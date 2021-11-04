@@ -1,0 +1,192 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scripts/ui/pause_menu/credits.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/buttons/button_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/ui/buttons/button_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/ui/buttons/button_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/ui/buttons/button_focus.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/ui/minimal_5x7.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://assets/ui/ui_panel.tres" type="StyleBox" id=7]
+[ext_resource path="res://assets/ui/profile_selector_button_font.tres" type="DynamicFont" id=8]
+[ext_resource path="res://assets/ui/ui_background.tres" type="StyleBox" id=9]
+
+[sub_resource type="DynamicFontData" id=1]
+font_path = "res://assets/ui/minimal_5x7.ttf"
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+font_data = SubResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.9 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.05, 0.05 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel:anchor_right")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.95, 0.95 ]
+}
+
+[node name="Credits" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+custom_styles/panel = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.173
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 1152.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 2 )
+text = "Credits"
+align = 1
+
+[node name="PromptText" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 45.0
+margin_right = 1152.0
+margin_bottom = 75.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
+text = "Everplast v"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Explanation" type="Panel" parent="Panel"]
+anchor_left = 0.05
+anchor_top = 0.187
+anchor_right = 0.95
+anchor_bottom = 0.806
+custom_styles/panel = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/Explanation"]
+anchor_left = 0.01
+anchor_top = 0.04
+anchor_right = 0.99
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 8 )
+text = "Primary Developer:
+WraithWinterly
+
+Godot Engine
+Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur.
+Copyright (c) 2014-2021 Godot Engine contributors.
+-- Godot Engine <https://godotengine.org>"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" type="Button" parent="Panel"]
+anchor_left = 0.05
+anchor_top = 0.85
+anchor_right = 0.95
+anchor_bottom = 0.871
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../Yes")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../Yes")
+focus_previous = NodePath("../Yes")
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = SubResource( 3 )
+text = "Return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 4 )
+
+[connection signal="pressed" from="Panel/Return" to="." method="_on_Return_pressed"]

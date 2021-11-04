@@ -1,0 +1,282 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://assets/enemies/slime.png" type="Texture" id=1]
+[ext_resource path="res://assets/misc/highUp.ogg" type="AudioStream" id=2]
+[ext_resource path="res://scripts/enemies/green_slime.gd" type="Script" id=3]
+[ext_resource path="res://scenes/enemies/components/enemy_component_manager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/components/basic_movement.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/enemies/components/attack_touch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/enemies/components/hurt_by_jump.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/enemies/components/hurt_by_bullet.tscn" type="PackedScene" id=8]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=3]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 3 ), Vector2( 4, 6.2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("..:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "death_invert"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ), Vector2( -1, 0.2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 3.2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( -1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 3.5 )
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 4, 1.5 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 4.5, 4.5 )
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 4, 2 )
+
+[sub_resource type="DynamicFontData" id=10]
+font_path = "res://assets/ui/minimal_5x7.ttf"
+
+[sub_resource type="DynamicFont" id=11]
+size = 15
+font_data = SubResource( 10 )
+
+[sub_resource type="Animation" id=12]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="GreenSlime" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource( 3 )
+
+[node name="EnemyComponentManager" parent="." instance=ExtResource( 4 )]
+
+[node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 5 )]
+raycast_floor_path = NodePath("../../RayCastFloor")
+raycast_wall_path = NodePath("../../RayCastWall")
+flip_animation_player_path = NodePath("../../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
+enemy_path = NodePath("../..")
+
+[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 6 )]
+enemy_path = NodePath("../..")
+hit_area_path = NodePath("../../HitArea")
+
+[node name="HurtByJump" parent="EnemyComponentManager" instance=ExtResource( 7 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../../HurtAreaJump")
+
+[node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 8 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../../HurtArea")
+
+[node name="SpriteHolder" type="Node2D" parent="."]
+position = Vector2( 4, 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="SpriteHolder"]
+frames = SubResource( 2 )
+
+[node name="DeathAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
+anims/death = SubResource( 3 )
+anims/death_invert = SubResource( 4 )
+
+[node name="FlipAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
+anims/flip = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 3.5 )
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HurtAreaJump" type="Area2D" parent="."]
+monitoring = false
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtAreaJump"]
+position = Vector2( 4, 1.4 )
+shape = SubResource( 7 )
+
+[node name="HurtArea" type="Area2D" parent="."]
+monitoring = false
+collision_layer = 8
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2( 4, 3.5 )
+shape = SubResource( 8 )
+
+[node name="HitArea" type="Area2D" parent="."]
+monitoring = false
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2( 4, 5 )
+shape = SubResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RayCastFloor" type="RayCast2D" parent="."]
+position = Vector2( 12, 4 )
+enabled = true
+cast_to = Vector2( 0, 5 )
+collision_mask = 3
+
+[node name="RayCastWall" type="RayCast2D" parent="."]
+position = Vector2( 4, 4 )
+enabled = true
+cast_to = Vector2( 7, 0 )
+collision_mask = 11
+
+[node name="HealthLabel" type="Label" parent="."]
+visible = false
+margin_top = -15.0
+margin_right = 40.0
+margin_bottom = -1.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 11 )
+custom_colors/font_color = Color( 1, 1, 1, 0 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HealthLabel"]
+anims/label = SubResource( 12 )
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+volume_db = 5.0
+bus = "Audio"

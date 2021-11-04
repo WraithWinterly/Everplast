@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/anttis_intstrumentals_another_day.ogg-61cc3ef423e0ae8d44661353e41a1553.oggstr"
+
+[deps]
+
+source_file="res://assets/ui/anttis_intstrumentals_another_day.ogg"
+dest_files=[ "res://.import/anttis_intstrumentals_another_day.ogg-61cc3ef423e0ae8d44661353e41a1553.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

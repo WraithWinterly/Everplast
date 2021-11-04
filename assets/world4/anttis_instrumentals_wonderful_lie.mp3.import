@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/anttis_instrumentals_wonderful_lie.mp3-9b4da7241a47d6cbfbdd1c7fc965ff35.mp3str"
+
+[deps]
+
+source_file="res://assets/world4/anttis_instrumentals_wonderful_lie.mp3"
+dest_files=[ "res://.import/anttis_instrumentals_wonderful_lie.mp3-9b4da7241a47d6cbfbdd1c7fc965ff35.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

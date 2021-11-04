@@ -1,0 +1,368 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://assets/ui/buttons/button_focus.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/ui/buttons/button_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/ui/buttons/button_hover.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/ui/buttons/button_pressed.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/ui/hud/heart.png" type="Texture" id=5]
+[ext_resource path="res://assets/ui/profile_selector_button_font.tres" type="DynamicFont" id=6]
+[ext_resource path="res://assets/misc/orb.png" type="Texture" id=7]
+[ext_resource path="res://assets/misc/coin.png" type="Texture" id=8]
+[ext_resource path="res://assets/misc/adrenaline.png" type="Texture" id=9]
+[ext_resource path="res://scripts/ui/profile_selector/profile_button.gd" type="Script" id=10]
+[ext_resource path="res://assets/ui/inventory/ranks.png" type="Texture" id=11]
+[ext_resource path="res://assets/ui/world_icons.png" type="Texture" id=12]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 25.0
+content_margin_right = 25.0
+content_margin_top = 200.0
+content_margin_bottom = 200.0
+bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.384314, 0.4, 0.443137, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_size = 1
+shadow_offset = Vector2( 4, 4 )
+
+[sub_resource type="DynamicFontData" id=2]
+font_path = "res://assets/ui/minimal_5x7.ttf"
+
+[sub_resource type="DynamicFont" id=3]
+font_data = SubResource( 2 )
+
+[sub_resource type="DynamicFontData" id=4]
+font_path = "res://assets/ui/minimal_5x7.ttf"
+
+[sub_resource type="DynamicFont" id=5]
+size = 48
+font_data = SubResource( 4 )
+
+[sub_resource type="AtlasTexture" id=22]
+atlas = ExtResource( 12 )
+region = Rect2( 0, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 12 )
+region = Rect2( 9, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 12 )
+region = Rect2( 18, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 12 )
+region = Rect2( 27, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 12 )
+region = Rect2( 36, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 12 )
+region = Rect2( 45, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=21]
+atlas = ExtResource( 11 )
+region = Rect2( 0, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 11 )
+region = Rect2( 11, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 11 )
+region = Rect2( 22, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 11 )
+region = Rect2( 33, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 11 )
+region = Rect2( 44, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 11 )
+region = Rect2( 55, 0, 11, 13 )
+
+[node name="ProfileButton" type="Button"]
+margin_left = 34.0
+margin_right = 244.0
+margin_bottom = 430.0
+focus_neighbour_left = NodePath("../MusicSlider/Slider")
+focus_neighbour_top = NodePath("../MusicSlider/Slider")
+focus_neighbour_right = NodePath("../../../HBoxContainer2/Back")
+focus_neighbour_bottom = NodePath("../../../HBoxContainer2/Back")
+focus_next = NodePath("../../../HBoxContainer2/Back")
+focus_previous = NodePath("../MusicSlider/Slider")
+custom_styles/hover = ExtResource( 3 )
+custom_styles/pressed = ExtResource( 4 )
+custom_styles/focus = ExtResource( 1 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = SubResource( 1 )
+custom_fonts/font = ExtResource( 6 )
+text = "                    "
+script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="VBoxContainer" parent="."]
+anchor_left = 0.05
+anchor_top = 0.015
+anchor_right = 0.5
+anchor_bottom = 0.153
+rect_scale = Vector2( 2, 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Stats"]
+margin_right = 94.0
+margin_bottom = 52.0
+
+[node name="Icons" type="VBoxContainer" parent="Stats/HBoxContainer"]
+margin_right = 8.0
+margin_bottom = 52.0
+custom_constants/separation = 6
+
+[node name="Heart" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
+margin_right = 8.0
+margin_bottom = 8.0
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Heart"]
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Coin" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
+margin_top = 14.0
+margin_right = 8.0
+margin_bottom = 22.0
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Coin"]
+margin_left = 1.0
+margin_right = 7.0
+margin_bottom = 8.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Orb" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
+margin_top = 28.0
+margin_right = 8.0
+margin_bottom = 36.0
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Orb"]
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Adrenaline" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
+margin_top = 42.0
+margin_right = 8.0
+margin_bottom = 50.0
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Adrenaline"]
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="VBoxContainer" parent="Stats/HBoxContainer"]
+margin_left = 12.0
+margin_right = 36.0
+margin_bottom = 52.0
+
+[node name="Heart" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
+margin_right = 24.0
+margin_bottom = 10.0
+
+[node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Heart"]
+margin_right = 24.0
+margin_bottom = 10.0
+custom_fonts/font = SubResource( 3 )
+text = "-- | --"
+align = 1
+valign = 1
+
+[node name="Coin" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
+margin_top = 14.0
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Coin"]
+margin_right = 8.0
+margin_bottom = 10.0
+custom_fonts/font = SubResource( 3 )
+text = "--"
+valign = 1
+
+[node name="Orb" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
+margin_top = 28.0
+margin_right = 24.0
+margin_bottom = 38.0
+
+[node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Orb"]
+margin_right = 8.0
+margin_bottom = 10.0
+custom_fonts/font = SubResource( 3 )
+text = "--"
+align = 1
+valign = 1
+
+[node name="Adrenaline" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
+margin_top = 42.0
+margin_right = 24.0
+margin_bottom = 52.0
+
+[node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Adrenaline"]
+margin_right = 24.0
+margin_bottom = 10.0
+custom_fonts/font = SubResource( 3 )
+text = "-- | --"
+align = 1
+valign = 1
+
+[node name="Text" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_outline_modulate = Color( 0.196078, 0.968627, 0.298039, 1 )
+text = "Button Text"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 0.528
+anchor_right = 0.17
+anchor_bottom = 0.608
+rect_scale = Vector2( 6, 6 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldIcons" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 5.0
+margin_right = 14.0
+margin_bottom = 34.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="TextureRect" parent="HBoxContainer/WorldIcons"]
+margin_top = 9.0
+margin_right = 9.0
+margin_bottom = 25.0
+texture = SubResource( 22 )
+
+[node name="2" type="TextureRect" parent="HBoxContainer/WorldIcons"]
+visible = false
+margin_top = 20.0
+margin_right = 9.0
+margin_bottom = 36.0
+texture = SubResource( 23 )
+
+[node name="3" type="TextureRect" parent="HBoxContainer/WorldIcons"]
+visible = false
+margin_top = 30.0
+margin_right = 9.0
+margin_bottom = 46.0
+texture = SubResource( 24 )
+
+[node name="4" type="TextureRect" parent="HBoxContainer/WorldIcons"]
+visible = false
+margin_top = 40.0
+margin_right = 9.0
+margin_bottom = 56.0
+texture = SubResource( 25 )
+
+[node name="5" type="TextureRect" parent="HBoxContainer/WorldIcons"]
+visible = false
+margin_top = 50.0
+margin_right = 9.0
+margin_bottom = 66.0
+texture = SubResource( 26 )
+
+[node name="6" type="TextureRect" parent="HBoxContainer/WorldIcons"]
+visible = false
+margin_top = 60.0
+margin_right = 9.0
+margin_bottom = 76.0
+texture = SubResource( 27 )
+
+[node name="RankIcons" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 18.0
+margin_right = 29.0
+margin_bottom = 34.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Silver" type="TextureRect" parent="HBoxContainer/RankIcons"]
+margin_top = 10.0
+margin_right = 11.0
+margin_bottom = 23.0
+texture = SubResource( 21 )
+
+[node name="Gold" type="TextureRect" parent="HBoxContainer/RankIcons"]
+visible = false
+margin_top = 17.0
+margin_right = 18.0
+margin_bottom = 30.0
+texture = SubResource( 14 )
+
+[node name="Diamond" type="TextureRect" parent="HBoxContainer/RankIcons"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 15 )
+
+[node name="Emerald" type="TextureRect" parent="HBoxContainer/RankIcons"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 16 )
+
+[node name="Glitch" type="TextureRect" parent="HBoxContainer/RankIcons"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 17 )
+
+[node name="Volcano" type="TextureRect" parent="HBoxContainer/RankIcons"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 18 )

@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/misc/torch_fuse.png" type="Texture" id=1]
+[ext_resource path="res://assets/misc/light.png" type="Texture" id=2]
+[ext_resource path="res://assets/world1/torch.png" type="Texture" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 8, 11 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 3 )
+region = Rect2( 8, 0, 8, 11 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 8, 11 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 24, 0, 8, 11 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 13.0
+} ]
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
+
+[node name="Torch" type="AnimatedSprite"]
+frames = SubResource( 5 )
+frame = 2
+playing = true
+centered = false
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 4, 1.591 )
+texture = ExtResource( 2 )
+texture_scale = 0.1
+color = Color( 0.670588, 0.427451, 0.0784314, 1 )
+range_layer_min = -2
+shadow_filter = 5
+shadow_filter_smooth = 64.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 4, 3.355 )
+z_index = -1
+amount = 10
+lifetime = 10.0
+preprocess = 1.0
+texture = ExtResource( 1 )
+gravity = Vector2( 0, -5 )
+angular_velocity = 5.0
+angular_velocity_random = 1.0
+tangential_accel = 3.0
+tangential_accel_random = 1.0
+scale_amount = 0.15
+color = Color( 0.313726, 0.313726, 0.313726, 0.607843 )
+
+[node name="Light" type="Sprite" parent="."]
+modulate = Color( 1, 0.560784, 0, 0.490196 )
+material = SubResource( 6 )
+position = Vector2( 4, 3 )
+scale = Vector2( 0.06, 0.06 )
+z_index = 8
+texture = ExtResource( 2 )
+offset = Vector2( 0, -1 )

@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://scripts/ui/debug/debug_console.gd" type="Script" id=1]
+[ext_resource path="res://assets/ui/ui_panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/ui/minimal_5x7.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://scripts/ui/debug/command_handler.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 80
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 48
+font_data = ExtResource( 3 )
+
+[node name="DebugConsole" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CommandHandler" type="Node" parent="."]
+script = ExtResource( 4 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.058
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.758
+margin_right = 40.0
+margin_bottom = 40.0
+custom_styles/panel = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_top = 0.02
+anchor_right = 1.0
+anchor_bottom = 0.02
+mouse_filter = 0
+custom_fonts/font = SubResource( 1 )
+text = "Debug Console"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Output" type="TextEdit" parent="Panel"]
+anchor_top = 0.125
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/read_only = ExtResource( 2 )
+custom_styles/focus = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 2 )
+readonly = true
+show_line_numbers = true
+wrap_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Input" type="LineEdit" parent="."]
+anchor_left = 0.058
+anchor_top = 0.83
+anchor_right = 0.9
+anchor_bottom = 0.842
+margin_right = 40.0
+margin_bottom = 40.0
+custom_styles/focus = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+custom_fonts/font = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,307 @@
+[gd_scene load_steps=25 format=2]
+
+[ext_resource path="res://assets/misc/highUp.ogg" type="AudioStream" id=1]
+[ext_resource path="res://scripts/enemies/scorpion.gd" type="Script" id=2]
+[ext_resource path="res://scenes/enemies/components/enemy_component_manager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/enemies/components/hurt_by_bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemies/components/basic_movement.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/enemies/components/attack_touch.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/enemies/scorpion.png" type="Texture" id=10]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 10 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 10 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 10 )
+region = Rect2( 24, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=6]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 3.2 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.929412, 0.117647, 0.117647, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( -1, 1 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 4, 4 )
+
+[sub_resource type="RectangleShape2D" id=10]
+extents = Vector2( 4.5, 4.5 )
+
+[sub_resource type="RectangleShape2D" id=11]
+extents = Vector2( 4, 4 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://assets/ui/minimal_5x7.ttf"
+
+[sub_resource type="DynamicFont" id=13]
+size = 15
+font_data = SubResource( 12 )
+
+[sub_resource type="Animation" id=14]
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:custom_colors/font_color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -15 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Curve" id=15]
+min_value = -1.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=16]
+curve = SubResource( 15 )
+
+[sub_resource type="ParticlesMaterial" id=17]
+emission_shape = 1
+emission_sphere_radius = 3.5
+flag_disable_z = true
+direction = Vector3( 1, 1, 1 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 24.24
+linear_accel_random = 0.14
+color = Color( 0.792157, 0, 0, 1 )
+hue_variation = -0.06
+hue_variation_curve = SubResource( 16 )
+
+[node name="Scorpion" type="KinematicBody2D"]
+collision_layer = 8
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="EnemyComponentManager" parent="." instance=ExtResource( 3 )]
+
+[node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 7 )]
+raycast_floor_path = NodePath("../../RayCastFloor")
+raycast_wall_path = NodePath("../../RayCastWall")
+flip_animation_player_path = NodePath("../../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
+enemy_path = NodePath("../..")
+
+[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 8 )]
+enemy_path = NodePath("../..")
+hit_area_path = NodePath("../../HitArea")
+
+[node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 4 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../../HurtArea")
+
+[node name="SpriteHolder" type="Node2D" parent="."]
+position = Vector2( 4, 4 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="SpriteHolder"]
+frames = SubResource( 5 )
+frame = 3
+playing = true
+
+[node name="DeathAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
+anims/death = SubResource( 6 )
+anims/hurt = SubResource( 7 )
+
+[node name="FlipAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
+anims/flip = SubResource( 8 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 4 )
+shape = SubResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="HurtArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 36
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2( 4, 4 )
+shape = SubResource( 10 )
+
+[node name="HitArea" type="Area2D" parent="."]
+monitoring = false
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea"]
+position = Vector2( 4, 4 )
+shape = SubResource( 11 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RayCastFloor" type="RayCast2D" parent="."]
+position = Vector2( 10, 4 )
+enabled = true
+cast_to = Vector2( 0, 5 )
+
+[node name="RayCastWall" type="RayCast2D" parent="."]
+position = Vector2( 4, 4 )
+enabled = true
+cast_to = Vector2( 7, 0 )
+collision_mask = 9
+
+[node name="HealthLabel" type="Label" parent="."]
+visible = false
+margin_top = -15.0
+margin_right = 40.0
+margin_bottom = -1.0
+rect_scale = Vector2( 0.5, 0.5 )
+custom_fonts/font = SubResource( 13 )
+custom_colors/font_color = Color( 1, 1, 1, 0 )
+text = "1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HealthLabel"]
+anims/label = SubResource( 14 )
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 1 )
+volume_db = 5.0
+bus = "Audio"
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 4, 4 )
+emitting = false
+lifetime = 2.0
+one_shot = true
+speed_scale = 5.0
+explosiveness = 0.16
+randomness = 0.7
+process_material = SubResource( 17 )

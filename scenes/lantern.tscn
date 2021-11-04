@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/misc/lantern.png" type="Texture" id=1]
+[ext_resource path="res://assets/misc/light.png" type="Texture" id=2]
+[ext_resource path="res://scripts/lantern.gd" type="Script" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[node name="Lantern" type="Sprite"]
+z_index = -1
+texture = ExtResource( 1 )
+centered = false
+hframes = 3
+script = ExtResource( 3 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 1, 0.560784, 0, 0.490196 )
+material = SubResource( 1 )
+position = Vector2( 4, 5.5 )
+scale = Vector2( 0.15, 0.15 )
+texture = ExtResource( 2 )

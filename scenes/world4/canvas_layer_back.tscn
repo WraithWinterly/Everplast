@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.254902, 0.254902, 0.254902, 1 )
+border_width_top = 55
+border_color = Color( 0.533333, 0.533333, 0.533333, 1 )
+border_blend = true
+
+[node name="CanvasLayerBack" type="CanvasLayer"]
+layer = -2
+
+[node name="BGColor" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}

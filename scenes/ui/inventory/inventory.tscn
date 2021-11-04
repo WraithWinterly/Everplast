@@ -1,0 +1,1300 @@
+[gd_scene load_steps=49 format=2]
+
+[ext_resource path="res://assets/ui/ui_panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/ui/profile_selector_button_font.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/ui/inventory/ranks.png" type="Texture" id=3]
+[ext_resource path="res://assets/ui/ui_background.tres" type="StyleBox" id=4]
+[ext_resource path="res://scripts/ui/inventory/inventory.gd" type="Script" id=5]
+[ext_resource path="res://assets/powerups/carrot.png" type="Texture" id=6]
+[ext_resource path="res://assets/powerups/cherry.png" type="Texture" id=7]
+[ext_resource path="res://assets/powerups/coconut.png" type="Texture" id=8]
+[ext_resource path="res://assets/powerups/powerup.wav" type="AudioStream" id=9]
+[ext_resource path="res://assets/ui/buttons/button_pressed.tres" type="StyleBox" id=10]
+[ext_resource path="res://assets/ui/menu_font.tres" type="DynamicFont" id=11]
+[ext_resource path="res://assets/ui/buttons/button_focus.tres" type="StyleBox" id=12]
+[ext_resource path="res://assets/ui/buttons/button_hover.tres" type="StyleBox" id=13]
+[ext_resource path="res://assets/ui/buttons/button_normal.tres" type="StyleBox" id=14]
+[ext_resource path="res://assets/misc/orb.png" type="Texture" id=15]
+[ext_resource path="res://assets/ui/hud_font_panel.tres" type="StyleBox" id=16]
+[ext_resource path="res://assets/ui/minimal_5x7.ttf" type="DynamicFontData" id=17]
+[ext_resource path="res://scenes/ui/inventory/equipable_button_focus.tres" type="StyleBox" id=18]
+[ext_resource path="res://scenes/ui/inventory/equipable_button_normal.tres" type="StyleBox" id=19]
+[ext_resource path="res://scenes/ui/inventory/equipable_button_pressed.tres" type="StyleBox" id=20]
+[ext_resource path="res://scenes/ui/inventory/equipable_button_hover.tres" type="StyleBox" id=21]
+[ext_resource path="res://assets/equipables/water_gun.png" type="Texture" id=22]
+[ext_resource path="res://assets/equipables/nail_gun.png" type="Texture" id=23]
+[ext_resource path="res://assets/equipables/laser_gun.png" type="Texture" id=24]
+[ext_resource path="res://assets/collectables/nails.png" type="Texture" id=25]
+[ext_resource path="res://assets/collectables/energy.png" type="Texture" id=26]
+[ext_resource path="res://assets/collectables/water.png" type="Texture" id=27]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 10.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.121569, 0.141176, 0.188235, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.333333, 0.345098, 0.380392, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 50.0
+shadow_size = 1
+shadow_offset = Vector2( 4, 4 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.109804, 0.129412, 0.168627, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.254902, 0.262745, 0.286275, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 50.0
+shadow_size = 1
+shadow_offset = Vector2( 4, 4 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 10.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.192157, 0.223529, 0.294118, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.278431, 0.321569, 0.439216, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 50.0
+shadow_size = 1
+shadow_offset = Vector2( 4, 4 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.384314, 0.4, 0.443137, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 50.0
+shadow_size = 1
+shadow_offset = Vector2( 4, 4 )
+
+[sub_resource type="Animation" id=6]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=7]
+
+[sub_resource type="Animation" id=8]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="StyleBoxEmpty" id=9]
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 11, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 3 )
+region = Rect2( 22, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 3 )
+region = Rect2( 33, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 3 )
+region = Rect2( 44, 0, 11, 13 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 3 )
+region = Rect2( 55, 0, 11, 13 )
+
+[sub_resource type="Animation" id=16]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="DynamicFontData" id=17]
+font_path = "res://assets/ui/minimal_5x7.ttf"
+
+[sub_resource type="DynamicFont" id=18]
+size = 48
+font_data = SubResource( 17 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 64
+font_data = ExtResource( 17 )
+
+[sub_resource type="Animation" id=20]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.38 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.95 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel:anchor_right")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.95 ]
+}
+
+[sub_resource type="Animation" id=21]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.1, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.9, 0.9 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.9 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="Inventory" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 0.015
+custom_constants/separation = 2
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 44.0
+margin_right = 152.0
+margin_bottom = 50.0
+focus_neighbour_left = NodePath("../RanksAndStatsButton")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../QuickItemsButton")
+focus_next = NodePath("../QuickItemsButton")
+focus_previous = NodePath("../RanksAndStatsButton")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+custom_fonts/font = ExtResource( 2 )
+text = "Close"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuickItemsButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 154.0
+margin_right = 401.0
+margin_bottom = 50.0
+focus_neighbour_left = NodePath("../CloseButton")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../CollectablesButton")
+focus_next = NodePath("../CollectablesButton")
+focus_previous = NodePath("../CloseButton")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+custom_fonts/font = ExtResource( 2 )
+text = "My Quick Items"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollectablesButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 403.0
+margin_right = 657.0
+margin_bottom = 50.0
+focus_neighbour_left = NodePath("../QuickItemsButton")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../RanksAndStatsButton")
+focus_next = NodePath("../RanksAndStatsButton")
+focus_previous = NodePath("../QuickItemsButton")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+custom_fonts/font = ExtResource( 2 )
+text = "My Collectables"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RanksAndStatsButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 659.0
+margin_right = 980.0
+margin_bottom = 50.0
+focus_neighbour_left = NodePath("../CollectablesButton")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../CloseButton")
+focus_next = NodePath("../CloseButton")
+focus_previous = NodePath("../CollectablesButton")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+custom_fonts/font = ExtResource( 2 )
+text = "My Ranks and Stats"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuickItems" type="Panel" parent="Panel"]
+visible = false
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/QuickItems"]
+anchor_left = 0.1
+anchor_right = 0.95
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/QuickItems/HBoxContainer"]
+margin_right = 256.0
+margin_bottom = 518.0
+custom_constants/separation = 10
+alignment = 1
+
+[node name="Coconut" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+margin_top = 159.0
+margin_right = 256.0
+margin_bottom = 219.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 11 )
+text = "Coconut [1]"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Coconut"]
+anchor_left = -0.15
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cherry" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+margin_top = 229.0
+margin_right = 256.0
+margin_bottom = 289.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 11 )
+text = "Cherry [1]"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Cherry"]
+anchor_left = -0.15
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 7 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Carrot" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+margin_top = 299.0
+margin_right = 256.0
+margin_bottom = 359.0
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 11 )
+text = " Carrot [1] "
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Carrot"]
+anchor_left = -0.15
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NotInLevelWarning" type="Label" parent="Panel/QuickItems"]
+anchor_right = 1.0
+anchor_bottom = 0.301
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "You cannot use powerups here!"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Explanation" type="Panel" parent="Panel/QuickItems"]
+anchor_left = 0.5
+anchor_top = 0.307
+anchor_right = 0.859
+anchor_bottom = 0.691
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/QuickItems/Explanation"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Increases your health by 10."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/QuickItems"]
+anims/slide = SubResource( 6 )
+
+[node name="Collectables" type="Panel" parent="Panel"]
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equipables" type="Panel" parent="Panel/Collectables"]
+anchor_left = 0.05
+anchor_top = 0.02
+anchor_right = 0.45
+anchor_bottom = 0.9
+margin_left = -7.62939e-06
+margin_bottom = 40.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/Collectables/Equipables"]
+anchor_right = 1.0
+anchor_bottom = 0.2
+margin_bottom = 11.4848
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Equipables"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/Collectables/Equipables"]
+anchor_left = 0.29
+anchor_top = 0.2
+anchor_right = 0.323
+anchor_bottom = 0.2
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water Gun" type="Button" parent="Panel/Collectables/Equipables/Buttons"]
+margin_right = 232.0
+margin_bottom = 60.0
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/normal = ExtResource( 19 )
+custom_fonts/font = ExtResource( 11 )
+text = "Water Gun"
+align = 0
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Equipables/Buttons/Water Gun"]
+anchor_left = -0.31
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 22 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nail Gun" type="Button" parent="Panel/Collectables/Equipables/Buttons"]
+margin_top = 70.0
+margin_right = 232.0
+margin_bottom = 130.0
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/normal = ExtResource( 19 )
+custom_fonts/font = ExtResource( 11 )
+text = "Nail Gun"
+align = 0
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Equipables/Buttons/Nail Gun"]
+anchor_left = -0.31
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 23 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Laser Gun" type="Button" parent="Panel/Collectables/Equipables/Buttons"]
+margin_top = 140.0
+margin_right = 232.0
+margin_bottom = 200.0
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/normal = ExtResource( 19 )
+custom_fonts/font = ExtResource( 11 )
+text = "Laser Gun"
+align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Equipables/Buttons/Laser Gun"]
+anchor_left = -0.31
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 24 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Collectables" type="Panel" parent="Panel/Collectables"]
+anchor_left = 0.55
+anchor_top = 0.02
+anchor_right = 0.95
+anchor_bottom = 0.9
+margin_left = -7.62939e-06
+margin_bottom = 40.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/Collectables/Collectables"]
+anchor_right = 1.0
+anchor_bottom = 0.2
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Collectables"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="VBoxContainer" parent="Panel/Collectables/Collectables"]
+anchor_left = 0.217
+anchor_top = 0.2
+anchor_right = 0.25
+anchor_bottom = 0.2
+margin_right = 256.0
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Energy" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
+margin_right = 290.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_right = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 11 )
+text = " Energy x999"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Collectables/Buttons/Energy"]
+anchor_left = -0.15
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 26 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
+margin_top = 70.0
+margin_right = 290.0
+margin_bottom = 130.0
+focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_right = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 11 )
+text = "Water x999"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Collectables/Buttons/Water"]
+anchor_left = -0.15
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 27 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nail" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
+margin_top = 140.0
+margin_right = 290.0
+margin_bottom = 200.0
+focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_right = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = ExtResource( 11 )
+text = "Nail x999"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Collectables/Buttons/Nail"]
+anchor_left = -0.15
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 25 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Collectables"]
+anims/slide = SubResource( 8 )
+
+[node name="RanksStats" type="Panel" parent="Panel"]
+visible = false
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ranks" type="Panel" parent="Panel/RanksStats"]
+anchor_left = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.28
+margin_bottom = 40.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/RanksStats/Ranks"]
+anchor_top = 0.1
+anchor_right = 0.125
+anchor_bottom = 0.1
+margin_top = 33.3248
+margin_bottom = 46.3248
+rect_scale = Vector2( 8, 8 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Silver" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+margin_left = 8.0
+margin_right = 19.0
+margin_bottom = 13.0
+texture = SubResource( 10 )
+
+[node name="Gold" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+margin_left = 23.0
+margin_right = 34.0
+margin_bottom = 13.0
+texture = SubResource( 11 )
+
+[node name="Diamond" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+margin_left = 38.0
+margin_right = 49.0
+margin_bottom = 13.0
+texture = SubResource( 12 )
+
+[node name="Emerald" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+margin_left = 53.0
+margin_right = 64.0
+margin_bottom = 13.0
+texture = SubResource( 13 )
+
+[node name="Glitch" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+margin_left = 68.0
+margin_right = 79.0
+margin_bottom = 13.0
+texture = SubResource( 14 )
+
+[node name="Volcano" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+margin_left = 83.0
+margin_right = 94.0
+margin_bottom = 13.0
+texture = SubResource( 15 )
+
+[node name="Label" type="Label" parent="Panel/RanksStats/Ranks"]
+anchor_right = 1.0
+anchor_bottom = 0.2
+margin_bottom = 11.4848
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Ranks"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CurrentRank" type="Panel" parent="Panel/RanksStats"]
+anchor_left = 0.1
+anchor_top = 0.4
+anchor_right = 0.49
+anchor_bottom = 0.9
+margin_bottom = 40.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/RanksStats/CurrentRank"]
+anchor_left = 0.02
+anchor_right = 0.139
+anchor_bottom = 0.124
+rect_scale = Vector2( 8, 8 )
+alignment = 1
+
+[node name="Silver" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+margin_top = 12.0
+margin_right = 47.0
+margin_bottom = 25.0
+texture = SubResource( 10 )
+
+[node name="Gold" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 11 )
+
+[node name="Diamond" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 12 )
+
+[node name="Emerald" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 13 )
+
+[node name="Glitch" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 14 )
+
+[node name="Volcano" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+visible = false
+margin_left = 15.0
+margin_right = 26.0
+margin_bottom = 13.0
+texture = SubResource( 15 )
+
+[node name="Title" type="Label" parent="Panel/RanksStats/CurrentRank"]
+anchor_right = 1.0
+anchor_bottom = 0.2
+margin_bottom = 11.4848
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "My Rank: Silver"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stats" type="Label" parent="Panel/RanksStats/CurrentRank"]
+anchor_left = 0.05
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "- Double Jump
+- Wall Jump"
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatsUpgrade" type="Panel" parent="Panel/RanksStats"]
+anchor_left = 0.51
+anchor_top = 0.4
+anchor_right = 0.9
+anchor_bottom = 0.9
+margin_bottom = 40.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrbTexture" type="TextureRect" parent="Panel/RanksStats/StatsUpgrade"]
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.215
+anchor_bottom = 0.02
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/RanksStats/StatsUpgrade"]
+anchor_top = 0.02
+anchor_right = 1.0
+anchor_bottom = 0.153
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Stats Upgrade"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Label" parent="Panel/RanksStats/StatsUpgrade"]
+anchor_left = 0.05
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -291.36
+mouse_filter = 0
+custom_styles/normal = ExtResource( 16 )
+custom_fonts/font = ExtResource( 2 )
+text = "Current Orbs: x0
+
+Next Upgrade: x0
+
+Level: 1"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpgradeButton" type="Button" parent="Panel/RanksStats/StatsUpgrade"]
+anchor_left = 0.1
+anchor_top = 0.8
+anchor_right = 0.9
+anchor_bottom = 0.8
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../../HBoxContainer/CloseButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../../../HBoxContainer/RanksAndStatsButton")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+custom_fonts/font = ExtResource( 2 )
+text = "Upgrade"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/RanksStats"]
+anims/slide = SubResource( 16 )
+
+[node name="UpgradeStatsPrompt" type="Control" parent="Panel/RanksStats"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Panel/RanksStats/UpgradeStatsPrompt"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.95
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+mouse_filter = 2
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel"]
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.9
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+margin_right = 921.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 18 )
+text = "Upgrade Stats..."
+align = 1
+
+[node name="PromptText" type="Label" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+margin_top = 45.0
+margin_right = 921.0
+margin_bottom = 174.0
+size_flags_vertical = 6
+custom_fonts/font = SubResource( 18 )
+custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
+text = "Level Up! Choose what to upgrade.
+Health %s -> %s
+or
+Adrenaline %s -> %s"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+margin_top = 189.0
+margin_right = 921.0
+margin_bottom = 249.0
+custom_constants/separation = 15
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 163.0
+margin_right = 321.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../Health")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../Health")
+focus_previous = NodePath("../Adrenaline")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+custom_fonts/font = SubResource( 19 )
+text = "Cancel"
+
+[node name="Health" type="Button" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 336.0
+margin_right = 494.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../Cancel")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../Adrenaline")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../Adrenaline")
+focus_previous = NodePath("../Cancel")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+custom_fonts/font = SubResource( 19 )
+custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+text = "Health"
+
+[node name="Adrenaline" type="Button" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 509.0
+margin_right = 757.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../Health")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../Cancel")
+focus_previous = NodePath("../Health")
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+custom_fonts/font = SubResource( 19 )
+custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+text = "Adrenaline "
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/RanksStats/UpgradeStatsPrompt"]
+anims/show = SubResource( 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 21 )
+
+[node name="PowerupSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -7.0
+bus = "Audio"
+
+[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_focus_entered"]
+[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_mouse_entered"]
+[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Coconut" to="." method="_quick_item_button_pressed"]
+[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_focus_entered"]
+[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_mouse_entered"]
+[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Cherry" to="." method="_quick_item_button_pressed"]
+[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_focus_entered"]
+[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_mouse_entered"]
+[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_quick_item_button_pressed"]
+[connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Water Gun" to="." method="_equipable_pressed"]
+[connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Nail Gun" to="." method="_equipable_pressed"]
+[connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Laser Gun" to="." method="_equipable_pressed"]

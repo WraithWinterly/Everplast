@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/anttis_instrumentals_wonderful_lie.ogg-8bf6c97aacee09dde84cdb105dd00e26.oggstr"
+
+[deps]
+
+source_file="res://assets/world4/anttis_instrumentals_wonderful_lie.ogg"
+dest_files=[ "res://.import/anttis_instrumentals_wonderful_lie.ogg-8bf6c97aacee09dde84cdb105dd00e26.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

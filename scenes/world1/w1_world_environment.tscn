@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 4
+background_canvas_max_layer = 5
+fog_depth_begin = 0.0
+fog_depth_end = 0.1
+auto_exposure_min_luma = 0.0
+auto_exposure_max_luma = 0.0
+glow_enabled = true
+glow_intensity = 0.42
+glow_bloom = 1.0
+glow_blend_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment"]
+environment = SubResource( 1 )
