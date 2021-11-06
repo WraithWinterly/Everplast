@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/anttis_instrumentals_simple_simplyfied.ogg-ff632644da95e80c9813ac605a27875a.oggstr"
+
+[deps]
+
+source_file="res://world2/anttis_instrumentals_simple_simplyfied.ogg"
+dest_files=[ "res://.import/anttis_instrumentals_simple_simplyfied.ogg-ff632644da95e80c9813ac605a27875a.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

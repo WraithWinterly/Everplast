@@ -1,0 +1,189 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/profile_selector/profile_button.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/profile_selector/delete_profile_prompt.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/profile_selector/profile_selector.gd" type="Script" id=8]
+[ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/profile_selector/update_profile_prompt.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=11]
+
+[sub_resource type="Animation" id=1]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[node name="ProfileSelector" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+mouse_filter = 2
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.03
+anchor_top = 0.05
+anchor_right = 0.97
+anchor_bottom = 0.95
+margin_right = -0.00012207
+margin_bottom = 6.10352e-05
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+custom_styles/panel = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.01
+anchor_top = 0.025
+anchor_right = 0.99
+anchor_bottom = 0.095
+custom_constants/separation = 49
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 1179.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 11 )
+text = "Select a Profile..."
+align = 1
+
+[node name="ProfileButtons" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 79.0
+margin_right = 1179.0
+margin_bottom = 509.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="ProfileButton1" parent="Panel/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
+focus_neighbour_left = NodePath("../ProfileButton5")
+focus_neighbour_top = NodePath("")
+focus_neighbour_right = NodePath("../ProfileButton2")
+focus_neighbour_bottom = NodePath("../../../Buttons/ReturnToMenu")
+focus_next = NodePath("../ProfileButton2")
+focus_previous = NodePath("../ProfileButton5")
+profile_selector_path = NodePath("../../../..")
+
+[node name="ProfileButton2" parent="Panel/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
+margin_left = 259.0
+margin_right = 469.0
+focus_neighbour_left = NodePath("../ProfileButton1")
+focus_neighbour_top = NodePath("")
+focus_neighbour_right = NodePath("../ProfileButton3")
+focus_neighbour_bottom = NodePath("../../../Buttons/ReturnToMenu")
+focus_next = NodePath("../ProfileButton3")
+focus_previous = NodePath("../ProfileButton1")
+my_index = 1
+profile_selector_path = NodePath("../../../..")
+
+[node name="ProfileButton3" parent="Panel/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
+margin_left = 484.0
+margin_right = 694.0
+focus_neighbour_left = NodePath("../ProfileButton2")
+focus_neighbour_top = NodePath("")
+focus_neighbour_right = NodePath("../ProfileButton4")
+focus_neighbour_bottom = NodePath("../../../Buttons/ReturnToMenu")
+focus_next = NodePath("../ProfileButton4")
+focus_previous = NodePath("../ProfileButton2")
+my_index = 2
+profile_selector_path = NodePath("../../../..")
+
+[node name="ProfileButton4" parent="Panel/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
+margin_left = 709.0
+margin_right = 919.0
+focus_neighbour_left = NodePath("../ProfileButton3")
+focus_neighbour_top = NodePath("")
+focus_neighbour_right = NodePath("../ProfileButton5")
+focus_neighbour_bottom = NodePath("../../../Buttons/ReturnToMenu")
+focus_next = NodePath("../ProfileButton5")
+focus_previous = NodePath("../ProfileButton3")
+my_index = 3
+profile_selector_path = NodePath("../../../..")
+
+[node name="ProfileButton5" parent="Panel/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
+margin_left = 934.0
+margin_right = 1144.0
+focus_neighbour_left = NodePath("../ProfileButton4")
+focus_neighbour_top = NodePath("")
+focus_neighbour_right = NodePath("../ProfileButton1")
+focus_neighbour_bottom = NodePath("../../../Buttons/ReturnToMenu")
+focus_next = NodePath("../ProfileButton1")
+focus_previous = NodePath("../ProfileButton4")
+my_index = 4
+profile_selector_path = NodePath("../../../..")
+
+[node name="Buttons" type="HBoxContainer" parent="Panel"]
+anchor_left = 0.035
+anchor_top = 0.86
+anchor_right = 0.965
+anchor_bottom = 0.9
+custom_constants/separation = 15
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReturnToMenu" type="Button" parent="Panel/Buttons"]
+margin_right = 767.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../ManageProfiles")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../ManageProfiles")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../ManageProfiles")
+focus_previous = NodePath(".")
+size_flags_horizontal = 3
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
+text = "Return to Main Menu"
+
+[node name="ManageProfiles" type="Button" parent="Panel/Buttons"]
+margin_left = 782.0
+margin_right = 1118.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../ReturnToMenu")
+focus_neighbour_top = NodePath("../../VBoxContainer/ProfileButtons/ProfileButton5")
+focus_neighbour_right = NodePath("../ReturnToMenu")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../ReturnToMenu")
+focus_previous = NodePath("../ReturnToMenu")
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
+text = "Manage Profiles"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 1 )
+
+[node name="UpgradeProfilePopup" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="DeleteProfilePopup" parent="." instance=ExtResource( 7 )]
+visible = false

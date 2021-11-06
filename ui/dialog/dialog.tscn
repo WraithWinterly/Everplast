@@ -1,0 +1,158 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/dialog/pin.png" type="Texture" id=3]
+[ext_resource path="res://ui/debug/dialog.gd" type="Script" id=4]
+[ext_resource path="res://ui/dialog/dialog_text.wav" type="AudioStream" id=5]
+[ext_resource path="res://ui/dialog/dialog_show.wav" type="AudioStream" id=6]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:percent_visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.731, 0.75 ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panels:anchor_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panels:anchor_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0 ]
+}
+
+[node name="Dialog" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panels" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Header" type="Panel" parent="Panels"]
+anchor_left = 0.05
+anchor_top = 0.5
+anchor_right = 0.95
+anchor_bottom = 0.581
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="Panels/Header"]
+anchor_left = 0.01
+anchor_top = 0.048
+anchor_right = 0.99
+anchor_bottom = 0.952
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Character Name:"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Content" type="Panel" parent="Panels"]
+anchor_left = 0.05
+anchor_top = 0.6
+anchor_right = 0.95
+anchor_bottom = 0.93
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Label" parent="Panels/Content"]
+anchor_left = 0.01
+anchor_top = 0.048
+anchor_right = 0.99
+anchor_bottom = 0.952
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "This is sample text!"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panels/Content/Text"]
+anims/show = SubResource( 1 )
+
+[node name="Pointer" type="TextureRect" parent="Panels/Content"]
+anchor_left = 0.935
+anchor_top = 0.74057
+anchor_right = 1.0
+anchor_bottom = 0.8
+rect_scale = Vector2( 6, 6 )
+mouse_filter = 0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panels/Content/Pointer"]
+anims/float = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 3 )
+
+[node name="Show" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = -9.0
+bus = "Audio"
+
+[node name="Text" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Audio"

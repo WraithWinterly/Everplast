@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://collectables/collectable_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://collectables/water.png" type="Texture" id=2]
+
+[node name="Water" type="Node2D"]
+
+[node name="CollectableBase" parent="." instance=ExtResource( 1 )]
+collectable_name = "water"
+
+[node name="Sprite" parent="CollectableBase" index="0"]
+texture = ExtResource( 2 )
+
+[editable path="CollectableBase"]

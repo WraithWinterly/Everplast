@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://mobs/components/hurt_by_jump.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 1.5 )
+
+[node name="HurtByJump" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="HurtArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
+position = Vector2( 4, 1.4 )
+shape = SubResource( 1 )

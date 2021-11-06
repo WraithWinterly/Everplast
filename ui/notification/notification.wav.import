@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/notification.wav-ae370d88b2d6bd86f1736a41b74435d0.sample"
+
+[deps]
+
+source_file="res://ui/notification/notification.wav"
+dest_files=[ "res://.import/notification.wav-ae370d88b2d6bd86f1736a41b74435d0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

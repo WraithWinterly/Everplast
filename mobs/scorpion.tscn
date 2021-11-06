@@ -1,0 +1,103 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://mobs/scorpion.gd" type="Script" id=2]
+[ext_resource path="res://mobs/components/enemy_component_manager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mobs/components/basic_movement.tscn" type="PackedScene" id=7]
+[ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=8]
+[ext_resource path="res://mobs/scorpion.png" type="Texture" id=10]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 10 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 10 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 10 )
+region = Rect2( 16, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 10 )
+region = Rect2( 24, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 4 )
+
+[sub_resource type="Curve" id=7]
+min_value = -1.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 3.5
+flag_disable_z = true
+direction = Vector3( 1, 1, 1 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 24.24
+linear_accel_random = 0.14
+color = Color( 0.792157, 0, 0, 1 )
+hue_variation = -0.06
+hue_variation_curve = SubResource( 8 )
+
+[node name="Scorpion" type="KinematicBody2D"]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="EnemyComponentManager" parent="." instance=ExtResource( 3 )]
+orb_amount = 20
+knockback = 200
+damage = 2
+max_health = 5
+
+[node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
+position = Vector2( 0, 1.15 )
+frames = SubResource( 5 )
+frame = 2
+playing = true
+
+[node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 7 )]
+flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
+enemy_path = NodePath("../..")
+
+[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 8 )]
+enemy_path = NodePath("../..")
+
+[node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 4 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../HurtArea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 4 )
+shape = SubResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 4, 4 )
+emitting = false
+lifetime = 2.0
+one_shot = true
+speed_scale = 5.0
+explosiveness = 0.16
+randomness = 0.7
+process_material = SubResource( 9 )
+
+[editable path="EnemyComponentManager"]

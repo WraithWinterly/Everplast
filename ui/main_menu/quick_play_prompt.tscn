@@ -1,0 +1,169 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://ui/main_menu/quick_play_prompt.gd" type="Script" id=1]
+[ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=6]
+[ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=8]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.289 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.55 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel:anchor_right")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.95 ]
+}
+
+[node name="FastLoadPrompt" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.05
+anchor_top = 0.289
+anchor_right = 0.95
+anchor_bottom = 0.55
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+custom_styles/panel = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.9
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 1152.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 8 )
+text = "Quick Play Last Save..."
+align = 1
+
+[node name="PromptText" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 49.0
+margin_right = 1152.0
+margin_bottom = 79.0
+size_flags_vertical = 6
+custom_fonts/font = ExtResource( 8 )
+text = "Play Profile [], [] - []?"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
+margin_top = 99.0
+margin_right = 1152.0
+margin_bottom = 159.0
+custom_constants/separation = 15
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="No" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+margin_left = 478.0
+margin_right = 556.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../Yes")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../Yes")
+focus_previous = NodePath("../Yes")
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "No"
+
+[node name="Yes" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+margin_left = 571.0
+margin_right = 673.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../No")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../No")
+focus_previous = NodePath("../No")
+custom_styles/hover = ExtResource( 2 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 6 )
+text = "Yes"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show = SubResource( 1 )

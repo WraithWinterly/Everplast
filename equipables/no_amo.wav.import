@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/no_amo.wav-528f67c7fb3a49f2190a313df06f013c.sample"
+
+[deps]
+
+source_file="res://equipables/no_amo.wav"
+dest_files=[ "res://.import/no_amo.wav-528f67c7fb3a49f2190a313df06f013c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

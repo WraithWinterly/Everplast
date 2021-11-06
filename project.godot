@@ -12,22 +12,22 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "EnemyComponentManager",
 "language": "GDScript",
-"path": "res://scripts/enemies/components/enemy_component_manager.gd"
+"path": "res://mobs/components/enemy_component_manager.gd"
 }, {
 "base": "CanvasLayer",
 "class": "FadePlayer",
 "language": "GDScript",
-"path": "res://scripts/ui/fade_player.gd"
+"path": "res://ui/fade_player/fade_player.gd"
 }, {
 "base": "Control",
 "class": "Main",
 "language": "GDScript",
-"path": "res://scripts/main.gd"
+"path": "res://main.gd"
 }, {
 "base": "Node2D",
 "class": "Player",
 "language": "GDScript",
-"path": "res://scripts/player/player.gd"
+"path": "res://player/player.gd"
 } ]
 _global_script_class_icons={
 "EnemyComponentManager": "",
@@ -39,9 +39,9 @@ _global_script_class_icons={
 [application]
 
 config/name="Everplast"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://main.tscn"
 config/use_custom_user_dir=true
-boot_splash/image="res://assets/ui/8x8.png"
+boot_splash/image="res://ui/8x8.png"
 boot_splash/use_filter=false
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
@@ -49,18 +49,18 @@ config/quit_on_go_back=false
 
 [audio]
 
-default_bus_layout="res://assets/misc/audiobuslayout.tres"
+default_bus_layout="res://misc/audiobuslayout.tres"
 
 [autoload]
 
-UI="*res://scripts/autoload/ui.gd"
-Globals="*res://scripts/autoload/globals.gd"
-LevelController="*res://scripts/autoload/level_controller.gd"
-PlayerStats="*res://scripts/autoload/player_stats.gd"
-Signals="*res://scripts/autoload/signals.gd"
-MusicController="*res://scripts/autoload/music_controller.gd"
-QuickPlay="*res://scripts/autoload/quick_play.gd"
-FileLocations="*res://scripts/autoload/file_locations.gd"
+UI="*res://autoload/ui.gd"
+Globals="*res://autoload/globals.gd"
+LevelController="*res://autoload/level_controller.gd"
+PlayerStats="*res://autoload/player_stats.gd"
+Signals="*res://autoload/signals.gd"
+MusicController="*res://autoload/music_controller.gd"
+QuickPlay="*res://autoload/quick_play.gd"
+FileLocations="*res://autoload/file_locations.gd"
 
 [debug]
 
@@ -236,6 +236,7 @@ ctr_move_left={
 2d_physics/layer_4="Entity"
 2d_physics/layer_5="Liquid"
 2d_physics/layer_6="Projectile"
+2d_physics/layer_7="Enemy"
 2d_physics/layer_11="Block"
 
 [physics]

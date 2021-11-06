@@ -1,0 +1,112 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://main.gd" type="Script" id=1]
+[ext_resource path="res://ui/hud/hud.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/notification/notification.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/debug/ui_print.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/pause_menu/pause_menu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/fade_player/fade_player.tscn" type="PackedScene" id=7]
+[ext_resource path="res://ui/ui_button_sound.gd" type="Script" id=8]
+[ext_resource path="res://ui/ts_buttons/ts_buttons.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/settings_menu/settings_menu.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui/fonts/minimal_5x7.ttf" type="DynamicFontData" id=12]
+[ext_resource path="res://ui/debug/debug.gd" type="Script" id=13]
+[ext_resource path="res://ui/debug/debug_console.tscn" type="PackedScene" id=14]
+[ext_resource path="res://ui/profile_selector/profile_selector.tscn" type="PackedScene" id=15]
+[ext_resource path="res://ui/dialog/dialog.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ui/main_menu/main_menu.tscn" type="PackedScene" id=17]
+[ext_resource path="res://ui/inventory/inventory.tscn" type="PackedScene" id=18]
+[ext_resource path="res://ui/button_press.ogg" type="AudioStream" id=19]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 12 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 4
+glow_intensity = 0.0
+glow_strength = 2.0
+glow_bloom = 0.01
+glow_blend_mode = 0
+
+[node name="Main" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+version_numbers = [ 1, 5 ]
+
+[node name="LevelHolder" type="Node2D" parent="."]
+
+[node name="FadePlayer" parent="." instance=ExtResource( 7 )]
+pause_mode = 2
+
+[node name="GUI" type="CanvasLayer" parent="."]
+pause_mode = 2
+
+[node name="TSButtons" parent="GUI" instance=ExtResource( 9 )]
+
+[node name="HUD" parent="GUI" instance=ExtResource( 2 )]
+pause_mode = 2
+visible = false
+
+[node name="Notification" parent="GUI" instance=ExtResource( 3 )]
+pause_mode = 2
+
+[node name="Dialog" parent="GUI" instance=ExtResource( 16 )]
+visible = false
+
+[node name="MainMenu" parent="GUI" instance=ExtResource( 17 )]
+pause_mode = 2
+
+[node name="Inventory" parent="GUI" instance=ExtResource( 18 )]
+visible = false
+
+[node name="PauseMenu" parent="GUI" instance=ExtResource( 5 )]
+visible = false
+
+[node name="Settings" parent="GUI" instance=ExtResource( 11 )]
+visible = false
+
+[node name="ProfileSelector" parent="GUI" instance=ExtResource( 15 )]
+
+[node name="UIButtonSound" type="AudioStreamPlayer" parent="GUI"]
+pause_mode = 2
+stream = ExtResource( 19 )
+volume_db = 15.0
+pitch_scale = 1.3
+bus = "Audio"
+script = ExtResource( 8 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GUI"]
+layer = 99
+
+[node name="Debug" type="Label" parent="GUI/CanvasLayer"]
+anchor_left = 0.005
+anchor_top = 0.012
+anchor_right = 1.0
+anchor_bottom = 0.015
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "Test Debug"
+valign = 1
+autowrap = true
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UIPrint" parent="GUI/CanvasLayer" instance=ExtResource( 4 )]
+
+[node name="DebugConsole" parent="GUI/CanvasLayer" instance=ExtResource( 14 )]
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
+__meta__ = {
+"_editor_description_": ""
+}

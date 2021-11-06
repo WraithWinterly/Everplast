@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/dash_failed.wav-0dcf6f92cbe7f300dc270c129a851d83.sample"
+
+[deps]
+
+source_file="res://player/dash_failed.wav"
+dest_files=[ "res://.import/dash_failed.wav-0dcf6f92cbe7f300dc270c129a851d83.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
