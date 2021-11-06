@@ -7,10 +7,12 @@ enum {
 
 export var equipable_name: String = "water gun"
 
+signal direction_changed(dir)
+
 var mode: int = COLLECT
 var firerate: int = 1
 var may_fire: bool = true
-
+var facing_right: bool = true
 var node2d: = Node2D.new()
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -37,10 +39,28 @@ func get_bullet() -> String:
 func _input(event: InputEvent) -> void:
 	if mode == USE:
 		if event is InputEventMouseMotion:
-			var speed = event.relative.y
-			speed /= 3000
-			rotation_degrees += speed * OS.window_size.y
-			rotation_degrees = clamp(rotation_degrees, -87, 87)
+#			var speed = event.relative.y
+#			speed /= 3000
+#			rotation_degrees += speed * OS.window_size.y
+#			rotation_degrees = clamp(rotation_degrees, -87, 87)
+			look_at(get_global_mouse_position())
+			print(rotation_degrees)
+			if facing_right:
+				if rotation_degrees < -90:
+					facing_right = false
+					emit_signal("direction_changed", facing_right)
+				elif rotation_degrees > 90:
+					facing_right = false
+					emit_signal("direction_changed", facing_right)
+					rotation_degrees = 90
+			else:
+				if rotation_degrees < -90:
+					facing_right = true
+					emit_signal("direction_changed", facing_right)
+				elif rotation_degrees > 90:
+					rotation_degrees = 90
+					facing_right = true
+					emit_signal("direction_changed", facing_right)
 
 
 func get_firerate() -> float:
@@ -82,7 +102,7 @@ func _physics_process(delta: float) -> void:
 				inst.global_position = position_2d.global_position
 				get_node(Globals.level_path).add_child(inst)
 				inst.global_rotation = global_rotation
-				if get_parent().get_parent().scale.x == 1:
+				if get_parent().get_parent().scale.x > 0:
 					inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(inst.get_node("BulletBase").speed, 0).rotated(rotation))
 				else:
 					inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(-inst.get_node("BulletBase").speed, 0).rotated(-rotation))

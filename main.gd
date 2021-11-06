@@ -4,7 +4,7 @@ class_name Main
 export(String, "release,beta,alpha,dev") var version_prefix = "dev"
 export var version_numbers: Array = [0, 0]
 export var world_names: Array = [
-	"World 0", "Foggy Overlands", "Drowsy Lands", "Snow Fall", "Tied Vines", "44 4f 4e 27 54 20 46 41 49 4c", "Molten Grounds"]
+	"World 0", "Foggy Overlands", "Drowsy Lands", "Snow Fall", "Tied Vines", "This is a world?", "Molten Grounds"]
 
 var version: String = ""
 

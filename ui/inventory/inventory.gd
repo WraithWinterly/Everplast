@@ -130,7 +130,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func hide_menu() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	UI.emit_signal("button_pressed", true)
 	if Globals.inventory_active:
 			get_tree().paused = false

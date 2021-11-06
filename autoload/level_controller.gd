@@ -74,7 +74,7 @@ func replace_scenes(world: int, level: int) -> void:
 
 
 func world_selector_load() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	LevelController.current_world = -1
 	LevelController.current_level = -1
 	Globals.game_state = Globals.GameStates.WORLD_SELECTOR
@@ -116,15 +116,15 @@ func _player_death() -> void:
 
 
 func _level_changed(world: int, level: int) -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	level_sound.play()
 	if checkpoint_active:
 		if not (checkpoint_world == world and checkpoint_level == level):
 			LevelController.reset_checkpoint()
 	get_tree().paused = true
-	yield(UI, "faded")
 	current_world = world
 	current_level = level
+	yield(UI, "faded")
 	replace_scenes(world, level)
 	get_tree().paused = false
 	error_detection()
@@ -149,14 +149,16 @@ func _level_completed() -> void:
 	yield(UI, "faded")
 	get_tree().paused = false
 	reset_checkpoint()
-	Signals.emit_signal("save")
 	world_selector_load()
 
 
 func unlock_next_level() -> void:
+	#print(LevelController.current_level)
+	#print(level_database[LevelController.current_world])
 	if LevelController.current_level + 1 <= level_database[LevelController.current_world]:
 		PlayerStats.set_stat("world_max", LevelController.current_world)
 		PlayerStats.set_stat("level_max", LevelController.current_level + 1)
 	else:
 		PlayerStats.set_stat("world_max", LevelController.current_world + 1)
 		PlayerStats.set_stat("level_max", 1)
+	Signals.emit_signal("save")

@@ -38,7 +38,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-version_numbers = [ 1, 5 ]
+version_numbers = [ 1, 6 ]
 
 [node name="LevelHolder" type="Node2D" parent="."]
 

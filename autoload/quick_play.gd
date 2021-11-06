@@ -16,7 +16,7 @@ onready var main: Main = get_tree().root.get_node("Main")
 func _ready() -> void:
 	UI.connect("changed", self, "_ui_changed")
 	UI.connect("faded", self, "_ui_changed")
-	Signals.connect("level_changed", self, "_level_changed")
+#	Signals.connect("level_changed", self, "_level_changed")
 	Signals.connect("save", self, "_game_save")
 
 	load_stats()
@@ -28,7 +28,8 @@ func update_stats() -> void:
 		available = false
 		return
 	else:
-		PlayerStats.load_stats()
+		if Globals.game_state == Globals.GameStates.MENU:
+			PlayerStats.load_stats()
 		available = PlayerStats.verify(data.last_profile)
 
 
@@ -81,7 +82,7 @@ func _game_save() -> void:
 	update_stats()
 
 
-func _level_changed(_world: int, _level: int) -> void:
-	data.last_profile = PlayerStats.current_save_profile
-	save_stats()
-	update_stats()
+#func _level_changed(_world: int, _level: int) -> void:
+#	data.last_profile = PlayerStats.current_save_profile
+#	save_stats()
+#	update_stats()

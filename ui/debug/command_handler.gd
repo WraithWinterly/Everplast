@@ -38,6 +38,7 @@ func change_level(world: int, level: int) -> String:
 	debug_console.last_world = Vector2(world, level)
 	return "Attempted to change to World %s, Level %s" % [world, level]
 
+
 func spawn(loader: String, amount: int) -> String:
 	var spawn = load("res://scenes/" + loader + ".tscn")
 	if spawn is PackedScene:

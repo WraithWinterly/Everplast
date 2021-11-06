@@ -69,7 +69,7 @@ max_health = 5
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 1.15 )
 frames = SubResource( 5 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 7 )]

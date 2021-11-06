@@ -17,8 +17,9 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="Animation" id=3]
-length = 0.5
+[sub_resource type="Animation" id=8]
+resource_name = "death"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("..:scale")
 tracks/0/interp = 1
@@ -41,7 +42,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 4, 3 ), Vector2( 4, 6.2 ) ]
+"values": [ Vector2( 4, 3 ), Vector2( 4, 7 ) ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("..:modulate")
@@ -50,17 +51,41 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 0.5 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "hurt"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("..:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1, 0.5 ), Vector2( 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("..:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 3 ), Vector2( 4, 5 ), Vector2( 4, 3 ) ]
 }
 
 [sub_resource type="Animation" id=4]
-resource_name = "death_invert"
-length = 0.5
-
-[sub_resource type="Animation" id=5]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
@@ -75,10 +100,10 @@ tracks/0/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( -1, 1 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 4.5, 4.5 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:custom_colors/font_color")
@@ -138,11 +163,11 @@ position = Vector2( 0, -0.15 )
 frames = SubResource( 2 )
 
 [node name="HurtAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
-anims/death = SubResource( 3 )
-anims/death_invert = SubResource( 4 )
+anims/death = SubResource( 8 )
+anims/hurt = SubResource( 7 )
 
 [node name="FlipAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
-anims/flip = SubResource( 5 )
+anims/flip = SubResource( 4 )
 
 [node name="HurtArea" type="Area2D" parent="."]
 collision_layer = 8
@@ -150,7 +175,7 @@ collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
 position = Vector2( 4, 3.5 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Index" type="Node2D" parent="."]
 z_index = 5
@@ -167,4 +192,4 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Index/HealthLabel"]
-anims/label = SubResource( 7 )
+anims/label = SubResource( 6 )

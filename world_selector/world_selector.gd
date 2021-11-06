@@ -5,6 +5,7 @@ var teleporter: Area2D
 
 func _ready() -> void:
 	var teleporters: Node2D = $Teleporters
+
 	for n in teleporters.get_children():
 		if n.world == PlayerStats.get_stat("world_last") \
 				and n.level == PlayerStats.get_stat("level_last"):

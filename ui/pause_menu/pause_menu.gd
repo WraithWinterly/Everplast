@@ -73,7 +73,7 @@ func show_menu() -> void:
 
 
 func hide_menu(unpause_game: bool = true, wait_for_fade: bool = false) -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	UI.menu_transitioning = true
 	animation_player.play_backwards("pause")
 	disable_buttons()

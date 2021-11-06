@@ -125,7 +125,6 @@ func set_adrenaline(new_value):
 	emit_signal("stat_updated")
 
 
-
 func profile_delete(profile: int):
 	if QuickPlay.data.last_profile == profile:
 		QuickPlay.reset()
@@ -149,6 +148,7 @@ func has(array: Array, value: String) -> bool:
 		if n[0] == value:
 			return true
 	return false
+
 
 func _profile_deleted() -> void:
 	profile_delete(UI.profile_index)
@@ -269,24 +269,29 @@ func _player_hurt_from_enemy(hurt_type: int, knockback, damage) -> void:
 
 
 func _player_death() -> void:
-	yield(UI, "faded")
+	var prev_last_world = LevelController.current_world
+	var prev_last_level = LevelController.current_level
 	var prev_quick_items = get_stat("quick_items")
 	var prev_collectables = get_stat("collectables")
 	var prev_equipables = get_stat("equipables")
 	load_stats()
-	set_stat("equiped_item", "none")
+	set_stat("world_last", prev_last_world)
+	set_stat("level_last", prev_last_level)
+	set_stat("equipped_item", "none")
 	set_stat("quick_items", prev_quick_items)
 	set_stat("collectables", prev_collectables)
 	set_stat("equipables", prev_equipables)
 	set_stat("health", get_stat("health_max"))
+	yield(UI, "faded")
 	save_stats()
 	emit_signal("stat_updated")
 
 
-func _level_changed(world: int, level:int) -> void:
-	set_stat("adrenaline", PlayerStats.get_stat("adrenaline_max"))
+func _level_changed(world: int, level: int) -> void:
+	yield(UI, "faded")
 	set_stat("world_last", world)
 	set_stat("level_last", level)
+	set_stat("adrenaline", PlayerStats.get_stat("adrenaline_max"))
 
 
 func _quick_item_used(item_name: String) -> void:
