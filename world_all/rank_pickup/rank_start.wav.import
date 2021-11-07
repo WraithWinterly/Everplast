@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/rank_start.wav-ea5cb079271a74e18ce59cad818446e8.sample"
+
+[deps]
+
+source_file="res://world_all/rank_pickup/rank_start.wav"
+dest_files=[ "res://.import/rank_start.wav-ea5cb079271a74e18ce59cad818446e8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

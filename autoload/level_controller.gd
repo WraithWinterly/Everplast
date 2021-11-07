@@ -147,6 +147,7 @@ func _level_completed() -> void:
 			PlayerStats.get_stat("world_max") <= LevelController.current_world:
 		unlock_next_level()
 	yield(UI, "faded")
+	Signals.emit_signal("save")
 	get_tree().paused = false
 	reset_checkpoint()
 	world_selector_load()

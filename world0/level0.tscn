@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world1/tilemap_world_1.tres" type="TileSet" id=2]
 [ext_resource path="res://world_all/orb.tscn" type="PackedScene" id=3]
 [ext_resource path="res://mobs/green_slime.tscn" type="PackedScene" id=4]
 [ext_resource path="res://world_all/sign.tscn" type="PackedScene" id=5]
-[ext_resource path="res://world_all/level_end_teleporter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world_all/level_end/level_end.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world_all/coin_100.tscn" type="PackedScene" id=7]
 [ext_resource path="res://world1/parallax_background.tscn" type="PackedScene" id=8]
 [ext_resource path="res://mobs/scorpion.tscn" type="PackedScene" id=9]
 [ext_resource path="res://vases/vase.tscn" type="PackedScene" id=10]
 [ext_resource path="res://world_all/coin.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world_all/rank_pickup/rank_pickup.tscn" type="PackedScene" id=12]
 [ext_resource path="res://world1/canvas_layer_back.tscn" type="PackedScene" id=13]
 [ext_resource path="res://world_all/level.gd" type="Script" id=16]
 
@@ -134,6 +135,11 @@ position = Vector2( 184, 304 )
 position = Vector2( 288, 272 )
 item = ExtResource( 11 )
 height = 4
+
+[node name="Vase2" parent="." instance=ExtResource( 10 )]
+position = Vector2( 424, 272 )
+item = ExtResource( 12 )
+height = 11
 
 [node name="Sign" parent="." instance=ExtResource( 5 )]
 position = Vector2( 352, 272 )

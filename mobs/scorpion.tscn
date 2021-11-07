@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://mobs/scorpion.gd" type="Script" id=2]
-[ext_resource path="res://mobs/components/enemy_component_manager.tscn" type="PackedScene" id=3]
+[ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=3]
 [ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=4]
 [ext_resource path="res://mobs/components/basic_movement.tscn" type="PackedScene" id=7]
 [ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=8]

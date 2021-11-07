@@ -43,6 +43,10 @@ region = Rect2( 0, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 11, 0, 11, 24 )
 
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 110, 0, 11, 24 )
+
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 44, 0, 11, 24 )
@@ -58,18 +62,6 @@ region = Rect2( 66, 0, 11, 24 )
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 77, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 88, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 99, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 22, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
@@ -87,9 +79,17 @@ region = Rect2( 66, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 77, 0, 11, 24 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
-region = Rect2( 110, 0, 11, 24 )
+region = Rect2( 88, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 99, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 22, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=17]
 atlas = ExtResource( 1 )
@@ -102,10 +102,20 @@ animations = [ {
 "name": "idle",
 "speed": 2.0
 }, {
+"frames": [ SubResource( 16 ) ],
+"loop": true,
+"name": "dash",
+"speed": 5.0
+}, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "walk",
 "speed": 7.0
+}, {
+"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
+"loop": true,
+"name": "sprint",
+"speed": 10.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
@@ -115,16 +125,6 @@ animations = [ {
 "frames": [ SubResource( 11 ) ],
 "loop": true,
 "name": "air_idle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
-"loop": true,
-"name": "sprint",
-"speed": 10.0
-}, {
-"frames": [ SubResource( 16 ) ],
-"loop": true,
-"name": "dash",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 17 ) ],
@@ -261,7 +261,7 @@ script = ExtResource( 10 )
 script = ExtResource( 7 )
 
 [node name="InvincibleTimer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 0.5
 autostart = true
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]
@@ -290,9 +290,7 @@ volume_db = -10.0
 pitch_scale = 0.73
 bus = "Audio"
 
-[node name="KinematicBody2D" type="KinematicBody2D" parent="." groups=[
-"Player",
-]]
+[node name="KinematicBody2D" type="KinematicBody2D" parent="." groups=["Player"]]
 collision_layer = 4
 collision_mask = 1027
 script = ExtResource( 17 )
@@ -344,6 +342,7 @@ script = ExtResource( 16 )
 target = NodePath("../KinematicBody2D")
 
 [node name="Camera2D" type="Camera2D" parent="Smoothing2D"]
+pause_mode = 2
 position = Vector2( -1, 0 )
 current = true
 zoom = Vector2( 0.2, 0.2 )
@@ -362,8 +361,7 @@ centered = false
 script = ExtResource( 4 )
 
 [node name="Equipable" type="Position2D" parent="Smoothing2D/AnimatedSprite"]
-position = Vector2( 5, 11 )
-scale = Vector2( 0.8, 0.8 )
+position = Vector2( 5.5, 13 )
 script = ExtResource( 28 )
 
 [node name="FlashAnimationPlayer" type="AnimationPlayer" parent="Smoothing2D/AnimatedSprite"]

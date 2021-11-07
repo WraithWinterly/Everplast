@@ -25,10 +25,9 @@ font_data = ExtResource( 12 )
 
 [sub_resource type="Environment" id=2]
 background_mode = 4
-glow_intensity = 0.0
-glow_strength = 2.0
-glow_bloom = 0.01
-glow_blend_mode = 0
+fog_depth_begin = 0.0
+fog_depth_end = 24.5
+tonemap_mode = 3
 
 [node name="Main" type="Control"]
 anchor_right = 1.0
@@ -38,7 +37,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-version_numbers = [ 1, 6 ]
+version_numbers = [ 1, 7 ]
 
 [node name="LevelHolder" type="Node2D" parent="."]
 

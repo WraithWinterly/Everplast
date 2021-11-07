@@ -161,6 +161,8 @@ func _profile_updated() -> void:
 	for element in old_profile:
 		if default_data.has(element) and typeof(old_profile.get(element)) == typeof(default_data.get(element)):
 			data[profile][element] = old_profile[element]
+	if old_profile.rank is String:
+		old_profile.rank = Ranks.NONE
 	save_stats(true)
 
 

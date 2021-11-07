@@ -15,18 +15,29 @@ onready var hud: Control = $GUI/HUD
 onready var pause_menu: Control = $GUI/PauseMenu
 
 
-static func get_action_strength_keyboard() -> float:
-	return float(Input.get_action_strength("move_right") - \
-			Input.get_action_strength("move_left")
-	)
+#static func get_action_strength_keyboard() -> float:
+#	return float(Input.get_action_strength("move_right") - \
+#			Input.get_action_strength("move_left")
+#	)
 
+
+static func get_action_strength_keyboard() -> float:
+	return float(Input.get_axis("move_left", "move_right"))
+
+#static func get_action_strength_controller() -> float:
+#	return float(Input.get_action_strength("ctr_move_right") - \
+#			Input.get_action_strength("ctr_move_left")
+#	)
 
 static func get_action_strength_controller() -> float:
-	return float(Input.get_action_strength("ctr_move_right") - \
-			Input.get_action_strength("ctr_move_left")
-	)
+	return float(Input.get_axis("ctr_move_left", "ctr_move_right"))
 
 
+static func get_controller_right_axis() -> Vector2:
+	return Vector2(Input.get_axis("ctr_look_left", "ctr_look_right"), 
+			Input.get_axis("ctr_look_down", "ctr_look_up"))
+			
+			
 static func get_action_strength() -> float:
 	if abs(get_action_strength_keyboard()) > 0:
 		return get_action_strength_keyboard()

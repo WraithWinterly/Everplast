@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://world_all/level.gd" type="Script" id=1]
 [ext_resource path="res://world4/w4_tilemap.tres" type="TileSet" id=2]
-[ext_resource path="res://world_all/level_end.tscn" type="PackedScene" id=4]
 [ext_resource path="res://world4/canvas_layer_back.tscn" type="PackedScene" id=5]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world4/parallax_background.tscn" type="PackedScene" id=7]
@@ -38,18 +37,6 @@ position = Vector2( 144, 232 )
 
 [node name="End" type="Position2D" parent="PlayerPositions"]
 position = Vector2( 4608, 32 )
-
-[node name="LevelSwitcherStart" parent="." instance=ExtResource( 4 )]
-position = Vector2( 112, 184 )
-scale = Vector2( 1, 3 )
-new_world = 3
-new_level = 4
-from_start = false
-
-[node name="LevelSwitcherEnd" parent="." instance=ExtResource( 4 )]
-position = Vector2( 4631, 32 )
-new_world = 3
-new_level = 4
 
 [node name="Player" parent="." instance=ExtResource( 6 )]
 position = Vector2( 144, 232 )

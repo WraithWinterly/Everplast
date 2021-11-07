@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=2]
@@ -25,6 +25,38 @@ bg_color = Color( 0.117647, 0.156863, 0.176471, 1 )
 border_width_top = 40
 border_color = Color( 0.14902, 0.196078, 0.219608, 1 )
 border_blend = true
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "scale"
+length = 5.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ) ]
+}
 
 [sub_resource type="CanvasItemMaterial" id=3]
 blend_mode = 1
@@ -118,9 +150,9 @@ drag_margin_top = 0.5
 drag_margin_bottom = 0.1
 
 [node name="Title" type="HBoxContainer" parent="."]
-anchor_top = 0.021
+anchor_top = 0.013
 anchor_right = 0.091
-anchor_bottom = 0.05
+anchor_bottom = 0.013
 margin_top = 0.200001
 margin_bottom = 40.0
 rect_scale = Vector2( 11, 11 )
@@ -129,15 +161,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Texture" type="TextureRect" parent="Title"]
-margin_left = 38.0
-margin_right = 78.0
-margin_bottom = 60.0
+[node name="Label" type="Label" parent="Title"]
+margin_left = 58.0
+margin_top = 12.0
+margin_right = 58.0
+margin_bottom = 26.0
+
+[node name="Texture" type="Sprite" parent="Title/Label"]
+scale = Vector2( 1, 1 )
 texture = ExtResource( 9 )
-stretch_mode = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Title/Label/Texture"]
+autoplay = "scale"
+anims/RESET = SubResource( 4 )
+anims/scale = SubResource( 5 )
 
 [node name="Light" type="HBoxContainer" parent="."]
 anchor_left = 0.645
@@ -178,12 +215,12 @@ focus_neighbour_right = NodePath("../QuickPlay")
 focus_neighbour_bottom = NodePath("../QuickPlay")
 focus_next = NodePath("../QuickPlay")
 focus_previous = NodePath("../Quit")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Play Everplast"
 
 [node name="QuickPlay" type="Button" parent="MenuButtons"]
@@ -196,12 +233,12 @@ focus_neighbour_right = NodePath("../Settings")
 focus_neighbour_bottom = NodePath("../Settings")
 focus_next = NodePath("../Settings")
 focus_previous = NodePath("../Play")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Quick Play"
 
 [node name="Settings" type="Button" parent="MenuButtons"]
@@ -214,13 +251,13 @@ focus_neighbour_right = NodePath("../Quit")
 focus_neighbour_bottom = NodePath("../Quit")
 focus_next = NodePath("../Quit")
 focus_previous = NodePath("../QuickPlay")
+custom_constants/hseparation = 15
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
-custom_constants/hseparation = 15
 text = "Settings"
 
 [node name="Quit" type="Button" parent="MenuButtons"]
@@ -233,12 +270,12 @@ focus_neighbour_right = NodePath("../Play")
 focus_neighbour_bottom = NodePath("../Play")
 focus_next = NodePath("../Play")
 focus_previous = NodePath("../Settings")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-custom_fonts/font = ExtResource( 2 )
 text = "Quit Game"
 
 [node name="QuitPrompt" parent="." instance=ExtResource( 11 )]

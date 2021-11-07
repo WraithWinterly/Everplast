@@ -25,7 +25,8 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_released("interact") and with_player and not UI.menu_transitioning:
+	if event.is_action_pressed("interact") and with_player \
+			and not UI.menu_transitioning:
 		Signals.emit_signal("level_changed", world, level)
 
 

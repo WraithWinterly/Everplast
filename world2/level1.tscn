@@ -1,9 +1,9 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://world2/w2_tilemap.tres" type="TileSet" id=1]
-[ext_resource path="res://world_all/level_end.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world2/parallax_background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://world_all/rank_pickup/rank_pickup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://world2/canvas_layer_back.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world_all/tree.tscn" type="PackedScene" id=7]
 [ext_resource path="res://world_all/lantern.tscn" type="PackedScene" id=8]
@@ -33,18 +33,6 @@ position = Vector2( 152, 200 )
 
 [node name="End" type="Position2D" parent="PlayerPositions"]
 position = Vector2( 4616, -16 )
-
-[node name="LevelSwitcherStart" parent="." instance=ExtResource( 2 )]
-position = Vector2( 104, 200 )
-scale = Vector2( 1, 3 )
-new_level = 2
-from_start = false
-
-[node name="LevelSwitcherEnd" parent="." instance=ExtResource( 2 )]
-position = Vector2( 4632, -16 )
-scale = Vector2( 1, 5.107 )
-new_world = 2
-new_level = 2
 
 [node name="Player" parent="." instance=ExtResource( 4 )]
 position = Vector2( 151, 200 )
@@ -368,16 +356,20 @@ position = Vector2( 4552, -16 )
 
 [node name="Torch" parent="Torches" instance=ExtResource( 9 )]
 position = Vector2( 680, 120 )
+frame = 2
 
 [node name="Torch2" parent="Torches" instance=ExtResource( 9 )]
 position = Vector2( 1408, 104 )
+frame = 2
 flip_h = true
 
 [node name="Torch3" parent="Torches" instance=ExtResource( 9 )]
 position = Vector2( 1632, 104 )
+frame = 2
 
 [node name="Torch4" parent="Torches" instance=ExtResource( 9 )]
 position = Vector2( 2704, 16 )
+frame = 2
 
 [node name="Food" type="Node2D" parent="."]
 
@@ -635,3 +627,7 @@ position = Vector2( 4584, -16 )
 
 [node name="Coin57" parent="Coins" instance=ExtResource( 16 )]
 position = Vector2( 4592, -16 )
+
+[node name="RankPickup" parent="." instance=ExtResource( 5 )]
+position = Vector2( 233, 200 )
+rank = 2
