@@ -22,11 +22,9 @@ onready var timer: Timer = $Timer
 
 func _ready() -> void:
 	connect("body_entered", self, "_body_entered")
-	if get_parent() is Node2D:
-		get_parent().get_parent().connect("direction_changed", self, "_direction_changed")
-	
 	if mode == USE:
 		$Sprite.rotation_degrees = 0
+		get_parent().get_parent().connect("direction_changed", self, "_direction_changed")
 	elif mode == COLLECT:
 		rotation_degrees = 23.2
 
@@ -34,8 +32,11 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if mode == USE:
 		if Input.is_action_just_pressed("fire") and not can_fire():
-			no_amo_sound.play()
-			return
+			var worker: String = PlayerStats.get_ammo()
+			var inv: Array = PlayerStats.get_stat("collectables")
+			if not PlayerStats.has(inv, worker):
+							no_amo_sound.play()
+							return
 		if Input.is_action_pressed("fire"):
 			if can_fire():
 				reduce_ammo()

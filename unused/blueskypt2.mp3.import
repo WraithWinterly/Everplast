@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/blueskypt2.mp3-beb3f4692e677e1af51620dd021752a4.mp3str"
+
+[deps]
+
+source_file="res://unused/blueskypt2.mp3"
+dest_files=[ "res://.import/blueskypt2.mp3-beb3f4692e677e1af51620dd021752a4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

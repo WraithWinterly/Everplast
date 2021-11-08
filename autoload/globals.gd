@@ -22,6 +22,7 @@ var player_invincible: bool = false
 var dialog_active: bool = false
 var inventory_active: bool = false
 var player_jump_damage: int = 1
+var timed_powerup_active: bool = false
 var game_state: int = GameStates.MENU
 
 var player_path = "/root/Main/LevelHolder/Level/Player"

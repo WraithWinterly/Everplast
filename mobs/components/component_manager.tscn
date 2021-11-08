@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://misc/highUp.ogg" type="AudioStream" id=1]
+[ext_resource path="res://mobs/hurt.ogg" type="AudioStream" id=1]
 [ext_resource path="res://mobs/components/component_manager.gd" type="Script" id=2]
 [ext_resource path="res://mobs/slime.png" type="Texture" id=3]
 [ext_resource path="res://ui/fonts/16x.tres" type="DynamicFont" id=4]
@@ -193,3 +193,9 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Index/HealthLabel"]
 anims/label = SubResource( 6 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+position = Vector2( -6, -6 )
+rect = Rect2( -10, -10, 40, 40 )
+process_parent = true
+physics_process_parent = true

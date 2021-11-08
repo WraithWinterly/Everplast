@@ -1,10 +1,29 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=13 format=2]
 
+[ext_resource path="res://mobs/bunny.png" type="Texture" id=1]
+[ext_resource path="res://mobs/bunny_hurt.wav" type="AudioStream" id=2]
+[ext_resource path="res://mobs/bunny.gd" type="Script" id=3]
 [ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://mobs/components/basic_movement.tscn" type="PackedScene" id=5]
 [ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://mobs/components/hurt_by_jump.tscn" type="PackedScene" id=7]
 [ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=8]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3.5 )
@@ -12,11 +31,25 @@ extents = Vector2( 4, 3.5 )
 [node name="Bunny" type="KinematicBody2D"]
 collision_layer = 64
 collision_mask = 3
+script = ExtResource( 3 )
 
 [node name="EnemyComponentManager" parent="." instance=ExtResource( 4 )]
+orb_amount = 5
+knockback = 120
+damage = 0
+
+[node name="HitSound" parent="EnemyComponentManager" index="0"]
+stream = ExtResource( 2 )
+volume_db = 9.0
+
+[node name="DeathSound" parent="EnemyComponentManager" index="1"]
+stream = ExtResource( 2 )
+volume_db = 7.0
 
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
-position = Vector2( 0, 1 )
+position = Vector2( 0, 0.15 )
+frames = SubResource( 4 )
+playing = true
 
 [node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 5 )]
 flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")

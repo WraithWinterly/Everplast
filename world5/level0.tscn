@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://world1/tilemap_world_1.tres" type="TileSet" id=2]
+[ext_resource path="res://tilesets/tilemap_w1.tres" type="TileSet" id=2]
 [ext_resource path="res://mobs/green_slime.tscn" type="PackedScene" id=3]
-[ext_resource path="res://world1/tilemap_platform.tres" type="TileSet" id=4]
-[ext_resource path="res://world_all/rank_pickup/rank_pickup.tscn" type="PackedScene" id=5]
-[ext_resource path="res://world_all/level_end/level_end.tscn" type="PackedScene" id=6]
+[ext_resource path="res://tilesets/tilemap_platform.tres" type="TileSet" id=4]
+[ext_resource path="res://rank_pickup/rank_pickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://teleporters/level_end/level_end.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world_all/level.gd" type="Script" id=16]
 
 [node name="Level" type="Node2D"]

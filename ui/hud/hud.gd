@@ -134,9 +134,9 @@ func _level_completed() -> void:
 
 
 func _player_death() -> void:
-	update_counters()
 	hide_hud()
-	#update_visibility()
+	yield(UI, "faded")
+	update_counters()
 
 
 func _quick_item_used(item_name: String) -> void:

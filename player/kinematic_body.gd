@@ -19,7 +19,8 @@ var walk_speed: float = 65
 var air_time: float = 0
 var current_speed: float = 0
 var rise_force: float = 14
-
+var bunny_speed: float = 80
+var speed_modifier: float = 1
 var may_dash: bool = true
 var second_jump_used: bool = true
 
@@ -40,6 +41,19 @@ func _ready() -> void:
 	Signals.connect("player_hurt_enemy", self, "_player_hurt_enemy")
 	Signals.connect("player_killed_enemy", self, "_player_killed_enemy")
 	Signals.connect("sublevel_changed", self, "_sublevel_changed")
+	Signals.connect("quick_item_used", self, "_quick_item_used")
+	Signals.connect("quick_item_ended", self, "_quick_item_ended")
+	
+	
+# Spikes
+func _physics_process(delta):
+	for i in get_slide_count():
+		var collider = get_slide_collision(i).collider
+		if collider is TileMap:
+			if collider.is_in_group("Spikes"):
+				Signals.emit_signal("player_hurt_from_enemy",
+						Globals.EnemyHurtTypes.NORMAL,collider.knockback, collider.damage)
+				return
 
 
 func basic_movement():
@@ -50,7 +64,7 @@ func basic_movement():
 	else:
 		current_speed = walk_speed
 	current_speed *= Main.get_action_strength()
-	linear_velocity.x = lerp(linear_velocity.x, current_speed, 0.1)
+	linear_velocity.x = lerp(linear_velocity.x, current_speed * speed_modifier, 0.1)
 	linear_velocity.y += delta * current_gravity
 	linear_velocity = move_and_slide(linear_velocity, Vector2.UP, true)
 
@@ -135,3 +149,19 @@ func _start_player_death() -> void:
 func _player_death() -> void:
 	set_collision_layer_bit(0, true)
 	set_collision_mask_bit(3, true)
+
+
+func _quick_item_used(item_name: String) -> void:
+	match item_name:
+		"bunny egg":
+			speed_modifier = 1.5
+		"glitch orb":
+			player.start_invincibility(5)
+	
+	
+func _quick_item_ended(item_name: String) -> void:
+	match item_name:
+		"bunny egg":
+			speed_modifier = 1
+		"glitch orb":
+			pass

@@ -49,7 +49,7 @@ config/quit_on_go_back=false
 
 [audio]
 
-default_bus_layout="res://misc/audiobuslayout.tres"
+default_bus_layout="res://audiobuslayout.tres"
 
 [autoload]
 
@@ -275,6 +275,7 @@ ctr_look_left={
 2d_physics/layer_5="Liquid"
 2d_physics/layer_6="Projectile"
 2d_physics/layer_7="Enemy"
+2d_physics/layer_8="Vase"
 2d_physics/layer_11="Block"
 
 [physics]
@@ -285,7 +286,6 @@ ctr_look_left={
 
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=1
-2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
 quality/filters/msaa=2
 quality/dynamic_fonts/use_oversampling=false

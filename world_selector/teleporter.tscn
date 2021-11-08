@@ -2,7 +2,7 @@
 
 [ext_resource path="res://world_selector/teleporter.png" type="Texture" id=1]
 [ext_resource path="res://world_selector/teleporter.gd" type="Script" id=2]
-[ext_resource path="res://misc/light.png" type="Texture" id=3]
+[ext_resource path="res://world_all/light.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12, 19 )

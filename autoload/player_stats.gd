@@ -111,7 +111,6 @@ func set_health(new_value):
 	elif new_value < 0:
 		new_value = 0
 	set_stat("health", new_value)
-	#set_stat("health", clamp(get_stat("health"), 0, get_stat("health_max")))
 	emit_signal("stat_updated")
 
 
@@ -121,7 +120,6 @@ func set_adrenaline(new_value):
 	elif new_value < 0:
 		new_value = 0
 	set_stat("adrenaline", new_value)
-	#set_stat("health", clamp(get_stat("health"), 0, get_stat("health_max")))
 	emit_signal("stat_updated")
 
 
@@ -276,6 +274,7 @@ func _player_death() -> void:
 	var prev_quick_items = get_stat("quick_items")
 	var prev_collectables = get_stat("collectables")
 	var prev_equipables = get_stat("equipables")
+	yield(UI, "faded")
 	load_stats()
 	set_stat("world_last", prev_last_world)
 	set_stat("level_last", prev_last_level)
@@ -284,7 +283,6 @@ func _player_death() -> void:
 	set_stat("collectables", prev_collectables)
 	set_stat("equipables", prev_equipables)
 	set_stat("health", get_stat("health_max"))
-	yield(UI, "faded")
 	save_stats()
 	emit_signal("stat_updated")
 
@@ -299,9 +297,9 @@ func _level_changed(world: int, level: int) -> void:
 func _quick_item_used(item_name: String) -> void:
 	match item_name:
 		"carrot":
-			set_health(get_stat("health") + 2)
+			set_health(get_stat("health") + 4)
 		"cherry":
-			set_adrenaline(get_stat("adrenaline") + 2)
+			set_adrenaline(get_stat("adrenaline") + 10)
 	emit_signal("stat_updated")
 
 

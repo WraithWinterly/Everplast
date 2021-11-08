@@ -2,7 +2,7 @@
 
 [ext_resource path="res://equipables/bullet_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://equipables/laser_bullet.png" type="Texture" id=2]
-[ext_resource path="res://misc/light.png" type="Texture" id=3]
+[ext_resource path="res://world_all/light.png" type="Texture" id=3]
 [ext_resource path="res://equipables/laser.wav" type="AudioStream" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]

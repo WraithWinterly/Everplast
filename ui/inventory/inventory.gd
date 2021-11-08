@@ -2,9 +2,11 @@ extends Control
 
 
 var quick_item_explanations: Dictionary = {
-	"carrot": "Increases your health by 2",
-	"cherry": "Increases your adrenaline by 2",
+	"carrot": "Increases your health by 4",
+	"cherry": "Increases your adrenaline by 10",
 	"coconut": "Coconut description",
+	"bunny egg": "Gives you a speed boost for 5 seconds",
+	"glitch orb": "player.code(hack_damage, 5) true"
 }
 var rank_explanations: Dictionary = {
 	"none": "You do not have a rank yet.",
@@ -16,7 +18,7 @@ var rank_explanations: Dictionary = {
 	"volcano": "Volcano description",
 }
 
-var valid_quick_items: Array = ["carrot", "cherry", "coconut"]
+var valid_quick_items: Array = ["carrot", "cherry", "coconut", "bunny egg", "glitch orb"]
 var valid_equipables: Array = ["water gun", "nail gun", "laser gun"]
 var valid_collectables: Array = ["energy", "water", "nail"]
 
@@ -253,17 +255,16 @@ func update_button_focus(top_button: Button) -> void:
 		top_button.focus_neighbour_top = button_collectables.get_path()
 
 
-
-
-
 func order_buttons(buttons: VBoxContainer, player_stat: String) -> void:
 	var button_names: Array = []
 	for button in buttons.get_children():
-		button_names.push_back(button.name.to_lower())
+		var string = button.name.to_lower()
+		string.replace(" ", "_")
+		button_names.push_back(string)
 	var stats: Array = PlayerStats.get_stat(player_stat)
 	var index: int = stats.size()
 
-	var button_positions: Array = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+	var button_positions: Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 #
 	for button in button_names:
 		if not button in stats:
@@ -341,10 +342,13 @@ func _quick_item_button_pressed() -> void:
 		UI.emit_signal("button_pressed")
 		for n in quick_item_buttons.get_children():
 			if n.has_focus():
-				powerup_sound.play()
-				Signals.emit_signal("quick_item_used", n.name.to_lower())
-				hide_menu()
-				return
+				if not Globals.timed_powerup_active:
+					powerup_sound.play()
+					Signals.emit_signal("quick_item_used", n.name.to_lower())
+					hide_menu()
+					return
+				else:
+					UI.emit_signal("show_notification", "You can not use this item yet, one is already active!")
 
 
 func _quick_items_pressed() -> void:
@@ -493,4 +497,17 @@ func _on_Coconut_focus_entered() -> void:
 	quick_item_explanation_label.text = quick_item_explanations["coconut"]
 
 
+func _on_Bunny_Egg_focus_entered():
+	quick_item_explanation_label.text = quick_item_explanations["bunny egg"]
 
+
+func _on_Bunny_Egg_mouse_entered():
+	quick_item_explanation_label.text = quick_item_explanations["bunny egg"]
+
+
+func _on_Glitch_Orb_focus_entered():
+	quick_item_explanation_label.text = quick_item_explanations["glitch orb"]
+
+
+func _on_Glitch_Orb_mouse_entered():
+	quick_item_explanation_label.text = quick_item_explanations["glitch orb"]

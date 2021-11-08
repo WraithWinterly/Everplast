@@ -38,7 +38,6 @@ func attempt_correction(amount: int):
 					0, player_body.linear_velocity.y * delta)):
 		for corner_distance in range(1, amount * 2 ):
 			for direction in [-1.0, 1.0]:
-				#player_body.linear_velocity.y += 2
 				if not player_body.test_move(
 						player_body.global_transform.translated(Vector2(
 						corner_distance * direction / 2, 0)),

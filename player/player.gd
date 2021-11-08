@@ -59,10 +59,10 @@ func dash_failed() -> void:
 	pass
 
 
-func start_invincibility() -> void:
+func start_invincibility(time: float) -> void:
 	yield(get_tree(), "physics_frame")
 	Globals.player_invincible = true
-	invincible_timer.start()
+	invincible_timer.start(time)
 	flash_animation_player.play("flash")
 
 
@@ -78,7 +78,7 @@ func _player_hurt_from_enemy(hurt_type: int, knockback: int, damage: int):
 	if PlayerStats.get_stat("health") <= 0:
 		Signals.emit_signal("start_player_death")
 	else:
-		start_invincibility()
+		start_invincibility(0.5)
 		hurt_sound.pitch_scale = 0.9
 		hurt_sound.play()
 

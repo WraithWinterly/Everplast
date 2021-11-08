@@ -40,7 +40,7 @@ func change_level(world: int, level: int) -> String:
 
 
 func spawn(loader: String, amount: int) -> String:
-	var spawn = load("res://scenes/" + loader + ".tscn")
+	var spawn = load("res://" + loader + ".tscn")
 	if spawn is PackedScene:
 		for _n in amount:
 			var loaded = spawn.instance()

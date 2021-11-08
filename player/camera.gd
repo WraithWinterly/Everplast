@@ -68,6 +68,7 @@ func _state_changed() -> void:
 
 
 func _sublevel_changed(_pos: Vector2) -> void:
+	yield(UI, "faded")
 	if state == NORMAL:
 		state = SUB
 		update_camera_positions(state)

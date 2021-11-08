@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
@@ -14,8 +14,9 @@
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=12]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=13]
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=14]
-[ext_resource path="res://misc/orb.png" type="Texture" id=15]
+[ext_resource path="res://world_all/orb.png" type="Texture" id=15]
 [ext_resource path="res://ui/hud/hud_font_panel.tres" type="StyleBox" id=16]
+[ext_resource path="res://powerups/bunny_egg.png" type="Texture" id=17]
 [ext_resource path="res://ui/inventory/equipable_button_focus.tres" type="StyleBox" id=18]
 [ext_resource path="res://ui/inventory/equipable_button_normal.tres" type="StyleBox" id=19]
 [ext_resource path="res://ui/inventory/equipable_button_pressed.tres" type="StyleBox" id=20]
@@ -26,6 +27,7 @@
 [ext_resource path="res://collectables/nail.png" type="Texture" id=25]
 [ext_resource path="res://collectables/energy.png" type="Texture" id=26]
 [ext_resource path="res://collectables/water.png" type="Texture" id=27]
+[ext_resource path="res://powerups/glitch_orb.png" type="Texture" id=28]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -414,12 +416,12 @@ focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath("../QuickItemsButton")
 focus_next = NodePath("../QuickItemsButton")
 focus_previous = NodePath("../RanksAndStatsButton")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-custom_fonts/font = ExtResource( 2 )
 text = "Close"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -434,12 +436,12 @@ focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath("../CollectablesButton")
 focus_next = NodePath("../CollectablesButton")
 focus_previous = NodePath("../CloseButton")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-custom_fonts/font = ExtResource( 2 )
 text = "My Quick Items"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -454,12 +456,12 @@ focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath("../RanksAndStatsButton")
 focus_next = NodePath("../RanksAndStatsButton")
 focus_previous = NodePath("../QuickItemsButton")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-custom_fonts/font = ExtResource( 2 )
 text = "My Collectables"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -474,23 +476,33 @@ focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath("../CloseButton")
 focus_next = NodePath("../CloseButton")
 focus_previous = NodePath("../CollectablesButton")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-custom_fonts/font = ExtResource( 2 )
 text = "My Ranks and Stats"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="QuickItems" type="Panel" parent="Panel"]
-visible = false
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Panel" parent="Panel/QuickItems"]
+anchor_left = 0.03
+anchor_top = 0.01
+anchor_right = 0.45
+anchor_bottom = 0.95
+margin_top = 1.52588e-05
+custom_styles/panel = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -504,20 +516,20 @@ __meta__ = {
 }
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/QuickItems/HBoxContainer"]
-margin_right = 256.0
+margin_right = 330.0
 margin_bottom = 518.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="Coconut" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
-margin_top = 159.0
-margin_right = 256.0
-margin_bottom = 219.0
+margin_top = 54.0
+margin_right = 330.0
+margin_bottom = 114.0
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 11 )
 text = "Coconut [1]"
 expand_icon = true
 __meta__ = {
@@ -525,7 +537,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Coconut"]
-anchor_left = -0.15
+anchor_left = -0.125
 anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
@@ -537,14 +549,14 @@ __meta__ = {
 }
 
 [node name="Cherry" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
-margin_top = 229.0
-margin_right = 256.0
-margin_bottom = 289.0
+margin_top = 124.0
+margin_right = 330.0
+margin_bottom = 184.0
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 11 )
 text = "Cherry [1]"
 expand_icon = true
 __meta__ = {
@@ -552,7 +564,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Cherry"]
-anchor_left = -0.15
+anchor_left = -0.125
 anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
@@ -564,14 +576,14 @@ __meta__ = {
 }
 
 [node name="Carrot" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
-margin_top = 299.0
-margin_right = 256.0
-margin_bottom = 359.0
+margin_top = 194.0
+margin_right = 330.0
+margin_bottom = 254.0
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 11 )
 text = " Carrot [1] "
 expand_icon = true
 __meta__ = {
@@ -579,7 +591,7 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Carrot"]
-anchor_left = -0.15
+anchor_left = -0.125
 anchor_top = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.9
@@ -590,10 +602,91 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Bunny Egg" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+margin_top = 264.0
+margin_right = 330.0
+margin_bottom = 324.0
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "bunny egg "
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Bunny Egg"]
+anchor_left = -0.125
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 17 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Glitch Orb" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+margin_top = 334.0
+margin_right = 330.0
+margin_bottom = 394.0
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Glitch Orb x999"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb"]
+anchor_left = -0.125
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 28 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Glitch Orb2" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+margin_top = 404.0
+margin_right = 330.0
+margin_bottom = 464.0
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+text = "Glitch Orb x999"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb2"]
+anchor_left = -0.125
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.9
+texture = ExtResource( 28 )
+expand = true
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="NotInLevelWarning" type="Label" parent="Panel/QuickItems"]
-anchor_right = 1.0
-anchor_bottom = 0.301
-mouse_filter = 0
+anchor_left = 0.5
+anchor_right = 0.86
+anchor_bottom = 0.311
 custom_fonts/font = ExtResource( 2 )
 text = "You cannot use powerups here!"
 align = 1
@@ -630,6 +723,7 @@ __meta__ = {
 anims/slide = SubResource( 6 )
 
 [node name="Collectables" type="Panel" parent="Panel"]
+visible = false
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -678,11 +772,11 @@ __meta__ = {
 [node name="Water Gun" type="Button" parent="Panel/Collectables/Equipables/Buttons"]
 margin_right = 232.0
 margin_bottom = 60.0
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
 custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 18 )
 custom_styles/normal = ExtResource( 19 )
-custom_fonts/font = ExtResource( 11 )
 text = "Water Gun"
 align = 0
 expand_icon = true
@@ -706,11 +800,11 @@ __meta__ = {
 margin_top = 70.0
 margin_right = 232.0
 margin_bottom = 130.0
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
 custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 18 )
 custom_styles/normal = ExtResource( 19 )
-custom_fonts/font = ExtResource( 11 )
 text = "Nail Gun"
 align = 0
 expand_icon = true
@@ -734,11 +828,11 @@ __meta__ = {
 margin_top = 140.0
 margin_right = 232.0
 margin_bottom = 200.0
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
 custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 18 )
 custom_styles/normal = ExtResource( 19 )
-custom_fonts/font = ExtResource( 11 )
 text = "Laser Gun"
 align = 0
 __meta__ = {
@@ -803,11 +897,11 @@ focus_neighbour_right = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 11 )
 text = " Energy x999"
 expand_icon = true
 __meta__ = {
@@ -836,11 +930,11 @@ focus_neighbour_right = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 11 )
 text = "Water x999"
 expand_icon = true
 __meta__ = {
@@ -869,11 +963,11 @@ focus_neighbour_right = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 5 )
-custom_fonts/font = ExtResource( 11 )
 text = "Nail x999"
 expand_icon = true
 __meta__ = {
@@ -896,6 +990,7 @@ __meta__ = {
 anims/slide = SubResource( 8 )
 
 [node name="RanksStats" type="Panel" parent="Panel"]
+visible = false
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1106,8 +1201,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -291.36
 mouse_filter = 0
-custom_styles/normal = ExtResource( 16 )
 custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
 text = "Current Orbs: x0
 
 Next Upgrade: x0
@@ -1129,12 +1224,12 @@ focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath(".")
 focus_previous = NodePath("../../../HBoxContainer/RanksAndStatsButton")
+custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-custom_fonts/font = ExtResource( 2 )
 text = "Upgrade"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1186,8 +1281,8 @@ margin_top = 45.0
 margin_right = 921.0
 margin_bottom = 174.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
+custom_fonts/font = ExtResource( 2 )
 text = "Level Up! Choose what to upgrade.
 Health %s -> %s
 or
@@ -1214,12 +1309,12 @@ focus_neighbour_right = NodePath("../Health")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../Health")
 focus_previous = NodePath("../Adrenaline")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-custom_fonts/font = ExtResource( 11 )
 text = "Cancel"
 
 [node name="Health" type="Button" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
@@ -1232,14 +1327,14 @@ focus_neighbour_right = NodePath("../Adrenaline")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../Adrenaline")
 focus_previous = NodePath("../Cancel")
+custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-custom_fonts/font = ExtResource( 11 )
-custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
-custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 text = "Health"
 
 [node name="Adrenaline" type="Button" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
@@ -1252,14 +1347,14 @@ focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../Cancel")
 focus_previous = NodePath("../Health")
+custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-custom_fonts/font = ExtResource( 11 )
-custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
-custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 text = "Adrenaline "
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/RanksStats/UpgradeStatsPrompt"]
@@ -1282,6 +1377,15 @@ bus = "Audio"
 [connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_focus_entered"]
 [connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_mouse_entered"]
 [connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_quick_item_button_pressed"]
+[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_focus_entered"]
+[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_mouse_entered"]
+[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Bunny Egg" to="." method="_quick_item_button_pressed"]
+[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_focus_entered"]
+[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_mouse_entered"]
+[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb" to="." method="_quick_item_button_pressed"]
+[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb2" to="." method="_on_Glitch_Orb_focus_entered"]
+[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb2" to="." method="_on_Glitch_Orb_mouse_entered"]
+[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb2" to="." method="_quick_item_button_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Water Gun" to="." method="_equipable_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Nail Gun" to="." method="_equipable_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Laser Gun" to="." method="_equipable_pressed"]

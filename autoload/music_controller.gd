@@ -14,7 +14,7 @@ var level_stream_paths := [
 
 var stream_paths := [
 	"res://ui/anttis_intstrumentals_another_day.ogg",
-	"res://world_selector/anttis_instrumentals_blue_arpeggio.mp3"]
+	"res://world_selector/sie_fragen_beat.mp3"]
 
 
 var music_database := [

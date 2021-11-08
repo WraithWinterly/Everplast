@@ -15,7 +15,7 @@ var dead: bool = false
 var hurt_player: bool = false
 
 
-onready var death_animation_player: AnimationPlayer = $SpriteHolder/AnimatedSprite/HurtAnimationPlayer
+onready var hurt_anim_player: AnimationPlayer = $SpriteHolder/AnimatedSprite/HurtAnimationPlayer
 onready var animated_sprite: AnimatedSprite = $SpriteHolder/AnimatedSprite
 onready var collision_shape: CollisionShape2D = get_parent().get_node("CollisionShape2D")
 
@@ -52,16 +52,11 @@ func damage_self(damage_type: int, body = null) -> void:
 		match damage_type:
 			Globals.HurtTypes.JUMP:
 				die(Globals.HurtTypes.JUMP)
-				return
 			Globals.HurtTypes.BULLET:
 				die(Globals.HurtTypes.BULLET)
-				return
-
-	hit_sound.play()
-	if animated_sprite.scale.x == 1:
-		death_animation_player.play("hurt")
-
-
+	else:
+		hit_sound.play()
+		hurt_anim_player.play("hurt")
 
 
 func remove_health(number) -> void:
@@ -74,8 +69,8 @@ func die(hurt_type: int) -> void:
 	death_sound.play()
 	emit_signal("died")
 	set_physics_process(false)
-	death_animation_player.stop()
-	death_animation_player.play("death")
+	hurt_anim_player.stop()
+	hurt_anim_player.play("death")
 	collision_shape.set_deferred("disabled", true)
 
 	var orb_loader: PackedScene = load(FileLocations.orb)
@@ -89,5 +84,5 @@ func die(hurt_type: int) -> void:
 	else:
 		orb_instance.global_position = Vector2(global_position.x + 2, global_position.y- 10)
 	level.call_deferred("add_child", orb_instance)
-	yield(death_animation_player, "animation_finished")
+	yield(hurt_anim_player, "animation_finished")
 	call_deferred("free")

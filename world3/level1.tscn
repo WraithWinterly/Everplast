@@ -1,18 +1,17 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world3/parallax_background.tscn" type="PackedScene" id=2]
+[ext_resource path="res://torches/torch.tscn" type="PackedScene" id=3]
 [ext_resource path="res://mobs/green_slime.tscn" type="PackedScene" id=4]
 [ext_resource path="res://world3/canvas_layer_back.tscn" type="PackedScene" id=5]
 [ext_resource path="res://world_all/level.gd" type="Script" id=6]
-[ext_resource path="res://world3/w3_tilemap.tres" type="TileSet" id=8]
-[ext_resource path="res://world_all/lantern.tscn" type="PackedScene" id=9]
-[ext_resource path="res://world3/spikes.tscn" type="PackedScene" id=10]
-[ext_resource path="res://world_all/sign.tscn" type="PackedScene" id=11]
-[ext_resource path="res://world3/torch.tscn" type="PackedScene" id=12]
+[ext_resource path="res://tilesets/tilemap_w3.tres" type="TileSet" id=8]
+[ext_resource path="res://lanterns/lantern.tscn" type="PackedScene" id=9]
+[ext_resource path="res://signs/sign.tscn" type="PackedScene" id=11]
 [ext_resource path="res://world3/penguin.tscn" type="PackedScene" id=13]
 [ext_resource path="res://powerups/cherry.tscn" type="PackedScene" id=14]
-[ext_resource path="res://world_all/coin.tscn" type="PackedScene" id=16]
+[ext_resource path="res://coins/coin.tscn" type="PackedScene" id=16]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 6 )
@@ -133,54 +132,6 @@ position = Vector2( 4480, 0 )
 
 [node name="Lantern28" parent="Lanterns" instance=ExtResource( 9 )]
 position = Vector2( 4576, 32 )
-
-[node name="Torches" type="Node2D" parent="."]
-
-[node name="Torch" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 512, 208 )
-frame = 2
-
-[node name="Torch2" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 472, 208 )
-frame = 2
-flip_h = true
-
-[node name="Torch3" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 512, 208 )
-frame = 1
-
-[node name="Torch4" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 968, 72 )
-frame = 1
-flip_h = true
-
-[node name="Torch5" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 1056, 88 )
-
-[node name="Torch6" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 1648, 144 )
-
-[node name="Torch7" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 2552, 56 )
-flip_h = true
-
-[node name="Torch8" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 3328, -120 )
-frame = 3
-flip_h = true
-
-[node name="Torch9" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 3616, -136 )
-frame = 2
-
-[node name="Torch10" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 4024, -72 )
-frame = 2
-flip_h = true
-
-[node name="Torch11" parent="Torches" instance=ExtResource( 12 )]
-position = Vector2( 4184, -80 )
-frame = 1
 
 [node name="Slimes" type="Node2D" parent="."]
 
@@ -363,68 +314,6 @@ sign_text = "It's probably harder to move on this ice... I slipped a lot."
 [node name="Sign2" parent="Signs" instance=ExtResource( 11 )]
 position = Vector2( 488, 200 )
 sign_text = "It's coooooold! Why did they make me write these signs!"
-
-[node name="Spikes" type="Node2D" parent="."]
-
-[node name="Spikes" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 640, 256 )
-
-[node name="Spikes2" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 648, 256 )
-
-[node name="Spikes3" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 656, 256 )
-
-[node name="Spikes4" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 1928, 152 )
-
-[node name="Spikes5" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 1936, 152 )
-
-[node name="Spikes6" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 1944, 152 )
-
-[node name="Spikes7" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 2152, 120 )
-
-[node name="Spikes8" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 2480, 80 )
-
-[node name="Spikes9" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 2656, 32 )
-
-[node name="Spikes10" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 2872, 64 )
-
-[node name="Spikes11" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 3128, -8 )
-
-[node name="Spikes12" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 3272, -72 )
-
-[node name="Spikes13" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 3464, -192 )
-
-[node name="Spikes14" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 3952, -32 )
-
-[node name="Spikes15" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 4096, -104 )
-
-[node name="Spikes16" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 4536, 40 )
-
-[node name="Spikes17" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 1256, 96 )
-
-[node name="Spikes18" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 1264, 96 )
-
-[node name="Spikes20" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 1272, 96 )
-
-[node name="Spikes19" parent="Spikes" instance=ExtResource( 10 )]
-position = Vector2( 1280, 96 )
 
 [node name="Cherries" type="Node2D" parent="."]
 
@@ -699,3 +588,10 @@ position = Vector2( 4504, 0 )
 
 [node name="Coin79" parent="Coins" instance=ExtResource( 16 )]
 position = Vector2( 4512, 0 )
+
+[node name="Torch" parent="." instance=ExtResource( 3 )]
+position = Vector2( 328, 224 )
+flip_h = true
+
+[node name="Torch2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 456, 216 )

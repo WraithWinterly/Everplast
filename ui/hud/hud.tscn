@@ -1,14 +1,107 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=20 format=2]
 
-[ext_resource path="res://misc/coin.png" type="Texture" id=1]
-[ext_resource path="res://misc/orb.png" type="Texture" id=2]
+[ext_resource path="res://coins/coin.png" type="Texture" id=1]
+[ext_resource path="res://world_all/orb.png" type="Texture" id=2]
 [ext_resource path="res://ui/hud/heart.png" type="Texture" id=3]
 [ext_resource path="res://ui/hud/hud.gd" type="Script" id=4]
-[ext_resource path="res://misc/adrenaline.png" type="Texture" id=5]
+[ext_resource path="res://world_all/adrenaline.png" type="Texture" id=5]
 [ext_resource path="res://ui/hud/hud_font_panel.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/hud/ui_slot.png" type="Texture" id=7]
 [ext_resource path="res://collectables/energy.png" type="Texture" id=8]
+[ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/fonts/16x.tres" type="DynamicFont" id=10]
+[ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=11]
+[ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=12]
+[ext_resource path="res://ui/hud/timed_powerup.gd" type="Script" id=13]
+[ext_resource path="res://ui/hud/powerup_start.wav" type="AudioStream" id=14]
+[ext_resource path="res://ui/hud/powerup_end.wav" type="AudioStream" id=15]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.384314, 0.4, 0.443137, 1 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.3 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.3, 0.7 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_left")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.3 ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "show"
@@ -33,6 +126,64 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TimedPowerup" type="Label" parent="."]
+pause_mode = 1
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_top = 0.1
+anchor_right = 1.3
+anchor_bottom = 0.1
+custom_fonts/font = ExtResource( 12 )
+text = "Bunny Egg"
+align = 1
+script = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartSound" type="AudioStreamPlayer" parent="TimedPowerup"]
+stream = ExtResource( 14 )
+volume_db = 2.0
+bus = "Audio"
+
+[node name="EndSound" type="AudioStreamPlayer" parent="TimedPowerup"]
+stream = ExtResource( 15 )
+pitch_scale = 1.2
+bus = "Audio"
+
+[node name="ProgressBar" type="ProgressBar" parent="TimedPowerup"]
+anchor_top = 1.2
+anchor_right = 1.0
+anchor_bottom = 2.5
+custom_fonts/font = ExtResource( 11 )
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = ExtResource( 9 )
+value = 100.0
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeLeft" type="Label" parent="TimedPowerup/ProgressBar"]
+anchor_top = 0.08
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 11 )
+text = "10"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="TimedPowerup"]
+wait_time = 5.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TimedPowerup"]
+anims/RESET = SubResource( 3 )
+anims/show = SubResource( 4 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.01
@@ -68,8 +219,8 @@ margin_left = 101.0
 margin_right = 127.0
 margin_bottom = 10.0
 mouse_filter = 0
-custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 6 )
 text = "0 | 0"
 valign = 1
 
@@ -85,8 +236,8 @@ margin_left = 141.0
 margin_right = 153.0
 margin_bottom = 10.0
 mouse_filter = 0
-custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 6 )
 text = "0"
 
 [node name="OrbTexture" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
@@ -101,8 +252,8 @@ margin_left = 169.0
 margin_right = 181.0
 margin_bottom = 10.0
 mouse_filter = 0
-custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 6 )
 text = "0"
 
 [node name="AdrenalineTexture" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
@@ -117,8 +268,8 @@ margin_left = 197.0
 margin_right = 223.0
 margin_bottom = 10.0
 mouse_filter = 0
-custom_styles/normal = ExtResource( 6 )
 custom_fonts/font = ExtResource( 10 )
+custom_styles/normal = ExtResource( 6 )
 text = "0 | 0"
 
 [node name="UISlot" type="TextureRect" parent="VBoxContainer"]

@@ -1,21 +1,21 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://world1/tilemap_world_1.tres" type="TileSet" id=2]
+[ext_resource path="res://tilesets/tilemap_w1.tres" type="TileSet" id=2]
 [ext_resource path="res://world1/wind.wav" type="AudioStream" id=3]
 [ext_resource path="res://world_all/level.gd" type="Script" id=4]
 [ext_resource path="res://world_all/block_tilemap.gd" type="Script" id=5]
 [ext_resource path="res://world1/fog_shader.tscn" type="PackedScene" id=6]
-[ext_resource path="res://world_all/checkpoint.tscn" type="PackedScene" id=7]
-[ext_resource path="res://misc/block.png" type="Texture" id=8]
+[ext_resource path="res://checkpoints/checkpoint.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world_all/block.png" type="Texture" id=8]
 [ext_resource path="res://mobs/green_slime.tscn" type="PackedScene" id=9]
 [ext_resource path="res://world_all/death_area.tscn" type="PackedScene" id=10]
-[ext_resource path="res://world_all/tree.tscn" type="PackedScene" id=11]
-[ext_resource path="res://world_all/lantern.tscn" type="PackedScene" id=12]
+[ext_resource path="res://trees/tree.tscn" type="PackedScene" id=11]
+[ext_resource path="res://lanterns/lantern.tscn" type="PackedScene" id=12]
 [ext_resource path="res://world1/parallax_background.tscn" type="PackedScene" id=13]
-[ext_resource path="res://world_all/level_end/level_end.tscn" type="PackedScene" id=16]
+[ext_resource path="res://teleporters/level_end/level_end.tscn" type="PackedScene" id=16]
 [ext_resource path="res://powerups/carrot.tscn" type="PackedScene" id=17]
-[ext_resource path="res://world_all/coin.tscn" type="PackedScene" id=18]
+[ext_resource path="res://coins/coin.tscn" type="PackedScene" id=18]
 [ext_resource path="res://world1/canvas_layer_back.tscn" type="PackedScene" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -169,9 +169,6 @@ position = Vector2( 296, -16 )
 
 [node name="Carrot2" parent="Powerups" instance=ExtResource( 17 )]
 position = Vector2( 464, -32 )
-
-[node name="Spikes" type="Node2D" parent="."]
-position = Vector2( -1, 0 )
 
 [node name="Checkpoint" parent="." instance=ExtResource( 7 )]
 position = Vector2( 760, -88 )

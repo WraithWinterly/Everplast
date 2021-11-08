@@ -3,8 +3,9 @@ extends Node
 var dust: String = "res://player/dust.tscn"
 var orb: String = "res://world_all/orb.tscn"
 var coin: String = "res://world_all/coin.tscn"
-var level_enter_sound: String = "res://misc/go_to_level.wav"
+var level_enter_sound: String = "res://world_all/go_to_level.wav"
 var world_selector: String = "res://world_selector/world_selector.tscn"
+var vase_bullet: String = "res://vases/vase_bullet.png"
 
 var clouds := ["res://world1/cloud.png",
 		"res://world1/cloud_2.png",
@@ -16,6 +17,7 @@ func get_level(world: int, level: int) -> String:
 
 
 func get_powerup(powerup_name: String) -> String:
+	powerup_name = powerup_name.replace(" ", "_")
 	return "res://powerups/%s.tscn" % powerup_name
 
 

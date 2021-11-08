@@ -21,6 +21,7 @@ signal adrenaline_updated()
 signal orb_collected(amount)
 signal quick_item_collected(item_name)
 signal quick_item_used(item_name)
+signal quick_item_ended(item_name)
 signal collectable_collected(item_name)
 signal equipable_collected(item_name)
 

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/glitch_1.wav-b4b05fd2cf7295c5c58ada589ad672d0.sample"
+
+[deps]
+
+source_file="res://unused/glitch_1.wav"
+dest_files=[ "res://.import/glitch_1.wav-b4b05fd2cf7295c5c58ada589ad672d0.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

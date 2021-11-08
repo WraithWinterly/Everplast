@@ -1,18 +1,17 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://world2/w2_tilemap.tres" type="TileSet" id=1]
+[ext_resource path="res://tilesets/tilemap_w2.tres" type="TileSet" id=1]
+[ext_resource path="res://torches/torch.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world2/parallax_background.tscn" type="PackedScene" id=3]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=4]
-[ext_resource path="res://world_all/rank_pickup/rank_pickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://rank_pickup/rank_pickup.tscn" type="PackedScene" id=5]
 [ext_resource path="res://world2/canvas_layer_back.tscn" type="PackedScene" id=6]
-[ext_resource path="res://world_all/tree.tscn" type="PackedScene" id=7]
-[ext_resource path="res://world_all/lantern.tscn" type="PackedScene" id=8]
-[ext_resource path="res://world2/torch.tscn" type="PackedScene" id=9]
+[ext_resource path="res://trees/tree.tscn" type="PackedScene" id=7]
+[ext_resource path="res://lanterns/lantern.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world_all/level.gd" type="Script" id=10]
 [ext_resource path="res://powerups/coconut.tscn" type="PackedScene" id=12]
 [ext_resource path="res://mobs/scorpion.tscn" type="PackedScene" id=13]
-[ext_resource path="res://world_all/spikes.tscn" type="PackedScene" id=15]
-[ext_resource path="res://world_all/coin.tscn" type="PackedScene" id=16]
+[ext_resource path="res://coins/coin.tscn" type="PackedScene" id=16]
 
 [node name="Level" type="Node2D"]
 position = Vector2( -1, 0 )
@@ -352,25 +351,6 @@ position = Vector2( 4344, -48 )
 [node name="Lantern35" parent="Lanterns" instance=ExtResource( 8 )]
 position = Vector2( 4552, -16 )
 
-[node name="Torches" type="Node2D" parent="."]
-
-[node name="Torch" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 680, 120 )
-frame = 2
-
-[node name="Torch2" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 1408, 104 )
-frame = 2
-flip_h = true
-
-[node name="Torch3" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 1632, 104 )
-frame = 2
-
-[node name="Torch4" parent="Torches" instance=ExtResource( 9 )]
-position = Vector2( 2704, 16 )
-frame = 2
-
 [node name="Food" type="Node2D" parent="."]
 
 [node name="Coconut" parent="Food" instance=ExtResource( 12 )]
@@ -440,20 +420,6 @@ position = Vector2( 3760, -40 )
 
 [node name="Scorpion8" parent="Scorpions" instance=ExtResource( 13 )]
 position = Vector2( 4192, 0 )
-
-[node name="Spikes" type="Node2D" parent="."]
-
-[node name="Spikes" parent="Spikes" instance=ExtResource( 15 )]
-position = Vector2( 3424, -112 )
-
-[node name="Spikes2" parent="Spikes" instance=ExtResource( 15 )]
-position = Vector2( 3616, -32 )
-
-[node name="Spikes3" parent="Spikes" instance=ExtResource( 15 )]
-position = Vector2( 4256, 0 )
-
-[node name="Spikes4" parent="Spikes" instance=ExtResource( 15 )]
-position = Vector2( 4512, 0 )
 
 [node name="Coins" type="Node2D" parent="."]
 
@@ -631,3 +597,7 @@ position = Vector2( 4592, -16 )
 [node name="RankPickup" parent="." instance=ExtResource( 5 )]
 position = Vector2( 233, 200 )
 rank = 2
+
+[node name="Torch" parent="." instance=ExtResource( 2 )]
+position = Vector2( 265, 208 )
+flip_h = true

@@ -43,10 +43,6 @@ region = Rect2( 0, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 11, 0, 11, 24 )
 
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 110, 0, 11, 24 )
-
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
 region = Rect2( 44, 0, 11, 24 )
@@ -62,6 +58,10 @@ region = Rect2( 66, 0, 11, 24 )
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 77, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 110, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
@@ -102,15 +102,15 @@ animations = [ {
 "name": "idle",
 "speed": 2.0
 }, {
-"frames": [ SubResource( 16 ) ],
-"loop": true,
-"name": "dash",
-"speed": 5.0
-}, {
 "frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
 "loop": true,
 "name": "walk",
 "speed": 7.0
+}, {
+"frames": [ SubResource( 16 ) ],
+"loop": true,
+"name": "dash",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
@@ -356,6 +356,7 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Smoothing2D"]
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 centered = false
 script = ExtResource( 4 )

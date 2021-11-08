@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/powerup_end.wav-66281211fa1e225ec7485da0f6b14a4f.sample"
+
+[deps]
+
+source_file="res://ui/hud/powerup_end.wav"
+dest_files=[ "res://.import/powerup_end.wav-66281211fa1e225ec7485da0f6b14a4f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
