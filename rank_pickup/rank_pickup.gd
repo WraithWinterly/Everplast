@@ -8,7 +8,7 @@ onready var rank_start_sound: AudioStreamPlayer = $RankStart
 onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 
-func _ready():
+func _ready() -> void:
 	print(position)
 	show()
 	anim_player.play("normal")

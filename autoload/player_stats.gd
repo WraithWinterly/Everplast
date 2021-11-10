@@ -25,11 +25,12 @@ var default_data: Dictionary = {
 	"level_last": 1.0,
 	"world_max": 1.0,
 	"level_max": 1.0,
-	"quick_items" : [],
+	"powerups" : [],
 	"equipables" : [],
 	"equipped_item": "none",
 	"collectables" : [],
 	"rank": float(Ranks.NONE),
+	"gems": {},
 }
 
 
@@ -64,9 +65,9 @@ func _ready() -> void:
 	Signals.connect("profile_deleted", self, "_profile_deleted")
 	Signals.connect("profile_updated", self, "_profile_updated")
 	Signals.connect("level_changed", self, "_level_changed")
-	#Signals.connect("level_completed", self, "_level_completed")
-	Signals.connect("quick_item_used", self, "_quick_item_used")
+	Signals.connect("powerup_used", self, "_powerup_used")
 	Signals.connect("equipped", self, "_equipped")
+	Signals.connect("gem_collected", self, "_gem_collected")
 	connect("level_up", self, "_level_up")
 	add_child(adrenaline_timer)
 	adrenaline_timer.connect("timeout", self, "_timer_timeout")
@@ -146,6 +147,19 @@ func has(array: Array, value: String) -> bool:
 		if n[0] == value:
 			return true
 	return false
+
+
+func get_gem_count() -> int:
+	var gem_count: int = 0
+	var gem_dict = PlayerStats.get_stat("gems")
+	if gem_dict.size() > 0:
+		for world in gem_dict.keys():
+			if gem_dict[world].size() > 0:
+				for level in gem_dict[world]:
+					for i in gem_dict[world][level]:
+						if i:
+							gem_count += 1
+	return gem_count
 
 
 func _profile_deleted() -> void:
@@ -269,22 +283,23 @@ func _player_hurt_from_enemy(hurt_type: int, knockback, damage) -> void:
 
 
 func _player_death() -> void:
-	var prev_last_world = LevelController.current_world
-	var prev_last_level = LevelController.current_level
-	var prev_quick_items = get_stat("quick_items")
-	var prev_collectables = get_stat("collectables")
-	var prev_equipables = get_stat("equipables")
-	yield(UI, "faded")
-	load_stats()
-	set_stat("world_last", prev_last_world)
-	set_stat("level_last", prev_last_level)
-	set_stat("equipped_item", "none")
-	set_stat("quick_items", prev_quick_items)
-	set_stat("collectables", prev_collectables)
-	set_stat("equipables", prev_equipables)
-	set_stat("health", get_stat("health_max"))
-	save_stats()
-	emit_signal("stat_updated")
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		var prev_last_world = LevelController.current_world
+		var prev_last_level = LevelController.current_level
+		var prev_powerups = get_stat("powerups")
+		var prev_collectables = get_stat("collectables")
+		var prev_equipables = get_stat("equipables")
+		yield(UI, "faded")
+		load_stats()
+		set_stat("world_last", prev_last_world)
+		set_stat("level_last", prev_last_level)
+		set_stat("equipped_item", "none")
+		set_stat("powerups", prev_powerups)
+		set_stat("collectables", prev_collectables)
+		set_stat("equipables", prev_equipables)
+		set_stat("health", get_stat("health_max"))
+		save_stats()
+		emit_signal("stat_updated")
 
 
 func _level_changed(world: int, level: int) -> void:
@@ -294,7 +309,7 @@ func _level_changed(world: int, level: int) -> void:
 	set_stat("adrenaline", PlayerStats.get_stat("adrenaline_max"))
 
 
-func _quick_item_used(item_name: String) -> void:
+func _powerup_used(item_name: String) -> void:
 	match item_name:
 		"carrot":
 			set_health(get_stat("health") + 4)
@@ -316,3 +331,25 @@ func _level_up(upgrade: String) -> void:
 
 func _equipped(equipable: String) -> void:
 	set_stat("equipped_item", equipable)
+
+
+func _gem_collected(index: int) -> void:
+	index = int(clamp(index, 0, 2))
+	var gem_dict = get_stat("gems")
+	if str(LevelController.current_world) in gem_dict:
+		for key in gem_dict.keys():
+			if int(key) == LevelController.current_world:
+				if str(LevelController.current_level) in gem_dict.get(key):
+					for level_key in gem_dict.get(key):
+						if level_key == str(LevelController.current_level):
+							gem_dict[str(LevelController.current_world)][str(LevelController.current_level)][index] = true
+							return
+							#print("THIS IS GEM %s FOR %s %s" % [index, LevelController.current_world, LevelController.current_level])
+				else:
+					gem_dict[str(LevelController.current_world)][str(LevelController.current_level)] = [false, false, false]
+					gem_dict[str(LevelController.current_world)][str(LevelController.current_level)][index] = true
+	else:
+		gem_dict[str(LevelController.current_world)] = {}
+		gem_dict[str(LevelController.current_world)][str(LevelController.current_level)] = [false, false, false]
+		gem_dict[str(LevelController.current_world)][str(LevelController.current_level)][index] = true
+	set_stat("gems", gem_dict)

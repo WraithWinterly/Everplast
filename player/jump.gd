@@ -48,7 +48,7 @@ func attempt_correction(amount: int):
 					return
 
 
-func start():
+func start() -> void:
 	jump_sound.play()
 	player_body.linear_velocity.y = 0
 	player_body.linear_velocity += player_body.get_floor_velocity()

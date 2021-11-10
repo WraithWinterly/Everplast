@@ -15,7 +15,7 @@ onready var particles: Particles2D = $Particles2D
 onready var particles_reverse: Particles2D = $Particles2DReverse
 
 
-func _ready():
+func _ready() -> void:
 	Signals.connect("start_player_death", self, "_start_player_death")
 	fsm.connect("state_changed", self, "_state_changed")
 	particles.emitting = false
@@ -71,7 +71,7 @@ func _process(delta: float) -> void:
 			emit_signal("direction_changed", true)
 
 
-func control_flip_h():
+func control_flip_h() -> void:
 	if Main.get_action_strength() > 0:
 		flip_h = false
 		emit_signal("direction_changed", false)

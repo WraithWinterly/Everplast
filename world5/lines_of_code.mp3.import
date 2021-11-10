@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/lines_of_code.mp3-b857b5ffdc01fe46685817c17e8c8841.mp3str"
+
+[deps]
+
+source_file="res://world5/lines_of_code.mp3"
+dest_files=[ "res://.import/lines_of_code.mp3-b857b5ffdc01fe46685817c17e8c8841.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

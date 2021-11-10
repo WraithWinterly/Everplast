@@ -8,8 +8,9 @@ onready var world_selector_button: Button = $PauseButtons/SelectWorld
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var level_label: Label = $LevelLabelCenter/LevelLabel
 onready var world_icons: VBoxContainer = $LevelLabelCenter/Control/WorldIcons
+onready var profile_label: Label = $PauseButtons/Profile
 
-func _ready():
+func _ready() -> void:
 	pause_mode = PAUSE_MODE_PROCESS
 	continue_button.connect("pressed", self, "_continue_pressed")
 	settings_button.connect("pressed", self, "_settings_pressed")
@@ -49,13 +50,15 @@ func _ui_changed(menu: int) -> void:
 
 
 func show_menu() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	profile_label.text = "Profile %s" % (PlayerStats.current_save_profile + 1)
 	for w_icon in world_icons.get_children():
 		if int(w_icon.name) == LevelController.current_world:
 			world_icons.show()
 			w_icon.show()
 		else:
 			w_icon.hide()
+
 	UI.menu_transitioning = true
 	enable_buttons()
 	show()

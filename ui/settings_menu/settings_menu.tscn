@@ -74,10 +74,11 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.15
-anchor_top = 0.05
+anchor_top = 1.0
 anchor_right = 0.9
-anchor_bottom = 0.95
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
 mouse_filter = 2
 custom_styles/panel = ExtResource( 9 )
@@ -118,12 +119,12 @@ focus_neighbour_right = NodePath("../Fullscreen")
 focus_neighbour_bottom = NodePath("../Fullscreen")
 focus_next = NodePath("../Fullscreen")
 focus_previous = NodePath("../../../HBoxContainer2/Back")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
 text = " Controls - NOT IMPLEMENTED"
 
 [node name="Fullscreen" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
@@ -136,12 +137,12 @@ focus_neighbour_right = NodePath("../AudioVolume")
 focus_neighbour_bottom = NodePath("../AudioVolume")
 focus_next = NodePath("../AudioVolume")
 focus_previous = NodePath("../Controls")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
 toggle_mode = true
 text = "Fullscreen Mode"
 
@@ -155,12 +156,12 @@ focus_neighbour_right = NodePath("../AudioSlider/Slider")
 focus_neighbour_bottom = NodePath("../AudioSlider/Slider")
 focus_next = NodePath("../AudioSlider/Slider")
 focus_previous = NodePath("../Fullscreen")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
 toggle_mode = true
 pressed = true
 text = "Audio Volume: On"
@@ -206,12 +207,12 @@ focus_neighbour_right = NodePath("../MusicSlider/Slider")
 focus_neighbour_bottom = NodePath("../MusicSlider/Slider")
 focus_next = NodePath("../MusicSlider/Slider")
 focus_previous = NodePath("../AudioVolume")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
 toggle_mode = true
 pressed = true
 text = "Music Volume: On"
@@ -255,12 +256,12 @@ focus_neighbour_right = NodePath("../Fullscreen")
 focus_neighbour_bottom = NodePath("../../../HBoxContainer2/Back")
 focus_next = NodePath("../../../HBoxContainer2/Back")
 focus_previous = NodePath("../MusicSlider/Slider")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
 text = "Credits"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Panel"]
@@ -283,12 +284,12 @@ focus_neighbour_right = NodePath("../Save")
 focus_neighbour_bottom = NodePath("../../VBoxContainer/HBoxContainer/Controls")
 focus_next = NodePath("../Save")
 focus_previous = NodePath("../Save")
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
 text = "Back"
 
 [node name="Save" type="Button" parent="Panel/HBoxContainer2"]
@@ -301,14 +302,14 @@ focus_neighbour_right = NodePath("../Back")
 focus_neighbour_bottom = NodePath("../../VBoxContainer/HBoxContainer/Controls")
 focus_next = NodePath("../../VBoxContainer/HBoxContainer/Controls")
 focus_previous = NodePath("../Back")
+custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 11 )
-custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
-custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 text = "Save"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

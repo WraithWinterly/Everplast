@@ -16,7 +16,7 @@ func _input(event: InputEvent) -> void:
 			update()
 
 
-func update():
+func update() -> void:
 	text = "FPS: %s\n" % Engine.get_frames_per_second()
 	text += "%s\n" % main.version
 	text += "Current Menu: %s\n" % UI.current_menu

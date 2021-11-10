@@ -24,7 +24,7 @@ onready var world_icons: VBoxContainer = $HBoxContainer/WorldIcons
 onready var rank_icons: VBoxContainer = $HBoxContainer/RankIcons
 
 
-func _ready():
+func _ready() -> void:
 	connect("pressed", self, "button_pressed")
 	connect("focus_entered", self, "_focus_entered")
 	UI.connect("changed", self, "_ui_changed")

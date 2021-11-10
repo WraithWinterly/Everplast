@@ -18,11 +18,11 @@ func _physics_process(delta: float) -> void:
 		player_body.basic_movement()
 
 
-func start():
+func start() -> void:
 	player_body.current_gravity = player_body.water_gravity
 
 
-func stop():
+func stop() -> void:
 	player_body.current_gravity = player_body.gravity
 	player_body.current_speed = 0
 

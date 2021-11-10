@@ -9,22 +9,22 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var start_sound: AudioStreamPlayer = $StartSound
 onready var end_sound: AudioStreamPlayer = $EndSound
 
-func _ready():
+func _ready() -> void:
 	UI.connect("changed", self, "_ui_changed")
-	Signals.connect("quick_item_used", self, "_quick_item_used")
+	Signals.connect("powerup_used", self, "_powerup_used")
 	Signals.connect("level_completed", self, "_level_completed")
 	Signals.connect("player_death", self, "_player_death")
 	timer.connect("timeout", self, "_timeout")
 	hide()
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if Globals.timed_powerup_active:
 		progress_bar.value = timer.time_left
 		time_left_label.text = str(int(timer.time_left) + 1)
-		
-		
-func _quick_item_used(item_name: String) -> void:
+
+
+func _powerup_used(item_name: String) -> void:
 	match item_name:
 		"bunny egg":
 			show_bar(item_name, 5)
@@ -36,7 +36,7 @@ func stop_active_item() -> void:
 		timer.stop()
 		Globals.timed_powerup_active = false
 		anim_player.play_backwards("show")
-		Signals.emit_signal("quick_item_ended", last_item_name
+		Signals.emit_signal("powerup_ended", last_item_name
 		)
 
 
@@ -69,4 +69,4 @@ func _timeout() -> void:
 	Globals.timed_powerup_active = false
 	anim_player.play_backwards("show")
 	end_sound.play()
-	Signals.emit_signal("quick_item_ended", last_item_name)
+	Signals.emit_signal("powerup_ended", last_item_name)

@@ -40,16 +40,15 @@ damage = 0
 
 [node name="HitSound" parent="EnemyComponentManager" index="0"]
 stream = ExtResource( 2 )
-volume_db = 9.0
+volume_db = 2.0
 
 [node name="DeathSound" parent="EnemyComponentManager" index="1"]
 stream = ExtResource( 2 )
-volume_db = 7.0
+volume_db = 2.0
 
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 0.15 )
 frames = SubResource( 4 )
-playing = true
 
 [node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 5 )]
 flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
@@ -57,9 +56,11 @@ enemy_path = NodePath("../..")
 
 [node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 6 )]
 enemy_path = NodePath("../..")
+hit_area_path = NodePath("../HurtArea")
 
 [node name="HurtByJump" parent="EnemyComponentManager" instance=ExtResource( 7 )]
 enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../HurtArea")
 
 [node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 8 )]
 enemy_path = NodePath("../..")

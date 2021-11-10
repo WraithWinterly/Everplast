@@ -2,7 +2,7 @@ extends Node2D
 
 export var flip_h: bool = false
 
-func _ready():
+func _ready() -> void:
 	$Sprite.flip_h = flip_h
 	match LevelController.current_world:
 		2:

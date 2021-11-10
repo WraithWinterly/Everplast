@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://mobs/worm.png" type="Texture" id=1]
 [ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=4]
@@ -30,12 +30,6 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 4.5, 2 )
 
-[sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 4, 1 )
-
-[sub_resource type="RectangleShape2D" id=7]
-extents = Vector2( 4, 1.5 )
-
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 2 )
 
@@ -50,7 +44,7 @@ knockback = 100
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 1 )
 frames = SubResource( 1 )
-playing = true
+frame = 2
 
 [node name="CollisionShape2D" parent="EnemyComponentManager/HurtArea" index="0"]
 position = Vector2( 4, 6 )
@@ -63,17 +57,11 @@ enemy_path = NodePath("../..")
 
 [node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 6 )]
 enemy_path = NodePath("../..")
-
-[node name="CollisionShape2D" parent="EnemyComponentManager/AttackTouch/HitArea" index="0"]
-position = Vector2( 4, 7 )
-shape = SubResource( 6 )
+hit_area_path = NodePath("../HurtArea")
 
 [node name="HurtByJump" parent="EnemyComponentManager" instance=ExtResource( 7 )]
 enemy_path = NodePath("../..")
-
-[node name="CollisionShape2D" parent="EnemyComponentManager/HurtByJump/HurtArea" index="0"]
-position = Vector2( 4, 4.5 )
-shape = SubResource( 7 )
+hurt_area_path = NodePath("../HurtArea")
 
 [node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 8 )]
 enemy_path = NodePath("../..")

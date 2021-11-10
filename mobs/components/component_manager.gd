@@ -12,8 +12,8 @@ export var max_health: int = 1
 
 var health: int = 1
 var dead: bool = false
+var hurt_by_jump: bool = false
 var hurt_player: bool = false
-
 
 onready var hurt_anim_player: AnimationPlayer = $SpriteHolder/AnimatedSprite/HurtAnimationPlayer
 onready var animated_sprite: AnimatedSprite = $SpriteHolder/AnimatedSprite
@@ -34,7 +34,6 @@ func _ready() -> void:
 
 func damage_self(damage_type: int, body = null) -> void:
 	emit_signal("hit")
-
 	match damage_type:
 		Globals.HurtTypes.JUMP:
 			remove_health(Globals.player_jump_damage)

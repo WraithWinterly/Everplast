@@ -161,6 +161,7 @@ position = Vector2( 4, 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpriteHolder"]
 position = Vector2( 0, -0.15 )
 frames = SubResource( 2 )
+playing = true
 
 [node name="HurtAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
 anims/death = SubResource( 8 )
@@ -171,7 +172,7 @@ anims/flip = SubResource( 4 )
 
 [node name="HurtArea" type="Area2D" parent="."]
 collision_layer = 8
-collision_mask = 32
+collision_mask = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea"]
 position = Vector2( 4, 3.5 )
@@ -195,6 +196,7 @@ __meta__ = {
 anims/label = SubResource( 6 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
 position = Vector2( -6, -6 )
 rect = Rect2( -10, -10, 40, 40 )
 process_parent = true

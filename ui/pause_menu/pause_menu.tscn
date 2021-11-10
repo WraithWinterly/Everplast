@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=2]
@@ -10,6 +10,21 @@
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ui/pause_menu/return_prompt.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/fonts/96x.tres" type="DynamicFont" id=10]
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 0.1
@@ -52,6 +67,7 @@ region = Rect2( 45, 0, 9, 16 )
 
 [node name="PauseMenu" type="Control"]
 pause_mode = 2
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -61,6 +77,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 9 )
 anims/pause = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -181,12 +198,12 @@ focus_neighbour_right = NodePath("../Settings")
 focus_neighbour_bottom = NodePath("../Settings")
 focus_next = NodePath("../Settings")
 focus_previous = NodePath("../Return")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 6 )
 text = "Continue Game"
 
 [node name="Settings" type="Button" parent="PauseButtons"]
@@ -199,12 +216,12 @@ focus_neighbour_right = NodePath("../SelectWorld")
 focus_neighbour_bottom = NodePath("../SelectWorld")
 focus_next = NodePath("../SelectWorld")
 focus_previous = NodePath("../Continue")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 6 )
 text = "Settings"
 
 [node name="SelectWorld" type="Button" parent="PauseButtons"]
@@ -218,12 +235,12 @@ focus_neighbour_right = NodePath("../Return")
 focus_neighbour_bottom = NodePath("../Return")
 focus_next = NodePath("../Return")
 focus_previous = NodePath("../Settings")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 6 )
 text = "World Selector"
 
 [node name="Return" type="Button" parent="PauseButtons"]
@@ -236,13 +253,28 @@ focus_neighbour_right = NodePath("../Continue")
 focus_neighbour_bottom = NodePath("../Continue")
 focus_next = NodePath("../Continue")
 focus_previous = NodePath("../SelectWorld")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
-custom_fonts/font = ExtResource( 6 )
 text = "Return to Menu"
+
+[node name="Profile" type="Label" parent="PauseButtons"]
+modulate = Color( 1, 1, 1, 0.607843 )
+margin_top = 225.0
+margin_right = 384.0
+margin_bottom = 265.0
+focus_neighbour_left = NodePath("../SelectWorld")
+focus_neighbour_top = NodePath("../SelectWorld")
+focus_neighbour_right = NodePath("../Continue")
+focus_neighbour_bottom = NodePath("../Continue")
+focus_next = NodePath("../Continue")
+focus_previous = NodePath("../SelectWorld")
+custom_fonts/font = ExtResource( 6 )
+text = "Profile 1"
+align = 1
 
 [node name="ReturnToMenuPrompt" parent="." instance=ExtResource( 9 )]
 visible = false

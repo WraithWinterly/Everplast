@@ -10,6 +10,7 @@ var level_stream_paths := [
 	"res://world2/anttis_instrumentals_simple_simplyfied.ogg",
 	"res://world3/anttis_instrumentals_rain.ogg",
 	"res://world4/anttis_instrumentals_wonderful_lie.ogg",
+	"res://world5/lines_of_code.mp3",
 ]
 
 var stream_paths := [
@@ -19,12 +20,12 @@ var stream_paths := [
 
 var music_database := [
 	[1, 1, 1, 1, 1, 1], # debug levels
-	[1, 1, 1, 1, 1, 1],
-	[1, 2, 2, 2, 2, 2],
-	[1, 3, 3, 3, 3, 3],
-	[1, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 1],
-	[1, 1, 1, 1, 1, 1],
+	[1, 1, 1, 1, 1, 1], # World 1
+	[1, 2, 2, 2, 2, 2], # World 2
+	[1, 3, 3, 3, 3, 3], # World 3
+	[1, 1, 1, 1, 1, 1], # World 4
+	[5, 5, 5, 5, 5, 5], # World 5
+	[1, 1, 1, 1, 1, 1], # World 6
 ]
 
 func _ready() -> void:

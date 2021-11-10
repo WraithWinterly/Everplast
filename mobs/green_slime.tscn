@@ -22,11 +22,13 @@ position = Vector2( 0, 0 )
 flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
 enemy_path = NodePath("../..")
 
-[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 6 )]
-enemy_path = NodePath("../..")
-
 [node name="HurtByJump" parent="EnemyComponentManager" instance=ExtResource( 7 )]
 enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../HurtArea")
+
+[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 6 )]
+enemy_path = NodePath("../..")
+hit_area_path = NodePath("../HurtArea")
 
 [node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 8 )]
 enemy_path = NodePath("../..")

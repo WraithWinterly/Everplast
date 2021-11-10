@@ -14,7 +14,7 @@ func _physics_process(delta: float) -> void:
 		fsm.change_state(fsm.fall)
 
 	if player_body.is_on_floor():
-		player_body.can_dash = true
+		player_body.may_dash = true
 		fsm.change_state(fsm.walk)
 
 

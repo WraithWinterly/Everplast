@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
@@ -14,7 +14,7 @@
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=12]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=13]
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=14]
-[ext_resource path="res://world_all/orb.png" type="Texture" id=15]
+[ext_resource path="res://orbs/orb.png" type="Texture" id=15]
 [ext_resource path="res://ui/hud/hud_font_panel.tres" type="StyleBox" id=16]
 [ext_resource path="res://powerups/bunny_egg.png" type="Texture" id=17]
 [ext_resource path="res://ui/inventory/equipable_button_focus.tres" type="StyleBox" id=18]
@@ -28,6 +28,8 @@
 [ext_resource path="res://collectables/energy.png" type="Texture" id=26]
 [ext_resource path="res://collectables/water.png" type="Texture" id=27]
 [ext_resource path="res://powerups/glitch_orb.png" type="Texture" id=28]
+[ext_resource path="res://gems/gem.png" type="Texture" id=29]
+[ext_resource path="res://ui/world_icons.png" type="Texture" id=30]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -315,6 +317,132 @@ tracks/4/keys = {
 "values": [ 0.95 ]
 }
 
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 30 )
+region = Rect2( 0, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 30 )
+region = Rect2( 9, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 30 )
+region = Rect2( 18, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 30 )
+region = Rect2( 27, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 30 )
+region = Rect2( 36, 0, 9, 16 )
+
+[sub_resource type="AtlasTexture" id=29]
+atlas = ExtResource( 30 )
+region = Rect2( 45, 0, 9, 16 )
+
+[sub_resource type="Animation" id=22]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=23]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.38 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.95 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_left")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel:anchor_right")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.95 ]
+}
+
 [sub_resource type="Animation" id=21]
 length = 0.1
 tracks/0/type = "value"
@@ -401,21 +529,21 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 0.015
-custom_constants/separation = 2
+custom_constants/separation = 10
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CloseButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 44.0
-margin_right = 152.0
+margin_left = 25.0
+margin_right = 133.0
 margin_bottom = 50.0
-focus_neighbour_left = NodePath("../RanksAndStatsButton")
+focus_neighbour_left = NodePath("../StatsButton")
 focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath("../QuickItemsButton")
-focus_next = NodePath("../QuickItemsButton")
-focus_previous = NodePath("../RanksAndStatsButton")
+focus_neighbour_right = NodePath("../PowerupsButton")
+focus_next = NodePath("../PowerupsButton")
+focus_previous = NodePath("../StatsButton")
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
@@ -427,9 +555,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="QuickItemsButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 154.0
-margin_right = 401.0
+[node name="PowerupsButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 143.0
+margin_right = 390.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../CloseButton")
 focus_neighbour_top = NodePath(".")
@@ -448,14 +576,14 @@ __meta__ = {
 }
 
 [node name="CollectablesButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 403.0
-margin_right = 657.0
+margin_left = 400.0
+margin_right = 654.0
 margin_bottom = 50.0
-focus_neighbour_left = NodePath("../QuickItemsButton")
+focus_neighbour_left = NodePath("../PowerupsButton")
 focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath("../RanksAndStatsButton")
-focus_next = NodePath("../RanksAndStatsButton")
-focus_previous = NodePath("../QuickItemsButton")
+focus_neighbour_right = NodePath("../RanksButton")
+focus_next = NodePath("../RanksButton")
+focus_previous = NodePath("../PowerupsButton")
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
@@ -467,14 +595,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RanksAndStatsButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 659.0
-margin_right = 980.0
+[node name="RanksButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 664.0
+margin_right = 825.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../CollectablesButton")
 focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath("../CloseButton")
-focus_next = NodePath("../CloseButton")
+focus_neighbour_right = NodePath("../StatsButton")
+focus_next = NodePath("../StatsButton")
 focus_previous = NodePath("../CollectablesButton")
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 13 )
@@ -482,12 +610,33 @@ custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-text = "My Ranks and Stats"
+text = "My Ranks"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="QuickItems" type="Panel" parent="Panel"]
+[node name="StatsButton" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 835.0
+margin_right = 999.0
+margin_bottom = 50.0
+focus_neighbour_left = NodePath("../RanksButton")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../CloseButton")
+focus_next = NodePath("../CloseButton")
+focus_previous = NodePath("../RanksButton")
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "My Stats"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerups" type="Panel" parent="Panel"]
+visible = false
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -496,7 +645,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BG" type="Panel" parent="Panel/QuickItems"]
+[node name="BG" type="Panel" parent="Panel/Powerups"]
 anchor_left = 0.03
 anchor_top = 0.01
 anchor_right = 0.45
@@ -507,7 +656,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/QuickItems"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Powerups"]
 anchor_left = 0.1
 anchor_right = 0.95
 anchor_bottom = 1.0
@@ -515,13 +664,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="VBoxContainer" parent="Panel/QuickItems/HBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="Panel/Powerups/HBoxContainer"]
 margin_right = 330.0
 margin_bottom = 518.0
 custom_constants/separation = 10
 alignment = 1
 
-[node name="Coconut" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+[node name="Coconut" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
 margin_top = 54.0
 margin_right = 330.0
 margin_bottom = 114.0
@@ -536,7 +685,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Coconut"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Coconut"]
 anchor_left = -0.125
 anchor_top = 0.1
 anchor_right = 0.9
@@ -548,7 +697,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cherry" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+[node name="Cherry" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
 margin_top = 124.0
 margin_right = 330.0
 margin_bottom = 184.0
@@ -563,7 +712,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Cherry"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Cherry"]
 anchor_left = -0.125
 anchor_top = 0.1
 anchor_right = 0.9
@@ -575,7 +724,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Carrot" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+[node name="Carrot" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
 margin_top = 194.0
 margin_right = 330.0
 margin_bottom = 254.0
@@ -590,7 +739,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Carrot"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Carrot"]
 anchor_left = -0.125
 anchor_top = 0.1
 anchor_right = 0.9
@@ -602,7 +751,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bunny Egg" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+[node name="Bunny Egg" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
 margin_top = 264.0
 margin_right = 330.0
 margin_bottom = 324.0
@@ -617,7 +766,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Bunny Egg"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Bunny Egg"]
 anchor_left = -0.125
 anchor_top = 0.1
 anchor_right = 0.9
@@ -629,7 +778,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Glitch Orb" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
+[node name="Glitch Orb" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
 margin_top = 334.0
 margin_right = 330.0
 margin_bottom = 394.0
@@ -644,7 +793,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb"]
+[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Glitch Orb"]
 anchor_left = -0.125
 anchor_top = 0.1
 anchor_right = 0.9
@@ -656,34 +805,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Glitch Orb2" type="Button" parent="Panel/QuickItems/HBoxContainer/Buttons"]
-margin_top = 404.0
-margin_right = 330.0
-margin_bottom = 464.0
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
-text = "Glitch Orb x999"
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb2"]
-anchor_left = -0.125
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 28 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NotInLevelWarning" type="Label" parent="Panel/QuickItems"]
+[node name="NotInLevelWarning" type="Label" parent="Panel/Powerups"]
 anchor_left = 0.5
 anchor_right = 0.86
 anchor_bottom = 0.311
@@ -696,7 +818,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Explanation" type="Panel" parent="Panel/QuickItems"]
+[node name="Explanation" type="Panel" parent="Panel/Powerups"]
 anchor_left = 0.5
 anchor_top = 0.307
 anchor_right = 0.859
@@ -706,7 +828,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Panel/QuickItems/Explanation"]
+[node name="Label" type="Label" parent="Panel/Powerups/Explanation"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 0
@@ -719,7 +841,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/QuickItems"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Powerups"]
 anims/slide = SubResource( 6 )
 
 [node name="Collectables" type="Panel" parent="Panel"]
@@ -989,8 +1111,7 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Collectables"]
 anims/slide = SubResource( 8 )
 
-[node name="RanksStats" type="Panel" parent="Panel"]
-visible = false
+[node name="Ranks" type="Panel" parent="Panel"]
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -999,7 +1120,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Ranks" type="Panel" parent="Panel/RanksStats"]
+[node name="Ranks" type="Panel" parent="Panel/Ranks"]
 anchor_left = 0.1
 anchor_right = 0.9
 anchor_bottom = 0.28
@@ -1009,7 +1130,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/RanksStats/Ranks"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Ranks/Ranks"]
 anchor_top = 0.1
 anchor_right = 0.125
 anchor_bottom = 0.1
@@ -1021,43 +1142,43 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Silver" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+[node name="Silver" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
 margin_left = 8.0
 margin_right = 19.0
 margin_bottom = 13.0
 texture = SubResource( 10 )
 
-[node name="Gold" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+[node name="Gold" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
 margin_left = 23.0
 margin_right = 34.0
 margin_bottom = 13.0
 texture = SubResource( 11 )
 
-[node name="Diamond" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+[node name="Diamond" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
 margin_left = 38.0
 margin_right = 49.0
 margin_bottom = 13.0
 texture = SubResource( 12 )
 
-[node name="Emerald" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+[node name="Emerald" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
 margin_left = 53.0
 margin_right = 64.0
 margin_bottom = 13.0
 texture = SubResource( 13 )
 
-[node name="Glitch" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+[node name="Glitch" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
 margin_left = 68.0
 margin_right = 79.0
 margin_bottom = 13.0
 texture = SubResource( 14 )
 
-[node name="Volcano" type="TextureRect" parent="Panel/RanksStats/Ranks/HBoxContainer"]
+[node name="Volcano" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
 margin_left = 83.0
 margin_right = 94.0
 margin_bottom = 13.0
 texture = SubResource( 15 )
 
-[node name="Label" type="Label" parent="Panel/RanksStats/Ranks"]
+[node name="Label" type="Label" parent="Panel/Ranks/Ranks"]
 anchor_right = 1.0
 anchor_bottom = 0.2
 margin_bottom = 11.4848
@@ -1071,66 +1192,66 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentRank" type="Panel" parent="Panel/RanksStats"]
+[node name="CurrentRank" type="Panel" parent="Panel/Ranks"]
 anchor_left = 0.1
 anchor_top = 0.4
-anchor_right = 0.49
-anchor_bottom = 0.9
+anchor_right = 0.9
+anchor_bottom = 0.87
 margin_bottom = 40.0
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/RanksStats/CurrentRank"]
-anchor_left = 0.02
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Ranks/CurrentRank"]
+anchor_left = 0.075
 anchor_right = 0.139
 anchor_bottom = 0.124
 rect_scale = Vector2( 8, 8 )
 alignment = 1
 
-[node name="Silver" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
-margin_top = 12.0
-margin_right = 47.0
-margin_bottom = 25.0
+[node name="Silver" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
+margin_top = 11.0
+margin_right = 52.0
+margin_bottom = 24.0
 texture = SubResource( 10 )
 
-[node name="Gold" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+[node name="Gold" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
 visible = false
 margin_left = 15.0
 margin_right = 26.0
 margin_bottom = 13.0
 texture = SubResource( 11 )
 
-[node name="Diamond" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+[node name="Diamond" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
 visible = false
 margin_left = 15.0
 margin_right = 26.0
 margin_bottom = 13.0
 texture = SubResource( 12 )
 
-[node name="Emerald" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+[node name="Emerald" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
 visible = false
 margin_left = 15.0
 margin_right = 26.0
 margin_bottom = 13.0
 texture = SubResource( 13 )
 
-[node name="Glitch" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+[node name="Glitch" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
 visible = false
 margin_left = 15.0
 margin_right = 26.0
 margin_bottom = 13.0
 texture = SubResource( 14 )
 
-[node name="Volcano" type="TextureRect" parent="Panel/RanksStats/CurrentRank/VBoxContainer"]
+[node name="Volcano" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
 visible = false
 margin_left = 15.0
 margin_right = 26.0
 margin_bottom = 13.0
 texture = SubResource( 15 )
 
-[node name="Title" type="Label" parent="Panel/RanksStats/CurrentRank"]
+[node name="Title" type="Label" parent="Panel/Ranks/CurrentRank"]
 anchor_right = 1.0
 anchor_bottom = 0.2
 margin_bottom = 11.4848
@@ -1144,50 +1265,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Stats" type="Label" parent="Panel/RanksStats/CurrentRank"]
+[node name="Stats" type="Label" parent="Panel/Ranks/CurrentRank"]
+modulate = Color( 0.156863, 1, 0.235294, 1 )
 anchor_left = 0.05
-anchor_right = 1.0
+anchor_right = 0.95
 anchor_bottom = 1.0
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
 text = "- Double Jump
 - Wall Jump"
-valign = 1
-autowrap = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StatsUpgrade" type="Panel" parent="Panel/RanksStats"]
-anchor_left = 0.51
-anchor_top = 0.4
-anchor_right = 0.9
-anchor_bottom = 0.9
-margin_bottom = 40.0
-custom_styles/panel = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="OrbTexture" type="TextureRect" parent="Panel/RanksStats/StatsUpgrade"]
-anchor_left = 0.02
-anchor_top = 0.02
-anchor_right = 0.215
-anchor_bottom = 0.02
-rect_scale = Vector2( 5, 5 )
-mouse_filter = 0
-texture = ExtResource( 15 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="Panel/RanksStats/StatsUpgrade"]
-anchor_top = 0.02
-anchor_right = 1.0
-anchor_bottom = 0.153
-mouse_filter = 0
-custom_fonts/font = ExtResource( 2 )
-text = "Stats Upgrade"
 align = 1
 valign = 1
 autowrap = true
@@ -1195,50 +1281,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Info" type="Label" parent="Panel/RanksStats/StatsUpgrade"]
-anchor_left = 0.05
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -291.36
-mouse_filter = 0
-custom_fonts/font = ExtResource( 2 )
-custom_styles/normal = ExtResource( 16 )
-text = "Current Orbs: x0
-
-Next Upgrade: x0
-
-Level: 1"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="UpgradeButton" type="Button" parent="Panel/RanksStats/StatsUpgrade"]
-anchor_left = 0.1
-anchor_top = 0.8
-anchor_right = 0.9
-anchor_bottom = 0.8
-focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../../../HBoxContainer/CloseButton")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath(".")
-focus_previous = NodePath("../../../HBoxContainer/RanksAndStatsButton")
-custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "Upgrade"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/RanksStats"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Ranks"]
 anims/slide = SubResource( 16 )
 
-[node name="UpgradeStatsPrompt" type="Control" parent="Panel/RanksStats"]
+[node name="UpgradeStatsPrompt" type="Control" parent="Panel/Ranks"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
@@ -1247,7 +1293,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Panel" type="Panel" parent="Panel/RanksStats/UpgradeStatsPrompt"]
+[node name="Panel" type="Panel" parent="Panel/Ranks/UpgradeStatsPrompt"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.05
 anchor_top = 1.0
@@ -1260,7 +1306,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Ranks/UpgradeStatsPrompt/Panel"]
 anchor_top = 0.05
 anchor_right = 1.0
 anchor_bottom = 0.9
@@ -1269,14 +1315,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+[node name="Title" type="Label" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer"]
 margin_right = 921.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 2 )
 text = "Upgrade Stats..."
 align = 1
 
-[node name="PromptText" type="Label" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+[node name="PromptText" type="Label" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer"]
 margin_top = 45.0
 margin_right = 921.0
 margin_bottom = 174.0
@@ -1289,7 +1335,7 @@ or
 Adrenaline %s -> %s"
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer"]
 margin_top = 189.0
 margin_right = 921.0
 margin_bottom = 249.0
@@ -1299,7 +1345,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Cancel" type="Button" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+[node name="Cancel" type="Button" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 163.0
 margin_right = 321.0
 margin_bottom = 60.0
@@ -1317,7 +1363,7 @@ custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
 text = "Cancel"
 
-[node name="Health" type="Button" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+[node name="Health" type="Button" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 336.0
 margin_right = 494.0
 margin_bottom = 60.0
@@ -1337,7 +1383,7 @@ custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
 text = "Health"
 
-[node name="Adrenaline" type="Button" parent="Panel/RanksStats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+[node name="Adrenaline" type="Button" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 509.0
 margin_right = 757.0
 margin_bottom = 60.0
@@ -1357,8 +1403,363 @@ custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
 text = "Adrenaline "
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/RanksStats/UpgradeStatsPrompt"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Ranks/UpgradeStatsPrompt"]
 anims/show = SubResource( 20 )
+
+[node name="Stats" type="Panel" parent="Panel"]
+visible = false
+anchor_top = 0.1
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/Stats"]
+anchor_right = 1.0
+anchor_bottom = 0.153
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Your Stats:"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerStats" type="Panel" parent="Panel/Stats"]
+anchor_left = 0.1
+anchor_top = 0.12
+anchor_right = 0.9
+anchor_bottom = 0.8
+margin_top = -1.0
+margin_bottom = 39.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Label" parent="Panel/Stats/PlayerStats"]
+anchor_left = 0.03
+anchor_top = 0.138
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Profile: %s
+Player Level: %s
+Latest World: %s
+"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalOrbs" type="Label" parent="Panel/Stats/PlayerStats"]
+anchor_left = 0.09
+anchor_top = 0.698
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Total Orbs: x%s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrbTexture" type="TextureRect" parent="Panel/Stats/PlayerStats/TotalOrbs"]
+anchor_left = -0.065
+anchor_top = -0.06
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalGems" type="Label" parent="Panel/Stats/PlayerStats"]
+anchor_left = 0.09
+anchor_top = 0.817
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Total Level Gems: x%s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrbTexture" type="TextureRect" parent="Panel/Stats/PlayerStats/TotalGems"]
+anchor_left = -0.065
+anchor_top = -0.145
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WorldIcons" type="VBoxContainer" parent="Panel/Stats/PlayerStats"]
+anchor_left = 0.03
+anchor_top = 0.4
+anchor_right = 0.037
+anchor_bottom = 0.404
+rect_scale = Vector2( 6, 6 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
+margin_right = 9.0
+margin_bottom = 16.0
+mouse_filter = 2
+texture = SubResource( 24 )
+
+[node name="2" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
+visible = false
+margin_top = 20.0
+margin_right = 9.0
+margin_bottom = 36.0
+mouse_filter = 2
+texture = SubResource( 25 )
+
+[node name="3" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
+visible = false
+margin_top = 30.0
+margin_right = 9.0
+margin_bottom = 46.0
+mouse_filter = 2
+texture = SubResource( 26 )
+
+[node name="4" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
+visible = false
+margin_top = 40.0
+margin_right = 9.0
+margin_bottom = 56.0
+mouse_filter = 2
+texture = SubResource( 27 )
+
+[node name="5" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
+visible = false
+margin_top = 50.0
+margin_right = 9.0
+margin_bottom = 66.0
+mouse_filter = 2
+texture = SubResource( 28 )
+
+[node name="6" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
+visible = false
+margin_top = 60.0
+margin_right = 9.0
+margin_bottom = 76.0
+mouse_filter = 2
+texture = SubResource( 29 )
+
+[node name="StatsUpgrade" type="Panel" parent="Panel/Stats"]
+anchor_left = 0.52
+anchor_top = 0.117
+anchor_right = 0.9
+anchor_bottom = 0.797
+margin_bottom = 40.0
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrbTexture" type="TextureRect" parent="Panel/Stats/StatsUpgrade"]
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.215
+anchor_bottom = 0.02
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/Stats/StatsUpgrade"]
+anchor_top = 0.04
+anchor_right = 1.0
+anchor_bottom = 0.153
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+text = "Player Upgrade"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Label" parent="Panel/Stats/StatsUpgrade"]
+anchor_left = 0.05
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Upgrade Requirements:
+%s Orbs
+"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UpgradeButton" type="Button" parent="Panel/Stats/StatsUpgrade"]
+anchor_left = 0.1
+anchor_top = 0.662
+anchor_right = 0.9
+anchor_bottom = 0.8
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../../../HBoxContainer/CloseButton")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../../../HBoxContainer/RanksButton")
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "Upgrade"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Stats"]
+anims/slide = SubResource( 22 )
+
+[node name="UpgradeStatsPrompt" type="Control" parent="Panel/Stats"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Panel/Stats/UpgradeStatsPrompt"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.05
+anchor_top = 1.0
+anchor_right = 0.95
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+mouse_filter = 2
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Stats/UpgradeStatsPrompt/Panel"]
+anchor_top = 0.05
+anchor_right = 1.0
+anchor_bottom = 0.9
+custom_constants/separation = 15
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+margin_right = 921.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+text = "Upgrade Stats..."
+align = 1
+
+[node name="PromptText" type="Label" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+margin_top = 45.0
+margin_right = 921.0
+margin_bottom = 174.0
+size_flags_vertical = 6
+custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
+custom_fonts/font = ExtResource( 2 )
+text = "Level Up! Choose what to upgrade.
+Health %s -> %s
+or
+Adrenaline %s -> %s"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
+margin_top = 189.0
+margin_right = 921.0
+margin_bottom = 249.0
+custom_constants/separation = 15
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cancel" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 163.0
+margin_right = 321.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../Health")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../Health")
+focus_previous = NodePath("../Adrenaline")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "Cancel"
+
+[node name="Health" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 336.0
+margin_right = 494.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../Cancel")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath("../Adrenaline")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../Adrenaline")
+focus_previous = NodePath("../Cancel")
+custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "Health"
+
+[node name="Adrenaline" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
+margin_left = 509.0
+margin_right = 757.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../Health")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath("../Cancel")
+focus_previous = NodePath("../Health")
+custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "Adrenaline "
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Stats/UpgradeStatsPrompt"]
+anims/show = SubResource( 23 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/show = SubResource( 21 )
@@ -1368,24 +1769,21 @@ stream = ExtResource( 9 )
 volume_db = -7.0
 bus = "Audio"
 
-[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_focus_entered"]
-[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_mouse_entered"]
-[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Coconut" to="." method="_quick_item_button_pressed"]
-[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_focus_entered"]
-[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_mouse_entered"]
-[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Cherry" to="." method="_quick_item_button_pressed"]
-[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_focus_entered"]
-[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_mouse_entered"]
-[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Carrot" to="." method="_quick_item_button_pressed"]
-[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_focus_entered"]
-[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_mouse_entered"]
-[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Bunny Egg" to="." method="_quick_item_button_pressed"]
-[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_focus_entered"]
-[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_mouse_entered"]
-[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb" to="." method="_quick_item_button_pressed"]
-[connection signal="focus_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb2" to="." method="_on_Glitch_Orb_focus_entered"]
-[connection signal="mouse_entered" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb2" to="." method="_on_Glitch_Orb_mouse_entered"]
-[connection signal="pressed" from="Panel/QuickItems/HBoxContainer/Buttons/Glitch Orb2" to="." method="_quick_item_button_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Coconut" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Cherry" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Carrot" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Bunny Egg" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Glitch Orb" to="." method="_powerup_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Water Gun" to="." method="_equipable_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Nail Gun" to="." method="_equipable_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Laser Gun" to="." method="_equipable_pressed"]

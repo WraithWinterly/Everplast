@@ -2,10 +2,10 @@ extends Position2D
 
 
 func _ready() -> void:
-	Signals.connect("quick_item_used", self, "_quick_item_used")
+	Signals.connect("powerup_used", self, "_powerup_used")
 
 
-func _quick_item_used(item_name) -> void:
+func _powerup_used(item_name) -> void:
 	var scn: PackedScene = load(FileLocations.get_powerup(item_name))
 	var inst: Node2D = scn.instance()
 	inst.position = position

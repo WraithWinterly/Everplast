@@ -70,7 +70,6 @@ max_health = 5
 position = Vector2( 0, 1.15 )
 frames = SubResource( 5 )
 frame = 2
-playing = true
 
 [node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 7 )]
 flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
@@ -78,6 +77,7 @@ enemy_path = NodePath("../..")
 
 [node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 8 )]
 enemy_path = NodePath("../..")
+hit_area_path = NodePath("../HurtArea")
 
 [node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 4 )]
 enemy_path = NodePath("../..")

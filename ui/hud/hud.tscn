@@ -1,7 +1,7 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://coins/coin.png" type="Texture" id=1]
-[ext_resource path="res://world_all/orb.png" type="Texture" id=2]
+[ext_resource path="res://orbs/orb.png" type="Texture" id=2]
 [ext_resource path="res://ui/hud/heart.png" type="Texture" id=3]
 [ext_resource path="res://ui/hud/hud.gd" type="Script" id=4]
 [ext_resource path="res://world_all/adrenaline.png" type="Texture" id=5]
@@ -15,6 +15,244 @@
 [ext_resource path="res://ui/hud/timed_powerup.gd" type="Script" id=13]
 [ext_resource path="res://ui/hud/powerup_start.wav" type="AudioStream" id=14]
 [ext_resource path="res://ui/hud/powerup_end.wav" type="AudioStream" id=15]
+[ext_resource path="res://gems/gem.png" type="Texture" id=16]
+
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
@@ -127,6 +365,85 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="GenContainer" type="HBoxContainer" parent="."]
+anchor_top = 0.101
+anchor_right = 0.24
+anchor_bottom = 0.11
+rect_scale = Vector2( 4, 4 )
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GemSlot1" type="TextureRect" parent="GenContainer"]
+margin_left = 251.0
+margin_right = 267.0
+margin_bottom = 16.0
+mouse_filter = 0
+texture = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Gem" type="TextureRect" parent="GenContainer/GemSlot1"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_top = 2.0
+anchor_right = 1.0
+anchor_bottom = 2.0
+texture = ExtResource( 16 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GenContainer/GemSlot1/Gem"]
+anims/RESET = SubResource( 13 )
+anims/show = SubResource( 5 )
+
+[node name="GemSlot2" type="TextureRect" parent="GenContainer"]
+margin_left = 271.0
+margin_right = 287.0
+margin_bottom = 16.0
+mouse_filter = 0
+texture = ExtResource( 7 )
+
+[node name="Gem" type="TextureRect" parent="GenContainer/GemSlot2"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_top = 2.0
+anchor_right = 1.0
+anchor_bottom = 2.0
+texture = ExtResource( 16 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GenContainer/GemSlot2/Gem"]
+anims/RESET = SubResource( 14 )
+anims/show = SubResource( 11 )
+
+[node name="GemSlot3" type="TextureRect" parent="GenContainer"]
+margin_left = 291.0
+margin_right = 307.0
+margin_bottom = 16.0
+mouse_filter = 0
+texture = ExtResource( 7 )
+
+[node name="Gem" type="TextureRect" parent="GenContainer/GemSlot3"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_top = 2.0
+anchor_right = 1.0
+anchor_bottom = 2.0
+texture = ExtResource( 16 )
+stretch_mode = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GenContainer/GemSlot3/Gem"]
+anims/RESET = SubResource( 15 )
+anims/show = SubResource( 12 )
+
 [node name="TimedPowerup" type="Label" parent="."]
 pause_mode = 1
 modulate = Color( 1, 1, 1, 0 )
@@ -213,6 +530,7 @@ margin_right = 97.0
 margin_bottom = 10.0
 mouse_filter = 0
 texture = ExtResource( 3 )
+stretch_mode = 3
 
 [node name="HealthLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 101.0
@@ -230,6 +548,7 @@ margin_right = 137.0
 margin_bottom = 10.0
 mouse_filter = 0
 texture = ExtResource( 1 )
+stretch_mode = 4
 
 [node name="CoinLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 141.0
@@ -246,6 +565,7 @@ margin_right = 165.0
 margin_bottom = 10.0
 mouse_filter = 0
 texture = ExtResource( 2 )
+stretch_mode = 4
 
 [node name="OrbLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 169.0
@@ -262,6 +582,7 @@ margin_right = 193.0
 margin_bottom = 10.0
 mouse_filter = 0
 texture = ExtResource( 5 )
+stretch_mode = 4
 
 [node name="AdrenalineLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 197.0

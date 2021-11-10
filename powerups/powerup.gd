@@ -26,5 +26,5 @@ func _body_entered(body: Node) -> void:
 			$Sound.play()
 			$CollisionShape2D.set_deferred("disabled", true)
 			animation_player.play("collected")
-			Signals.emit_signal("quick_item_collected", item_name)
+			Signals.emit_signal("powerup_collected", item_name)
 

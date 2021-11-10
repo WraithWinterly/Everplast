@@ -16,6 +16,7 @@ const valid_commands: Array = [
 	["set_stat", [ARG_STRING, ARG_STRING]],
 	["get_stat", [ARG_STRING]],
 	["get_stats"],
+	["get_stats_raw"],
 	["clear"],
 	["kill"],
 	["save"],
@@ -24,6 +25,7 @@ const valid_commands: Array = [
 
 
 func tp(location_x: float, location_y: float) -> String:
+	debug_console.hide_console()
 	var location = Vector2(location_x, location_y)
 	var player_body: KinematicBody2D = get_node_or_null(Globals.player_body_path)
 	if not player_body == null:
@@ -34,6 +36,7 @@ func tp(location_x: float, location_y: float) -> String:
 
 
 func change_level(world: int, level: int) -> String:
+	debug_console.hide_console()
 	Signals.emit_signal("level_change_attempted", world, level)
 	debug_console.last_world = Vector2(world, level)
 	return "Attempted to change to World %s, Level %s" % [world, level]
@@ -47,6 +50,7 @@ func spawn(loader: String, amount: int) -> String:
 			loaded.global_position = get_node(Globals.player_body_path).global_position
 			loaded.global_position.x -= 30
 			get_node(Globals.level_path).add_child(loaded)
+			debug_console.hide_console()
 		return "%s Loaded." % loader
 	else:
 		return "Failed to load %s" % loader
@@ -69,10 +73,24 @@ func get_stat(stat: String) -> String:
 
 
 func get_stats() -> String:
+	var stats_string: String = "Save Data:\n"
+	var data = PlayerStats.data
+	
+	var index: int = 0
+	for dict in data:
+		stats_string += "Profile %s:\n" % (index + 1)
+		for stats in data[index]:
+			stats_string += "     %s: %s\n" % [stats, data[index][stats]]
+		index += 1
+	return stats_string
+		
+
+func get_stats_raw() -> String:
 	return str(PlayerStats.data)
 
+
 func clear() -> String:
-	debug_console.output.text = ""
+	debug_console.output.text = "Type help for help"
 	return "Console cleared."
 
 
@@ -81,6 +99,7 @@ func kill() -> String:
 	if player == null:
 		return "Failed to find player."
 	else:
+		debug_console.hide_console()
 		Signals.emit_signal("start_player_death")
 		return "Killed Player."
 
@@ -92,18 +111,17 @@ func save() -> String:
 
 func help() -> String:
 	var help_string: String = "Debug Commands:\n"
+	var index: int = 0
 	for command in valid_commands:
-		help_string += "%s" % command[0]
+		help_string += "     %s" % command[0]
 		if command.size() > 1:
 			for parameter in command[1]:
 				help_string += " <%s>" % get_enum_name(parameter)
-		help_string += "\n"
+		if not index == valid_commands.size() - 1:
+			help_string += "\n"
+			index += 1 
 
 	return help_string
-
-
-func give(item: String) -> void:
-	pass
 
 
 func get_enum_name(index: int) -> String:

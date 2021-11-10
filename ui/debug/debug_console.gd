@@ -15,15 +15,19 @@ func _ready() -> void:
 	hide()
 	Signals.connect("error_level_changed", self, "_error_level_changed")
 	input.connect("text_entered", self, "_text_entered")
-	output.text = ""
+	output.text = "Type help for help"
+	output.get_child(0).set("custom_styles/scroll", load("res://ui/ui_background.tres"))
+	output.get_child(1).set("custom_styles/scroll", load("res://ui/ui_background.tres"))
+	output.get_child(1).anchor_bottom = 0.08
+	output.get_child(5).set("custom_styles/panel", load("res://ui/ui_background.tres"))
+	output.get_child(5).set("custom_styles/hover", load("res://ui/ui_panel.tres"))
+	output.get_child(5).set("custom_fonts/font", load("res://ui/fonts/32x.tres"))
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_console"):
 		if visible:
-			hide()
-			if UI.current_menu == UI.NONE:
-				get_tree().paused = false
+			hide_console()
 		else:
 			show()
 			input.grab_focus()
@@ -38,6 +42,10 @@ func _input(event: InputEvent) -> void:
 			set_command_history(1)
 
 
+func hide_console() -> void:
+	hide()
+	if UI.current_menu == UI.NONE:
+		get_tree().paused = false
 func set_command_history(offset: int) -> void:
 	command_history_line += offset
 	command_history_line = int(clamp(command_history_line, 0, command_history.size()))
@@ -112,6 +120,7 @@ func output_text(text) -> void:
 
 func _text_entered(new_text: String) -> void:
 	input.clear()
+	new_text = new_text.to_lower()
 	process_command(new_text)
 	command_history_line = command_history.size()
 

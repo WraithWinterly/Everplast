@@ -147,15 +147,13 @@ func _level_completed() -> void:
 			PlayerStats.get_stat("world_max") <= LevelController.current_world:
 		unlock_next_level()
 	yield(UI, "faded")
-	Signals.emit_signal("save")
+	#Signals.emit_signal("save")
 	get_tree().paused = false
 	reset_checkpoint()
 	world_selector_load()
 
 
 func unlock_next_level() -> void:
-	#print(LevelController.current_level)
-	#print(level_database[LevelController.current_world])
 	if LevelController.current_level + 1 <= level_database[LevelController.current_world]:
 		PlayerStats.set_stat("world_max", LevelController.current_world)
 		PlayerStats.set_stat("level_max", LevelController.current_level + 1)

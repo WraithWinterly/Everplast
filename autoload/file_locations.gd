@@ -1,11 +1,12 @@
 extends Node
 
 var dust: String = "res://player/dust.tscn"
-var orb: String = "res://world_all/orb.tscn"
-var coin: String = "res://world_all/coin.tscn"
+var orb: String = "res://orbs/orb.tscn"
+#var coin: String = "res://coins/coin.tscn"
 var level_enter_sound: String = "res://world_all/go_to_level.wav"
 var world_selector: String = "res://world_selector/world_selector.tscn"
 var vase_bullet: String = "res://vases/vase_bullet.png"
+var gem_used: String = "res://gems/gem_used.png"
 
 var clouds := ["res://world1/cloud.png",
 		"res://world1/cloud_2.png",

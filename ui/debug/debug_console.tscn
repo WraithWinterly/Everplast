@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/debug/debug_console.gd" type="Script" id=1]
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/debug/command_handler.gd" type="Script" id=4]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=5]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=6]
+[ext_resource path="res://ui/ui_background.tres" type="StyleBox" id=7]
 
 [node name="DebugConsole" type="Control"]
 anchor_right = 1.0
@@ -40,16 +41,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BG" type="Panel" parent="Panel"]
+anchor_left = 0.03
+anchor_top = 0.221
+anchor_right = 0.45
+anchor_bottom = 0.95
+custom_styles/panel = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Output" type="TextEdit" parent="Panel"]
-anchor_top = 0.125
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/read_only = ExtResource( 2 )
-custom_styles/focus = ExtResource( 2 )
-custom_styles/normal = ExtResource( 2 )
+anchor_left = 0.015
+anchor_top = 0.116
+anchor_right = 0.985
+anchor_bottom = 0.95
+custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
 custom_fonts/font = ExtResource( 3 )
+custom_styles/read_only = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
 readonly = true
 show_line_numbers = true
+smooth_scrolling = true
 wrap_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -62,9 +76,9 @@ anchor_right = 0.9
 anchor_bottom = 0.842
 margin_right = 40.0
 margin_bottom = 40.0
+custom_fonts/font = ExtResource( 6 )
 custom_styles/focus = ExtResource( 2 )
 custom_styles/normal = ExtResource( 2 )
-custom_fonts/font = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

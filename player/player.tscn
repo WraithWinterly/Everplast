@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://player/character.png" type="Texture" id=1]
 [ext_resource path="res://player/player.gd" type="Script" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://player/jump.gd" type="Script" id=14]
 [ext_resource path="res://player/sprint.gd" type="Script" id=15]
 [ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=16]
-[ext_resource path="res://player/kinematic_body.gd" type="Script" id=17]
+[ext_resource path="res://player/player_body.gd" type="Script" id=17]
 [ext_resource path="res://player/dust.tscn" type="PackedScene" id=18]
 [ext_resource path="res://player/dash.wav" type="AudioStream" id=19]
 [ext_resource path="res://player/wall_slide.gd" type="Script" id=20]
@@ -29,11 +29,14 @@
 [ext_resource path="res://player/equipable_holder.gd" type="Script" id=28]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 4, 10 )
+extents = Vector2( 3.5, 10 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 4.0
 height = 14.0
+
+[sub_resource type="RectangleShape2D" id=26]
+extents = Vector2( 5.5, 3 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
@@ -42,22 +45,6 @@ region = Rect2( 0, 0, 11, 24 )
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 11, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 44, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 55, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 66, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 77, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
@@ -76,6 +63,22 @@ atlas = ExtResource( 1 )
 region = Rect2( 66, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 1 )
+region = Rect2( 77, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 44, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 55, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 66, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 1 )
 region = Rect2( 77, 0, 11, 24 )
 
@@ -102,11 +105,6 @@ animations = [ {
 "name": "idle",
 "speed": 2.0
 }, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "walk",
-"speed": 7.0
-}, {
 "frames": [ SubResource( 16 ) ],
 "loop": true,
 "name": "dash",
@@ -116,6 +114,11 @@ animations = [ {
 "loop": true,
 "name": "sprint",
 "speed": 10.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
+"loop": true,
+"name": "walk",
+"speed": 7.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
@@ -337,6 +340,14 @@ collision_mask = 27
 position = Vector2( 5.5, 13 )
 shape = SubResource( 2 )
 
+[node name="Boots" type="Area2D" parent="KinematicBody2D" groups=["PlayerBoots"]]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Boots"]
+position = Vector2( 5.5, 22 )
+shape = SubResource( 26 )
+
 [node name="Smoothing2D" type="Node2D" parent="."]
 script = ExtResource( 16 )
 target = NodePath("../KinematicBody2D")
@@ -356,7 +367,6 @@ script = ExtResource( 3 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Smoothing2D"]
 frames = SubResource( 18 )
 animation = "idle"
-frame = 1
 playing = true
 centered = false
 script = ExtResource( 4 )

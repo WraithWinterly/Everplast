@@ -1,5 +1,7 @@
 extends Control
 
+var previous_item: String = "none"
+
 onready var coin_label: Label = $VBoxContainer/HBoxContainer/CoinLabel
 onready var health_amount: Label = $VBoxContainer/HBoxContainer/HealthLabel
 onready var orb_label: Label = $VBoxContainer/HBoxContainer/OrbLabel
@@ -8,10 +10,11 @@ onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var ui_slot: TextureRect = $VBoxContainer/UISlot
 onready var ui_slot_label: Label = $VBoxContainer/UISlot/Label
 onready var ui_slot_texture: TextureRect = $VBoxContainer/UISlot/TextureRect
+onready var gem_textures := [$GenContainer/GemSlot1/Gem, $GenContainer/GemSlot2/Gem, $GenContainer/GemSlot3/Gem]
+onready var gem_container: HBoxContainer = $GenContainer
 
-var previous_item: String = "none"
 
-func _ready():
+func _ready() -> void:
 	UI.connect("changed", self, "_ui_changed")
 	PlayerStats.connect("stat_updated", self, "update_counters")
 	Signals.connect("level_completed", self, "_level_completed")
@@ -21,9 +24,12 @@ func _ready():
 	Signals.connect("player_death", self, "_player_death")
 	Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
 	Signals.connect("adrenaline_updated", self, "update_counters")
-	Signals.connect("quick_item_used", self, "_quick_item_used")
+	Signals.connect("powerup_used", self, "_powerup_used")
 	Signals.connect("inventory_changed", self, "_inventory_changed")
+	Signals.connect("gem_collected", self, "_gem_collected")
 	hide()
+	for gem in gem_textures:
+		gem.hide()
 
 
 func show_hud() -> void:
@@ -78,7 +84,26 @@ func update_counters() -> void:
 			ui_slot_label.text = "x0"
 			ui_slot_label.modulate = Color8(220, 25, 25)
 
-
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		gem_container.show()
+		var index: int = 0
+		var gem_dict = PlayerStats.get_stat("gems")
+		for gem in gem_textures:
+			if gem_dict.has(str(LevelController.current_world)):
+				if gem_dict[str(LevelController.current_world)].has(str(LevelController.current_level)):
+					if gem_dict[str(LevelController.current_world)][str(LevelController.current_level)][index]:
+						if not gem.visible:
+							gem.show()
+							gem.get_node("AnimationPlayer").play("show")
+					else:
+						gem.hide()
+				else:
+					gem.hide()
+			else:
+				gem.hide()
+			index += 1
+	else:
+		gem_container.hide()
 func update_coin_counter(amount: int = 0) -> void:
 	coin_label.text = str(PlayerStats.get_stat("coins"))
 
@@ -139,10 +164,14 @@ func _player_death() -> void:
 	update_counters()
 
 
-func _quick_item_used(item_name: String) -> void:
+func _powerup_used(item_name: String) -> void:
 	yield(get_tree(), "physics_frame")
 	update_counters()
 
 
 func _player_hurt_from_enemy(var _hurt_type: int, var _knockback: int, var _damage: int) -> void:
+	update_counters()
+
+
+func _gem_collected(index: int) -> void:
 	update_counters()

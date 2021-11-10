@@ -13,6 +13,7 @@ enum HurtTypes {
 
 enum EnemyHurtTypes {
 	NORMAL,
+	NORMAL_AIR
 }
 
 var is_mobile: bool = false
@@ -21,9 +22,13 @@ var death_in_progress: bool = false
 var player_invincible: bool = false
 var dialog_active: bool = false
 var inventory_active: bool = false
-var player_jump_damage: int = 1
 var timed_powerup_active: bool = false
+var player_jump_damage: int = 1
+var selected_world: int = 0
+var selected_level: int = 0
 var game_state: int = GameStates.MENU
+
+
 
 var player_path = "/root/Main/LevelHolder/Level/Player"
 var player_body_path = "/root/Main/LevelHolder/Level/Player/KinematicBody2D"

@@ -12,7 +12,7 @@ func _ready() -> void:
 	hide()
 
 
-func show_notification(message: String):
+func show_notification(message: String) -> void:
 	show()
 	label.text = message
 	if not animation_player.is_playing():
@@ -23,7 +23,7 @@ func show_notification(message: String):
 		hide()
 
 
-func _save():
+func _save() -> void:
 	if UI.menu_transitioning:
 		yield(UI, "faded")
 	if animation_player.is_playing():

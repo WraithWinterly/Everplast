@@ -16,7 +16,9 @@ enum {
 	PAUSE_MENU_SETTINGS,
 	PAUSE_MENU_SETTINGS_CREDITS,
 	PAUSE_MENU_RETURN_PROMPT,
-	NONE
+	WORLD_SELECTOR_LEVEL_ENTER,
+	INVENTORY,
+	NONE,
 }
 
 # UI
@@ -101,7 +103,9 @@ func _input(event: InputEvent) -> void:
 			PROFILE_SELECTOR_UPDATE_PROMPT:
 				emit_signal("changed", PROFILE_SELECTOR)
 				emit_signal("button_pressed", true)
-
+			WORLD_SELECTOR_LEVEL_ENTER:
+				emit_signal("changed", UI.NONE)
+				emit_signal("button_pressed", true)
 
 func _changed(menu: int) -> void:
 	if menu_transitioning:

@@ -2,14 +2,17 @@ extends Area2D
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var sound: AudioStreamPlayer = $AudioStreamPlayer
+onready var light: Sprite = $Sprite/Light2D
+onready var coll_shape: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
+	light.self_modulate = Color8(122, 122, 122, 255)
 	connect("body_entered", self, "_body_entered")
 	if LevelController.checkpoint_active and \
 			LevelController.checkpoint_world == LevelController.current_world and \
 			LevelController.checkpoint_level == LevelController.current_level:
-		hide_self()
+		disable(false)
 
 
 func _body_entered(body: Node) -> void:
@@ -18,10 +21,14 @@ func _body_entered(body: Node) -> void:
 		UI.emit_signal("show_notification", "Checkpoint Reached!")
 		Signals.emit_signal("save")
 		sound.play()
-		hide_self()
+		disable()
 
 
-func hide_self() -> void:
-	animation_player.play("hide")
-	yield(animation_player, "animation_finished")
-	call_deferred("free")
+func disable(animation: bool = true) -> void:
+	coll_shape.set_deferred("disabled", true)
+	if animation:
+		animation_player.play("hide")
+		yield(animation_player, "animation_finished")
+	light.self_modulate = Color8(20, 135, 30, 255)
+	animation_player.play_backwards("hide")
+

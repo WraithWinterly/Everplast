@@ -52,10 +52,10 @@ func down_check() -> void:
 		player_body.position.y += 2
 
 
-func start():
+func start() -> void:
 	player_body.current_gravity = player_body.water_gravity
 
 
-func stop():
+func stop() -> void:
 	player_body.current_gravity = player_body.gravity
 	player_body.current_speed = 0

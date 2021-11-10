@@ -18,10 +18,10 @@ func _physics_process(delta: float) -> void:
 			fsm.change_state(fsm.idle)
 
 
-func start():
+func start() -> void:
 	player_body.current_gravity = player_body.ladder_gravity
 
 
-func stop():
+func stop() -> void:
 	player_body.current_gravity = player_body.normal_gravity
 

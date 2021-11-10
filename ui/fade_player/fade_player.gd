@@ -45,7 +45,7 @@ func _ui_changed(menu: int) -> void:
 				transition()
 
 
-func transition():
+func transition() -> void:
 	for icon in world_icons.get_children():
 		icon.hide()
 	UI.menu_transitioning = true

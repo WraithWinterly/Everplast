@@ -1,10 +1,11 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://ui/hud/hud.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/notification/notification.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/debug/ui_print.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/pause_menu/pause_menu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/enter_level/enter_level.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/fade_player/fade_player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/ui_button_sound.gd" type="Script" id=8]
 [ext_resource path="res://ui/ts_buttons/ts_buttons.tscn" type="PackedScene" id=9]
@@ -37,7 +38,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-version_numbers = [ 1, 8 ]
+version_numbers = [ 1, 9 ]
 
 [node name="LevelHolder" type="Node2D" parent="."]
 
@@ -64,6 +65,8 @@ pause_mode = 2
 
 [node name="Inventory" parent="GUI" instance=ExtResource( 18 )]
 visible = false
+
+[node name="EnterLevel" parent="GUI" instance=ExtResource( 6 )]
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource( 5 )]
 visible = false

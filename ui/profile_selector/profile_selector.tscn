@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/profile_selector/profile_button.tscn" type="PackedScene" id=2]
@@ -11,6 +11,21 @@
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/profile_selector/update_profile_prompt.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=11]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 0.2
@@ -153,12 +168,12 @@ focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../ManageProfiles")
 focus_previous = NodePath(".")
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 1 )
 text = "Return to Main Menu"
 
 [node name="ManageProfiles" type="Button" parent="Panel/Buttons"]
@@ -171,15 +186,16 @@ focus_neighbour_right = NodePath("../ReturnToMenu")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../ReturnToMenu")
 focus_previous = NodePath("../ReturnToMenu")
+custom_fonts/font = ExtResource( 1 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 1 )
 text = "Manage Profiles"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
 anims/show = SubResource( 1 )
 
 [node name="UpgradeProfilePopup" parent="." instance=ExtResource( 10 )]

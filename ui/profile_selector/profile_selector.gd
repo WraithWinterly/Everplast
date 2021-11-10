@@ -9,7 +9,7 @@ onready var label: Label = $Panel/VBoxContainer/Label
 onready var profile_buttons = get_node("Panel/VBoxContainer/ProfileButtons").get_children()
 
 
-func _ready():
+func _ready() -> void:
 	animation_player.connect("animation_finished", self, "_animation_finished")
 	return_button.connect("pressed", self, "_return_pressed")
 	manage_button.connect("pressed", self, "_manage_pressed")

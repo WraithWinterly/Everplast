@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://ui/pause_menu/credits.gd" type="Script" id=1]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=2]
@@ -9,6 +9,45 @@
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ui/ui_background.tres" type="StyleBox" id=9]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.95 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "show"
@@ -85,10 +124,11 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.05
-anchor_top = 0.1
+anchor_top = 1.0
 anchor_right = 0.95
-anchor_bottom = 0.9
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
 custom_styles/panel = ExtResource( 7 )
 __meta__ = {
@@ -116,8 +156,8 @@ margin_top = 45.0
 margin_right = 1152.0
 margin_bottom = 75.0
 size_flags_vertical = 6
-custom_fonts/font = ExtResource( 8 )
 custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
+custom_fonts/font = ExtResource( 8 )
 text = "Everplast v"
 align = 1
 __meta__ = {
@@ -164,18 +204,19 @@ focus_neighbour_right = NodePath("../Yes")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../Yes")
 focus_previous = NodePath("../Yes")
+custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-custom_fonts/font = ExtResource( 6 )
 text = "Return"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
 anims/show = SubResource( 1 )
 
 [connection signal="pressed" from="Panel/Return" to="." method="_on_Return_pressed"]
