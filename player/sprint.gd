@@ -6,7 +6,7 @@ onready var fsm: Node = get_parent()
 
 # Add mobile toggle sprint later
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	player_body.basic_movement()
 	if not Input.is_action_pressed("move_sprint"):
 		fsm.change_state(fsm.walk)

@@ -104,6 +104,7 @@ anims/hide = SubResource( 3 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+bus = "Audio"
 
 [node name="AnimationPlayerGlow" type="AnimationPlayer" parent="."]
 anims/glow = SubResource( 4 )

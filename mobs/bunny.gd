@@ -5,7 +5,8 @@ onready var enemy_component: Node2D = $EnemyComponentManager
 
 
 func _ready() -> void:
-	enemy_component.connect("died", self, "_died")
+	var __: int
+	__ = enemy_component.connect("died", self, "_died")
 
 
 func _died() -> void:

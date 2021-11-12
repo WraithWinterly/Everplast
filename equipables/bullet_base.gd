@@ -22,7 +22,7 @@ func _ready() -> void:
 			speed = 500
 
 
-func _body_entered(body: Node) -> void:
+func _body_entered(_body: Node) -> void:
 	yield(get_tree(), "physics_frame")
 	collision_shape.set_deferred("disabled", true)
 	set_deferred("mode", MODE_KINEMATIC)

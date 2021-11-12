@@ -11,19 +11,19 @@ var jump_buffer: bool = false
 onready var fsm: Node = get_parent()
 onready var player: Player = get_parent().get_parent()
 onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("KinematicBody2D")
-onready var timer: Timer
+onready var timer: Timer = Timer.new()
 
 
 func _ready() -> void:
-	current_jump_buffer_time = jump_buffer_time
-	timer = Timer.new()
+	var __: int
+	__ = timer.connect("timeout", self, "_timeout")
 	add_child(timer)
+	current_jump_buffer_time = jump_buffer_time
 	timer.wait_time = cayote
 	timer.one_shot = true
-	timer.connect("timeout", self, "_timeout")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if jump_buffer:
 		current_jump_buffer_time -= 1
 		if current_jump_buffer_time <= 0:

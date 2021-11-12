@@ -4,7 +4,7 @@ onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("K
 onready var fsm: Node = get_parent()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not Main.get_action_strength() == 0:
 		fsm.change_state(fsm.water_move)
 
@@ -14,7 +14,7 @@ func _input(event: InputEvent) -> void:
 		fsm.change_state(fsm.water_move)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 		player_body.basic_movement()
 
 

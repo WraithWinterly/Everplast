@@ -7,10 +7,11 @@ onready var prompt_text: Label = $Panel/VBoxContainer/PromptText
 
 
 func _ready() -> void:
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = no_button.connect("pressed", self, "_no_pressed")
+	__ = yes_button.connect("pressed", self, "_yes_pressed")
 	hide()
-	UI.connect("changed", self, "_ui_changed")
-	yes_button.connect("pressed", self, "_yes_pressed")
-	no_button.connect("pressed", self, "_no_pressed")
 
 
 func enable_buttons() -> void:
@@ -35,11 +36,6 @@ func _ui_changed(menu: int) -> void:
 			if UI.last_menu == UI.PROFILE_SELECTOR_DELETE_PROMPT:
 				animation_player.play_backwards("show")
 				disable_buttons()
-#		UI.PROFILE_SELECTOR:
-#			if visible and not animation_player.is_playing() and UI.last_menu == UI.PROFILE_SELECTOR_DELETE:
-#				print("bca")
-#				animation_player.play_backwards("show")
-#				disable_buttons()
 
 
 func _no_pressed() -> void:

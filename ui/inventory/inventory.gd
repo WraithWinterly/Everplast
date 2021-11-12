@@ -32,7 +32,6 @@ var tab_2_focus_bottom: Button
 var tab_3_focus: Button = null
 var tab_4_focus: Button
 
-onready var main: Main = get_tree().root.get_node("Main")
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var upper_buttons: HBoxContainer = $Panel/HBoxContainer
@@ -80,23 +79,24 @@ onready var current_panel: Panel = powerups_panel
 
 
 func _ready() -> void:
-	hide()
-	Signals.connect("level_changed", self, "_level_changed")
-	UI.connect("changed", self, "_ui_changed")
-	button_close.connect("pressed", self, "_close_pressed")
-	top_powerup_button.connect("pressed", self, "_powerups_pressed")
-	top_collectables_button.connect("pressed", self, "_collectables_pressed")
-	top_rank_button.connect("pressed", self, "_ranks_pressed")
-	top_stats_button.connect("pressed", self, "_stats_pressed")
-	stats_upgrade_button.connect("pressed", self, "_upgrade_stats_pressed")
-	upgrade_stats_cancel_button.connect("pressed", self, "_upgrade_stats_cancel_pressed")
-	upgrade_stats_health_button.connect("pressed", self, "_upgrade_stats_health_pressed")
-	upgrade_stats_adrenaline_button.connect("pressed", self, "_upgrade_stats_adrenaline_pressed")
-	Signals.connect("powerup_collected", self, "_powerup_collected")
-	Signals.connect("powerup_used", self, "_powerup_used")
-	Signals.connect("equipable_collected", self, "_equipable_collected")
-	Signals.connect("collectable_collected", self, "_collectable_collected")
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = Signals.connect("level_changed", self, "_level_changed")
+	__ = Signals.connect("powerup_collected", self, "_powerup_collected")
+	__ = Signals.connect("powerup_used", self, "_powerup_used")
+	__ = Signals.connect("equipable_collected", self, "_equipable_collected")
+	__ = Signals.connect("collectable_collected", self, "_collectable_collected")
+	__ = button_close.connect("pressed", self, "_close_pressed")
+	__ = top_powerup_button.connect("pressed", self, "_powerups_pressed")
+	__ = top_collectables_button.connect("pressed", self, "_collectables_pressed")
+	__ = top_rank_button.connect("pressed", self, "_ranks_pressed")
+	__ = top_stats_button.connect("pressed", self, "_stats_pressed")
+	__ = stats_upgrade_button.connect("pressed", self, "_upgrade_stats_pressed")
+	__ = upgrade_stats_cancel_button.connect("pressed", self, "_upgrade_stats_cancel_pressed")
+	__ = upgrade_stats_health_button.connect("pressed", self, "_upgrade_stats_health_pressed")
+	__ = upgrade_stats_adrenaline_button.connect("pressed", self, "_upgrade_stats_adrenaline_pressed")
 
+	hide()
 	collectables_panel.hide()
 	ranks_panel.hide()
 	stats_panel.hide()
@@ -148,6 +148,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func hide_menu() -> void:
 	UI.emit_signal("button_pressed", true)
+	Signals.emit_signal("inventory_changed", false)
 	if Globals.inventory_active:
 			get_tree().paused = false
 			Globals.inventory_active = false
@@ -224,7 +225,7 @@ func update_inventory() -> void:
 	#stats_upgrade_button.visible = Globals.game_state == Globals.GameStates.LEVEL and PlayerStats.get_stat("orbs") >= PlayerStats.get_level_up_cost()
 	stats_upgrade_button.disabled = not (PlayerStats.get_stat("orbs") >= PlayerStats.get_level_up_cost())
 
-	var world_string: String = "\"%s\" - %s" % [main.world_names[PlayerStats.get_stat("world_max")], PlayerStats.get_stat("level_max")]
+	var world_string: String = "\"%s\" - %s" % [Globals.get_main().world_names[PlayerStats.get_stat("world_max")], PlayerStats.get_stat("level_max")]
 	stats_label.text = "Profile: %s\nPlayer Level: %s\nLatest World:\n       %s" % \
 			[(PlayerStats.current_save_profile + 1), PlayerStats.get_stat("level"), world_string]
 	stats_label_orbs.text = "x%s" % PlayerStats.get_stat("orbs")
@@ -344,6 +345,7 @@ func _level_changed(_world: int, _level: int) -> void:
 
 func _close_pressed() -> void:
 	hide_menu()
+	Signals.emit_signal("inventory_changed", false)
 
 
 func _equipable_pressed() -> void:
@@ -355,7 +357,9 @@ func _equipable_pressed() -> void:
 					powerup_sound.play()
 					Signals.emit_signal("equipped", n.name.to_lower())
 					hide_menu()
-					return
+				else:
+					Signals.emit_signal("equipped", "none")
+					hide_menu()
 
 
 func _powerup_pressed() -> void:

@@ -12,9 +12,10 @@ onready var command_handler: Node = $CommandHandler
 
 
 func _ready() -> void:
+	var __: int
+	__ = Signals.connect("error_level_changed", self, "_error_level_changed")
+	__ = input.connect("text_entered", self, "_text_entered")
 	hide()
-	Signals.connect("error_level_changed", self, "_error_level_changed")
-	input.connect("text_entered", self, "_text_entered")
 	output.text = "Type help for help"
 	output.get_child(0).set("custom_styles/scroll", load("res://ui/ui_background.tres"))
 	output.get_child(1).set("custom_styles/scroll", load("res://ui/ui_background.tres"))
@@ -25,7 +26,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_console"):
+	if event.is_action_pressed("debug_console") and Globals.get_settings().data.cheats:
 		if visible:
 			hide_console()
 		else:

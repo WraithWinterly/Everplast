@@ -8,7 +8,7 @@
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 8, 9 )
+region = Rect2( 0, 0, 8, 12 )
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
@@ -32,7 +32,7 @@ damage = 4
 max_health = 2
 
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
-position = Vector2( 0, 0.2 )
+position = Vector2( 0, -0.86 )
 frames = SubResource( 3 )
 
 [node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 5 )]

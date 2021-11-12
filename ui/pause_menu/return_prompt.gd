@@ -9,9 +9,10 @@ onready var prompt_text: Label = $Panel/VBoxContainer/PromptText
 
 func _ready() -> void:
 	hide()
-	UI.connect("changed", self, "_ui_changed")
-	yes_button.connect("pressed", self, "_yes_pressed")
-	no_button.connect("pressed", self, "_no_pressed")
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = no_button.connect("pressed", self, "_no_pressed")
+	__ = yes_button.connect("pressed", self, "_yes_pressed")
 
 
 func _ui_changed(menu: int) -> void:

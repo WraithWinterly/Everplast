@@ -7,8 +7,9 @@ onready var sound: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
-	Signals.connect("save", self, "_save")
-	UI.connect("show_notification", self, "show_notification")
+	var __: int
+	__ = Signals.connect("save", self, "_save")
+	__ = UI.connect("show_notification", self, "show_notification")
 	hide()
 
 

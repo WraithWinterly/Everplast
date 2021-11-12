@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/twitter.png" type="Texture" id=2]
+[ext_resource path="res://ui/youtube.png" type="Texture" id=3]
+[ext_resource path="res://ui/social_plug/social_plug.gd" type="Script" id=4]
+
+[node name="SocialPlug" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
+anchor_right = 0.99
+anchor_bottom = 0.95
+mouse_filter = 2
+alignment = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+margin_left = 1107.0
+margin_right = 1267.0
+margin_bottom = 684.0
+mouse_filter = 2
+alignment = 2
+
+[node name="Twitter" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.607843 )
+margin_top = 552.0
+margin_right = 160.0
+margin_bottom = 592.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.607843 )
+margin_top = 596.0
+margin_right = 160.0
+margin_bottom = 616.0
+custom_fonts/font = ExtResource( 1 )
+text = "@WraithWinterly"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Youtube" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.607843 )
+margin_top = 620.0
+margin_right = 160.0
+margin_bottom = 660.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.607843 )
+margin_top = 664.0
+margin_right = 160.0
+margin_bottom = 684.0
+custom_fonts/font = ExtResource( 1 )
+text = "WraithWinterly"
+align = 2
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

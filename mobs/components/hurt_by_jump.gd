@@ -9,9 +9,10 @@ onready var enemy_component: EnemyComponentManager = get_parent()
 
 
 func _ready() -> void:
-	hurt_area.connect("area_entered", self, "_hurt_area_area_entered")
-	hurt_area.connect("body_entered", self, "_hurt_area_body_entered")
-	hurt_area.connect("area_exited", self, "_hurt_area_area_exited")
+	var __: int
+	__ = hurt_area.connect("area_entered", self, "_hurt_area_area_entered")
+	__ = hurt_area.connect("body_entered", self, "_hurt_area_body_entered")
+	__ = hurt_area.connect("area_exited", self, "_hurt_area_area_exited")
 
 
 func _hurt_area_area_entered(area: Area2D) -> void:
@@ -30,7 +31,7 @@ func _hurt_area_body_entered(body: Node) -> void:
 		if body.fsm.current_state == body.fsm.dash and not enemy_component.hurt_by_jump:
 			enemy_component.hurt_by_jump = true
 			enemy_component.damage_self(Globals.HurtTypes.JUMP)
-			
+
 
 func _hurt_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("PlayerBoots"):

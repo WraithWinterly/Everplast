@@ -3,6 +3,8 @@ extends Node
 signal state_changed()
 signal landed()
 
+var enabled: bool = true
+
 onready var player_body: KinematicBody2D = get_parent().get_node("KinematicBody2D")
 onready var idle: Node = $Idle
 onready var walk: Node = $Walk
@@ -29,6 +31,7 @@ func _ready() -> void:
 
 
 func change_state(new_state: Node, bypass: bool = false):
+	if not enabled: return
 	if Globals.death_in_progress and not bypass:
 		return
 	last_state = current_state

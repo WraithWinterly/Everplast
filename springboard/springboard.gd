@@ -9,9 +9,10 @@ var amount: int = 80
 
 
 func _ready() -> void:
-	area_2d.connect("body_entered", self, "_body_entered")
-	
-	
+	var __: int
+	__ = area_2d.connect("body_entered", self, "_body_entered")
+
+
 func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		if body.get_parent().falling:

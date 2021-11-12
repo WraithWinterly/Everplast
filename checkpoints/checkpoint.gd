@@ -7,8 +7,9 @@ onready var coll_shape: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
+	var __: int
+	__ = connect("body_entered", self, "_body_entered")
 	light.self_modulate = Color8(122, 122, 122, 255)
-	connect("body_entered", self, "_body_entered")
 	if LevelController.checkpoint_active and \
 			LevelController.checkpoint_world == LevelController.current_world and \
 			LevelController.checkpoint_level == LevelController.current_level:

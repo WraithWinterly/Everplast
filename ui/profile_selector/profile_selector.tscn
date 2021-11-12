@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/profile_selector/profile_button.tscn" type="PackedScene" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/profile_selector/update_profile_prompt.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=11]
+[ext_resource path="res://ui/ui_background.tres" type="StyleBox" id=12]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -62,6 +63,16 @@ margin_right = -0.00012207
 margin_bottom = 6.10352e-05
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
 custom_styles/panel = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Panel" parent="Panel"]
+anchor_left = 0.02
+anchor_top = 0.1
+anchor_right = 0.98
+anchor_bottom = 0.85
+custom_styles/panel = ExtResource( 12 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -149,7 +160,7 @@ profile_selector_path = NodePath("../../../..")
 
 [node name="Buttons" type="HBoxContainer" parent="Panel"]
 anchor_left = 0.035
-anchor_top = 0.86
+anchor_top = 0.875
 anchor_right = 0.965
 anchor_bottom = 0.9
 custom_constants/separation = 15

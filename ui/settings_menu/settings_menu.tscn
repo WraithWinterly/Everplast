@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://ui/settings_menu/settings_menu.gd" type="Script" id=1]
+[ext_resource path="res://ui/ui_background.tres" type="StyleBox" id=2]
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=5]
@@ -11,6 +12,366 @@
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=10]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=11]
 [ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=12]
+[ext_resource path="res://ui/pause_menu/erase_prompt.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/grabber.png" type="Texture" id=14]
+[ext_resource path="res://ui/grabber_highlight.png" type="Texture" id=15]
+[ext_resource path="res://ui/pause_menu/debug_prompt.tscn" type="PackedScene" id=16]
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "slide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.8, 0.9 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "slide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.8, 0.9 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "slide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.8, 0.9 ]
+}
+
+[sub_resource type="Animation" id=9]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "slide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.8, 0.9 ]
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "slide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.8, 0.9 ]
+}
 
 [sub_resource type="Animation" id=2]
 length = 0.1
@@ -74,11 +435,10 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.15
-anchor_top = 1.0
-anchor_right = 0.9
-anchor_bottom = 1.0
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.95
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
 mouse_filter = 2
 custom_styles/panel = ExtResource( 9 )
@@ -86,56 +446,106 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
-anchor_left = 0.15
-anchor_top = 0.03
-anchor_right = 0.85
-anchor_bottom = 1.0
-custom_constants/separation = 40
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Panel/VBoxContainer"]
-margin_right = 672.0
-margin_bottom = 30.0
+[node name="Label" type="Label" parent="Panel"]
+anchor_top = 0.015
+anchor_right = 1.0
+anchor_bottom = 0.017
 custom_fonts/font = ExtResource( 10 )
 text = "Settings"
 align = 1
 
-[node name="HBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 70.0
-margin_right = 672.0
-margin_bottom = 500.0
+[node name="SidePanel" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.025
+anchor_right = 0.25
+anchor_bottom = 1.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/SidePanel"]
+margin_top = 144.0
+margin_right = 259.0
+margin_bottom = 504.0
 custom_constants/separation = 15
 alignment = 1
 
-[node name="Controls" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_right = 672.0
+[node name="Back" type="Button" parent="Panel/SidePanel/HBoxContainer"]
+margin_right = 259.0
 margin_bottom = 60.0
-focus_neighbour_left = NodePath("../../../HBoxContainer2/Back")
-focus_neighbour_top = NodePath("../../../HBoxContainer2/Back")
-focus_neighbour_right = NodePath("../Fullscreen")
-focus_neighbour_bottom = NodePath("../Fullscreen")
-focus_next = NodePath("../Fullscreen")
-focus_previous = NodePath("../../../HBoxContainer2/Back")
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Other")
+focus_neighbour_bottom = NodePath("../General")
+focus_next = NodePath("../General")
+focus_previous = NodePath("../General")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = " Controls - NOT IMPLEMENTED"
+text = "Back"
 
-[node name="Fullscreen" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="General" type="Button" parent="Panel/SidePanel/HBoxContainer"]
 margin_top = 75.0
-margin_right = 672.0
+margin_right = 259.0
 margin_bottom = 135.0
-focus_neighbour_left = NodePath("../Controls")
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Back")
+focus_neighbour_bottom = NodePath("../Graphics")
+focus_next = NodePath("../Graphics")
+focus_previous = NodePath("../Back")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "General"
+
+[node name="Graphics" type="Button" parent="Panel/SidePanel/HBoxContainer"]
+margin_top = 150.0
+margin_right = 259.0
+margin_bottom = 210.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../General")
+focus_neighbour_bottom = NodePath("../Controls")
+focus_next = NodePath("../Controls")
+focus_previous = NodePath("../General")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "Graphics"
+
+[node name="Controls" type="Button" parent="Panel/SidePanel/HBoxContainer"]
+margin_top = 225.0
+margin_right = 259.0
+margin_bottom = 285.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Graphics")
+focus_neighbour_bottom = NodePath("../Other")
+focus_next = NodePath("../Other")
+focus_previous = NodePath("../Graphics")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "Controls"
+
+[node name="Other" type="Button" parent="Panel/SidePanel/HBoxContainer"]
+margin_top = 300.0
+margin_right = 259.0
+margin_bottom = 360.0
+focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Controls")
-focus_neighbour_right = NodePath("../AudioVolume")
-focus_neighbour_bottom = NodePath("../AudioVolume")
-focus_next = NodePath("../AudioVolume")
+focus_neighbour_bottom = NodePath("../Back")
+focus_next = NodePath("../Back")
 focus_previous = NodePath("../Controls")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
@@ -143,19 +553,102 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-toggle_mode = true
-text = "Fullscreen Mode"
+text = "Other"
 
-[node name="AudioVolume" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
+[node name="BG" type="Panel" parent="Panel"]
+anchor_left = 0.275
+anchor_top = 0.1
+anchor_right = 0.95
+anchor_bottom = 0.9
+mouse_filter = 2
+custom_styles/panel = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GeneralMenu" type="VBoxContainer" parent="Panel/BG"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_right = 1.8
+anchor_bottom = 1.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/GeneralMenu"]
+margin_top = 36.0
+margin_right = 622.0
+margin_bottom = 482.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="SocialMedia" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_right = 622.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../ProfilePause")
+focus_next = NodePath("../ProfilePause")
+focus_previous = NodePath(".")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+toggle_mode = true
+pressed = true
+text = "Show Social Media: On"
+
+[node name="ProfilePause" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 75.0
+margin_right = 622.0
+margin_bottom = 135.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
+focus_neighbour_top = NodePath("../SocialMedia")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Credits")
+focus_next = NodePath("../Credits")
+focus_previous = NodePath("../SocialMedia")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+toggle_mode = true
+pressed = true
+text = "Profile In Pause Screen: On"
+
+[node name="Credits" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
 margin_top = 150.0
-margin_right = 672.0
+margin_right = 622.0
 margin_bottom = 210.0
-focus_neighbour_left = NodePath("../Fullscreen")
-focus_neighbour_top = NodePath("../Fullscreen")
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
+focus_neighbour_top = NodePath("../ProfilePause")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../AudioVolume")
+focus_next = NodePath("../AudioVolume")
+focus_previous = NodePath("../ProfilePause")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "Everplast Credits"
+
+[node name="AudioVolume" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 225.0
+margin_right = 622.0
+margin_bottom = 285.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
+focus_neighbour_top = NodePath("../Credits")
 focus_neighbour_right = NodePath("../AudioSlider/Slider")
 focus_neighbour_bottom = NodePath("../AudioSlider/Slider")
 focus_next = NodePath("../AudioSlider/Slider")
-focus_previous = NodePath("../Fullscreen")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
@@ -166,24 +659,25 @@ toggle_mode = true
 pressed = true
 text = "Audio Volume: On"
 
-[node name="AudioSlider" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_top = 225.0
-margin_right = 672.0
-margin_bottom = 245.0
+[node name="AudioSlider" type="HBoxContainer" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 300.0
+margin_right = 622.0
+margin_bottom = 328.0
 
-[node name="Value" type="Label" parent="Panel/VBoxContainer/HBoxContainer/AudioSlider"]
+[node name="Value" type="Label" parent="Panel/BG/GeneralMenu/HBoxContainer/AudioSlider"]
+margin_top = 4.0
 margin_right = 166.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 custom_fonts/font = ExtResource( 12 )
 text = "Audio Volume: 100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer/AudioSlider"]
+[node name="Slider" type="HSlider" parent="Panel/BG/GeneralMenu/HBoxContainer/AudioSlider"]
 margin_left = 170.0
-margin_right = 672.0
-margin_bottom = 16.0
+margin_right = 622.0
+margin_bottom = 28.0
 focus_neighbour_left = NodePath("../../AudioVolume")
 focus_neighbour_top = NodePath("../../AudioVolume")
 focus_neighbour_right = NodePath("../../MusicVolume")
@@ -191,17 +685,19 @@ focus_neighbour_bottom = NodePath("../../MusicVolume")
 focus_next = NodePath("../../MusicVolume")
 focus_previous = NodePath("../../AudioVolume")
 size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 15 )
+custom_icons/grabber = ExtResource( 14 )
 custom_styles/slider = ExtResource( 7 )
 custom_styles/grabber_area_highlight = ExtResource( 7 )
 custom_styles/grabber_area = ExtResource( 7 )
-step = 10.0
+step = 2.0
 value = 100.0
 
-[node name="MusicVolume" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_top = 260.0
-margin_right = 672.0
-margin_bottom = 320.0
-focus_neighbour_left = NodePath("../AudioSlider/Slider")
+[node name="MusicVolume" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 343.0
+margin_right = 622.0
+margin_bottom = 403.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
 focus_neighbour_top = NodePath("../AudioSlider/Slider")
 focus_neighbour_right = NodePath("../MusicSlider/Slider")
 focus_neighbour_bottom = NodePath("../MusicSlider/Slider")
@@ -217,102 +713,277 @@ toggle_mode = true
 pressed = true
 text = "Music Volume: On"
 
-[node name="MusicSlider" type="HBoxContainer" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_top = 335.0
-margin_right = 672.0
-margin_bottom = 355.0
+[node name="MusicSlider" type="HBoxContainer" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 418.0
+margin_right = 622.0
+margin_bottom = 446.0
 
-[node name="Value" type="Label" parent="Panel/VBoxContainer/HBoxContainer/MusicSlider"]
+[node name="Value" type="Label" parent="Panel/BG/GeneralMenu/HBoxContainer/MusicSlider"]
+margin_top = 4.0
 margin_right = 166.0
-margin_bottom = 20.0
+margin_bottom = 24.0
 custom_fonts/font = ExtResource( 12 )
 text = "Music Volume: 100"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slider" type="HSlider" parent="Panel/VBoxContainer/HBoxContainer/MusicSlider"]
+[node name="Slider" type="HSlider" parent="Panel/BG/GeneralMenu/HBoxContainer/MusicSlider"]
 margin_left = 170.0
-margin_right = 672.0
-margin_bottom = 16.0
+margin_right = 622.0
+margin_bottom = 28.0
 focus_neighbour_left = NodePath("../../MusicVolume")
 focus_neighbour_top = NodePath("../../MusicVolume")
 focus_neighbour_right = NodePath("../../ResetStats")
 focus_neighbour_bottom = NodePath("../../ResetStats")
 size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 15 )
+custom_icons/grabber = ExtResource( 14 )
 custom_styles/slider = ExtResource( 7 )
 custom_styles/grabber_area_highlight = ExtResource( 7 )
 custom_styles/grabber_area = ExtResource( 7 )
-step = 10.0
+step = 2.0
 value = 100.0
 rounded = true
 
-[node name="Credits" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_top = 370.0
-margin_right = 672.0
-margin_bottom = 430.0
-focus_neighbour_left = NodePath("../MusicSlider/Slider")
-focus_neighbour_right = NodePath("../Fullscreen")
-focus_neighbour_bottom = NodePath("../../../HBoxContainer2/Back")
-focus_next = NodePath("../../../HBoxContainer2/Back")
-focus_previous = NodePath("../MusicSlider/Slider")
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
-text = "Credits"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/GeneralMenu"]
+anims/RESET = SubResource( 4 )
+anims/slide = SubResource( 3 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Panel"]
-anchor_top = 0.85
-anchor_right = 1.0
-anchor_bottom = 0.85
-custom_constants/separation = 15
+[node name="GraphicsMenu" type="VBoxContainer" parent="Panel/BG"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_right = 1.8
+anchor_bottom = 1.0
+custom_constants/separation = 40
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Button" parent="Panel/HBoxContainer2"]
-margin_left = 348.0
-margin_right = 470.0
-margin_bottom = 60.0
-focus_neighbour_left = NodePath("../Save")
-focus_neighbour_top = NodePath("../../VBoxContainer/HBoxContainer/Credits")
-focus_neighbour_right = NodePath("../Save")
-focus_neighbour_bottom = NodePath("../../VBoxContainer/HBoxContainer/Controls")
-focus_next = NodePath("../Save")
-focus_previous = NodePath("../Save")
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
-text = "Back"
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/GraphicsMenu"]
+margin_top = 116.0
+margin_right = 622.0
+margin_bottom = 401.0
+custom_constants/separation = 15
+alignment = 1
 
-[node name="Save" type="Button" parent="Panel/HBoxContainer2"]
-margin_left = 485.0
-margin_right = 611.0
+[node name="Fullscreen" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
+margin_right = 622.0
 margin_bottom = 60.0
-focus_neighbour_left = NodePath("../Back")
-focus_neighbour_top = NodePath("../../VBoxContainer/HBoxContainer/Credits")
-focus_neighbour_right = NodePath("../Back")
-focus_neighbour_bottom = NodePath("../../VBoxContainer/HBoxContainer/Controls")
-focus_next = NodePath("../../VBoxContainer/HBoxContainer/Controls")
-focus_previous = NodePath("../Back")
-custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
-custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
+focus_neighbour_top = NodePath("../Tonemap")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../VSync")
+focus_next = NodePath("../VSync")
+focus_previous = NodePath("../Tonemap")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Save"
+toggle_mode = true
+pressed = true
+text = "Fullscreen Mode: On"
+
+[node name="VSync" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
+margin_top = 75.0
+margin_right = 622.0
+margin_bottom = 135.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
+focus_neighbour_top = NodePath("../Fullscreen")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../AA")
+focus_next = NodePath("../AA")
+focus_previous = NodePath("../Fullscreen")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+toggle_mode = true
+pressed = true
+text = "Use VSync: On"
+
+[node name="AA" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
+margin_top = 150.0
+margin_right = 622.0
+margin_bottom = 210.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
+focus_neighbour_top = NodePath("../VSync")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Tonemap")
+focus_next = NodePath("../Tonemap")
+focus_previous = NodePath("../VSync")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "Anti Aliasing: x4"
+
+[node name="Tonemap" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
+margin_top = 225.0
+margin_right = 622.0
+margin_bottom = 285.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
+focus_neighbour_top = NodePath("../AA")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Fullscreen")
+focus_next = NodePath("../Fullscreen")
+focus_previous = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "Color Tonemap: ACES"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/GraphicsMenu"]
+anims/slide = SubResource( 5 )
+
+[node name="ControlsMenu" type="VBoxContainer" parent="Panel/BG"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_right = 1.8
+anchor_bottom = 1.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/ControlsMenu"]
+margin_top = 229.0
+margin_right = 622.0
+margin_bottom = 289.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="Test" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
+margin_right = 622.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Controls")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+toggle_mode = true
+text = "Menu Not Complete"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/ControlsMenu"]
+anims/RESET = SubResource( 8 )
+anims/slide = SubResource( 6 )
+
+[node name="OtherMenu" type="VBoxContainer" parent="Panel/BG"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_right = 1.8
+anchor_bottom = 1.0
+custom_constants/separation = 40
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/OtherMenu"]
+margin_top = 191.0
+margin_right = 622.0
+margin_bottom = 326.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="DebugConsole" type="Button" parent="Panel/BG/OtherMenu/HBoxContainer"]
+margin_right = 622.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Other")
+focus_neighbour_top = NodePath("../EraseGame")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../EraseGame")
+focus_next = NodePath("../EraseGame")
+focus_previous = NodePath(".")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+toggle_mode = true
+text = "Debug Console: Off"
+
+[node name="EraseGame" type="Button" parent="Panel/BG/OtherMenu/HBoxContainer"]
+margin_top = 75.0
+margin_right = 622.0
+margin_bottom = 135.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Other")
+focus_neighbour_top = NodePath("../DebugConsole")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../DebugConsole")
+focus_next = NodePath("../DebugConsole")
+focus_previous = NodePath("../DebugConsole")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "Erase All Data"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/OtherMenu"]
+anims/RESET = SubResource( 9 )
+anims/slide = SubResource( 7 )
+
+[node name="Subcategory" type="Label" parent="Panel/BG"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
+anchor_right = 1.8
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 11 )
+text = "Select a Subcategory"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/Subcategory"]
+anims/RESET = SubResource( 11 )
+anims/slide = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/show = SubResource( 2 )
 
 [node name="Credits" parent="." instance=ExtResource( 8 )]
+
+[node name="ErasePrompt" parent="." instance=ExtResource( 13 )]
+
+[node name="DebugPrompt" parent="." instance=ExtResource( 16 )]
+
+[connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Back" to="." method="_on_Back_focus_entered"]
+[connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/General" to="." method="_on_General_focus_entered"]
+[connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Graphics" to="." method="_on_Graphics_focus_entered"]
+[connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Controls" to="." method="_on_Controls_focus_entered"]
+[connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Other" to="." method="_on_Other_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/SocialMedia" to="." method="_on_SocialMedia_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/ProfilePause" to="." method="_on_ProfilePause_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/Credits" to="." method="_on_Credits_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/AudioVolume" to="." method="_on_AudioVolume_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/MusicVolume" to="." method="_on_MusicVolume_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/Fullscreen" to="." method="_on_Fullscreen_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/VSync" to="." method="_on_VSync_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/AA" to="." method="_on_AA_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/Tonemap" to="." method="_on_Tonemap_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/Test" to="." method="_on_Test_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/DebugConsole" to="." method="_on_DebugConsole_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/EraseGame" to="." method="_on_EraseGame_focus_entered"]

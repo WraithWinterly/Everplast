@@ -1,7 +1,7 @@
 extends Node
 
 const FILE: String = \
-		"user://fast_load.json"
+		"user://quick_play.json"
 
 
 var available: bool = false
@@ -10,15 +10,12 @@ var data: Dictionary = {
 	"last_profile": -1,
 }
 
-onready var main: Main = get_tree().root.get_node("Main")
-
 
 func _ready() -> void:
-	UI.connect("changed", self, "_ui_changed")
-	UI.connect("faded", self, "_ui_changed")
-#	Signals.connect("level_changed", self, "_level_changed")
-	Signals.connect("save", self, "_game_save")
-
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = UI.connect("faded", self, "_ui_changed")
+	__ = Signals.connect("save", self, "_game_save")
 	load_stats()
 	update_stats()
 
@@ -36,7 +33,7 @@ func update_stats() -> void:
 func save_stats() -> void:
 	var file: File = File.new()
 	#file.open_encrypted_with_pass(FILE, File.WRITE, KEY)
-	file.open(FILE, File.WRITE)
+	var __: int = file.open(FILE, File.WRITE)
 	file.store_string(to_json(data))
 	file.close()
 	load_stats()
@@ -46,7 +43,7 @@ func load_stats() -> void:
 	var file: File = File.new()
 	if file.file_exists(FILE):
 		#file.open_encrypted_with_pass(FILE, File.READ, KEY)
-		file.open(FILE, File.READ)
+		var __: int = file.open(FILE, File.READ)
 		var test = parse_json(file.get_as_text())
 		if test is Dictionary:
 			data = parse_json(file.get_as_text())

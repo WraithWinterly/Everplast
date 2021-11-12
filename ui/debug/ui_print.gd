@@ -4,7 +4,8 @@ var prev_label: Label = null
 
 
 func _ready() -> void:
-	UI.connect("screen_print", self, "_screen_print")
+	var __: int
+	__ = UI.connect("screen_print", self, "_screen_print")
 	pause_mode = PAUSE_MODE_PROCESS
 
 

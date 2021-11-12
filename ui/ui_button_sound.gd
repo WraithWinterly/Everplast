@@ -2,7 +2,8 @@ extends AudioStreamPlayer
 
 
 func _ready() -> void:
-	UI.connect("button_pressed", self, "_ui_button_pressed")
+	var __: int
+	__ = UI.connect("button_pressed", self, "_ui_button_pressed")
 
 
 func _ui_button_pressed(other_sound: bool = false) -> void:

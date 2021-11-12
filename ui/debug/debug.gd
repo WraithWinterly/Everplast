@@ -1,13 +1,10 @@
 extends Label
 
-onready var main: Control = get_tree().root.get_node("Main")
-
-
 func _ready() -> void:
 	hide()
 
 
-func _input(event: InputEvent) -> void:
+func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("debug"):
 		if visible:
 			hide()
@@ -18,7 +15,7 @@ func _input(event: InputEvent) -> void:
 
 func update() -> void:
 	text = "FPS: %s\n" % Engine.get_frames_per_second()
-	text += "%s\n" % main.version
+	text += "%s\n" % Globals.get_main().version
 	text += "Current Menu: %s\n" % UI.current_menu
 	text += "Last Menu: %s\n" % UI.last_menu
 	text += "UI Index: %s\n" % UI.profile_index

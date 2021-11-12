@@ -11,8 +11,9 @@ onready var sound: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
-	connect("body_entered", self, "_body_entered")
-	connect("body_exited", self, "_body_exited")
+	var __: int
+	__ = connect("body_entered", self, "_body_entered")
+	__ = connect("body_exited", self, "_body_exited")
 	show()
 
 

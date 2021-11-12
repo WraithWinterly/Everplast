@@ -7,7 +7,8 @@ onready var hurt_area: Area2D = get_node(hurt_area_path)
 
 
 func _ready() -> void:
-	hurt_area.connect("body_entered", self, "_hurt_area_body_entered")
+	var __: int
+	__ = hurt_area.connect("body_entered", self, "_hurt_area_body_entered")
 
 
 func _hurt_area_body_entered(body: Node) -> void:

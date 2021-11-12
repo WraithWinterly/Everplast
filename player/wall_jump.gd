@@ -8,7 +8,7 @@ onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("K
 onready var jump_sound: AudioStreamPlayer = get_parent().get_parent().get_node("JumpSound")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	player_body.basic_movement()
 	if player.falling:
 		fsm.change_state(fsm.fall)
@@ -38,8 +38,6 @@ func start():
 		player_body.linear_velocity.x -= wall_jump_force
 	jump_sound.play()
 	player_body.linear_velocity.y = 0
-	player_body.linear_velocity += player_body.get_floor_velocity()
+
 	player_body.air_time = 0
 	player_body.linear_velocity.y -= player_body.jump_speed
-
-	#yield(get_tree().create_timer(0.1), "timeout")

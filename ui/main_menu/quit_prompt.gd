@@ -6,10 +6,11 @@ onready var no_button: Button = $Panel/VBoxContainer/HBoxContainer/No
 
 
 func _ready() -> void:
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = no_button.connect("pressed", self, "_no_pressed")
+	__ = yes_button.connect("pressed", self, "_yes_pressed")
 	hide()
-	UI.connect("changed", self, "_ui_changed")
-	yes_button.connect("pressed", self, "_yes_pressed")
-	no_button.connect("pressed", self, "_no_pressed")
 
 
 func enable_buttons() -> void:

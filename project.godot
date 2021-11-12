@@ -64,9 +64,7 @@ FileLocations="*res://autoload/file_locations.gd"
 
 [debug]
 
-gdscript/warnings/unused_argument=false
 gdscript/warnings/unused_signal=false
-gdscript/warnings/return_value_discarded=false
 
 [display]
 

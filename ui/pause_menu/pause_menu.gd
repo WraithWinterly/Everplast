@@ -1,6 +1,6 @@
 extends Control
 
-onready var main: Main = get_tree().root.get_node("Main")
+
 onready var continue_button: Button = $PauseButtons/Continue
 onready var return_button: Button = $PauseButtons/Return
 onready var settings_button: Button = $PauseButtons/Settings
@@ -10,13 +10,15 @@ onready var level_label: Label = $LevelLabelCenter/LevelLabel
 onready var world_icons: VBoxContainer = $LevelLabelCenter/Control/WorldIcons
 onready var profile_label: Label = $PauseButtons/Profile
 
+
 func _ready() -> void:
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = Signals.connect("level_changed", self, "_level_changed")
+	__ = continue_button.connect("pressed", self, "_continue_pressed")
+	__ = settings_button.connect("pressed", self, "_settings_pressed")
+	__ = return_button.connect("pressed", self, "_return_pressed")
 	pause_mode = PAUSE_MODE_PROCESS
-	continue_button.connect("pressed", self, "_continue_pressed")
-	settings_button.connect("pressed", self, "_settings_pressed")
-	return_button.connect("pressed", self, "_return_pressed")
-	UI.connect("changed", self, "_ui_changed")
-	Signals.connect("level_changed", self, "_level_changed")
 	disable_buttons()
 	hide()
 	level_label.hide()
@@ -29,7 +31,7 @@ func _ui_changed(menu: int) -> void:
 				hide_menu()
 			elif UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
 				yield(UI, "faded")
-				hide_menu(false, true)
+				hide_menu(true)
 		UI.PAUSE_MENU:
 			if UI.last_menu == UI.NONE:
 				show_menu()
@@ -46,7 +48,7 @@ func _ui_changed(menu: int) -> void:
 			disable_buttons()
 		UI.MAIN_MENU:
 			if UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
-				hide_menu(false, true)
+				hide_menu(true)
 
 
 func show_menu() -> void:
@@ -75,8 +77,7 @@ func show_menu() -> void:
 	UI.menu_transitioning = false
 
 
-func hide_menu(unpause_game: bool = true, wait_for_fade: bool = false) -> void:
-	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+func hide_menu(wait_for_fade: bool = false) -> void:
 	UI.menu_transitioning = true
 	animation_player.play_backwards("pause")
 	disable_buttons()
@@ -124,4 +125,4 @@ func _level_changed(world: int, level: int) -> void:
 	yield(UI, "faded")
 	yield(get_tree(), "idle_frame")
 	level_label.show()
-	level_label.text = "%s - %s" % [main.world_names[world], level]
+	level_label.text = "%s - %s" % [Globals.get_main().world_names[world], level]

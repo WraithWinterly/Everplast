@@ -1,6 +1,5 @@
 extends Control
 
-onready var main: Main = get_tree().root.get_node("Main")
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var yes_button: Button = $Panel/VBoxContainer/HBoxContainer/Yes
 onready var no_button: Button = $Panel/VBoxContainer/HBoxContainer/No
@@ -8,10 +7,11 @@ onready var prompt_text: Label = $Panel/VBoxContainer/PromptText
 
 
 func _ready() -> void:
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = no_button.connect("pressed", self, "_no_pressed")
+	__ = yes_button.connect("pressed", self, "_yes_pressed")
 	hide()
-	UI.connect("changed", self, "_ui_changed")
-	yes_button.connect("pressed", self, "_yes_pressed")
-	no_button.connect("pressed", self, "_no_pressed")
 
 
 func enable_buttons() -> void:
@@ -29,7 +29,7 @@ func _ui_changed(menu: int) -> void:
 		UI.MAIN_MENU_QUICK_PLAY:
 			prompt_text.text = "Play Profile %s: %s - %s?" % [
 					QuickPlay.data.last_profile + 1,
-					main.world_names[\
+					Globals.get_main().world_names[\
 						PlayerStats.data[\
 						QuickPlay.data.last_profile].world_last],
 						(PlayerStats.data[\

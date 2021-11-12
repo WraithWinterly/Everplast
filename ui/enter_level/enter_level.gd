@@ -3,8 +3,7 @@ extends Control
 var enter_level: bool = false
 var allowed: bool = false
 
-onready var main: Main = get_tree().root.get_node("Main")
-onready var fade_player = main.get_node("FadePlayer")
+onready var fade_player = Globals.get_main().get_node("FadePlayer")
 onready var start_button: Button = $Panel/HBoxContainer/Start
 onready var back_button: Button = $Panel/HBoxContainer/Back
 onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -22,9 +21,10 @@ onready var gem_textures := [
 
 
 func _ready() -> void:
-	UI.connect("changed", self, "_ui_changed")
-	start_button.connect("pressed", self, "_start_pressed")
-	back_button.connect("pressed", self, "_back_pressed")
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = start_button.connect("pressed", self, "_start_pressed")
+	__ = back_button.connect("pressed", self, "_back_pressed")
 
 	hide()
 	for gem in gem_textures:
@@ -36,7 +36,7 @@ func show_menu() -> void:
 	enable_buttons()
 	get_tree().paused = true
 	anim_player.play("show")
-	label.text = "%s - %s" % [main.world_names[Globals.selected_world], Globals.selected_level]
+	label.text = "%s - %s" % [Globals.get_main().world_names[Globals.selected_world], Globals.selected_level]
 
 	allowed = false
 

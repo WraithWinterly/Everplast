@@ -2,7 +2,7 @@ extends Position2D
 
 
 func _ready() -> void:
-	Signals.connect("powerup_used", self, "_powerup_used")
+	var __: int = Signals.connect("powerup_used", self, "_powerup_used")
 
 
 func _powerup_used(item_name) -> void:

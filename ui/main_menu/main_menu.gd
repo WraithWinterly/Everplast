@@ -15,17 +15,19 @@ $ParallaxBackground/ParallaxLayer2, $ParallaxBackground/ParallaxLayer3]
 
 
 func _ready() -> void:
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = UI.connect("faded", self, "_ui_faded")
+	__ = play_button.connect("pressed", self, "_play_pressed")
+	__ = quick_play_button.connect("pressed", self, "_quick_play_pressed")
+	__ = settings_button.connect("pressed", self, "_on_settings_pressed")
+	__ = quit_button.connect("pressed", self, "_quit_pressed")
+
 	# Set camera perspective to be zoomed in
 	camera.current = true
 	yield(get_tree(), "idle_frame")
 	camera.current = false
 
-	play_button.connect("pressed", self, "_play_pressed")
-	quick_play_button.connect("pressed", self, "_quick_play_pressed")
-	settings_button.connect("pressed", self, "_on_settings_pressed")
-	quit_button.connect("pressed", self, "_quit_pressed")
-	UI.connect("changed", self, "_ui_changed")
-	UI.connect("faded", self, "_ui_faded")
 	play_button.grab_focus()
 	update_menu()
 
@@ -62,10 +64,10 @@ func _ui_changed(menu: int) -> void:
 		UI.PROFILE_SELECTOR, UI.NONE:
 			hide_menu()
 
-
-func _process(delta: float) -> void:
-	if Input.is_key_pressed(KEY_K):
-		update_menu()
+#
+#func _process(delta: float) -> void:
+#	if Input.is_key_pressed(KEY_K):
+#		update_menu()
 
 
 func _ui_faded() -> void:
@@ -107,20 +109,24 @@ func update_menu() -> void:
 
 
 func _play_pressed() -> void:
+	if UI.menu_transitioning: return
 	UI.emit_signal("button_pressed")
 	UI.emit_signal("changed", UI.PROFILE_SELECTOR)
 
 
 func _quick_play_pressed() -> void:
+	if UI.menu_transitioning: return
 	UI.emit_signal("button_pressed")
 	UI.emit_signal("changed", UI.MAIN_MENU_QUICK_PLAY)
 
 
 func _on_settings_pressed() -> void:
+	if UI.menu_transitioning: return
 	UI.emit_signal("button_pressed")
 	UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS)
 
 
 func _quit_pressed() -> void:
+	if UI.menu_transitioning: return
 	UI.emit_signal("button_pressed")
 	UI.emit_signal("changed", UI.MAIN_MENU_QUIT_PROMPT)

@@ -25,10 +25,11 @@ onready var rank_icons: VBoxContainer = $HBoxContainer/RankIcons
 
 
 func _ready() -> void:
-	connect("pressed", self, "button_pressed")
-	connect("focus_entered", self, "_focus_entered")
-	UI.connect("changed", self, "_ui_changed")
-	Signals.connect("profile_updated", self, "_profile_updated")
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = Signals.connect("profile_updated", self, "_profile_updated")
+	__ = connect("pressed", self, "button_pressed")
+	__ = connect("focus_entered", self, "_focus_entered")
 	update_buttons()
 
 

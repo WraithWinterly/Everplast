@@ -62,17 +62,17 @@ position = Vector2( 408, 272 )
 [node name="GreenSlime5" parent="." instance=ExtResource( 4 )]
 position = Vector2( 472, 272 )
 
+[node name="LevelEndTeleporter" parent="." instance=ExtResource( 6 )]
+position = Vector2( 768, 264 )
+
 [node name="GreenSlime6" parent="." instance=ExtResource( 4 )]
 position = Vector2( 456, 272 )
-
-[node name="LevelEndTeleporter" parent="GreenSlime6" instance=ExtResource( 6 )]
-position = Vector2( 360, -8 )
 
 [node name="GreenSlime2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 144, 272 )
 
 [node name="GreenSlime3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 216, 272 )
+position = Vector2( 208, 272 )
 
 [node name="Coin" parent="." instance=ExtResource( 7 )]
 position = Vector2( 592, 192 )

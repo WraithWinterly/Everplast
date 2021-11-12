@@ -530,7 +530,6 @@ margin_right = 97.0
 margin_bottom = 10.0
 mouse_filter = 0
 texture = ExtResource( 3 )
-stretch_mode = 3
 
 [node name="HealthLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 101.0
@@ -548,7 +547,6 @@ margin_right = 137.0
 margin_bottom = 10.0
 mouse_filter = 0
 texture = ExtResource( 1 )
-stretch_mode = 4
 
 [node name="CoinLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 141.0
@@ -565,7 +563,6 @@ margin_right = 165.0
 margin_bottom = 10.0
 mouse_filter = 0
 texture = ExtResource( 2 )
-stretch_mode = 4
 
 [node name="OrbLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 169.0
@@ -582,7 +579,6 @@ margin_right = 193.0
 margin_bottom = 10.0
 mouse_filter = 0
 texture = ExtResource( 5 )
-stretch_mode = 4
 
 [node name="AdrenalineLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 197.0

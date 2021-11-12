@@ -28,6 +28,7 @@ var music_database := [
 	[1, 1, 1, 1, 1, 1], # World 6
 ]
 
+
 func _ready() -> void:
 	pause_mode = PAUSE_MODE_PROCESS
 	add_child(audio_stream_player, true)
@@ -35,7 +36,7 @@ func _ready() -> void:
 	update_music()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	update_music()
 
 
@@ -51,10 +52,11 @@ func update_music() -> void:
 		Globals.GameStates.MENU:
 			new_stream_name = stream_paths[0]
 
+	if Globals.in_evil_mode:
+		new_stream_name = level_stream_paths[5]
+
 	if not new_stream_name == loaded_stream_name:
 		audio_stream_player.stream = load(new_stream_name)
 		loaded_stream_name = new_stream_name
 	if not audio_stream_player.playing:
 		audio_stream_player.play()
-
-

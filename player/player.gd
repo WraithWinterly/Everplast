@@ -24,17 +24,18 @@ onready var dash_failed_sound: AudioStreamPlayer = $DashFailedSound
 
 
 func _ready() -> void:
+	var __: int
+	__ = Signals.connect("start_player_death", self, "_start_player_death")
+	__ = Signals.connect("player_death", self, "_player_death")
+	__ = Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
+	__ = area_2d.connect("area_entered", self, "_area_entered")
+	__ = area_2d.connect("area_exited", self, "_area_exited")
 	Globals.death_in_progress = false
 	Globals.player_invincible = false
-	Signals.connect("start_player_death", self, "_start_player_death")
-	Signals.connect("player_death", self, "_player_death")
-	Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
-	area_2d.connect("area_entered", self, "_area_entered")
-	area_2d.connect("area_exited", self, "_area_exited")
 	LevelController.error_detection()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if kinematic_body.is_on_floor():
 		kinematic_body.second_jump_used = false
 
@@ -73,7 +74,7 @@ func stop_invincibility() -> void:
 	animated_sprite.modulate = Color(1, 1, 1, 1)
 
 
-func _player_hurt_from_enemy(hurt_type: int, knockback: int, damage: int):
+func _player_hurt_from_enemy(_hurt_type: int, _knockback: int, _damage: int):
 	if Globals.player_invincible: return;
 	if PlayerStats.get_stat("health") <= 0:
 		Signals.emit_signal("start_player_death")

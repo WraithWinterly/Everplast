@@ -9,7 +9,8 @@ onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 
 func _ready() -> void:
-	print(position)
+	var __: int
+	__ = connect("body_entered", self, "_body_entered")
 	show()
 	anim_player.play("normal")
 	match rank:
@@ -25,9 +26,8 @@ func _ready() -> void:
 			sprite.region_rect = Rect2(44, 0, 11, 13)
 		PlayerStats.Ranks.VOLCANO:
 			sprite.region_rect = Rect2(55, 0, 11, 13)
-	connect("body_entered", self, "_body_entered")
-	
-	
+
+
 func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		collision_shape.set_deferred("disabled", true)
@@ -36,5 +36,5 @@ func _body_entered(body: Node) -> void:
 		yield(anim_player, "animation_finished")
 		if rank > PlayerStats.get_stat("rank"):
 			PlayerStats.set_stat("rank", rank)
-			UI.emit_signal("show_notification", "Rank Upgraded to %s!" %  PlayerStats.ranks[rank].capitalize()) 
+			UI.emit_signal("show_notification", "Rank Upgraded to %s!" %  PlayerStats.ranks[rank].capitalize())
 			Signals.emit_signal("save")

@@ -9,7 +9,6 @@ export(Color, RGB) var color_world_4
 export(Color, RGB) var color_world_5
 export(Color, RGB) var color_world_6
 
-onready var main: Main = get_tree().root.get_node("Main")
 onready var fade_rect: ColorRect = $FadeRect
 onready var world_icons = $FadeRect/Control/HBoxContainer/Control/WorldIcons
 onready var label: Label = $FadeRect/Control/HBoxContainer/Label
@@ -18,15 +17,25 @@ onready var level_animation_player: AnimationPlayer = $FadeRect/Control/Animatio
 
 
 func _ready() -> void:
-	animation_player.connect("animation_finished", self, "_on_animation_finished")
-	Signals.connect("level_changed", self, "_level_changed")
-	Signals.connect("player_death", self, "_player_death")
-	Signals.connect("level_completed", self, "_level_completed")
-	UI.connect("changed", self, "_ui_changed")
-	Signals.connect("profile_deleted", self, "_profile_deleted")
-	Signals.connect("sublevel_changed", self, "_sublevel_changed")
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = Signals.connect("level_changed", self, "_level_changed")
+	__ = Signals.connect("player_death", self, "_player_death")
+	__ = Signals.connect("level_completed", self, "_level_completed")
+	__ = Signals.connect("profile_deleted", self, "_profile_deleted")
+	__ = Signals.connect("sublevel_changed", self, "_sublevel_changed")
+	__ = Signals.connect("erase_all_started", self, "_erase_all_started")
+	__ = Signals.connect("erase_all_canceled", self, "_erase_all_canceled")
+	__ = Signals.connect("debug_enable_started", self, "_debug_enable_started")
+	__ = Signals.connect("debug_enable_canceled", self, "_debug_enable_canceled")
+	__ = Signals.connect("debug_enable_confirmed", self, "_debug_enable_confirmed")
+	__ = animation_player.connect("animation_finished", self, "_on_animation_finished")
+	fade_rect.modulate = Color8(0, 0, 0, 255)
 	fade_rect.show()
+	get_tree().paused = true
 	play(true)
+	yield(get_tree().create_timer(1), "timeout")
+	get_tree().paused = false
 	animation_player.get_animation("fade").length = 0.6
 
 
@@ -73,7 +82,7 @@ func play(fade_out: bool) -> void:
 
 func _level_changed(world: int = 0, level: int = 0, _from_start: bool = false) -> void:
 	UI.menu_transitioning = true
-	label.text = "%s - %s" % [main.world_names[world], level]
+	label.text = "%s - %s" % [Globals.get_main().world_names[world], level]
 	for w_icon in world_icons.get_children():
 		if int(w_icon.name) == world:
 			world_icons.show()
@@ -95,7 +104,7 @@ func _level_changed(world: int = 0, level: int = 0, _from_start: bool = false) -
 			fade_rect.color = color_world_6
 		_:
 			fade_rect.color = color_world_error
-			label.text = "Not an official level: \"%s - %s\"" % [main.world_names[world], level]
+			label.text = "Not an official level: \"%s - %s\"" % [Globals.get_main().world_names[world], level]
 	level_animation_player.play("level")
 	animation_player.get_animation("fade").length = (1)
 	play(false)
@@ -155,3 +164,23 @@ func _world_selector_ready() -> void:
 
 func _level_completed() -> void:
 	transition()
+
+
+func _erase_all_started() -> void:
+	play(false)
+
+
+func _erase_all_canceled() -> void:
+	play(true)
+
+
+func _debug_enable_started() -> void:
+	play(false)
+
+
+func _debug_enable_canceled() -> void:
+	play(true)
+
+
+func _debug_enable_confirmed() -> void:
+	play(true)

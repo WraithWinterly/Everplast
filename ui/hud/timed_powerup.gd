@@ -10,15 +10,16 @@ onready var start_sound: AudioStreamPlayer = $StartSound
 onready var end_sound: AudioStreamPlayer = $EndSound
 
 func _ready() -> void:
-	UI.connect("changed", self, "_ui_changed")
-	Signals.connect("powerup_used", self, "_powerup_used")
-	Signals.connect("level_completed", self, "_level_completed")
-	Signals.connect("player_death", self, "_player_death")
-	timer.connect("timeout", self, "_timeout")
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = Signals.connect("powerup_used", self, "_powerup_used")
+	__ = Signals.connect("level_completed", self, "_level_completed")
+	__ = Signals.connect("player_death", self, "_player_death")
+	__ = timer.connect("timeout", self, "_timeout")
 	hide()
 
 
-func _physics_process(delta) -> void:
+func _physics_process(_delta) -> void:
 	if Globals.timed_powerup_active:
 		progress_bar.value = timer.time_left
 		time_left_label.text = str(int(timer.time_left) + 1)
@@ -60,7 +61,7 @@ func show_bar(item_name: String, time: int) -> void:
 	last_item_name = item_name
 	text = last_item_name.capitalize()
 	anim_player.play("show")
-	timer.start(5)
+	timer.start(time)
 	progress_bar.max_value = timer.time_left
 	Globals.timed_powerup_active = true
 

@@ -12,10 +12,11 @@ onready var attack_by_jump = enemy_component.get_node_or_null("HurtByJump")
 
 
 func _ready() -> void:
-	Signals.connect("player_invincibility_stopped", self, "_player_invincibility_stopped")
-	hit_area.connect("body_entered", self, "_hit_area_body_entered")
-	hit_area.connect("body_exited", self, "_hit_area_body_exited")
-	
+	var __: int
+	__ = Signals.connect("player_invincibility_stopped", self, "_player_invincibility_stopped")
+	__ = hit_area.connect("body_entered", self, "_hit_area_body_entered")
+	__ = hit_area.connect("body_exited", self, "_hit_area_body_exited")
+
 
 func _hit_area_body_entered(body: Node) -> void:
 	if enemy_component.dead: return
@@ -28,9 +29,9 @@ func _hit_area_body_entered(body: Node) -> void:
 			if body.fsm.current_state == body.fsm.dash:
 				return
 		if flying_enemy:
-			Signals.emit_signal("player_hurt_from_enemy", 
-					Globals.EnemyHurtTypes.NORMAL_AIR, 
-					enemy_component.knockback, 
+			Signals.emit_signal("player_hurt_from_enemy",
+					Globals.EnemyHurtTypes.NORMAL_AIR,
+					enemy_component.knockback,
 					enemy_component.damage)
 			enemy_component.hurt_player = true
 		else:

@@ -12,7 +12,8 @@ enum {
 var mode: int = COLLECT
 
 func _ready() -> void:
-	connect("body_entered", self, "_body_entered")
+	var __: int
+	__ = connect("body_entered", self, "_body_entered")
 	if mode == USE:
 		animation_player.play("used")
 		yield(animation_player, "animation_finished")

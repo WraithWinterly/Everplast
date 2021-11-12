@@ -54,27 +54,29 @@ var adrenaline_timer := Timer.new()
 
 
 func _ready() -> void:
-	UI.connect("changed", self, "_ui_changed")
-	Signals.connect("new_save_file", self, "_new_save_file")
-	Signals.connect("player_death", self, "_player_death")
-	Signals.connect("coin_collected", self, "_coin_collected")
-	Signals.connect("orb_collected", self, "_orb_collected")
-	Signals.connect("player_dashed", self, "_player_dashed")
-	Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
-	Signals.connect("save", self, "save_stats")
-	Signals.connect("profile_deleted", self, "_profile_deleted")
-	Signals.connect("profile_updated", self, "_profile_updated")
-	Signals.connect("level_changed", self, "_level_changed")
-	Signals.connect("powerup_used", self, "_powerup_used")
-	Signals.connect("equipped", self, "_equipped")
-	Signals.connect("gem_collected", self, "_gem_collected")
-	connect("level_up", self, "_level_up")
+	var __: int
+	__= UI.connect("changed", self, "_ui_changed")
+	__ = Signals.connect("new_save_file", self, "_new_save_file")
+	__ = Signals.connect("player_death", self, "_player_death")
+	__ = Signals.connect("coin_collected", self, "_coin_collected")
+	__ = Signals.connect("orb_collected", self, "_orb_collected")
+	__ = Signals.connect("player_dashed", self, "_player_dashed")
+	__ = Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
+	__ = Signals.connect("save", self, "save_stats")
+	__ = Signals.connect("profile_deleted", self, "_profile_deleted")
+	__ = Signals.connect("profile_updated", self, "_profile_updated")
+	__ = Signals.connect("level_changed", self, "_level_changed")
+	__ = Signals.connect("powerup_used", self, "_powerup_used")
+	__ = Signals.connect("equipped", self, "_equipped")
+	__ = Signals.connect("gem_collected", self, "_gem_collected")
+	__ = Signals.connect("erase_all_confirmed", self, "_erase_all_confirmed")
+	__ = adrenaline_timer.connect("timeout", self, "_timer_timeout")
+	__ = connect("level_up", self, "_level_up")
 	add_child(adrenaline_timer)
-	adrenaline_timer.connect("timeout", self, "_timer_timeout")
 	load_stats()
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if not Globals.game_state == Globals.GameStates.LEVEL: return
 	if get_stat("adrenaline") >= get_stat("adrenaline_max"):
 		adrenaline_timer.stop()
@@ -93,14 +95,13 @@ func _ui_changed(menu: int) -> void:
 			current_save_profile = UI.profile_index
 
 
-func save_stats(on_reset: bool = false) -> void:
+func save_stats(_on_reset: bool = false) -> void:
 	if Globals.game_state == Globals.GameStates.LEVEL:
 		set_stat("world_last", LevelController.current_world)
 		set_stat("level_last", LevelController.current_level)
-#		update_max_levels(LevelController.current_world, LevelController.current_level)
 	var file: File = File.new()
 	#file.open_encrypted_with_pass(FILE, File.WRITE, KEY)
-	file.open(FILE, File.WRITE)
+	var __ = file.open(FILE, File.WRITE)
 	file.store_string(to_json(data))
 	file.close()
 	load_stats()
@@ -182,7 +183,7 @@ func load_stats() -> void:
 	var file: File = File.new()
 	if file.file_exists(FILE):
 		#file.open_encrypted_with_pass(FILE, File.READ, KEY)
-		file.open(FILE, File.READ)
+		var __ = file.open(FILE, File.READ)
 		var loaded_data
 		var test = parse_json(file.get_as_text())
 		if test is Array:
@@ -275,7 +276,7 @@ func _player_dashed() -> void:
 		emit_signal("stat_updated")
 
 
-func _player_hurt_from_enemy(hurt_type: int, knockback, damage) -> void:
+func _player_hurt_from_enemy(_hurt_type: int, _knockback, damage) -> void:
 	if not Globals.player_invincible:
 		var health: int = get_stat("health")
 		set_health(health - damage)
@@ -353,3 +354,8 @@ func _gem_collected(index: int) -> void:
 		gem_dict[str(LevelController.current_world)][str(LevelController.current_level)] = [false, false, false]
 		gem_dict[str(LevelController.current_world)][str(LevelController.current_level)][index] = true
 	set_stat("gems", gem_dict)
+
+
+func _erase_all_confirmed() -> void:
+	data = [{}, {}, {}, {}, {}]
+	save_stats()

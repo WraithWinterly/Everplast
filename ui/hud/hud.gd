@@ -15,18 +15,19 @@ onready var gem_container: HBoxContainer = $GenContainer
 
 
 func _ready() -> void:
-	UI.connect("changed", self, "_ui_changed")
-	PlayerStats.connect("stat_updated", self, "update_counters")
-	Signals.connect("level_completed", self, "_level_completed")
-	Signals.connect("level_changed", self, "_level_changed")
-	Signals.connect("coin_collected", self, "update_coin_counter")
-	Signals.connect("orb_collected", self, "update_orb_counter")
-	Signals.connect("player_death", self, "_player_death")
-	Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
-	Signals.connect("adrenaline_updated", self, "update_counters")
-	Signals.connect("powerup_used", self, "_powerup_used")
-	Signals.connect("inventory_changed", self, "_inventory_changed")
-	Signals.connect("gem_collected", self, "_gem_collected")
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = PlayerStats.connect("stat_updated", self, "update_counters")
+	__ = Signals.connect("level_completed", self, "_level_completed")
+	__ = Signals.connect("level_changed", self, "_level_changed")
+	__ = Signals.connect("coin_collected", self, "update_coin_counter")
+	__ = Signals.connect("orb_collected", self, "update_orb_counter")
+	__ = Signals.connect("player_death", self, "_player_death")
+	__ = Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
+	__ = Signals.connect("adrenaline_updated", self, "update_counters")
+	__ = Signals.connect("powerup_used", self, "_powerup_used")
+	__ = Signals.connect("inventory_changed", self, "_inventory_changed")
+	__ = Signals.connect("gem_collected", self, "_gem_collected")
 	hide()
 	for gem in gem_textures:
 		gem.hide()
@@ -39,9 +40,6 @@ func show_hud() -> void:
 
 func hide_hud() -> void:
 	animation_player.play_backwards("show")
-	yield(animation_player, "animation_finished")
-	if not animation_player.is_playing():
-		hide()
 
 
 func update_visibility() -> void:
@@ -104,11 +102,13 @@ func update_counters() -> void:
 			index += 1
 	else:
 		gem_container.hide()
-func update_coin_counter(amount: int = 0) -> void:
+
+
+func update_coin_counter(_amount: int = 0) -> void:
 	coin_label.text = str(PlayerStats.get_stat("coins"))
 
 
-func update_orb_counter(amount: int = 0) -> void:
+func update_orb_counter(_amount: int = 0) -> void:
 	orb_label.text = str(PlayerStats.get_stat("orbs"))
 
 
@@ -142,13 +142,14 @@ func _ui_changed(menu: int) -> void:
 				hide()
 
 
-func _level_changed(world: int, level: int) -> void:
+func _level_changed(_world: int, _level: int) -> void:
 	hide()
 	yield(UI, "faded")
 	#update_visibility()
 	update_counters()
 	yield(UI, "faded")
 	yield(get_tree(), "physics_frame")
+	update_counters()
 	show_hud()
 
 
@@ -164,7 +165,7 @@ func _player_death() -> void:
 	update_counters()
 
 
-func _powerup_used(item_name: String) -> void:
+func _powerup_used(_item_name: String) -> void:
 	yield(get_tree(), "physics_frame")
 	update_counters()
 
@@ -173,5 +174,5 @@ func _player_hurt_from_enemy(var _hurt_type: int, var _knockback: int, var _dama
 	update_counters()
 
 
-func _gem_collected(index: int) -> void:
+func _gem_collected(_index: int) -> void:
 	update_counters()

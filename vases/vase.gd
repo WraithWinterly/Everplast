@@ -18,7 +18,8 @@ onready var sprite: Sprite = $Sprite
 onready var static_body_coll_shape: CollisionShape2D = $StaticBody2D/CollisionShape2D
 
 func _ready() -> void:
-	connect("body_entered", self, "_body_entered")
+	var __: int
+	__ = connect("body_entered", self, "_body_entered")
 	if type == Types.BULLLET:
 		sprite.texture = load(FileLocations.vase_bullet)
 

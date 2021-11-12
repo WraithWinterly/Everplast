@@ -19,16 +19,16 @@ onready var text_sound: AudioStreamPlayer = $Text
 
 
 func _ready() -> void:
-	UI.connect("changed", self, "_ui_changed")
-	Signals.connect("dialog", self, "_dialog")
-	Signals.connect("level_changed", self, "_level_changed")
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = Signals.connect("dialog", self, "_dialog")
+	__ = Signals.connect("level_changed", self, "_level_changed")
 	hide()
 	header.hide()
 	pointer.hide()
 
 func _level_changed(_world: int, _level: int) -> void:
 	close_dialog()
-
 	hide()
 
 func _ui_changed(menu: int) -> void:
@@ -37,11 +37,13 @@ func _ui_changed(menu: int) -> void:
 	if menu == UI.MAIN_MENU and visible:
 		close_dialog()
 
-func lol() -> void:
-	Signals.emit_signal("level_changed", 2, 1)
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_jump") and UI.current_menu == UI.NONE:
+		if Globals.dialog_active and can_next_dialog:
+			next_dialog()
+	elif event is InputEventScreenTouch and UI.current_menu == UI.NONE:
 		if Globals.dialog_active and can_next_dialog:
 			next_dialog()
 
@@ -72,6 +74,7 @@ func show_dialog() -> void:
 
 
 func close_dialog() -> void:
+	Signals.emit_signal("dialog_hidden")
 	dialog_index = 0
 	if Globals.dialog_active == false:
 		return

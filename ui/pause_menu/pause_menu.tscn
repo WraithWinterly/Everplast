@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ui/pause_menu/return_prompt.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/fonts/96x.tres" type="DynamicFont" id=10]
+[ext_resource path="res://ui/social_plug/social_plug.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui/pause_menu/profile.gd" type="Script" id=12]
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -275,6 +277,9 @@ focus_previous = NodePath("../SelectWorld")
 custom_fonts/font = ExtResource( 6 )
 text = "Profile 1"
 align = 1
+script = ExtResource( 12 )
 
 [node name="ReturnToMenuPrompt" parent="." instance=ExtResource( 9 )]
 visible = false
+
+[node name="SocialPlug" parent="." instance=ExtResource( 11 )]

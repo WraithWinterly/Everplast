@@ -1,6 +1,5 @@
 extends Area2D
 
-
 export var index: int = 0
 
 var collected: bool = false
@@ -11,8 +10,9 @@ onready var sound: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
+	var __: int
+	__ = connect("body_entered", self, "_body_entered")
 	index = int(clamp(index, 0, 2))
-	connect("body_entered", self, "_body_entered")
 	var gem_dict: Dictionary = PlayerStats.get_stat("gems")
 	if gem_dict.has(str(LevelController.current_world)):
 		if gem_dict[str(LevelController.current_world)].has(str(LevelController.current_level)):

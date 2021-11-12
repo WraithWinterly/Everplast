@@ -13,21 +13,20 @@ var level_database: Array = [
 
 var level_sound := AudioStreamPlayer.new()
 
-onready var main: Main = get_tree().root.get_node("Main")
-
 
 func _ready() -> void:
+	var __: int
+	__ = UI.connect("faded", self, "error_detection")
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = Signals.connect("checkpoint_activated", self, "_checkpoint_activated")
+	__ = Signals.connect("level_changed", self, "_level_changed")
+	__ = Signals.connect("level_change_attempted", self, "_level_change_attempted")
+	__ = Signals.connect("player_death", self, "_player_death")
+	__ = Signals.connect("level_completed", self, "_level_completed")
 	level_sound.bus = "Audio"
 	level_sound.stream = load(FileLocations.level_enter_sound)
 	add_child(level_sound)
 	pause_mode = PAUSE_MODE_PROCESS
-	UI.connect("faded", self, "error_detection")
-	UI.connect("changed", self, "_ui_changed")
-	Signals.connect("checkpoint_activated", self, "_checkpoint_activated")
-	Signals.connect("level_changed", self, "_level_changed")
-	Signals.connect("level_change_attempted", self, "_level_change_attempted")
-	Signals.connect("player_death", self, "_player_death")
-	Signals.connect("level_completed", self, "_level_completed")
 	var prev_level = get_node_or_null("/root/Main/Level")
 	if not prev_level == null: prev_level.call_deferred("free")
 
@@ -46,16 +45,16 @@ func reset_checkpoint() -> void:
 
 func error_detection() -> void:
 	var in_world_selector: bool = false
-	for node in main.level_holder.get_children():
+	for node in Globals.get_main().get_node("LevelHolder").get_children():
 		if node.name == "WorldSelector":
 			in_world_selector = true
 			continue
 	if in_world_selector:
-		for node in main.level_holder.get_children():
+		for node in Globals.get_main().level_holder.get_children():
 			if not node.name == "WorldSelector":
 				node.queue_free()
 	else:
-		for node in main.level_holder.get_children():
+		for node in Globals.get_main().level_holder.get_children():
 			if not node.name == "Level":
 				node.queue_free()
 
@@ -69,7 +68,7 @@ func replace_scenes(world: int, level: int) -> void:
 #		% [world, level])
 	var new_level: PackedScene = load(FileLocations.get_level(world, level))
 	# If you crashed here you tried to load a level that doesn't exist
-	main.level_holder.call_deferred("add_child", new_level.instance(), true)
+	Globals.get_main().level_holder.call_deferred("add_child", new_level.instance(), true)
 	error_detection()
 
 
@@ -78,10 +77,10 @@ func world_selector_load() -> void:
 	LevelController.current_world = -1
 	LevelController.current_level = -1
 	Globals.game_state = Globals.GameStates.WORLD_SELECTOR
-	if main.level_holder.get_children().size() > 0:
+	if Globals.get_main().get_node("LevelHolder").get_children().size() > 0:
 		get_node(Globals.level_path).call_deferred("free")
 	var world_selector: PackedScene = load(FileLocations.world_selector)
-	main.level_holder.call_deferred("add_child", world_selector.instance(), true)
+	Globals.get_main().level_holder.call_deferred("add_child", world_selector.instance(), true)
 	error_detection()
 	get_tree().paused = false
 	PlayerStats.emit_signal("stat_updated")

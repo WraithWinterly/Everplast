@@ -24,8 +24,9 @@ onready var fsm: Node = get_parent().get_parent().get_node("FSM")
 
 
 func _ready() -> void:
-	Signals.connect("sublevel_changed", self, "_sublevel_changed")
-	fsm.connect("state_changed", self, "_state_changed")
+	var __: int
+	__ = Signals.connect("sublevel_changed", self, "_sublevel_changed")
+	__ = fsm.connect("state_changed", self, "_state_changed")
 	randomize()
 	noise.seed = randi()
 	noise.period = 4
@@ -46,7 +47,7 @@ func _process(delta) -> void:
 		shake()
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	zoom = lerp(zoom, current_zoom, 0.15)
 	if player.sprinting:
 		current_zoom = sprint_zoom

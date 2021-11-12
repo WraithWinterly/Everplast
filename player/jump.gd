@@ -6,7 +6,7 @@ onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("K
 onready var jump_sound: AudioStreamPlayer = get_parent().get_parent().get_node("JumpSound")
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	attempt_correction(3)
 	player_body.basic_movement()
 	if player.falling:
@@ -21,9 +21,8 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_jump") \
 			and player_body.can_second_jump():
 		player_body.second_jump_used = true
-		player_body.linear_velocity.y = 0
 		player_body.air_time = 0
-		player_body.linear_velocity.y -= player_body.jump_speed
+		player_body.linear_velocity.y = -player_body.jump_speed
 	elif event.is_action_pressed("move_dash"):
 		if player_body.can_dash():
 			fsm.change_state(fsm.dash)
@@ -50,8 +49,5 @@ func attempt_correction(amount: int):
 
 func start() -> void:
 	jump_sound.play()
-	player_body.linear_velocity.y = 0
-	player_body.linear_velocity += player_body.get_floor_velocity()
 	player_body.air_time = 0
-	player_body.linear_velocity.y -= player_body.jump_speed
-	#yield(get_tree().create_timer(0.1), "timeout")
+	player_body.linear_velocity.y = -player_body.jump_speed

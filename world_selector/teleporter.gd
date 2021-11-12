@@ -10,8 +10,9 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
-	connect("body_entered", self, "_body_entered")
-	connect("body_exited", self, "_body_exited")
+	var __: int
+	__ = connect("body_entered", self, "_body_entered")
+	__ = connect("body_exited", self, "_body_exited")
 	show()
 	if PlayerStats.get_stat("world_max") >= world:
 		if PlayerStats.get_stat("world_max") == world:

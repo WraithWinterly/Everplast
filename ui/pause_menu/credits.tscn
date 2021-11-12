@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://ui/pause_menu/credits.gd" type="Script" id=1]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=8]
 [ext_resource path="res://ui/ui_background.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=10]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -126,9 +127,9 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.05
-anchor_top = 1.0
+anchor_top = 0.1
 anchor_right = 0.95
-anchor_bottom = 1.0
+anchor_bottom = 0.9
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
 custom_styles/panel = ExtResource( 7 )
 __meta__ = {
@@ -164,31 +165,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Explanation" type="Panel" parent="Panel"]
+[node name="Copyright" type="TextEdit" parent="Panel"]
 anchor_left = 0.05
 anchor_top = 0.187
 anchor_right = 0.95
-anchor_bottom = 0.806
-custom_styles/panel = ExtResource( 9 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="Panel/Explanation"]
-anchor_left = 0.01
-anchor_top = 0.04
-anchor_right = 0.99
-anchor_bottom = 1.0
-mouse_filter = 0
-custom_fonts/font = ExtResource( 8 )
-text = "Primary Developer:
-WraithWinterly
-
-Godot Engine
-Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur.
-Copyright (c) 2014-2021 Godot Engine contributors.
--- Godot Engine <https://godotengine.org>"
-autowrap = true
+anchor_bottom = 0.8
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Return")
+focus_next = NodePath("../Return")
+focus_previous = NodePath("../Return")
+mouse_default_cursor_shape = 6
+custom_colors/font_color_readonly = Color( 1, 1, 1, 1 )
+custom_fonts/font = ExtResource( 10 )
+custom_styles/read_only = ExtResource( 9 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/normal = ExtResource( 9 )
+readonly = true
+highlight_current_line = true
+show_line_numbers = true
+smooth_scrolling = true
+wrap_enabled = true
+caret_blink = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -199,11 +198,11 @@ anchor_top = 0.85
 anchor_right = 0.95
 anchor_bottom = 0.871
 focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath("../Yes")
+focus_neighbour_top = NodePath("../Copyright")
+focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath("../Yes")
-focus_previous = NodePath("../Yes")
+focus_next = NodePath(".")
+focus_previous = NodePath(".")
 custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 2 )
 custom_styles/pressed = ExtResource( 3 )

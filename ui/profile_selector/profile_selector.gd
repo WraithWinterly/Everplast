@@ -10,13 +10,14 @@ onready var profile_buttons = get_node("Panel/VBoxContainer/ProfileButtons").get
 
 
 func _ready() -> void:
-	animation_player.connect("animation_finished", self, "_animation_finished")
-	return_button.connect("pressed", self, "_return_pressed")
-	manage_button.connect("pressed", self, "_manage_pressed")
-	UI.connect("changed", self, "_ui_changed")
-	UI.connect("profile_focus_index_changed", self, "_ui_profile_focus_index_changed")
-	Signals.connect("profile_deleted", self, "_profile_deleted")
-	update_manage_button()
+	var __: int
+	__ = UI.connect("changed", self, "_ui_changed")
+	__ = UI.connect("profile_focus_index_changed", self, "_ui_profile_focus_index_changed")
+	__ = Signals.connect("profile_deleted", self, "_profile_deleted")
+	__ = animation_player.connect("animation_finished", self, "_animation_finished")
+	__ = return_button.connect("pressed", self, "_return_pressed")
+	__ = manage_button.connect("pressed", self, "_manage_pressed")
+	__ = update_manage_button()
 	hide()
 
 
@@ -35,7 +36,7 @@ func _ui_changed(menu: int) -> void:
 				yield(UI, "faded")
 				show()
 				enable_buttons()
-				update_manage_button()
+				var __: int = update_manage_button()
 				animation_player.play("show")
 				UI.menu_transitioning = false
 			elif UI.last_menu == UI.PROFILE_SELECTOR_DELETE:
@@ -43,7 +44,7 @@ func _ui_changed(menu: int) -> void:
 				UI.menu_transitioning = true
 				animation_player.play_backwards("show")
 				yield(animation_player, "animation_finished")
-				update_manage_button()
+				var __: int = update_manage_button()
 				label.text = "Select a Profile..."
 				animation_player.play("show")
 				return_button.text = "Return to Main Menu"
@@ -66,7 +67,7 @@ func _ui_changed(menu: int) -> void:
 				disable_buttons()
 				UI.menu_transitioning = true
 				animation_player.play_backwards("show")
-				update_manage_button()
+				var __: int = update_manage_button()
 				yield(animation_player, "animation_finished")
 				label.text = "Manage Profiles..."
 				animation_player.play("show")

@@ -27,7 +27,9 @@ signal powerup_ended(item_name)
 signal collectable_collected(item_name)
 signal equipable_collected(item_name)
 signal springboard_used(amount)
+signal settings_updated()
 
+signal dialog_hidden()
 signal profile_deleted()
 signal profile_updated()
 signal world_selector_ready()
@@ -36,6 +38,13 @@ signal checkpoint_activated()
 signal save()
 signal new_save_file(index)
 signal dialog(content, person, func_call)
+signal erase_all_started()
+signal erase_all_canceled()
+signal erase_all_confirmed()
+signal debug_enable_started()
+signal debug_enable_canceled()
+signal debug_enable_confirmed()
+
 
 # Errors
 signal error_level_changed()

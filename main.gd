@@ -10,8 +10,6 @@ var version: String = ""
 
 onready var level_holder: Node2D = $LevelHolder
 onready var main_menu: Control = $GUI/MainMenu
-onready var ts_buttons: Control = $GUI/TSButtons
-onready var hud: Control = $GUI/HUD
 onready var pause_menu: Control = $GUI/PauseMenu
 
 
@@ -42,30 +40,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	VisualServer.set_default_clear_color(Color(0, 0, 0, 0))
 	OS.min_window_size = Vector2(1280, 720)
-	UI.connect("changed", self, "_ui_changed")
-	ts_buttons.hide()
-	pause_menu.hide()
 
 
-func _ui_changed(menu: int) -> void:
-	match menu:
-		UI.MAIN_MENU:
-			if UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
-				yield(UI, "faded")
-				ts_buttons.hide()
 
-
-func _level_changed(_world: int, _level: int) -> void:
-	yield(UI, "faded")
-	ts_buttons.show()
-
-
-func _game_paused() -> void:
-	if Globals.is_mobile:
-		ts_buttons.hide()
-
-
-func _game_unpaused() -> void:
-	if Globals.is_mobile:
-		ts_buttons.show()
 

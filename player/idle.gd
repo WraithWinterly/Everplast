@@ -5,13 +5,13 @@ onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("K
 onready var fsm = get_parent()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not Main.get_action_strength_keyboard() == 0 or \
 			not Main.get_action_strength_controller() == 0:
 		fsm.change_state(fsm.walk)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	player_body.basic_movement()
 
 

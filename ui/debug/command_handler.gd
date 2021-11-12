@@ -17,6 +17,8 @@ const valid_commands: Array = [
 	["get_stat", [ARG_STRING]],
 	["get_stats"],
 	["get_stats_raw"],
+	["get_settings"],
+	["get_settings_raw"],
 	["clear"],
 	["kill"],
 	["save"],
@@ -75,7 +77,7 @@ func get_stat(stat: String) -> String:
 func get_stats() -> String:
 	var stats_string: String = "Save Data:\n"
 	var data = PlayerStats.data
-	
+
 	var index: int = 0
 	for dict in data:
 		stats_string += "Profile %s:\n" % (index + 1)
@@ -83,7 +85,22 @@ func get_stats() -> String:
 			stats_string += "     %s: %s\n" % [stats, data[index][stats]]
 		index += 1
 	return stats_string
-		
+
+
+func get_settings() -> String:
+	var string: String = "Settings:\n"
+	for key in Globals.get_settings().data.keys():
+		var new_str: String = key
+		new_str = new_str.replace("_", " ")
+		new_str = new_str.capitalize()
+		string += "     %s: " % new_str
+		string += "%s\n" % Globals.get_settings().data[key]
+	return string
+
+
+func get_settings_raw() -> String:
+	return str(Globals.get_settings().data)
+
 
 func get_stats_raw() -> String:
 	return str(PlayerStats.data)
@@ -119,7 +136,7 @@ func help() -> String:
 				help_string += " <%s>" % get_enum_name(parameter)
 		if not index == valid_commands.size() - 1:
 			help_string += "\n"
-			index += 1 
+			index += 1
 
 	return help_string
 

@@ -14,7 +14,8 @@ onready var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravi
 
 
 func _ready() -> void:
-	area.connect("body_entered", self, "_body_entered")
+	var __: int
+	__ = area.connect("body_entered", self, "_body_entered")
 
 
 func _physics_process(delta: float) -> void:

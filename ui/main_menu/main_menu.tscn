@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ui/main_menu/quit_prompt.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/main_menu/quick_play_prompt.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=13]
+[ext_resource path="res://ui/social_plug/social_plug.tscn" type="PackedScene" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0.564706, 0.513726, 1 )
@@ -168,7 +169,6 @@ margin_right = 58.0
 margin_bottom = 26.0
 
 [node name="Texture" type="Sprite" parent="Title/Label"]
-scale = Vector2( 1, 1 )
 texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Title/Label/Texture"]
@@ -285,8 +285,8 @@ visible = false
 visible = false
 
 [node name="Version" type="Label" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_right = 0.99
+anchor_bottom = 0.99
 custom_fonts/font = ExtResource( 13 )
 text = "Version"
 align = 2
@@ -295,3 +295,5 @@ script = ExtResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="SocialPlug" parent="." instance=ExtResource( 14 )]

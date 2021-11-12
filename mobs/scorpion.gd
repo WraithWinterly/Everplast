@@ -5,8 +5,9 @@ onready var particles: Particles2D = $Particles2D
 
 
 func _ready() -> void:
-	enemy_component.connect("died", self, "_died")
-	enemy_component.connect("hit", self, "_hit")
+	var __: int
+	__ = enemy_component.connect("died", self, "_died")
+	__ = enemy_component.connect("hit", self, "_hit")
 
 
 func _died() -> void:

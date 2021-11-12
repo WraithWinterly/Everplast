@@ -4,16 +4,25 @@ enum {
 	MAIN_MENU,
 	MAIN_MENU_QUICK_PLAY,
 	MAIN_MENU_SETTINGS,
+	MAIN_MENU_SETTINGS_GENERAL,
+	MAIN_MENU_SETTINGS_GRAPHICS,
+	MAIN_MENU_SETTINGS_OTHER,
 	MAIN_MENU_SETTINGS_CONTROLS,
 	MAIN_MENU_SETTINGS_CREDITS,
+	MAIN_MENU_SETTINGS_ERASE_PROMPT,
+	MAIN_MENU_SETTINGS_ERASE_PROMPT_EVIL,
+	MAIN_MENU_SETTINGS_DEBUG_ENABLE_PROMPT,
+	MAIN_MENU_SETTINGS_DEBUG_ENABLE_EVIL_PROMPT,
 	MAIN_MENU_QUIT_PROMPT,
 	PROFILE_SELECTOR,
 	PROFILE_SELECTOR_DELETE,
 	PROFILE_SELECTOR_UPDATE_PROMPT,
 	PROFILE_SELECTOR_DELETE_PROMPT,
 	PAUSE_MENU,
-	PAUSE_MENU_SETTINGS_CONTROLS,
 	PAUSE_MENU_SETTINGS,
+	PAUSE_MENU_SETTINGS_GENERAL,
+	PAUSE_MENU_SETTINGS_GRAPHICS,
+	PAUSE_MENU_SETTINGS_CONTROLS,
 	PAUSE_MENU_SETTINGS_CREDITS,
 	PAUSE_MENU_RETURN_PROMPT,
 	WORLD_SELECTOR_LEVEL_ENTER,
@@ -39,9 +48,10 @@ var prompt_no: bool = true
 
 
 func _ready() -> void:
+	var __: int
+	__ = Signals.connect("level_changed", self, "_level_changed")
+	__ = connect("changed", self, "_changed")
 	pause_mode = PAUSE_MODE_PROCESS
-	connect("changed", self, "_changed")
-	Signals.connect("level_changed", self, "_level_changed")
 
 
 func _input(event: InputEvent) -> void:
@@ -67,11 +77,24 @@ func _input(event: InputEvent) -> void:
 			MAIN_MENU_SETTINGS:
 				emit_signal("changed", MAIN_MENU)
 				emit_signal("button_pressed", true)
-			MAIN_MENU_SETTINGS_CONTROLS:
+			MAIN_MENU_SETTINGS_GENERAL, MAIN_MENU_SETTINGS_GRAPHICS, \
+			MAIN_MENU_SETTINGS_CONTROLS, MAIN_MENU_SETTINGS_OTHER:
 				emit_signal("changed", MAIN_MENU_SETTINGS)
 				emit_signal("button_pressed", true)
+			MAIN_MENU_SETTINGS_ERASE_PROMPT:
+				emit_signal("changed", MAIN_MENU_SETTINGS_OTHER)
+				emit_signal("button_pressed", true)
+			MAIN_MENU_SETTINGS_ERASE_PROMPT_EVIL:
+				emit_signal("changed", MAIN_MENU_SETTINGS_OTHER)
+				emit_signal("button_pressed", true)
+			MAIN_MENU_SETTINGS_DEBUG_ENABLE_PROMPT:
+				emit_signal("changed", MAIN_MENU_SETTINGS_OTHER)
+				emit_signal("button_pressed", true)
+			MAIN_MENU_SETTINGS_DEBUG_ENABLE_EVIL_PROMPT:
+				emit_signal("changed", MAIN_MENU_SETTINGS_OTHER)
+				emit_signal("button_pressed", true)
 			MAIN_MENU_SETTINGS_CREDITS:
-				emit_signal("changed", MAIN_MENU_SETTINGS)
+				emit_signal("changed", MAIN_MENU_SETTINGS_GENERAL)
 				emit_signal("button_pressed", true)
 			MAIN_MENU_QUIT_PROMPT:
 				emit_signal("changed", MAIN_MENU)
@@ -85,11 +108,12 @@ func _input(event: InputEvent) -> void:
 			PAUSE_MENU_SETTINGS:
 				emit_signal("changed", PAUSE_MENU)
 				emit_signal("button_pressed", true)
+			PAUSE_MENU_SETTINGS_GENERAL, PAUSE_MENU_SETTINGS_GRAPHICS, \
 			PAUSE_MENU_SETTINGS_CONTROLS:
 				emit_signal("changed", PAUSE_MENU_SETTINGS)
 				emit_signal("button_pressed", true)
 			PAUSE_MENU_SETTINGS_CREDITS:
-				emit_signal("changed", PAUSE_MENU_SETTINGS)
+				emit_signal("changed", PAUSE_MENU_SETTINGS_GENERAL)
 				emit_signal("button_pressed", true)
 			PROFILE_SELECTOR:
 				emit_signal("changed", MAIN_MENU)

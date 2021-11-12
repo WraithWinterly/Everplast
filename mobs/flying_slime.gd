@@ -7,9 +7,10 @@ onready var anim_sprite: AnimatedSprite = $EnemyComponentManager/SpriteHolder/An
 
 
 func _ready() -> void:
-	enemy_component.connect("hit", self, "_hit")
-	
-	
+	var __: int
+	__ = enemy_component.connect("hit", self, "_hit")
+
+
 func _hit() -> void:
 	if fly_movement.state == fly_movement.States.FLY:
 		fly_movement.state = fly_movement.States.NORMAL

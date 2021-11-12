@@ -21,9 +21,10 @@ onready var audio_player: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
-	connect("body_entered", self, "_body_entered")
-	connect("body_exited", self, "_body_exited")
-	Signals.connect("sublevel_changed", self, "_sublevel_changed")
+	var __: int
+	__ = Signals.connect("sublevel_changed", self, "_sublevel_changed")
+	__ = connect("body_entered", self, "_body_entered")
+	__ = connect("body_exited", self, "_body_exited")
 	show()
 
 

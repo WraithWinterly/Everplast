@@ -5,7 +5,7 @@ onready var player: Player = get_parent().get_parent()
 onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("KinematicBody2D")
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 #	if not Main.get_action_strength() == 0 or \
 #			not Main.get_action_strength().y == 0:
 #		set_input_speed()
@@ -39,7 +39,7 @@ func set_input_speed() -> void:
 	player_body.current_speed = player_body.water_speed
 
 
-func sprint_and_jump(delta: float) -> void:
+func sprint_and_jump(_delta: float) -> void:
 	if Input.is_action_just_pressed("move_jump"):
 		player_body.air_time = 0
 		player_body.linear_velocity.y = -player_body.water_jump_speed

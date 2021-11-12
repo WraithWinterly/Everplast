@@ -5,7 +5,7 @@ onready var player: Player = get_parent().get_parent()
 onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("KinematicBody2D")
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Main.get_action_strength_keyboard() == 0 and \
 			Main.get_action_strength_controller() == 0:
 		fsm.change_state(fsm.idle)
@@ -13,7 +13,7 @@ func _process(delta: float) -> void:
 		fsm.change_state(fsm.fall)
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	player_body.basic_movement()
 	if Input.is_action_pressed("move_sprint") and player_body.is_on_floor():
 		fsm.change_state(fsm.sprint)

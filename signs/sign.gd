@@ -11,9 +11,10 @@ onready var label: Label = $Sprite/Label
 
 
 func _ready() -> void:
+	var __: int
+	__ = Signals.connect("level_changed", self, "_level_changed")
 	with_player = false
 	sprite.frame = int(clamp(LevelController.current_world - 1, 0, INF))
-	Signals.connect("level_changed", self, "_level_changed")
 	label.hide()
 
 

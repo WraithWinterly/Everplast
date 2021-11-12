@@ -16,17 +16,28 @@ onready var particles_reverse: Particles2D = $Particles2DReverse
 
 
 func _ready() -> void:
-	Signals.connect("start_player_death", self, "_start_player_death")
-	fsm.connect("state_changed", self, "_state_changed")
+	var __: int
+	__ = Signals.connect("start_player_death", self, "_start_player_death")
+	__ = fsm.connect("state_changed", self, "_state_changed")
 	particles.emitting = false
 	particles_reverse.emitting = false
 	modulate = Color8(255, 255, 255, 255)
 	position = Vector2(0, 0)
 	visible = true
 	rotation_degrees = 0
+	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+		hide()
+		fsm.current_state = fsm.idle
+		fsm.enabled = false
+		#yield(UI, "faded")
+		$AnimationPlayer.play("spawn")
+		yield(get_tree(), "physics_frame")
+		show()
+		$SpawnSound.play()
+		fsm.enabled = true
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	match fsm.current_state:
 		fsm.idle:
 			animation = "idle"

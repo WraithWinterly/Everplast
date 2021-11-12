@@ -21,36 +21,52 @@ onready var timer: Timer = $Timer
 
 
 func _ready() -> void:
-	connect("body_entered", self, "_body_entered")
+	var __: int
+	__ = connect("body_entered", self, "_body_entered")
 	if mode == USE:
 		$Sprite.rotation_degrees = 0
-		get_parent().get_parent().connect("direction_changed", self, "_direction_changed")
+		__ = get_parent().get_parent().connect("direction_changed", self, "_direction_changed")
 	elif mode == COLLECT:
 		rotation_degrees = 23.2
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if mode == USE:
 		if Input.is_action_just_pressed("fire") and not can_fire():
-			var worker: String = PlayerStats.get_ammo()
-			var inv: Array = PlayerStats.get_stat("collectables")
-			if not PlayerStats.has(inv, worker):
-							no_amo_sound.play()
-							return
+			fail_fire()
 		if Input.is_action_pressed("fire"):
 			if can_fire():
-				reduce_ammo()
-				may_fire = false
-				timer.start(get_firerate())
-				var inst = load(get_bullet()).instance()
-				inst.global_position = position_2d.global_position
-				get_node(Globals.level_path).add_child(inst)
-				inst.global_rotation = get_parent().global_rotation
-				if get_parent().get_parent().scale.x > 0:
-					inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(inst.get_node("BulletBase").speed, 0).rotated(get_parent().global_rotation))
-				else:
-					inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(-inst.get_node("BulletBase").speed, 0).rotated(-get_parent().global_rotation))
-				get_node(Globals.player_camera_path).set_trauma(0.25)
+				fire()
+
+func fire() -> void:
+	reduce_ammo()
+	may_fire = false
+	timer.start(get_firerate())
+	var inst = load(get_bullet()).instance()
+	inst.global_position = position_2d.global_position
+	get_node(Globals.level_path).add_child(inst)
+	inst.global_rotation = get_parent().global_rotation
+	if get_parent().get_parent().scale.x > 0:
+		inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(inst.get_node("BulletBase").speed, 0).rotated(get_parent().global_rotation))
+	else:
+		inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(-inst.get_node("BulletBase").speed, 0).rotated(-get_parent().global_rotation))
+	get_node(Globals.player_camera_path).set_trauma(0.25)
+
+
+func fail_fire() -> void:
+	var worker: String = PlayerStats.get_ammo()
+	var inv: Array = PlayerStats.get_stat("collectables")
+	if not PlayerStats.has(inv, worker):
+		no_amo_sound.play()
+		return
+
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventScreenDrag and mode == USE and not Globals.ts_button_pressed:
+		if can_fire():
+			fire()
+		else:
+			fail_fire()
 
 
 func _direction_changed(facing_right: bool) -> void:

@@ -34,20 +34,21 @@ onready var jump_checks := [$Checks/WallLeft, $Checks/WallRight]
 
 
 func _ready() -> void:
+	var __: int
+	__ = Signals.connect("start_player_death", self, "_start_player_death")
+	__ = Signals.connect("player_death", self, "_player_death")
+	__ = Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
+	__ = Signals.connect("player_hurt_enemy", self, "_player_hurt_enemy")
+	__ = Signals.connect("player_killed_enemy", self, "_player_killed_enemy")
+	__ = Signals.connect("sublevel_changed", self, "_sublevel_changed")
+	__ = Signals.connect("powerup_used", self, "_powerup_used")
+	__ = Signals.connect("powerup_ended", self, "_powerup_ended")
+	__ = Signals.connect("springboard_used", self, "_springboard_used")
 	current_gravity = gravity
-	Signals.connect("start_player_death", self, "_start_player_death")
-	Signals.connect("player_death", self, "_player_death")
-	Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
-	Signals.connect("player_hurt_enemy", self, "_player_hurt_enemy")
-	Signals.connect("player_killed_enemy", self, "_player_killed_enemy")
-	Signals.connect("sublevel_changed", self, "_sublevel_changed")
-	Signals.connect("powerup_used", self, "_powerup_used")
-	Signals.connect("powerup_ended", self, "_powerup_ended")
-	Signals.connect("springboard_used", self, "_springboard_used")
 
 
 # Spikes
-func _physics_process(delta):
+func _physics_process(_delta):
 	for i in get_slide_count():
 		var collider = get_slide_collision(i).collider
 		if collider is TileMap:
@@ -99,7 +100,7 @@ func can_wall_slide() -> bool:
 	return on_wall() and PlayerStats.get_stat("rank") >= PlayerStats.Ranks.SILVER
 
 
-func _player_hurt_from_enemy(hurt_type: int, knockback: int, damage: int) -> void:
+func _player_hurt_from_enemy(hurt_type: int, knockback: int, _damage: int) -> void:
 	if fsm.current_state == fsm.dash: return
 	if not Globals.player_invincible and not PlayerStats.get_stat("health") <= 0:
 		if hurt_type == Globals.EnemyHurtTypes.NORMAL:

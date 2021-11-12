@@ -23,11 +23,12 @@ var player_invincible: bool = false
 var dialog_active: bool = false
 var inventory_active: bool = false
 var timed_powerup_active: bool = false
+var in_evil_mode: bool = false # Code name for Erase All Prompt with Black Screen
 var player_jump_damage: int = 1
 var selected_world: int = 0
 var selected_level: int = 0
+var ts_button_pressed: bool = false
 var game_state: int = GameStates.MENU
-
 
 
 var player_path = "/root/Main/LevelHolder/Level/Player"
@@ -42,9 +43,10 @@ func _enter_tree() -> void:
 
 
 func _ready() -> void:
-	Signals.connect("level_changed", self, "_level_changed")
-	UI.connect("faded", self, "_ui_faded")
-	UI.connect("changed", self, "_ui_changed")
+	var __: int
+	__= UI.connect("changed", self, "_ui_changed")
+	__ = UI.connect("faded", self, "_ui_faded")
+	__ = Signals.connect("level_changed", self, "_level_changed")
 
 
 func _notification(what):
@@ -82,3 +84,15 @@ func update_game_state() -> void:
 
 func _level_changed(_world: int, _level: int) -> void:
 	Globals.game_state = Globals.GameStates.LEVEL
+
+
+func get_main() -> Main:
+	return get_tree().root.get_node("Main") as Main
+
+
+func get_env() -> WorldEnvironment:
+	return get_main().get_node("WorldEnvironment") as WorldEnvironment
+
+
+func get_settings() -> Control:
+	return get_main().get_node("GUI/Settings") as Control
