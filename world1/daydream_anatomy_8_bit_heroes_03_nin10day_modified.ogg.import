@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/daydream_anatomy_8_bit_heroes_03_nin10day_modified.ogg-d808bd4634a6391c7d76dcd82a99a18e.oggstr"
+
+[deps]
+
+source_file="res://world1/daydream_anatomy_8_bit_heroes_03_nin10day_modified.ogg"
+dest_files=[ "res://.import/daydream_anatomy_8_bit_heroes_03_nin10day_modified.ogg-d808bd4634a6391c7d76dcd82a99a18e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

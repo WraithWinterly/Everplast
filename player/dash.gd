@@ -23,6 +23,7 @@ func _physics_process(delta: float) -> void:
 
 
 func start() -> void:
+	player.dashing = true
 	player_body.second_jump_used = true
 	dash_time = 0
 	player_body.linear_velocity = Vector2(0, 0)
@@ -39,6 +40,8 @@ func start() -> void:
 func stop() -> void:
 	dash_time = 0
 	player_body.linear_velocity.x = 0
+	yield(get_tree(), "physics_frame")
+	player.dashing = false
 
 
 func _timeout() -> void:

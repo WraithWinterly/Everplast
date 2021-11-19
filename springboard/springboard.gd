@@ -5,12 +5,14 @@ onready var area_2d: Area2D = $Area2D
 onready var sound: AudioStreamPlayer = $AudioStreamPlayer
 
 var used: bool = false
-var amount: int = 80
+var amount: int = 100
 
 
 func _ready() -> void:
 	var __: int
 	__ = area_2d.connect("body_entered", self, "_body_entered")
+	# Fit stutter on first use
+	$Sprite/Particles2D.emitting = true
 
 
 func _body_entered(body: Node) -> void:

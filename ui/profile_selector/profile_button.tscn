@@ -246,8 +246,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_left = 0.01
 anchor_top = 0.528
-anchor_right = 0.17
+anchor_right = 0.178
 anchor_bottom = 0.608
 rect_scale = Vector2( 6, 6 )
 alignment = 1
@@ -256,8 +257,8 @@ __meta__ = {
 }
 
 [node name="WorldIcons" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 5.0
-margin_right = 14.0
+margin_left = 13.0
+margin_right = 22.0
 margin_bottom = 34.0
 alignment = 1
 __meta__ = {
@@ -306,6 +307,7 @@ margin_bottom = 76.0
 texture = SubResource( 7 )
 
 [node name="RankIcons" type="VBoxContainer" parent="HBoxContainer"]
+visible = false
 margin_left = 18.0
 margin_right = 29.0
 margin_bottom = 34.0

@@ -19,6 +19,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/fade_player/fade_player.gd"
 }, {
+"base": "Node",
+"class": "LevelTest",
+"language": "GDScript",
+"path": "res://level_test.gd"
+}, {
 "base": "Control",
 "class": "Main",
 "language": "GDScript",
@@ -32,6 +37,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "EnemyComponentManager": "",
 "FadePlayer": "",
+"LevelTest": "",
 "Main": "",
 "Player": ""
 }
@@ -41,9 +47,10 @@ _global_script_class_icons={
 config/name="Everplast"
 run/main_scene="res://main.tscn"
 config/use_custom_user_dir=true
-boot_splash/image="res://ui/8x8.png"
+boot_splash/image="res://ui/nothing.png"
+boot_splash/fullsize=false
 boot_splash/use_filter=false
-boot_splash/bg_color=Color( 0, 0, 0, 1 )
+boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
 config/icon="res://icon.png"
 config/quit_on_go_back=false
 
@@ -70,12 +77,25 @@ gdscript/warnings/unused_signal=false
 
 window/size/width=1280
 window/size/height=720
+window/size/borderless=true
+window/dpi/allow_hidpi=true
+window/vsync/vsync_via_compositor=true
+window/per_pixel_transparency/allowed=true
+window/per_pixel_transparency/enabled=true
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
 
+[editor]
+
+convert_text_resources_to_binary_on_export=true
+
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/smoothing/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/quick_level_test/plugin.cfg", "res://addons/smoothing/plugin.cfg" )
+
+[gui]
+
+common/snap_controls_to_pixels=false
 
 [importer_defaults]
 
@@ -263,6 +283,16 @@ ctr_look_left={
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":2,"axis_value":-1.0,"script":null)
  ]
 }
+editor_start={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777250,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+toggle_hud={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777244,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
 
 [layer_names]
 
@@ -285,10 +315,12 @@ ctr_look_left={
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=1
 2d/snapping/use_gpu_pixel_snap=true
+threads/thread_model=2
 vram_compression/import_etc=true
-quality/filters/msaa=2
+quality/filters/msaa=1
+quality/depth/hdr=false
 quality/dynamic_fonts/use_oversampling=false
-quality/2d/use_nvidia_rect_flicker_workaround=true
+quality/2d/use_nvidia_rect_flicker_workaround=false
 quality/2d/use_pixel_snap=true
 quality/2d/use_transform_snap=true
 

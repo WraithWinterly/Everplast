@@ -19,7 +19,7 @@ func _ready() -> void:
 	__ = settings_button.connect("pressed", self, "_settings_pressed")
 	__ = return_button.connect("pressed", self, "_return_pressed")
 	pause_mode = PAUSE_MODE_PROCESS
-	disable_buttons()
+	disable_buttons(false)
 	hide()
 	level_label.hide()
 
@@ -45,6 +45,8 @@ func _ui_changed(menu: int) -> void:
 					_:
 						continue_button.grab_focus()
 		UI.PAUSE_MENU_RETURN_PROMPT:
+			disable_buttons()
+		UI.PAUSE_MENU_SETTINGS:
 			disable_buttons()
 		UI.MAIN_MENU:
 			if UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
@@ -97,9 +99,12 @@ func enable_buttons() -> void:
 	settings_button.disabled = false
 	world_selector_button.disabled = false
 	return_button.disabled = false
+	Signals.emit_signal("social_enabled")
 
 
-func disable_buttons() -> void:
+func disable_buttons(disable_social: bool = true) -> void:
+	if disable_social:
+		Signals.emit_signal("social_disabled")
 	continue_button.disabled = true
 	settings_button.disabled = true
 	world_selector_button.disabled = true

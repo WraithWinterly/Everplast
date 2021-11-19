@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://ui/hud/hud.tscn" type="PackedScene" id=2]
@@ -20,6 +20,7 @@
 [ext_resource path="res://ui/inventory/inventory.tscn" type="PackedScene" id=18]
 [ext_resource path="res://ui/button_press.ogg" type="AudioStream" id=19]
 [ext_resource path="res://ui/cheat_label.gd" type="Script" id=20]
+[ext_resource path="res://level_test.gd" type="Script" id=21]
 
 [sub_resource type="DynamicFont" id=1]
 outline_size = 1
@@ -69,7 +70,10 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-version_numbers = [ 1, 10 ]
+version_numbers = [ 1, 11 ]
+
+[node name="LevelTest" type="Node" parent="."]
+script = ExtResource( 21 )
 
 [node name="LevelHolder" type="Node2D" parent="."]
 
@@ -144,6 +148,7 @@ layer = 100
 
 [node name="CheatLabel" type="Label" parent="GUI/CanvasLayer2"]
 modulate = Color( 1, 1, 1, 0.607843 )
+self_modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.005
 anchor_top = 0.012
 anchor_right = 1.0

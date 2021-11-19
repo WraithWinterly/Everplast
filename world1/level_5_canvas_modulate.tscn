@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 1
+
+[node name="CanvasModulate" type="CanvasModulate" groups=["CanvasModulate"]]
+material = SubResource( 8 )
+position = Vector2( 0, 40 )
+color = Color( 0.490196, 0.490196, 0.490196, 1 )

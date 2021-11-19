@@ -61,8 +61,13 @@ func _ui_changed(menu: int) -> void:
 					previous_button_focus = button
 					continue
 			disable_buttons()
+#		UI.PROFILE_SELECTOR, UI.NONE:
+#			hide_menu()
 		UI.PROFILE_SELECTOR, UI.NONE:
-			hide_menu()
+			if UI.last_menu == UI.MAIN_MENU_QUICK_PLAY or \
+					UI.last_menu == UI.PROFILE_SELECTOR or \
+					UI.last_menu == UI.MAIN_MENU:
+				hide_menu()
 
 #
 #func _process(delta: float) -> void:
@@ -81,16 +86,19 @@ func _ui_faded() -> void:
 		for bg in parallax_layers:
 			bg.show()
 
+
 func hide_menu() -> void:
 	disable_buttons()
 	yield(UI, "faded")
 	hide()
+
 
 func disable_buttons() -> void:
 	play_button.disabled = true
 	quick_play_button.disabled = true
 	settings_button.disabled = true
 	quit_button.disabled = true
+	Signals.emit_signal("social_disabled")
 
 
 func enable_buttons() -> void:
@@ -98,6 +106,7 @@ func enable_buttons() -> void:
 	quick_play_button.disabled = false
 	settings_button.disabled = false
 	quit_button.disabled = false
+	Signals.emit_signal("social_enabled")
 
 
 func update_menu() -> void:

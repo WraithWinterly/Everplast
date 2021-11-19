@@ -7,8 +7,42 @@ var checkpoint_active: bool = false
 var checkpoint_world: int = 0
 var checkpoint_level: int = 0
 
-var level_database: Array = [
-	2, 2, 2, 2, 2, 2, 2
+var level_database := [
+	0, 9, 5, 4, 4, 4, 4
+]
+
+var canvas_database := [
+	#W0
+	[false],
+	#W1
+	[false, false, false, true, false, true, true, false, true, false],
+	#W2
+	[false, false, false, false, false, false, false, false, false, false],
+	#W3
+	[false, false, false, false, false, false, false, false, false, false],
+	#W4
+	[false, false, false, false, false, false, false, false, false, false],
+	#W5
+	[false, false, false, false, false, false, false, false, false, false],
+	#W6
+	[false, false, false, false, false, false, false, false, false, false],
+]
+
+var canvas_sub_database := [
+	#W0
+	[false],
+	#W1
+	[false, false, false, false, false, false, false, false, false, true],
+	#W2
+	[false, false, false, false, false, false, false, false, false, false],
+	#W3
+	[false, false, false, false, false, false, false, false, false, false],
+	#W4
+	[false, false, false, false, false, false, false, false, false, false],
+	#W5
+	[false, false, false, false, false, false, false, false, false, false],
+	#W6
+	[false, false, false, false, false, false, false, false, false, false],
 ]
 
 var level_sound := AudioStreamPlayer.new()
@@ -28,7 +62,15 @@ func _ready() -> void:
 	add_child(level_sound)
 	pause_mode = PAUSE_MODE_PROCESS
 	var prev_level = get_node_or_null("/root/Main/Level")
-	if not prev_level == null: prev_level.call_deferred("free")
+	if not prev_level == null:
+		prev_level.call_deferred("free")
+
+
+func has_canvas() -> bool:
+	if Globals.in_subsection:
+		return canvas_sub_database[current_world][current_level]
+	else:
+		return canvas_database[current_world][current_level]
 
 
 func _checkpoint_activated() -> void:
@@ -73,6 +115,8 @@ func replace_scenes(world: int, level: int) -> void:
 
 
 func world_selector_load() -> void:
+	Globals.in_subsection = false
+	#AudioServer.remove_bus_effect(2, 1)
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	LevelController.current_world = -1
 	LevelController.current_level = -1
@@ -107,6 +151,7 @@ func _ui_changed(menu: int) -> void:
 
 
 func _player_death() -> void:
+	Globals.in_subsection = false
 	get_tree().paused = true
 	yield(UI, "faded")
 	world_selector_load()
@@ -115,6 +160,7 @@ func _player_death() -> void:
 
 
 func _level_changed(world: int, level: int) -> void:
+	Globals.in_subsection = false
 	#Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	level_sound.play()
 	if checkpoint_active:
@@ -140,16 +186,15 @@ func _level_change_attempted(world: int, level: int) -> void:
 
 func _level_completed() -> void:
 	get_tree().paused = true
-	if PlayerStats.get_stat("world_max") <= LevelController.current_world:
+	if int(LevelController.current_world) == PlayerStats.get_stat("world_max") and int(LevelController.current_level) == PlayerStats.get_stat("level_max"):
 		unlock_next_level()
-	elif PlayerStats.get_stat("level_max") <= LevelController.current_level and \
-			PlayerStats.get_stat("world_max") <= LevelController.current_world:
-		unlock_next_level()
+#	else:
+#		unlock_next_level()
 	yield(UI, "faded")
-	#Signals.emit_signal("save")
 	get_tree().paused = false
 	reset_checkpoint()
 	world_selector_load()
+	Signals.emit_signal("save")
 
 
 func unlock_next_level() -> void:
@@ -159,4 +204,6 @@ func unlock_next_level() -> void:
 	else:
 		PlayerStats.set_stat("world_max", LevelController.current_world + 1)
 		PlayerStats.set_stat("level_max", 1)
-	Signals.emit_signal("save")
+	yield(UI, "faded")
+	UI.emit_signal("show_notification", "%s - %s Now Active!" % [Globals.get_main().world_names[PlayerStats.get_stat("world_max")], PlayerStats.get_stat("level_max")])
+	#Signals.emit_signal("save")

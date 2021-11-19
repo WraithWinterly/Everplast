@@ -20,6 +20,7 @@ var linear_velocity: Vector2
 var flying: bool = true
 var ignore: bool = false
 var state: int = States.FLY
+var ignore_next: bool = false
 
 onready var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 onready var flip_animation_player: AnimationPlayer = get_node(flip_animation_player_path)
@@ -32,7 +33,7 @@ onready var raycast_wall_right: RayCast2D = $RayCastWallRight
 
 func _ready() -> void:
 	fly_amount = int(rand_range(fly_amount_max, fly_amount_min))
-	
+
 
 func _physics_process(delta: float) -> void:
 	if state == States.NORMAL:
@@ -49,32 +50,40 @@ func _physics_process(delta: float) -> void:
 			else:
 				current_speed *= -1
 
-					
+
 			linear_velocity.x = lerp(linear_velocity.x, current_speed, 0.05)
 			linear_velocity.y += gravity * delta
 			linear_velocity = enemy.move_and_slide(linear_velocity, Vector2.UP)
-			
-			
+
+
 	elif state == States.FLY:
 		current_speed = fly_speed
-		
+
 		if facing_right:
 			current_speed *= 1
 			if current_fly_amount > fly_amount:
-				attempt_flip(true)
 				current_fly_amount = 0
+				if ignore_next:
+					ignore_next = false
+					return
+				attempt_flip(true)
 		else:
 			current_speed *= -1
 			if current_fly_amount > fly_amount:
-				attempt_flip(false)
 				current_fly_amount = 0
-				
-				
+				if ignore_next:
+					ignore_next = false
+					return
+				attempt_flip(false)
+
+
 		if raycast_wall_right.is_colliding():
 			attempt_flip(true)
+			ignore_next = true
 		elif raycast_wall_left.is_colliding():
 			attempt_flip(false)
-				
+			ignore_next = true
+
 		current_fly_amount += abs(linear_velocity.x) * delta
 		linear_velocity.x = lerp(linear_velocity.x, current_speed, 0.05)
 		linear_velocity = enemy.move_and_slide(linear_velocity, Vector2.UP)

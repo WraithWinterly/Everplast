@@ -131,6 +131,7 @@ anchor_top = 0.1
 anchor_right = 0.95
 anchor_bottom = 0.9
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
+mouse_filter = 2
 custom_styles/panel = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -140,6 +141,7 @@ __meta__ = {
 anchor_top = 0.05
 anchor_right = 1.0
 anchor_bottom = 0.173
+mouse_filter = 2
 custom_constants/separation = 15
 __meta__ = {
 "_edit_use_anchors_": false
@@ -155,11 +157,12 @@ align = 1
 [node name="PromptText" type="Label" parent="Panel/VBoxContainer"]
 margin_top = 45.0
 margin_right = 1152.0
-margin_bottom = 75.0
+margin_bottom = 108.0
 size_flags_vertical = 6
 custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
 custom_fonts/font = ExtResource( 8 )
-text = "Everplast v"
+text = "Everplast v
+Copyright"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -167,7 +170,7 @@ __meta__ = {
 
 [node name="Copyright" type="TextEdit" parent="Panel"]
 anchor_left = 0.05
-anchor_top = 0.187
+anchor_top = 0.265
 anchor_right = 0.95
 anchor_bottom = 0.8
 focus_neighbour_left = NodePath(".")

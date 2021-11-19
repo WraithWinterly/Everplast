@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://mobs/spiked_slime.png" type="Texture" id=1]
+[ext_resource path="res://mobs/spiked_slime.gd" type="Script" id=2]
 [ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=4]
 [ext_resource path="res://mobs/components/basic_movement.tscn" type="PackedScene" id=5]
 [ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=6]
@@ -21,13 +22,35 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3.5 )
 
-[node name="SpikedSlime" type="KinematicBody2D"]
+[sub_resource type="Curve" id=7]
+min_value = -1.0
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+emission_shape = 1
+emission_sphere_radius = 3.5
+flag_disable_z = true
+direction = Vector3( 1, 1, 1 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 24.24
+linear_accel_random = 0.14
+color = Color( 0.792157, 0, 0, 1 )
+hue_variation = -0.06
+hue_variation_curve = SubResource( 8 )
+
+[node name="SpikedSlime" type="KinematicBody2D" groups=["Mob"]]
 collision_layer = 64
 collision_mask = 3
+script = ExtResource( 2 )
 
 [node name="EnemyComponentManager" parent="." instance=ExtResource( 4 )]
 orb_amount = 20
-knockback = 175
+knockback = 200
 damage = 4
 max_health = 2
 
@@ -53,5 +76,15 @@ shape = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 4, 4 )
+emitting = false
+lifetime = 2.0
+one_shot = true
+speed_scale = 5.0
+explosiveness = 0.16
+randomness = 0.7
+process_material = SubResource( 9 )
 
 [editable path="EnemyComponentManager"]

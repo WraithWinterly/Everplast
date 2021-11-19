@@ -90,6 +90,7 @@ tracks/2/keys = {
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+z_index = 4
 texture = ExtResource( 2 )
 centered = false
 

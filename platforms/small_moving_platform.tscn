@@ -38,6 +38,9 @@ tracks/0/keys = {
 }
 
 [node name="SmallPlatform" type="Node2D"]
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 

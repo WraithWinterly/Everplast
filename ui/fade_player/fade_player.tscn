@@ -22,7 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "level"
-length = 1.7
+length = 1.2
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:anchor_top")
 tracks/0/interp = 1
@@ -30,7 +30,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5, 1.7 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.35, 0.35, 1.0 ]
@@ -42,7 +42,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5, 1.7 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.366, 0.366, 1.0 ]
@@ -54,7 +54,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 1.5, 1.7 ),
+"times": PoolRealArray( 0, 0.5, 1, 1.2 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]

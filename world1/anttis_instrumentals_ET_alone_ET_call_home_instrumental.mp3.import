@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/anttis_instrumentals_ET_alone_ET_call_home_instrumental.mp3-1d31a377af95af0a4621d3c98de01acf.mp3str"
+
+[deps]
+
+source_file="res://world1/anttis_instrumentals_ET_alone_ET_call_home_instrumental.mp3"
+dest_files=[ "res://.import/anttis_instrumentals_ET_alone_ET_call_home_instrumental.mp3-1d31a377af95af0a4621d3c98de01acf.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

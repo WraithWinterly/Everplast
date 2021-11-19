@@ -35,6 +35,7 @@ func update() -> void:
 		text += "Max Level: %s\n" % PlayerStats.get_stat("level_max")
 		text += "Last World: %s\n" % PlayerStats.get_stat("world_last")
 		text += "Last Level: %s\n" % PlayerStats.get_stat("level_last")
+		text += "In Subsection: %s\n" % Globals.in_subsection
 		text += "Current Rank: %s\n" % PlayerStats.get_stat("rank")
 		text += "Dialog Active: %s\n" % Globals.dialog_active
 		text += "Inventory Active: %s\n" % Globals.inventory_active

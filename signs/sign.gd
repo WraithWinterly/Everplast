@@ -25,10 +25,12 @@ func _input(event: InputEvent) -> void:
 		for n in sign_text:
 			if n.hash() == sign_text[0].hash():
 				continue
-			if sign_text.size() >= 3:
+			if n.size() >= 3:
 				Signals.emit_signal("dialog", n[0], n[1], n[2])
-			else:
+			elif n.size() >= 2:
 				Signals.emit_signal("dialog", n[0], n[1])
+			else:
+				Signals.emit_signal("dialog", n[0])
 
 
 func _level_changed(_world: int, _level: int) -> void:

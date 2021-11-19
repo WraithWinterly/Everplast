@@ -48,7 +48,7 @@ length = 5.0
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 2
+tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -142,7 +142,6 @@ __meta__ = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( -1, 0 )
-current = true
 zoom = Vector2( 0.2, 0.2 )
 drag_margin_v_enabled = true
 smoothing_enabled = true

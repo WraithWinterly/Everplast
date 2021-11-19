@@ -75,6 +75,7 @@ texture = ExtResource( 3 )
 stream = ExtResource( 4 )
 volume_db = 2.0
 pitch_scale = 1.34
+bus = "Audio"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/hide = SubResource( 3 )

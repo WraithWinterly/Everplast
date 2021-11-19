@@ -7,7 +7,7 @@ const water_speed: int = 64
 const water_gravity: int = 150
 const water_suction: int = 50
 const ladder_gravity: int = 1
-const out_water_boost: int = 75
+const out_water_boost: int = 225
 
 var linear_velocity: Vector2 = Vector2.ZERO
 
@@ -18,7 +18,7 @@ var sprint_speed: float = 80
 var walk_speed: float = 65
 var air_time: float = 0
 var current_speed: float = 0
-var rise_force: float = 14
+
 var bunny_speed: float = 80
 var speed_modifier: float = 1
 var may_dash: bool = true
@@ -68,6 +68,8 @@ func basic_movement():
 	current_speed *= Main.get_action_strength()
 	linear_velocity.x = lerp(linear_velocity.x, current_speed * speed_modifier, 0.1)
 	linear_velocity.y += delta * current_gravity
+	if not fsm.current_state == fsm.idle:
+		linear_velocity.x -= (get_floor_velocity().x * 0.07)
 	linear_velocity = move_and_slide(linear_velocity, Vector2.UP, true)
 
 	down_check()
@@ -88,7 +90,8 @@ func down_check() -> void:
 func can_dash() -> bool:
 	return not PlayerStats.get_stat("adrenaline") <= 0 \
 			and PlayerStats.get_stat("rank") >= PlayerStats.Ranks.GOLD \
-			and may_dash and Globals.game_state == Globals.GameStates.LEVEL
+			and may_dash and Globals.game_state == Globals.GameStates.LEVEL \
+			and not is_on_floor() and not is_on_wall()
 
 
 func can_second_jump() -> bool:
@@ -104,14 +107,12 @@ func _player_hurt_from_enemy(hurt_type: int, knockback: int, _damage: int) -> vo
 	if fsm.current_state == fsm.dash: return
 	if not Globals.player_invincible and not PlayerStats.get_stat("health") <= 0:
 		if hurt_type == Globals.EnemyHurtTypes.NORMAL:
-			rise_force = 0
 			linear_velocity.y = -knockback
 			if player.facing_right:
 				linear_velocity.x -= knockback
 			else:
 				linear_velocity.x += knockback
 		if hurt_type == Globals.EnemyHurtTypes.NORMAL_AIR:
-			rise_force = 0
 			if player.facing_right:
 				linear_velocity.y = (-knockback / 2.0)
 				linear_velocity.x -= knockback
@@ -127,7 +128,8 @@ func _player_hurt_enemy(hurt_type: int) -> void:
 				new_jump_speed /= 2
 			air_time = 0
 			linear_velocity.y = -new_jump_speed
-			fsm.change_state(fsm.jump)
+			if not player.in_water:
+				fsm.change_state(fsm.jump)
 
 
 func _sublevel_changed(pos: Vector2) -> void:
@@ -141,13 +143,13 @@ func _player_killed_enemy(hurt_type: int):
 
 
 func _on_Area2D_area_entered(area: Area2D) -> void:
-	if area.is_in_group("water"):
-		linear_velocity.y += water_suction
+	if area.is_in_group("Water"):
+		linear_velocity.y = water_suction
 
 
 func _on_Area2D_area_exited(area: Area2D) -> void:
-	if area.is_in_group("water"):
-		linear_velocity.y -= out_water_boost
+	if area.is_in_group("Water"):
+		linear_velocity.y = -out_water_boost
 
 
 func _start_player_death() -> void:

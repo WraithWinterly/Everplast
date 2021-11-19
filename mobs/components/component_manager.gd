@@ -4,6 +4,7 @@ class_name EnemyComponentManager
 
 signal hit()
 signal died()
+signal hit_player()
 
 export var orb_amount: int = 10
 export var knockback: int = 150
@@ -43,7 +44,7 @@ func damage_self(damage_type: int, body = null) -> void:
 
 	if health_label_animation_player.is_playing():
 		health_label_animation_player.stop()
-	if PlayerStats.get_stat("rank") >= PlayerStats.Ranks.GOLD:
+	if PlayerStats.get_stat("rank") >= PlayerStats.Ranks.SILVER:
 		health_label.text = "%s / %s" % [health, max_health]
 		health_label_animation_player.play("label")
 

@@ -7,7 +7,7 @@ enum {
 
 const max_offset := Vector2(100, 75)
 const normal_zoom := Vector2(0.2, 0.2)
-const sprint_zoom := Vector2(0.21, 0.21)
+const sprint_zoom := Vector2(0.212, 0.212)
 const decay: float = 0.8
 const max_roll: float = 0.1
 
@@ -17,11 +17,13 @@ var trauma_power: float = 2.5
 var noise_y: int = 0
 var state: int = NORMAL
 
+var default_drag_top = drag_margin_top
+var default_drag_bottom = drag_margin_bottom
+
 onready var noise = OpenSimplexNoise.new()
 onready var player = get_parent().get_parent()
 onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("KinematicBody2D")
 onready var fsm: Node = get_parent().get_parent().get_node("FSM")
-
 
 func _ready() -> void:
 	var __: int
@@ -32,6 +34,7 @@ func _ready() -> void:
 	noise.period = 4
 	noise.octaves = 2
 	update_camera_positions(NORMAL)
+
 
 func add_trauma(amount) -> void:
 	trauma = min(trauma + amount, 1.0)
@@ -48,7 +51,7 @@ func _process(delta) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	zoom = lerp(zoom, current_zoom, 0.15)
+	zoom = lerp(zoom, current_zoom, 0.14)
 	if player.sprinting:
 		current_zoom = sprint_zoom
 	else:
@@ -64,8 +67,8 @@ func shake() -> void:
 
 
 func _state_changed() -> void:
-	if fsm.current_state == fsm.dash and not player_body.is_on_wall():
-		add_trauma(0.4)
+	if fsm.current_state == fsm.dash:
+		set_trauma(0.4)
 
 
 func _sublevel_changed(_pos: Vector2) -> void:
@@ -78,12 +81,12 @@ func _sublevel_changed(_pos: Vector2) -> void:
 		update_camera_positions(state)
 
 
-func update_camera_positions(var mode: int) -> void:
+func update_camera_positions(mode: int) -> void:
 	if mode == NORMAL:
 		var level: Node2D = get_node_or_null(Globals.level_path)
 		if not level == null:
-			var limit_left_top_position = level.get_node_or_null("CameraPositions/TopLeft")
-			var limit_right_bottom_position = level.get_node_or_null("CameraPositions/BottomRight")
+			var limit_left_top_position = level.get_node_or_null("LevelComponents/CameraPositions/TopLeft")
+			var limit_right_bottom_position = level.get_node_or_null("LevelComponents/CameraPositions/BottomRight")
 			if not limit_left_top_position == null and not limit_right_bottom_position == null:
 				limit_left = limit_left_top_position.position.x
 				limit_top = limit_left_top_position.position.y
@@ -92,8 +95,8 @@ func update_camera_positions(var mode: int) -> void:
 	else:
 		var level: Node2D = get_node_or_null(Globals.level_path)
 		if not level == null:
-			var limit_left_top_position = level.get_node_or_null("CameraPositions/SubTopLeft")
-			var limit_right_bottom_position = level.get_node_or_null("CameraPositions/SubBottomRight")
+			var limit_left_top_position = level.get_node_or_null("LevelComponents/CameraPositions/SubTopLeft")
+			var limit_right_bottom_position = level.get_node_or_null("LevelComponents/CameraPositions/SubBottomRight")
 			if not limit_left_top_position == null and not limit_right_bottom_position == null:
 				limit_left = limit_left_top_position.position.x
 				limit_top = limit_left_top_position.position.y

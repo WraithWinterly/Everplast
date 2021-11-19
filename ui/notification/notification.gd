@@ -24,9 +24,10 @@ func show_notification(message: String) -> void:
 		hide()
 
 
-func _save() -> void:
+func _save(noti: bool = true) -> void:
 	if UI.menu_transitioning:
 		yield(UI, "faded")
 	if animation_player.is_playing():
 		yield(UI, "notification_finished")
+	if not noti: return
 	show_notification("Saved Game!")

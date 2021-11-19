@@ -31,6 +31,5 @@ func _body_entered(body: Node) -> void:
 		_:
 			coin_sound.pitch_scale = rng.randf_range(0.7, 0.8)
 			coin_sound.volume_db = -15
-
 	yield(animation_player, "animation_finished")
 	call_deferred("free")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://powerups/glitch_orb.png" type="Texture" id=28]
 [ext_resource path="res://gems/gem.png" type="Texture" id=29]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=30]
+[ext_resource path="res://ui/inventory/upgrade.wav" type="AudioStream" id=31]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -380,6 +381,69 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="Animation" id=30]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.05 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.95 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
 [sub_resource type="Animation" id=23]
 length = 0.1
 tracks/0/type = "value"
@@ -392,7 +456,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.38 ]
+"values": [ 1.0, 0.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Panel:anchor_bottom")
@@ -1407,7 +1471,6 @@ text = "Adrenaline "
 anims/show = SubResource( 20 )
 
 [node name="Stats" type="Panel" parent="Panel"]
-visible = false
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1661,6 +1724,18 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BG" type="Panel" parent="Panel/Stats/UpgradeStatsPrompt/Panel"]
+anchor_left = 0.05
+anchor_top = 0.165
+anchor_right = 0.95
+anchor_bottom = 0.675
+margin_left = -3.8147e-06
+margin_top = 1.50204e-05
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel/Stats/UpgradeStatsPrompt/Panel"]
 anchor_top = 0.05
 anchor_right = 1.0
@@ -1678,9 +1753,9 @@ text = "Upgrade Stats..."
 align = 1
 
 [node name="PromptText" type="Label" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_top = 45.0
+margin_top = 129.0
 margin_right = 921.0
-margin_bottom = 174.0
+margin_bottom = 258.0
 size_flags_vertical = 6
 custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
 custom_fonts/font = ExtResource( 2 )
@@ -1691,9 +1766,9 @@ Adrenaline %s -> %s"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_top = 189.0
+margin_top = 358.0
 margin_right = 921.0
-margin_bottom = 249.0
+margin_bottom = 418.0
 custom_constants/separation = 15
 alignment = 1
 __meta__ = {
@@ -1701,8 +1776,8 @@ __meta__ = {
 }
 
 [node name="Cancel" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 163.0
-margin_right = 321.0
+margin_left = 129.0
+margin_right = 287.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
@@ -1719,7 +1794,7 @@ custom_styles/normal = ExtResource( 14 )
 text = "Cancel"
 
 [node name="Health" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 336.0
+margin_left = 302.0
 margin_right = 494.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Cancel")
@@ -1736,11 +1811,11 @@ custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-text = "Health"
+text = "+ Health"
 
 [node name="Adrenaline" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
 margin_left = 509.0
-margin_right = 757.0
+margin_right = 791.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Health")
 focus_neighbour_top = NodePath(".")
@@ -1756,10 +1831,15 @@ custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-text = "Adrenaline "
+text = "+ Adrenaline "
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Stats/UpgradeStatsPrompt"]
+anims/RESET = SubResource( 30 )
 anims/show = SubResource( 23 )
+
+[node name="UpgradeSound" type="AudioStreamPlayer" parent="Panel/Stats/UpgradeStatsPrompt"]
+stream = ExtResource( 31 )
+bus = "Audio"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/show = SubResource( 21 )

@@ -20,7 +20,7 @@ func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player") and not LevelController.checkpoint_active:
 		Signals.emit_signal("checkpoint_activated")
 		UI.emit_signal("show_notification", "Checkpoint Reached!")
-		Signals.emit_signal("save")
+		Signals.emit_signal("save", false)
 		sound.play()
 		disable()
 

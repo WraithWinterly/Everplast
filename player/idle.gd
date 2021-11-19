@@ -13,10 +13,13 @@ func _process(_delta: float) -> void:
 
 func _physics_process(_delta: float) -> void:
 	player_body.basic_movement()
+	player.sprinting = false
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_jump") and player_body.is_on_floor():
+		if Input.is_action_pressed("move_sprint"):
+			player.sprinting = true
 		fsm.change_state(fsm.jump)
 
 func _start() -> void:

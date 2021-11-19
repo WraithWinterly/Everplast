@@ -33,7 +33,7 @@
 extents = Vector2( 3.5, 10 )
 
 [sub_resource type="CapsuleShape2D" id=2]
-radius = 4.0
+radius = 6.5
 height = 14.0
 
 [sub_resource type="RectangleShape2D" id=26]
@@ -46,6 +46,22 @@ region = Rect2( 0, 0, 11, 24 )
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 11, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 22, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 88, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 99, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 33, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
@@ -83,28 +99,27 @@ region = Rect2( 66, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 77, 0, 11, 24 )
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 33, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 88, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 99, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 22, 0, 11, 24 )
-
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
 "frames": [ SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
+}, {
+"frames": [ SubResource( 11 ) ],
+"loop": true,
+"name": "air_idle",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
+"loop": true,
+"name": "ladder",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 17 ) ],
+"loop": true,
+"name": "air_walk",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 16 ) ],
 "loop": true,
@@ -120,21 +135,6 @@ animations = [ {
 "loop": true,
 "name": "walk",
 "speed": 7.0
-}, {
-"frames": [ SubResource( 17 ) ],
-"loop": true,
-"name": "air_walk",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 9 ), SubResource( 10 ) ],
-"loop": true,
-"name": "ladder",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 11 ) ],
-"loop": true,
-"name": "air_idle",
-"speed": 5.0
 } ]
 
 [sub_resource type="Animation" id=19]
@@ -414,6 +414,7 @@ enabled = true
 cast_to = Vector2( -5, 0 )
 
 [node name="Area2D" type="Area2D" parent="KinematicBody2D"]
+collision_layer = 4
 collision_mask = 27
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
@@ -434,17 +435,16 @@ target = NodePath("../KinematicBody2D")
 
 [node name="Camera2D" type="Camera2D" parent="Smoothing2D"]
 pause_mode = 2
-position = Vector2( -1, 0 )
 current = true
 zoom = Vector2( 0.2, 0.2 )
-limit_smoothed = true
 drag_margin_v_enabled = true
 smoothing_speed = 20.0
-drag_margin_top = 0.5
+drag_margin_top = 0.53
 drag_margin_bottom = 0.1
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Smoothing2D"]
+z_index = 3
 frames = SubResource( 18 )
 animation = "idle"
 frame = 1

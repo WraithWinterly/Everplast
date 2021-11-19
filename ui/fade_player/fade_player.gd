@@ -36,7 +36,7 @@ func _ready() -> void:
 	play(true)
 	yield(get_tree().create_timer(1), "timeout")
 	get_tree().paused = false
-	animation_player.get_animation("fade").length = 0.6
+	animation_player.get_animation("fade").length = 0.8
 
 
 func _ui_changed(menu: int) -> void:
@@ -81,6 +81,7 @@ func play(fade_out: bool) -> void:
 
 
 func _level_changed(world: int = 0, level: int = 0, _from_start: bool = false) -> void:
+	animation_player.get_animation("fade").length = 0.8
 	UI.menu_transitioning = true
 	label.text = "%s - %s" % [Globals.get_main().world_names[world], level]
 	for w_icon in world_icons.get_children():
@@ -106,7 +107,6 @@ func _level_changed(world: int = 0, level: int = 0, _from_start: bool = false) -
 			fade_rect.color = color_world_error
 			label.text = "Not an official level: \"%s - %s\"" % [Globals.get_main().world_names[world], level]
 	level_animation_player.play("level")
-	animation_player.get_animation("fade").length = (1)
 	play(false)
 	yield(UI, "faded")
 	play(true)

@@ -2,7 +2,7 @@ extends Control
 
 
 var powerup_explanations: Dictionary = {
-	"carrot": "Increases your health by 4",
+	"carrot": "Increases your health by 2",
 	"cherry": "Increases your adrenaline by 10",
 	"coconut": "Coconut description",
 	"bunny egg": "Gives you a speed boost for 5 seconds",
@@ -10,8 +10,8 @@ var powerup_explanations: Dictionary = {
 }
 var rank_explanations: Dictionary = {
 	"none": "You do not have a rank yet.",
-	"silver": "- Double Jump\n- Wall Jump",
-	"gold": "- Adrenaline Rush\n- See enemy health on hit",
+	"silver": "- See enemy health on hit\n- Double Jump\n- Wall Jump",
+	"gold": "- Adrenaline Rush\n",
 	"diamond": "Diamond description",
 	"emerald": "Emerald description",
 	"glitch": "Glitch description",
@@ -74,6 +74,7 @@ onready var upgrade_stats_cancel_button: Button = $Panel/Stats/UpgradeStatsPromp
 onready var upgrade_stats_anim_player: AnimationPlayer = $Panel/Stats/UpgradeStatsPrompt/AnimationPlayer
 onready var upgrade_stats_prompt_text: Label = $Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/PromptText
 onready var upgrade_stats_info_label: Label = $Panel/Stats/StatsUpgrade/Info
+onready var upgrade_sound: AudioStreamPlayer = $Panel/Stats/UpgradeStatsPrompt/UpgradeSound
 
 onready var current_panel: Panel = powerups_panel
 
@@ -120,7 +121,6 @@ func _unhandled_input(event: InputEvent) -> void:
 				hide_menu()
 				Signals.emit_signal("inventory_changed", false)
 			else:
-				#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 				Signals.emit_signal("inventory_changed", true)
 				UI.emit_signal("button_pressed")
 				current_panel = powerups_panel
@@ -220,9 +220,7 @@ func update_inventory() -> void:
 			rank_title_label.text = "My Rank: %s" % PlayerStats.ranks[PlayerStats.get_stat("rank")].capitalize()
 		else:
 			texture.hide()
-	#upgrade_stats_info_label.text = "Current Orbs: x%s\n\nNext Upgrade: x%s\n\nLevel: %s" % [PlayerStats.get_stat("orbs"), PlayerStats.get_level_up_cost(), PlayerStats.get_stat("level")]
 	upgrade_stats_info_label.text = "Upgrade Requirements:\n%s Orbs" % PlayerStats.get_level_up_cost()
-	#stats_upgrade_button.visible = Globals.game_state == Globals.GameStates.LEVEL and PlayerStats.get_stat("orbs") >= PlayerStats.get_level_up_cost()
 	stats_upgrade_button.disabled = not (PlayerStats.get_stat("orbs") >= PlayerStats.get_level_up_cost())
 
 	var world_string: String = "\"%s\" - %s" % [Globals.get_main().world_names[PlayerStats.get_stat("world_max")], PlayerStats.get_stat("level_max")]
@@ -294,7 +292,6 @@ func order_buttons(buttons: VBoxContainer, player_stat: String) -> void:
 		if not button in stats:
 			if not buttons.get_node_or_null(button.capitalize()) == null:
 				buttons.get_node(button.capitalize()).hide()
-
 
 	for stat in stats:
 		if stat[0] in button_names:
@@ -417,15 +414,35 @@ func _stats_pressed() -> void:
 
 
 func _upgrade_stats_pressed() -> void:
+	var has_adrenaline: bool = PlayerStats.get_stat("rank") >= PlayerStats.Ranks.GOLD
+	upgrade_stats_adrenaline_button.visible = has_adrenaline
 	upgrade_stats_cancel_button.grab_focus()
 	UI.emit_signal("button_pressed")
 	in_upgrade_prompt = true
 	disable_buttons()
 	upgrade_stats_anim_player.play("show")
-	upgrade_stats_prompt_text.text = \
-			"Level Up! Choose what to upgrade.\nHealth %s -> %s\nor\nAdrenaline %s -> %s" \
-			% [PlayerStats.get_stat("health_max"), PlayerStats.get_stat("health_max") + 10,
-			PlayerStats.get_stat("adrenaline_max"), PlayerStats.get_stat("adrenaline_max") + 10]
+	if has_adrenaline:
+		upgrade_stats_health_button.text = "+ Health"
+		upgrade_stats_prompt_text.text = \
+				"Level: %s -> %s\nChoose what to upgrade.\nHealth %s -> %s\nor\nAdrenaline %s -> %s\nCost: %s Orbs" \
+				% [
+						PlayerStats.get_stat("level"),
+						PlayerStats.get_stat("level") + 1,
+						PlayerStats.get_stat("health_max"),
+						PlayerStats.get_stat("health_max") + 5,
+						PlayerStats.get_stat("adrenaline_max"),
+						PlayerStats.get_stat("adrenaline_max") + 5,
+						PlayerStats.get_level_up_cost()]
+	else:
+		upgrade_stats_health_button.text = "Upgrade Level!"
+		upgrade_stats_prompt_text.text = \
+				"Level: %s -> %s\nHealth %s -> %s\nCost: %s Orbs" \
+				% [
+						PlayerStats.get_stat("level"),
+						PlayerStats.get_stat("level") + 1,
+						PlayerStats.get_stat("health_max"),
+						PlayerStats.get_stat("health_max") + 5,
+						PlayerStats.get_level_up_cost()]
 
 
 func _upgrade_stats_cancel_pressed() -> void:
@@ -437,6 +454,7 @@ func _upgrade_stats_cancel_pressed() -> void:
 
 
 func _upgrade_stats_health_pressed() -> void:
+	upgrade_sound.play()
 	PlayerStats.emit_signal("level_up", "health")
 	_upgrade_stats_cancel_pressed()
 	_close_pressed()
@@ -444,6 +462,7 @@ func _upgrade_stats_health_pressed() -> void:
 
 
 func _upgrade_stats_adrenaline_pressed() -> void:
+	upgrade_sound.play()
 	PlayerStats.emit_signal("level_up", "adrenaline")
 	_upgrade_stats_cancel_pressed()
 	_close_pressed()

@@ -26,15 +26,19 @@ func _ready() -> void:
 			sprite.region_rect = Rect2(44, 0, 11, 13)
 		PlayerStats.Ranks.VOLCANO:
 			sprite.region_rect = Rect2(55, 0, 11, 13)
-
+	if PlayerStats.get_stat("rank") >= rank:
+		sprite.region_rect = Rect2(66, 0, 11, 13)
 
 func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		collision_shape.set_deferred("disabled", true)
 		rank_start_sound.play()
-		anim_player.play("collect")
+		if rank > PlayerStats.get_stat("rank"):
+			anim_player.play("collect")
+		else:
+			anim_player.play("collect_used")
 		yield(anim_player, "animation_finished")
 		if rank > PlayerStats.get_stat("rank"):
 			PlayerStats.set_stat("rank", rank)
 			UI.emit_signal("show_notification", "Rank Upgraded to %s!" %  PlayerStats.ranks[rank].capitalize())
-			Signals.emit_signal("save")
+			Signals.emit_signal("save", false)

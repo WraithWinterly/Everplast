@@ -45,7 +45,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3.5 )
 
-[node name="FlyingSlime" type="KinematicBody2D"]
+[node name="FlyingSlime" type="KinematicBody2D" groups=["Mob"]]
 collision_layer = 64
 collision_mask = 3
 script = ExtResource( 3 )

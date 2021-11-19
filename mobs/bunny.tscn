@@ -28,7 +28,7 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3.5 )
 
-[node name="Bunny" type="KinematicBody2D"]
+[node name="Bunny" type="KinematicBody2D" groups=["Mob"]]
 collision_layer = 64
 collision_mask = 3
 script = ExtResource( 3 )
@@ -49,6 +49,7 @@ volume_db = 2.0
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 0.15 )
 frames = SubResource( 4 )
+frame = 1
 
 [node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 5 )]
 flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")

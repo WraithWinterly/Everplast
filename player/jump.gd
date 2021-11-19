@@ -22,7 +22,9 @@ func _input(event: InputEvent) -> void:
 			and player_body.can_second_jump():
 		player_body.second_jump_used = true
 		player_body.air_time = 0
+		player_body.linear_velocity.y -= player_body.get_floor_velocity().y
 		player_body.linear_velocity.y = -player_body.jump_speed
+
 	elif event.is_action_pressed("move_dash"):
 		if player_body.can_dash():
 			fsm.change_state(fsm.dash)
@@ -35,7 +37,7 @@ func attempt_correction(amount: int):
 	if player_body.linear_velocity.y < 0 and player_body.test_move(
 				player_body.global_transform, Vector2(
 					0, player_body.linear_velocity.y * delta)):
-		for corner_distance in range(1, amount * 2 ):
+		for corner_distance in range(1, amount * 2):
 			for direction in [-1.0, 1.0]:
 				if not player_body.test_move(
 						player_body.global_transform.translated(Vector2(
@@ -51,3 +53,6 @@ func start() -> void:
 	jump_sound.play()
 	player_body.air_time = 0
 	player_body.linear_velocity.y = -player_body.jump_speed
+	player_body.linear_velocity.y -= player_body.get_floor_velocity().y
+	yield(get_tree(), "physics_frame")
+	#player_body.linear_velocity.y -= player_body.get_floor_velocity().y

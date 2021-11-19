@@ -15,7 +15,7 @@ func _ready() -> void:
 	var __: int
 	__ = UI.connect("changed", self, "_ui_changed")
 	__ = UI.connect("faded", self, "_ui_changed")
-	__ = Signals.connect("save", self, "_game_save")
+	__ = Signals.connect("save", self, "_save")
 	load_stats()
 	update_stats()
 
@@ -73,7 +73,7 @@ func _ui_changed(menu: int = 0) -> void:
 			update_stats()
 
 
-func _game_save() -> void:
+func _save(_noti: bool = false) -> void:
 	data.last_profile = PlayerStats.current_save_profile
 	save_stats()
 	update_stats()

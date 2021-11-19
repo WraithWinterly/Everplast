@@ -13,6 +13,9 @@ texture = ExtResource( 1 )
 centered = false
 hframes = 3
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false

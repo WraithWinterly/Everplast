@@ -2,7 +2,7 @@
 
 [ext_resource path="res://torches/torch.tscn" type="PackedScene" id=1]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tilesets/tilemap_w1.tres" type="TileSet" id=3]
+[ext_resource path="res://tilesets/tilemap_w1_grass.tres" type="TileSet" id=3]
 [ext_resource path="res://world2/canvas_layer_back.tscn" type="PackedScene" id=4]
 [ext_resource path="res://tilesets/tilemap_w3.tres" type="TileSet" id=5]
 [ext_resource path="res://tilesets/tilemap_w2.tres" type="TileSet" id=7]
@@ -15,7 +15,7 @@
 [ext_resource path="res://powerups/coconut.tscn" type="PackedScene" id=16]
 [ext_resource path="res://world_all/level.gd" type="Script" id=17]
 [ext_resource path="res://powerups/cherry.tscn" type="PackedScene" id=18]
-[ext_resource path="res://mobs/green_slime.tscn" type="PackedScene" id=19]
+[ext_resource path="res://mobs/slime.tscn" type="PackedScene" id=19]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 17 )

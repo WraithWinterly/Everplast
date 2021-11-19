@@ -28,6 +28,7 @@ var player_jump_damage: int = 1
 var selected_world: int = 0
 var selected_level: int = 0
 var ts_button_pressed: bool = false
+var in_subsection: bool = false
 var game_state: int = GameStates.MENU
 
 
@@ -96,3 +97,7 @@ func get_env() -> WorldEnvironment:
 
 func get_settings() -> Control:
 	return get_main().get_node("GUI/Settings") as Control
+
+
+func get_level_test() -> LevelTest:
+	return get_tree().root.get_node("Main/LevelTest") as LevelTest

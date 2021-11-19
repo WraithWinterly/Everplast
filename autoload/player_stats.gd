@@ -9,12 +9,12 @@ const KEY: String = \
 const FILE: String = \
 		"user://save.json"
 
-var ranks: Array = ["none", "silver", "gold", "emerald", "diamond", "glitch", "volcano"]
+var ranks: Array = ["none", "silver", "gold", "diamond", "emerald", "glitch", "volcano"]
 var equipable_items: Array = ["none", "water gun", "nail gun", "laser gun"]
 
 var default_data: Dictionary = {
-	"health_max": 10.0,
-	"health": 10.0,
+	"health_max": 5.0,
+	"health": 5.0,
 	"coins": 0.0,
 	"orbs" : 0.0,
 	"level": 1.0,
@@ -241,9 +241,9 @@ func reset_all() -> void:
 
 
 func get_level_up_cost() -> int:
-	var cost: int = 500
+	var cost: int = 50
 	var level = get_stat("level")
-	cost *= level * 2
+	cost *= level * 2.5
 	return int(cost)
 
 
@@ -313,7 +313,7 @@ func _level_changed(world: int, level: int) -> void:
 func _powerup_used(item_name: String) -> void:
 	match item_name:
 		"carrot":
-			set_health(get_stat("health") + 4)
+			set_health(get_stat("health") + 2)
 		"cherry":
 			set_adrenaline(get_stat("adrenaline") + 10)
 	emit_signal("stat_updated")
@@ -322,9 +322,9 @@ func _powerup_used(item_name: String) -> void:
 func _level_up(upgrade: String) -> void:
 	match upgrade:
 		"health":
-			set_stat("health_max", PlayerStats.get_stat("health_max") + 10)
+			set_stat("health_max", PlayerStats.get_stat("health_max") + 5)
 		"adrenaline":
-			set_stat("adrenaline_max", PlayerStats.get_stat("adrenaline_max") + 10)
+			set_stat("adrenaline_max", PlayerStats.get_stat("adrenaline_max") + 5)
 	set_stat("orbs", PlayerStats.get_stat("orbs") - get_level_up_cost())
 	set_stat("level", PlayerStats.get_stat("level") + 1)
 	set_stat("adrenaline_speed", PlayerStats.get_stat("adrenaline_speed") / 1.3)

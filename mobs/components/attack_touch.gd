@@ -5,6 +5,8 @@ export var enemy_path: NodePath
 export var hit_area_path: NodePath
 export var flying_enemy: bool = false
 
+var cooldown: bool = false
+
 onready var hit_area: Area2D = get_node(hit_area_path)
 onready var enemy: KinematicBody2D = get_node(enemy_path)
 onready var enemy_component: EnemyComponentManager = get_parent()
@@ -19,14 +21,18 @@ func _ready() -> void:
 
 
 func _hit_area_body_entered(body: Node) -> void:
+	if cooldown: return
 	if enemy_component.dead: return
 	if body.is_in_group("Player"):
-		yield(get_tree(), "physics_frame")
 		if enemy_component.hurt_by_jump: return
 		if attack_by_jump:
+			if get_node(Globals.player_path).dashing:
+				return
+			yield(get_tree(), "physics_frame")
+			if enemy_component.hurt_by_jump: return
 #			if body.player.falling:
 #				return
-			if body.fsm.current_state == body.fsm.dash:
+			if get_node(Globals.player_path).dashing:
 				return
 		if flying_enemy:
 			Signals.emit_signal("player_hurt_from_enemy",
@@ -34,17 +40,22 @@ func _hit_area_body_entered(body: Node) -> void:
 					enemy_component.knockback,
 					enemy_component.damage)
 			enemy_component.hurt_player = true
+			enemy_component.emit_signal("hit_player")
 		else:
 			Signals.emit_signal("player_hurt_from_enemy",
 					Globals.EnemyHurtTypes.NORMAL,
 					enemy_component.knockback,
 					enemy_component.damage)
 			enemy_component.hurt_player = true
+			enemy_component.emit_signal("hit_player")
 
 
 func _hit_area_body_exited(body: Node) -> void:
 	if body.is_in_group("Player"):
+		if not get_tree() == null:
+			yield(get_tree(), "physics_frame")
 		enemy_component.hurt_player = false
+		cooldown = false
 
 
 func _player_invincibility_stopped() -> void:

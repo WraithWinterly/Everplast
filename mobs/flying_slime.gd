@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func _hit() -> void:
 	if fly_movement.state == fly_movement.States.FLY:
+		$EnemyComponentManager/AttackTouch.cooldown = true
 		fly_movement.state = fly_movement.States.NORMAL
 		anim_sprite.animation = "normal"
-		$"EnemyComponentManager/AttackTouch".flying_enemy = false
+		$EnemyComponentManager/AttackTouch.flying_enemy = false

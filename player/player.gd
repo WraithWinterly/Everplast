@@ -8,6 +8,7 @@ var climbing_ladder: bool = false
 var sprinting: bool = false
 var falling: bool = false
 var facing_right: bool = true
+var dashing: bool = false
 
 onready var kinematic_body: KinematicBody2D = $KinematicBody2D
 onready var animated_sprite: AnimatedSprite = $Smoothing2D/AnimatedSprite
@@ -75,7 +76,7 @@ func stop_invincibility() -> void:
 
 
 func _player_hurt_from_enemy(_hurt_type: int, _knockback: int, _damage: int):
-	if Globals.player_invincible: return;
+	if Globals.player_invincible: return
 	if PlayerStats.get_stat("health") <= 0:
 		Signals.emit_signal("start_player_death")
 	else:
@@ -89,15 +90,18 @@ func _on_InvincibleTimer_timeout() -> void:
 
 
 func _area_entered(area: Area2D) -> void:
-	if area.is_in_group("water"):
+	if area.is_in_group("Water"):
 		in_water = true
-		AudioServer.add_bus_effect(0, audio_effect_filter)
+		#AudioServer.add_bus_effect(2, audio_effect_filter)
 		fsm.change_state(fsm.water_idle)
+		kinematic_body._on_Area2D_area_entered(area)
 
 
 func _area_exited(area: Area2D) -> void:
-	if area.is_in_group("water"):
+	if area.is_in_group("Water"):
+		kinematic_body.may_dash = true
 		in_water = false
-		AudioServer.remove_bus_effect(0, 1)
-		fsm.change_state(fsm.idle)
+		#AudioServer.remove_bus_effect(2, 1)
+		if not in_water: fsm.change_state(fsm.jump)
+		kinematic_body._on_Area2D_area_exited(area)
 

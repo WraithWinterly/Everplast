@@ -6,6 +6,12 @@ export var version_numbers: Array = [0, 0]
 export var world_names: Array = [
 	"World 0", "Foggy Overlands", "Drowsy Lands", "Snow Fall", "Tied Vines", "This is a world?", "Molten Grounds"]
 
+export var runtime_start_level: bool = false
+export var runtime_world: int = 0
+export var runtime_level: int = 0
+export var runtime_pos: Vector2 = Vector2()
+
+
 var version: String = ""
 
 onready var level_holder: Node2D = $LevelHolder
@@ -40,7 +46,4 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	VisualServer.set_default_clear_color(Color(0, 0, 0, 0))
 	OS.min_window_size = Vector2(1280, 720)
-
-
-
-
+	OS.window_borderless = false

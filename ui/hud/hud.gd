@@ -1,10 +1,12 @@
 extends Control
 
 var previous_item: String = "none"
+var toggled: bool = true
 
 onready var coin_label: Label = $VBoxContainer/HBoxContainer/CoinLabel
 onready var health_amount: Label = $VBoxContainer/HBoxContainer/HealthLabel
 onready var orb_label: Label = $VBoxContainer/HBoxContainer/OrbLabel
+onready var adrenaline_texture: TextureRect = $VBoxContainer/HBoxContainer/AdrenalineTexture
 onready var adrenaline_label: Label = $VBoxContainer/HBoxContainer/AdrenalineLabel
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var ui_slot: TextureRect = $VBoxContainer/UISlot
@@ -104,6 +106,18 @@ func update_counters() -> void:
 		gem_container.hide()
 
 
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_hud") and Globals.game_state == Globals.GameStates.LEVEL:
+		if toggled:
+			animation_player.stop()
+			hide_hud()
+			toggled = false
+		else:
+			animation_player.stop()
+			show_hud()
+			toggled = true
+
+
 func update_coin_counter(_amount: int = 0) -> void:
 	coin_label.text = str(PlayerStats.get_stat("coins"))
 
@@ -118,6 +132,9 @@ func update_health_counter() -> void:
 
 
 func update_adrenaline_counter() -> void:
+	var is_visibe: bool = PlayerStats.get_stat("rank") >= PlayerStats.Ranks.GOLD
+	adrenaline_label.visible = is_visibe
+	adrenaline_texture.visible = is_visibe
 	adrenaline_label.text = "%s | %s" % [
 			PlayerStats.get_stat("adrenaline"), PlayerStats.get_stat("adrenaline_max")]
 
@@ -151,6 +168,7 @@ func _level_changed(_world: int, _level: int) -> void:
 	yield(get_tree(), "physics_frame")
 	update_counters()
 	show_hud()
+	toggled = true
 
 
 func _level_completed() -> void:

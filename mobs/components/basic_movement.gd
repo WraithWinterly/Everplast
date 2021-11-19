@@ -7,7 +7,6 @@ export var enemy_path: NodePath
 var current_speed: int
 var facing_right: bool = true
 var linear_velocity: Vector2
-var ignore: bool = false
 
 
 onready var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -39,21 +38,27 @@ func _physics_process(delta: float) -> void:
 
 
 func attempt_flip(flip_left: bool = true) -> void:
-	if ignore:
-		if (facing_right and not raycast_wall_left.is_colliding()) \
-				or not facing_right and not raycast_floor_right.is_colliding():
-			ignore = false
-		if raycast_floor_left.is_colliding() and raycast_floor_right.is_colliding() and ignore:
-			return
+	if enemy.get_slide_count() > 0:
+		for i in enemy.get_slide_count():
+			var collider = enemy.get_slide_collision(i).collider
+			if not collider == null:
+				if collider.is_in_group("Enemy"):
+					return
+#	if ignore:
+#		if (facing_right and not raycast_wall_left.is_colliding()) \
+#				or not facing_right and not raycast_floor_right.is_colliding():
+#			ignore = false
+#		if raycast_floor_left.is_colliding() and raycast_floor_right.is_colliding() and ignore:
+#			return
 	if flip_left:
 		if not raycast_wall_left.is_colliding():
 			facing_right = false
 			flip_animation_player.play("flip")
-		else:
-			ignore = true
+#		else:
+#			ignore = true
 	else:
 		if not raycast_wall_right.is_colliding():
 			facing_right = true
 			flip_animation_player.play_backwards("flip")
-		else:
-			ignore = true
+#		else:
+#			ignore = true

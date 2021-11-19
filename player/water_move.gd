@@ -4,12 +4,14 @@ onready var fsm: Node = get_parent()
 onready var player: Player = get_parent().get_parent()
 onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("KinematicBody2D")
 
+var ignore: bool = false
 
 func _process(_delta: float) -> void:
+	if ignore: return
 #	if not Main.get_action_strength() == 0 or \
 #			not Main.get_action_strength().y == 0:
 #		set_input_speed()
-	if player_body.is_on_floor():
+	if player_body.is_on_floor() and abs(Main.get_action_strength()) == 0:
 		fsm.change_state(fsm.water_idle)
 
 
@@ -53,6 +55,9 @@ func down_check() -> void:
 
 
 func start() -> void:
+	ignore = true
+	yield(get_tree(), "physics_frame")
+	ignore = false
 	player_body.current_gravity = player_body.water_gravity
 
 

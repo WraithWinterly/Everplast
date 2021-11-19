@@ -12,8 +12,10 @@ func _ready() -> void:
 func _debug_enable_confirmed() -> void:
 	show()
 
+
 func _erase_all_confirmed() -> void:
 	hide()
+
 
 func _ui_faded() -> void:
 	visible = Globals.get_settings().data.cheats

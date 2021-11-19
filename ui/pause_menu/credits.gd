@@ -10,22 +10,20 @@ onready var title: Label = $Panel/VBoxContainer/PromptText
 func _ready() -> void:
 	var __: int
 	__ = UI.connect("changed", self, "_ui_changed")
-	var copyright: String = "Everplast %s: Copyright 2021 Ayden Springer." % Globals.get_main().version
+	var copyright: String = "Everplast %s\nCopyright 2021 Ayden Springer." % Globals.get_main().version
 	hide()
-	var engine_string: String = ""
-	for key in Engine.get_version_info().keys():
-		engine_string += "       " + key.capitalize() + ":\n"
-		engine_string += "              " + str(Engine.get_version_info()[key]) + "\n"
+	var engine_string: String = Engine.get_version_info().string
 	credits.text = \
-"""Primary Developer: WraithWinterly
+"""Primary Developer: Ayden Springer, "WraithWinterly"
 
 %s
 
 ***All rights reserved.***
 
-Godot Engine:
-%s
+You are NOT allowed to use any of my assets, or this game, for any comerical use. You are NOT allowed to use Everplast's copyrighted assets or Everplast for Non-fungible Tokens (NFT), or selling the art, or game somewhere else. A detailed list of non-copyrighted assets are listed below. Otherwise, all rights are reserved.
+YOU AREE YOU WILL NOT USE EVERPLAST OR EVERPLAST'S ASSETS FOR COMMERCIAL USE OR NFTs.
 
+This game uses Godot Engine %s
 	Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur.
 	Copyright (c) 2014-2021 Godot Engine contributors.
 
@@ -58,6 +56,8 @@ Music Tracks:
 		Feel the Love
 		Simple Simplyfied
 		Rain
+		ET alone ET call home instrumental
+		Beach Walk
 
 	Daydream Anatony - 8-Bit-Heroes - 04 Struggle <gamesounds.xyz>
 

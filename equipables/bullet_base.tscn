@@ -62,5 +62,4 @@ bus = "Audio"
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 rect = Rect2( -40, -40, 80, 80 )
 
-[connection signal="body_entered" from="." to="." method="_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_screen_exited"]

@@ -19,19 +19,19 @@ func _physics_process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("move_jump") and not player_body.second_jump_used:
-		player_body.may_dash = true
-		player_body.second_jump_used = true
-		player_body.linear_velocity.y = 0
-		player_body.air_time = 0
-		player_body.linear_velocity.y -= player_body.jump_speed
-	elif event.is_action_pressed("move_dash") and player_body.can_dash():
+#	if event.is_action_pressed("move_jump") and not player_body.second_jump_used:
+#		player_body.may_dash = true
+#		player_body.second_jump_used = true
+#		player_body.linear_velocity.y = 0
+#		player_body.air_time = 0
+#		player_body.linear_velocity.y -= player_body.jump_speed
+	if event.is_action_pressed("move_dash") and player_body.can_dash():
 		fsm.change_state(fsm.dash)
 
 
 func start():
 	player_body.may_dash = true
-	player_body.second_jump_used = false
+	player_body.second_jump_used = true
 	if player.facing_right:
 		player_body.linear_velocity.x += wall_jump_force
 	else:

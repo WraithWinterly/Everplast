@@ -72,7 +72,10 @@ func _process(_delta: float) -> void:
 
 		fsm.water_move:
 			control_flip_h()
-			animation = "walk"
+			if not abs(Globals.get_main().get_action_strength()) == 0:
+				animation = "walk"
+			else:
+				animation = "idle"
 
 		fsm.dash:
 			animation = "dash"

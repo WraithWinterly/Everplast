@@ -5,7 +5,8 @@ onready var fsm: Node = get_parent()
 
 
 func _process(_delta: float) -> void:
-	if not Main.get_action_strength() == 0:
+
+	if not abs(Main.get_action_strength()) == 0:
 		fsm.change_state(fsm.water_move)
 
 
@@ -15,7 +16,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-		player_body.basic_movement()
+	player_body.basic_movement()
 
 
 func start() -> void:
