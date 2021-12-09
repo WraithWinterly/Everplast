@@ -1,21 +1,20 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://ui/settings_menu/settings_menu.gd" type="Script" id=1]
-[ext_resource path="res://ui/ui_background.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=2]
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=3]
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/settings_menu/slider.tres" type="StyleBox" id=7]
-[ext_resource path="res://ui/pause_menu/credits.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=10]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=11]
 [ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=12]
-[ext_resource path="res://ui/pause_menu/erase_prompt.tscn" type="PackedScene" id=13]
 [ext_resource path="res://ui/grabber.png" type="Texture" id=14]
 [ext_resource path="res://ui/grabber_highlight.png" type="Texture" id=15]
-[ext_resource path="res://ui/pause_menu/debug_prompt.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ui/settings_menu/controls.png" type="Texture" id=17]
+[ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=18]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -69,7 +68,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.1 ]
+"values": [ 1.0, 0.05 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
@@ -93,7 +92,46 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.8, 0.9 ]
+"values": [ 1.8, 0.95 ]
+}
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -109,7 +147,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.1 ]
+"values": [ 1.0, 0.05 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
@@ -133,7 +171,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.8, 0.9 ]
+"values": [ 1.8, 0.95 ]
 }
 
 [sub_resource type="Animation" id=8]
@@ -188,7 +226,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.1 ]
+"values": [ 1.0, 0.05 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
@@ -212,7 +250,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.8, 0.9 ]
+"values": [ 1.8, 0.95 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -267,7 +305,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.1 ]
+"values": [ 1.0, 0.05 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:modulate")
@@ -291,7 +329,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.8, 0.9 ]
+"values": [ 1.8, 0.95 ]
 }
 
 [sub_resource type="Animation" id=11]
@@ -373,8 +411,60 @@ tracks/2/keys = {
 "values": [ 1.8, 0.9 ]
 }
 
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BGBlur:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BGBlur:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_top")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+
 [sub_resource type="Animation" id=2]
 length = 0.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("./Panel:modulate")
 tracks/0/interp = 1
@@ -394,7 +484,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05 ),
+"times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ 1.0, 0.0 ]
@@ -421,7 +511,43 @@ tracks/3/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.95 ]
+"values": [ 2.0, 0.95 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BGBlur:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("BGBlur:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Panel:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="Settings" type="Control"]
@@ -434,11 +560,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BGBlur" parent="." instance=ExtResource( 18 )]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+
 [node name="Panel" type="Panel" parent="."]
-anchor_left = 0.05
-anchor_top = 0.05
-anchor_right = 0.95
-anchor_bottom = 0.95
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.025
+anchor_top = 1.0
+anchor_right = 0.975
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
 mouse_filter = 2
 custom_styles/panel = ExtResource( 9 )
@@ -451,8 +582,11 @@ anchor_top = 0.015
 anchor_right = 1.0
 anchor_bottom = 0.017
 custom_fonts/font = ExtResource( 10 )
-text = "Settings"
+text = "settings.title"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="SidePanel" type="VBoxContainer" parent="Panel"]
 anchor_left = 0.025
@@ -465,14 +599,14 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/SidePanel"]
-margin_top = 144.0
-margin_right = 259.0
-margin_bottom = 504.0
+margin_top = 162.0
+margin_right = 390.0
+margin_bottom = 522.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="Back" type="Button" parent="Panel/SidePanel/HBoxContainer"]
-margin_right = 259.0
+margin_right = 390.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Other")
@@ -485,11 +619,11 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Back"
+text = "settings.back"
 
 [node name="General" type="Button" parent="Panel/SidePanel/HBoxContainer"]
 margin_top = 75.0
-margin_right = 259.0
+margin_right = 390.0
 margin_bottom = 135.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Back")
@@ -502,11 +636,11 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "General"
+text = "settings.general"
 
 [node name="Graphics" type="Button" parent="Panel/SidePanel/HBoxContainer"]
 margin_top = 150.0
-margin_right = 259.0
+margin_right = 390.0
 margin_bottom = 210.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../General")
@@ -519,11 +653,11 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Graphics"
+text = "settings.graphics"
 
 [node name="Controls" type="Button" parent="Panel/SidePanel/HBoxContainer"]
 margin_top = 225.0
-margin_right = 259.0
+margin_right = 390.0
 margin_bottom = 285.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Graphics")
@@ -536,11 +670,11 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Controls"
+text = "settings.controls"
 
 [node name="Other" type="Button" parent="Panel/SidePanel/HBoxContainer"]
 margin_top = 300.0
-margin_right = 259.0
+margin_right = 390.0
 margin_bottom = 360.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Controls")
@@ -553,13 +687,13 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Other"
+text = "settings.other"
 
 [node name="BG" type="Panel" parent="Panel"]
 anchor_left = 0.275
-anchor_top = 0.1
+anchor_top = 0.07
 anchor_right = 0.95
-anchor_bottom = 0.9
+anchor_bottom = 0.973
 mouse_filter = 2
 custom_styles/panel = ExtResource( 2 )
 __meta__ = {
@@ -578,131 +712,39 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/GeneralMenu"]
-margin_top = 36.0
-margin_right = 622.0
-margin_bottom = 482.0
+margin_top = 85.0
+margin_right = 656.0
+margin_bottom = 531.0
 custom_constants/separation = 15
 alignment = 1
 
-[node name="SocialMedia" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_right = 622.0
+[node name="Language" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_right = 656.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../ProfilePause")
-focus_next = NodePath("../ProfilePause")
-focus_previous = NodePath(".")
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
-toggle_mode = true
-pressed = true
-text = "Show Social Media: On"
-
-[node name="ProfilePause" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 75.0
-margin_right = 622.0
-margin_bottom = 135.0
-focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
-focus_neighbour_top = NodePath("../SocialMedia")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../Credits")
-focus_next = NodePath("../Credits")
-focus_previous = NodePath("../SocialMedia")
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
-toggle_mode = true
-pressed = true
-text = "Profile In Pause Screen: On"
-
-[node name="Credits" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 150.0
-margin_right = 622.0
-margin_bottom = 210.0
-focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
-focus_neighbour_top = NodePath("../ProfilePause")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../AudioVolume")
-focus_next = NodePath("../AudioVolume")
-focus_previous = NodePath("../ProfilePause")
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = ExtResource( 6 )
-custom_styles/pressed = ExtResource( 3 )
-custom_styles/focus = ExtResource( 5 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
-text = "Everplast Credits"
-
-[node name="AudioVolume" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 225.0
-margin_right = 622.0
-margin_bottom = 285.0
-focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
 focus_neighbour_top = NodePath("../Credits")
-focus_neighbour_right = NodePath("../AudioSlider/Slider")
-focus_neighbour_bottom = NodePath("../AudioSlider/Slider")
-focus_next = NodePath("../AudioSlider/Slider")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../MusicVolume")
+focus_next = NodePath("../MusicVolume")
+focus_previous = NodePath("../Credits")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-toggle_mode = true
-pressed = true
-text = "Audio Volume: On"
-
-[node name="AudioSlider" type="HBoxContainer" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 300.0
-margin_right = 622.0
-margin_bottom = 328.0
-
-[node name="Value" type="Label" parent="Panel/BG/GeneralMenu/HBoxContainer/AudioSlider"]
-margin_top = 4.0
-margin_right = 166.0
-margin_bottom = 24.0
-custom_fonts/font = ExtResource( 12 )
-text = "Audio Volume: 100"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Slider" type="HSlider" parent="Panel/BG/GeneralMenu/HBoxContainer/AudioSlider"]
-margin_left = 170.0
-margin_right = 622.0
-margin_bottom = 28.0
-focus_neighbour_left = NodePath("../../AudioVolume")
-focus_neighbour_top = NodePath("../../AudioVolume")
-focus_neighbour_right = NodePath("../../MusicVolume")
-focus_neighbour_bottom = NodePath("../../MusicVolume")
-focus_next = NodePath("../../MusicVolume")
-focus_previous = NodePath("../../AudioVolume")
-size_flags_horizontal = 3
-custom_icons/grabber_highlight = ExtResource( 15 )
-custom_icons/grabber = ExtResource( 14 )
-custom_styles/slider = ExtResource( 7 )
-custom_styles/grabber_area_highlight = ExtResource( 7 )
-custom_styles/grabber_area = ExtResource( 7 )
-step = 2.0
-value = 100.0
+text = "settings.general.languages"
 
 [node name="MusicVolume" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 343.0
-margin_right = 622.0
-margin_bottom = 403.0
+margin_top = 75.0
+margin_right = 656.0
+margin_bottom = 135.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
-focus_neighbour_top = NodePath("../AudioSlider/Slider")
+focus_neighbour_top = NodePath("../Language")
 focus_neighbour_right = NodePath("../MusicSlider/Slider")
 focus_neighbour_bottom = NodePath("../MusicSlider/Slider")
 focus_next = NodePath("../MusicSlider/Slider")
-focus_previous = NodePath("../AudioVolume")
+focus_previous = NodePath("../Language")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
@@ -711,12 +753,12 @@ custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
 toggle_mode = true
 pressed = true
-text = "Music Volume: On"
+text = "settings.general.music_volume"
 
 [node name="MusicSlider" type="HBoxContainer" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 418.0
-margin_right = 622.0
-margin_bottom = 446.0
+margin_top = 150.0
+margin_right = 656.0
+margin_bottom = 178.0
 
 [node name="Value" type="Label" parent="Panel/BG/GeneralMenu/HBoxContainer/MusicSlider"]
 margin_top = 4.0
@@ -730,12 +772,12 @@ __meta__ = {
 
 [node name="Slider" type="HSlider" parent="Panel/BG/GeneralMenu/HBoxContainer/MusicSlider"]
 margin_left = 170.0
-margin_right = 622.0
+margin_right = 656.0
 margin_bottom = 28.0
-focus_neighbour_left = NodePath("../../MusicVolume")
 focus_neighbour_top = NodePath("../../MusicVolume")
-focus_neighbour_right = NodePath("../../ResetStats")
-focus_neighbour_bottom = NodePath("../../ResetStats")
+focus_neighbour_bottom = NodePath("../../AudioVolume")
+focus_next = NodePath("../../AudioVolume")
+focus_previous = NodePath("../../MusicVolume")
 size_flags_horizontal = 3
 custom_icons/grabber_highlight = ExtResource( 15 )
 custom_icons/grabber = ExtResource( 14 )
@@ -745,6 +787,90 @@ custom_styles/grabber_area = ExtResource( 7 )
 step = 2.0
 value = 100.0
 rounded = true
+
+[node name="AudioVolume" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 193.0
+margin_right = 656.0
+margin_bottom = 253.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
+focus_neighbour_right = NodePath(".")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+toggle_mode = true
+pressed = true
+text = "settings.general.audio_volume"
+
+[node name="AudioSlider" type="HBoxContainer" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 268.0
+margin_right = 656.0
+margin_bottom = 296.0
+
+[node name="Value" type="Label" parent="Panel/BG/GeneralMenu/HBoxContainer/AudioSlider"]
+margin_top = 4.0
+margin_right = 166.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 12 )
+text = "Audio Volume: 100"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="Panel/BG/GeneralMenu/HBoxContainer/AudioSlider"]
+margin_left = 170.0
+margin_right = 656.0
+margin_bottom = 28.0
+focus_neighbour_top = NodePath("../../AudioVolume")
+focus_neighbour_bottom = NodePath("../../Social")
+focus_next = NodePath("../../Social")
+focus_previous = NodePath("../../AudioVolume")
+size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 15 )
+custom_icons/grabber = ExtResource( 14 )
+custom_styles/slider = ExtResource( 7 )
+custom_styles/grabber_area_highlight = ExtResource( 7 )
+custom_styles/grabber_area = ExtResource( 7 )
+step = 2.0
+value = 100.0
+
+[node name="Social" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 311.0
+margin_right = 656.0
+margin_bottom = 371.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Credits")
+focus_next = NodePath("../Credits")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+toggle_mode = true
+pressed = true
+text = "settings.general.social_links"
+
+[node name="Credits" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
+margin_top = 386.0
+margin_right = 656.0
+margin_bottom = 446.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
+focus_neighbour_top = NodePath("../Social")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../Language")
+focus_next = NodePath("../Language")
+focus_previous = NodePath("../Social")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+text = "settings.general.credits"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/GeneralMenu"]
 anims/RESET = SubResource( 4 )
@@ -762,21 +888,21 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/GraphicsMenu"]
-margin_top = 116.0
-margin_right = 622.0
-margin_bottom = 401.0
+margin_top = 166.0
+margin_right = 656.0
+margin_bottom = 451.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="Fullscreen" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
-margin_right = 622.0
+margin_right = 656.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
-focus_neighbour_top = NodePath("../Tonemap")
+focus_neighbour_top = NodePath("../PostProcessing")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../VSync")
 focus_next = NodePath("../VSync")
-focus_previous = NodePath("../Tonemap")
+focus_previous = NodePath("../PostProcessing")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
@@ -789,13 +915,13 @@ text = "Fullscreen Mode: On"
 
 [node name="VSync" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
 margin_top = 75.0
-margin_right = 622.0
+margin_right = 656.0
 margin_bottom = 135.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
 focus_neighbour_top = NodePath("../Fullscreen")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../AA")
-focus_next = NodePath("../AA")
+focus_neighbour_bottom = NodePath("../Tonemap")
+focus_next = NodePath("../Tonemap")
 focus_previous = NodePath("../Fullscreen")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
@@ -807,15 +933,15 @@ toggle_mode = true
 pressed = true
 text = "Use VSync: On"
 
-[node name="AA" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
+[node name="Tonemap" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
 margin_top = 150.0
-margin_right = 622.0
+margin_right = 656.0
 margin_bottom = 210.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
 focus_neighbour_top = NodePath("../VSync")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../Tonemap")
-focus_next = NodePath("../Tonemap")
+focus_neighbour_right = NodePath("../PostProcessing")
+focus_neighbour_bottom = NodePath("../PostProcessing")
+focus_next = NodePath("../PostProcessing")
 focus_previous = NodePath("../VSync")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
@@ -823,34 +949,37 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Anti Aliasing: x4"
+text = "settings.graphics.tonemap"
 
-[node name="Tonemap" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
+[node name="PostProcessing" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
 margin_top = 225.0
-margin_right = 622.0
+margin_right = 656.0
 margin_bottom = 285.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
-focus_neighbour_top = NodePath("../AA")
+focus_neighbour_top = NodePath("../Tonemap")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../Fullscreen")
 focus_next = NodePath("../Fullscreen")
-focus_previous = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
+focus_previous = NodePath("../Tonemap")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Color Tonemap: ACES"
+toggle_mode = true
+pressed = true
+text = "Post Processing: On"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/GraphicsMenu"]
+anims/RESET = SubResource( 12 )
 anims/slide = SubResource( 5 )
 
 [node name="ControlsMenu" type="VBoxContainer" parent="Panel/BG"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
 anchor_right = 1.8
-anchor_bottom = 1.0
+anchor_bottom = 0.139
 custom_constants/separation = 40
 alignment = 1
 __meta__ = {
@@ -858,14 +987,15 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/ControlsMenu"]
-margin_top = 229.0
-margin_right = 622.0
-margin_bottom = 289.0
+margin_top = 12.0
+margin_right = 738.0
+margin_bottom = 72.0
 custom_constants/separation = 15
 alignment = 1
 
-[node name="Test" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
-margin_right = 622.0
+[node name="CustomizeControls" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.862745 )
+margin_right = 738.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Controls")
 focus_neighbour_top = NodePath(".")
@@ -880,7 +1010,164 @@ custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
 toggle_mode = true
-text = "Menu Not Complete"
+text = "controls.customize_controls"
+
+[node name="TextureRect" type="TextureRect" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_top = 72.3
+margin_right = 738.0
+margin_bottom = 138.3
+rect_scale = Vector2( 5, 5 )
+texture = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interact" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 15.0
+margin_top = 145.0
+margin_right = 140.0
+margin_bottom = 130.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.interact"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equip" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 15.0
+margin_top = 180.0
+margin_right = 140.0
+margin_bottom = 165.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.equip"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerup" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 15.0
+margin_top = 109.0
+margin_right = 140.0
+margin_bottom = 100.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.powerup"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprint" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 420.0
+margin_top = 145.0
+margin_right = 561.0
+margin_bottom = 165.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.sprint"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 550.0
+margin_top = 144.0
+margin_right = 1288.0
+margin_bottom = 164.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.fire"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 420.0
+margin_top = 182.0
+margin_right = 1158.0
+margin_bottom = 202.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.inventory"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 420.0
+margin_top = 216.0
+margin_right = 1158.0
+margin_bottom = 236.0
+custom_fonts/font = ExtResource( 12 )
+text = "global.back"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Jump" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 420.0
+margin_top = 250.0
+margin_right = 1158.0
+margin_bottom = 270.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.jump"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Aim" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 420.0
+margin_top = 309.0
+margin_right = 1158.0
+margin_bottom = 329.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.aim"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_top = 333.0
+margin_right = 235.0
+margin_bottom = 353.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.move"
+align = 2
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Seperator" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 262.0
+margin_top = 333.0
+margin_right = 1000.0
+margin_bottom = 353.0
+custom_fonts/font = ExtResource( 12 )
+text = "|"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ability" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+margin_left = 285.0
+margin_top = 333.0
+margin_right = 1023.0
+margin_bottom = 353.0
+custom_fonts/font = ExtResource( 12 )
+text = "controls.ability"
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/ControlsMenu"]
 anims/RESET = SubResource( 8 )
@@ -898,14 +1185,14 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/OtherMenu"]
-margin_top = 191.0
-margin_right = 622.0
-margin_bottom = 326.0
+margin_top = 241.0
+margin_right = 656.0
+margin_bottom = 376.0
 custom_constants/separation = 15
 alignment = 1
 
-[node name="DebugConsole" type="Button" parent="Panel/BG/OtherMenu/HBoxContainer"]
-margin_right = 622.0
+[node name="ResetSettings" type="Button" parent="Panel/BG/OtherMenu/HBoxContainer"]
+margin_right = 656.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Other")
 focus_neighbour_top = NodePath("../EraseGame")
@@ -920,25 +1207,25 @@ custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
 toggle_mode = true
-text = "Debug Console: Off"
+text = "settings.reset_settings"
 
 [node name="EraseGame" type="Button" parent="Panel/BG/OtherMenu/HBoxContainer"]
 margin_top = 75.0
-margin_right = 622.0
+margin_right = 656.0
 margin_bottom = 135.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Other")
-focus_neighbour_top = NodePath("../DebugConsole")
+focus_neighbour_top = NodePath("../ResetSettings")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath("../DebugConsole")
-focus_next = NodePath("../DebugConsole")
-focus_previous = NodePath("../DebugConsole")
+focus_neighbour_bottom = NodePath("../ResetSettings")
+focus_next = NodePath("../ResetSettings")
+focus_previous = NodePath("../ResetSettings")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Erase All Data"
+text = "settings.other.erase_all"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/BG/OtherMenu"]
 anims/RESET = SubResource( 9 )
@@ -950,7 +1237,7 @@ anchor_left = 1.0
 anchor_right = 1.8
 anchor_bottom = 1.0
 custom_fonts/font = ExtResource( 11 )
-text = "Select a Subcategory"
+text = "settings.subcategory_text"
 align = 1
 valign = 1
 __meta__ = {
@@ -962,28 +1249,23 @@ anims/RESET = SubResource( 11 )
 anims/slide = SubResource( 10 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 13 )
 anims/show = SubResource( 2 )
-
-[node name="Credits" parent="." instance=ExtResource( 8 )]
-
-[node name="ErasePrompt" parent="." instance=ExtResource( 13 )]
-
-[node name="DebugPrompt" parent="." instance=ExtResource( 16 )]
 
 [connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Back" to="." method="_on_Back_focus_entered"]
 [connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/General" to="." method="_on_General_focus_entered"]
 [connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Graphics" to="." method="_on_Graphics_focus_entered"]
 [connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Controls" to="." method="_on_Controls_focus_entered"]
 [connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Other" to="." method="_on_Other_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/SocialMedia" to="." method="_on_SocialMedia_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/ProfilePause" to="." method="_on_ProfilePause_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/Credits" to="." method="_on_Credits_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/AudioVolume" to="." method="_on_AudioVolume_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/Language" to="." method="_on_Language_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/MusicVolume" to="." method="_on_MusicVolume_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/AudioVolume" to="." method="_on_AudioVolume_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/Social" to="." method="_on_SocialMedia_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/Credits" to="." method="_on_Credits_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/Fullscreen" to="." method="_on_Fullscreen_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/VSync" to="." method="_on_VSync_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/AA" to="." method="_on_AA_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/Tonemap" to="." method="_on_Tonemap_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/Test" to="." method="_on_Test_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/DebugConsole" to="." method="_on_DebugConsole_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/PostProcessing" to="." method="_on_PostProcessing_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls" to="." method="_on_Test_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/ResetSettings" to="." method="_on_DebugConsole_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/EraseGame" to="." method="_on_EraseGame_focus_entered"]

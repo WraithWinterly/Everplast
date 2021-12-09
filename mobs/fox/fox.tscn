@@ -1,0 +1,99 @@
+[gd_scene load_steps=27 format=2]
+
+[ext_resource path="res://mobs/fox/foxrun3.png" type="Texture" id=1]
+[ext_resource path="res://mobs/bunny/bunny_hurt.wav" type="AudioStream" id=2]
+[ext_resource path="res://mobs/fox/foxidle5.png" type="Texture" id=3]
+[ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mobs/components/chase_movement.tscn" type="PackedScene" id=5]
+[ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=8]
+[ext_resource path="res://mobs/components/hurt_by_spikes.tscn" type="PackedScene" id=9]
+[ext_resource path="res://mobs/fox/foxrun2.png" type="Texture" id=10]
+[ext_resource path="res://mobs/fox/foxrun5.png" type="Texture" id=11]
+[ext_resource path="res://mobs/fox/foxrun8.png" type="Texture" id=12]
+[ext_resource path="res://mobs/fox/foxrun4.png" type="Texture" id=13]
+[ext_resource path="res://mobs/fox/foxrun1.png" type="Texture" id=14]
+[ext_resource path="res://mobs/fox/foxrun6.png" type="Texture" id=15]
+[ext_resource path="res://mobs/fox/foxrun7.png" type="Texture" id=16]
+[ext_resource path="res://mobs/fox/foxidle7.png" type="Texture" id=17]
+[ext_resource path="res://mobs/fox/foxidle1.png" type="Texture" id=18]
+[ext_resource path="res://mobs/fox/foxidle3.png" type="Texture" id=19]
+[ext_resource path="res://mobs/fox/foxidle4.png" type="Texture" id=20]
+[ext_resource path="res://mobs/fox/foxidle6.png" type="Texture" id=21]
+[ext_resource path="res://mobs/fox/foxidle2.png" type="Texture" id=22]
+[ext_resource path="res://mobs/fox/foxidle8.png" type="Texture" id=23]
+[ext_resource path="res://mobs/fox/foxidle9.png" type="Texture" id=24]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 18 ), ExtResource( 22 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 3 ), ExtResource( 21 ), ExtResource( 17 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "default",
+"speed": 15.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 10 ), ExtResource( 1 ), ExtResource( 13 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "chase",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 8, 6.5 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 5.5 )
+
+[node name="Fox" type="KinematicBody2D" groups=["Mob"]]
+collision_layer = 64
+collision_mask = 3
+
+[node name="MobComponentManager" parent="." instance=ExtResource( 4 )]
+orb_amount = 40
+knockback = 200
+attack_damage = 15
+max_health = 15
+
+[node name="HitSound" parent="MobComponentManager" index="0"]
+stream = ExtResource( 2 )
+volume_db = 2.0
+
+[node name="DeathSound" parent="MobComponentManager" index="1"]
+stream = ExtResource( 2 )
+volume_db = 2.0
+
+[node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
+position = Vector2( 0, -2.85 )
+frames = SubResource( 2 )
+animation = "chase"
+frame = 4
+
+[node name="CollisionShape2D" parent="MobComponentManager/HurtArea" index="0"]
+position = Vector2( 4, 1.5 )
+shape = SubResource( 3 )
+
+[node name="ChaseMovement" parent="MobComponentManager" instance=ExtResource( 5 )]
+speed = 150
+flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
+enemy_path = NodePath("../..")
+animated_sprite_path = NodePath("../SpriteHolder/AnimatedSprite")
+
+[node name="AttackTouch" parent="MobComponentManager" instance=ExtResource( 6 )]
+enemy_path = NodePath("../..")
+hit_area_path = NodePath("../HurtArea")
+
+[node name="HurtByBullet" parent="MobComponentManager" instance=ExtResource( 8 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../HurtArea")
+
+[node name="HurtBySpikes" parent="MobComponentManager" instance=ExtResource( 9 )]
+kinematic_body_path = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 1.5 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[editable path="MobComponentManager"]
+[editable path="MobComponentManager/ChaseMovement"]

@@ -1,0 +1,94 @@
+extends Node
+
+var ignore_fire := false
+var ui_used_up := false
+var ui_used_down := false
+var ui_used_left := false
+var ui_used_right := false
+
+
+func _physics_process(_delta: float) -> void:
+	check_action("stick_ui_up")
+	check_action("stick_ui_down")
+	check_action("stick_ui_left")
+	check_action("stick_ui_right")
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("stick_ui_up"):
+		if not ui_used_up:
+			stick_action("ui_up")
+			ui_used_up = true
+		else:
+			release_action("ui_up")
+
+	elif event.is_action_pressed("stick_ui_down"):
+		if not ui_used_down:
+			stick_action("ui_down")
+			ui_used_down = true
+		else:
+			release_action("ui_down")
+
+	elif event.is_action_pressed("stick_ui_left"):
+		if not ui_used_left:
+			stick_action("ui_left")
+			ui_used_left = true
+		else:
+			release_action("ui_left")
+
+	elif event.is_action_pressed("stick_ui_right"):
+		if not ui_used_right:
+			stick_action("ui_right")
+			ui_used_right = true
+		else:
+			release_action("ui_right")
+
+	elif event.is_action_released("fire"):
+		ignore_fire = false
+
+
+func check_action(input_event: String) -> void:
+	if not Input.is_action_pressed(input_event):
+		match input_event:
+			"stick_ui_up":
+				ui_used_up = false
+			"stick_ui_down":
+				ui_used_down = false
+			"stick_ui_left":
+				ui_used_left = false
+			"stick_ui_right":
+				ui_used_right = false
+
+
+func stick_action(action: String) -> void:
+	var input_action = InputEventAction.new()
+	input_action.action = action
+	input_action.pressed = true
+	Input.parse_input_event(input_action)
+
+
+func release_action(action: String) -> void:
+	var input_action = InputEventAction.new()
+	input_action.action = action
+	input_action.pressed = false
+	Input.parse_input_event(input_action)
+
+
+func get_action_strength_keyboard() -> float:
+	return float(Input.get_axis("move_left", "move_right"))
+
+
+func get_action_strength_controller() -> float:
+	return float(Input.get_axis("ctr_move_left", "ctr_move_right"))
+
+
+func get_action_strength() -> float:
+	if abs(get_action_strength_keyboard()) > 0:
+		return get_action_strength_keyboard()
+	else:
+		return get_action_strength_controller()
+
+
+func get_controller_right_axis() -> Vector2:
+	return Vector2(Input.get_axis("ctr_look_left", "ctr_look_right"),
+			Input.get_axis("ctr_look_down", "ctr_look_up"))

@@ -1,18 +1,18 @@
 extends Node
 
-onready var player: Node2D = get_parent().get_parent()
-onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("KinematicBody2D")
+onready var player: KinematicBody2D = get_parent().get_parent()
 onready var fsm: Node = get_parent()
 
 # Add mobile toggle sprint later
 
 func _physics_process(_delta: float) -> void:
-	player_body.basic_movement()
-	if not Input.is_action_pressed("move_sprint"):
-		fsm.change_state(fsm.walk)
-	elif not abs(Main.get_action_strength()) > 0:
+	player.basic_movement()
+	if not player.sprinting_pressed:
+
 		fsm.change_state(fsm.idle)
-	elif player.falling:
+	elif not abs(GlobalInput.get_action_strength()) > 0:
+		fsm.change_state(fsm.walk)
+	elif not player.on_floor() and player.falling:
 		fsm.change_state(fsm.fall)
 
 

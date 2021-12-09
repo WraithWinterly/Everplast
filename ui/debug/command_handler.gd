@@ -27,7 +27,7 @@ const valid_commands: Array = [
 
 
 func tp(location_x: float, location_y: float) -> String:
-	debug_console.hide_console()
+	debug_console.hide_menu()
 	var location = Vector2(location_x, location_y)
 	var player_body: KinematicBody2D = get_node_or_null(Globals.player_body_path)
 	if not player_body == null:
@@ -38,8 +38,8 @@ func tp(location_x: float, location_y: float) -> String:
 
 
 func change_level(world: int, level: int) -> String:
-	debug_console.hide_console()
-	Signals.emit_signal("level_change_attempted", world, level)
+	debug_console.hide_menu()
+	GlobalEvents.emit_signal("level_changed", world, level)
 	debug_console.last_world = Vector2(world, level)
 	return "Attempted to change to World %s, Level %s" % [world, level]
 
@@ -49,34 +49,34 @@ func spawn(loader: String, amount: int) -> String:
 	if spawn is PackedScene:
 		for _n in amount:
 			var loaded = spawn.instance()
-			loaded.global_position = get_node(Globals.player_body_path).global_position
+			get_node(GlobalPaths.LEVEL).add_child(loaded)
+			loaded.global_position = get_node(GlobalPaths.PLAYER).global_position
 			loaded.global_position.x -= 30
-			get_node(Globals.level_path).add_child(loaded)
-			debug_console.hide_console()
+			debug_console.hide_menu()
 		return "%s Loaded." % loader
 	else:
 		return "Failed to load %s" % loader
 
 
 func set_stat(stat_name: String, stat_value) -> String:
-	if PlayerStats.get_stat(stat_name) is float:
+	if GlobalSave.get_stat(stat_name) is float:
 		stat_value = stat_value as float
-	elif PlayerStats.get_stat(stat_name) is int:
+	elif GlobalSave.get_stat(stat_name) is int:
 		stat_value = stat_value as int
-	elif PlayerStats.get_stat(stat_name) is String:
+	elif GlobalSave.get_stat(stat_name) is String:
 		stat_value = stat_value as String
 
-	PlayerStats.set_stat(stat_name, stat_value)
+	GlobalSave.set_stat(stat_name, stat_value)
 	return "Attempted to set stat %s to %s" % [stat_name, stat_value]
 
 
 func get_stat(stat: String) -> String:
-	return str(PlayerStats.get_stat(stat))
+	return str(GlobalSave.get_stat(stat))
 
 
 func get_stats() -> String:
 	var stats_string: String = "Save Data:\n"
-	var data = PlayerStats.data
+	var data = GlobalSave.data
 
 	var index: int = 0
 	for dict in data:
@@ -87,23 +87,23 @@ func get_stats() -> String:
 	return stats_string
 
 
+func get_stats_raw() -> String:
+	return str(GlobalSave.data)
+
+
 func get_settings() -> String:
 	var string: String = "Settings:\n"
-	for key in Globals.get_settings().data.keys():
+	for key in get_node(GlobalPaths.SETTINGS).data.keys():
 		var new_str: String = key
 		new_str = new_str.replace("_", " ")
 		new_str = new_str.capitalize()
 		string += "     %s: " % new_str
-		string += "%s\n" % Globals.get_settings().data[key]
+		string += "%s\n" % get_node(GlobalPaths.SETTINGS).data[key]
 	return string
 
 
 func get_settings_raw() -> String:
-	return str(Globals.get_settings().data)
-
-
-func get_stats_raw() -> String:
-	return str(PlayerStats.data)
+	return str(get_node(GlobalPaths.SETTINGS).data)
 
 
 func clear() -> String:
@@ -112,17 +112,17 @@ func clear() -> String:
 
 
 func kill() -> String:
-	var player = get_node(Globals.player_path)
+	var player = get_node_or_null(GlobalPaths.PLAYER)
 	if player == null:
 		return "Failed to find player."
 	else:
-		debug_console.hide_console()
-		Signals.emit_signal("start_player_death")
+		debug_console.hide_menu()
+		GlobalEvents.emit_signal("player_death_started")
 		return "Killed Player."
 
 
 func save() -> String:
-	Signals.emit_signal("save")
+	GlobalEvents.emit_signal("save_file_saved")
 	return "Game Saved."
 
 

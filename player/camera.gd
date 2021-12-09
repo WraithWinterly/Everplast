@@ -5,34 +5,42 @@ enum {
 	SUB
 }
 
-const max_offset := Vector2(100, 75)
-const normal_zoom := Vector2(0.2, 0.2)
-const sprint_zoom := Vector2(0.212, 0.212)
-const decay: float = 0.8
-const max_roll: float = 0.1
+const MAX_OFFSET := Vector2(100, 75)
+const NORMAL_ZOOM := Vector2(0.21875, 0.21875)
+const SPRINT_ZOOM := Vector2(0.2265625, 0.2265625)
 
-var current_zoom: Vector2 = normal_zoom
+const DECAY: float = 0.8
+const MAX_ROLL: float = 0.1
+
+var current_zoom := NORMAL_ZOOM
+
+var default_drag_top: float = drag_margin_top
+var default_drag_bottom: float = drag_margin_bottom
+
+
 var trauma: float = 0.0
 var trauma_power: float = 2.5
-var noise_y: int = 0
+
 var state: int = NORMAL
+var noise_y: int = 0
 
-var default_drag_top = drag_margin_top
-var default_drag_bottom = drag_margin_bottom
 
-onready var noise = OpenSimplexNoise.new()
-onready var player = get_parent().get_parent()
-onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("KinematicBody2D")
-onready var fsm: Node = get_parent().get_parent().get_node("FSM")
+onready var noise := OpenSimplexNoise.new()
+onready var player: KinematicBody2D = $"../../KinematicBody2D"
+onready var fsm: Node = $"../../KinematicBody2D/FSM"
+
 
 func _ready() -> void:
 	var __: int
-	__ = Signals.connect("sublevel_changed", self, "_sublevel_changed")
+	__ = GlobalEvents.connect("level_subsection_changed", self, "_level_subsection_changed")
 	__ = fsm.connect("state_changed", self, "_state_changed")
+
 	randomize()
 	noise.seed = randi()
 	noise.period = 4
 	noise.octaves = 2
+
+	yield(get_tree(), "idle_frame")
 	update_camera_positions(NORMAL)
 
 
@@ -46,44 +54,32 @@ func set_trauma(amount) -> void:
 
 func _process(delta) -> void:
 	if trauma:
-		trauma = max(trauma - decay * delta, 0)
+		trauma = max(trauma - DECAY * delta, 0)
 		shake()
 
 
 func _physics_process(_delta: float) -> void:
-	zoom = lerp(zoom, current_zoom, 0.14)
+	zoom = lerp(zoom, current_zoom, 0.1484375)
+
 	if player.sprinting:
-		current_zoom = sprint_zoom
+		current_zoom = SPRINT_ZOOM
 	else:
-		current_zoom = normal_zoom
+		current_zoom = NORMAL_ZOOM
 
 
 func shake() -> void:
 	var amount = pow(trauma, trauma_power)
+
 	noise_y += 1
-	rotation = max_roll * amount * noise.get_noise_2d(noise.seed, noise_y)
-	offset.x = max_offset.x * amount * noise.get_noise_2d(noise.seed*2, noise_y)
-	offset.y = max_offset.y * amount * noise.get_noise_2d(noise.seed*3, noise_y)
-
-
-func _state_changed() -> void:
-	if fsm.current_state == fsm.dash:
-		set_trauma(0.4)
-
-
-func _sublevel_changed(_pos: Vector2) -> void:
-	yield(UI, "faded")
-	if state == NORMAL:
-		state = SUB
-		update_camera_positions(state)
-	else:
-		state = NORMAL
-		update_camera_positions(state)
+	rotation = MAX_ROLL * amount * noise.get_noise_2d(noise.seed, noise_y)
+	offset.x = MAX_OFFSET.x * amount * noise.get_noise_2d(noise.seed*2, noise_y)
+	offset.y = MAX_OFFSET.y * amount * noise.get_noise_2d(noise.seed*3, noise_y)
 
 
 func update_camera_positions(mode: int) -> void:
 	if mode == NORMAL:
-		var level: Node2D = get_node_or_null(Globals.level_path)
+		var level: Node2D = get_node_or_null(GlobalPaths.LEVEL)
+
 		if not level == null:
 			var limit_left_top_position = level.get_node_or_null("LevelComponents/CameraPositions/TopLeft")
 			var limit_right_bottom_position = level.get_node_or_null("LevelComponents/CameraPositions/BottomRight")
@@ -93,7 +89,8 @@ func update_camera_positions(mode: int) -> void:
 				limit_right = limit_right_bottom_position.position.x
 				limit_bottom = limit_right_bottom_position.position.y
 	else:
-		var level: Node2D = get_node_or_null(Globals.level_path)
+		var level: Node2D = get_node_or_null(GlobalPaths.LEVEL)
+
 		if not level == null:
 			var limit_left_top_position = level.get_node_or_null("LevelComponents/CameraPositions/SubTopLeft")
 			var limit_right_bottom_position = level.get_node_or_null("LevelComponents/CameraPositions/SubBottomRight")
@@ -102,3 +99,21 @@ func update_camera_positions(mode: int) -> void:
 				limit_top = limit_left_top_position.position.y
 				limit_right = limit_right_bottom_position.position.x
 				limit_bottom = limit_right_bottom_position.position.y
+
+
+func _level_subsection_changed(_pos: Vector2) -> void:
+	yield(GlobalEvents, "ui_faded")
+
+	if state == NORMAL:
+		state = SUB
+		update_camera_positions(state)
+	else:
+		state = NORMAL
+		update_camera_positions(state)
+
+
+func _state_changed() -> void:
+	if fsm.current_state == fsm.dash:
+		set_trauma(0.4)
+
+

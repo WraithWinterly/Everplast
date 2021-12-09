@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=2]
@@ -22,7 +22,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "level"
-length = 1.2
+length = 2.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:anchor_top")
 tracks/0/interp = 1
@@ -30,7 +30,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.2 ),
+"times": PoolRealArray( 0, 0.5, 2.4, 2.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.35, 0.35, 1.0 ]
@@ -42,7 +42,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.2 ),
+"times": PoolRealArray( 0, 0.5, 2.4, 2.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.366, 0.366, 1.0 ]
@@ -54,7 +54,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.5, 1, 1.2 ),
+"times": PoolRealArray( 0, 0.5, 2.4, 2.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
@@ -76,24 +76,13 @@ region = Rect2( 18, 0, 9, 16 )
 atlas = ExtResource( 2 )
 region = Rect2( 27, 0, 9, 16 )
 
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 36, 0, 9, 16 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 45, 0, 9, 16 )
-
 [node name="FadePlayer" type="CanvasLayer"]
 layer = 2
 script = ExtResource( 3 )
-color_world_error = Color( 1, 0, 0, 1 )
-color_world_1 = Color( 0.160784, 0.666667, 0.560784, 1 )
+color_world_1 = Color( 0.137255, 0.509804, 0.529412, 1 )
 color_world_2 = Color( 0.141176, 0.12549, 0.0235294, 1 )
-color_world_3 = Color( 0.239216, 0.443137, 0.435294, 1 )
-color_world_4 = Color( 0.184314, 0.572549, 0.0862745, 1 )
-color_world_5 = Color( 0.168627, 0.168627, 0.168627, 1 )
-color_world_6 = Color( 0.611765, 0, 0, 1 )
+color_world_3 = Color( 0.439216, 0.439216, 0.439216, 1 )
+color_world_4 = Color( 0.137255, 0, 0.0588235, 1 )
 
 [node name="FadeRect" type="ColorRect" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -176,22 +165,6 @@ margin_right = 9.0
 margin_bottom = 56.0
 mouse_filter = 2
 texture = SubResource( 6 )
-
-[node name="5" type="TextureRect" parent="FadeRect/Control/HBoxContainer/Control/WorldIcons"]
-visible = false
-margin_top = 50.0
-margin_right = 9.0
-margin_bottom = 66.0
-mouse_filter = 2
-texture = SubResource( 7 )
-
-[node name="6" type="TextureRect" parent="FadeRect/Control/HBoxContainer/Control/WorldIcons"]
-visible = false
-margin_top = 60.0
-margin_right = 9.0
-margin_bottom = 76.0
-mouse_filter = 2
-texture = SubResource( 8 )
 
 [node name="Label" type="Label" parent="FadeRect/Control/HBoxContainer"]
 margin_left = 642.0

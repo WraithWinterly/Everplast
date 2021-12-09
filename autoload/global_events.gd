@@ -1,0 +1,131 @@
+extends Node
+
+#----------------------#
+#-----Level Events-----#
+#----------------------#
+
+signal level_completed()
+signal level_complete_started()
+signal level_world_selector_loaded()
+signal level_checkpoint_activated()
+signal level_subsection_changed(pos)
+signal level_changed(world, level)
+
+#-----------------------#
+#-----Player Events-----#
+#-----------------------#
+
+signal player_anim_sprite_reset()
+signal player_anim_sprite_direction_changed(facing_right) # bool
+signal player_dashed()
+signal player_invincibility_started()
+signal player_invincibility_stopped()
+
+signal player_death_started()
+signal player_died()
+
+signal player_used_powerup(item_name) # string
+signal player_powerup_ended(item_name) # string
+
+signal player_collected_powerup(item_name) # string
+signal player_collected_collectable(item_name) # string
+signal player_collected_equippable(item_name) # string
+
+signal player_collected_coin(amount) # int
+signal player_collected_orb(amount) # int
+signal player_collected_gem(index) # int
+
+signal player_hurt_from_enemy(hurt_type, knockback, damage) # A_Globals.HurtTypes, int, int
+signal player_hurt_enemy(hurt_type) # A_Globals.HurtTypes
+signal player_killed_enemy(hurt_type) # A_Globals.HurtTypes
+signal player_equipped(equippable) # string
+signal player_used_springboard(amount) # int
+signal player_level_increased(type)
+
+#---------------------#
+#-----Save Events-----#
+#---------------------#
+
+signal save_file_saved(save_silent) # bool
+signal save_file_created(index) # bool
+signal save_stat_updated()
+
+#-------------------#
+#-----UI Events-----#
+#-------------------#
+
+signal ui_dialogue_hidden()
+signal ui_dialogued(content, person, func_call) # string
+
+signal ui_social_disabled()
+signal ui_social_enabled()
+
+signal ui_settings_updated()
+
+
+signal ui_faded()
+signal ui_notification_shown(noti) # string
+signal ui_notification_finished()
+signal ui_button_pressed(alt) # bool
+signal ui_profile_focus_index_changed()
+
+signal ui_play_pressed()
+signal ui_settings_pressed()
+signal ui_settings_back_pressed()
+signal ui_settings_credits_pressed()
+signal ui_settings_credits_back_pressed()
+signal ui_settings_initial_started()
+signal ui_settings_language_pressed()
+signal ui_settings_language_back_pressed()
+signal ui_settings_language_back_pressed_initial()
+signal ui_settings_language_english_pressed()
+signal ui_settings_language_spanish_pressed()
+signal ui_settings_language_buttons_updated(region) # String
+signal ui_settings_controls_customize_pressed()
+signal ui_settings_controls_customize_back_pressed()
+signal ui_settings_erase_all_pressed()
+signal ui_settings_erase_all_prompt_no_pressed()
+signal ui_settings_erase_all_prompt_yes_pressed()
+signal ui_settings_erase_all_prompt_extra_no_pressed()
+signal ui_settings_erase_all_prompt_extra_yes_pressed()
+signal ui_settings_reset_settings_pressed()
+signal ui_settings_reset_settings_prompt_no_pressed()
+signal ui_settings_reset_settings_prompt_yes_pressed()
+signal ui_quick_play_pressed()
+signal ui_quick_play_prompt_no_pressed()
+signal ui_quick_play_prompt_yes_pressed()
+signal ui_quit_pressed()
+signal ui_quit_prompt_no_pressed()
+signal ui_quit_prompt_yes_pressed()
+signal ui_profile_selector_return_pressed()
+signal ui_profile_selector_manage_pressed()
+signal ui_profile_selector_profile_pressed()
+signal ui_profile_selector_delete_pressed()
+signal ui_profile_selector_delete_prompt_no_pressed()
+signal ui_profile_selector_delete_prompt_yes_pressed()
+signal ui_profile_selector_update_pressed()
+signal ui_profile_selector_update_prompt_no_pressed()
+signal ui_profile_selector_update_prompt_yes_pressed()
+signal ui_pause_menu_pressed()
+signal ui_pause_menu_continue_pressed()
+signal ui_pause_menu_return_pressed()
+signal ui_pause_menu_return_prompt_no_pressed()
+signal ui_pause_menu_return_prompt_yes_pressed()
+signal ui_level_enter_menu_pressed()
+signal ui_inventory_opened()
+signal ui_inventory_closed()
+
+#--------------------#
+#-----Mob Events-----#
+#--------------------#
+
+signal mob_used_springboard(amount, mob) #int, mob reference
+
+#----------------------#
+#-----Story Events-----#
+#----------------------#
+
+signal story_w1_boss_activated()
+signal story_w1_boss_killed()
+signal story_w1_boss_camera_animated()
+signal story_w1_boss_level_end_completed()

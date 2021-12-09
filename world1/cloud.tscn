@@ -37,10 +37,10 @@ tracks/1/keys = {
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 1, 1, 0.607843 )
-position = Vector2( 13.3333, 0 )
+modulate = Color( 1, 1, 1, 0 )
 texture = ExtResource( 1 )
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+pause_mode = 2
 anims/move = SubResource( 1 )

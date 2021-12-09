@@ -1,0 +1,173 @@
+keys,en,es
+,,
+global.default,Default,Por Defecto
+global.no,No,No
+global.yes,Yes,Si
+global.return,Return,Volver
+global.back,Back,Volver
+global.on,On,Activado
+global.off,Off,Apagado
+global.continue,Continue,Seguir
+main_menu.play,Play,Jugar
+main_menu.quick_play,Quick Play,Juego Rapido
+main_menu.settings,Settings,Ajustes
+main_menu.quit,Quit,Salir
+,,
+quick_play.prompt_title,Play Last Profile...,Jugar Perfil Ultimo...
+quick_play.prompt_text,Play,¿Jugar
+quit_prompt.title,Quit?,¿Salir?
+quit_prompt.text,Are you sure you want to quit?,Estas seguro que quieres salir?
+,,
+settings.title,Settings,Ajustes
+settings.back,Back,Volver
+settings.general,General,General
+settings.graphics,Graphics,Graficos
+settings.controls,Controls,Mandos
+settings.other,Other,Otros
+settings.subcategory_text,Select a subcategory,Escoge una subcategoria
+settings.general.languages,Languages,Idiomas
+settings.general.music_volume,Music Volume,Volumen de Musica
+settings.general.audio_volume,Audio Volume,Volumen de Audio
+settings.general.social,Social Links,Enlaces de Social
+settings.general.credits,Everplast Credits,Creditos de Everplast
+settings.graphics.fullscreen,Fullscreen,Pantalla Completa
+settings.graphics.vsync,Vsync,Vsync
+settings.graphics.tonemap,Tonemap,Tonemap
+settings.graphics.post_processing,Post Processing,Procesamiento Posterior
+settings.other.erase_all,Erase All Data,Borrar Todos Los Datos
+settings.reset_settings,Reset Settings,Reajustar Ajustes
+,,
+erase_all.prompt.title,Erase ALL Data?,Borrar TODOS Los Datos?
+erase_all.prompt.text,All save data will be deleted. All profiles will be deleted. All settings will be reset. Everything will be reset.,Todos Los Datos seran eliminados. Todos los perfiles seran eliminados.\nTodos ajustes seran eliminados. Todo sera elimiado.
+erase_all.prompt.text_extra,You are about to reset EVERTHING. THIS CAN NOT BE UNDONE! Are you sure about this?,Vas a reajustar TODO. No puedes deshacerlo!\nEstas seguro?
+credits_prompt.title,Everplast Credits,Creditos de Everplast
+profile_selector.title,Select a Profile...,Esoger Perfil...
+profile_selector.title_manage,Manage Profiles...,Manejar Perfiles...
+profile_selector.return,Return to Main Menu,Volver al Menu
+profile_selector.return_manage,Return to Profile Selector,Volver al Menu de Perfiles
+profile_selector.manage,Manage Profile,Manejar Perfiles
+profile_selector.button.normal,Profile,Perfil
+profile_selector.button.new,New Profile,Perfil Nuevo
+profile_selector.button.update,Update\nRequired,Actualizar\nNecesario
+profile_selector.button.delete,Delete\nProfile,Borrar\nPerfil
+update_prompt.title,Update Profile...,Actualizar Perfil...
+update_prompt.text,This save file is not updated.\nDo you want to upgrade profile,Este archivo no esta acualizado.\nQuieres actualizar perfil
+update_prompt.text.2,to the latest version?,al version ultimo?
+delete_prompt.title,Delete Profile...,Borrar Perfil...
+delete_prompt.text,Are you sure you want to delete profile,Estas seguro que quieres borrar perfil
+,,
+language_menu.title,Select Language,Escoge Idioma
+,,
+inventory.close,Close,Cerrar
+inventory.quick_items,Quick Items,Potenciadores
+inventory.use_all,Fill,Llenar
+inventory.collectables,Collectables,Coleccionables
+inventory.equippables_label,Equippables,Equipables
+inventory.collectables_label,Collectables,Coleccionables
+inventory.ranks,Ranks,Rangos
+inventory.stats,Stats,Estadisticas
+inventory.stats_upgrade,Upgrade Level,Subir Nivel
+inventory.stats_profile_label,Profile,Perfil
+inventory.player_level_label,Player Level,Nivel de Jugador
+inventory.lastest_world,Lastest World,Mundo Ultimo
+inventory.player_upgrade_label,Player Upgrade,Subir Nivel de Jugador
+inventory.upgrade_requirements_label,Upgrade Requirements:,Requisitos de Subir Nivel
+inventory.your_stats,Your Stats:,Tus Estadisticas:
+inventory.ranks.ranks,Ranks,Rangos
+inventory.ranks.my_rank,Current Rank,Rango Actual
+inventory.can_not_use_items,You can not use quick items here!,No puedes usar potenciadores aqui!
+inventory.item.carrot,Carrot,Zanahoria
+inventory.item.cherry,Cherry,Cereza
+inventory.item.coconut,Coconut,Coco
+inventory.item.bunny_egg,Bunny Egg,Huevo de Conejito
+inventory.item.glitch_orb,Glitch Orb,Orbe Glitch
+inventory.item.pear,Pear,Pera
+inventory.item.glitch_soul,Glitch Soul,Alma Glitch
+inventory.no_items,There is not much to see here.,Aun no hay cosas para ver aqui.
+,,
+pause_menu.paused,Paused,Pausado
+pause_menu.continue,Continue,Seguir
+pause_menu.settings,Settings,Ajustes
+pause_menu.return,Return to Menu,Volver al Menu
+pause_menu.return_level,Exit Level,Salir al Selector Mundial
+return_prompt.title_level,Exit Level?,Salir?
+return_prompt.text_level,All unsaved progress will be lost!,Progreso no guardado sera perdido!
+return_prompt.title,Return to Main Menu?,Volver al Menu?
+,,
+level_enter_menu.start,Start,Empezar
+pause_menu.profile,Profile,Perfil
+,,
+notification.level_now_active,Now Active!,Ahora Habilitado!
+notification.checkpoint,Checkpoint Reached!,Punto de Control Alcanzado!
+notification.rank_upgrade,Rank Upgraded to,Rango Actualizado a
+notification.profile_erased,Profile,Perfil
+notification.profile_erased.2,Erased!,Borrado!
+notification.upgrade_available,Level Upgrade Available!,Actualizacion de Nivel Disponible!
+notification.item_active,"You can not use this item yet, one is already active!","No puedes usar este potenciador aun, ya lo esta activo!"
+notification.saved,Saved!,Guardado!
+,,
+inventory.upgrade_stats.label,Upgrade Stats...,Subir Nivel...
+inventory.upgrade_stats.level,Level,Nivel
+inventory.upgrade_stats.choose,Choose what to upgrade.,Escoge lo que quieres subir.
+inventory.upgrade_stats.health,Health,Salud
+inventory.upgrade_stats.adrenaline,Adrenaline,Adrenalina
+inventory.upgrade_stats.cost,Cost,Costo
+inventory.upgrade_stats.upgrade_level,Upgrade Level!,Subir Nivel!
+inventory.upgrade_stats.orbs,Orbs,Orbes
+inventory.collectable.energy,Energy,Energia
+inventory.collectable.water,Water,Agua
+inventory.collectable.nail,Nail,Clavo
+inventory.equippable.water_gun,Water Gun,Pistola de Agua
+inventory.equippable.nail_gun,Nail Gun,Pistola de Clavo
+inventory.equippable.laser_gun,Laser Gun,Pistola de Laser
+,,
+world_selector.teleporter_not_active,This teleporter is not active yet!,Este teletransportador aun no esta activo!
+world_selector.label,World Selector,Selector Mundial
+,,
+settings.reset_settings.title,Reset Settings?,Reajustar Ajustes?
+settings.reset_settings.text,All settings will be reset to their default values.,Todos ajustes sera reajustados a sus valores predeterminados.
+,,
+inventory.quick_items.fill,"Will use all required or available items. For example, if you have 2 carrots and 4 health to fill, two will be used instead of one. Only available for items that refill stats.","Usara todos los potenciadores que sea posible. Por ejemplo, si tienes dos zanahorias y cuatros corazones para llenar, dos se uasaran. Solo funciona por los potenciadores que llena a los estadisticas. "
+,,
+powerup_explanations.carrot,Increases your health by,Aumenta tu salud por
+powerup_explanations.cherry,Increases your adrenaline by,Aumenta tu adrenalina por
+powerup_explanations.coconut,Increases your health by ,Aumenta tu salud por
+powerup_explanations.bunny_egg,Gives you a speed boost for,Aumenta tu velocidad por
+powerup_explanations.bunny_egg.2,seconds,segundos
+powerup_explanations.glitch_orb,CODE_GLITCH,PROGRAMA_GLITCH
+powerup_explanations.pear,Increases your health by,Aumenta tu salud por
+powerup_explanations.pear.2,and your adrenaline by,y su adrenalina por
+powerup_explanations.glitch_soul,Not complete,No esta completo
+,,
+rank_explanations.none,You do not have a rank yet,No tienes un rango aun
+rank_explanations.silver,- See enemy health on hit\n- Double Jump\n- Wall Jump,- Puedes ver la salud de los enemigos en golpe\n- Doble Salto\n- Salto de Paredes
+rank_explanations.gold,- Adrenaline Rush\n,- Subidon de Adrenalina\n
+rank_explanations.diamond,Not complete,No esta completo
+rank_explanations.glitch,Not complete,No esta completo
+,,
+rank_names.none,None,Nada
+rank_names.silver,Silver,Plata
+rank_names.gold,Gold,Oro
+rank_names.diamond,Diamond,Dimante
+rank_names.glitch,Glitch,Glitch
+,,
+controls.title,Customize Controls (Keyboard Only),Personalizar Los Mandos (Solo Teclado)
+controls.customize_controls,Customize Controls,Personalizar Los Mandos
+controls.controls,Controls,Los Mandos
+controls.assignments,Assignments,Asignaciones
+controls.reset,Reset,Reajustar
+controls.interact,Interact,Interactuar
+controls.move_left,Move Left,Moverse Izquiero
+controls.move_right,Move Right,Moverse Derecho
+controls.move_down,Move Down,Moverse Abajo
+controls.ability,Ability,Habilidad
+controls.sprint,Sprint,Esprintar
+controls.fire,Fire,Disparar
+controls.inventory,Inventory,Inventario
+controls.jump,Jump,Soltar
+controls.aim,Aim,Apuntar
+controls.equip,Equip,Equipar
+controls.powerup,Powerup,Potenciarse
+controls.move,Move,Moverse
+controls.unassigned,Unassigned,Sin Asignar
+controls.left_click,Left Click,Clic Izquierdo

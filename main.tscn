@@ -1,30 +1,36 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://ui/hud/hud.tscn" type="PackedScene" id=2]
 [ext_resource path="res://ui/notification/notification.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/debug/ui_print.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/world_selector_label.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/pause_menu/pause_menu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://ui/enter_level/enter_level.tscn" type="PackedScene" id=6]
+[ext_resource path="res://ui/level_enter_menu/level_enter_menu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/fade_player/fade_player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/ui_button_sound.gd" type="Script" id=8]
-[ext_resource path="res://ui/ts_buttons/ts_buttons.tscn" type="PackedScene" id=9]
-[ext_resource path="res://ui/fonts/16x.tres" type="DynamicFont" id=10]
+[ext_resource path="res://ui/settings_menu/language_menu/language_menu.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/pause_menu/credits.tscn" type="PackedScene" id=10]
 [ext_resource path="res://ui/settings_menu/settings_menu.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/fonts/minimal_5x7.ttf" type="DynamicFontData" id=12]
 [ext_resource path="res://ui/debug/debug.gd" type="Script" id=13]
 [ext_resource path="res://ui/debug/debug_console.tscn" type="PackedScene" id=14]
 [ext_resource path="res://ui/profile_selector/profile_selector.tscn" type="PackedScene" id=15]
-[ext_resource path="res://ui/dialog/dialog.tscn" type="PackedScene" id=16]
+[ext_resource path="res://ui/dialogue/dialogue.tscn" type="PackedScene" id=16]
 [ext_resource path="res://ui/main_menu/main_menu.tscn" type="PackedScene" id=17]
 [ext_resource path="res://ui/inventory/inventory.tscn" type="PackedScene" id=18]
 [ext_resource path="res://ui/button_press.ogg" type="AudioStream" id=19]
-[ext_resource path="res://ui/cheat_label.gd" type="Script" id=20]
+[ext_resource path="res://ui/settings_menu/erase_prompt.tscn" type="PackedScene" id=20]
 [ext_resource path="res://level_test.gd" type="Script" id=21]
+[ext_resource path="res://ui/settings_menu/controls_menu/controls_menu.tscn" type="PackedScene" id=22]
+[ext_resource path="res://ui/main_menu/quick_play_prompt.tscn" type="PackedScene" id=23]
+[ext_resource path="res://ui/main_menu/quit_prompt.tscn" type="PackedScene" id=24]
+[ext_resource path="res://ui/pause_menu/return_prompt.tscn" type="PackedScene" id=25]
+[ext_resource path="res://ui/social_plug/social_plug.tscn" type="PackedScene" id=26]
+[ext_resource path="res://ui/profile_selector/delete_profile_prompt.tscn" type="PackedScene" id=27]
+[ext_resource path="res://ui/profile_selector/update_profile_prompt.tscn" type="PackedScene" id=28]
+[ext_resource path="res://ui/settings_menu/reset_settings_prompt.tscn" type="PackedScene" id=29]
 
 [sub_resource type="DynamicFont" id=1]
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 12 )
 
 [sub_resource type="Environment" id=2]
@@ -33,84 +39,77 @@ background_canvas_max_layer = 50
 fog_depth_begin = 0.0
 fog_depth_end = 24.5
 tonemap_mode = 3
+auto_exposure_scale = 0.1
+glow_enabled = true
+glow_bloom = 0.04
+glow_bicubic_upscale = true
+glow_high_quality = true
+adjustment_enabled = true
+adjustment_contrast = 1.05
+adjustment_saturation = 1.15
 
-[sub_resource type="Animation" id=3]
-resource_name = "glow"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite/Light2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 0.145098, 0.129412, 0.701961, 0.607843 ), Color( 0.145098, 0.129412, 0.701961, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/Light2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0.05, 0.05 ), Vector2( 0.07, 0.07 ) ]
-}
-
-[node name="Main" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 1
+[node name="Main" type="Node"]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-version_numbers = [ 1, 11 ]
+version_prefix = 1
+version_numbers = [ 0, 3, 0 ]
+runtime_pos = Vector2( 967, -30 )
+runtime_world = 1
+runtime_level = 9
 
 [node name="LevelTest" type="Node" parent="."]
 script = ExtResource( 21 )
 
 [node name="LevelHolder" type="Node2D" parent="."]
 
-[node name="FadePlayer" parent="." instance=ExtResource( 7 )]
-pause_mode = 2
-
 [node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2
 
-[node name="TSButtons" parent="GUI" instance=ExtResource( 9 )]
-visible = false
+[node name="Notification" parent="GUI" instance=ExtResource( 3 )]
+pause_mode = 2
 
 [node name="HUD" parent="GUI" instance=ExtResource( 2 )]
 pause_mode = 2
 visible = false
 
-[node name="Notification" parent="GUI" instance=ExtResource( 3 )]
-pause_mode = 2
-
 [node name="Dialog" parent="GUI" instance=ExtResource( 16 )]
 visible = false
+
+[node name="WorldSelectorLabel" parent="GUI" instance=ExtResource( 4 )]
 
 [node name="MainMenu" parent="GUI" instance=ExtResource( 17 )]
 pause_mode = 2
 
-[node name="Inventory" parent="GUI" instance=ExtResource( 18 )]
-visible = false
+[node name="SocialPlug" parent="GUI" instance=ExtResource( 26 )]
+
+[node name="QuickPlayPrompt" parent="GUI" instance=ExtResource( 23 )]
 
 [node name="EnterLevel" parent="GUI" instance=ExtResource( 6 )]
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource( 5 )]
-visible = false
+
+[node name="ReturnPrompt" parent="GUI" instance=ExtResource( 25 )]
 
 [node name="Settings" parent="GUI" instance=ExtResource( 11 )]
-visible = false
+
+[node name="ErasePrompt" parent="GUI" instance=ExtResource( 20 )]
+
+[node name="ResetSettingsPrompt" parent="GUI" instance=ExtResource( 29 )]
+
+[node name="Credits" parent="GUI" instance=ExtResource( 10 )]
+
+[node name="CustomizeControls" parent="GUI" instance=ExtResource( 22 )]
+
+[node name="QuitPrompt" parent="GUI" instance=ExtResource( 24 )]
+
+[node name="Language" parent="GUI" instance=ExtResource( 9 )]
+
+[node name="Inventory" parent="GUI" instance=ExtResource( 18 )]
 
 [node name="ProfileSelector" parent="GUI" instance=ExtResource( 15 )]
+
+[node name="UpgradeProfilePopup" parent="GUI" instance=ExtResource( 28 )]
+
+[node name="DeleteProfilePopup" parent="GUI" instance=ExtResource( 27 )]
 
 [node name="UIButtonSound" type="AudioStreamPlayer" parent="GUI"]
 pause_mode = 2
@@ -120,10 +119,14 @@ pitch_scale = 1.3
 bus = "Audio"
 script = ExtResource( 8 )
 
+[node name="FadePlayer" parent="GUI" instance=ExtResource( 7 )]
+pause_mode = 2
+
 [node name="CanvasLayer" type="CanvasLayer" parent="GUI"]
 layer = 99
 
 [node name="Debug" type="Label" parent="GUI/CanvasLayer"]
+visible = false
 anchor_left = 0.005
 anchor_top = 0.012
 anchor_right = 1.0
@@ -138,36 +141,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UIPrint" parent="GUI/CanvasLayer" instance=ExtResource( 4 )]
-
 [node name="DebugConsole" parent="GUI/CanvasLayer" instance=ExtResource( 14 )]
 visible = false
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="GUI"]
-layer = 100
-
-[node name="CheatLabel" type="Label" parent="GUI/CanvasLayer2"]
-modulate = Color( 1, 1, 1, 0.607843 )
-self_modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.005
-anchor_top = 0.012
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_fonts/font = ExtResource( 10 )
-text = "Cheats Enabled"
-align = 1
-valign = 2
-autowrap = true
-script = ExtResource( 20 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
-
-[node name="AnimationPlayerGlow" type="AnimationPlayer" parent="."]
-anims/glow = SubResource( 3 )

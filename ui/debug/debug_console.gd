@@ -2,9 +2,14 @@ extends Control
 
 var command_history: Array = []
 var all_words: Array = []
-var command_history_line: int = command_history.size()
 
 var last_world: Vector2
+
+var command_history_line: int = command_history.size()
+var prev_menu: int = GlobalUI.Menus.MAIN_MENU
+
+var console_visible := false
+var was_paused := false
 
 onready var output: TextEdit = $Panel/Output
 onready var input: LineEdit = $Input
@@ -13,28 +18,44 @@ onready var command_handler: Node = $CommandHandler
 
 func _ready() -> void:
 	var __: int
-	__ = Signals.connect("error_level_changed", self, "_error_level_changed")
 	__ = input.connect("text_entered", self, "_text_entered")
+
 	hide()
+
 	output.text = "Type help for help"
-	output.get_child(0).set("custom_styles/scroll", load("res://ui/ui_background.tres"))
-	output.get_child(1).set("custom_styles/scroll", load("res://ui/ui_background.tres"))
+	output.get_child(0).set("custom_styles/scroll", load("res://ui/ui_panel_bg.tres"))
+	output.get_child(1).set("custom_styles/scroll", load("res://ui/ui_panel_bg.tres"))
 	output.get_child(1).anchor_bottom = 0.08
-	output.get_child(5).set("custom_styles/panel", load("res://ui/ui_background.tres"))
+	output.get_child(5).set("custom_styles/panel", load("res://ui/ui_panel_bg.tres"))
 	output.get_child(5).set("custom_styles/hover", load("res://ui/ui_panel.tres"))
 	output.get_child(5).set("custom_fonts/font", load("res://ui/fonts/32x.tres"))
 
 
+func show_menu() -> void:
+	was_paused = get_tree().paused
+	console_visible = true
+	prev_menu = GlobalUI.menu
+	GlobalUI.menu = GlobalUI.Menus.DEBUG
+	show()
+	input.grab_focus()
+	yield(get_tree(), "idle_frame")
+	input.clear()
+	get_tree().paused = true
+
+
+func hide_menu() -> void:
+	hide()
+	get_tree().paused = was_paused
+	GlobalUI.menu = prev_menu
+	console_visible = false
+
+
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_console") and Globals.get_settings().data.cheats:
-		if visible:
-			hide_console()
+	if event.is_action_pressed("debug_console"):
+		if console_visible:
+			hide_menu()
 		else:
-			show()
-			input.grab_focus()
-			yield(get_tree(), "idle_frame")
-			input.clear()
-			get_tree().paused = true
+			show_menu()
 
 	if event is InputEventKey and event.is_pressed() and visible:
 		if event.scancode == KEY_UP:
@@ -43,10 +64,6 @@ func _input(event: InputEvent) -> void:
 			set_command_history(1)
 
 
-func hide_console() -> void:
-	hide()
-	if UI.current_menu == UI.NONE:
-		get_tree().paused = false
 func set_command_history(offset: int) -> void:
 	command_history_line += offset
 	command_history_line = int(clamp(command_history_line, 0, command_history.size()))

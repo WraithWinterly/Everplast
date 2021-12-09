@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/level_end_teleporter.wav-a496b29437c9e9d96befd5f18865e882.sample"
+
+[deps]
+
+source_file="res://world_all/teleporters/level_end/level_end_teleporter.wav"
+dest_files=[ "res://.import/level_end_teleporter.wav-a496b29437c9e9d96befd5f18865e882.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -19,6 +19,9 @@ border_blend = true
 layer = -1
 follow_viewport_scale = 0.001
 
+[node name="CanvasModulate" parent="." instance=ExtResource( 2 )]
+visible = false
+
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 motion_scale = Vector2( 0.35, 0 )
 motion_mirroring = Vector2( 299, 0 )
@@ -27,6 +30,7 @@ __meta__ = {
 }
 
 [node name="CanvasModulate" parent="ParallaxLayer" instance=ExtResource( 2 )]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer"]
 position = Vector2( 0, 5 )
@@ -55,6 +59,7 @@ __meta__ = {
 }
 
 [node name="CanvasModulate" parent="ParallaxLayer2" instance=ExtResource( 2 )]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer2"]
 texture = ExtResource( 1 )
@@ -71,6 +76,7 @@ __meta__ = {
 }
 
 [node name="CanvasModulate" parent="ParallaxLayer3" instance=ExtResource( 2 )]
+visible = false
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer3"]
 texture = ExtResource( 1 )
@@ -84,7 +90,7 @@ layer = -2
 
 [node name="CanvasModulate" parent="CanvasLayerBack" instance=ExtResource( 2 )]
 
-[node name="BGColor" type="Panel" parent="CanvasLayerBack"]
+[node name="Top" type="Panel" parent="CanvasLayerBack"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 4 )

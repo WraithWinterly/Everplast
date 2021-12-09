@@ -8,41 +8,33 @@ onready var prompt_text: Label = $Panel/VBoxContainer/PromptText
 
 
 func _ready() -> void:
-	hide()
 	var __: int
-	__ = UI.connect("changed", self, "_ui_changed")
+	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("ui_pause_menu_return_pressed", self, "_ui_pause_menu_return_pressed")
 	__ = no_button.connect("pressed", self, "_no_pressed")
 	__ = yes_button.connect("pressed", self, "_yes_pressed")
 
+	hide()
 
-func _ui_changed(menu: int) -> void:
-	match menu:
-		UI.PAUSE_MENU_RETURN_PROMPT:
-			show_menu()
-		UI.PAUSE_MENU:
-			if UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
-				UI.emit_signal("button_pressed", true)
-				hide_menu()
-		UI.MAIN_MENU:
-			hide_menu()
-		UI.NONE:
-			if visible:
-				hide_menu()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.RETURN_PROMPT and not GlobalUI.menu_locked:
+		_no_pressed()
+		get_tree().set_input_as_handled()
 
 
 func show_menu() -> void:
 	if Globals.game_state == Globals.GameStates.LEVEL:
-		prompt_text.text = "Exit Level?"
-		prompt_text.text = "All unsaved progress will be lost!"
+		prompt_text.text = tr("return_prompt.title_level")
+		prompt_text.text = tr("return_prompt.text_level")
 	else:
-		prompt_text.text = "Return to Main Menu?"
+		prompt_text.text = tr("return_prompt.title")
 		prompt_text.text = ""
 	show()
 	title_text.show()
-	no_button.grab_focus()
 	animation_player.play("show")
 	enable_buttons()
+	no_button.grab_focus()
 
 
 func hide_menu() -> void:
@@ -62,17 +54,37 @@ func disable_buttons() -> void:
 	no_button.disabled = true
 
 
+func _level_changed(_world: int, _level: int) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.RETURN_PROMPT:
+		hide_menu()
+
+func _ui_pause_menu_return_pressed() -> void:
+	show_menu()
+
+
 func _no_pressed() -> void:
-	UI.emit_signal("button_pressed", true)
-	UI.emit_signal("changed", UI.PAUSE_MENU)
+	if GlobalUI.menu_locked: return
+	GlobalEvents.emit_signal("ui_button_pressed", true)
+	GlobalUI.menu = GlobalUI.Menus.PAUSE_MENU
+	GlobalEvents.emit_signal("ui_pause_menu_return_prompt_no_pressed")
+	hide_menu()
 
 
 func _yes_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
-		UI.emit_signal("changed", UI.MAIN_MENU)
+	if GlobalUI.menu_locked: return
+	GlobalEvents.emit_signal("ui_button_pressed")
+	hide_menu()
+	GlobalEvents.emit_signal("ui_pause_menu_return_prompt_yes_pressed")
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		Globals.game_state = Globals.GameStates.WORLD_SELECTOR
+		GlobalUI.menu = GlobalUI.Menus.NONE
+		yield(GlobalEvents, "ui_faded")
+		get_tree().paused = false
 	else:
-		UI.emit_signal("changed", UI.NONE)
+		Globals.game_state = Globals.GameStates.MENU
+		GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
+		yield(GlobalEvents, "ui_faded")
+		get_tree().paused = false
 
 
 

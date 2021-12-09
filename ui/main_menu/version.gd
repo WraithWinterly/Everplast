@@ -2,6 +2,7 @@ extends Label
 
 
 func _ready() -> void:
-	text = get_tree().root.get_node("Main").version
+	yield(get_tree(), "physics_frame")
+	text = Globals.version_string
 
 

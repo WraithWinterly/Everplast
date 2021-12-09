@@ -1,49 +1,45 @@
-extends Control
+extends Node
 class_name Main
 
-export(String, "release,beta,alpha,dev") var version_prefix = "dev"
-export var version_numbers: Array = [0, 0]
-export var world_names: Array = [
-	"World 0", "Foggy Overlands", "Drowsy Lands", "Snow Fall", "Tied Vines", "This is a world?", "Molten Grounds"]
+enum VersionPrefixes {
+	DEV,
+	ALPHA,
+	BETA,
+	RELEASE,
+}
 
-export var runtime_start_level: bool = false
+enum VersionPosts {
+	DEVELOPER_BUILD,
+	DISCORD_TESTER,
+	KICKSTARTER,
+	STEAM,
+	SWITCH,
+}
+
+export(VersionPrefixes) var version_prefix = VersionPrefixes.DEV
+export(VersionPosts) var version_post = VersionPosts.DEVELOPER_BUILD
+
+export var version_numbers: Array = [0, 0, 0]
+
+export var runtime_pos := Vector2()
+
 export var runtime_world: int = 0
 export var runtime_level: int = 0
-export var runtime_pos: Vector2 = Vector2()
 
-
-var version: String = ""
-
-onready var level_holder: Node2D = $LevelHolder
-onready var main_menu: Control = $GUI/MainMenu
-onready var pause_menu: Control = $GUI/PauseMenu
-
-
-static func get_action_strength_keyboard() -> float:
-	return float(Input.get_axis("move_left", "move_right"))
-
-
-static func get_action_strength_controller() -> float:
-	return float(Input.get_axis("ctr_move_left", "ctr_move_right"))
-
-
-static func get_controller_right_axis() -> Vector2:
-	return Vector2(Input.get_axis("ctr_look_left", "ctr_look_right"),
-			Input.get_axis("ctr_look_down", "ctr_look_up"))
-
-
-static func get_action_strength() -> float:
-	if abs(get_action_strength_keyboard()) > 0:
-		return get_action_strength_keyboard()
-	else:
-		return get_action_strength_controller()
-
-
-func _enter_tree() -> void:
-	version = "v%s.%s-%s" % [version_numbers[0], version_numbers[1], version_prefix]
+export var runtime_start_level := false
+export var demo_version := false
 
 
 func _ready() -> void:
 	VisualServer.set_default_clear_color(Color(0, 0, 0, 0))
 	OS.min_window_size = Vector2(1280, 720)
-	OS.window_borderless = false
+
+	if demo_version:
+		Globals.demo_version = true
+		Globals.version_string = "Everplast Version %s.%s.%s.%s.demo.%s" % [
+				version_numbers[0], version_numbers[1],version_numbers[2],
+				VersionPrefixes.keys()[version_prefix].to_lower(), VersionPosts.keys()[version_post].to_lower()]
+	else:
+		Globals.version_string = "Everplast Version %s.%s.%s.%s.%s" % [
+				version_numbers[0], version_numbers[1],version_numbers[2],
+				VersionPrefixes.keys()[version_prefix].to_lower(), VersionPosts.keys()[version_post].to_lower()]

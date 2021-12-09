@@ -9,19 +9,28 @@ onready var title: Label = $Panel/VBoxContainer/PromptText
 
 func _ready() -> void:
 	var __: int
-	__ = UI.connect("changed", self, "_ui_changed")
-	var copyright: String = "Everplast %s\nCopyright 2021 Ayden Springer." % Globals.get_main().version
+	__ = GlobalEvents.connect("ui_settings_credits_pressed", self, "_ui_settings_credits_pressed")
+
 	hide()
+
+	yield(get_tree(), "physics_frame")
+	var copyright: String = "%s\nCopyright (c) 2021 Ayden Springer." % Globals.version_string
+
+	credits.scroll_vertical = 0
 	var engine_string: String = Engine.get_version_info().string
+	credits.get_child(1).set("custom_styles/scroll", load(GlobalPaths.CREDITS_SCROLL))
+	credits.get_child(1).set("custom_styles/scroll_focus", load(GlobalPaths.CREDITS_SCROLL))
+	credits.get_child(1).set("custom_styles/grabber", load(GlobalPaths.CREDITS_SCROLL_GRABBER))
+	credits.get_child(1).set("custom_styles/grabber_highlight", load(GlobalPaths.CREDITS_SCROLL_GRABBER))
+	credits.get_child(1).set("custom_styles/grabber_pressed", load(GlobalPaths.CREDITS_SCROLL_GRABBER))
+	credits.get_child(5).set("custom_styles/panel", load("res://ui/ui_panel_bg.tres"))
+	credits.get_child(5).set("custom_styles/hover", load("res://ui/ui_panel.tres"))
+	credits.get_child(5).set("custom_fonts/font", load("res://ui/fonts/32x.tres"))
 	credits.text = \
-"""Primary Developer: Ayden Springer, "WraithWinterly"
-
-%s
-
+"""%s
 ***All rights reserved.***
 
-You are NOT allowed to use any of my assets, or this game, for any comerical use. You are NOT allowed to use Everplast's copyrighted assets or Everplast for Non-fungible Tokens (NFT), or selling the art, or game somewhere else. A detailed list of non-copyrighted assets are listed below. Otherwise, all rights are reserved.
-YOU AREE YOU WILL NOT USE EVERPLAST OR EVERPLAST'S ASSETS FOR COMMERCIAL USE OR NFTs.
+Primary Developer: Ayden Springer, "WraithWinterly"
 
 This game uses Godot Engine %s
 	Copyright (c) 2007-2021 Juan Linietsky, Ariel Manzur.
@@ -52,14 +61,14 @@ Music Tracks:
 	Antti Luode - Anttis Instrumentals <gamesounds.xyz>
 		Blue Arpeggio
 		Wonderful Lie
-		Another Day
+		Some Kind of Music
 		Feel the Love
-		Simple Simplyfied
+		Simple Simplified
 		Rain
 		ET alone ET call home instrumental
 		Beach Walk
 
-	Daydream Anatony - 8-Bit-Heroes - 04 Struggle <gamesounds.xyz>
+	Daydream Anatomy - 8-Bit-Heroes - 04 Struggle <gamesounds.xyz>
 
 	Trevor Lentz - "Lines of Code" <opengameart.org>
 
@@ -79,26 +88,58 @@ Sound Effects:
 
 	BFXR <https://www.bfxr.net>
 		Make sound effects for your games.
+
+Art:
+	Fox: https://opengameart.org/content/fox-animated
 """ % [copyright, engine_string]
 	title.text = copyright
 
 
+func _physics_process(_delta: float) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.SETTINGS_CREDITS:
+		if Input.is_action_pressed("stick_ui_down") or Input.is_action_pressed("ui_down"):
+			credits.scroll_vertical += 0.25
+		elif Input.is_action_pressed("stick_ui_up") or Input.is_action_pressed("ui_up"):
+			credits.scroll_vertical -= 0.25
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.SETTINGS_CREDITS and not GlobalUI.menu_locked:
+		_on_Return_pressed()
+		get_tree().set_input_as_handled()
+
+
+func disable_buttons() -> void:
+	return_button.disabled = true
+
+
+func enable_buttons() -> void:
+	return_button.disabled = false
+
+
+func hide_menu() -> void:
+	anim_player.play_backwards("show")
+	return_button.release_focus()
+	disable_buttons()
+	yield(anim_player, "animation_finished")
+	$BGBlur.hide()
+	hide()
+
+
+func show_menu() -> void:
+	anim_player.play("show")
+	show()
+	enable_buttons()
+	return_button.grab_focus()
+
+
+func _ui_settings_credits_pressed() -> void:
+	show_menu()
+
+
 func _on_Return_pressed() -> void:
-	UI.emit_signal("button_pressed", true)
-	match UI.current_menu:
-		UI.MAIN_MENU_SETTINGS_CREDITS:
-			UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_GENERAL)
-		UI.PAUSE_MENU_SETTINGS_CREDITS:
-			UI.emit_signal("changed", UI.PAUSE_MENU_SETTINGS_GENERAL)
+	GlobalEvents.emit_signal("ui_button_pressed", true)
+	GlobalEvents.emit_signal("ui_settings_credits_back_pressed")
+	GlobalUI.menu = GlobalUI.Menus.SETTINGS_GENERAL
+	hide_menu()
 
-
-func _ui_changed(menu: int) -> void:
-	match menu:
-		UI.MAIN_MENU_SETTINGS_CREDITS, UI.PAUSE_MENU_SETTINGS_CREDITS:
-			anim_player.play("show")
-			show()
-			return_button.grab_focus()
-		UI.MAIN_MENU_SETTINGS_GENERAL, UI.PAUSE_MENU_SETTINGS_GENERAL:
-			if UI.last_menu == UI.MAIN_MENU_SETTINGS_CREDITS \
-					or UI.last_menu == UI.PAUSE_MENU_SETTINGS_CREDITS:
-				anim_player.play_backwards("show")

@@ -3,11 +3,16 @@ extends Label
 
 func _ready() -> void:
 	var __: int
-	__ = Signals.connect("settings_updated", self, "_settings_updated")
+	__ = GlobalEvents.connect("ui_settings_updated", self, "_ui_settings_updated")
+
 	show()
-	_settings_updated()
+	update_visibility()
 
 
-func _settings_updated() -> void:
-	if Globals.get_settings().data.has("profile_pause"):
-		visible = Globals.get_settings().data.profile_pause
+func update_visibility() -> void:
+	if get_node(GlobalPaths.SETTINGS).data.has("profile_pause"):
+		visible = get_node(GlobalPaths.SETTINGS).data.profile_pause
+
+
+func _ui_settings_updated() -> void:
+	update_visibility()

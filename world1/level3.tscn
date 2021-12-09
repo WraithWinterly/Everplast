@@ -2,31 +2,31 @@
 
 [ext_resource path="res://world1/rain.wav" type="AudioStream" id=1]
 [ext_resource path="res://tilesets/tilemap_w1_grass.tres" type="TileSet" id=2]
-[ext_resource path="res://world_all/block_tilemap.gd" type="Script" id=3]
+[ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=3]
 [ext_resource path="res://world_all/level.gd" type="Script" id=4]
-[ext_resource path="res://trees/tree.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world_all/trees/tree.tscn" type="PackedScene" id=5]
 [ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=6]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=7]
-[ext_resource path="res://lanterns/lantern.tscn" type="PackedScene" id=8]
-[ext_resource path="res://rank_pickup/rank_pickup.tscn" type="PackedScene" id=9]
-[ext_resource path="res://signs/sign.tscn" type="PackedScene" id=10]
-[ext_resource path="res://coins/coin.tscn" type="PackedScene" id=11]
-[ext_resource path="res://mobs/slime.tscn" type="PackedScene" id=12]
-[ext_resource path="res://teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=13]
-[ext_resource path="res://powerups/carrot.tscn" type="PackedScene" id=14]
-[ext_resource path="res://mobs/worm.tscn" type="PackedScene" id=15]
-[ext_resource path="res://vases/vase.tscn" type="PackedScene" id=16]
-[ext_resource path="res://platforms/small_moving_platform.tscn" type="PackedScene" id=17]
+[ext_resource path="res://world_all/lanterns/lantern.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world_all/rank_pickup/rank_pickup.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world_all/signs/sign.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world_all/coins/coin.tscn" type="PackedScene" id=11]
+[ext_resource path="res://mobs/slime/slime.tscn" type="PackedScene" id=12]
+[ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=13]
+[ext_resource path="res://world_all/powerups/carrot.tscn" type="PackedScene" id=14]
+[ext_resource path="res://mobs/worm/worm.tscn" type="PackedScene" id=15]
+[ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=16]
+[ext_resource path="res://world_all/platforms/small_moving_platform.tscn" type="PackedScene" id=17]
 [ext_resource path="res://world1/level_3_canvas_modulate.tscn" type="PackedScene" id=18]
-[ext_resource path="res://gems/gem.tscn" type="PackedScene" id=19]
-[ext_resource path="res://platforms/falling_platform.tscn" type="PackedScene" id=20]
-[ext_resource path="res://mobs/blue_bird.tscn" type="PackedScene" id=21]
-[ext_resource path="res://death_area/death_area.tscn" type="PackedScene" id=22]
-[ext_resource path="res://checkpoints/checkpoint.tscn" type="PackedScene" id=23]
+[ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=19]
+[ext_resource path="res://world_all/platforms/falling_platform.tscn" type="PackedScene" id=20]
+[ext_resource path="res://mobs/bird/bird.tscn" type="PackedScene" id=21]
+[ext_resource path="res://world_all/death_area/death_area.tscn" type="PackedScene" id=22]
+[ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=23]
 [ext_resource path="res://world1/fog_shader.tscn" type="PackedScene" id=24]
-[ext_resource path="res://mobs/flying_slime.tscn" type="PackedScene" id=25]
-[ext_resource path="res://mobs/bunny.tscn" type="PackedScene" id=26]
-[ext_resource path="res://world_all/block.png" type="Texture" id=27]
+[ext_resource path="res://mobs/slime_flying/slime_flying.tscn" type="PackedScene" id=25]
+[ext_resource path="res://mobs/bunny/bunny.tscn" type="PackedScene" id=26]
+[ext_resource path="res://world_all/tilemap_block/block.png" type="Texture" id=27]
 [ext_resource path="res://tilesets/tilemap_platform.tres" type="TileSet" id=28]
 
 [sub_resource type="Gradient" id=6]
@@ -110,7 +110,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Particles2D" type="Particles2D" parent="."]
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Particles2D" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 0, -240 )
 amount = 300
 lifetime = 2.4
@@ -118,7 +121,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D2" type="Particles2D" parent="."]
+[node name="Particles2D2" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 304, -232 )
 amount = 300
 lifetime = 2.4
@@ -126,7 +130,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D3" type="Particles2D" parent="."]
+[node name="Particles2D3" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 600, -240 )
 amount = 300
 lifetime = 2.4
@@ -134,7 +139,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D4" type="Particles2D" parent="."]
+[node name="Particles2D4" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 888, -240 )
 amount = 300
 lifetime = 2.4
@@ -142,7 +148,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D5" type="Particles2D" parent="."]
+[node name="Particles2D5" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 1200, -216 )
 amount = 300
 lifetime = 2.4
@@ -150,7 +157,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D6" type="Particles2D" parent="."]
+[node name="Particles2D6" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 1496, -232 )
 amount = 300
 lifetime = 2.4
@@ -158,7 +166,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D7" type="Particles2D" parent="."]
+[node name="Particles2D7" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 1680, -320 )
 amount = 300
 lifetime = 2.4
@@ -166,7 +175,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D8" type="Particles2D" parent="."]
+[node name="Particles2D8" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 1608, -496 )
 amount = 300
 lifetime = 2.4
@@ -174,7 +184,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D9" type="Particles2D" parent="."]
+[node name="Particles2D9" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 1904, -504 )
 amount = 300
 lifetime = 2.4
@@ -182,7 +193,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D10" type="Particles2D" parent="."]
+[node name="Particles2D10" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 2176, -504 )
 amount = 300
 lifetime = 2.4
@@ -190,7 +202,8 @@ preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 5 )
 
-[node name="Particles2D11" type="Particles2D" parent="."]
+[node name="Particles2D11" type="Particles2D" parent="Particles"]
+pause_mode = 2
 position = Vector2( 2392, -520 )
 amount = 300
 lifetime = 2.4
@@ -205,8 +218,9 @@ position = Vector2( 16, -999 )
 position = Vector2( 1384, -88 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 1 )
-volume_db = -0.209
+volume_db = -0.2
 autoplay = true
 bus = "Audio"
 
@@ -241,7 +255,7 @@ index = 2
 modulate = Color( 0.411765, 0.411765, 0.411765, 1 )
 
 [node name="PlayerStart" type="Position2D" parent="LevelComponents"]
-position = Vector2( 16, -32 )
+position = Vector2( 16, -24 )
 
 [node name="DeathArea" parent="LevelComponents" instance=ExtResource( 22 )]
 position = Vector2( 152, 56 )
@@ -271,7 +285,7 @@ cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 2
 collision_mask = 12
 format = 1
-tile_data = PoolIntArray( -1965859, 0, 0, -786255, 2, 0, -327631, 2, 0, -196564, 0, 0, 7864334, 5, 0, 7864338, 5, 0, 7864341, 5, 0 )
+tile_data = PoolIntArray( -1965859, 0, 0, -786255, 2, 0, -393172, 0, 0, -196564, 0, 0, 7864334, 5, 0, 7864338, 5, 0, 7864341, 5, 0 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -466,10 +480,10 @@ position = Vector2( 1048, -120 )
 position = Vector2( 1072, -120 )
 
 [node name="Coin17" parent="Coins" instance=ExtResource( 11 )]
-position = Vector2( 1264, -104 )
+position = Vector2( 1264, -88 )
 
 [node name="Coin18" parent="Coins" instance=ExtResource( 11 )]
-position = Vector2( 1280, -96 )
+position = Vector2( 1280, -80 )
 
 [node name="Coin19" parent="Coins" instance=ExtResource( 11 )]
 position = Vector2( 1296, -80 )
@@ -484,9 +498,6 @@ position = Vector2( 1328, -88 )
 position = Vector2( 1344, -96 )
 
 [node name="Coin23" parent="Coins" instance=ExtResource( 11 )]
-position = Vector2( 1360, -96 )
-
-[node name="Coin30" parent="Coins" instance=ExtResource( 11 )]
 position = Vector2( 1360, -96 )
 
 [node name="Coin31" parent="Coins" instance=ExtResource( 11 )]
@@ -541,18 +552,15 @@ position = Vector2( 2320, -384 )
 position = Vector2( 2336, -384 )
 
 [node name="Coin24" parent="Coins" instance=ExtResource( 11 )]
-position = Vector2( 1248, -104 )
+position = Vector2( 1248, -96 )
 
 [node name="Coin25" parent="Coins" instance=ExtResource( 11 )]
-position = Vector2( 1232, -112 )
+position = Vector2( 1232, -104 )
 
 [node name="Coin26" parent="Coins" instance=ExtResource( 11 )]
-position = Vector2( 1216, -112 )
+position = Vector2( 1216, -104 )
 
 [node name="Coin27" parent="Coins" instance=ExtResource( 11 )]
-position = Vector2( 1200, -112 )
-
-[node name="Coin28" parent="Coins" instance=ExtResource( 11 )]
 position = Vector2( 1200, -112 )
 
 [node name="Coin29" parent="Coins" instance=ExtResource( 11 )]
@@ -561,7 +569,7 @@ position = Vector2( 1184, -112 )
 [node name="Slimes" type="Node2D" parent="."]
 
 [node name="Slime" parent="Slimes" instance=ExtResource( 12 )]
-position = Vector2( 608, -48 )
+position = Vector2( 616, -48 )
 
 [node name="GreenSlime" parent="Slimes" instance=ExtResource( 12 )]
 position = Vector2( 144, -8 )
@@ -570,10 +578,7 @@ position = Vector2( 144, -8 )
 position = Vector2( 288, -64 )
 
 [node name="GreenSlime3" parent="Slimes" instance=ExtResource( 12 )]
-position = Vector2( 472, -64 )
-
-[node name="GreenSlime4" parent="Slimes" instance=ExtResource( 12 )]
-position = Vector2( 552, -56 )
+position = Vector2( 480, -64 )
 
 [node name="GreenSlime5" parent="Slimes" instance=ExtResource( 12 )]
 position = Vector2( 744, -72 )
@@ -593,22 +598,13 @@ position = Vector2( 2136, -376 )
 [node name="FlyingSlimes" type="Node2D" parent="."]
 
 [node name="FlyingSlime" parent="FlyingSlimes" instance=ExtResource( 25 )]
-position = Vector2( 448, -88 )
+position = Vector2( 440, -88 )
 
 [node name="FlyingSlime2" parent="FlyingSlimes" instance=ExtResource( 25 )]
-position = Vector2( 768, -104 )
-
-[node name="FlyingSlime3" parent="FlyingSlimes" instance=ExtResource( 25 )]
-position = Vector2( 976, -120 )
-
-[node name="FlyingSlime4" parent="FlyingSlimes" instance=ExtResource( 25 )]
-position = Vector2( 1304, -104 )
+position = Vector2( 1160, -112 )
 
 [node name="FlyingSlime5" parent="FlyingSlimes" instance=ExtResource( 25 )]
-position = Vector2( 1640, -152 )
-
-[node name="FlyingSlime6" parent="FlyingSlimes" instance=ExtResource( 25 )]
-position = Vector2( 1632, -328 )
+position = Vector2( 1688, -184 )
 
 [node name="FlyingSlime7" parent="FlyingSlimes" instance=ExtResource( 25 )]
 position = Vector2( 1840, -368 )
@@ -627,17 +623,11 @@ position = Vector2( 2168, -392 )
 [node name="Worm" parent="Worms" instance=ExtResource( 15 )]
 position = Vector2( 240, -48 )
 
-[node name="Worm2" parent="Worms" instance=ExtResource( 15 )]
-position = Vector2( 832, -96 )
-
 [node name="Worm3" parent="Worms" instance=ExtResource( 15 )]
-position = Vector2( 856, -96 )
+position = Vector2( 840, -96 )
 
 [node name="Worm5" parent="Worms" instance=ExtResource( 15 )]
 position = Vector2( 1144, -96 )
-
-[node name="Worm6" parent="Worms" instance=ExtResource( 15 )]
-position = Vector2( 1664, -144 )
 
 [node name="Worm7" parent="Worms" instance=ExtResource( 15 )]
 position = Vector2( 1624, -296 )
@@ -758,6 +748,6 @@ sign_text = [ [ "You found a rank! Check your inventory to see what it is.", "Si
 position = Vector2( 1848, -240 )
 
 [node name="BlueBird2" parent="Bird" instance=ExtResource( 21 )]
-position = Vector2( 1656, -352 )
+position = Vector2( 1728, -360 )
 
 [editable path="MovingPlatforms/SmallPlatform"]

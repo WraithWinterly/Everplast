@@ -1,5 +1,6 @@
 extends Label
 
+
 func _ready() -> void:
 	hide()
 
@@ -10,45 +11,49 @@ func _input(_event: InputEvent) -> void:
 			hide()
 		else:
 			show()
-			update()
+			update_text()
 
 
-func update() -> void:
+func update_text() -> void:
 	text = "FPS: %s\n" % Engine.get_frames_per_second()
-	text += "%s\n" % Globals.get_main().version
-	text += "Current Menu: %s\n" % UI.current_menu
-	text += "Last Menu: %s\n" % UI.last_menu
-	text += "UI Index: %s\n" % UI.profile_index
-	text += "UI Focus: %s\n" % UI.profile_index_focus
-	text += "Current Profile: %s\n" % PlayerStats.current_save_profile
-	text += "Game States: %s\n" % Globals.GameStates
-	text += "Game State: %s\n" % Globals.game_state
-	text += "Menu Transitioning: %s\n" % UI.menu_transitioning
-	text += "Checkpoint Active: %s\n" % LevelController.checkpoint_active
-	text += "Checkpoint World: %s\n" % LevelController.checkpoint_world
-	text += "Checkpoint Level: %s\n" % LevelController.checkpoint_level
-	text += "Current World: %s\n" % LevelController.current_world
-	text += "Current Level: %s\n" % LevelController.current_level
-	text += "Quick Play: %s\n" % QuickPlay.data
+	text += "%s\n" % Globals.version_string
+
+	text += "\n"
+	text += "Current Menu: %s\n" % GlobalUI.Menus.keys()[GlobalUI.menu]
+	text += "Menu Locked: %s\n" % GlobalUI.menu_locked
+	text += "Game State: %s\n" % Globals.GameStates.keys()[Globals.game_state]
+	text += "Profile Selector Index Focus: %s\n" % GlobalUI.profile_index_focus
+	text += "Profile Selector Index: %s\n" % GlobalUI.profile_index
+	text += "Current Profile: %s\n" % GlobalSave.profile
+	text += "Current World: %s\n" % GlobalLevel.current_world
+	text += "Current Level: %s\n" % GlobalLevel.current_level
+	text += "Checkpoint Active: %s\n" % GlobalLevel.checkpoint_active
+	text += "Checkpoint World: %s\n" % GlobalLevel.checkpoint_world
+	text += "Checkpoint Level: %s\n" % GlobalLevel.checkpoint_level
+	text += "Quick Play Profile: %s\n" % GlobalQuickPlay.data["last_profile"]
+
+	text += "\n"
 	if not Globals.game_state == Globals.GameStates.MENU:
-		text += "Max World: %s\n" % PlayerStats.get_stat("world_max")
-		text += "Max Level: %s\n" % PlayerStats.get_stat("level_max")
-		text += "Last World: %s\n" % PlayerStats.get_stat("world_last")
-		text += "Last Level: %s\n" % PlayerStats.get_stat("level_last")
-		text += "In Subsection: %s\n" % Globals.in_subsection
-		text += "Current Rank: %s\n" % PlayerStats.get_stat("rank")
-		text += "Dialog Active: %s\n" % Globals.dialog_active
-		text += "Inventory Active: %s\n" % Globals.inventory_active
-	var player: Player = get_node_or_null(Globals.player_path)
+		text += "Max World: %s\n" % GlobalSave.get_stat("world_max")
+		text += "Max Level: %s\n" % GlobalSave.get_stat("level_max")
+		text += "Last World: %s\n" % GlobalSave.get_stat("world_last")
+		text += "Last Level: %s\n" % GlobalSave.get_stat("level_last")
+		text += "In Subsection: %s\n" % GlobalLevel.in_subsection
+		text += "Current Rank: %s\n" % GlobalSave.get_stat("rank")
+		text += "Last Powerup: %s\n" % get_node("/root/Main/GUI/Inventory").last_powerup
+		text += "Last Equippable: %s\n" % get_node("/root/Main/GUI/Inventory").last_equippable
+
+	text += "\n"
+	var player: Node2D = get_node_or_null(GlobalPaths.PLAYER)
 	if not player == null:
 		text += "Player: %s\n" % str(player.fsm.current_state.name)
-		text += "Player Position: %s\n" % str(player.kinematic_body.position)
+		text += "Player Position: %s\n" % str(player.global_position)
 		text += "Player Sprinting: %s\n" % str(player.sprinting)
-		var player_body: KinematicBody2D = get_node(Globals.player_body_path)
-		text += "Player Second Jump Used: %s\n" % player_body.second_jump_used
+		text += "Player Second Jump Used: %s\n" % player.second_jump_used
 		text += "Player Facing Right: %s\n" % player.facing_right
-		text += "Player Velocity: %s\n" % player_body.linear_velocity
+		text += "Player Velocity: %s\n" % player.linear_velocity
 		text += "\n"
+
 	yield(get_tree(), "idle_frame")
 	if visible:
-		update()
+		update_text()

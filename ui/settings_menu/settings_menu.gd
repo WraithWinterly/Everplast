@@ -3,25 +3,50 @@ extends Control
 const FILE: String = \
 	"user://settings.json"
 
-var default_data: Dictionary = {
+const DEFAULT_DATA: Dictionary = {
 	"show_social": true,
-	"profile_pause": true,
-	"aa_level": 1.0,
 	"vsync": true,
 	"tonemap": 3.0,
 	"fullscreen": true,
+	"post_processing": true,
 	"audio_enabled": true,
 	"audio_value": 100.0,
 	"music_enabled": true,
 	"music_value": 100.0,
-	"cheats": false,
+	"language": "not_set",
+	"controls": {
+		"ability": KEY_CONTROL,
+		"move_left": KEY_A,
+		"move_right": KEY_D,
+		"move_down": KEY_S,
+		"move_jump": KEY_SPACE,
+		"move_sprint": KEY_SHIFT,
+		"interact": KEY_F,
+		"inventory": KEY_E,
+		"equip": KEY_R,
+		"powerup": KEY_X,
+	},
+
+	"controls_2": {
+		"ability": null,
+		"move_left": KEY_LEFT,
+		"move_right": KEY_RIGHT,
+		"move_down": KEY_DOWN,
+		"move_jump": KEY_W,
+		"move_sprint": null,
+		"interact": null,
+		"inventory": null,
+		"fire": null,
+		"equip": null,
+		"powerup": null,
+	},
 }
 
 var data: Dictionary = {}
 
-var in_category: bool = false
 var side_panel_focus: Button = null
 var button_focus: Button = null
+var in_category: bool = false
 
 onready var subcategory: Label = $Panel/BG/Subcategory
 onready var subcategory_anim_player: AnimationPlayer = $Panel/BG/Subcategory/AnimationPlayer
@@ -30,8 +55,8 @@ onready var subcategory_anim_player: AnimationPlayer = $Panel/BG/Subcategory/Ani
 # GENERAL MENU
 #
 onready var general_buttons: VBoxContainer = $Panel/BG/GeneralMenu/HBoxContainer
-onready var social_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/SocialMedia
-onready var profile_pause_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/ProfilePause
+onready var social_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/Social
+onready var language_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/Language
 onready var credits_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/Credits
 onready var audio_volume_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/AudioVolume
 onready var audio_volume_slider: HSlider = $Panel/BG/GeneralMenu/HBoxContainer/AudioSlider/Slider
@@ -47,21 +72,22 @@ onready var music_slider: HBoxContainer = $Panel/BG/GeneralMenu/HBoxContainer/Mu
 #
 onready var graphics_buttons: VBoxContainer = $Panel/BG/GraphicsMenu/HBoxContainer
 onready var fullscreen_button: Button = $Panel/BG/GraphicsMenu/HBoxContainer/Fullscreen
-onready var aa_button: Button = $Panel/BG/GraphicsMenu/HBoxContainer/AA
 onready var vsync_button: Button = $Panel/BG/GraphicsMenu/HBoxContainer/VSync
 onready var tonemap_button: Button = $Panel/BG/GraphicsMenu/HBoxContainer/Tonemap
+onready var post_processing_button: Button = $Panel/BG/GraphicsMenu/HBoxContainer/PostProcessing
 
 #
 # CONTROLS MENU
 #
 onready var controls_buttons: VBoxContainer = $Panel/BG/ControlsMenu/HBoxContainer
-onready var controls_test_button: Button = $Panel/BG/ControlsMenu/HBoxContainer/Test
+onready var controls_customize_button: Button = $Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls
+
 #
 # OTHER MENU
 #
 onready var other_buttons: VBoxContainer = $Panel/BG/OtherMenu/HBoxContainer
-onready var debug_button: Button = $Panel/BG/OtherMenu/HBoxContainer/DebugConsole
-onready var erase_button: Button = $Panel/BG/OtherMenu/HBoxContainer/EraseGame
+onready var reset_settings_button: Button = $Panel/BG/OtherMenu/HBoxContainer/ResetSettings
+onready var erase_all_button: Button = $Panel/BG/OtherMenu/HBoxContainer/EraseGame
 
 #
 # SIDE PANEL
@@ -82,41 +108,50 @@ onready var back_button: Button = $Panel/SidePanel/HBoxContainer/Back
 
 func _ready() -> void:
 	var __: int
-	__ = UI.connect("changed", self, "_ui_changed")
-	__ = Signals.connect("erase_all_started", self, "_erase_all_started")
-	__ = Signals.connect("erase_all_confirmed", self, "_erase_all_confirmed")
-	__ = Signals.connect("debug_enable_started", self, "_debug_enable_started")
-	__ = Signals.connect("debug_enable_confirmed", self, "_debug_enable_confirmed")
+	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("ui_settings_pressed", self, "_ui_settings_pressed")
+	__ = GlobalEvents.connect("ui_settings_credits_back_pressed", self, "_ui_settings_credits_back_pressed")
+	__ = GlobalEvents.connect("ui_settings_controls_customize_back_pressed", self, "_ui_settings_controls_customize_back_pressed")
+	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_no_pressed", self, "_ui_settings_erase_all_prompt_no_pressed")
+	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_extra_no_pressed", self, "_ui_settings_erase_all_prompt_extra_no_pressed")
+	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_extra_yes_pressed", self, "_ui_settings_erase_all_prompt_extra_yes_pressed")
+	__ = GlobalEvents.connect("ui_settings_reset_settings_prompt_no_pressed", self, "_ui_settings_reset_settings_prompt_no_pressed")
+	__ = GlobalEvents.connect("ui_settings_reset_settings_prompt_yes_pressed", self, "_ui_settings_reset_settings_prompt_yes_pressed")
+	__ = GlobalEvents.connect("ui_settings_language_back_pressed", self, "_ui_settings_language_back_pressed")
+	__ = GlobalEvents.connect("ui_settings_language_english_pressed", self, "_ui_settings_language_english_pressed")
+	__ = GlobalEvents.connect("ui_settings_language_spanish_pressed", self, "_ui_settings_language_spanish_pressed")
 	__ = general_menu_button.connect("pressed", self, "_general_pressed")
 	__ = graphics_menu_button.connect("pressed", self, "_graphics_pressed")
 	__ = controls_menu_button.connect("pressed", self, "_controls_pressed")
 	__ = other_menu_button.connect("pressed", self, "_other_pressed")
-	__ = social_button.connect("pressed", self, "_social_button_pressed")
-	__ = profile_pause_button.connect("pressed", self, "_profile_pause_button_pressed")
-	__ = credits_button.connect("pressed", self, "_credits_button_pressed")
+	__ = language_button.connect("pressed", self, "_language_button_pressed")
 	__ = audio_volume_button.connect("pressed", self, "_audio_volume_button_pressed")
 	__ = audio_volume_slider.connect("value_changed", self, "_audio_volume_changed")
 	__ = music_volume_button.connect("pressed", self, "_music_volume_button_pressed")
 	__ = music_volume_slider.connect("value_changed", self, "_music_volume_changed")
+	__ = social_button.connect("pressed", self, "_social_button_pressed")
+	__ = credits_button.connect("pressed", self, "_credits_button_pressed")
 	__ = fullscreen_button.connect("pressed", self, "_fullscreen_button_pressed")
-	__ = aa_button.connect("pressed", self, "_aa_button_pressed")
 	__ = vsync_button.connect("pressed", self, "_vsync_button_pressed")
 	__ = tonemap_button.connect("pressed", self, "_tonemap_button_pressed")
-	__ = debug_button.connect("pressed", self, "_debug_button_pressed")
-	__ = erase_button.connect("pressed", self, "_erase_button_pressed")
-	__ = back_button.connect("pressed", self, "_back_pressed")
+	__ = post_processing_button.connect("pressed", self, "_post_processing_button_pressed")
+	__ = controls_customize_button.connect("pressed", self, "_controls_customize_button_pressed")
+	__ = reset_settings_button.connect("pressed", self, "_reset_settings_button_pressed")
+	__ = erase_all_button.connect("pressed", self, "_erase_all_button_pressed")
+	__ = back_button.connect("pressed", self, "_back_button_pressed")
 
 	load_stats()
+
+	yield(get_tree(), "physics_frame")
 	update_button_toggles()
 	update_audio_toggle()
 	update_music_toggle()
 	update_toggle_buttons()
-	update_aa_button_text()
 	update_tonemap_button_text()
 	update_audio_labels()
-
 	apply_settings()
 	hide()
+
 
 
 func _input(_event: InputEvent) -> void:
@@ -129,8 +164,7 @@ func _input(_event: InputEvent) -> void:
 			data.fullscreen = true
 			OS.window_fullscreen = true
 			fullscreen_changed()
-		if not UI.current_menu == UI.MAIN_MENU_SETTINGS:
-			save_settings()
+		save_settings()
 
 		var file: File = File.new()
 		var __: int = file.open(FILE, File.WRITE)
@@ -138,9 +172,27 @@ func _input(_event: InputEvent) -> void:
 		file.close()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and (GlobalUI.menu == GlobalUI.Menus.SETTINGS\
+			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_GENERAL or GlobalUI.menu == GlobalUI.Menus.SETTINGS_GRAPHICS\
+			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS or GlobalUI.menu == GlobalUI.Menus.SETTINGS_OTHER) and not GlobalUI.menu_locked:
+		back()
+		get_tree().set_input_as_handled()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_TRANSLATION_CHANGED:
+		update_button_toggles()
+		update_audio_toggle()
+		update_music_toggle()
+		update_toggle_buttons()
+		update_tonemap_button_text()
+		update_audio_labels()
+
+
 func update_audio_labels() -> void:
-	music_volume_label.text = "Music Volume: %s" % data.music_value
-	audio_volume_label.text = "Audio Volume: %s" % data.audio_value
+	music_volume_label.text = "%s" % data.music_value
+	audio_volume_label.text = "%s" % data.audio_value
 
 
 func disable_side_panel_right_focus() -> void:
@@ -150,13 +202,14 @@ func disable_side_panel_right_focus() -> void:
 
 func update_button_toggles() -> void:
 	social_button.pressed = data.show_social
-	profile_pause_button.pressed = data.profile_pause
 	fullscreen_button.pressed = data.fullscreen
 	vsync_button.pressed = data.vsync
+	post_processing_button.pressed = data.post_processing
 	audio_volume_button.pressed = data.audio_enabled
 	audio_volume_slider.value = data.audio_value
 	music_volume_button.pressed = data.music_enabled
 	music_volume_slider.value = data.music_value
+	GlobalEvents.emit_signal("ui_settings_language_buttons_updated", data.language)
 
 
 func show_menu() -> void:
@@ -172,18 +225,15 @@ func show_menu() -> void:
 	update_music_toggle()
 	update_toggle_buttons()
 	update_audio_labels()
-	update_aa_button_text()
 	update_tonemap_button_text()
-
-	if Globals.is_mobile:
-		graphics_menu_button.hide()
-		general_anim_player.focus_neighbour_bottom = controls_menu_button.get_path()
-		controls_menu_button.focus_neighbour_top = general_menu_button.get_path()
 
 
 func hide_menu() -> void:
 	animation_player.play_backwards("show")
 	disable_buttons()
+	in_category = false
+	yield(animation_player, "animation_finished")
+	hide()
 
 
 func enable_buttons() -> void:
@@ -193,6 +243,7 @@ func enable_buttons() -> void:
 	other_menu_button.disabled = false
 
 	social_button.disabled = false
+	language_button.disabled = false
 	credits_button.disabled = false
 	audio_volume_button.disabled = false
 	audio_volume_slider.show()
@@ -200,16 +251,21 @@ func enable_buttons() -> void:
 	music_volume_slider.show()
 
 	fullscreen_button.disabled = false
-	aa_button.disabled = false
 	vsync_button.disabled = false
 	tonemap_button.disabled = false
 
+	controls_customize_button.disabled = false
 
-	erase_button.disabled = false
+	erase_all_button.disabled = false
+
+	reset_settings_button.disabled = false
+
+	if Globals.game_state == Globals.GameStates.MENU:
+		other_menu_button.disabled = false
+	else:
+		other_menu_button.disabled = true
 
 	back_button.disabled = false
-	debug_button.disabled =  data.cheats
-	other_menu_button.disabled = not (Globals.game_state == Globals.GameStates.MENU)
 
 
 func disable_buttons() -> void:
@@ -219,6 +275,7 @@ func disable_buttons() -> void:
 	other_menu_button.disabled = true
 
 	social_button.disabled = true
+	language_button.disabled = true
 	credits_button.disabled = true
 	audio_volume_button.disabled = true
 	audio_volume_slider.hide()
@@ -226,12 +283,13 @@ func disable_buttons() -> void:
 	music_volume_slider.hide()
 
 	fullscreen_button.disabled = true
-	aa_button.disabled = true
 	vsync_button.disabled = true
 	tonemap_button.disabled = true
 
-	debug_button.disabled = true
-	erase_button.disabled = true
+	controls_customize_button.disabled = true
+
+	reset_settings_button.disabled = true
+	erase_all_button.disabled = true
 
 	back_button.disabled = true
 
@@ -244,14 +302,14 @@ func load_stats() -> void:
 		file.close()
 		var allow: bool = true
 		if typeof(loaded_data) == TYPE_DICTIONARY:
-			for i in default_data:
+			for i in DEFAULT_DATA:
 				if not loaded_data.has(i):
 					allow = false
 					continue
-				elif not typeof(loaded_data[i]) == typeof(default_data[i]):
+				elif not typeof(loaded_data[i]) == typeof(DEFAULT_DATA[i]):
 					allow = false
 					continue
-			if loaded_data.size() == default_data.size() and allow:
+			if loaded_data.size() == DEFAULT_DATA.size() and allow:
 				data = loaded_data
 			else:
 				reset_file()
@@ -262,7 +320,7 @@ func load_stats() -> void:
 
 
 func reset_file() -> void:
-	data = default_data
+	data = DEFAULT_DATA
 	var file: File = File.new()
 	var __: int = file.open(FILE, File.WRITE)
 	file.store_string(to_json(data))
@@ -272,7 +330,6 @@ func reset_file() -> void:
 
 func save_settings() -> void:
 	data.show_social = social_button.pressed
-	data.profile_pause = profile_pause_button.pressed
 	data.fullscreen = fullscreen_button.pressed
 	data.vsync = vsync_button.pressed
 	data.audio_enabled = audio_volume_button.pressed
@@ -289,10 +346,13 @@ func apply_settings() -> void:
 	update_toggle_buttons()
 	yield(get_tree(), "physics_frame")
 	save_settings()
-	get_viewport().msaa = data.aa_level
 	OS.window_fullscreen = data.fullscreen
 	OS.vsync_enabled = data.vsync
-	Globals.get_env().environment.tonemap_mode = data.tonemap
+
+	get_node(GlobalPaths.WORLD_ENVIRONMENT).environment.tonemap_mode = data.tonemap
+	get_node(GlobalPaths.WORLD_ENVIRONMENT).environment.glow_enabled = data.post_processing
+	get_node(GlobalPaths.WORLD_ENVIRONMENT).environment.adjustment_enabled = data.post_processing
+
 	if data.audio_enabled:
 		AudioServer.set_bus_volume_db(2, get_db_value(data.audio_value))
 	else:
@@ -302,7 +362,11 @@ func apply_settings() -> void:
 		AudioServer.set_bus_volume_db(1, get_db_value(data.music_value))
 	else:
 		AudioServer.set_bus_volume_db(1, get_db_value(0))
-	Signals.emit_signal("settings_updated")
+
+	if not data.language == "not_set":
+		TranslationServer.set_locale(data.language)
+
+	GlobalEvents.emit_signal("ui_settings_updated")
 
 
 func get_db_value(db_level: float) -> float:
@@ -312,61 +376,61 @@ func get_db_value(db_level: float) -> float:
 
 func update_audio_toggle() -> void:
 	if audio_volume_button.pressed:
-		audio_volume_button.text = "Audio Volume: On"
+		audio_volume_button.text = "%s: %s" % [tr("settings.general.audio_volume"), tr("global.on")]
 		audio_slider.show()
 		audio_volume_button.focus_neighbour_bottom = audio_volume_slider.get_path()
 		audio_volume_button.focus_next = audio_volume_slider.get_path()
-		music_volume_button.focus_neighbour_top = audio_volume_slider.get_path()
-		music_volume_button.focus_previous = audio_volume_slider.get_path()
+		social_button.focus_neighbour_top = audio_volume_slider.get_path()
+		social_button.focus_previous = audio_volume_slider.get_path()
 	else:
-		audio_volume_button.text = "Audio Volume: Off"
+		audio_volume_button.text = "%s: %s" % [tr("settings.general.audio_volume"), tr("global.off")]
 		audio_slider.hide()
-		audio_volume_button.focus_neighbour_bottom = music_volume_button.get_path()
-		audio_volume_button.focus_next = music_volume_button.get_path()
-		music_volume_button.focus_neighbour_top = audio_volume_button.get_path()
-		music_volume_button.focus_previous = audio_volume_button.get_path()
+		audio_volume_button.focus_neighbour_bottom = social_button.get_path()
+		audio_volume_button.focus_next = social_button.get_path()
+		social_button.focus_neighbour_top = audio_volume_button.get_path()
+		social_button.focus_previous = audio_volume_button.get_path()
 
 
 func update_music_toggle() -> void:
 	if music_volume_button.pressed:
-		music_volume_button.text = "Music Volume: On"
+		music_volume_button.text = "%s: %s" % [tr("settings.general.music_volume"), tr("global.on")]
 		music_slider.show()
 		music_volume_button.focus_neighbour_bottom = music_volume_slider.get_path()
 		music_volume_button.focus_next = music_volume_slider.get_path()
-		music_volume_slider.focus_neighbour_bottom = social_button.get_path()
-		music_volume_slider.focus_next = social_button.get_path()
-		social_button.focus_neighbour_top = music_volume_slider.get_path()
-		social_button.focus_previous = music_volume_slider.get_path()
+		music_volume_slider.focus_neighbour_bottom = audio_volume_button.get_path()
+		music_volume_slider.focus_next = audio_volume_button.get_path()
+		audio_volume_button.focus_neighbour_top = music_volume_slider.get_path()
+		audio_volume_button.focus_previous = music_volume_slider.get_path()
 	else:
-		music_volume_button.text = "Music Volume: Off"
+		music_volume_button.text = "%s: %s" % [tr("settings.general.music_volume"), tr("global.off")]
 		music_slider.hide()
-		music_volume_button.focus_neighbour_bottom = social_button.get_path()
-		music_volume_button.focus_next = social_button.get_path()
-		social_button.focus_neighbour_top = music_volume_button.get_path()
-		social_button.focus_previous = music_volume_button.get_path()
+		music_volume_button.focus_neighbour_bottom = audio_volume_button.get_path()
+		music_volume_button.focus_next = audio_volume_button.get_path()
+		audio_volume_button.focus_neighbour_top = music_volume_button.get_path()
+		audio_volume_button.focus_previous = music_volume_button.get_path()
 
 
 func update_toggle_buttons() -> void:
+
 	if social_button.pressed:
-		social_button.text = "Show Social Media: On"
+		social_button.text = "%s: %s" % [tr("settings.general.social"), tr("global.on")]
 	else:
-		social_button.text = "Show Social Media: Off"
-	if profile_pause_button.pressed:
-		profile_pause_button.text = "Profile In Pause Screen: On"
-	else:
-		profile_pause_button.text = "Profile In Pause Screen: Off"
+		social_button.text = "%s: %s" % [tr("settings.general.social"), tr("global.off")]
+
 	if fullscreen_button.pressed:
-		fullscreen_button.text = "Fullscreen Mode: On"
+		fullscreen_button.text = "%s: %s" % [tr("settings.graphics.fullscreen"), tr("global.on")]
 	else:
-		fullscreen_button.text = "Fullscreen Mode: Off"
+		fullscreen_button.text = "%s: %s" % [tr("settings.graphics.fullscreen"), tr("global.off")]
+
 	if vsync_button.pressed:
-		vsync_button.text = "Use VSync: On"
+		vsync_button.text = "%s: %s" % [tr("settings.graphics.vsync"), tr("global.on")]
 	else:
-		vsync_button.text = "Use VSync: Off"
-	if debug_button.pressed or debug_button.disabled:
-		debug_button.text = "Debug Console: On"
+		vsync_button.text = "%s: %s" % [tr("settings.graphics.vsync"), tr("global.off")]
+
+	if post_processing_button.pressed:
+		post_processing_button.text = "%s: %s" % [tr("settings.graphics.post_processing"), tr("global.on")]
 	else:
-		debug_button.text = "Debug Console: Off"
+		post_processing_button.text = "%s: %s" % [tr("settings.graphics.post_processing"), tr("global.off")]
 
 
 func fullscreen_changed() -> void:
@@ -377,264 +441,311 @@ func fullscreen_changed() -> void:
 	update_toggle_buttons()
 
 
-func _back_pressed() -> void:
-	UI.emit_signal("button_pressed", true)
-	match UI.current_menu:
-		UI.MAIN_MENU_SETTINGS_GENERAL, UI.MAIN_MENU_SETTINGS_GRAPHICS, \
-		UI.MAIN_MENU_SETTINGS_CONTROLS, UI.MAIN_MENU_SETTINGS_OTHER:
-			UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS)
-		UI.PAUSE_MENU_SETTINGS_GENERAL, UI.PAUSE_MENU_SETTINGS_GRAPHICS, \
-		UI.PAUSE_MENU_SETTINGS_CONTROLS:
-			UI.emit_signal("changed", UI.PAUSE_MENU_SETTINGS)
-
-	match UI.current_menu:
-		UI.MAIN_MENU_SETTINGS:
-			UI.emit_signal("changed", UI.MAIN_MENU)
-		UI.PAUSE_MENU_SETTINGS:
-			UI.emit_signal("changed", UI.PAUSE_MENU)
-
-
-func _ui_changed(menu: int) -> void:
-	var switched_not_closed: bool = false
-	match menu:
-		UI.MAIN_MENU_SETTINGS, UI.PAUSE_MENU_SETTINGS:
-			if UI.last_menu == UI.MAIN_MENU or UI.last_menu == UI.PAUSE_MENU:
-				show_menu()
-			else:
-				enable_buttons()
-		UI.MAIN_MENU, UI.PAUSE_MENU:
-			if UI.last_menu == UI.PAUSE_MENU_SETTINGS or \
-					UI.last_menu == UI.MAIN_MENU_SETTINGS:
-				hide_menu()
-		UI.MAIN_MENU_SETTINGS_CREDITS, UI.PAUSE_MENU_SETTINGS_CREDITS:
-			disable_buttons()
-
-		UI.MAIN_MENU_SETTINGS_GENERAL, UI.PAUSE_MENU_SETTINGS_GENERAL:
-			if not in_category:
-				subcategory_anim_player.play_backwards("slide")
-			in_category = true
-			general_anim_player.play("slide")
-			switched_not_closed = true
-		UI.MAIN_MENU_SETTINGS_GRAPHICS, UI.PAUSE_MENU_SETTINGS_GRAPHICS:
-			if not in_category:
-				subcategory_anim_player.play_backwards("slide")
-			in_category = true
-			graphics_anim_player.play("slide")
-			switched_not_closed = true
-		UI.MAIN_MENU_SETTINGS_CONTROLS, UI.PAUSE_MENU_SETTINGS_CONTROLS:
-			if not in_category:
-				subcategory_anim_player.play_backwards("slide")
-			in_category = true
-			controls_anim_player.play("slide")
-
-			switched_not_closed = true
-		UI.MAIN_MENU_SETTINGS_OTHER:
-			if not in_category:
-				subcategory_anim_player.play_backwards("slide")
-			in_category = true
-			other_anim_player.play("slide")
-			switched_not_closed = true
-
-	match UI.last_menu:
-		UI.MAIN_MENU_SETTINGS_GENERAL, UI.PAUSE_MENU_SETTINGS_GENERAL:
+func previous_menu_back() -> void:
+	match GlobalUI.menu:
+		GlobalUI.Menus.SETTINGS_GENERAL:
 			general_anim_player.play_backwards("slide")
-			if not switched_not_closed and (menu == UI.MAIN_MENU_SETTINGS or menu == UI.PAUSE_MENU_SETTINGS):
-				in_category = false
-				subcategory_anim_player.play("slide")
-				general_menu_button.grab_focus()
-				disable_side_panel_right_focus()
-		UI.MAIN_MENU_SETTINGS_GRAPHICS, UI.PAUSE_MENU_SETTINGS_GRAPHICS:
+		GlobalUI.Menus.SETTINGS_GRAPHICS:
 			graphics_anim_player.play_backwards("slide")
-			if not switched_not_closed and (menu == UI.MAIN_MENU_SETTINGS or menu == UI.PAUSE_MENU_SETTINGS):
-				in_category = false
-				subcategory_anim_player.play("slide")
-				graphics_menu_button.grab_focus()
-				disable_side_panel_right_focus()
-		UI.MAIN_MENU_SETTINGS_CONTROLS, UI.PAUSE_MENU_SETTINGS_CONTROLS:
+		GlobalUI.Menus.SETTINGS_CONTROLS:
 			controls_anim_player.play_backwards("slide")
-			if not switched_not_closed and (menu == UI.MAIN_MENU_SETTINGS or menu == UI.PAUSE_MENU_SETTINGS):
-				in_category = false
-				subcategory_anim_player.play("slide")
-				controls_menu_button.grab_focus()
-				disable_side_panel_right_focus()
-		UI.MAIN_MENU_SETTINGS_OTHER:
+		GlobalUI.Menus.SETTINGS_OTHER:
 			other_anim_player.play_backwards("slide")
-			if not switched_not_closed and (menu == UI.MAIN_MENU_SETTINGS or menu == UI.PAUSE_MENU_SETTINGS):
-				in_category = false
-				other_menu_button.grab_focus()
-				subcategory_anim_player.play("slide")
-				disable_side_panel_right_focus()
-		UI.MAIN_MENU_SETTINGS_CREDITS, UI.PAUSE_MENU_SETTINGS_CREDITS:
-			enable_buttons()
-			credits_button.grab_focus()
-		UI.MAIN_MENU_SETTINGS_ERASE_PROMPT, UI.MAIN_MENU_SETTINGS_ERASE_PROMPT_EVIL:
-			erase_button.grab_focus()
-			enable_buttons()
-		UI.MAIN_MENU_SETTINGS_DEBUG_ENABLE_PROMPT, UI.MAIN_MENU_SETTINGS_DEBUG_ENABLE_EVIL_PROMPT:
-			debug_button.grab_focus()
-			enable_buttons()
-			if data.cheats:
-				debug_button.disabled = true
 
 
+func back() -> void:
+	if GlobalUI.menu_locked: return
+	GlobalEvents.emit_signal("ui_button_pressed", true)
+
+	match GlobalUI.menu:
+		GlobalUI.Menus.SETTINGS_GENERAL:
+			general_anim_player.play_backwards("slide")
+			subcategory_anim_player.play("slide")
+			general_menu_button.grab_focus()
+			GlobalUI.menu = GlobalUI.Menus.SETTINGS
+			in_category = false
+
+		GlobalUI.Menus.SETTINGS_GRAPHICS:
+			graphics_anim_player.play_backwards("slide")
+			subcategory_anim_player.play("slide")
+			graphics_menu_button.grab_focus()
+			GlobalUI.menu = GlobalUI.Menus.SETTINGS
+			in_category = false
+
+		GlobalUI.Menus.SETTINGS_CONTROLS:
+			controls_anim_player.play_backwards("slide")
+			subcategory_anim_player.play("slide")
+			controls_menu_button.grab_focus()
+			GlobalUI.menu = GlobalUI.Menus.SETTINGS
+			in_category = false
+
+		GlobalUI.Menus.SETTINGS_OTHER:
+			other_anim_player.play_backwards("slide")
+			subcategory_anim_player.play("slide")
+			other_menu_button.grab_focus()
+			GlobalUI.menu = GlobalUI.Menus.SETTINGS
+			in_category = false
+
+		GlobalUI.Menus.SETTINGS:
+			GlobalEvents.emit_signal("ui_settings_back_pressed")
+			hide_menu()
+			if Globals.game_state == Globals.GameStates.MENU:
+				GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
+			else:
+				GlobalUI.menu = GlobalUI.Menus.PAUSE_MENU
+
+
+func update_tonemap_button_text() -> void:
+	var string: String = "%s: " % tr("settings.graphics.tonemap")
+	var env: WorldEnvironment = get_node(GlobalPaths.WORLD_ENVIRONMENT)
+	match int(data.tonemap):
+		env.environment.TONE_MAPPER_LINEAR:
+			string += "Linear"
+		env.environment.TONE_MAPPER_FILMIC:
+			string += "Filmic"
+		env.environment.TONE_MAPPER_REINHARDT:
+			string += "Reinhardt"
+		env.environment.TONE_MAPPER_ACES:
+			string += "ACES (%s)" % tr("default")
+		env.environment.TONE_MAPPER_ACES_FITTED:
+			string += "ACES Fitted"
+	tonemap_button.text = string
+
+
+func update_right_button_focus() -> void:
+	match GlobalUI.menu:
+		GlobalUI.Menus.SETTINGS_GENERAL:
+			for button in general_buttons.get_children():
+				button.focus_neighbour_left = side_panel_focus.get_path()
+		GlobalUI.Menus.SETTINGS_GRAPHICS:
+			for button in graphics_buttons.get_children():
+				button.focus_neighbour_left = side_panel_focus.get_path()
+		GlobalUI.Menus.SETTINGS_CONTROLS:
+			for button in controls_buttons.get_children():
+				button.focus_neighbour_left = side_panel_focus.get_path()
+		GlobalUI.Menus.SETTINGS_OTHER:
+			for button in other_buttons.get_children():
+				button.focus_neighbour_left = side_panel_focus.get_path()
+
+
+func update_left_button_focus() -> void:
+	for button in side_panel.get_children():
+		button.focus_neighbour_right = button_focus.get_path()
+
+
+# Start of Global Events
+func _level_changed(_world: int, _level: int) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.SETTINGS \
+			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_GENERAL \
+			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_GRAPHICS \
+			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS \
+			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_OTHER:
+		back()
+		hide_menu()
+
+
+func _ui_settings_pressed() -> void:
+	show_menu()
+
+
+func _ui_settings_credits_back_pressed() -> void:
+	enable_buttons()
+	credits_button.grab_focus()
+
+
+func _ui_settings_controls_customize_back_pressed() -> void:
+	enable_buttons()
+	controls_customize_button.grab_focus()
+
+
+func _ui_settings_erase_all_prompt_no_pressed() -> void:
+	enable_buttons()
+	erase_all_button.grab_focus()
+
+
+func _ui_settings_erase_all_prompt_extra_no_pressed() -> void:
+	enable_buttons()
+	erase_all_button.grab_focus()
+
+
+func _ui_settings_erase_all_prompt_extra_yes_pressed() -> void:
+	yield(get_tree().create_timer(0.75), "timeout")
+	reset_file()
+	load_stats()
+	update_button_toggles()
+	update_audio_toggle()
+	update_music_toggle()
+	update_toggle_buttons()
+	update_tonemap_button_text()
+	update_audio_labels()
+	apply_settings()
+
+
+func _ui_settings_reset_settings_prompt_no_pressed() -> void:
+	enable_buttons()
+	reset_settings_button.grab_focus()
+
+
+func _ui_settings_reset_settings_prompt_yes_pressed() -> void:
+	# Give time for Controls Menu to delete InputMaps based off of settings
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
+
+	enable_buttons()
+	reset_settings_button.grab_focus()
+	reset_file()
+
+
+func _ui_settings_language_back_pressed() -> void:
+	enable_buttons()
+	language_button.grab_focus()
+
+
+func _ui_settings_language_english_pressed() -> void:
+	data.language = "en"
+	apply_settings()
+
+
+func _ui_settings_language_spanish_pressed() -> void:
+	data.language = "es"
+	apply_settings()
+
+
+# End of Global Events
 func _general_pressed() -> void:
-	UI.emit_signal("button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed")
 	side_panel_focus = general_menu_button
 	for button in side_panel.get_children():
 		button.focus_neighbour_right = social_button.get_path()
 	button_focus = social_button
-	if not (UI.current_menu == UI.MAIN_MENU_SETTINGS_GENERAL \
-			or UI.current_menu == UI.PAUSE_MENU_SETTINGS_GENERAL):
-		social_button.grab_focus()
-		if Globals.game_state == Globals.GameStates.MENU:
-			UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_GENERAL)
+	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_GENERAL:
+		general_anim_player.play("slide")
+		if not in_category:
+			subcategory_anim_player.play_backwards("slide")
+			in_category = true
 		else:
-			UI.emit_signal("changed", UI.PAUSE_MENU_SETTINGS_GENERAL)
+			previous_menu_back()
+		GlobalUI.menu = GlobalUI.Menus.SETTINGS_GENERAL
+		language_button.grab_focus()
 	update_left_button_focus()
 	update_right_button_focus()
 
 
 func _graphics_pressed() -> void:
-	UI.emit_signal("button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed")
 	side_panel_focus = graphics_menu_button
 	for button in side_panel.get_children():
 		button.focus_neighbour_right = fullscreen_button.get_path()
 	button_focus = fullscreen_button
-	if not (UI.current_menu == UI.MAIN_MENU_SETTINGS_GRAPHICS \
-			or UI.current_menu == UI.PAUSE_MENU_SETTINGS_GRAPHICS):
-		fullscreen_button.grab_focus()
-		if Globals.game_state == Globals.GameStates.MENU:
-			UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_GRAPHICS)
+	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_GRAPHICS:
+		graphics_anim_player.play("slide")
+		if not in_category:
+			subcategory_anim_player.play_backwards("slide")
+			in_category = true
 		else:
-			UI.emit_signal("changed", UI.PAUSE_MENU_SETTINGS_GRAPHICS)
+			previous_menu_back()
+		GlobalUI.menu = GlobalUI.Menus.SETTINGS_GRAPHICS
+		fullscreen_button.grab_focus()
 	update_left_button_focus()
 	update_right_button_focus()
 
 
 func _controls_pressed() -> void:
-	UI.emit_signal("button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed")
 	side_panel_focus = controls_menu_button
 	for button in side_panel.get_children():
-		button.focus_neighbour_right = controls_test_button.get_path()
-	button_focus = controls_test_button
-	if not (UI.current_menu == UI.MAIN_MENU_SETTINGS_CONTROLS \
-			or UI.current_menu == UI.PAUSE_MENU_SETTINGS_CONTROLS):
-		controls_test_button.grab_focus()
-		if Globals.game_state == Globals.GameStates.MENU:
-			UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_CONTROLS)
+		button.focus_neighbour_right = controls_customize_button.get_path()
+	button_focus = controls_customize_button
+	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS:
+		controls_anim_player.play("slide")
+		if not in_category:
+			subcategory_anim_player.play_backwards("slide")
+			in_category = true
 		else:
-			UI.emit_signal("changed", UI.PAUSE_MENU_SETTINGS_CONTROLS)
+			previous_menu_back()
+		GlobalUI.menu = GlobalUI.Menus.SETTINGS_CONTROLS
+		controls_customize_button.grab_focus()
 	update_left_button_focus()
 	update_right_button_focus()
 
 
 func _other_pressed() -> void:
-	UI.emit_signal("button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed")
 	side_panel_focus = other_menu_button
 	for button in side_panel.get_children():
-		button.focus_neighbour_right = debug_button.get_path()
-	button_focus = debug_button
-	if not UI.current_menu == UI.MAIN_MENU_SETTINGS_OTHER:
-		debug_button.grab_focus()
-		if Globals.game_state == Globals.GameStates.MENU:
-			UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_OTHER)
+		button.focus_neighbour_right = reset_settings_button.get_path()
+	button_focus = reset_settings_button
+	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_OTHER:
+		other_anim_player.play("slide")
+		if not in_category:
+			subcategory_anim_player.play_backwards("slide")
+			in_category = true
 		else:
-			UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_OTHER)
+			previous_menu_back()
+		GlobalUI.menu = GlobalUI.Menus.SETTINGS_OTHER
+		reset_settings_button.grab_focus()
 	update_left_button_focus()
 	update_right_button_focus()
 
 
-func _social_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	apply_settings()
-
-
-func _profile_pause_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	apply_settings()
-
-
-func _credits_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	if UI.current_menu == UI.MAIN_MENU_SETTINGS_GENERAL:
-		UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_CREDITS)
-	elif UI.current_menu == UI.PAUSE_MENU_SETTINGS_GENERAL:
-		UI.emit_signal("changed", UI.PAUSE_MENU_SETTINGS_CREDITS)
+func _language_button_pressed() -> void:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_settings_language_pressed")
+	GlobalUI.menu = GlobalUI.Menus.SETTINGS_GENERAL_LANGUAGE
+	disable_buttons()
 
 
 func _music_volume_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed")
 	update_music_toggle()
 	apply_settings()
 
 
 func _audio_volume_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed")
 	update_audio_toggle()
 	apply_settings()
 
 
 func _audio_volume_changed(value: int) -> void:
-	audio_volume_label.text = "Audio Volume: %s" % str(value)
+	audio_volume_label.text = str(value)
 	apply_settings()
 
 
 func _music_volume_changed(value: int) -> void:
-	music_volume_label.text = "Music Volume: %s" % str(value)
+	music_volume_label.text = str(value)
 	apply_settings()
 
 
+func _social_button_pressed() -> void:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	apply_settings()
+
+
+func _credits_button_pressed() -> void:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	if GlobalUI.menu == GlobalUI.Menus.SETTINGS_GENERAL:
+		GlobalUI.menu = GlobalUI.Menus.SETTINGS_CREDITS
+		GlobalEvents.emit_signal("ui_settings_credits_pressed")
+		disable_buttons()
+
+
 func _fullscreen_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed")
 	update_toggle_buttons()
 	data.fullscreen = fullscreen_button.pressed
 	apply_settings()
 
 
-func _aa_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	var viewport: Viewport = get_viewport()
-	match viewport.msaa:
-		viewport.MSAA_DISABLED:
-			data.aa_level = float(viewport.MSAA_2X)
-		viewport.MSAA_2X:
-			data.aa_level = float(viewport.MSAA_4X)
-		viewport.MSAA_4X:
-			data.aa_level = float(viewport.MSAA_8X)
-		viewport.MSAA_8X:
-			data.aa_level = float(viewport.MSAA_16X)
-		viewport.MSAA_16X:
-			data.aa_level = float(viewport.MSAA_DISABLED)
-	update_aa_button_text()
-	apply_settings()
-
-
-func update_aa_button_text() -> void:
-	var viewport: Viewport = get_viewport()
-	var string: String = "Anti Aliasing: "
-	match int(data.aa_level):
-		viewport.MSAA_DISABLED:
-			string += "Disabled"
-		viewport.MSAA_2X:
-			string += "Default"
-		viewport.MSAA_4X:
-			string += "Medium"
-		viewport.MSAA_8X:
-			string += "High"
-		viewport.MSAA_16X:
-			string += "Very High"
-	aa_button.text = string
-
-
 func _vsync_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed")
 	apply_settings()
 
 
 func _tonemap_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	var env: WorldEnvironment = Globals.get_env()
-	match Globals.get_env().environment.tonemap_mode:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	var env: WorldEnvironment = get_node(GlobalPaths.WORLD_ENVIRONMENT)
+	match env.environment.tonemap_mode:
 		env.environment.TONE_MAPPER_LINEAR:
 			data.tonemap = float(env.environment.TONE_MAPPER_FILMIC)
 		env.environment.TONE_MAPPER_FILMIC:
@@ -649,84 +760,44 @@ func _tonemap_button_pressed() -> void:
 	update_tonemap_button_text()
 
 
-func update_tonemap_button_text() -> void:
-	var string: String = "Color Tonemap: "
-	var env: WorldEnvironment = Globals.get_env()
-	match int(data.tonemap):
-		env.environment.TONE_MAPPER_LINEAR:
-			string += "Linear"
-		env.environment.TONE_MAPPER_FILMIC:
-			string += "Filmic"
-		env.environment.TONE_MAPPER_REINHARDT:
-			string += "Reinhardt"
-		env.environment.TONE_MAPPER_ACES:
-			string += "ACES (Default)"
-		env.environment.TONE_MAPPER_ACES_FITTED:
-			string += "ACES Fitted"
-	tonemap_button.text = string
-
-
-func _debug_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_DEBUG_ENABLE_PROMPT)
-#		update_toggle_buttons()
-#		apply_settings()
-
-
-func _erase_button_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS_ERASE_PROMPT)
-
-
-func _erase_all_started() -> void:
-	disable_buttons()
-
-
-func _debug_enable_started() -> void:
-	disable_buttons()
-	if not data.cheats:
-		debug_button.pressed = false
-
-
-func _erase_all_confirmed() -> void:
-	yield(get_tree().create_timer(0.9), "timeout")
-	reset_file()
-	load_stats()
-	update_button_toggles()
-	update_audio_toggle()
-	update_music_toggle()
-	update_toggle_buttons()
-	update_aa_button_text()
-	update_tonemap_button_text()
-	update_audio_labels()
+func _post_processing_button_pressed() -> void:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	data.post_processing = post_processing_button.pressed
 	apply_settings()
 
 
-func _debug_enable_confirmed() -> void:
-	debug_button.disabled = true
-	data.cheats = true
-	apply_settings()
+func _controls_customize_button_pressed() -> void:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_settings_controls_customize_pressed")
+	GlobalUI.menu = GlobalUI.Menus.SETTINGS_CONTROLS_CUSTOMIZE
+	disable_buttons()
 
 
-func update_right_button_focus() -> void:
-	match UI.current_menu:
-		UI.MAIN_MENU_SETTINGS_GENERAL, UI.PAUSE_MENU_SETTINGS_GENERAL:
-			for button in general_buttons.get_children():
-				button.focus_neighbour_left = side_panel_focus.get_path()
-		UI.MAIN_MENU_SETTINGS_GRAPHICS, UI.PAUSE_MENU_SETTINGS_GRAPHICS:
-			for button in graphics_buttons.get_children():
-				button.focus_neighbour_left = side_panel_focus.get_path()
-		UI.MAIN_MENU_SETTINGS_CONTROLS, UI.PAUSE_MENU_SETTINGS_CONTROLS:
-			for button in controls_buttons.get_children():
-				button.focus_neighbour_left = side_panel_focus.get_path()
-		UI.MAIN_MENU_SETTINGS_OTHER:
-			for button in other_buttons.get_children():
-				button.focus_neighbour_left = side_panel_focus.get_path()
+func _reset_settings_button_pressed() -> void:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_settings_reset_settings_pressed")
+	GlobalUI.menu = GlobalUI.Menus.SETTINGS_RESET_SETTINGS_PROMPT
+	disable_buttons()
 
 
-func update_left_button_focus() -> void:
-	for button in side_panel.get_children():
-		button.focus_neighbour_right = button_focus.get_path()
+func _erase_all_button_pressed() -> void:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_settings_erase_all_pressed")
+	GlobalUI.menu = GlobalUI.Menus.SETTINGS_ERASE_ALL_PROMPT
+	disable_buttons()
+
+
+func _back_button_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	GlobalEvents.emit_signal("ui_button_pressed", true)
+	GlobalEvents.emit_signal("ui_settings_back_pressed")
+	previous_menu_back()
+	if Globals.game_state == Globals.GameStates.MENU:
+		GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
+	else:
+		GlobalUI.menu = GlobalUI.Menus.PAUSE_MENU
+	hide_menu()
+
 
 #
 # SIDE PANEL FOCUSES
@@ -763,8 +834,8 @@ func _on_SocialMedia_focus_entered() -> void:
 	update_left_button_focus()
 
 
-func _on_ProfilePause_focus_entered() -> void:
-	button_focus = profile_pause_button
+func _on_Language_focus_entered() -> void:
+	button_focus = language_button
 	update_left_button_focus()
 
 
@@ -795,30 +866,30 @@ func _on_VSync_focus_entered() -> void:
 	update_left_button_focus()
 
 
-func _on_AA_focus_entered() -> void:
-	button_focus = aa_button
+func _on_Tonemap_focus_entered() -> void:
+	button_focus = tonemap_button
 	update_left_button_focus()
 
 
-func _on_Tonemap_focus_entered() -> void:
-	button_focus = tonemap_button
+func _on_PostProcessing_focus_entered() -> void:
+	button_focus = post_processing_button
 	update_left_button_focus()
 
 #
 # CONTROLS MENU FOCUSES
 #
 func _on_Test_focus_entered() -> void:
-	button_focus = controls_test_button
+	button_focus = controls_customize_button
 	update_left_button_focus()
 
 #
 # OTHER MENU FOCUSES
 #
 func _on_DebugConsole_focus_entered() -> void:
-	button_focus = debug_button
+	button_focus = reset_settings_button
 	update_left_button_focus()
 
 
 func _on_EraseGame_focus_entered() -> void:
-	button_focus = erase_button
+	button_focus = erase_all_button
 	update_left_button_focus()

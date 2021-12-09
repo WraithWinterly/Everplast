@@ -1,6 +1,7 @@
 extends Label
 
 var last_item_name: String
+var last_int: int = 0
 
 onready var timer: Timer = $Timer
 onready var progress_bar: ProgressBar = $ProgressBar
@@ -8,66 +9,77 @@ onready var time_left_label: Label = $ProgressBar/TimeLeft
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var start_sound: AudioStreamPlayer = $StartSound
 onready var end_sound: AudioStreamPlayer = $EndSound
+onready var tick_sound: AudioStreamPlayer = $TickSound
+
 
 func _ready() -> void:
 	var __: int
-	__ = UI.connect("changed", self, "_ui_changed")
-	__ = Signals.connect("powerup_used", self, "_powerup_used")
-	__ = Signals.connect("level_completed", self, "_level_completed")
-	__ = Signals.connect("player_death", self, "_player_death")
+	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
+	__ = GlobalEvents.connect("player_used_powerup", self, "_player_used_powerup")
+	__ = GlobalEvents.connect("level_completed", self, "_level_completed")
+	__ = GlobalEvents.connect("player_died", self, "_player_died")
 	__ = timer.connect("timeout", self, "_timeout")
 	hide()
 
 
 func _physics_process(_delta) -> void:
-	if Globals.timed_powerup_active:
+	if GlobalStats.timed_powerup_active:
 		progress_bar.value = timer.time_left
 		time_left_label.text = str(int(timer.time_left) + 1)
+		if not last_int == int(timer.time_left):
+			last_int = int(timer.time_left)
+			tick_sound.play()
+			if last_int <= 2:
+				tick_sound.pitch_scale = 1.15
+			else:
+				tick_sound.pitch_scale = 1
 
 
-func _powerup_used(item_name: String) -> void:
+func _player_used_powerup(item_name: String) -> void:
+	last_item_name = item_name
+	text = GlobalStats.POWERUP_NAMES[item_name.capitalize()]
 	match item_name:
 		"bunny egg":
-			show_bar(item_name, 5)
+			show_bar(GlobalStats.bunny_egg_time)
+			last_int = GlobalStats.bunny_egg_time
+			tick_sound.pitch_scale = 1
 		"glitch orb":
-			show_bar(item_name, 5)
+			show_bar(GlobalStats.glitch_orb_time)
+			last_int = GlobalStats.glitch_orb_time
+			tick_sound.pitch_scale = 1
 
 
 func stop_active_item() -> void:
 		timer.stop()
-		Globals.timed_powerup_active = false
+		GlobalStats.timed_powerup_active = false
 		anim_player.play_backwards("show")
-		Signals.emit_signal("powerup_ended", last_item_name
-		)
+		GlobalEvents.emit_signal("player_powerup_ended", last_item_name)
 
 
-func _ui_changed(menu: int) -> void:
-	if menu == UI.NONE and UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
-		stop_active_item()
+func _ui_pause_menu_return_prompt_yes_pressed() -> void:
+	stop_active_item()
 
 
 func _level_completed() -> void:
 	stop_active_item()
 
 
-func _player_death() -> void:
+func _player_died() -> void:
 	stop_active_item()
 
 
 
-func show_bar(item_name: String, time: int) -> void:
+func show_bar(time: int) -> void:
 	show()
 	start_sound.play()
-	last_item_name = item_name
-	text = last_item_name.capitalize()
 	anim_player.play("show")
 	timer.start(time)
 	progress_bar.max_value = timer.time_left
-	Globals.timed_powerup_active = true
+	GlobalStats.timed_powerup_active = true
 
 
 func _timeout() -> void:
-	Globals.timed_powerup_active = false
+	GlobalStats.timed_powerup_active = false
 	anim_player.play_backwards("show")
 	end_sound.play()
-	Signals.emit_signal("powerup_ended", last_item_name)
+	GlobalEvents.emit_signal("player_powerup_ended", last_item_name)

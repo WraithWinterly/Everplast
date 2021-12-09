@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://world_all/equippables/equippable_base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world_all/equippables/laser_gun.png" type="Texture" id=2]
+
+[node name="Laser Gun" type="Node2D"]
+
+[node name="EquippableBase" parent="." instance=ExtResource( 1 )]
+equippable_name = "laser gun"
+
+[node name="Sprite" parent="EquippableBase" index="0"]
+texture = ExtResource( 2 )
+
+[editable path="EquippableBase"]

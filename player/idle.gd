@@ -1,27 +1,28 @@
 extends Node
 
-onready var player: Player = get_parent().get_parent()
-onready var player_body: KinematicBody2D = get_parent().get_parent().get_node("KinematicBody2D")
 onready var fsm = get_parent()
+onready var player: KinematicBody2D = get_parent().get_parent()
 
 
 func _process(_delta: float) -> void:
-	if not Main.get_action_strength_keyboard() == 0 or \
-			not Main.get_action_strength_controller() == 0:
+	if not GlobalInput.get_action_strength_keyboard() == 0 or \
+			not GlobalInput.get_action_strength_controller() == 0:
 		fsm.change_state(fsm.walk)
 
 
 func _physics_process(_delta: float) -> void:
-	player_body.basic_movement()
+	player.basic_movement()
 	player.sprinting = false
+	if not abs(GlobalInput.get_action_strength()) > 0:
+		player.sprinting_pressed = false
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("move_jump") and player_body.is_on_floor():
-		if Input.is_action_pressed("move_sprint"):
+	if event.is_action_pressed("move_jump") and player.is_on_floor():
+		if player.sprinting_pressed:
 			player.sprinting = true
 		fsm.change_state(fsm.jump)
 
 func _start() -> void:
 	player.sprinting = false
-	player_body.can_dash = true
+	player.can_dash = true

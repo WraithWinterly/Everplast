@@ -1,33 +1,42 @@
 extends Control
 
-
-onready var animation_player: AnimationPlayer = $CanvasLayer/Panel/AnimationPlayer
+onready var anim_player: AnimationPlayer = $CanvasLayer/Panel/AnimationPlayer
 onready var label: Label = $CanvasLayer/Panel/Label
 onready var sound: AudioStreamPlayer = $AudioStreamPlayer
 
 
 func _ready() -> void:
 	var __: int
-	__ = Signals.connect("save", self, "_save")
-	__ = UI.connect("show_notification", self, "show_notification")
+	__ = GlobalEvents.connect("save_file_saved", self, "_save_file_saved")
+	__ = GlobalEvents.connect("ui_notification_shown", self, "_ui_notification_shown")
 	hide()
 
 
-func show_notification(message: String) -> void:
+func show_notification(noti: String) -> void:
 	show()
-	label.text = message
-	if not animation_player.is_playing():
+
+	if not anim_player.is_playing():
+		label.text = noti
 		sound.play()
-		animation_player.play("notification")
-		yield(animation_player, "animation_finished")
-		UI.emit_signal("notification_finished")
-		hide()
+		anim_player.play("notification")
+		yield(anim_player, "animation_finished")
+		GlobalEvents.emit_signal("ui_notification_finished")
+	else:
+		yield(GlobalEvents, "ui_notification_finished")
+		show()
+		label.text = noti
+		sound.play()
+		anim_player.play("notification")
 
 
-func _save(noti: bool = true) -> void:
-	if UI.menu_transitioning:
-		yield(UI, "faded")
-	if animation_player.is_playing():
-		yield(UI, "notification_finished")
+func _save_file_saved(noti: bool = true) -> void:
+	if GlobalUI.menu_locked:
+		yield(GlobalEvents, "ui_faded")
+
 	if not noti: return
-	show_notification("Saved Game!")
+
+	GlobalEvents.emit_signal("ui_notification_shown", tr("notification.saved"))
+
+
+func _ui_notification_shown(noti: String) -> void:
+	show_notification(noti)

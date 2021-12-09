@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://mobs/fish/fish.png" type="Texture" id=1]
+[ext_resource path="res://mobs/fish/fish.gd" type="Script" id=2]
+[ext_resource path="res://mobs/components/water_movement.tscn" type="PackedScene" id=3]
+[ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=8]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 11, 6 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 11, 0, 11, 6 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": true,
+"name": "alt",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 3.5 )
+
+[node name="Fish" type="KinematicBody2D" groups=["Mob"]]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource( 2 )
+
+[node name="EnemyComponentManager" parent="." instance=ExtResource( 4 )]
+orb_amount = 5
+
+[node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
+position = Vector2( 0, 0 )
+frames = SubResource( 4 )
+
+[node name="WaterMovement" parent="EnemyComponentManager" instance=ExtResource( 3 )]
+flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
+enemy_path = NodePath("../..")
+
+[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 6 )]
+enemy_path = NodePath("../..")
+hit_area_path = NodePath("../HurtArea")
+
+[node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 8 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../HurtArea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 3.5 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[editable path="EnemyComponentManager"]

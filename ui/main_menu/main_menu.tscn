@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=2]
@@ -7,25 +7,11 @@
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://world_all/light.png" type="Texture" id=7]
-[ext_resource path="res://ui/main_menu/background.png" type="Texture" id=8]
+[ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=8]
 [ext_resource path="res://ui/main_menu/main_logo.png" type="Texture" id=9]
 [ext_resource path="res://ui/main_menu/version.gd" type="Script" id=10]
-[ext_resource path="res://ui/main_menu/quit_prompt.tscn" type="PackedScene" id=11]
-[ext_resource path="res://ui/main_menu/quick_play_prompt.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=13]
-[ext_resource path="res://ui/social_plug/social_plug.tscn" type="PackedScene" id=14]
-
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0, 0.564706, 0.513726, 1 )
-border_width_top = 155
-border_color = Color( 0.12549, 0.47451, 0.47451, 1 )
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.117647, 0.156863, 0.176471, 1 )
-border_width_top = 40
-border_color = Color( 0.14902, 0.196078, 0.219608, 1 )
-border_blend = true
+[ext_resource path="res://ui/canvas_bg_override.gd" type="Script" id=15]
 
 [sub_resource type="Animation" id=4]
 length = 0.001
@@ -41,22 +27,34 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 1, 1 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -10.0 ]
+}
 
 [sub_resource type="Animation" id=5]
 resource_name = "scale"
 length = 5.0
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:scale")
+tracks/0/path = NodePath(".:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2.4 ),
+"times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ) ]
+"values": [ 10.0, -10.0 ]
 }
 
 [sub_resource type="CanvasItemMaterial" id=3]
@@ -70,77 +68,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CanvasLayerBack" type="CanvasLayer" parent="."]
-layer = -3
+[node name="Background" parent="." instance=ExtResource( 8 )]
+script = ExtResource( 15 )
 
-[node name="BGColor" type="Panel" parent="CanvasLayerBack"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-custom_styles/panel = SubResource( 1 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": true
-}
-
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-layer = -1
-follow_viewport_scale = 0.001
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.35, 0 )
-motion_mirroring = Vector2( 299, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
-position = Vector2( 0, 5 )
-z_index = 2
-texture = ExtResource( 8 )
-offset = Vector2( 150, 25 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="ColorRect" type="Panel" parent="ParallaxBackground/ParallaxLayer"]
-margin_top = 59.0
-margin_right = 1933.0
-margin_bottom = 1099.0
-custom_styles/panel = SubResource( 2 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
-
-[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.35, 0 )
-motion_mirroring = Vector2( 299, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer2"]
-texture = ExtResource( 8 )
-offset = Vector2( 748, 30 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
-motion_scale = Vector2( 0.35, 0 )
-motion_mirroring = Vector2( 299, 0 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="Sprite" type="Sprite" parent="ParallaxBackground/ParallaxLayer3"]
-texture = ExtResource( 8 )
-offset = Vector2( 1346, 30 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="CanvasModulate" parent="Background/CanvasLayerBack" index="0"]
+visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
+visible = false
 position = Vector2( -1, 0 )
 zoom = Vector2( 0.2, 0.2 )
 drag_margin_v_enabled = true
@@ -168,7 +103,9 @@ margin_right = 58.0
 margin_bottom = 26.0
 
 [node name="Texture" type="Sprite" parent="Title/Label"]
+rotation = -0.174533
 texture = ExtResource( 9 )
+offset = Vector2( 1, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Title/Label/Texture"]
 autoplay = "scale"
@@ -206,7 +143,7 @@ __meta__ = {
 }
 
 [node name="Play" type="Button" parent="MenuButtons"]
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Quit")
 focus_neighbour_top = NodePath("../Quit")
@@ -220,11 +157,11 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Play Everplast"
+text = "main_menu.play"
 
 [node name="QuickPlay" type="Button" parent="MenuButtons"]
 margin_top = 75.0
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 135.0
 focus_neighbour_left = NodePath("../Play")
 focus_neighbour_top = NodePath("../Play")
@@ -238,11 +175,11 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Quick Play"
+text = "main_menu.quick_play"
 
 [node name="Settings" type="Button" parent="MenuButtons"]
 margin_top = 150.0
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 210.0
 focus_neighbour_left = NodePath("../QuickPlay")
 focus_neighbour_top = NodePath("../QuickPlay")
@@ -257,11 +194,11 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Settings"
+text = "main_menu.settings"
 
 [node name="Quit" type="Button" parent="MenuButtons"]
 margin_top = 225.0
-margin_right = 384.0
+margin_right = 442.0
 margin_bottom = 285.0
 focus_neighbour_left = NodePath("../Settings")
 focus_neighbour_top = NodePath("../Settings")
@@ -275,13 +212,7 @@ custom_styles/pressed = ExtResource( 5 )
 custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
-text = "Quit Game"
-
-[node name="QuitPrompt" parent="." instance=ExtResource( 11 )]
-visible = false
-
-[node name="QuickLoadPrompt" parent="." instance=ExtResource( 12 )]
-visible = false
+text = "main_menu.quit"
 
 [node name="Version" type="Label" parent="."]
 anchor_right = 0.99
@@ -295,4 +226,4 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SocialPlug" parent="." instance=ExtResource( 14 )]
+[editable path="Background"]

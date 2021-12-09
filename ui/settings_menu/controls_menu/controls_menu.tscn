@@ -1,0 +1,963 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
+[ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=2]
+[ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=3]
+[ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=5]
+[ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/settings_menu/controls_menu/controls_menu.gd" type="Script" id=9]
+[ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=10]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("BGBlur:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BGBlur:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:anchor_top")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.9 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Panel:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.9, 0.9 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BGBlur:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BGBlur:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="StyleBoxFlat" id=6]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_bottom = 2
+border_color = Color( 0.431373, 0.431373, 0.431373, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_offset = Vector2( 4, 4 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0, 0, 0, 1 )
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.431373, 0.431373, 0.431373, 1 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+expand_margin_left = 65.0
+shadow_offset = Vector2( 4, 4 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+content_margin_left = 15.0
+content_margin_right = 15.0
+content_margin_top = 10.0
+content_margin_bottom = 10.0
+bg_color = Color( 0, 0, 0, 0 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.431373, 0.431373, 0.431373, 0 )
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_size = 1
+shadow_offset = Vector2( 4, 4 )
+
+[node name="CustomizeControls" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGBlur" parent="." instance=ExtResource( 10 )]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/show = SubResource( 1 )
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.01
+anchor_top = 1.0
+anchor_right = 0.99
+anchor_bottom = 1.9
+custom_styles/panel = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel"]
+anchor_top = 0.015
+anchor_right = 1.0
+anchor_bottom = 0.017
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath("../Back")
+focus_neighbour_bottom = NodePath("../Graphics")
+focus_next = NodePath("../Graphics")
+focus_previous = NodePath("../Back")
+custom_fonts/font = ExtResource( 5 )
+text = "controls.title"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Return" type="Button" parent="Panel"]
+anchor_left = 0.01
+anchor_top = 0.1
+anchor_right = 0.99
+anchor_bottom = 0.175
+custom_fonts/font = ExtResource( 1 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "global.return"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Panel" parent="Panel"]
+anchor_left = 0.01
+anchor_top = 0.215
+anchor_right = 0.99
+anchor_bottom = 0.95
+margin_top = 1.52588e-05
+custom_styles/panel = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/BG"]
+anchor_left = 0.01
+anchor_top = 0.02
+anchor_right = 0.99
+anchor_bottom = 0.98
+follow_focus = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Collumns" type="HBoxContainer" parent="Panel/BG/ScrollContainer"]
+margin_right = 1398.0
+margin_bottom = 710.0
+custom_constants/separation = 55
+alignment = 1
+
+[node name="Labels" type="VBoxContainer" parent="Panel/BG/ScrollContainer/Collumns"]
+margin_right = 336.0
+margin_bottom = 710.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_right = 336.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "controls.controls"
+align = 1
+
+[node name="Ability" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 60.0
+margin_right = 336.0
+margin_bottom = 110.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.ability"
+align = 1
+
+[node name="WalkLeft" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 120.0
+margin_right = 336.0
+margin_bottom = 170.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.move_left"
+align = 1
+
+[node name="WalkRight" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 180.0
+margin_right = 336.0
+margin_bottom = 230.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.move_right"
+align = 1
+
+[node name="MoveDown" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 240.0
+margin_right = 336.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.move_down"
+align = 1
+
+[node name="Jump" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 300.0
+margin_right = 336.0
+margin_bottom = 350.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.jump"
+align = 1
+
+[node name="Sprint" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 360.0
+margin_right = 336.0
+margin_bottom = 410.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.sprint"
+align = 1
+
+[node name="Interact" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 420.0
+margin_right = 336.0
+margin_bottom = 470.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.interact"
+align = 1
+
+[node name="Inventory" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 480.0
+margin_right = 336.0
+margin_bottom = 530.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.inventory"
+align = 1
+
+[node name="Fire" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 540.0
+margin_right = 336.0
+margin_bottom = 590.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.fire"
+align = 1
+
+[node name="Equip" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 600.0
+margin_right = 336.0
+margin_bottom = 650.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.equip"
+align = 1
+
+[node name="Powerup" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Labels"]
+margin_top = 660.0
+margin_right = 336.0
+margin_bottom = 710.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.powerup"
+align = 1
+
+[node name="Assignments1" type="VBoxContainer" parent="Panel/BG/ScrollContainer/Collumns"]
+margin_left = 391.0
+margin_right = 694.0
+margin_bottom = 710.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_right = 303.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 5 )
+text = "Assignments 1"
+align = 1
+
+[node name="Ability" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 60.0
+margin_right = 303.0
+margin_bottom = 110.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "C"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Left" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 120.0
+margin_right = 303.0
+margin_bottom = 170.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "A"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Right" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 180.0
+margin_right = 303.0
+margin_bottom = 230.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "D"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Down" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 240.0
+margin_right = 303.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "S"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Jump" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 300.0
+margin_right = 303.0
+margin_bottom = 350.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Space"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Sprint" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 360.0
+margin_right = 303.0
+margin_bottom = 410.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Shift"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interact" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 420.0
+margin_right = 303.0
+margin_bottom = 470.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Shift"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 480.0
+margin_right = 303.0
+margin_bottom = 530.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "Shift"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 540.0
+margin_right = 303.0
+margin_bottom = 590.0
+custom_colors/font_color_disabled = Color( 0.313726, 0.313726, 0.313726, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+disabled = true
+text = "controls.left_click"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equip" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 600.0
+margin_right = 303.0
+margin_bottom = 650.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "R"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerup" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments1"]
+margin_top = 660.0
+margin_right = 303.0
+margin_bottom = 710.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "G"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Assignments2" type="VBoxContainer" parent="Panel/BG/ScrollContainer/Collumns"]
+margin_left = 749.0
+margin_right = 1085.0
+margin_bottom = 710.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_right = 336.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 5 )
+text = "Assignments 2"
+align = 1
+
+[node name="Ability" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 60.0
+margin_right = 336.0
+margin_bottom = 110.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Left" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 120.0
+margin_right = 336.0
+margin_bottom = 170.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Right" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 180.0
+margin_right = 336.0
+margin_bottom = 230.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Down" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 240.0
+margin_right = 336.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Jump" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 300.0
+margin_right = 336.0
+margin_bottom = 350.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Sprint" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 360.0
+margin_right = 336.0
+margin_bottom = 410.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interact" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 420.0
+margin_right = 336.0
+margin_bottom = 470.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 480.0
+margin_right = 336.0
+margin_bottom = 530.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 540.0
+margin_right = 336.0
+margin_bottom = 590.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equip" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 600.0
+margin_right = 336.0
+margin_bottom = 650.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerup" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Assignments2"]
+margin_top = 660.0
+margin_right = 336.0
+margin_bottom = 710.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.unassigned"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Reset" type="VBoxContainer" parent="Panel/BG/ScrollContainer/Collumns"]
+margin_left = 1140.0
+margin_right = 1398.0
+margin_bottom = 710.0
+custom_constants/separation = 10
+
+[node name="Label" type="Label" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_right = 258.0
+margin_bottom = 50.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 3 )
+align = 1
+
+[node name="Ability" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 60.0
+margin_right = 258.0
+margin_bottom = 110.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Left" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 120.0
+margin_right = 258.0
+margin_bottom = 170.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Right" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 180.0
+margin_right = 258.0
+margin_bottom = 230.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Down" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 240.0
+margin_right = 258.0
+margin_bottom = 290.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Jump" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 300.0
+margin_right = 258.0
+margin_bottom = 350.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Move Sprint" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 360.0
+margin_right = 258.0
+margin_bottom = 410.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interact" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 420.0
+margin_right = 258.0
+margin_bottom = 470.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 480.0
+margin_right = 258.0
+margin_bottom = 530.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 540.0
+margin_right = 258.0
+margin_bottom = 590.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equip" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 600.0
+margin_right = 258.0
+margin_bottom = 650.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerup" type="Button" parent="Panel/BG/ScrollContainer/Collumns/Reset"]
+margin_top = 660.0
+margin_right = 258.0
+margin_bottom = 710.0
+custom_fonts/font = ExtResource( 5 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 2 )
+custom_styles/normal = ExtResource( 2 )
+text = "controls.reset"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Ability" to="." method="_on_Ability_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Move Left" to="." method="_on_Move_Left_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Move Right" to="." method="_on_Move_Right_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Move Down" to="." method="_on_Move_Down_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Move Jump" to="." method="_on_Move_Jump_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Move Sprint" to="." method="_on_Move_Sprint_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Interact" to="." method="_on_Interact_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Inventory" to="." method="_on_Inventory_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Fire" to="." method="_on_Fire_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Equip" to="." method="_on_Equip_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments1/Powerup" to="." method="_on_Powerup_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Ability" to="." method="_on_Ability_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Move Left" to="." method="_on_Move_Left_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Move Right" to="." method="_on_Move_Right_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Move Down" to="." method="_on_Move_Down_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Move Jump" to="." method="_on_Move_Jump_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Move Sprint" to="." method="_on_Move_Sprint_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Interact" to="." method="_on_Interact_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Inventory" to="." method="_on_Inventory_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Fire" to="." method="_on_Fire_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Equip" to="." method="_on_Equip_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Assignments2/Powerup" to="." method="_on_Powerup_2_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Ability" to="." method="_on_Ability_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Move Left" to="." method="_on_Move_Left_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Move Right" to="." method="_on_Move_Right_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Move Down" to="." method="_on_Move_Down_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Move Jump" to="." method="_on_Move_Jump_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Move Sprint" to="." method="_on_Move_Sprint_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Interact" to="." method="_on_Interact_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Inventory" to="." method="_on_Inventory_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Fire" to="." method="_on_Fire_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Equip" to="." method="_on_Equip_Reset_pressed"]
+[connection signal="pressed" from="Panel/BG/ScrollContainer/Collumns/Reset/Powerup" to="." method="_on_Powerup_Reset_pressed"]

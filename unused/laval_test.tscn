@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/8x8.png" type="Texture" id=1]
+[ext_resource path="res://unused/lava.gdshader" type="Shader" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/OCTAVES = 6
+shader_param/red = Color( 0.615686, 0.337255, 0.729412, 1 )
+shader_param/yellow = Color( 0.172549, 0.0117647, 0.164706, 1 )
+shader_param/gray = Color( 0.231373, 0.231373, 0.231373, 1 )
+shader_param/black = null
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+scale = Vector2( 500, 500 )
+texture = ExtResource( 1 )

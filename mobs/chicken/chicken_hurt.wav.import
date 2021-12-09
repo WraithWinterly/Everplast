@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/chicken_hurt.wav-57830d95fe82dff9fe5ebfb46575dc02.sample"
+
+[deps]
+
+source_file="res://mobs/chicken/chicken_hurt.wav"
+dest_files=[ "res://.import/chicken_hurt.wav-57830d95fe82dff9fe5ebfb46575dc02.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tilesets/tilemap_w2_sand.tres" type="TileSet" id=1]
+
+[node name="TileMapSand" type="TileMap"]
+z_index = 1
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 0, 0, 0, 0, 0, 0 )
+collision_mask = 0
+format = 1

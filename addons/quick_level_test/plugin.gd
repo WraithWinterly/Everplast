@@ -1,16 +1,14 @@
 tool
 extends EditorPlugin
 
+const FILE: String = "user://editor.json"
+
 var regex := RegEx.new()
-#
-#func _enter_tree() -> void:
-#	regex.compile("(world|level)([0-9]+)")
 
 
 func _exit_tree() -> void:
 	pass
 
-const FILE: String = "user://editor.json"
 
 var data: Dictionary = {
 	"enabled": false,
@@ -19,13 +17,6 @@ var data: Dictionary = {
 	"pos_x": 0,
 	"pos_y": 0,
 }
-
-#func _ready() -> void:
-#	print(get_tree().edited_scene_root)
-#	load_file()
-#	yield(get_tree(), "physics_frame")
-#	data.enabled = false
-#	save_file()
 
 
 func _unhandled_key_input(event: InputEventKey) -> void:

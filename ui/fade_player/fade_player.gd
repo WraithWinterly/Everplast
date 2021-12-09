@@ -6,8 +6,6 @@ export(Color, RGB) var color_world_1
 export(Color, RGB) var color_world_2
 export(Color, RGB) var color_world_3
 export(Color, RGB) var color_world_4
-export(Color, RGB) var color_world_5
-export(Color, RGB) var color_world_6
 
 onready var fade_rect: ColorRect = $FadeRect
 onready var world_icons = $FadeRect/Control/HBoxContainer/Control/WorldIcons
@@ -18,78 +16,69 @@ onready var level_animation_player: AnimationPlayer = $FadeRect/Control/Animatio
 
 func _ready() -> void:
 	var __: int
-	__ = UI.connect("changed", self, "_ui_changed")
-	__ = Signals.connect("level_changed", self, "_level_changed")
-	__ = Signals.connect("player_death", self, "_player_death")
-	__ = Signals.connect("level_completed", self, "_level_completed")
-	__ = Signals.connect("profile_deleted", self, "_profile_deleted")
-	__ = Signals.connect("sublevel_changed", self, "_sublevel_changed")
-	__ = Signals.connect("erase_all_started", self, "_erase_all_started")
-	__ = Signals.connect("erase_all_canceled", self, "_erase_all_canceled")
-	__ = Signals.connect("debug_enable_started", self, "_debug_enable_started")
-	__ = Signals.connect("debug_enable_canceled", self, "_debug_enable_canceled")
-	__ = Signals.connect("debug_enable_confirmed", self, "_debug_enable_confirmed")
-	__ = animation_player.connect("animation_finished", self, "_on_animation_finished")
+	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("level_completed", self, "_level_completed")
+	__ = GlobalEvents.connect("level_subsection_changed", self, "_level_subsection_changed")
+	__ = GlobalEvents.connect("player_died", self, "_player_died")
+	__ = GlobalEvents.connect("story_w1_boss_killed", self, "_story_w1_boss_killed")
+	__ = GlobalEvents.connect("story_w1_boss_level_end_completed", self, "_story_w1_boss_level_end_completed")
+	__ = GlobalEvents.connect("ui_play_pressed", self, "transition")
+	__ = GlobalEvents.connect("ui_profile_selector_profile_pressed", self, "_ui_profile_selector_profile_pressed")
+	__ = GlobalEvents.connect("ui_profile_selector_return_pressed", self, "_ui_profile_selector_return_pressed")
+	__ = GlobalEvents.connect("ui_profile_selector_delete_prompt_yes_pressed", self, "_ui_profile_selector_delete_prompt_yes_pressed")
+	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
+	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_yes_pressed", self, "_ui_settings_erase_all_prompt_yes_pressed")
+	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_extra_no_pressed", self, "_ui_settings_erase_all_prompt_extra_no_pressed")
+	__ = GlobalEvents.connect("ui_settings_reset_settings_prompt_yes_pressed", self, "_ui_settings_reset_settings_prompt_yes_pressed")
+	__ = animation_player.connect("animation_finished", self, "_anim_finished")
+
 	fade_rect.modulate = Color8(0, 0, 0, 255)
 	fade_rect.show()
-	get_tree().paused = true
 	play(true)
-	yield(get_tree().create_timer(1), "timeout")
-	get_tree().paused = false
-	animation_player.get_animation("fade").length = 0.8
+	pause_mode = PAUSE_MODE_PROCESS
 
 
-func _ui_changed(menu: int) -> void:
-	match menu:
-		UI.PROFILE_SELECTOR:
-			if UI.last_menu == UI.MAIN_MENU:
-				transition()
-		UI.MAIN_MENU:
-			if UI.last_menu == UI.PROFILE_SELECTOR or\
-					UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
-				transition()
-		UI.NONE:
-			if UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT or \
-					UI.last_menu == UI.PROFILE_SELECTOR:
-				transition()
+func play(fade_out: bool) -> void:
+	if not fade_out:
+		animation_player.play("fade")
+		GlobalUI.fade_player_playing = true
+	else:
+		animation_player.play_backwards("fade")
+		GlobalUI.fade_player_playing = true
 
 
 func transition() -> void:
 	for icon in world_icons.get_children():
 		icon.hide()
-	UI.menu_transitioning = true
+	GlobalUI.menu_locked = true
 	animation_player.get_animation("fade").length = 0.4
 	fade_rect.color = Color8(0, 0, 0, 255)
 	play(false)
-	yield(UI, "faded")
+	yield(GlobalEvents, "ui_faded")
 	if animation_player.is_playing():
 		return
 	play(true)
-	yield(UI, "faded")
-	UI.menu_transitioning = false
+	yield(GlobalEvents, "ui_faded")
+	GlobalUI.menu_locked = false
 
 
 func transition_once() -> void:
 	play(false)
 
 
-func play(fade_out: bool) -> void:
-	if not fade_out:
-		animation_player.play("fade")
-	else:
-		animation_player.play_backwards("fade")
+func _level_changed(world: int = 0, level: int = 0) -> void:
+	animation_player.stop()
+	animation_player.get_animation("fade").length = 1.4
+	GlobalUI.menu_locked = true
+	label.text = "%s - %s" % [GlobalLevel.WORLD_NAMES[world], level]
 
-
-func _level_changed(world: int = 0, level: int = 0, _from_start: bool = false) -> void:
-	animation_player.get_animation("fade").length = 0.8
-	UI.menu_transitioning = true
-	label.text = "%s - %s" % [Globals.get_main().world_names[world], level]
 	for w_icon in world_icons.get_children():
 		if int(w_icon.name) == world:
 			world_icons.show()
 			w_icon.show()
 		else:
 			w_icon.hide()
+
 	match world:
 		1:
 			fade_rect.color = color_world_1
@@ -99,26 +88,28 @@ func _level_changed(world: int = 0, level: int = 0, _from_start: bool = false) -
 			fade_rect.color = color_world_3
 		4:
 			fade_rect.color = color_world_4
-		5:
-			fade_rect.color = color_world_5
-		6:
-			fade_rect.color = color_world_6
 		_:
 			fade_rect.color = color_world_error
-			label.text = "Not an official level: \"%s - %s\"" % [Globals.get_main().world_names[world], level]
+			label.text = "Unofficial World - %s" % level
+
 	level_animation_player.play("level")
 	play(false)
-	yield(UI, "faded")
+	yield(GlobalEvents, "ui_faded")
 	play(true)
-	UI.menu_transitioning = false
+	GlobalUI.menu_locked = false
+	get_tree().paused = false
 
 
-func _sublevel_changed(_pos: Vector2) -> void:
-	UI.menu_transitioning = true
+func _level_completed() -> void:
+	transition()
+
+
+func _level_subsection_changed(_pos: Vector2) -> void:
+	GlobalUI.menu_locked = true
 	get_tree().paused = true
 	animation_player.get_animation("fade").length = 0.4
 	transition()
-	match LevelController.current_world:
+	match GlobalLevel.current_world:
 		1:
 			fade_rect.color = color_world_1
 		2:
@@ -127,60 +118,62 @@ func _sublevel_changed(_pos: Vector2) -> void:
 			fade_rect.color = color_world_3
 		4:
 			fade_rect.color = color_world_4
-		5:
-			fade_rect.color = color_world_5
-		6:
-			fade_rect.color = color_world_6
 		_:
 			fade_rect.color = color_world_error
-	yield(UI, "faded")
-	UI.menu_transitioning = false
+	yield(GlobalEvents, "ui_faded")
+	GlobalUI.menu_locked = false
 	get_tree().paused = false
 
 
-func _on_animation_finished(_anim_name: String) -> void:
-	UI.emit_signal("faded")
-
-
-func _return_pressed() -> void:
+func _player_died() -> void:
 	transition()
 
 
-func _player_death() -> void:
+func _story_w1_boss_killed() -> void:
+	yield(GlobalEvents, "ui_dialogue_hidden")
 	transition()
 
 
-func _profile_deleted() -> void:
-	yield(UI, "changed")
-	transition()
-	yield(UI, "faded")
-	yield(UI, "faded")
-	UI.emit_signal("show_notification", "Profile %s Erased!" % (UI.profile_index + 1))
-
-
-func _world_selector_ready() -> void:
+func _story_w1_boss_level_end_completed() -> void:
 	transition()
 
 
-func _level_completed() -> void:
+func _ui_profile_selector_profile_pressed() -> void:
 	transition()
 
 
-func _erase_all_started() -> void:
+func _ui_profile_selector_return_pressed() -> void:
+	if GlobalUI.menu == GlobalUI.Menus.PROFILE_SELECTOR:
+		transition()
+
+
+func _ui_profile_selector_delete_prompt_yes_pressed() -> void:
+	transition()
+
+	yield(GlobalEvents, "ui_faded")
+	yield(GlobalEvents, "ui_faded")
+
+	GlobalEvents.emit_signal("ui_notification_shown", "%s %s %s" % [tr("notification.profile_erased"), (GlobalUI.profile_index + 1), tr("notification.profile_erased.2")])
+
+
+func _ui_pause_menu_return_prompt_yes_pressed() -> void:
+	transition()
+
+
+func _ui_settings_erase_all_prompt_yes_pressed() -> void:
 	play(false)
 
 
-func _erase_all_canceled() -> void:
+func _ui_settings_erase_all_prompt_extra_no_pressed() -> void:
 	play(true)
 
 
-func _debug_enable_started() -> void:
-	play(false)
+func _ui_settings_reset_settings_prompt_yes_pressed() -> void:
+	transition()
 
 
-func _debug_enable_canceled() -> void:
-	play(true)
-
-
-func _debug_enable_confirmed() -> void:
-	play(true)
+func _anim_finished(_anim_name: String) -> void:
+	GlobalEvents.emit_signal("ui_faded")
+	yield(get_tree(), "physics_frame")
+	if not animation_player.is_playing():
+		GlobalUI.fade_player_playing = false

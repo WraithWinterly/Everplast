@@ -1,10 +1,89 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/social_plug/twitter.png" type="Texture" id=2]
 [ext_resource path="res://ui/social_plug/youtube.png" type="Texture" id=3]
 [ext_resource path="res://ui/social_plug/social_plug.gd" type="Script" id=4]
 [ext_resource path="res://ui/social_plug/discord.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=1]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.77 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.95 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("HBoxContainer:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.77 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("HBoxContainer:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.95 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HBoxContainer:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="SocialPlug" type="Control"]
 pause_mode = 2
@@ -17,6 +96,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchor_top = 0.77
 anchor_right = 0.99
 anchor_bottom = 0.95
 mouse_filter = 2
@@ -26,65 +106,86 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 1021.0
+margin_left = 977.0
 margin_right = 1267.0
-margin_bottom = 684.0
+margin_bottom = 129.0
 mouse_filter = 2
 alignment = 2
 
-[node name="Youtube" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
-modulate = Color( 1, 1, 1, 0.607843 )
-margin_top = 466.0
-margin_right = 246.0
-margin_bottom = 506.0
-mouse_filter = 2
-texture = ExtResource( 3 )
-stretch_mode = 4
+[node name="Youtube" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 1.0
+margin_right = 290.0
+margin_bottom = 41.0
+alignment = 2
 
-[node name="YoutubeButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Youtube"]
 modulate = Color( 1, 1, 1, 0.607843 )
-margin_top = 510.0
+margin_left = 90.0
 margin_right = 246.0
-margin_bottom = 536.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 1 )
 text = "WraithWinterly"
 flat = true
 align = 2
 
-[node name="Twitter" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+[node name="Icon" type="TextureRect" parent="HBoxContainer/VBoxContainer/Youtube"]
 modulate = Color( 1, 1, 1, 0.607843 )
-margin_top = 540.0
-margin_right = 246.0
-margin_bottom = 580.0
+margin_left = 250.0
+margin_right = 290.0
+margin_bottom = 40.0
 mouse_filter = 2
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 stretch_mode = 4
 
-[node name="TwitterButton" type="Button" parent="HBoxContainer/VBoxContainer"]
+[node name="Twitter" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 45.0
+margin_right = 290.0
+margin_bottom = 85.0
+alignment = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Twitter"]
 modulate = Color( 1, 1, 1, 0.607843 )
-margin_top = 584.0
+margin_left = 74.0
 margin_right = 246.0
-margin_bottom = 610.0
+margin_bottom = 40.0
 custom_fonts/font = ExtResource( 1 )
 text = "@WraithWinterly"
 flat = true
 align = 2
 
-[node name="Discord" type="TextureRect" parent="HBoxContainer/VBoxContainer"]
+[node name="Icon" type="TextureRect" parent="HBoxContainer/VBoxContainer/Twitter"]
 modulate = Color( 1, 1, 1, 0.607843 )
-margin_top = 614.0
+margin_left = 250.0
+margin_right = 290.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 2 )
+stretch_mode = 4
+
+[node name="Discord" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 89.0
+margin_right = 290.0
+margin_bottom = 129.0
+alignment = 2
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Discord"]
+modulate = Color( 1, 1, 1, 0.607843 )
 margin_right = 246.0
-margin_bottom = 654.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 1 )
+text = "discord.gg/36ee6SpDAq"
+flat = true
+align = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer/VBoxContainer/Discord"]
+modulate = Color( 1, 1, 1, 0.607843 )
+margin_left = 250.0
+margin_right = 290.0
+margin_bottom = 40.0
 mouse_filter = 2
 texture = ExtResource( 5 )
 stretch_mode = 4
 
-[node name="DiscordButton" type="Button" parent="HBoxContainer/VBoxContainer"]
-modulate = Color( 1, 1, 1, 0.607843 )
-margin_top = 658.0
-margin_right = 246.0
-margin_bottom = 684.0
-custom_fonts/font = ExtResource( 1 )
-text = "discord.gg/tsrbNCs3rS"
-flat = true
-align = 2
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 1 )
+anims/show = SubResource( 2 )

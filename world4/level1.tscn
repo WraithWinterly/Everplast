@@ -5,8 +5,8 @@
 [ext_resource path="res://world4/canvas_layer_back.tscn" type="PackedScene" id=5]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world4/parallax_background.tscn" type="PackedScene" id=7]
-[ext_resource path="res://powerups/carrot.tscn" type="PackedScene" id=9]
-[ext_resource path="res://powerups/cherry.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world_all/powerups/carrot.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world_all/powerups/cherry.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10, 80 )

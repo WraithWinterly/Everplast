@@ -1,14 +1,13 @@
-[gd_scene load_steps=57 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://player/character.png" type="Texture" id=1]
-[ext_resource path="res://player/player.gd" type="Script" id=2]
 [ext_resource path="res://player/camera.gd" type="Script" id=3]
 [ext_resource path="res://player/animated_sprite.gd" type="Script" id=4]
 [ext_resource path="res://player/fsm.gd" type="Script" id=5]
 [ext_resource path="res://player/idle.gd" type="Script" id=6]
 [ext_resource path="res://player/water_move.gd" type="Script" id=7]
 [ext_resource path="res://player/dash.gd" type="Script" id=8]
-[ext_resource path="res://player/move.gd" type="Script" id=9]
+[ext_resource path="res://player/walk.gd" type="Script" id=9]
 [ext_resource path="res://player/water_idle.gd" type="Script" id=10]
 [ext_resource path="res://player/fall.gd" type="Script" id=11]
 [ext_resource path="res://player/jump.wav" type="AudioStream" id=12]
@@ -16,7 +15,7 @@
 [ext_resource path="res://player/jump.gd" type="Script" id=14]
 [ext_resource path="res://player/sprint.gd" type="Script" id=15]
 [ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=16]
-[ext_resource path="res://player/player_body.gd" type="Script" id=17]
+[ext_resource path="res://player/player.gd" type="Script" id=17]
 [ext_resource path="res://player/dust.tscn" type="PackedScene" id=18]
 [ext_resource path="res://player/dash.wav" type="AudioStream" id=19]
 [ext_resource path="res://player/wall_slide.gd" type="Script" id=20]
@@ -29,15 +28,15 @@
 [ext_resource path="res://player/spawn.wav" type="AudioStream" id=27]
 [ext_resource path="res://player/equipable_holder.gd" type="Script" id=28]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 3.5, 10 )
-
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 6.5
 height = 14.0
 
 [sub_resource type="RectangleShape2D" id=26]
 extents = Vector2( 5.5, 3 )
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3.5, 10 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
@@ -46,6 +45,10 @@ region = Rect2( 0, 0, 11, 24 )
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
 region = Rect2( 11, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 110, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 1 )
@@ -63,9 +66,21 @@ region = Rect2( 99, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 33, 0, 11, 24 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 110, 0, 11, 24 )
+region = Rect2( 55, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 44, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 77, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 66, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
@@ -83,28 +98,17 @@ region = Rect2( 66, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 77, 0, 11, 24 )
 
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 44, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 55, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 66, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 77, 0, 11, 24 )
-
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
 "frames": [ SubResource( 3 ), SubResource( 4 ) ],
 "loop": true,
 "name": "idle",
 "speed": 2.0
+}, {
+"frames": [ SubResource( 16 ) ],
+"loop": true,
+"name": "dash",
+"speed": 5.0
 }, {
 "frames": [ SubResource( 11 ) ],
 "loop": true,
@@ -121,20 +125,15 @@ animations = [ {
 "name": "air_walk",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 16 ) ],
+"frames": [ SubResource( 6 ), SubResource( 5 ), SubResource( 8 ), SubResource( 7 ) ],
 "loop": true,
-"name": "dash",
-"speed": 5.0
+"name": "walk",
+"speed": 7.0
 }, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "sprint",
 "speed": 10.0
-}, {
-"frames": [ SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ) ],
-"loop": true,
-"name": "walk",
-"speed": 7.0
 } ]
 
 [sub_resource type="Animation" id=19]
@@ -268,7 +267,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=28]
 resource_name = "spawn"
-length = 0.3
+length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
 tracks/0/interp = 1
@@ -276,7 +275,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0.1, 0.1 ), Vector2( 1, 1 ) ]
@@ -288,7 +287,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 0, 0, 0 ), Color( 1, 1, 1, 1 ) ]
@@ -300,83 +299,54 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.4 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 5, 12 ), Vector2( 0, 0 ) ]
 }
 
 [node name="Player" type="Node2D"]
+pause_mode = 2
 z_index = 3
-script = ExtResource( 2 )
-
-[node name="FSM" type="Node" parent="."]
-script = ExtResource( 5 )
-
-[node name="Idle" type="Node" parent="FSM"]
-script = ExtResource( 6 )
-
-[node name="Walk" type="Node" parent="FSM"]
-script = ExtResource( 9 )
-
-[node name="Sprint" type="Node" parent="FSM"]
-script = ExtResource( 15 )
-
-[node name="Dash" type="Node" parent="FSM"]
-script = ExtResource( 8 )
-
-[node name="WallSlide" type="Node" parent="FSM"]
-script = ExtResource( 20 )
-
-[node name="WallJump" type="Node" parent="FSM"]
-script = ExtResource( 23 )
-
-[node name="Jump" type="Node" parent="FSM"]
-script = ExtResource( 14 )
-
-[node name="Fall" type="Node" parent="FSM"]
-script = ExtResource( 11 )
-
-[node name="WaterIdle" type="Node" parent="FSM"]
-script = ExtResource( 10 )
-
-[node name="WaterMove" type="Node" parent="FSM"]
-script = ExtResource( 7 )
-
-[node name="InvincibleTimer" type="Timer" parent="."]
-wait_time = 0.5
-autostart = true
-
-[node name="HurtSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 13 )
-pitch_scale = 0.89
-bus = "Audio"
-
-[node name="DieSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 24 )
-bus = "Audio"
-
-[node name="DashFailedSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 25 )
-volume_db = 17.0
-pitch_scale = 1.1
-bus = "Audio"
-
-[node name="JumpSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 12 )
-volume_db = -25.0
-bus = "Audio"
-
-[node name="DashSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 19 )
-volume_db = -5.0
-pitch_scale = 0.73
-bus = "Audio"
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="." groups=["Player"]]
 collision_layer = 4
 collision_mask = 1027
 script = ExtResource( 17 )
+
+[node name="FSM" type="Node" parent="KinematicBody2D"]
+pause_mode = 1
+script = ExtResource( 5 )
+
+[node name="Idle" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 6 )
+
+[node name="Walk" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 9 )
+
+[node name="Sprint" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 15 )
+
+[node name="Dash" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 8 )
+
+[node name="WallSlide" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 20 )
+
+[node name="WallJump" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 23 )
+
+[node name="Jump" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 14 )
+
+[node name="Fall" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 11 )
+
+[node name="WaterIdle" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 10 )
+
+[node name="WaterMove" type="Node" parent="KinematicBody2D/FSM"]
+script = ExtResource( 7 )
 
 [node name="PowerupAdder" type="Position2D" parent="KinematicBody2D"]
 script = ExtResource( 26 )
@@ -390,10 +360,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 5.5, 13 )
-shape = SubResource( 1 )
-
 [node name="Checks" type="Node2D" parent="KinematicBody2D"]
 
 [node name="Down" type="RayCast2D" parent="KinematicBody2D/Checks"]
@@ -403,19 +369,43 @@ exclude_parent = false
 cast_to = Vector2( 0, 5.6 )
 collision_mask = 3
 
-[node name="WallRight" type="RayCast2D" parent="KinematicBody2D/Checks"]
-position = Vector2( 6, 17 )
+[node name="FloorLeft" type="RayCast2D" parent="KinematicBody2D/Checks"]
+position = Vector2( 2, 22.532 )
 enabled = true
-cast_to = Vector2( 5, 0 )
+cast_to = Vector2( 0, 3 )
+collision_mask = 3
+
+[node name="FloorRight" type="RayCast2D" parent="KinematicBody2D/Checks"]
+position = Vector2( 8, 22.532 )
+enabled = true
+cast_to = Vector2( 0, 3 )
+collision_mask = 3
 
 [node name="WallLeft" type="RayCast2D" parent="KinematicBody2D/Checks"]
-position = Vector2( 4, 17 )
+position = Vector2( 4, 11.5 )
+enabled = true
+cast_to = Vector2( -6, 0 )
+
+[node name="WallRight" type="RayCast2D" parent="KinematicBody2D/Checks"]
+position = Vector2( 6, 11.5 )
+enabled = true
+cast_to = Vector2( 6, 0 )
+
+[node name="LowerWallLeft" type="RayCast2D" parent="KinematicBody2D/Checks"]
+position = Vector2( 4, 22 )
 enabled = true
 cast_to = Vector2( -5, 0 )
+collision_mask = 1027
 
-[node name="Area2D" type="Area2D" parent="KinematicBody2D"]
+[node name="LowerWallRight" type="RayCast2D" parent="KinematicBody2D/Checks"]
+position = Vector2( 6, 22 )
+enabled = true
+cast_to = Vector2( 5, 0 )
+collision_mask = 1027
+
+[node name="Area2D" type="Area2D" parent="KinematicBody2D" groups=["Player"]]
 collision_layer = 4
-collision_mask = 27
+collision_mask = 123
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Area2D"]
 position = Vector2( 5.5, 13 )
@@ -429,21 +419,60 @@ collision_mask = 0
 position = Vector2( 5.5, 22 )
 shape = SubResource( 26 )
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+position = Vector2( 6.5, 13 )
+shape = SubResource( 1 )
+
+[node name="InvincibleTimer" type="Timer" parent="KinematicBody2D"]
+wait_time = 0.5
+autostart = true
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="KinematicBody2D"]
+pause_mode = 2
+stream = ExtResource( 13 )
+pitch_scale = 0.89
+bus = "Audio"
+
+[node name="DieSound" type="AudioStreamPlayer" parent="KinematicBody2D"]
+pause_mode = 2
+stream = ExtResource( 24 )
+bus = "Audio"
+
+[node name="DashFailedSound" type="AudioStreamPlayer" parent="KinematicBody2D"]
+pause_mode = 2
+stream = ExtResource( 25 )
+volume_db = 1.0
+bus = "Audio"
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="KinematicBody2D"]
+pause_mode = 2
+stream = ExtResource( 12 )
+volume_db = -25.0
+bus = "Audio"
+
+[node name="DashSound" type="AudioStreamPlayer" parent="KinematicBody2D"]
+pause_mode = 2
+stream = ExtResource( 19 )
+volume_db = -5.0
+pitch_scale = 0.73
+bus = "Audio"
+
 [node name="Smoothing2D" type="Node2D" parent="."]
+pause_mode = 2
 script = ExtResource( 16 )
 target = NodePath("../KinematicBody2D")
 
 [node name="Camera2D" type="Camera2D" parent="Smoothing2D"]
 pause_mode = 2
 current = true
-zoom = Vector2( 0.2, 0.2 )
+zoom = Vector2( 0.25, 0.25 )
 drag_margin_v_enabled = true
 smoothing_speed = 20.0
 drag_margin_top = 0.53
-drag_margin_bottom = 0.1
 script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Smoothing2D"]
+pause_mode = 2
 z_index = 3
 frames = SubResource( 18 )
 animation = "idle"
@@ -453,16 +482,20 @@ centered = false
 script = ExtResource( 4 )
 
 [node name="Equipable" type="Position2D" parent="Smoothing2D/AnimatedSprite"]
+pause_mode = 1
 position = Vector2( 5.5, 13 )
 script = ExtResource( 28 )
 
 [node name="FlashAnimationPlayer" type="AnimationPlayer" parent="Smoothing2D/AnimatedSprite"]
+pause_mode = 2
 anims/flash = SubResource( 19 )
 
 [node name="DeathAnimationPlayer" type="AnimationPlayer" parent="Smoothing2D/AnimatedSprite"]
+pause_mode = 2
 anims/death = SubResource( 20 )
 
 [node name="Particles2D" type="Particles2D" parent="Smoothing2D/AnimatedSprite"]
+pause_mode = 1
 position = Vector2( 5.5, 13 )
 emitting = false
 amount = 18
@@ -473,6 +506,7 @@ process_material = SubResource( 25 )
 texture = ExtResource( 21 )
 
 [node name="Particles2DReverse" type="Particles2D" parent="Smoothing2D/AnimatedSprite"]
+pause_mode = 1
 position = Vector2( 5.5, 13 )
 emitting = false
 amount = 18
@@ -483,14 +517,17 @@ process_material = SubResource( 25 )
 texture = ExtResource( 22 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Smoothing2D/AnimatedSprite"]
+pause_mode = 2
 anims/RESET = SubResource( 27 )
 anims/spawn = SubResource( 28 )
 
 [node name="SpawnSound" type="AudioStreamPlayer" parent="Smoothing2D/AnimatedSprite"]
+pause_mode = 2
 stream = ExtResource( 27 )
 bus = "Audio"
 
 [node name="Dust" parent="Smoothing2D" instance=ExtResource( 18 )]
+pause_mode = 2
 visible = false
 
-[connection signal="timeout" from="InvincibleTimer" to="." method="_on_InvincibleTimer_timeout"]
+[connection signal="timeout" from="KinematicBody2D/InvincibleTimer" to="KinematicBody2D" method="_on_InvincibleTimer_timeout"]

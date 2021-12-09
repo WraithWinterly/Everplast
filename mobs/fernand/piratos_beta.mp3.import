@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/piratos_beta.mp3-da21e8011c6ac382093d6dc8527f65d4.mp3str"
+
+[deps]
+
+source_file="res://mobs/fernand/piratos_beta.mp3"
+dest_files=[ "res://.import/piratos_beta.mp3-da21e8011c6ac382093d6dc8527f65d4.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

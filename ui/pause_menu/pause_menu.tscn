@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=2]
@@ -8,10 +8,8 @@
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=6]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=7]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=8]
-[ext_resource path="res://ui/pause_menu/return_prompt.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=9]
 [ext_resource path="res://ui/fonts/96x.tres" type="DynamicFont" id=10]
-[ext_resource path="res://ui/social_plug/social_plug.tscn" type="PackedScene" id=11]
-[ext_resource path="res://ui/pause_menu/profile.gd" type="Script" id=12]
 
 [sub_resource type="Animation" id=9]
 length = 0.001
@@ -27,9 +25,34 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect/BGBlur:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 0.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -41,6 +64,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("ColorRect/BGBlur:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
 }
 
 [sub_resource type="AtlasTexture" id=3]
@@ -83,13 +130,17 @@ anims/RESET = SubResource( 9 )
 anims/pause = SubResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 0.607843 )
+color = Color( 0.15625, 0.15625, 0.15625, 0.313726 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BGBlur" parent="ColorRect" instance=ExtResource( 9 )]
+visible = false
 
 [node name="PauseLabelCenter" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -100,12 +151,12 @@ __meta__ = {
 }
 
 [node name="PausedLabel" type="Label" parent="PauseLabelCenter"]
-margin_left = 532.0
+margin_left = 346.0
 margin_top = 48.0
-margin_right = 748.0
+margin_right = 934.0
 margin_bottom = 108.0
 custom_fonts/font = ExtResource( 10 )
-text = "Paused"
+text = "pause_menu.paused"
 
 [node name="LevelLabelCenter" type="HBoxContainer" parent="."]
 anchor_right = 1.0
@@ -130,6 +181,9 @@ anchor_bottom = 0.323
 margin_left = -54.0
 rect_scale = Vector2( 6, 6 )
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="1" type="TextureRect" parent="LevelLabelCenter/Control/WorldIcons"]
 margin_right = 54.0
@@ -178,11 +232,12 @@ margin_right = 774.0
 margin_bottom = 184.0
 custom_fonts/font = ExtResource( 8 )
 text = "World Name - Level"
+align = 1
 
 [node name="PauseButtons" type="VBoxContainer" parent="."]
-anchor_left = 0.35
-anchor_top = 0.32
-anchor_right = 0.65
+anchor_left = 0.3
+anchor_top = 0.35
+anchor_right = 0.7
 anchor_bottom = 0.5
 margin_bottom = 80.4
 custom_constants/separation = 15
@@ -192,7 +247,7 @@ __meta__ = {
 }
 
 [node name="Continue" type="Button" parent="PauseButtons"]
-margin_right = 384.0
+margin_right = 512.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Return")
 focus_neighbour_top = NodePath("../Return")
@@ -206,17 +261,14 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
-text = "Continue Game"
+text = "pause_menu.continue"
 
 [node name="Settings" type="Button" parent="PauseButtons"]
 margin_top = 75.0
-margin_right = 384.0
+margin_right = 512.0
 margin_bottom = 135.0
 focus_neighbour_left = NodePath("../Continue")
 focus_neighbour_top = NodePath("../Continue")
-focus_neighbour_right = NodePath("../SelectWorld")
-focus_neighbour_bottom = NodePath("../SelectWorld")
-focus_next = NodePath("../SelectWorld")
 focus_previous = NodePath("../Continue")
 custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 4 )
@@ -224,62 +276,19 @@ custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
-text = "Settings"
-
-[node name="SelectWorld" type="Button" parent="PauseButtons"]
-visible = false
-margin_top = 150.0
-margin_right = 384.0
-margin_bottom = 210.0
-focus_neighbour_left = NodePath("../Settings")
-focus_neighbour_top = NodePath("../Settings")
-focus_neighbour_right = NodePath("../Return")
-focus_neighbour_bottom = NodePath("../Return")
-focus_next = NodePath("../Return")
-focus_previous = NodePath("../Settings")
-custom_fonts/font = ExtResource( 6 )
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 2 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/disabled = ExtResource( 1 )
-custom_styles/normal = ExtResource( 1 )
-text = "World Selector"
+text = "pause_menu.settings"
 
 [node name="Return" type="Button" parent="PauseButtons"]
 margin_top = 150.0
-margin_right = 384.0
+margin_right = 512.0
 margin_bottom = 210.0
-focus_neighbour_left = NodePath("../SelectWorld")
-focus_neighbour_top = NodePath("../SelectWorld")
 focus_neighbour_right = NodePath("../Continue")
 focus_neighbour_bottom = NodePath("../Continue")
 focus_next = NodePath("../Continue")
-focus_previous = NodePath("../SelectWorld")
 custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 2 )
 custom_styles/focus = ExtResource( 3 )
 custom_styles/disabled = ExtResource( 1 )
 custom_styles/normal = ExtResource( 1 )
-text = "Return to Menu"
-
-[node name="Profile" type="Label" parent="PauseButtons"]
-modulate = Color( 1, 1, 1, 0.607843 )
-margin_top = 225.0
-margin_right = 384.0
-margin_bottom = 265.0
-focus_neighbour_left = NodePath("../SelectWorld")
-focus_neighbour_top = NodePath("../SelectWorld")
-focus_neighbour_right = NodePath("../Continue")
-focus_neighbour_bottom = NodePath("../Continue")
-focus_next = NodePath("../Continue")
-focus_previous = NodePath("../SelectWorld")
-custom_fonts/font = ExtResource( 6 )
-text = "Profile 1"
-align = 1
-script = ExtResource( 12 )
-
-[node name="ReturnToMenuPrompt" parent="." instance=ExtResource( 9 )]
-visible = false
-
-[node name="SocialPlug" parent="." instance=ExtResource( 11 )]
+text = "pause_menu.return"

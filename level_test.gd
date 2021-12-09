@@ -13,20 +13,31 @@ var data: Dictionary = {
 }
 
 func _ready() -> void:
-	load_file()
-	if data.enabled:
-		data.enabled = false
-		save_file()
-		if PlayerStats.data[0].size() > 0:
-		#UI.emit_signal("changed", UI.MAIN_MENU_QUICK_PLAY)
-			yield(UI, "faded")
-			Signals.emit_signal("level_changed", data.world, data.level)
-			yield(UI, "faded")
-			yield(UI, "faded")
-			yield(get_tree(), "physics_frame")
-			var player: KinematicBody2D = get_node(Globals.player_body_path)
-			player.global_position.x = data.pos_x
-			player.global_position.y = data.pos_y
+	var main: Node = get_parent()
+
+	if main.runtime_start_level:
+		yield(GlobalEvents, "ui_faded")
+		GlobalEvents.emit_signal("level_changed", main.runtime_world, main.runtime_level)
+		yield(GlobalEvents, "ui_faded")
+		yield(GlobalEvents, "ui_faded")
+		yield(get_tree(), "physics_frame")
+		var player: KinematicBody2D = get_node(GlobalPaths.PLAYER)
+		player.global_position = main.runtime_pos
+	else:
+		load_file()
+		if data.enabled:
+			data.enabled = false
+			save_file()
+			if GlobalSave.data[0].size() > 0:
+				yield(GlobalEvents, "ui_faded")
+				yield(get_tree().create_timer(0.5), "timeout")
+				GlobalEvents.emit_signal("level_changed", data.world, data.level)
+				yield(GlobalEvents, "ui_faded")
+				yield(GlobalEvents, "ui_faded")
+				yield(get_tree(), "physics_frame")
+				var player: KinematicBody2D = get_node(GlobalPaths.PLAYER)
+				player.global_position.x = data.pos_x
+				player.global_position.y = data.pos_y
 
 
 func save_file() -> void:

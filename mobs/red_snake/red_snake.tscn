@@ -1,0 +1,112 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=1]
+[ext_resource path="res://mobs/red_snake/red_snake.png" type="Texture" id=2]
+[ext_resource path="res://mobs/components/basic_movement.tscn" type="PackedScene" id=3]
+[ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://mobs/components/hurt_by_spikes.tscn" type="PackedScene" id=6]
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 15, 6 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 15, 0, 15, 6 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 30, 0, 15, 6 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 45, 0, 15, 6 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 60, 0, 15, 6 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 75, 0, 15, 6 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 90, 0, 15, 6 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 105, 0, 15, 6 )
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ), SubResource( 18 ) ],
+"loop": true,
+"name": "default",
+"speed": 7.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=9]
+extents = Vector2( 7.5, 3 )
+
+[sub_resource type="CapsuleShape2D" id=10]
+radius = 3.0
+height = 10.0
+
+[node name="RedSnake" type="KinematicBody2D"]
+collision_layer = 64
+
+[node name="EnemyComponentManager" parent="." instance=ExtResource( 1 )]
+orb_amount = 50
+knockback = 200
+attack_damage = 10
+max_health = 5
+
+[node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
+position = Vector2( 0, 3 )
+frames = SubResource( 1 )
+frame = 6
+flip_h = true
+
+[node name="CollisionShape2D" parent="EnemyComponentManager/HurtArea" index="0"]
+visible = false
+position = Vector2( 3.5, 5 )
+shape = SubResource( 9 )
+
+[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 4 )]
+enemy_path = NodePath("../..")
+hit_area_path = NodePath("../HurtArea")
+
+[node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 3 )]
+speed = 30
+flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
+enemy_path = NodePath("../..")
+
+[node name="RayCastFloorLeft" parent="EnemyComponentManager/BasicMovement" index="0"]
+position = Vector2( -8, 4 )
+
+[node name="RayCastFloorRight" parent="EnemyComponentManager/BasicMovement" index="1"]
+position = Vector2( 16, 4 )
+
+[node name="RayCastWallLeft" parent="EnemyComponentManager/BasicMovement" index="2"]
+position = Vector2( -8, 4 )
+
+[node name="RayCastWallRight" parent="EnemyComponentManager/BasicMovement" index="3"]
+position = Vector2( 16, 4 )
+
+[node name="HurtBySpikes" parent="EnemyComponentManager" instance=ExtResource( 6 )]
+kinematic_body_path = NodePath("../..")
+
+[node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 5 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../HurtArea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2( 3, 5 )
+rotation = 1.5708
+shape = SubResource( 10 )
+
+[editable path="EnemyComponentManager"]
+[editable path="EnemyComponentManager/BasicMovement"]

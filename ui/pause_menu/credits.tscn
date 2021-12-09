@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/pause_menu/credits.gd" type="Script" id=1]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=2]
@@ -8,8 +8,9 @@
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=6]
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=7]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=8]
-[ext_resource path="res://ui/ui_background.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=10]
+[ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -49,10 +50,35 @@ tracks/2/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("BGBlur:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BGBlur:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=1]
 resource_name = "show"
 length = 0.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:anchor_top")
 tracks/0/interp = 1
@@ -113,6 +139,30 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 0.95, 0.95 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("BGBlur:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BGBlur:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Credits" type="Control"]
 anchor_right = 1.0
@@ -124,12 +174,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BGBlur" parent="." instance=ExtResource( 11 )]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+
 [node name="Panel" type="Panel" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.05
-anchor_top = 0.1
+anchor_top = 1.0
 anchor_right = 0.95
-anchor_bottom = 0.9
+anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 1162.38, 37.3887 )
 mouse_filter = 2
 custom_styles/panel = ExtResource( 7 )
@@ -151,7 +205,7 @@ __meta__ = {
 margin_right = 1152.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 8 )
-text = "Credits"
+text = "credits_prompt.title"
 align = 1
 
 [node name="PromptText" type="Label" parent="Panel/VBoxContainer"]
@@ -185,9 +239,27 @@ custom_fonts/font = ExtResource( 10 )
 custom_styles/read_only = ExtResource( 9 )
 custom_styles/focus = ExtResource( 9 )
 custom_styles/normal = ExtResource( 9 )
+text = "d
+D
+D
+D
+D
+DD
+D
+D
+D
+D
+DD
+D
+D
+D
+D
+DD
+D
+D
+"
 readonly = true
 highlight_current_line = true
-show_line_numbers = true
 smooth_scrolling = true
 wrap_enabled = true
 caret_blink = true
@@ -201,7 +273,7 @@ anchor_top = 0.85
 anchor_right = 0.95
 anchor_bottom = 0.871
 focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath("../Copyright")
+focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath(".")
@@ -212,7 +284,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
-text = "Return"
+text = "global.return"
 __meta__ = {
 "_edit_use_anchors_": false
 }

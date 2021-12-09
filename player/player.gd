@@ -1,107 +1,296 @@
-extends Node2D
-class_name Player
+extends KinematicBody2D
 
-var audio_effect_filter: AudioEffectFilter = AudioEffectFilter.new()
+const water_jump_speed: int = 65
+const water_speed: int = 64
+const WATER_GRAVITY: int = 150
+const WATER_SUCTION: int = 50
+const WATER_JUMP_BOOST: int = 350
 
-var in_water: bool = false
-var climbing_ladder: bool = false
-var sprinting: bool = false
-var falling: bool = false
-var facing_right: bool = true
-var dashing: bool = false
+var linear_velocity := Vector2.ZERO
 
-onready var kinematic_body: KinematicBody2D = $KinematicBody2D
-onready var animated_sprite: AnimatedSprite = $Smoothing2D/AnimatedSprite
-onready var flash_animation_player: AnimationPlayer = \
-			$Smoothing2D/AnimatedSprite/FlashAnimationPlayer
-onready var invincible_timer: Timer = $InvincibleTimer
+var sprint_speed: float = 80
+var walk_speed: float = 65
+var air_time: float = 0
+var current_speed: float = 0
+var speed_modifier: float = 1
+
+var jump_speed: int = 200
+var current_gravity: int = 0
+
+var cayote_used := false
+var may_dash := true
+var second_jump_used := true
+var sprinting_pressed := false
+var in_water := false
+var sprinting := false
+var falling := false
+var facing_right := true
+var dashing := false
+
 onready var fsm: Node = $FSM
+onready var down_check_cast: RayCast2D = $Checks/Down
+onready var wall_checks = [$Checks/WallLeft, $Checks/WallRight]
+onready var collision_shape: CollisionShape2D = $CollisionShape2D
+onready var floor_checks := [$Checks/FloorLeft, $Checks/FloorRight]
+onready var area_2d : Area2D = $Area2D
+onready var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+onready var invincible_timer: Timer = $InvincibleTimer
 onready var hurt_sound: AudioStreamPlayer = $HurtSound
 onready var die_sound: AudioStreamPlayer = $DieSound
-onready var collision_shape: CollisionShape2D = $KinematicBody2D/CollisionShape2D
-onready var area_2d: Area2D = $KinematicBody2D/Area2D
-
 onready var dash_failed_sound: AudioStreamPlayer = $DashFailedSound
 
 
 func _ready() -> void:
 	var __: int
-	__ = Signals.connect("start_player_death", self, "_start_player_death")
-	__ = Signals.connect("player_death", self, "_player_death")
-	__ = Signals.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
+	__ = GlobalEvents.connect("level_subsection_changed", self, "_level_subsection_changed")
+	__ = GlobalEvents.connect("player_death_started", self, "_player_death_started")
+	__ = GlobalEvents.connect("player_died", self, "_player_died")
+	__ = GlobalEvents.connect("player_hurt_enemy", self, "_player_hurt_enemy")
+	__ = GlobalEvents.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
+	__ = GlobalEvents.connect("player_killed_enemy", self, "_player_killed_enemy")
+	__ = GlobalEvents.connect("player_used_powerup", self, "_player_used_powerup")
+	__ = GlobalEvents.connect("player_powerup_ended", self, "_player_powerup_ended")
+	__ = GlobalEvents.connect("player_used_springboard", self, "_player_used_springboard")
 	__ = area_2d.connect("area_entered", self, "_area_entered")
 	__ = area_2d.connect("area_exited", self, "_area_exited")
+
+	current_gravity = gravity
+
 	Globals.death_in_progress = false
 	Globals.player_invincible = false
-	LevelController.error_detection()
+	GlobalLevel.error_detection()
 
 
+# Spikes
 func _physics_process(_delta):
-	if kinematic_body.is_on_floor():
-		kinematic_body.second_jump_used = false
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.collider
+
+		if collider is TileMap:
+			if collider.is_in_group("Spikes"):
+				var tile_pos = collider.world_to_map(collision.position - collision.normal)
+				var tile_id = collider.get_cellv(tile_pos)
+
+				GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.TOUCH, collider.knockback, GlobalStats.get_spike_damage(tile_id))
+				return
+
+	if Input.is_action_pressed("move_sprint"):
+		sprinting_pressed = true
+
+	if is_on_floor():
+		second_jump_used = false
 
 
-func _start_player_death() -> void:
-	if not Globals.death_in_progress:
-		Globals.player_invincible = false
-		hurt_sound.pitch_scale = 0.65
-		hurt_sound.play()
-		die_sound.play()
+func basic_movement():
+	var delta = get_physics_process_delta_time()
+
+	falling = linear_velocity.y > 0
+
+	if sprinting:
+		current_speed = sprint_speed
+	else:
+		current_speed = walk_speed
+
+	current_speed *= GlobalInput.get_action_strength()
+	linear_velocity.x = lerp(linear_velocity.x, current_speed * speed_modifier, 0.08)
+	linear_velocity.y += delta * current_gravity
+
+	if not fsm.current_state == fsm.idle:
+		linear_velocity.x -= (get_floor_velocity().x * 0.07)
+
+	linear_velocity = move_and_slide(linear_velocity, Vector2.UP)
+
+	down_check()
 
 
-func _player_death() -> void:
+func start_invincibility(time: float) -> void:
+	yield(get_tree(), "physics_frame")
+
+	GlobalEvents.emit_signal("player_invincibility_started")
+	Globals.player_invincible = true
+	invincible_timer.start(time)
+
+
+func stop_invincibility() -> void:
+	GlobalEvents.emit_signal("player_invincibility_stopped")
+	Globals.player_invincible = false
+
+
+func dash_failed() -> void:
+	if GlobalSave.get_stat("rank") > 1 and GlobalSave.get_stat("adrenaline") <= 0:
+		dash_failed_sound.play()
+
+
+func on_wall() -> bool:
+	return (((wall_checks[0].is_colliding() and not facing_right) and ((GlobalInput.get_action_strength() < 0) or (Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right")))) or \
+			((wall_checks[1].is_colliding() and facing_right) and ((GlobalInput.get_action_strength() > 0) or (Input.is_action_pressed("move_left") and Input.is_action_pressed("move_right"))))) \
+
+
+func on_floor() -> bool:
+	return is_on_floor() or floor_checks[0].is_colliding() or floor_checks[1].is_colliding()
+
+
+func down_check() -> void:
+	if is_on_floor() and Input.is_action_pressed("move_down"):
+		if not down_check_cast.is_colliding():
+			position.y += 2
+
+
+func can_dash() -> bool:
+	return not GlobalSave.get_stat("adrenaline") <= 0 \
+			and GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD \
+			and may_dash \
+			and not is_on_floor() and not is_on_wall()
+
+
+func can_second_jump() -> bool:
+	return GlobalSave.get_stat("rank") >= GlobalStats.Ranks.SILVER \
+			and not second_jump_used
+
+
+func can_wall_slide() -> bool:
+	return on_wall() and GlobalSave.get_stat("rank") >= GlobalStats.Ranks.SILVER
+
+
+# Start of GlobalEvents
+func _level_subsection_changed(pos: Vector2) -> void:
+	yield(GlobalEvents, "ui_faded")
+
+	global_position.x = pos.x - 2
+	global_position.y = pos.y - 7
+
+
+func _player_death_started() -> void:
+	linear_velocity = Vector2(0, 0)
+	fsm.change_state(fsm.idle, true)
+
+	set_collision_layer_bit(0, false)
+	set_collision_mask_bit(3, false)
+
+	Globals.player_invincible = false
+	hurt_sound.pitch_scale = 0.65
+	hurt_sound.play()
+	die_sound.play()
+
+
+func _player_died() -> void:
+	set_collision_layer_bit(0, true)
+	set_collision_mask_bit(3, true)
+
 	in_water = false
-	climbing_ladder = false
 	sprinting = false
 	falling = false
 	collision_shape.set_deferred("disabled", true)
 
 
-func dash_failed() -> void:
-	pass
+func _player_hurt_enemy(hurt_type: int) -> void:
+	if not fsm.current_state == fsm.dash:
+		may_dash = true
 
+	if hurt_type == Globals.HurtTypes.JUMP:
+		if not fsm.current_state == fsm.dash:
+			var new_jump_speed = jump_speed
 
-func start_invincibility(time: float) -> void:
-	yield(get_tree(), "physics_frame")
-	Globals.player_invincible = true
-	invincible_timer.start(time)
-	flash_animation_player.play("flash")
+			if in_water:
+				new_jump_speed /= 3
 
+			air_time = 0
+			linear_velocity.y = -new_jump_speed
 
-func stop_invincibility() -> void:
-	Signals.emit_signal("player_invincibility_stopped")
-	Globals.player_invincible = false
-	flash_animation_player.stop()
-	animated_sprite.modulate = Color(1, 1, 1, 1)
+			if not in_water:
+				fsm.change_state(fsm.jump)
 
-
-func _player_hurt_from_enemy(_hurt_type: int, _knockback: int, _damage: int):
+func _player_hurt_from_enemy(hurt_type: int, knockback: int, _damage: int) -> void:
+	if fsm.current_state == fsm.dash: return
 	if Globals.player_invincible: return
-	if PlayerStats.get_stat("health") <= 0:
-		Signals.emit_signal("start_player_death")
-	else:
+
+	if not GlobalSave.get_stat("health") <= 0:
+		if hurt_type == Globals.HurtTypes.TOUCH:
+			linear_velocity.y = -knockback
+
+			if facing_right:
+				linear_velocity.x -= knockback
+			else:
+				linear_velocity.x += knockback
+		elif hurt_type == Globals.HurtTypes.TOUCH_AIR:
+			if facing_right:
+				linear_velocity.y = (-knockback / 2.0)
+				linear_velocity.x -= knockback
+			else:
+				linear_velocity.x += knockback
+		elif hurt_type == Globals.HurtTypes.BULLET:
+			linear_velocity.x = knockback
+
 		start_invincibility(0.5)
 		hurt_sound.pitch_scale = 0.9
 		hurt_sound.play()
 
+	else:
+		if Globals.death_in_progress: return
+		GlobalEvents.emit_signal("player_death_started")
 
-func _on_InvincibleTimer_timeout() -> void:
-	stop_invincibility()
+
+func _player_killed_enemy(hurt_type: int):
+	_player_hurt_enemy(hurt_type)
+
+
+func _player_used_powerup(item_name: String) -> void:
+	match item_name:
+		"bunny egg":
+			speed_modifier = GlobalStats.bunny_egg_boost
+		"glitch orb":
+			start_invincibility(GlobalStats.glitch_orb_time)
+
+
+func _player_powerup_ended(item_name: String) -> void:
+	match item_name:
+		"bunny egg", "pear":
+			speed_modifier = 1
+		"glitch orb":
+			pass
+
+
+func _player_used_springboard(amount: int) -> void:
+	fsm.change_state(fsm.jump)
+	linear_velocity.y -= amount
+	second_jump_used = true
+# End of GlobalEvents
 
 
 func _area_entered(area: Area2D) -> void:
 	if area.is_in_group("Water"):
 		in_water = true
-		#AudioServer.add_bus_effect(2, audio_effect_filter)
+
+		linear_velocity.y = WATER_SUCTION
+
 		fsm.change_state(fsm.water_idle)
-		kinematic_body._on_Area2D_area_entered(area)
+	elif area.is_in_group("Bullet"):
+		if area.get_parent().player_bullet: return
+
+		var kb = 100
+		var vel_x = area.get_parent().linear_velocity.x
+
+		# moving left
+		if vel_x < 0:
+			kb = -kb
+		GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.BULLET, kb, area.damage)
 
 
 func _area_exited(area: Area2D) -> void:
+	print("exited")
 	if area.is_in_group("Water"):
-		kinematic_body.may_dash = true
+		print("exited watre")
+		may_dash = true
 		in_water = false
-		#AudioServer.remove_bus_effect(2, 1)
-		if not in_water: fsm.change_state(fsm.jump)
-		kinematic_body._on_Area2D_area_exited(area)
 
+		linear_velocity.y = -WATER_JUMP_BOOST
+		basic_movement()
+
+		if not in_water:
+			fsm.change_state(fsm.jump)
+
+
+func _on_InvincibleTimer_timeout() -> void:
+	stop_invincibility()

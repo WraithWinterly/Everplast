@@ -2,28 +2,28 @@
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilesets/tilemap_platform.tres" type="TileSet" id=2]
-[ext_resource path="res://trees/tree.tscn" type="PackedScene" id=3]
-[ext_resource path="res://death_area/death_area.tscn" type="PackedScene" id=4]
-[ext_resource path="res://spikes/spikes.gd" type="Script" id=5]
-[ext_resource path="res://teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=6]
-[ext_resource path="res://coins/coin.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world_all/trees/tree.tscn" type="PackedScene" id=3]
+[ext_resource path="res://world_all/death_area/death_area.tscn" type="PackedScene" id=4]
+[ext_resource path="res://world_all/spikes/spikes.gd" type="Script" id=5]
+[ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world_all/coins/coin.tscn" type="PackedScene" id=7]
 [ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=8]
-[ext_resource path="res://world_all/block_tilemap.gd" type="Script" id=9]
-[ext_resource path="res://vases/vase.tscn" type="PackedScene" id=10]
-[ext_resource path="res://powerups/carrot.tscn" type="PackedScene" id=11]
-[ext_resource path="res://lanterns/lantern.tscn" type="PackedScene" id=12]
-[ext_resource path="res://mobs/flying_slime.tscn" type="PackedScene" id=13]
-[ext_resource path="res://mobs/blue_bird.tscn" type="PackedScene" id=14]
+[ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=9]
+[ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world_all/powerups/carrot.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world_all/lanterns/lantern.tscn" type="PackedScene" id=12]
+[ext_resource path="res://mobs/slime_flying/slime_flying.tscn" type="PackedScene" id=13]
+[ext_resource path="res://mobs/bird/bird.tscn" type="PackedScene" id=14]
 [ext_resource path="res://tilesets/tilemap_w1_grass.tres" type="TileSet" id=15]
 [ext_resource path="res://world_all/level.gd" type="Script" id=16]
-[ext_resource path="res://mobs/slime.tscn" type="PackedScene" id=17]
-[ext_resource path="res://mobs/chicken.tscn" type="PackedScene" id=18]
-[ext_resource path="res://mobs/bunny.tscn" type="PackedScene" id=19]
+[ext_resource path="res://mobs/slime/slime.tscn" type="PackedScene" id=17]
+[ext_resource path="res://mobs/chicken/chicken.tscn" type="PackedScene" id=18]
+[ext_resource path="res://mobs/bunny/bunny.tscn" type="PackedScene" id=19]
 [ext_resource path="res://tilesets/tilemap_spikes.tres" type="TileSet" id=20]
-[ext_resource path="res://collectables/water.tscn" type="PackedScene" id=21]
-[ext_resource path="res://world_all/block.png" type="Texture" id=29]
+[ext_resource path="res://world_all/collectables/water.tscn" type="PackedScene" id=21]
+[ext_resource path="res://world_all/tilemap_block/block.png" type="Texture" id=29]
 [ext_resource path="res://world1/cloud.tscn" type="PackedScene" id=30]
-[ext_resource path="res://gems/gem.tscn" type="PackedScene" id=40]
+[ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=40]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -124,7 +124,7 @@ cell_size = Vector2( 8, 8 )
 cell_quadrant_size = 8
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
-tile_data = PoolIntArray( -1441294, 2, 0, -1441293, 2, 0, -1441292, 2, 0, -1441253, 2, 0, -1441252, 2, 0, -1441251, 2, 0, -1441250, 2, 0, -1244668, 2, 0, -1244667, 2, 0, -1244666, 2, 0, -917030, 2, 0, -917029, 2, 0, -917028, 0, 0, -786064, 0, 0, -786063, 2, 0, -786062, 2, 0, -786061, 2, 0, -786060, 2, 0, -786059, 0, 0, -655205, 0, 0, -655204, 0, 0, -655203, 0, 0, -393106, 0, 0, -393105, 0, 0, -393104, 0, 0, -393103, 0, 0, -393102, 0, 0, -393074, 0, 0, -392927, 0, 0, -392926, 2, 0, -392925, 2, 0, -392924, 2, 0, -392923, 0, 0, -392783, 0, 0, -392782, 2, 0, -392781, 2, 0, -392780, 2, 0, -392779, 0, 0, -327506, 0, 0, -327505, 0, 0, -327504, 0, 0, -327503, 0, 0, -262075, 0, 0, -262074, 0, 0, -262073, 0, 0, -262052, 0, 0, -262050, 0, 0, -261904, 2, 0, -261903, 2, 0, -261902, 2, 0, -261901, 2, 0, -261892, 0, 2, -261891, 2, 1, -261890, 2, 0, -261889, 0, 0, -131022, 0, 0, -131021, 0, 0, -131020, 0, 0, -131019, 0, 0, -65315, 2, 0, -65314, 2, 0, -65313, 2, 0, -65312, 2, 0, 65715, 1073741826, 0, 65716, 1073741826, 0, 65717, 1073741826, 0, 262332, 0, 0 )
+tile_data = PoolIntArray( -1441294, 2, 0, -1441293, 2, 0, -1441292, 2, 0, -1441253, 2, 0, -1441252, 2, 0, -1441251, 2, 0, -1441250, 2, 0, -1244668, 2, 0, -1244667, 2, 0, -1244666, 2, 0, -917030, 2, 0, -917029, 2, 0, -917028, 0, 0, -786064, 0, 0, -786063, 2, 0, -786062, 2, 0, -786061, 2, 0, -786060, 2, 0, -786059, 0, 0, -655205, 0, 0, -655204, 0, 0, -655203, 0, 0, -393106, 0, 0, -393105, 0, 0, -393104, 0, 0, -393103, 0, 0, -393102, 0, 0, -393074, 0, 0, -392927, 0, 0, -392926, 2, 0, -392925, 2, 0, -392924, 2, 0, -392923, 0, 0, -392783, 0, 0, -392782, 2, 0, -392781, 2, 0, -392780, 2, 0, -392779, 0, 0, -327506, 0, 0, -327505, 0, 0, -327504, 0, 0, -327503, 0, 0, -262075, 0, 0, -262074, 0, 0, -262073, 0, 0, -262052, 0, 0, -262050, 0, 0, -261904, 2, 0, -261903, 2, 0, -261902, 2, 0, -261901, 2, 0, -261893, 0, 0, -261892, 2, 0, -261891, 2, 1, -261890, 0, 0, -131022, 0, 0, -131021, 0, 0, -131020, 0, 0, -131019, 0, 0, -65315, 2, 0, -65314, 2, 0, -65313, 2, 0, -65312, 2, 0, 65715, 1073741826, 0, 65716, 1073741826, 0, 65717, 1073741826, 0, 262332, 0, 0 )
 script = ExtResource( 5 )
 
 [node name="DeathArea" parent="LevelComponents" instance=ExtResource( 4 )]
@@ -326,8 +326,6 @@ position = Vector2( 4256, -224 )
 [node name="Tree38" parent="Trees" instance=ExtResource( 3 )]
 position = Vector2( 4352, -224 )
 
-[node name="Signs" type="Node2D" parent="."]
-
 [node name="Vases" type="Node2D" parent="."]
 
 [node name="Vase" parent="Vases" instance=ExtResource( 10 )]
@@ -445,7 +443,7 @@ type = 1
 item = ExtResource( 7 )
 
 [node name="Vase38" parent="Vases" instance=ExtResource( 10 )]
-position = Vector2( 2008, -32 )
+position = Vector2( 1992, -32 )
 type = 1
 item = ExtResource( 7 )
 
@@ -729,10 +727,10 @@ position = Vector2( 2968, -128 )
 position = Vector2( 200, -16 )
 
 [node name="Slime2" parent="Slimes" instance=ExtResource( 17 )]
-position = Vector2( 320, -16 )
+position = Vector2( 312, -16 )
 
 [node name="Slime3" parent="Slimes" instance=ExtResource( 17 )]
-position = Vector2( 640, -32 )
+position = Vector2( 648, -32 )
 
 [node name="Slime4" parent="Slimes" instance=ExtResource( 17 )]
 position = Vector2( 704, -32 )
@@ -741,7 +739,7 @@ position = Vector2( 704, -32 )
 position = Vector2( 824, -56 )
 
 [node name="Slime6" parent="Slimes" instance=ExtResource( 17 )]
-position = Vector2( 1032, -24 )
+position = Vector2( 1024, -24 )
 
 [node name="Slime7" parent="Slimes" instance=ExtResource( 17 )]
 position = Vector2( 1064, -24 )
@@ -803,9 +801,6 @@ position = Vector2( 3680, -80 )
 [node name="Slime26" parent="Slimes" instance=ExtResource( 17 )]
 position = Vector2( 3720, -80 )
 
-[node name="Slime27" parent="Slimes" instance=ExtResource( 17 )]
-position = Vector2( 3720, -80 )
-
 [node name="Slime28" parent="Slimes" instance=ExtResource( 17 )]
 position = Vector2( 3848, -112 )
 
@@ -821,9 +816,6 @@ position = Vector2( 4288, -176 )
 [node name="FlyingSlime" type="Node2D" parent="."]
 
 [node name="FlyingSlime" parent="FlyingSlime" instance=ExtResource( 13 )]
-position = Vector2( 312, -48 )
-
-[node name="FlyingSlime3" parent="FlyingSlime" instance=ExtResource( 13 )]
 position = Vector2( 312, -48 )
 
 [node name="FlyingSlime2" parent="FlyingSlime" instance=ExtResource( 13 )]
@@ -843,9 +835,6 @@ position = Vector2( 1496, -96 )
 
 [node name="FlyingSlime8" parent="FlyingSlime" instance=ExtResource( 13 )]
 position = Vector2( 1832, -48 )
-
-[node name="FlyingSlime10" parent="FlyingSlime" instance=ExtResource( 13 )]
-position = Vector2( 2056, -64 )
 
 [node name="FlyingSlime11" parent="FlyingSlime" instance=ExtResource( 13 )]
 position = Vector2( 2272, -104 )

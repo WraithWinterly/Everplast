@@ -5,12 +5,12 @@
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0313726, 0.443137, 0.0862745, 1 )
+bg_color = Color( 0, 0, 0, 1 )
 border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
-border_color = Color( 0.215686, 0.596078, 0.0196078, 1 )
+border_color = Color( 0.0784314, 0.0784314, 0.0784314, 1 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -64,7 +64,7 @@ tracks/3/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-length = 1.8
+length = 2.5
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:anchor_top")
 tracks/0/interp = 1
@@ -84,7 +84,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2, 1.5 ),
+"times": PoolRealArray( 0, 0.2, 2.2 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.3, 1.0, 1.0 ]
@@ -96,7 +96,7 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.2, 1.5, 1.8 ),
+"times": PoolRealArray( 0, 0.2, 2.2, 2.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.607843 ), Color( 1, 1, 1, 0.607843 ), Color( 1, 1, 1, 0 ) ]
@@ -108,7 +108,7 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"times": PoolRealArray( 0, 1.5, 1.8 ),
+"times": PoolRealArray( 0, 2.2, 2.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ 0.0, 0.0, 1.0 ]

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=1]
+[ext_resource path="res://tilesets/tilemap_block.tres" type="TileSet" id=2]
+
+[node name="TileMapBlock" type="TileMap"]
+tile_set = ExtResource( 2 )
+cell_size = Vector2( 8, 8 )
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+format = 1
+script = ExtResource( 1 )

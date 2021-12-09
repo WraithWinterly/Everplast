@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/checkpoint.wav-8fbe972fb62b0b52339b01a5a461fb4c.sample"
+
+[deps]
+
+source_file="res://world_all/checkpoints/checkpoint.wav"
+dest_files=[ "res://.import/checkpoint.wav-8fbe972fb62b0b52339b01a5a461fb4c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

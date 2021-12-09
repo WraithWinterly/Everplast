@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://mobs/hurt.ogg" type="AudioStream" id=1]
+[ext_resource path="res://mobs/slime/slime_hurt.ogg" type="AudioStream" id=1]
 [ext_resource path="res://mobs/components/component_manager.gd" type="Script" id=2]
-[ext_resource path="res://mobs/slime.png" type="Texture" id=3]
+[ext_resource path="res://mobs/slime/slime.png" type="Texture" id=3]
 [ext_resource path="res://ui/fonts/16x.tres" type="DynamicFont" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
@@ -146,11 +146,13 @@ tracks/2/keys = {
 script = ExtResource( 2 )
 
 [node name="HitSound" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 1 )
 volume_db = 5.0
 bus = "Audio"
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
+pause_mode = 2
 stream = ExtResource( 1 )
 volume_db = 5.0
 bus = "Audio"
@@ -159,15 +161,18 @@ bus = "Audio"
 position = Vector2( 4, 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="SpriteHolder"]
+pause_mode = 2
 position = Vector2( 0, -0.15 )
 frames = SubResource( 2 )
 playing = true
 
 [node name="HurtAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
+pause_mode = 2
 anims/death = SubResource( 8 )
 anims/hurt = SubResource( 7 )
 
 [node name="FlipAnimationPlayer" type="AnimationPlayer" parent="SpriteHolder/AnimatedSprite"]
+pause_mode = 2
 anims/flip = SubResource( 4 )
 
 [node name="HurtArea" type="Area2D" parent="."]

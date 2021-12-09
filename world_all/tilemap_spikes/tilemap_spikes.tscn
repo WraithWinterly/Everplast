@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tilesets/tilemap_spikes.tres" type="TileSet" id=1]
+[ext_resource path="res://world_all/tilemap_spikes/tilemap_spikes.gd" type="Script" id=2]
+
+[node name="TileMapSpikes" type="TileMap" groups=["Spikes"]]
+z_index = 4
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 8
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+collision_mask = 4
+format = 1
+script = ExtResource( 2 )

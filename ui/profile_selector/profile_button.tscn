@@ -6,8 +6,8 @@
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/hud/heart.png" type="Texture" id=5]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=6]
-[ext_resource path="res://orbs/orb.png" type="Texture" id=7]
-[ext_resource path="res://coins/coin.png" type="Texture" id=8]
+[ext_resource path="res://world_all/orbs/orb.png" type="Texture" id=7]
+[ext_resource path="res://world_all/coins/coin.png" type="Texture" id=8]
 [ext_resource path="res://world_all/adrenaline.png" type="Texture" id=9]
 [ext_resource path="res://ui/profile_selector/profile_button.gd" type="Script" id=10]
 [ext_resource path="res://ui/inventory/ranks.png" type="Texture" id=11]
@@ -19,7 +19,7 @@ content_margin_left = 25.0
 content_margin_right = 25.0
 content_margin_top = 200.0
 content_margin_bottom = 200.0
-bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
+bg_color = Color( 0, 0, 0, 1 )
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -84,12 +84,6 @@ region = Rect2( 55, 0, 11, 13 )
 margin_left = 34.0
 margin_right = 244.0
 margin_bottom = 430.0
-focus_neighbour_left = NodePath("../MusicSlider/Slider")
-focus_neighbour_top = NodePath("../MusicSlider/Slider")
-focus_neighbour_right = NodePath("../../../HBoxContainer2/Back")
-focus_neighbour_bottom = NodePath("../../../HBoxContainer2/Back")
-focus_next = NodePath("../../../HBoxContainer2/Back")
-focus_previous = NodePath("../MusicSlider/Slider")
 custom_fonts/font = ExtResource( 6 )
 custom_styles/hover = ExtResource( 3 )
 custom_styles/pressed = ExtResource( 4 )

@@ -29,34 +29,30 @@ onready var raycast_floor_left: RayCast2D = $RayCastFloorLeft
 onready var raycast_floor_right: RayCast2D = $RayCastFloorRight
 onready var raycast_wall_left: RayCast2D = $RayCastWallLeft
 onready var raycast_wall_right: RayCast2D = $RayCastWallRight
+onready var basic_movement: Node2D = $BasicMovement
 
 
 func _ready() -> void:
+	var __: int
+	__ = get_parent().connect("died", self, "_died")
+	__ = get_parent().connect("hit", self, "_hit")
+
 	fly_amount = int(rand_range(fly_amount_max, fly_amount_min))
+	basic_movement.set_process(false)
+	basic_movement.set_physics_process(false)
+	basic_movement.enemy = enemy
+	basic_movement.flip_animation_player = flip_animation_player
 
 
 func _physics_process(delta: float) -> void:
 	if state == States.NORMAL:
-		if get_parent().is_physics_processing():
-			current_speed = speed
-			if enemy.is_on_floor():
-				if (not raycast_floor_right.is_colliding() or raycast_wall_right.is_colliding()) and facing_right:
-					attempt_flip(true)
-				elif (not raycast_floor_left.is_colliding() or raycast_wall_left.is_colliding()) and not facing_right:
-					attempt_flip(false)
-
-			if facing_right:
-				current_speed *= 1
-			else:
-				current_speed *= -1
-
-
-			linear_velocity.x = lerp(linear_velocity.x, current_speed, 0.05)
-			linear_velocity.y += gravity * delta
-			linear_velocity = enemy.move_and_slide(linear_velocity, Vector2.UP)
-
+		basic_movement.set_process(true)
+		basic_movement.set_physics_process(true)
 
 	elif state == States.FLY:
+		basic_movement.set_process(false)
+		basic_movement.set_physics_process(false)
+
 		current_speed = fly_speed
 
 		if facing_right:
@@ -96,6 +92,7 @@ func attempt_flip(flip_left: bool = true) -> void:
 			ignore = false
 		if raycast_floor_left.is_colliding() and raycast_floor_right.is_colliding() and ignore:
 			return
+
 	if flip_left:
 		if not raycast_wall_left.is_colliding():
 			facing_right = false
@@ -108,3 +105,13 @@ func attempt_flip(flip_left: bool = true) -> void:
 			flip_animation_player.play_backwards("flip")
 		else:
 			ignore = true
+
+
+func _hit() -> void:
+	if state == States.FLY:
+		state = States.NORMAL
+		get_parent().get_node("AttackTouch").flying_enemy = false
+
+		
+func _died() -> void:
+	get_node("BasicMovement").dying = true

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world_all/powerups/powerup_base.tscn" type="PackedScene" id=1]
+
+[node name="Carrot" type="Node2D"]
+
+[node name="LevelPowerupBase" parent="." instance=ExtResource( 1 )]
+
+[node name="Sprite" parent="LevelPowerupBase" index="0"]
+rotation = 0.675442
+offset = Vector2( 3, -3 )
+
+[editable path="LevelPowerupBase"]

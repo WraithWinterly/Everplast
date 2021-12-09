@@ -1,16 +1,25 @@
 extends Control
 
-onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var yes_button: Button = $Panel/VBoxContainer/HBoxContainer/Yes
 onready var no_button: Button = $Panel/VBoxContainer/HBoxContainer/No
+onready var prompt_text: Label = $Panel/VBoxContainer/PromptText
 
 
 func _ready() -> void:
 	var __: int
-	__ = UI.connect("changed", self, "_ui_changed")
+	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("ui_quit_pressed", self, "_ui_quit_pressed")
 	__ = no_button.connect("pressed", self, "_no_pressed")
 	__ = yes_button.connect("pressed", self, "_yes_pressed")
+
 	hide()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.QUIT_PROMPT:
+		_no_pressed()
+		get_tree().set_input_as_handled()
 
 
 func enable_buttons() -> void:
@@ -23,23 +32,34 @@ func disable_buttons() -> void:
 	no_button.disabled = true
 
 
-func _ui_changed(menu: int) -> void:
-	match menu:
-		UI.MAIN_MENU_QUIT_PROMPT:
-			show()
-			no_button.grab_focus()
-			animation_player.play("show")
-			enable_buttons()
-		UI.MAIN_MENU:
-			if UI.last_menu == UI.MAIN_MENU_QUIT_PROMPT:
-				animation_player.play_backwards("show")
-				disable_buttons()
+func show_menu() -> void:
+	anim_player.play("show")
+	no_button.grab_focus()
+	show()
+	enable_buttons()
+
+
+func hide_menu() -> void:
+	anim_player.play_backwards("show")
+
+
+func _level_changed(_world: int, _level: int) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.QUIT_PROMPT:
+		hide_menu()
+
+
+func _ui_quit_pressed() -> void:
+	show_menu()
 
 
 func _no_pressed() -> void:
-	UI.emit_signal("button_pressed", true)
-	UI.emit_signal("changed", UI.MAIN_MENU)
+	if GlobalUI.menu_locked: return
+	GlobalEvents.emit_signal("ui_button_pressed", true)
+	GlobalEvents.emit_signal("ui_quit_prompt_no_pressed")
+	GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
+	hide_menu()
 
 
 func _yes_pressed() -> void:
+	if GlobalUI.menu_locked: return
 	get_tree().quit()

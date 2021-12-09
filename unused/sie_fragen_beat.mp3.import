@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sie_fragen_beat.mp3-57ab0ad39fe59c825f224e5e37ae0e35.mp3str"
+
+[deps]
+
+source_file="res://unused/sie_fragen_beat.mp3"
+dest_files=[ "res://.import/sie_fragen_beat.mp3-57ab0ad39fe59c825f224e5e37ae0e35.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

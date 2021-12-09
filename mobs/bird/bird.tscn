@@ -1,0 +1,85 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://mobs/bird/bird.png" type="Texture" id=1]
+[ext_resource path="res://mobs/components/fly_movement.tscn" type="PackedScene" id=2]
+[ext_resource path="res://mobs/chicken/chicken_hurt.wav" type="AudioStream" id=3]
+[ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mobs/bird/bird.gd" type="Script" id=5]
+[ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=6]
+[ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=8]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 12, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 24, 0, 12, 12 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 36, 0, 12, 12 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 5 ), SubResource( 6 ) ],
+"loop": true,
+"name": "green",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 3.5 )
+
+[node name="BlueBird" type="KinematicBody2D" groups=["Mob"]]
+collision_layer = 64
+collision_mask = 3
+script = ExtResource( 5 )
+
+[node name="MobComponentManager" parent="." instance=ExtResource( 4 )]
+knockback = 200
+
+[node name="HitSound" parent="MobComponentManager" index="0"]
+stream = ExtResource( 3 )
+volume_db = -9.0
+
+[node name="DeathSound" parent="MobComponentManager" index="1"]
+stream = ExtResource( 3 )
+volume_db = -9.0
+
+[node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
+position = Vector2( 0, 1.1 )
+frames = SubResource( 4 )
+
+[node name="FlyMovement" parent="MobComponentManager" instance=ExtResource( 2 )]
+flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
+enemy_path = NodePath("../..")
+fly_amount_max = 85
+fly_amount_min = 65
+
+[node name="AttackTouch" parent="MobComponentManager" instance=ExtResource( 6 )]
+enemy_path = NodePath("../..")
+hit_area_path = NodePath("../HurtArea")
+flying_enemy = true
+
+[node name="HurtByBullet" parent="MobComponentManager" instance=ExtResource( 8 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../HurtArea")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 3.5 )
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[editable path="MobComponentManager"]

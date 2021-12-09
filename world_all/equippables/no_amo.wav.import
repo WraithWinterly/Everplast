@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/no_amo.wav-de7c9e49f1d9d80b893b25de2a883fcb.sample"
+
+[deps]
+
+source_file="res://world_all/equippables/no_amo.wav"
+dest_files=[ "res://.import/no_amo.wav-de7c9e49f1d9d80b893b25de2a883fcb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

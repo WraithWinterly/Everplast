@@ -4,130 +4,140 @@ extends Control
 onready var continue_button: Button = $PauseButtons/Continue
 onready var return_button: Button = $PauseButtons/Return
 onready var settings_button: Button = $PauseButtons/Settings
-onready var world_selector_button: Button = $PauseButtons/SelectWorld
 onready var animation_player: AnimationPlayer = $AnimationPlayer
 onready var level_label: Label = $LevelLabelCenter/LevelLabel
 onready var world_icons: VBoxContainer = $LevelLabelCenter/Control/WorldIcons
-onready var profile_label: Label = $PauseButtons/Profile
 
 
 func _ready() -> void:
 	var __: int
-	__ = UI.connect("changed", self, "_ui_changed")
-	__ = Signals.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("ui_settings_back_pressed", self, "_ui_settings_back_pressed")
+	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_no_pressed", self, "_ui_pause_menu_return_prompt_no_pressed")
+	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
 	__ = continue_button.connect("pressed", self, "_continue_pressed")
 	__ = settings_button.connect("pressed", self, "_settings_pressed")
 	__ = return_button.connect("pressed", self, "_return_pressed")
+
 	pause_mode = PAUSE_MODE_PROCESS
-	disable_buttons(false)
+	disable_buttons()
 	hide()
-	level_label.hide()
 
 
-func _ui_changed(menu: int) -> void:
-	match menu:
-		UI.NONE:
-			if UI.last_menu == UI.PAUSE_MENU:
-				hide_menu()
-			elif UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
-				yield(UI, "faded")
-				hide_menu(true)
-		UI.PAUSE_MENU:
-			if UI.last_menu == UI.NONE:
-				show_menu()
-			else:
-				enable_buttons()
-				match UI.last_menu:
-					UI.PAUSE_MENU_SETTINGS:
-						settings_button.grab_focus()
-					UI.PAUSE_MENU_RETURN_PROMPT:
-						return_button.grab_focus()
-					_:
-						continue_button.grab_focus()
-		UI.PAUSE_MENU_RETURN_PROMPT:
-			disable_buttons()
-		UI.PAUSE_MENU_SETTINGS:
-			disable_buttons()
-		UI.MAIN_MENU:
-			if UI.last_menu == UI.PAUSE_MENU_RETURN_PROMPT:
-				hide_menu(true)
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and not GlobalUI.menu_locked:
+		if GlobalUI.menu == GlobalUI.Menus.NONE and not GlobalUI.fade_player_playing:
+			show_menu()
+			GlobalEvents.emit_signal("ui_button_pressed")
+			GlobalEvents.emit_signal("ui_pause_menu_pressed")
+			get_tree().set_input_as_handled()
+		elif GlobalUI.menu == GlobalUI.Menus.PAUSE_MENU and not GlobalUI.fade_player_playing:
+			hide_menu()
+			GlobalEvents.emit_signal("ui_button_pressed", true)
+			GlobalEvents.emit_signal("ui_pause_menu_continue_pressed")
+			get_tree().set_input_as_handled()
 
 
 func show_menu() -> void:
-	#Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	profile_label.text = "Profile %s" % (PlayerStats.current_save_profile + 1)
+	GlobalUI.menu = GlobalUI.Menus.PAUSE_MENU
+	get_tree().paused = true
+
 	for w_icon in world_icons.get_children():
-		if int(w_icon.name) == LevelController.current_world:
+		if int(w_icon.name) == GlobalLevel.current_world:
 			world_icons.show()
 			w_icon.show()
 		else:
 			w_icon.hide()
 
-	UI.menu_transitioning = true
 	enable_buttons()
 	show()
+
 	if Globals.game_state == Globals.GameStates.LEVEL:
-		level_label.show()
-		return_button.text = "Exit Level"
+		return_button.text = tr("pause_menu.return_level")
 	else:
-		level_label.hide()
-		return_button.text = "Return to Menu"
+		level_label.text = "%s %s" % [tr("pause_menu.profile"), GlobalSave.profile + 1]
+		return_button.text = tr("pause_menu.return")
+
 	animation_player.play("pause")
-	get_tree().paused = true
 	continue_button.grab_focus()
-	yield(animation_player, "animation_finished")
-	UI.menu_transitioning = false
 
 
 func hide_menu(wait_for_fade: bool = false) -> void:
-	UI.menu_transitioning = true
-	animation_player.play_backwards("pause")
+	GlobalUI.menu = GlobalUI.Menus.NONE
 	disable_buttons()
-	if not animation_player.is_playing():
-		yield(animation_player, "animation_finished")
-	if not Globals.dialog_active:
-		if wait_for_fade:
-			yield(UI, "faded")
-		get_tree().paused = false
-	UI.menu_transitioning = false
+	animation_player.play_backwards("pause")
+
+	if wait_for_fade:
+		GlobalUI.menu_locked = true
+		yield(GlobalEvents, "ui_faded")
+
+	get_tree().paused = false
+	GlobalUI.menu_locked = false
+
 	if not animation_player.is_playing():
 		hide()
+		$ColorRect/BGBlur.hide()
 
 
 func enable_buttons() -> void:
 	continue_button.disabled = false
 	settings_button.disabled = false
-	world_selector_button.disabled = false
 	return_button.disabled = false
-	Signals.emit_signal("social_enabled")
 
 
-func disable_buttons(disable_social: bool = true) -> void:
-	if disable_social:
-		Signals.emit_signal("social_disabled")
+func disable_buttons() -> void:
 	continue_button.disabled = true
 	settings_button.disabled = true
-	world_selector_button.disabled = true
 	return_button.disabled = true
 
 
+func _level_changed(world: int, level: int) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.PAUSE_MENU:
+		hide_menu()
+	yield(GlobalEvents, "ui_faded")
+	yield(get_tree(), "idle_frame")
+	level_label.show()
+	level_label.text = "%s %s\n %s - %s" % [tr("pause_menu.profile"), GlobalSave.profile + 1, GlobalLevel.WORLD_NAMES[world], level]
+
+
+func _ui_settings_back_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	if not Globals.game_state == Globals.GameStates.MENU:
+		enable_buttons()
+		settings_button.grab_focus()
+
+
+func _ui_pause_menu_return_prompt_no_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	enable_buttons()
+	return_button.grab_focus()
+
+
+func _ui_pause_menu_return_prompt_yes_pressed() -> void:
+	hide()
+	$ColorRect/BGBlur.hide()
+
+
 func _continue_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.NONE)
+	if GlobalUI.menu_locked: return
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_pause_menu_continue_pressed")
+	hide_menu()
 
 
 func _settings_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.PAUSE_MENU_SETTINGS)
+	if GlobalUI.menu_locked: return
+	GlobalUI.menu = GlobalUI.Menus.SETTINGS
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_settings_pressed")
+	disable_buttons()
 
 
 func _return_pressed() -> void:
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.PAUSE_MENU_RETURN_PROMPT)
+	if GlobalUI.menu_locked: return
+	GlobalUI.menu = GlobalUI.Menus.RETURN_PROMPT
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_pause_menu_return_pressed")
+	disable_buttons()
+	return_button.release_focus()
 
-
-func _level_changed(world: int, level: int) -> void:
-	yield(UI, "faded")
-	yield(get_tree(), "idle_frame")
-	level_label.show()
-	level_label.text = "%s - %s" % [Globals.get_main().world_names[world], level]

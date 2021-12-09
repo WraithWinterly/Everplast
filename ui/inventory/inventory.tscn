@@ -3,112 +3,80 @@
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/inventory/ranks.png" type="Texture" id=3]
-[ext_resource path="res://ui/ui_background.tres" type="StyleBox" id=4]
+[ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=4]
 [ext_resource path="res://ui/inventory/inventory.gd" type="Script" id=5]
-[ext_resource path="res://powerups/carrot.png" type="Texture" id=6]
-[ext_resource path="res://powerups/cherry.png" type="Texture" id=7]
-[ext_resource path="res://powerups/coconut.png" type="Texture" id=8]
-[ext_resource path="res://powerups/powerup.wav" type="AudioStream" id=9]
+[ext_resource path="res://world_all/powerups/carrot.png" type="Texture" id=6]
+[ext_resource path="res://world_all/powerups/cherry.png" type="Texture" id=7]
+[ext_resource path="res://world_all/powerups/coconut.png" type="Texture" id=8]
+[ext_resource path="res://world_all/powerups/powerup.wav" type="AudioStream" id=9]
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=10]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=11]
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=12]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=13]
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=14]
-[ext_resource path="res://orbs/orb.png" type="Texture" id=15]
+[ext_resource path="res://world_all/orbs/orb.png" type="Texture" id=15]
 [ext_resource path="res://ui/hud/hud_font_panel.tres" type="StyleBox" id=16]
-[ext_resource path="res://powerups/bunny_egg.png" type="Texture" id=17]
+[ext_resource path="res://world_all/powerups/bunny_egg.png" type="Texture" id=17]
 [ext_resource path="res://ui/inventory/equipable_button_focus.tres" type="StyleBox" id=18]
 [ext_resource path="res://ui/inventory/equipable_button_normal.tres" type="StyleBox" id=19]
 [ext_resource path="res://ui/inventory/equipable_button_pressed.tres" type="StyleBox" id=20]
 [ext_resource path="res://ui/inventory/equipable_button_hover.tres" type="StyleBox" id=21]
-[ext_resource path="res://equipables/water_gun.png" type="Texture" id=22]
-[ext_resource path="res://equipables/nail_gun.png" type="Texture" id=23]
-[ext_resource path="res://equipables/laser_gun.png" type="Texture" id=24]
-[ext_resource path="res://collectables/nail.png" type="Texture" id=25]
-[ext_resource path="res://collectables/energy.png" type="Texture" id=26]
-[ext_resource path="res://collectables/water.png" type="Texture" id=27]
-[ext_resource path="res://powerups/glitch_orb.png" type="Texture" id=28]
-[ext_resource path="res://gems/gem.png" type="Texture" id=29]
+[ext_resource path="res://world_all/equippables/water_gun.png" type="Texture" id=22]
+[ext_resource path="res://world_all/equippables/nail_gun.png" type="Texture" id=23]
+[ext_resource path="res://world_all/equippables/laser_gun.png" type="Texture" id=24]
+[ext_resource path="res://world_all/collectables/nail.png" type="Texture" id=25]
+[ext_resource path="res://world_all/collectables/energy.png" type="Texture" id=26]
+[ext_resource path="res://world_all/collectables/water.png" type="Texture" id=27]
+[ext_resource path="res://world_all/powerups/glitch_orb.png" type="Texture" id=28]
+[ext_resource path="res://world_all/gems/gem.png" type="Texture" id=29]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=30]
 [ext_resource path="res://ui/inventory/upgrade.wav" type="AudioStream" id=31]
+[ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=32]
+[ext_resource path="res://ui/check_box.png" type="Texture" id=36]
+[ext_resource path="res://ui/check_box_checked.png" type="Texture" id=37]
+[ext_resource path="res://world_all/powerups/pear.png" type="Texture" id=38]
+[ext_resource path="res://world_all/powerups/glitch_soul.png" type="Texture" id=39]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxFlat" id=2]
-content_margin_left = 15.0
-content_margin_right = 15.0
-content_margin_top = 10.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.121569, 0.141176, 0.188235, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.333333, 0.345098, 0.380392, 1 )
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-expand_margin_left = 50.0
-shadow_size = 1
-shadow_offset = Vector2( 4, 4 )
-
-[sub_resource type="StyleBoxFlat" id=3]
-content_margin_left = 15.0
-content_margin_right = 15.0
-content_margin_top = 10.0
-content_margin_bottom = 10.0
-bg_color = Color( 0.109804, 0.129412, 0.168627, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.254902, 0.262745, 0.286275, 1 )
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-expand_margin_left = 50.0
-shadow_size = 1
-shadow_offset = Vector2( 4, 4 )
-
-[sub_resource type="StyleBoxFlat" id=4]
-content_margin_left = 15.0
-content_margin_right = 15.0
-content_margin_top = 10.0
-content_margin_bottom = 8.0
-bg_color = Color( 0.192157, 0.223529, 0.294118, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.278431, 0.321569, 0.439216, 1 )
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-expand_margin_left = 50.0
-shadow_size = 1
-shadow_offset = Vector2( 4, 4 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-content_margin_left = 15.0
-content_margin_right = 15.0
-content_margin_top = 10.0
-content_margin_bottom = 10.0
-bg_color = Color( 0.14902, 0.172549, 0.231373, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.384314, 0.4, 0.443137, 1 )
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-expand_margin_left = 50.0
-shadow_size = 1
-shadow_offset = Vector2( 4, 4 )
+[sub_resource type="Animation" id=33]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=6]
 length = 0.2
@@ -207,14 +175,6 @@ region = Rect2( 22, 0, 11, 13 )
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 3 )
 region = Rect2( 33, 0, 11, 13 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 3 )
-region = Rect2( 44, 0, 11, 13 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 3 )
-region = Rect2( 55, 0, 11, 13 )
 
 [sub_resource type="Animation" id=16]
 length = 0.2
@@ -334,13 +294,44 @@ region = Rect2( 18, 0, 9, 16 )
 atlas = ExtResource( 30 )
 region = Rect2( 27, 0, 9, 16 )
 
-[sub_resource type="AtlasTexture" id=28]
-atlas = ExtResource( 30 )
-region = Rect2( 36, 0, 9, 16 )
-
-[sub_resource type="AtlasTexture" id=29]
-atlas = ExtResource( 30 )
-region = Rect2( 45, 0, 9, 16 )
+[sub_resource type="Animation" id=31]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:anchor_right")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
 
 [sub_resource type="Animation" id=22]
 length = 0.2
@@ -443,9 +434,34 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("BGBlur:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BGBlur:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=23]
 length = 0.1
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Panel:anchor_top")
 tracks/0/interp = 1
@@ -506,11 +522,74 @@ tracks/4/keys = {
 "update": 0,
 "values": [ 0.95 ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("BGBlur:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("BGBlur:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=32]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 
 [sub_resource type="Animation" id=21]
 length = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:anchor_left")
+tracks/0/path = NodePath("Panel:anchor_top")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -519,10 +598,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 0.1, 0.1 ]
+"values": [ 1.0, 0.075 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Panel:anchor_top")
+tracks/1/path = NodePath("Panel:anchor_bottom")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -531,39 +610,15 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.0, 0.1 ]
+"values": [ 1.0, 0.935 ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Panel:anchor_right")
+tracks/2/path = NodePath("Panel:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0.9, 0.9 ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Panel:anchor_bottom")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.9 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Panel:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -581,10 +636,11 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-anchor_left = 0.1
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.02
+anchor_top = 1.0
+anchor_right = 0.98
+anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -600,8 +656,7 @@ __meta__ = {
 }
 
 [node name="CloseButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 25.0
-margin_right = 133.0
+margin_right = 250.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../StatsButton")
 focus_neighbour_top = NodePath(".")
@@ -609,19 +664,19 @@ focus_neighbour_right = NodePath("../PowerupsButton")
 focus_next = NodePath("../PowerupsButton")
 focus_previous = NodePath("../StatsButton")
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "Close"
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "inventory.close"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="PowerupsButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 143.0
-margin_right = 390.0
+margin_left = 260.0
+margin_right = 603.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../CloseButton")
 focus_neighbour_top = NodePath(".")
@@ -629,19 +684,19 @@ focus_neighbour_right = NodePath("../CollectablesButton")
 focus_next = NodePath("../CollectablesButton")
 focus_previous = NodePath("../CloseButton")
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "My Quick Items"
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "inventory.quick_items"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="CollectablesButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 400.0
-margin_right = 654.0
+margin_left = 613.0
+margin_right = 965.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../PowerupsButton")
 focus_neighbour_top = NodePath(".")
@@ -649,19 +704,19 @@ focus_neighbour_right = NodePath("../RanksButton")
 focus_next = NodePath("../RanksButton")
 focus_previous = NodePath("../PowerupsButton")
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "My Collectables"
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "inventory.collectables"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RanksButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 664.0
-margin_right = 825.0
+margin_left = 975.0
+margin_right = 1234.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../CollectablesButton")
 focus_neighbour_top = NodePath(".")
@@ -669,19 +724,19 @@ focus_neighbour_right = NodePath("../StatsButton")
 focus_next = NodePath("../StatsButton")
 focus_previous = NodePath("../CollectablesButton")
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "My Ranks"
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "inventory.ranks"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StatsButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 835.0
-margin_right = 999.0
+margin_left = 1244.0
+margin_right = 1506.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../RanksButton")
 focus_neighbour_top = NodePath(".")
@@ -689,20 +744,21 @@ focus_neighbour_right = NodePath("../CloseButton")
 focus_next = NodePath("../CloseButton")
 focus_previous = NodePath("../RanksButton")
 custom_fonts/font = ExtResource( 2 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "My Stats"
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "inventory.stats"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Powerups" type="Panel" parent="Panel"]
-visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
 anchor_top = 0.1
-anchor_right = 1.0
+anchor_right = 2.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
@@ -711,170 +767,187 @@ __meta__ = {
 
 [node name="BG" type="Panel" parent="Panel/Powerups"]
 anchor_left = 0.03
-anchor_top = 0.01
-anchor_right = 0.45
-anchor_bottom = 0.95
+anchor_right = 0.5
+anchor_bottom = 0.885
 margin_top = 1.52588e-05
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Powerups"]
-anchor_left = 0.1
-anchor_right = 0.95
-anchor_bottom = 1.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Powerups/BG"]
+anchor_left = 0.025
+anchor_top = 0.025
+anchor_right = 0.97
+anchor_bottom = 0.84
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="VBoxContainer" parent="Panel/Powerups/HBoxContainer"]
-margin_right = 330.0
-margin_bottom = 518.0
+[node name="Buttons" type="VBoxContainer" parent="Panel/Powerups/BG/HBoxContainer"]
+margin_right = 545.0
+margin_bottom = 470.0
+size_flags_horizontal = 3
 custom_constants/separation = 10
-alignment = 1
 
-[node name="Coconut" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
-margin_top = 54.0
-margin_right = 330.0
-margin_bottom = 114.0
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+[node name="Coconut" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+margin_right = 545.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+custom_constants/hseparation = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
 text = "Coconut [1]"
+icon = ExtResource( 8 )
+align = 2
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Coconut"]
-anchor_left = -0.125
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 8 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Cherry" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
-margin_top = 124.0
-margin_right = 330.0
-margin_bottom = 184.0
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+[node name="Cherry" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+margin_top = 60.0
+margin_right = 545.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
 text = "Cherry [1]"
+icon = ExtResource( 7 )
+align = 2
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Cherry"]
-anchor_left = -0.125
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 7 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Carrot" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
-margin_top = 194.0
-margin_right = 330.0
-margin_bottom = 254.0
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
-text = " Carrot [1] "
+[node name="Carrot" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+margin_top = 120.0
+margin_right = 545.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Carrot [1] "
+icon = ExtResource( 6 )
+align = 2
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Carrot"]
-anchor_left = -0.125
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Bunny Egg" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
-margin_top = 264.0
-margin_right = 330.0
-margin_bottom = 324.0
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
-text = "bunny egg "
+[node name="Bunny Egg" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+margin_top = 180.0
+margin_right = 545.0
+margin_bottom = 230.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Huevo de Conejito x999"
+icon = ExtResource( 17 )
+align = 2
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Bunny Egg"]
-anchor_left = -0.125
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 17 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Glitch Orb" type="Button" parent="Panel/Powerups/HBoxContainer/Buttons"]
-margin_top = 334.0
-margin_right = 330.0
-margin_bottom = 394.0
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
-text = "Glitch Orb x999"
+[node name="Glitch Orb" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+margin_top = 240.0
+margin_right = 545.0
+margin_bottom = 290.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Glitch Orb"
+icon = ExtResource( 28 )
+align = 2
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Powerups/HBoxContainer/Buttons/Glitch Orb"]
-anchor_left = -0.125
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 28 )
-expand = true
-stretch_mode = 5
+[node name="Pear" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+margin_top = 300.0
+margin_right = 545.0
+margin_bottom = 350.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Pear"
+icon = ExtResource( 38 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Glitch Soul" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+margin_top = 360.0
+margin_right = 545.0
+margin_bottom = 410.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Glitch Soul x999"
+icon = ExtResource( 39 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Glitch Soul2" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+margin_top = 420.0
+margin_right = 545.0
+margin_bottom = 470.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Extra Item"
+icon = ExtResource( 39 )
+align = 2
+expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NotInLevelWarning" type="Label" parent="Panel/Powerups"]
-anchor_left = 0.5
-anchor_right = 0.86
-anchor_bottom = 0.311
+anchor_left = 0.52
+anchor_right = 1.0
+anchor_bottom = 0.085
 custom_fonts/font = ExtResource( 2 )
-text = "You cannot use powerups here!"
+text = "inventory.can_not_use_items"
 align = 1
 valign = 1
 autowrap = true
@@ -882,18 +955,44 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Fill" type="CheckBox" parent="Panel/Powerups"]
+anchor_left = 0.03
+anchor_top = 0.898
+anchor_right = 0.5
+anchor_bottom = 0.898
+margin_left = -7.62939e-06
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+custom_constants/check_vadjust = -4
+custom_fonts/font = ExtResource( 2 )
+custom_icons/checked = ExtResource( 37 )
+custom_icons/unchecked = ExtResource( 36 )
+custom_styles/hover = ExtResource( 13 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 12 )
+custom_styles/disabled = ExtResource( 14 )
+custom_styles/normal = ExtResource( 14 )
+text = "inventory.use_all"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Explanation" type="Panel" parent="Panel/Powerups"]
-anchor_left = 0.5
-anchor_top = 0.307
-anchor_right = 0.859
-anchor_bottom = 0.691
+anchor_left = 0.52
+anchor_top = 0.08
+anchor_right = 0.99
+anchor_bottom = 0.835
 custom_styles/panel = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Panel/Powerups/Explanation"]
-anchor_right = 1.0
+anchor_left = 0.03
+anchor_right = 0.97
 anchor_bottom = 1.0
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
@@ -906,19 +1005,21 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Powerups"]
+anims/RESET = SubResource( 33 )
 anims/slide = SubResource( 6 )
 
 [node name="Collectables" type="Panel" parent="Panel"]
-visible = false
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
 anchor_top = 0.1
-anchor_right = 1.0
+anchor_right = 2.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Equipables" type="Panel" parent="Panel/Collectables"]
+[node name="Equippables" type="Panel" parent="Panel/Collectables"]
 anchor_left = 0.05
 anchor_top = 0.02
 anchor_right = 0.45
@@ -930,13 +1031,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="Panel/Collectables/Equipables"]
+[node name="Label" type="Label" parent="Panel/Collectables/Equippables"]
 anchor_right = 1.0
 anchor_bottom = 0.2
 margin_bottom = 11.4848
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
-text = "Equipables"
+text = "inventory.equippables_label"
 align = 1
 valign = 1
 autowrap = true
@@ -944,10 +1045,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Buttons" type="VBoxContainer" parent="Panel/Collectables/Equipables"]
-anchor_left = 0.29
+[node name="Buttons" type="VBoxContainer" parent="Panel/Collectables/Equippables"]
+anchor_left = 0.03
 anchor_top = 0.2
-anchor_right = 0.323
+anchor_right = 0.97
 anchor_bottom = 0.2
 custom_constants/separation = 10
 alignment = 1
@@ -955,84 +1056,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Water Gun" type="Button" parent="Panel/Collectables/Equipables/Buttons"]
-margin_right = 232.0
+[node name="Water Gun" type="Button" parent="Panel/Collectables/Equippables/Buttons"]
+margin_right = 462.0
 margin_bottom = 60.0
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
 custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
 custom_styles/normal = ExtResource( 19 )
 text = "Water Gun"
-align = 0
+icon = ExtResource( 22 )
+align = 2
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Equipables/Buttons/Water Gun"]
-anchor_left = -0.31
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 22 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Nail Gun" type="Button" parent="Panel/Collectables/Equipables/Buttons"]
+[node name="Nail Gun" type="Button" parent="Panel/Collectables/Equippables/Buttons"]
 margin_top = 70.0
-margin_right = 232.0
+margin_right = 462.0
 margin_bottom = 130.0
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
 custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
 custom_styles/normal = ExtResource( 19 )
 text = "Nail Gun"
-align = 0
+icon = ExtResource( 23 )
+align = 2
 expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Equipables/Buttons/Nail Gun"]
-anchor_left = -0.31
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 23 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Laser Gun" type="Button" parent="Panel/Collectables/Equipables/Buttons"]
+[node name="Laser Gun" type="Button" parent="Panel/Collectables/Equippables/Buttons"]
 margin_top = 140.0
-margin_right = 232.0
+margin_right = 462.0
 margin_bottom = 200.0
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
 custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
 custom_styles/normal = ExtResource( 19 )
 text = "Laser Gun"
-align = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Equipables/Buttons/Laser Gun"]
-anchor_left = -0.31
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 24 )
-expand = true
-stretch_mode = 5
+icon = ExtResource( 24 )
+align = 2
+expand_icon = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1054,7 +1126,7 @@ anchor_right = 1.0
 anchor_bottom = 0.2
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
-text = "Collectables"
+text = "inventory.collectables_label"
 align = 1
 valign = 1
 autowrap = true
@@ -1063,9 +1135,9 @@ __meta__ = {
 }
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Collectables/Collectables"]
-anchor_left = 0.217
+anchor_left = 0.03
 anchor_top = 0.2
-anchor_right = 0.25
+anchor_right = 0.445
 anchor_bottom = 0.2
 margin_right = 256.0
 custom_constants/separation = 10
@@ -1075,7 +1147,7 @@ __meta__ = {
 }
 
 [node name="Energy" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
-margin_right = 290.0
+margin_right = 459.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
@@ -1084,31 +1156,22 @@ focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton"
 focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
 custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
 text = " Energy x999"
+icon = ExtResource( 26 )
+align = 2
 expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Collectables/Buttons/Energy"]
-anchor_left = -0.15
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 26 )
-expand = true
-stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Water" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
 margin_top = 70.0
-margin_right = 290.0
+margin_right = 459.0
 margin_bottom = 130.0
 focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
@@ -1117,31 +1180,22 @@ focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton"
 focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
 custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
 text = "Water x999"
+icon = ExtResource( 27 )
+align = 2
 expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Collectables/Buttons/Water"]
-anchor_left = -0.15
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 27 )
-expand = true
-stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Nail" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
 margin_top = 140.0
-margin_right = 290.0
+margin_right = 459.0
 margin_bottom = 200.0
 focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
@@ -1150,24 +1204,15 @@ focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton"
 focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
 custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = SubResource( 2 )
-custom_styles/pressed = SubResource( 3 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/normal = SubResource( 5 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
 text = "Nail x999"
+icon = ExtResource( 25 )
+align = 2
 expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Panel/Collectables/Collectables/Buttons/Nail"]
-anchor_left = -0.15
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.9
-texture = ExtResource( 25 )
-expand = true
-stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1176,6 +1221,7 @@ __meta__ = {
 anims/slide = SubResource( 8 )
 
 [node name="Ranks" type="Panel" parent="Panel"]
+visible = false
 anchor_top = 0.1
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -1207,40 +1253,28 @@ __meta__ = {
 }
 
 [node name="Silver" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
-margin_left = 8.0
-margin_right = 19.0
+margin_left = 23.0
+margin_right = 34.0
 margin_bottom = 13.0
 texture = SubResource( 10 )
 
 [node name="Gold" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
-margin_left = 23.0
-margin_right = 34.0
+margin_left = 38.0
+margin_right = 49.0
 margin_bottom = 13.0
 texture = SubResource( 11 )
 
 [node name="Diamond" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
-margin_left = 38.0
-margin_right = 49.0
-margin_bottom = 13.0
-texture = SubResource( 12 )
-
-[node name="Emerald" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
 margin_left = 53.0
 margin_right = 64.0
 margin_bottom = 13.0
-texture = SubResource( 13 )
+texture = SubResource( 12 )
 
 [node name="Glitch" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
 margin_left = 68.0
 margin_right = 79.0
 margin_bottom = 13.0
-texture = SubResource( 14 )
-
-[node name="Volcano" type="TextureRect" parent="Panel/Ranks/Ranks/HBoxContainer"]
-margin_left = 83.0
-margin_right = 94.0
-margin_bottom = 13.0
-texture = SubResource( 15 )
+texture = SubResource( 13 )
 
 [node name="Label" type="Label" parent="Panel/Ranks/Ranks"]
 anchor_right = 1.0
@@ -1248,7 +1282,7 @@ anchor_bottom = 0.2
 margin_bottom = 11.4848
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
-text = "Ranks"
+text = "inventory.ranks.ranks"
 align = 1
 valign = 1
 autowrap = true
@@ -1294,26 +1328,12 @@ margin_right = 26.0
 margin_bottom = 13.0
 texture = SubResource( 12 )
 
-[node name="Emerald" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
-visible = false
-margin_left = 15.0
-margin_right = 26.0
-margin_bottom = 13.0
-texture = SubResource( 13 )
-
 [node name="Glitch" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
 visible = false
 margin_left = 15.0
 margin_right = 26.0
 margin_bottom = 13.0
-texture = SubResource( 14 )
-
-[node name="Volcano" type="TextureRect" parent="Panel/Ranks/CurrentRank/VBoxContainer"]
-visible = false
-margin_left = 15.0
-margin_right = 26.0
-margin_bottom = 13.0
-texture = SubResource( 15 )
+texture = SubResource( 13 )
 
 [node name="Title" type="Label" parent="Panel/Ranks/CurrentRank"]
 anchor_right = 1.0
@@ -1471,8 +1491,10 @@ text = "Adrenaline "
 anims/show = SubResource( 20 )
 
 [node name="Stats" type="Panel" parent="Panel"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 1.0
 anchor_top = 0.1
-anchor_right = 1.0
+anchor_right = 2.0
 anchor_bottom = 1.0
 custom_styles/panel = SubResource( 9 )
 __meta__ = {
@@ -1484,7 +1506,7 @@ anchor_right = 1.0
 anchor_bottom = 0.153
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
-text = "Your Stats:"
+text = "inventory.your_stats"
 align = 1
 valign = 1
 autowrap = true
@@ -1609,22 +1631,6 @@ margin_bottom = 56.0
 mouse_filter = 2
 texture = SubResource( 27 )
 
-[node name="5" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
-visible = false
-margin_top = 50.0
-margin_right = 9.0
-margin_bottom = 66.0
-mouse_filter = 2
-texture = SubResource( 28 )
-
-[node name="6" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
-visible = false
-margin_top = 60.0
-margin_right = 9.0
-margin_bottom = 76.0
-mouse_filter = 2
-texture = SubResource( 29 )
-
 [node name="StatsUpgrade" type="Panel" parent="Panel/Stats"]
 anchor_left = 0.52
 anchor_top = 0.117
@@ -1654,7 +1660,7 @@ anchor_right = 1.0
 anchor_bottom = 0.153
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
-text = "Player Upgrade"
+text = "inventory.player_upgrade_label"
 align = 1
 valign = 1
 autowrap = true
@@ -1694,12 +1700,13 @@ custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-text = "Upgrade"
+text = "inventory.stats_upgrade"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Stats"]
+anims/RESET = SubResource( 31 )
 anims/slide = SubResource( 22 )
 
 [node name="UpgradeStatsPrompt" type="Control" parent="Panel/Stats"]
@@ -1710,6 +1717,10 @@ mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BGBlur" parent="Panel/Stats/UpgradeStatsPrompt" instance=ExtResource( 32 )]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
 
 [node name="Panel" type="Panel" parent="Panel/Stats/UpgradeStatsPrompt"]
 modulate = Color( 1, 1, 1, 0 )
@@ -1746,18 +1757,18 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_right = 921.0
+margin_right = 1105.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 2 )
-text = "Upgrade Stats..."
+text = "inventory.upgrade_stats.label"
 align = 1
 
 [node name="PromptText" type="Label" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_top = 129.0
-margin_right = 921.0
-margin_bottom = 258.0
+margin_top = 45.0
+margin_right = 1105.0
+margin_bottom = 174.0
 size_flags_vertical = 6
-custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
+custom_colors/font_color = Color( 0.156863, 1, 0.235294, 1 )
 custom_fonts/font = ExtResource( 2 )
 text = "Level Up! Choose what to upgrade.
 Health %s -> %s
@@ -1766,9 +1777,9 @@ Adrenaline %s -> %s"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_top = 358.0
-margin_right = 921.0
-margin_bottom = 418.0
+margin_top = 189.0
+margin_right = 1105.0
+margin_bottom = 249.0
 custom_constants/separation = 15
 alignment = 1
 __meta__ = {
@@ -1776,8 +1787,8 @@ __meta__ = {
 }
 
 [node name="Cancel" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 129.0
-margin_right = 287.0
+margin_left = 179.0
+margin_right = 421.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
@@ -1791,11 +1802,11 @@ custom_styles/pressed = ExtResource( 10 )
 custom_styles/focus = ExtResource( 12 )
 custom_styles/disabled = ExtResource( 14 )
 custom_styles/normal = ExtResource( 14 )
-text = "Cancel"
+text = "global.back"
 
 [node name="Health" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 302.0
-margin_right = 494.0
+margin_left = 436.0
+margin_right = 628.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Cancel")
 focus_neighbour_top = NodePath(".")
@@ -1803,8 +1814,8 @@ focus_neighbour_right = NodePath("../Adrenaline")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../Adrenaline")
 focus_previous = NodePath("../Cancel")
-custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
-custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0.156863, 1, 0.235294, 1 )
+custom_colors/font_color_hover = Color( 0.156863, 1, 0.235294, 1 )
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
@@ -1814,8 +1825,8 @@ custom_styles/normal = ExtResource( 14 )
 text = "+ Health"
 
 [node name="Adrenaline" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 509.0
-margin_right = 791.0
+margin_left = 643.0
+margin_right = 925.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Health")
 focus_neighbour_top = NodePath(".")
@@ -1823,8 +1834,8 @@ focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath(".")
 focus_next = NodePath("../Cancel")
 focus_previous = NodePath("../Health")
-custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
-custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_focus = Color( 0.156863, 1, 0.235294, 1 )
+custom_colors/font_color_hover = Color( 0.156863, 1, 0.235294, 1 )
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 13 )
 custom_styles/pressed = ExtResource( 10 )
@@ -1839,31 +1850,46 @@ anims/show = SubResource( 23 )
 
 [node name="UpgradeSound" type="AudioStreamPlayer" parent="Panel/Stats/UpgradeStatsPrompt"]
 stream = ExtResource( 31 )
+volume_db = -6.0
 bus = "Audio"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 32 )
 anims/show = SubResource( 21 )
 
 [node name="PowerupSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
 volume_db = -7.0
+pitch_scale = 0.85
 bus = "Audio"
 
-[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_focus_entered"]
-[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_mouse_entered"]
-[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Coconut" to="." method="_powerup_pressed"]
-[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_focus_entered"]
-[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_mouse_entered"]
-[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Cherry" to="." method="_powerup_pressed"]
-[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_focus_entered"]
-[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_mouse_entered"]
-[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Carrot" to="." method="_powerup_pressed"]
-[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_focus_entered"]
-[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_mouse_entered"]
-[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Bunny Egg" to="." method="_powerup_pressed"]
-[connection signal="focus_entered" from="Panel/Powerups/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_focus_entered"]
-[connection signal="mouse_entered" from="Panel/Powerups/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_mouse_entered"]
-[connection signal="pressed" from="Panel/Powerups/HBoxContainer/Buttons/Glitch Orb" to="." method="_powerup_pressed"]
-[connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Water Gun" to="." method="_equipable_pressed"]
-[connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Nail Gun" to="." method="_equipable_pressed"]
-[connection signal="pressed" from="Panel/Collectables/Equipables/Buttons/Laser Gun" to="." method="_equipable_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Coconut" to="." method="_on_Coconut_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Coconut" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Cherry" to="." method="_on_Cherry_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Cherry" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Carrot" to="." method="_on_Carrot_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Carrot" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Bunny Egg" to="." method="_on_Bunny_Egg_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Bunny Egg" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Orb" to="." method="_on_Glitch_Orb_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Orb" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Pear" to="." method="_on_Pear_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Pear" to="." method="_on_Pear_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Pear" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul" to="." method="_on_Glitch_Soul_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul" to="." method="_on_Glitch_Soul_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul2" to="." method="_on_Glitch_Soul_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul2" to="." method="_on_Glitch_Soul_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul2" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/Fill" to="." method="_on_Fill_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/Fill" to="." method="_on_Fill_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/Fill" to="." method="_on_Fill_pressed"]
+[connection signal="pressed" from="Panel/Collectables/Equippables/Buttons/Water Gun" to="." method="_equippable_pressed"]
+[connection signal="pressed" from="Panel/Collectables/Equippables/Buttons/Nail Gun" to="." method="_equippable_pressed"]
+[connection signal="pressed" from="Panel/Collectables/Equippables/Buttons/Laser Gun" to="." method="_equippable_pressed"]

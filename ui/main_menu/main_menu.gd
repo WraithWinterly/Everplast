@@ -1,5 +1,5 @@
-extends Control
 
+extends Control
 
 onready var menu_buttons: VBoxContainer = $MenuButtons
 onready var play_button: Button = $MenuButtons/Play
@@ -9,133 +9,180 @@ onready var quit_button: Button = $MenuButtons/Quit
 onready var camera: Camera2D = $Camera2D
 onready var previous_button_focus: Button = play_button
 
-onready var bg_color: Panel = $CanvasLayerBack/BGColor
-onready var parallax_layers := [$ParallaxBackground/ParallaxLayer,
-$ParallaxBackground/ParallaxLayer2, $ParallaxBackground/ParallaxLayer3]
+onready var bg_color: Panel = $Background/CanvasLayerBack/Top
+onready var parallax_layers := [$Background/ParallaxLayer, $Background/ParallaxLayer2,
+								$Background/ParallaxLayer3]
 
 
 func _ready() -> void:
 	var __: int
-	__ = UI.connect("changed", self, "_ui_changed")
-	__ = UI.connect("faded", self, "_ui_faded")
+	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("ui_profile_selector_return_pressed", self, "_ui_profile_selector_return_pressed")
+	__ = GlobalEvents.connect("ui_quick_play_prompt_no_pressed", self, "_ui_quick_play_prompt_no_pressed")
+	__ = GlobalEvents.connect("ui_quick_play_prompt_yes_pressed", self, "_ui_quick_play_prompt_yes_pressed")
+	__ = GlobalEvents.connect("ui_quit_prompt_no_pressed", self, "_ui_quit_prompt_no_pressed")
+	__ = GlobalEvents.connect("ui_quit_prompt_yes_pressed", self, "_ui_quit_prompt_yes_pressed")
+	__ = GlobalEvents.connect("ui_settings_back_pressed", self, "_ui_settings_back_pressed")
+	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
+	__ = GlobalEvents.connect("ui_settings_language_back_pressed_initial", self, "_ui_settings_language_back_pressed_initial")
+	__ = GlobalEvents.connect("ui_settings_initial_started", self, "_ui_settings_initial_started")
 	__ = play_button.connect("pressed", self, "_play_pressed")
 	__ = quick_play_button.connect("pressed", self, "_quick_play_pressed")
 	__ = settings_button.connect("pressed", self, "_on_settings_pressed")
 	__ = quit_button.connect("pressed", self, "_quit_pressed")
 
+	GlobalUI.menu_locked = true
+	show()
+
 	# Set camera perspective to be zoomed in
 	camera.current = true
 	yield(get_tree(), "idle_frame")
 	camera.current = false
-
-	play_button.grab_focus()
 	update_menu()
 
+	if not GlobalUI.menu == GlobalUI.Menus.INITIAL_SETUP:
+		play_button.grab_focus()
 
-func _ui_changed(menu: int) -> void:
-	match menu:
-		UI.MAIN_MENU:
-			enable_buttons()
-			update_menu()
-			match UI.last_menu:
-				UI.PROFILE_SELECTOR, UI.PAUSE_MENU_RETURN_PROMPT:
-					if Globals.game_state == Globals.GameStates.MENU:
-						yield(UI, "faded")
-						show()
-						enable_buttons()
-						Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-					play_button.grab_focus()
-				UI.MAIN_MENU_QUICK_PLAY:
-					quick_play_button.grab_focus()
-				UI.MAIN_MENU_SETTINGS:
-					settings_button.grab_focus()
-				UI.MAIN_MENU_QUIT_PROMPT:
-					previous_button_focus.grab_focus()
+	yield(get_tree(), "idle_frame")
+
+	yield(GlobalEvents, "ui_faded")
+	GlobalUI.menu_locked = false
 
 
-		UI.MAIN_MENU_QUICK_PLAY,\
-		UI.MAIN_MENU_SETTINGS,\
-		UI.MAIN_MENU_QUIT_PROMPT:
-			for button in menu_buttons.get_children():
-				if button.has_focus():
-					previous_button_focus = button
-					continue
-			disable_buttons()
-#		UI.PROFILE_SELECTOR, UI.NONE:
-#			hide_menu()
-		UI.PROFILE_SELECTOR, UI.NONE:
-			if UI.last_menu == UI.MAIN_MENU_QUICK_PLAY or \
-					UI.last_menu == UI.PROFILE_SELECTOR or \
-					UI.last_menu == UI.MAIN_MENU:
-				hide_menu()
-
-#
-#func _process(delta: float) -> void:
-#	if Input.is_key_pressed(KEY_K):
-#		update_menu()
-
-
-func _ui_faded() -> void:
+func show_menu() -> void:
+	enable_buttons()
+	show()
+	bg_color.show()
+	for bg in parallax_layers:
+		bg.show()
 	update_menu()
-	if not Globals.game_state == Globals.GameStates.MENU:
-		bg_color.hide()
-		for bg in parallax_layers:
-			bg.hide()
-	else:
-		bg_color.show()
-		for bg in parallax_layers:
-			bg.show()
 
 
 func hide_menu() -> void:
 	disable_buttons()
-	yield(UI, "faded")
 	hide()
+	yield(get_tree(), "physics_frame")
+	if GlobalUI.fade_player_playing:
+		yield(GlobalEvents, "ui_faded")
+	bg_color.hide()
+	for bg in parallax_layers:
+		bg.hide()
 
 
 func disable_buttons() -> void:
-	play_button.disabled = true
-	quick_play_button.disabled = true
-	settings_button.disabled = true
-	quit_button.disabled = true
-	Signals.emit_signal("social_disabled")
+	for button in menu_buttons.get_children():
+		button.disabled = true
+
+	GlobalEvents.emit_signal("ui_social_disabled")
 
 
 func enable_buttons() -> void:
-	play_button.disabled = false
-	quick_play_button.disabled = false
-	settings_button.disabled = false
-	quit_button.disabled = false
-	Signals.emit_signal("social_enabled")
+	for button in menu_buttons.get_children():
+		button.disabled = false
+
+	GlobalEvents.emit_signal("ui_social_enabled")
 
 
 func update_menu() -> void:
-	QuickPlay.update_stats()
-	if QuickPlay.available:
+	GlobalQuickPlay.update_stats()
+
+	if GlobalQuickPlay.available:
 		quick_play_button.show()
 	else:
 		quick_play_button.hide()
 
+# Start of GlobalEvents
+
+func _level_changed(_world: int, _level: int) -> void:
+	if Globals.game_state == Globals.GameStates.MENU:
+		hide_menu()
+
+
+func _ui_profile_selector_return_pressed() -> void:
+	if GlobalUI.menu == GlobalUI.Menus.PROFILE_SELECTOR:
+		yield(GlobalEvents, "ui_faded")
+		update_menu()
+		show_menu()
+		play_button.grab_focus()
+
+
+func _ui_quick_play_prompt_no_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	GlobalEvents.emit_signal("ui_button_pressed", true)
+	enable_buttons()
+	quick_play_button.grab_focus()
+
+
+func _ui_quit_prompt_no_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	enable_buttons()
+	quit_button.grab_focus()
+
+
+func _ui_quick_play_prompt_yes_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	yield(GlobalEvents, "ui_faded")
+	hide_menu()
+
+
+func _ui_settings_back_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	if Globals.game_state == Globals.GameStates.MENU:
+		enable_buttons()
+		settings_button.grab_focus()
+
+
+func _ui_pause_menu_return_prompt_yes_pressed() -> void:
+	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+		yield(GlobalEvents, "ui_faded")
+		show_menu()
+		play_button.grab_focus()
+
+
+# Initial Languge Setup
+func _ui_settings_language_back_pressed_initial() -> void:
+	play_button.grab_focus()
+	enable_buttons()
+
+
+func _ui_settings_initial_started() -> void:
+	disable_buttons()
+# End of GlobalEvents
+
 
 func _play_pressed() -> void:
-	if UI.menu_transitioning: return
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.PROFILE_SELECTOR)
+	if GlobalUI.menu_locked: return
+	disable_buttons()
+	play_button.release_focus()
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_play_pressed")
+	GlobalUI.menu = GlobalUI.Menus.PROFILE_SELECTOR
+	yield(GlobalEvents, "ui_faded")
+	hide_menu()
 
 
 func _quick_play_pressed() -> void:
-	if UI.menu_transitioning: return
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.MAIN_MENU_QUICK_PLAY)
+	if GlobalUI.menu_locked: return
+	disable_buttons()
+	quick_play_button.release_focus()
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_quick_play_pressed")
+	GlobalUI.menu = GlobalUI.Menus.QUICK_PLAY_PROMPT
 
 
 func _on_settings_pressed() -> void:
-	if UI.menu_transitioning: return
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.MAIN_MENU_SETTINGS)
+	if GlobalUI.menu_locked: return
+	disable_buttons()
+	settings_button.release_focus()
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_settings_pressed")
+	GlobalUI.menu = GlobalUI.Menus.SETTINGS
 
 
 func _quit_pressed() -> void:
-	if UI.menu_transitioning: return
-	UI.emit_signal("button_pressed")
-	UI.emit_signal("changed", UI.MAIN_MENU_QUIT_PROMPT)
+	if GlobalUI.menu_locked: return
+	disable_buttons()
+	quit_button.release_focus()
+	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_quit_pressed")
+	GlobalUI.menu = GlobalUI.Menus.QUIT_PROMPT
