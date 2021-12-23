@@ -40,6 +40,8 @@ enum Menus {
 
 	CUTSCENE,
 
+	SHOP,
+
 	NONE,
 }
 
@@ -48,6 +50,7 @@ var profile_index: int = 0
 var profile_index_focus: int = 0
 var menu_locked := false
 var fade_player_playing := true
+var dis_focus_sound := true
 
 
 func _ready() -> void:

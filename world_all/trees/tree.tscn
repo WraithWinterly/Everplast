@@ -10,7 +10,6 @@ texture = ExtResource( 1 )
 centered = false
 offset = Vector2( 0, -1 )
 hframes = 6
-region_rect = Rect2( 0, 0, 38, 58 )
 script = ExtResource( 2 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

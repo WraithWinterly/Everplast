@@ -9,24 +9,34 @@ func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("save_file_saved", self, "_save_file_saved")
 	__ = GlobalEvents.connect("ui_notification_shown", self, "_ui_notification_shown")
+
 	hide()
 
 
-func show_notification(noti: String) -> void:
+func show_notification(noti: String, wait: bool = false) -> void:
 	show()
 
-	if not anim_player.is_playing():
-		label.text = noti
+	if wait:
+		if not anim_player.is_playing():
+			label.text = noti
+			sound.play()
+			anim_player.play("notification")
+			yield(anim_player, "animation_finished")
+			GlobalEvents.emit_signal("ui_notification_finished")
+		else:
+			yield(GlobalEvents, "ui_notification_finished")
+			show()
+			label.text = noti
+			sound.play()
+			anim_player.play("notification")
+	else:
 		sound.play()
+		anim_player.play("RESET")
 		anim_player.play("notification")
+		yield(get_tree(), "idle_frame")
+		label.text = noti
 		yield(anim_player, "animation_finished")
 		GlobalEvents.emit_signal("ui_notification_finished")
-	else:
-		yield(GlobalEvents, "ui_notification_finished")
-		show()
-		label.text = noti
-		sound.play()
-		anim_player.play("notification")
 
 
 func _save_file_saved(noti: bool = true) -> void:
@@ -35,6 +45,11 @@ func _save_file_saved(noti: bool = true) -> void:
 
 	if not noti: return
 
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
+
+	if anim_player.is_playing():
+		yield(GlobalEvents, "ui_notification_finished")
 	GlobalEvents.emit_signal("ui_notification_shown", tr("notification.saved"))
 
 

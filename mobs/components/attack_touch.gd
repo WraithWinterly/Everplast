@@ -43,18 +43,22 @@ func _hit_area_body_entered(body: Node) -> void:
 	if mob_component.dead: return
 	if mob_component.damaging_self: return
 	if cooling_down: return
+
 	if body.is_in_group("Player"):
 		if attack_by_jump:
 			var in_jump_boots := false
 			var areas := hit_area.get_overlapping_areas()
+
 			for area in areas:
 				if area.is_in_group("PlayerBoots"):
 					in_jump_boots = true
+
 			if cooling_down: return
+
 			if get_node(GlobalPaths.PLAYER).dashing:
 				damage_by_jump()
 				return
-			elif body.falling or (not body.is_on_floor() and in_jump_boots):
+			elif in_jump_boots and (body.was_falling or not body.is_on_floor()):
 				damage_by_jump()
 				return
 			else:

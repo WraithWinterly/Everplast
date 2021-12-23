@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=2]
@@ -13,12 +13,13 @@
 [ext_resource path="res://ui/inventory/ranks.png" type="Texture" id=11]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=12]
 [ext_resource path="res://ui/fonts/16x.tres" type="DynamicFont" id=13]
+[ext_resource path="res://ui/level_icon.png" type="Texture" id=14]
 
 [sub_resource type="StyleBoxFlat" id=1]
-content_margin_left = 25.0
-content_margin_right = 25.0
-content_margin_top = 200.0
-content_margin_bottom = 200.0
+content_margin_left = 50.0
+content_margin_right = 50.0
+content_margin_top = 250.0
+content_margin_bottom = 250.0
 bg_color = Color( 0, 0, 0, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -99,25 +100,39 @@ __meta__ = {
 [node name="Stats" type="VBoxContainer" parent="."]
 anchor_left = 0.05
 anchor_top = 0.015
-anchor_right = 0.5
+anchor_right = 0.43
 anchor_bottom = 0.153
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 2.5, 2.5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Stats"]
-margin_right = 94.0
-margin_bottom = 52.0
+margin_right = 98.0
+margin_bottom = 66.0
 
 [node name="Icons" type="VBoxContainer" parent="Stats/HBoxContainer"]
 margin_right = 8.0
-margin_bottom = 52.0
+margin_bottom = 66.0
 custom_constants/separation = 6
 
-[node name="Heart" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
+[node name="Level" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
 margin_right = 8.0
 margin_bottom = 8.0
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Level"]
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Heart" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
+margin_top = 14.0
+margin_right = 8.0
+margin_bottom = 22.0
 alignment = 1
 
 [node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Heart"]
@@ -129,9 +144,9 @@ __meta__ = {
 }
 
 [node name="Coin" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
-margin_top = 14.0
+margin_top = 28.0
 margin_right = 8.0
-margin_bottom = 22.0
+margin_bottom = 36.0
 alignment = 1
 
 [node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Coin"]
@@ -144,9 +159,9 @@ __meta__ = {
 }
 
 [node name="Orb" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
-margin_top = 28.0
+margin_top = 42.0
 margin_right = 8.0
-margin_bottom = 36.0
+margin_bottom = 50.0
 alignment = 1
 
 [node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Orb"]
@@ -158,9 +173,9 @@ __meta__ = {
 }
 
 [node name="Adrenaline" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
-margin_top = 42.0
+margin_top = 56.0
 margin_right = 8.0
-margin_bottom = 50.0
+margin_bottom = 64.0
 alignment = 1
 
 [node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Adrenaline"]
@@ -174,11 +189,24 @@ __meta__ = {
 [node name="Text" type="VBoxContainer" parent="Stats/HBoxContainer"]
 margin_left = 12.0
 margin_right = 36.0
-margin_bottom = 52.0
+margin_bottom = 66.0
 
-[node name="Heart" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
+[node name="Level" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
 margin_right = 24.0
 margin_bottom = 10.0
+
+[node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Level"]
+margin_right = 8.0
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 13 )
+text = "--"
+align = 1
+valign = 1
+
+[node name="Heart" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
+margin_top = 14.0
+margin_right = 24.0
+margin_bottom = 24.0
 
 [node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Heart"]
 margin_right = 24.0
@@ -189,9 +217,9 @@ align = 1
 valign = 1
 
 [node name="Coin" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
-margin_top = 14.0
+margin_top = 28.0
 margin_right = 24.0
-margin_bottom = 24.0
+margin_bottom = 38.0
 
 [node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Coin"]
 margin_right = 8.0
@@ -201,9 +229,9 @@ text = "--"
 valign = 1
 
 [node name="Orb" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
-margin_top = 28.0
+margin_top = 42.0
 margin_right = 24.0
-margin_bottom = 38.0
+margin_bottom = 52.0
 
 [node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Orb"]
 margin_right = 8.0
@@ -214,9 +242,9 @@ align = 1
 valign = 1
 
 [node name="Adrenaline" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
-margin_top = 42.0
+margin_top = 56.0
 margin_right = 24.0
-margin_bottom = 52.0
+margin_bottom = 66.0
 
 [node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Adrenaline"]
 margin_right = 24.0
@@ -251,18 +279,18 @@ __meta__ = {
 }
 
 [node name="WorldIcons" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 13.0
-margin_right = 22.0
-margin_bottom = 34.0
+margin_left = 17.0
+margin_right = 26.0
+margin_bottom = 42.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="1" type="TextureRect" parent="HBoxContainer/WorldIcons"]
-margin_top = 9.0
+margin_top = 13.0
 margin_right = 9.0
-margin_bottom = 25.0
+margin_bottom = 29.0
 texture = SubResource( 2 )
 
 [node name="2" type="TextureRect" parent="HBoxContainer/WorldIcons"]

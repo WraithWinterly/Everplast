@@ -30,8 +30,9 @@
 [ext_resource path="res://world_all/powerups/glitch_orb.png" type="Texture" id=28]
 [ext_resource path="res://world_all/gems/gem.png" type="Texture" id=29]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=30]
-[ext_resource path="res://ui/inventory/upgrade.wav" type="AudioStream" id=31]
+[ext_resource path="res://player/523650__matrixxx__powerup-06.wav" type="AudioStream" id=31]
 [ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=32]
+[ext_resource path="res://ui/level_icon.png" type="Texture" id=33]
 [ext_resource path="res://ui/check_box.png" type="Texture" id=36]
 [ext_resource path="res://ui/check_box_checked.png" type="Texture" id=37]
 [ext_resource path="res://world_all/powerups/pear.png" type="Texture" id=38]
@@ -213,69 +214,6 @@ tracks/2/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
-}
-
-[sub_resource type="Animation" id=20]
-length = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:anchor_top")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.38 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Panel:anchor_bottom")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 1.0, 0.95 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("Panel:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("Panel:anchor_left")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.05 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("Panel:anchor_right")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.95 ]
 }
 
 [sub_resource type="AtlasTexture" id=24]
@@ -656,7 +594,8 @@ __meta__ = {
 }
 
 [node name="CloseButton" type="Button" parent="Panel/HBoxContainer"]
-margin_right = 250.0
+margin_left = 15.0
+margin_right = 265.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../StatsButton")
 focus_neighbour_top = NodePath(".")
@@ -675,8 +614,8 @@ __meta__ = {
 }
 
 [node name="PowerupsButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 260.0
-margin_right = 603.0
+margin_left = 275.0
+margin_right = 618.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../CloseButton")
 focus_neighbour_top = NodePath(".")
@@ -695,8 +634,8 @@ __meta__ = {
 }
 
 [node name="CollectablesButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 613.0
-margin_right = 965.0
+margin_left = 628.0
+margin_right = 980.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../PowerupsButton")
 focus_neighbour_top = NodePath(".")
@@ -715,8 +654,8 @@ __meta__ = {
 }
 
 [node name="RanksButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 975.0
-margin_right = 1234.0
+margin_left = 990.0
+margin_right = 1249.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../CollectablesButton")
 focus_neighbour_top = NodePath(".")
@@ -735,8 +674,8 @@ __meta__ = {
 }
 
 [node name="StatsButton" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 1244.0
-margin_right = 1506.0
+margin_left = 1259.0
+margin_right = 1521.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath("../RanksButton")
 focus_neighbour_top = NodePath(".")
@@ -767,7 +706,7 @@ __meta__ = {
 
 [node name="BG" type="Panel" parent="Panel/Powerups"]
 anchor_left = 0.03
-anchor_right = 0.5
+anchor_right = 0.475
 anchor_bottom = 0.885
 margin_top = 1.52588e-05
 custom_styles/panel = ExtResource( 4 )
@@ -785,13 +724,13 @@ __meta__ = {
 }
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Powerups/BG/HBoxContainer"]
-margin_right = 545.0
-margin_bottom = 470.0
+margin_right = 645.0
+margin_bottom = 502.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
 [node name="Coconut" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
-margin_right = 545.0
+margin_right = 645.0
 margin_bottom = 50.0
 size_flags_horizontal = 3
 custom_constants/hseparation = 0
@@ -811,7 +750,7 @@ __meta__ = {
 
 [node name="Cherry" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
 margin_top = 60.0
-margin_right = 545.0
+margin_right = 645.0
 margin_bottom = 110.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -830,7 +769,7 @@ __meta__ = {
 
 [node name="Carrot" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
 margin_top = 120.0
-margin_right = 545.0
+margin_right = 645.0
 margin_bottom = 170.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -849,7 +788,7 @@ __meta__ = {
 
 [node name="Bunny Egg" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
 margin_top = 180.0
-margin_right = 545.0
+margin_right = 645.0
 margin_bottom = 230.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -868,7 +807,7 @@ __meta__ = {
 
 [node name="Glitch Orb" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
 margin_top = 240.0
-margin_right = 545.0
+margin_right = 645.0
 margin_bottom = 290.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -887,7 +826,7 @@ __meta__ = {
 
 [node name="Pear" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
 margin_top = 300.0
-margin_right = 545.0
+margin_right = 645.0
 margin_bottom = 350.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -906,7 +845,7 @@ __meta__ = {
 
 [node name="Glitch Soul" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
 margin_top = 360.0
-margin_right = 545.0
+margin_right = 645.0
 margin_bottom = 410.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -925,7 +864,7 @@ __meta__ = {
 
 [node name="Glitch Soul2" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
 margin_top = 420.0
-margin_right = 545.0
+margin_right = 645.0
 margin_bottom = 470.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
@@ -958,7 +897,7 @@ __meta__ = {
 [node name="Fill" type="CheckBox" parent="Panel/Powerups"]
 anchor_left = 0.03
 anchor_top = 0.898
-anchor_right = 0.5
+anchor_right = 0.475
 anchor_bottom = 0.898
 margin_left = -7.62939e-06
 focus_neighbour_left = NodePath(".")
@@ -981,7 +920,7 @@ __meta__ = {
 }
 
 [node name="Explanation" type="Panel" parent="Panel/Powerups"]
-anchor_left = 0.52
+anchor_left = 0.575
 anchor_top = 0.08
 anchor_right = 0.99
 anchor_bottom = 0.835
@@ -1057,7 +996,7 @@ __meta__ = {
 }
 
 [node name="Water Gun" type="Button" parent="Panel/Collectables/Equippables/Buttons"]
-margin_right = 462.0
+margin_right = 577.0
 margin_bottom = 60.0
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
@@ -1075,7 +1014,7 @@ __meta__ = {
 
 [node name="Nail Gun" type="Button" parent="Panel/Collectables/Equippables/Buttons"]
 margin_top = 70.0
-margin_right = 462.0
+margin_right = 577.0
 margin_bottom = 130.0
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
@@ -1093,7 +1032,7 @@ __meta__ = {
 
 [node name="Laser Gun" type="Button" parent="Panel/Collectables/Equippables/Buttons"]
 margin_top = 140.0
-margin_right = 462.0
+margin_right = 577.0
 margin_bottom = 200.0
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 21 )
@@ -1147,7 +1086,7 @@ __meta__ = {
 }
 
 [node name="Energy" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
-margin_right = 459.0
+margin_right = 510.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
@@ -1171,7 +1110,7 @@ __meta__ = {
 
 [node name="Water" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
 margin_top = 70.0
-margin_right = 459.0
+margin_right = 510.0
 margin_bottom = 130.0
 focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
@@ -1195,7 +1134,7 @@ __meta__ = {
 
 [node name="Nail" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
 margin_top = 140.0
-margin_right = 459.0
+margin_right = 510.0
 margin_bottom = 200.0
 focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
 focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
@@ -1368,128 +1307,6 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Ranks"]
 anims/slide = SubResource( 16 )
 
-[node name="UpgradeStatsPrompt" type="Control" parent="Panel/Ranks"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 1162.38, 37.3887 )
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Panel" type="Panel" parent="Panel/Ranks/UpgradeStatsPrompt"]
-modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.05
-anchor_top = 1.0
-anchor_right = 0.95
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 1162.38, 37.3887 )
-mouse_filter = 2
-custom_styles/panel = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel/Ranks/UpgradeStatsPrompt/Panel"]
-anchor_top = 0.05
-anchor_right = 1.0
-anchor_bottom = 0.9
-custom_constants/separation = 15
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Title" type="Label" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_right = 921.0
-margin_bottom = 30.0
-custom_fonts/font = ExtResource( 2 )
-text = "Upgrade Stats..."
-align = 1
-
-[node name="PromptText" type="Label" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_top = 45.0
-margin_right = 921.0
-margin_bottom = 174.0
-size_flags_vertical = 6
-custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
-custom_fonts/font = ExtResource( 2 )
-text = "Level Up! Choose what to upgrade.
-Health %s -> %s
-or
-Adrenaline %s -> %s"
-align = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_top = 189.0
-margin_right = 921.0
-margin_bottom = 249.0
-custom_constants/separation = 15
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Cancel" type="Button" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 163.0
-margin_right = 321.0
-margin_bottom = 60.0
-focus_neighbour_left = NodePath(".")
-focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath("../Health")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath("../Health")
-focus_previous = NodePath("../Adrenaline")
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "Cancel"
-
-[node name="Health" type="Button" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 336.0
-margin_right = 494.0
-margin_bottom = 60.0
-focus_neighbour_left = NodePath("../Cancel")
-focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath("../Adrenaline")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath("../Adrenaline")
-focus_previous = NodePath("../Cancel")
-custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
-custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "Health"
-
-[node name="Adrenaline" type="Button" parent="Panel/Ranks/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 509.0
-margin_right = 757.0
-margin_bottom = 60.0
-focus_neighbour_left = NodePath("../Health")
-focus_neighbour_top = NodePath(".")
-focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath("../Cancel")
-focus_previous = NodePath("../Health")
-custom_colors/font_color = Color( 1, 0.580392, 0.580392, 1 )
-custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
-custom_fonts/font = ExtResource( 11 )
-custom_styles/hover = ExtResource( 13 )
-custom_styles/pressed = ExtResource( 10 )
-custom_styles/focus = ExtResource( 12 )
-custom_styles/disabled = ExtResource( 14 )
-custom_styles/normal = ExtResource( 14 )
-text = "Adrenaline "
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel/Ranks/UpgradeStatsPrompt"]
-anims/show = SubResource( 20 )
-
 [node name="Stats" type="Panel" parent="Panel"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
@@ -1528,24 +1345,47 @@ __meta__ = {
 
 [node name="Info" type="Label" parent="Panel/Stats/PlayerStats"]
 anchor_left = 0.03
-anchor_top = 0.138
+anchor_top = 0.12
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
 custom_styles/normal = ExtResource( 16 )
 text = "Profile: %s
-Player Level: %s
 Latest World: %s
 "
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Level" type="Label" parent="Panel/Stats/PlayerStats"]
+anchor_left = 0.07
+anchor_top = 0.63
+anchor_right = 0.7
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Player Level: %s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelTexture" type="TextureRect" parent="Panel/Stats/PlayerStats/Level"]
+anchor_left = -0.065
+anchor_top = -0.06
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 33 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="TotalOrbs" type="Label" parent="Panel/Stats/PlayerStats"]
-anchor_left = 0.09
-anchor_top = 0.698
-anchor_right = 1.0
+anchor_left = 0.07
+anchor_top = 0.75
+anchor_right = 0.7
 anchor_bottom = 1.0
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
@@ -1567,9 +1407,9 @@ __meta__ = {
 }
 
 [node name="TotalGems" type="Label" parent="Panel/Stats/PlayerStats"]
-anchor_left = 0.09
-anchor_top = 0.817
-anchor_right = 1.0
+anchor_left = 0.07
+anchor_top = 0.87
+anchor_right = 0.7
 anchor_bottom = 1.0
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
@@ -1579,7 +1419,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="OrbTexture" type="TextureRect" parent="Panel/Stats/PlayerStats/TotalGems"]
+[node name="GemTexture" type="TextureRect" parent="Panel/Stats/PlayerStats/TotalGems"]
 anchor_left = -0.065
 anchor_top = -0.145
 margin_bottom = 8.0
@@ -1591,8 +1431,8 @@ __meta__ = {
 }
 
 [node name="WorldIcons" type="VBoxContainer" parent="Panel/Stats/PlayerStats"]
-anchor_left = 0.03
-anchor_top = 0.4
+anchor_left = 0.025
+anchor_top = 0.334
 anchor_right = 0.037
 anchor_bottom = 0.404
 rect_scale = Vector2( 6, 6 )
@@ -1602,7 +1442,7 @@ __meta__ = {
 }
 
 [node name="1" type="TextureRect" parent="Panel/Stats/PlayerStats/WorldIcons"]
-margin_right = 9.0
+margin_right = 14.0
 margin_bottom = 16.0
 mouse_filter = 2
 texture = SubResource( 24 )
@@ -1643,10 +1483,10 @@ __meta__ = {
 }
 
 [node name="OrbTexture" type="TextureRect" parent="Panel/Stats/StatsUpgrade"]
-anchor_left = 0.02
-anchor_top = 0.02
+anchor_left = 0.04
+anchor_top = 0.04
 anchor_right = 0.215
-anchor_bottom = 0.02
+anchor_bottom = 0.04
 rect_scale = Vector2( 5, 5 )
 mouse_filter = 0
 texture = ExtResource( 15 )
@@ -1757,7 +1597,7 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
-margin_right = 1105.0
+margin_right = 1382.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 2 )
 text = "inventory.upgrade_stats.label"
@@ -1765,7 +1605,7 @@ align = 1
 
 [node name="PromptText" type="Label" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
 margin_top = 45.0
-margin_right = 1105.0
+margin_right = 1382.0
 margin_bottom = 174.0
 size_flags_vertical = 6
 custom_colors/font_color = Color( 0.156863, 1, 0.235294, 1 )
@@ -1778,7 +1618,7 @@ align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer"]
 margin_top = 189.0
-margin_right = 1105.0
+margin_right = 1382.0
 margin_bottom = 249.0
 custom_constants/separation = 15
 alignment = 1
@@ -1787,8 +1627,8 @@ __meta__ = {
 }
 
 [node name="Cancel" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 179.0
-margin_right = 421.0
+margin_left = 318.0
+margin_right = 560.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
@@ -1805,8 +1645,8 @@ custom_styles/normal = ExtResource( 14 )
 text = "global.back"
 
 [node name="Health" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 436.0
-margin_right = 628.0
+margin_left = 575.0
+margin_right = 767.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Cancel")
 focus_neighbour_top = NodePath(".")
@@ -1825,8 +1665,8 @@ custom_styles/normal = ExtResource( 14 )
 text = "+ Health"
 
 [node name="Adrenaline" type="Button" parent="Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer"]
-margin_left = 643.0
-margin_right = 925.0
+margin_left = 782.0
+margin_right = 1064.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Health")
 focus_neighbour_top = NodePath(".")
@@ -1850,7 +1690,8 @@ anims/show = SubResource( 23 )
 
 [node name="UpgradeSound" type="AudioStreamPlayer" parent="Panel/Stats/UpgradeStatsPrompt"]
 stream = ExtResource( 31 )
-volume_db = -6.0
+volume_db = -3.0
+pitch_scale = 1.2
 bus = "Audio"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

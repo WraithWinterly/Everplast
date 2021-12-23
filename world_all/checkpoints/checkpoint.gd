@@ -35,6 +35,7 @@ func disable(animation: bool = true) -> void:
 
 func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player") and not (GlobalLevel.checkpoint_active and GlobalLevel.checkpoint_index == index):
+		GlobalInput.start_high_vibration()
 		GlobalLevel.checkpoint_in_sub = GlobalLevel.in_subsection
 		GlobalLevel.checkpoint_index = index
 		GlobalEvents.emit_signal("level_checkpoint_activated")

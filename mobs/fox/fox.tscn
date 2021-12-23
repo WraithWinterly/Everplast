@@ -64,8 +64,7 @@ volume_db = 2.0
 [node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, -2.85 )
 frames = SubResource( 2 )
-animation = "chase"
-frame = 4
+frame = 8
 
 [node name="CollisionShape2D" parent="MobComponentManager/HurtArea" index="0"]
 position = Vector2( 4, 1.5 )
@@ -76,6 +75,20 @@ speed = 150
 flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
 enemy_path = NodePath("../..")
 animated_sprite_path = NodePath("../SpriteHolder/AnimatedSprite")
+
+[node name="RayCastFloorLeft" parent="MobComponentManager/ChaseMovement" index="0"]
+position = Vector2( -8, 4 )
+
+[node name="RayCastFloorRight" parent="MobComponentManager/ChaseMovement" index="1"]
+position = Vector2( 16, 4 )
+
+[node name="RayCastWallLeft" parent="MobComponentManager/ChaseMovement" index="2"]
+cast_to = Vector2( -8, 0 )
+collision_mask = 3
+
+[node name="RayCastWallRight" parent="MobComponentManager/ChaseMovement" index="3"]
+cast_to = Vector2( 8, 0 )
+collision_mask = 3
 
 [node name="AttackTouch" parent="MobComponentManager" instance=ExtResource( 6 )]
 enemy_path = NodePath("../..")

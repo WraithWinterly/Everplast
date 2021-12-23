@@ -12,6 +12,7 @@ onready var world_icons = $FadeRect/Control/HBoxContainer/Control/WorldIcons
 onready var label: Label = $FadeRect/Control/HBoxContainer/Label
 onready var animation_player: AnimationPlayer = $FadeRect/AnimationPlayer
 onready var level_animation_player: AnimationPlayer = $FadeRect/Control/AnimationPlayer
+onready var level_enter: AudioStreamPlayer = $LevelEnter
 
 
 func _ready() -> void:
@@ -20,8 +21,8 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("level_completed", self, "_level_completed")
 	__ = GlobalEvents.connect("level_subsection_changed", self, "_level_subsection_changed")
 	__ = GlobalEvents.connect("player_died", self, "_player_died")
-	__ = GlobalEvents.connect("story_w1_boss_killed", self, "_story_w1_boss_killed")
-	__ = GlobalEvents.connect("story_w1_boss_level_end_completed", self, "_story_w1_boss_level_end_completed")
+	__ = GlobalEvents.connect("story_boss_killed", self, "_story_boss_killed")
+	__ = GlobalEvents.connect("story_boss_level_end_completed", self, "_story_boss_level_end_completed")
 	__ = GlobalEvents.connect("ui_play_pressed", self, "transition")
 	__ = GlobalEvents.connect("ui_profile_selector_profile_pressed", self, "_ui_profile_selector_profile_pressed")
 	__ = GlobalEvents.connect("ui_profile_selector_return_pressed", self, "_ui_profile_selector_return_pressed")
@@ -67,6 +68,7 @@ func transition_once() -> void:
 
 
 func _level_changed(world: int = 0, level: int = 0) -> void:
+	level_enter.play()
 	animation_player.stop()
 	animation_player.get_animation("fade").length = 1.4
 	GlobalUI.menu_locked = true
@@ -129,12 +131,12 @@ func _player_died() -> void:
 	transition()
 
 
-func _story_w1_boss_killed() -> void:
+func _story_boss_killed(_idx: int) -> void:
 	yield(GlobalEvents, "ui_dialogue_hidden")
 	transition()
 
 
-func _story_w1_boss_level_end_completed() -> void:
+func _story_boss_level_end_completed(_idx: int) -> void:
 	transition()
 
 

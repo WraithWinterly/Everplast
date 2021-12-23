@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/233415__rocktopus__splash16.wav-f6d4c2b4bfc9fdfd2caea9ec2fe046ae.sample"
+
+[deps]
+
+source_file="res://player/233415__rocktopus__splash16.wav"
+dest_files=[ "res://.import/233415__rocktopus__splash16.wav-f6d4c2b4bfc9fdfd2caea9ec2fe046ae.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

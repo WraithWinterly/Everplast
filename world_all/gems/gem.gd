@@ -29,6 +29,8 @@ func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		if not collected:
 			GlobalEvents.emit_signal("player_collected_gem", index)
+
+		GlobalInput.start_normal_vibration()
 		coll_shape.set_deferred("disabled", true)
 		anim_player.play("use")
 		sound.play()

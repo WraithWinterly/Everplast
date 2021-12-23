@@ -34,7 +34,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=6]
-extents = Vector2( 4, 4 )
+extents = Vector2( 3.5, 3.5 )
 
 [sub_resource type="Curve" id=7]
 min_value = -1.0
@@ -62,45 +62,50 @@ collision_layer = 64
 collision_mask = 3
 script = ExtResource( 2 )
 
-[node name="EnemyComponentManager" parent="." instance=ExtResource( 3 )]
+[node name="MobComponentManager" parent="." instance=ExtResource( 3 )]
 orb_amount = 60
 knockback = 200
 attack_damage = 10
 max_health = 10
 
-[node name="HitSound" parent="EnemyComponentManager" index="0"]
+[node name="HitSound" parent="MobComponentManager" index="0"]
 stream = ExtResource( 1 )
+volume_db = 1.0
 pitch_scale = 0.84
 
-[node name="DeathSound" parent="EnemyComponentManager" index="1"]
+[node name="DeathSound" parent="MobComponentManager" index="1"]
 stream = ExtResource( 5 )
+volume_db = 0.0
 pitch_scale = 0.9
 
-[node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
+[node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 1.15 )
 frames = SubResource( 5 )
 
-[node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 7 )]
+[node name="CollisionShape2D" parent="MobComponentManager/HurtArea" index="0"]
+position = Vector2( 4, 4 )
+
+[node name="BasicMovement" parent="MobComponentManager" instance=ExtResource( 7 )]
 flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
 enemy_path = NodePath("../..")
 
-[node name="RayCastWallLeft" parent="EnemyComponentManager/BasicMovement" index="2"]
+[node name="RayCastWallLeft" parent="MobComponentManager/BasicMovement" index="2"]
 position = Vector2( -2, 5.5 )
 
-[node name="RayCastWallRight" parent="EnemyComponentManager/BasicMovement" index="3"]
+[node name="RayCastWallRight" parent="MobComponentManager/BasicMovement" index="3"]
 position = Vector2( 10, 5.5 )
 
-[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 8 )]
+[node name="AttackTouch" parent="MobComponentManager" instance=ExtResource( 8 )]
 enemy_path = NodePath("../..")
 hit_area_path = NodePath("../HurtArea")
 attack_by_jump = false
 
-[node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 4 )]
+[node name="HurtByBullet" parent="MobComponentManager" instance=ExtResource( 4 )]
 enemy_path = NodePath("../..")
 hurt_area_path = NodePath("../HurtArea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4, 4 )
+position = Vector2( 4, 4.51 )
 shape = SubResource( 6 )
 __meta__ = {
 "_edit_group_": true
@@ -117,5 +122,5 @@ explosiveness = 0.16
 randomness = 0.7
 process_material = SubResource( 9 )
 
-[editable path="EnemyComponentManager"]
-[editable path="EnemyComponentManager/BasicMovement"]
+[editable path="MobComponentManager"]
+[editable path="MobComponentManager/BasicMovement"]

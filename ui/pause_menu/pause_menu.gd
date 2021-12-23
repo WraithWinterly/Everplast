@@ -19,6 +19,10 @@ func _ready() -> void:
 	__ = settings_button.connect("pressed", self, "_settings_pressed")
 	__ = return_button.connect("pressed", self, "_return_pressed")
 
+	for button in $PauseButtons.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
 	pause_mode = PAUSE_MODE_PROCESS
 	disable_buttons()
 	hide()
@@ -42,12 +46,20 @@ func show_menu() -> void:
 	GlobalUI.menu = GlobalUI.Menus.PAUSE_MENU
 	get_tree().paused = true
 
-	for w_icon in world_icons.get_children():
-		if int(w_icon.name) == GlobalLevel.current_world:
-			world_icons.show()
-			w_icon.show()
-		else:
-			w_icon.hide()
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		for w_icon in world_icons.get_children():
+			if int(w_icon.name) == GlobalLevel.current_world:
+				world_icons.show()
+				w_icon.show()
+			else:
+				w_icon.hide()
+	else:
+		for w_icon in world_icons.get_children():
+			if int(w_icon.name) == int(GlobalSave.get_stat("world_max")):
+				world_icons.show()
+				w_icon.show()
+			else:
+				w_icon.hide()
 
 	enable_buttons()
 	show()
@@ -59,6 +71,7 @@ func show_menu() -> void:
 		return_button.text = tr("pause_menu.return")
 
 	animation_player.play("pause")
+	GlobalUI.dis_focus_sound = true
 	continue_button.grab_focus()
 
 
@@ -103,6 +116,7 @@ func _level_changed(world: int, level: int) -> void:
 func _ui_settings_back_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	if not Globals.game_state == Globals.GameStates.MENU:
+		GlobalUI.dis_focus_sound = true
 		enable_buttons()
 		settings_button.grab_focus()
 
@@ -110,6 +124,7 @@ func _ui_settings_back_pressed() -> void:
 func _ui_pause_menu_return_prompt_no_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	enable_buttons()
+	GlobalUI.dis_focus_sound = true
 	return_button.grab_focus()
 
 
@@ -141,3 +156,7 @@ func _return_pressed() -> void:
 	disable_buttons()
 	return_button.release_focus()
 
+
+func _button_hovered() -> void:
+	if GlobalUI.menu == GlobalUI.Menus.PAUSE_MENU:
+		GlobalEvents.emit_signal("ui_button_hovered")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://tilesets/tilemap_spikes.tres" type="TileSet" id=1]
 [ext_resource path="res://tilesets/tilemap_w1_grass.tres" type="TileSet" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://mobs/slime/slime.tscn" type="PackedScene" id=11]
 [ext_resource path="res://mobs/worm/worm.tscn" type="PackedScene" id=12]
 [ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=13]
-[ext_resource path="res://world_all/powerups/carrot.tscn" type="PackedScene" id=14]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=15]
 [ext_resource path="res://world_all/platforms/falling_platform.tscn" type="PackedScene" id=16]
 [ext_resource path="res://mobs/bird/bird.tscn" type="PackedScene" id=17]
@@ -100,7 +99,7 @@ position = Vector2( 2800, -536 )
 z_index = 2
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_mask = 0
 format = 1
@@ -109,7 +108,7 @@ tile_data = PoolIntArray( -5046102, 0, 0, -5046101, 0, 1, -5046100, 0, 3, -50460
 [node name="TileMapW1Platform" type="TileMap" parent="LevelComponents"]
 tile_set = ExtResource( 28 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 2
 collision_mask = 12
@@ -122,7 +121,7 @@ __meta__ = {
 [node name="BlockTilemap" type="TileMap" parent="LevelComponents"]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 1024
 collision_mask = 0
@@ -134,7 +133,7 @@ script = ExtResource( 3 )
 z_index = 129
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
 tile_data = PoolIntArray( -4325041, 0, 2, -4325040, 0, 3, -4325039, 0, 2, -4325038, 0, 3, -4325037, 0, 1, -4325036, 0, 3, -4325035, 0, 3, -1965807, 1073741826, 0, -1965806, 1073741826, 0, -1965805, 1073741826, 0, -1637991, 2, 0, -1637990, 2, 1, -1572591, 2, 0, -1572590, 2, 0, -1572589, 2, 0, -1441543, 0, 0, -1441542, 0, 0, -523798, 1073741826, 0, -523797, 1073741826, 1, -523796, 1073741826, 1, -523795, 1073741826, 0, -523794, 1073741826, 1, -523793, 1073741826, 0, -523792, 1073741826, 0, -523791, 1073741826, 0, -523790, 1073741826, 0, -523789, 1073741826, 1, -523788, 1073741826, 0, -523787, 1073741826, 1, -523779, 1073741826, 0, -523778, 1073741826, 1, -523777, 1073741826, 0, -523776, 1073741826, 0, -523775, 1073741826, 0, -523774, 1073741826, 1, -523773, 1073741826, 1, -523772, 1073741826, 0, -523771, 1073741826, 1, -523770, 1073741826, 0 )
@@ -449,71 +448,54 @@ position = Vector2( 2752, -528 )
 
 [node name="Vase" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1144, -55 )
-item = ExtResource( 8 )
 
 [node name="Vase2" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1208, -40 )
-item = ExtResource( 8 )
 
 [node name="Vase3" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1232, -40 )
-item = ExtResource( 8 )
 
 [node name="Vase4" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1264, -40 )
-item = ExtResource( 8 )
 
 [node name="Vase5" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1288, -48 )
-item = ExtResource( 8 )
 
 [node name="Vase10" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1416, -120 )
-item = ExtResource( 8 )
 
 [node name="Vase11" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1432, -120 )
-item = ExtResource( 8 )
 
 [node name="Vase12" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1464, -120 )
-item = ExtResource( 8 )
 
 [node name="Vase13" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1664, -144 )
-item = ExtResource( 8 )
 
 [node name="Vase14" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1680, -144 )
-item = ExtResource( 8 )
 
 [node name="Vase15" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1688, -248 )
-item = ExtResource( 8 )
 
 [node name="Vase16" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1648, -272 )
-item = ExtResource( 8 )
 
 [node name="Vase17" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1592, -280 )
-item = ExtResource( 8 )
 
 [node name="Vase6" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 1312, -80 )
-item = ExtResource( 14 )
 
 [node name="Vase7" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 2224, -192 )
-item = ExtResource( 14 )
 
 [node name="Vase8" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 2400, -272 )
-item = ExtResource( 14 )
 
 [node name="Vase9" parent="Vases" instance=ExtResource( 15 )]
 position = Vector2( 2784, -528 )
-item = ExtResource( 14 )
 
 [node name="Platforms" type="Node2D" parent="."]
 

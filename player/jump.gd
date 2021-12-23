@@ -4,19 +4,29 @@ onready var fsm: Node = get_parent()
 onready var player: KinematicBody2D = get_parent().get_parent()
 onready var jump_sound: AudioStreamPlayer = get_parent().get_parent().get_node("JumpSound")
 
+var checks_ignored := true
 
 func _physics_process(_delta: float) -> void:
 	player.basic_movement()
 
-	attempt_correction(3)
+	attempt_correction(2)
 
 	if player.falling:
 		fsm.change_state(fsm.fall)
-	elif player.is_on_floor():
+
+
+	elif player.floor_checks[0].is_colliding() or player.floor_checks[1].is_colliding():
+		if not player.can_wall_slide(): return
+
 		player.may_dash = true
 		player.second_jump_used = false
 		fsm.change_state(fsm.walk)
 
+	if not player.floor_checks[0].is_colliding() or not player.floor_checks[1].is_colliding():
+		checks_ignored = false
+
+	if player.is_on_floor() and not player.sprinting:
+		fsm.change_state(fsm.walk)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_jump"):
@@ -31,6 +41,7 @@ func _input(event: InputEvent) -> void:
 			fsm.change_state(fsm.dash)
 		else:
 			player.dash_failed()
+
 
 # Jumping on the top of a corner wil round it out
 func attempt_correction(amount: int):
@@ -58,10 +69,12 @@ func start() -> void:
 
 
 func jump() -> void:
+	checks_ignored = true
 	player.air_time = 0
 
 	# Falling Platform Jump Height Fix
-	var collider = null
+	var collider: Object = null
+
 	if not player.floor_checks[1].get_collider() == null:
 		if player.floor_checks[1].get_collider().is_in_group("FallingPlatform"):
 			collider = player.floor_checks[1].get_collider()

@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://player/water_particles.gd" type="Script" id=1]
+
+[sub_resource type="Gradient" id=30]
+offsets = PoolRealArray( 0.0514706, 0.970588 )
+colors = PoolColorArray( 0.0662231, 0.445173, 0.484375, 1, 0.34317, 0.675781, 0.667986, 1 )
+
+[sub_resource type="GradientTexture" id=31]
+gradient = SubResource( 30 )
+
+[sub_resource type="ParticlesMaterial" id=29]
+flag_disable_z = true
+direction = Vector3( 1, 1, 1 )
+gravity = Vector3( 1, 1, 0 )
+initial_velocity = 67.41
+initial_velocity_random = 0.33
+angular_velocity = 177.98
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color_ramp = SubResource( 31 )
+
+[node name="WaterParticles" type="Particles2D"]
+position = Vector2( 5.5, 22.5 )
+emitting = false
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.1
+process_material = SubResource( 29 )
+script = ExtResource( 1 )

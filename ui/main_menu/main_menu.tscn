@@ -85,21 +85,19 @@ drag_margin_top = 0.5
 drag_margin_bottom = 0.1
 
 [node name="Title" type="HBoxContainer" parent="."]
-anchor_top = 0.013
-anchor_right = 0.091
-anchor_bottom = 0.013
+anchor_right = 0.083
 margin_top = 0.200001
 margin_bottom = 40.0
-rect_scale = Vector2( 11, 11 )
+rect_scale = Vector2( 12, 12 )
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Title"]
-margin_left = 58.0
+margin_left = 66.0
 margin_top = 12.0
-margin_right = 58.0
+margin_right = 66.0
 margin_bottom = 26.0
 
 [node name="Texture" type="Sprite" parent="Title/Label"]
@@ -143,7 +141,7 @@ __meta__ = {
 }
 
 [node name="Play" type="Button" parent="MenuButtons"]
-margin_right = 442.0
+margin_right = 480.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Quit")
 focus_neighbour_top = NodePath("../Quit")
@@ -161,7 +159,7 @@ text = "main_menu.play"
 
 [node name="QuickPlay" type="Button" parent="MenuButtons"]
 margin_top = 75.0
-margin_right = 442.0
+margin_right = 480.0
 margin_bottom = 135.0
 focus_neighbour_left = NodePath("../Play")
 focus_neighbour_top = NodePath("../Play")
@@ -179,7 +177,7 @@ text = "main_menu.quick_play"
 
 [node name="Settings" type="Button" parent="MenuButtons"]
 margin_top = 150.0
-margin_right = 442.0
+margin_right = 480.0
 margin_bottom = 210.0
 focus_neighbour_left = NodePath("../QuickPlay")
 focus_neighbour_top = NodePath("../QuickPlay")
@@ -198,7 +196,7 @@ text = "main_menu.settings"
 
 [node name="Quit" type="Button" parent="MenuButtons"]
 margin_top = 225.0
-margin_right = 442.0
+margin_right = 480.0
 margin_bottom = 285.0
 focus_neighbour_left = NodePath("../Settings")
 focus_neighbour_top = NodePath("../Settings")
@@ -222,6 +220,17 @@ text = "Version"
 align = 2
 valign = 2
 script = ExtResource( 10 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Copyright" type="Label" parent="."]
+anchor_left = 0.01
+anchor_right = 1.0
+anchor_bottom = 0.99
+custom_fonts/font = ExtResource( 13 )
+text = "Copyright (c) 2021-2022 WraithWinterly"
+valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }

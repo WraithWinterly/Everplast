@@ -16,6 +16,14 @@ func _ready() -> void:
 	__ = spanish_button.connect("pressed", self, "_spanish_pressed")
 	__ = return_button.connect("pressed", self, "_return_pressed")
 
+	for button in $Panel/BottomButtons.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
+	for button in $Panel/VBoxContainer.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
 	if get_node(GlobalPaths.SETTINGS).data.language == "not_set":
 		GlobalUI.menu = GlobalUI.Menus.INITIAL_SETUP
 		yield(GlobalEvents, "ui_faded")
@@ -47,6 +55,7 @@ func disable_buttons() -> void:
 func show_menu() -> void:
 	enable_buttons()
 	anim_player.play("show")
+	GlobalUI.dis_focus_sound = true
 	english_button.grab_focus()
 
 
@@ -114,3 +123,7 @@ func _return_pressed() -> void:
 		GlobalEvents.emit_signal("ui_button_pressed")
 		yield(anim_player,"animation_finished")
 		return_button.text = tr("global.return")
+
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

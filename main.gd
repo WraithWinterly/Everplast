@@ -32,7 +32,6 @@ export var demo_version := false
 
 func _ready() -> void:
 	VisualServer.set_default_clear_color(Color(0, 0, 0, 0))
-	OS.min_window_size = Vector2(1280, 720)
 
 	if demo_version:
 		Globals.demo_version = true
@@ -43,3 +42,13 @@ func _ready() -> void:
 		Globals.version_string = "Everplast Version %s.%s.%s.%s.%s" % [
 				version_numbers[0], version_numbers[1],version_numbers[2],
 				VersionPrefixes.keys()[version_prefix].to_lower(), VersionPosts.keys()[version_post].to_lower()]
+
+# Mute audio on focus loss?
+#func _notification(what: int) -> void:
+#	match what:
+#		NOTIFICATION_WM_FOCUS_OUT:
+#			AudioServer.set_bus_mute(0, true)
+#			AudioServer.set_bus_mute(1, true)
+#		NOTIFICATION_WM_FOCUS_IN:
+#			AudioServer.set_bus_mute(0, false)
+#			AudioServer.set_bus_mute(1, false)

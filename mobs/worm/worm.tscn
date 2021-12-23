@@ -30,7 +30,7 @@ animations = [ {
 extents = Vector2( 3, 2 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 2 )
+extents = Vector2( 6, 2.5 )
 
 [node name="Worm" type="KinematicBody2D" groups=["Mob"]]
 collision_layer = 64
@@ -43,7 +43,6 @@ knockback = 125
 [node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 1 )
 frames = SubResource( 1 )
-frame = 1
 
 [node name="CollisionShape2D" parent="MobComponentManager/HurtArea" index="0"]
 position = Vector2( 4, 6 )
@@ -63,7 +62,7 @@ enemy_path = NodePath("../..")
 hurt_area_path = NodePath("../HurtArea")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4, 6 )
+position = Vector2( 4, 5.5 )
 shape = SubResource( 2 )
 __meta__ = {
 "_edit_group_": true

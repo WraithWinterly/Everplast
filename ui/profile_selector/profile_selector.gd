@@ -30,6 +30,11 @@ func _ready() -> void:
 	__ = anim_player.connect("animation_finished", self, "_animation_finished")
 	__ = return_button.connect("pressed", self, "_return_pressed")
 	__ = manage_button.connect("pressed", self, "_manage_pressed")
+
+	for button in $Panel/Buttons.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
 	__ = update_manage_button()
 
 	hide()
@@ -43,26 +48,27 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_tree().set_input_as_handled()
 
 
-
-
 func show_menu() -> void:
 	bg_color.show()
 	for bg in parallax_layers:
 		bg.show()
-	yield(GlobalEvents, "ui_faded")
-	show()
-	anim_player.play("show")
-	enable_buttons()
-	setup()
+
 	GlobalUI.profile_index = 0
 	GlobalUI.profile_index_focus = 0
 	return_button.focus_neighbour_top = profile_buttons[0].get_path()
+	yield(GlobalEvents, "ui_faded")
+	show()
+	setup()
+	anim_player.play("show")
+	enable_buttons()
+	GlobalUI.dis_focus_sound = true
 	profile_buttons[0].grab_focus()
 
 
 func setup(normal := true):
 	if normal:
 		var __: int = update_manage_button()
+		GlobalUI.dis_focus_sound = true
 		return_button.grab_focus()
 		anim_player.play("show")
 		return_button.text = tr("profile_selector.return")
@@ -204,8 +210,10 @@ func _return_pressed() -> void:
 		enable_buttons()
 		anim_player.play("show")
 		if update_manage_button():
+			GlobalUI.dis_focus_sound = true
 			manage_button.grab_focus()
 		else:
+			GlobalUI.dis_focus_sound = true
 			return_button.grab_focus()
 		GlobalUI.menu_locked = false
 
@@ -221,3 +229,7 @@ func _manage_pressed() -> void:
 	setup(false)
 	anim_player.play("show")
 	GlobalUI.menu_locked = false
+
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

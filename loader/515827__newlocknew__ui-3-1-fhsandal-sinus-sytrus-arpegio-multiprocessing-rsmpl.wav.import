@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/515827__newlocknew__ui-3-1-fhsandal-sinus-sytrus-arpegio-multiprocessing-rsmpl.wav-5bfed23168c38eb9638cb6453e477eae.sample"
+
+[deps]
+
+source_file="res://loader/515827__newlocknew__ui-3-1-fhsandal-sinus-sytrus-arpegio-multiprocessing-rsmpl.wav"
+dest_files=[ "res://.import/515827__newlocknew__ui-3-1-fhsandal-sinus-sytrus-arpegio-multiprocessing-rsmpl.wav-5bfed23168c38eb9638cb6453e477eae.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

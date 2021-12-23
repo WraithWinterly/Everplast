@@ -39,7 +39,6 @@ func _input(event: InputEvent) -> void:
 			if event.is_action_pressed("fire"):
 				clicked = true
 			next_dialogue()
-			print(" next duia")
 		else:
 			fast_speed = true
 			update_dialogue_speed()

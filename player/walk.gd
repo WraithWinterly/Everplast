@@ -5,8 +5,7 @@ onready var player: KinematicBody2D = get_parent().get_parent()
 
 
 func _process(_delta: float) -> void:
-	if GlobalInput.get_action_strength_keyboard() == 0 and \
-			GlobalInput.get_action_strength_controller() == 0:
+	if is_equal_approx(GlobalInput.get_action_strength(), 0):
 		fsm.change_state(fsm.idle)
 	if not player.on_floor() and player.falling:
 		fsm.change_state(fsm.fall)

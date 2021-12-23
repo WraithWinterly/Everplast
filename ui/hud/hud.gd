@@ -2,9 +2,21 @@ extends Control
 
 var previous_item: String = "none"
 
+var health_display: float = 0
+var health_display_max: float = 0
+var coin_display_prev: float = 0
+var coin_display: float = 0
+var orb_display: float = 0
+var orb_display_prev: float = 0
+var adrenaline_display: float = 0
+var adrenaline_display_max: float = 0
+
 var toggled := true
 var upgrade_notification_showed := false
 var ui_slot_visible := false
+var bypass_visibility := false
+
+var low_health_rect_visibile: bool = false
 
 onready var coin_label: Label = $VBoxContainer/HBoxContainer/CoinLabel
 onready var health_amount: Label = $VBoxContainer/HBoxContainer/HealthLabel
@@ -27,6 +39,7 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("level_completed", self, "_level_completed")
 	__ = GlobalEvents.connect("player_died", self, "_player_died")
 	__ = GlobalEvents.connect("player_level_increased", self, "_player_level_increased")
+	__ = GlobalEvents.connect("player_level_increase_animation_finished", self, "_player_level_increase_animation_finished")
 	__ = GlobalEvents.connect("player_collected_coin", self, "_player_collected_coin")
 	__ = GlobalEvents.connect("player_collected_orb", self, "_player_collected_orb")
 	__ = GlobalEvents.connect("player_collected_gem", self, "_player_collected_gem")
@@ -35,6 +48,8 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("save_stat_updated", self, "_save_stat_updated")
 	__ = GlobalEvents.connect("ui_inventory_opened", self, "_ui_inventory_opened")
 	__ = GlobalEvents.connect("ui_inventory_closed", self, "_ui_inventory_closed")
+	__ = GlobalEvents.connect("ui_shop_opened", self, "_ui_shop_opened")
+	__ = GlobalEvents.connect("ui_shop_closed", self, "_ui_shop_closed")
 	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
 
 	hide()
@@ -43,22 +58,35 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if Globals.game_state == Globals.GameStates.LEVEL:
-		match int(GlobalSave.get_stat("health_max")):
-			5:
-				low_health_modulate(2, 1)
-			10:
-				low_health_modulate(3, 1)
-			15:
-				low_health_modulate(5, 2)
-			20:
-				low_health_modulate(5, 2)
-			25:
-				low_health_modulate(5, 2)
-			_:
-				low_health_modulate(10, 5)
+	if not Globals.game_state == Globals.GameStates.MENU:
+		if Globals.game_state == Globals.GameStates.LEVEL:
+			match int(GlobalSave.get_stat("health_max")):
+				5:
+					low_health_modulate(2, 1)
+				10:
+					low_health_modulate(3, 1)
+				15:
+					low_health_modulate(5, 2)
+				20:
+					low_health_modulate(5, 2)
+				25:
+					low_health_modulate(5, 2)
+				_:
+					low_health_modulate(10, 5)
+
+		if GlobalSave.get_stat("orbs") >= GlobalSave.get_level_up_cost() and not upgrade_notification_showed:
+			if GlobalUI.fade_player_playing:
+				upgrade_notification_showed = true
+				yield(GlobalEvents, "ui_faded")
+				yield(GlobalEvents, "ui_faded")
+			GlobalEvents.emit_signal("ui_notification_shown", tr("notification.upgrade_available"))
+			upgrade_notification_showed = true
+
+
 	else:
 		low_health_rect.modulate = lerp(low_health_rect.modulate, Color8(255, 255, 255, 0), 0.1)
+
+	update_counters()
 
 
 func low_health_modulate(low_health, extreme_health) -> void:
@@ -98,7 +126,9 @@ func hide_ui_slot() -> void:
 func update_visibility() -> void:
 	yield(get_tree(), "physics_frame")
 	if not Globals.game_state == Globals.GameStates.LEVEL:
-		hide_hud()
+		if not GlobalUI.menu == GlobalUI.Menus.INVENTORY and not GlobalUI.menu == GlobalUI.Menus.SHOP:
+			if not bypass_visibility:
+				hide_hud()
 
 
 func update_counters() -> void:
@@ -118,6 +148,13 @@ func update_counters() -> void:
 		adrenaline_label.modulate = Color8(40, 255, 60)
 	else:
 		adrenaline_label.modulate = Color8(255, 255, 255)
+
+	if int(GlobalSave.get_stat("health")) == int(GlobalSave.get_stat("health_max")):
+		health_amount.modulate = Color8(40, 255, 60)
+	elif low_health_rect_visibile:
+		health_amount.modulate = Color8(220, 25, 25)
+	else:
+		health_amount.modulate = Color8(255, 255, 255)
 
 	if GlobalSave.get_stat("equipped_item") == "none":
 		hide_ui_slot()
@@ -176,32 +213,48 @@ func _input(event: InputEvent) -> void:
 
 
 func update_health_counter() -> void:
+	health_display = lerp(health_display, int(GlobalSave.get_stat("health")), 0.05)
+	health_display_max = lerp(health_display_max, int(GlobalSave.get_stat("health_max")), 0.05)
 	health_amount.text = "%s  |  %s " % [
-			GlobalSave.get_stat("health"), GlobalSave.get_stat("health_max")]
+			int(health_display + 0.5), GlobalSave.get_stat("health_max")]
 
 
 func update_coin_counter(_amount: int = 0) -> void:
-	coin_label.text = str(GlobalSave.get_stat("coins"))
+	coin_display_prev = coin_display
+	coin_display = lerp(coin_display, int(GlobalSave.get_stat("coins")), 0.1)
+	coin_label.text = str(int(coin_display + 0.5))
+	# Losing coins
+	if (coin_display_prev - 0.05) > coin_display:
+		coin_label.modulate = Color8(220, 25, 25, 255)
+	else:
+		coin_label.modulate = Color8(255, 255, 255, 255)
 
 
 func update_orb_counter(_amount: int = 0) -> void:
-	orb_label.text = str(GlobalSave.get_stat("orbs"))
-	if GlobalSave.get_stat("orbs") >= GlobalSave.get_level_up_cost() and not upgrade_notification_showed:
-		GlobalEvents.emit_signal("ui_notification_shown", tr("notification.upgrade_available"))
-		upgrade_notification_showed = true
+	orb_display_prev = orb_display
+	orb_display = lerp(orb_display, int(GlobalSave.get_stat("orbs")), 0.1)
+	orb_label.text = str(int(orb_display + 0.5))
+	# Losing orbs
+	if (orb_display_prev - 0.05) > orb_display:
+		orb_label.modulate = Color8(220, 25, 25, 255)
+	else:
+		orb_label.modulate = Color8(255, 255, 255, 255)
 
 
 func update_adrenaline_counter() -> void:
 	var is_visibe: bool = GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD
 	adrenaline_label.visible = is_visibe
 	adrenaline_texture.visible = is_visibe
+	adrenaline_display = lerp(adrenaline_display, int(GlobalSave.get_stat("adrenaline")), 0.1)
+	adrenaline_display_max = lerp(adrenaline_display_max, int(GlobalSave.get_stat("adrenaline_max")), 0.05)
 	adrenaline_label.text = "%s  |  %s" % [
-			GlobalSave.get_stat("adrenaline"), GlobalSave.get_stat("adrenaline_max")]
+			int(adrenaline_display + 0.5), int(adrenaline_display_max + 0.5)]
 
 
 func _level_changed(_world: int, _level: int) -> void:
 	hide()
 	yield(GlobalEvents, "ui_faded")
+	upgrade_notification_showed = false
 	update_counters()
 	yield(GlobalEvents, "ui_faded")
 	yield(get_tree(), "physics_frame")
@@ -222,7 +275,15 @@ func _player_died() -> void:
 
 
 func _player_level_increased(_upgrade: String) -> void:
+	bypass_visibility = true
+	show_hud()
+
+
+func _player_level_increase_animation_finished() -> void:
 	upgrade_notification_showed = false
+	yield(get_tree().create_timer(2), "timeout")
+	bypass_visibility = false
+	update_visibility()
 
 
 func _player_collected_coin(_amount: int) -> void:
@@ -235,6 +296,7 @@ func _player_collected_orb(_amount: int) -> void:
 
 func _player_collected_gem(_index: int) -> void:
 	update_counters()
+
 
 func _player_hurt_from_enemy(var _hurt_type: int, var _knockback: int, var _damage: int) -> void:
 	update_counters()
@@ -255,6 +317,16 @@ func _ui_inventory_opened() -> void:
 
 
 func _ui_inventory_closed() -> void:
+	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+		hide_hud()
+
+
+func _ui_shop_opened(_items: Dictionary) -> void:
+	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+		show_hud()
+
+
+func _ui_shop_closed() -> void:
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
 		hide_hud()
 

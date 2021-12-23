@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 
 func basic_movement(var delta: float):
 
-	player.current_speed = player.water_speed
+	player.current_speed = player.WATER_SPEED
 
 	down_check()
 
@@ -46,7 +46,7 @@ func set_input_speed() -> void:
 func sprint_and_jump(_delta: float) -> void:
 	if Input.is_action_just_pressed("move_jump"):
 		player.air_time = 0
-		player.linear_velocity.y = -player.water_jump_speed
+		player.linear_velocity.y = -player.WATER_JUMP_SPEED
 
 
 func down_check() -> void:

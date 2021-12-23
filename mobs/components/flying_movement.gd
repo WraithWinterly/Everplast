@@ -112,6 +112,6 @@ func _hit() -> void:
 		state = States.NORMAL
 		get_parent().get_node("AttackTouch").flying_enemy = false
 
-		
+
 func _died() -> void:
 	get_node("BasicMovement").dying = true

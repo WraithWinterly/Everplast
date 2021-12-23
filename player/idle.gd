@@ -15,6 +15,8 @@ func _physics_process(_delta: float) -> void:
 	player.sprinting = false
 	if not abs(GlobalInput.get_action_strength()) > 0:
 		player.sprinting_pressed = false
+	if not player.on_floor() and player.falling:
+		fsm.change_state(fsm.fall)
 
 
 func _input(event: InputEvent) -> void:

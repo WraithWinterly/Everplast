@@ -6,11 +6,13 @@ enum {
 }
 
 const MAX_OFFSET := Vector2(100, 75)
-const NORMAL_ZOOM := Vector2(0.21875, 0.21875)
-const SPRINT_ZOOM := Vector2(0.2265625, 0.2265625)
+const NORMAL_ZOOM := Vector2(0.2, 0.2)
+const SPRINT_ZOOM := Vector2(0.21, 0.21)
 
 const DECAY: float = 0.8
 const MAX_ROLL: float = 0.1
+const DRAG_TOP : float = 0.53
+const DRAG_BOTTOM: float = 0.2
 
 var current_zoom := NORMAL_ZOOM
 
@@ -24,7 +26,6 @@ var trauma_power: float = 2.5
 var state: int = NORMAL
 var noise_y: int = 0
 
-
 onready var noise := OpenSimplexNoise.new()
 onready var player: KinematicBody2D = $"../../KinematicBody2D"
 onready var fsm: Node = $"../../KinematicBody2D/FSM"
@@ -36,20 +37,14 @@ func _ready() -> void:
 	__ = fsm.connect("state_changed", self, "_state_changed")
 
 	randomize()
+
 	noise.seed = randi()
 	noise.period = 4
 	noise.octaves = 2
 
 	yield(get_tree(), "idle_frame")
+
 	update_camera_positions(NORMAL)
-
-
-func add_trauma(amount) -> void:
-	trauma = min(trauma + amount, 1.0)
-
-
-func set_trauma(amount) -> void:
-	trauma = min(amount, 1.0)
 
 
 func _process(delta) -> void:
@@ -65,6 +60,14 @@ func _physics_process(_delta: float) -> void:
 		current_zoom = SPRINT_ZOOM
 	else:
 		current_zoom = NORMAL_ZOOM
+
+
+func add_trauma(amount) -> void:
+	trauma = min(trauma + amount, 1.0)
+
+
+func set_trauma(amount) -> void:
+	trauma = min(amount, 1.0)
 
 
 func shake() -> void:
@@ -99,6 +102,15 @@ func update_camera_positions(mode: int) -> void:
 				limit_top = limit_left_top_position.position.y
 				limit_right = limit_right_bottom_position.position.x
 				limit_bottom = limit_right_bottom_position.position.y
+
+	drag_margin_top = 0
+	drag_margin_bottom = 0
+
+	yield(get_tree(), "physics_frame")
+	yield(get_tree(), "physics_frame")
+
+	drag_margin_top = DRAG_TOP
+	drag_margin_bottom = DRAG_BOTTOM
 
 
 func _level_subsection_changed(_pos: Vector2) -> void:

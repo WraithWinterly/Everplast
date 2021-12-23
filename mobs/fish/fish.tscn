@@ -36,22 +36,23 @@ collision_layer = 64
 collision_mask = 3
 script = ExtResource( 2 )
 
-[node name="EnemyComponentManager" parent="." instance=ExtResource( 4 )]
+[node name="MobComponentManager" parent="." instance=ExtResource( 4 )]
 orb_amount = 5
 
-[node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
+[node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
+modulate = Color( 0.788235, 0.266667, 0.266667, 1 )
 position = Vector2( 0, 0 )
 frames = SubResource( 4 )
 
-[node name="WaterMovement" parent="EnemyComponentManager" instance=ExtResource( 3 )]
+[node name="WaterMovement" parent="MobComponentManager" instance=ExtResource( 3 )]
 flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
 enemy_path = NodePath("../..")
 
-[node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 6 )]
+[node name="AttackTouch" parent="MobComponentManager" instance=ExtResource( 6 )]
 enemy_path = NodePath("../..")
 hit_area_path = NodePath("../HurtArea")
 
-[node name="HurtByBullet" parent="EnemyComponentManager" instance=ExtResource( 8 )]
+[node name="HurtByBullet" parent="MobComponentManager" instance=ExtResource( 8 )]
 enemy_path = NodePath("../..")
 hurt_area_path = NodePath("../HurtArea")
 
@@ -62,4 +63,4 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[editable path="EnemyComponentManager"]
+[editable path="MobComponentManager"]

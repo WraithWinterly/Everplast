@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world_all/equippables/nail_bullet.png" type="Texture" id=1]
 [ext_resource path="res://world_all/equippables/bullet_base.gd" type="Script" id=2]
 [ext_resource path="res://world_all/equippables/nail.wav" type="AudioStream" id=3]
-[ext_resource path="res://world_all/equippables/bullet_vars.gd" type="Script" id=4]
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 1.001, 4.001 )
@@ -64,12 +63,9 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 1, 4 )
-
-[node name="BulletBase" type="RigidBody2D"]
+[node name="BulletBase" type="RigidBody2D" groups=["Bullet"]]
 z_index = -1
-collision_layer = 0
+collision_layer = 32
 collision_mask = 225
 gravity_scale = 0.2
 contacts_reported = 5
@@ -97,24 +93,5 @@ rect = Rect2( -40, -40, 80, 80 )
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
 bus = "Audio"
-
-[node name="DestroyArea" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 197
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DestroyArea"]
-position = Vector2( 7.27596e-12, -1.90735e-06 )
-rotation = 1.5708
-shape = SubResource( 8 )
-
-[node name="Area2D" type="Area2D" parent="." groups=["Bullet"]]
-collision_layer = 32
-collision_mask = 0
-script = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -1.90735e-06 )
-rotation = 1.5708
-shape = SubResource( 7 )
 
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_screen_exited"]

@@ -1,11 +1,21 @@
 extends Node
 
 const DUST := "res://player/dust.tscn"
+const WATER_PARTICLES := "res://player/water_particles.tscn"
+
 const ORB := "res://world_all/orbs/orb.tscn"
+const COIN := "res://world_all/coins/coin.tscn"
 const RANK_PICKUP := "res://world_all/rank_pickup/rank_pickup.tscn"
 const WORLD_SELECTOR := "res://world_selector/world_selector.tscn"
 
-const LEVEL_ENTER_SOUND := "res://world_all/go_to_level.wav"
+const CARROT := "res://world_all/powerups/carrot.tscn"
+const COCONUT := "res://world_all/powerups/coconut.tscn"
+const BUNNY_EGG := "res://world_all/powerups/bunny_egg.tscn"
+const PEAR := "res://world_all/powerups/pear.tscn"
+const WATER := "res://world_all/collectables/water.tscn"
+const ENERGY := "res://world_all/collectables/energy.tscn"
+
+const LEVEL_ENTER_SOUND := "res://ui/fade_player/level_enter.ogg"
 
 const VASE_BULLET := "res://world_all/vases/vase_bullet.png"
 const GEM_USED := "res://world_all/gems/gem_used.png"

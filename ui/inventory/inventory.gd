@@ -47,6 +47,7 @@ onready var stats_panel: Panel = $Panel/Stats
 onready var stats_anim_player: AnimationPlayer = $Panel/Stats/AnimationPlayer
 onready var stats_upgrade_button: Button = $Panel/Stats/StatsUpgrade/UpgradeButton
 onready var stats_label: Label = $Panel/Stats/PlayerStats/Info
+onready var stats_label_level: Label = $Panel/Stats/PlayerStats/Level
 onready var stats_label_orbs: Label = $Panel/Stats/PlayerStats/TotalOrbs
 onready var stats_label_gems: Label = $Panel/Stats/PlayerStats/TotalGems
 onready var world_icons: VBoxContainer = $Panel/Stats/PlayerStats/WorldIcons
@@ -79,6 +80,27 @@ func _ready() -> void:
 	__ = upgrade_stats_cancel_button.connect("pressed", self, "_upgrade_stats_cancel_pressed")
 	__ = upgrade_stats_health_button.connect("pressed", self, "_upgrade_stats_health_pressed")
 	__ = upgrade_stats_adrenaline_button.connect("pressed", self, "_upgrade_stats_adrenaline_pressed")
+
+	for button in $Panel/HBoxContainer.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
+	for button in $Panel/Powerups/BG/HBoxContainer/Buttons.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
+	for button in $Panel/Collectables/Equippables/Buttons.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
+	for button in $Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
+	__ = stats_upgrade_button.connect("focus_entered", self, "_button_hovered")
+	__ = stats_upgrade_button.connect("mouse_entered", self, "_button_hovered")
+	__ = fill_button.connect("focus_entered", self, "_button_hovered")
+	__ = fill_button.connect("mouse_entered", self, "_button_hovered")
 
 	hide()
 	collectables_panel.hide()
@@ -158,6 +180,7 @@ func show_menu() -> void:
 	update_button_focus(powerups_buttons_top_focus)
 	get_tree().paused = true
 	animation_player.play("show")
+	GlobalUI.dis_focus_sound = true
 	top_powerup_button.grab_focus()
 
 
@@ -241,10 +264,11 @@ func update_inventory() -> void:
 	stats_upgrade_button.disabled = not (GlobalSave.get_stat("orbs") >= GlobalSave.get_level_up_cost())
 
 	var world_string: String = "\"%s\" - %s" % [GlobalLevel.WORLD_NAMES[GlobalSave.get_stat("world_max")], GlobalSave.get_stat("level_max")]
-	stats_label.text = "%s: %s\n%s: %s\n%s:\n       %s" % \
-			[tr("inventory.stats_profile_label"), (GlobalSave.profile + 1), tr("inventory.player_level_label"),GlobalSave.get_stat("level"), tr("inventory.lastest_world"),world_string]
-	stats_label_orbs.text = "x%s" % GlobalSave.get_stat("orbs")
-	stats_label_gems.text = "x%s" % GlobalSave.get_gem_count()
+	stats_label.text = "%s: %s\n\n%s:\n       %s" % \
+			[tr("inventory.stats_profile_label"), (GlobalSave.profile + 1), tr("inventory.lastest_world"),world_string]
+	stats_label_level.text = "Player Level: %s" % GlobalSave.get_stat("level")
+	stats_label_orbs.text = "Total Orbs: x%s" % GlobalSave.get_stat("orbs")
+	stats_label_gems.text = "Total Gems: x%s" % GlobalSave.get_gem_count()
 
 	for w_icon in world_icons.get_children():
 		if int(w_icon.name) == GlobalSave.get_stat("world_max"):
@@ -339,6 +363,7 @@ func order_buttons(buttons: VBoxContainer, player_stat: String) -> void:
 				button_positions[index] = index
 
 				if index == stats.size():
+					GlobalUI.dis_focus_sound = true
 					buttons.get_node(stat[0].capitalize()).grab_focus()
 				index -= 1
 
@@ -388,6 +413,9 @@ func fill_items(stat: String, amount: int) -> void:
 		"cherry":
 			stat_boost = GlobalStats.cherry_boost
 			type = 1
+		"pear":
+			stat_boost = GlobalStats.pear_health_boost
+			type = 0
 
 	var iterations: int = 0
 	var amount_test: int = 0
@@ -626,6 +654,7 @@ func _upgrade_stats_pressed() -> void:
 	$"Panel/Stats/UpgradeStatsPrompt".show()
 	var has_adrenaline: bool = GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD
 	upgrade_stats_adrenaline_button.visible = has_adrenaline
+	GlobalUI.dis_focus_sound = true
 	upgrade_stats_cancel_button.grab_focus()
 	GlobalEvents.emit_signal("ui_button_pressed")
 	GlobalUI.menu = GlobalUI.Menus.INVENTORY_UPGRADE_PROMPT
@@ -670,6 +699,7 @@ func _upgrade_stats_pressed() -> void:
 
 func _upgrade_stats_cancel_pressed() -> void:
 	GlobalUI.menu = GlobalUI.Menus.INVENTORY
+	GlobalUI.dis_focus_sound = true
 	stats_upgrade_button.grab_focus()
 	GlobalEvents.emit_signal("ui_button_pressed", true)
 	upgrade_stats_cancel_button.disabled = true
@@ -698,6 +728,10 @@ func _upgrade_stats_adrenaline_pressed() -> void:
 	_close_pressed()
 	upgrade_sound.play()
 	GlobalUI.menu = GlobalUI.Menus.NONE
+
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")
 
 
 func _on_Fill_pressed() -> void:

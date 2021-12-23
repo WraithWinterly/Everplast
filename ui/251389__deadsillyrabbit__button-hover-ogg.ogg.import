@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/251389__deadsillyrabbit__button-hover-ogg.ogg-b8a49a9408867cd19573bbd32d307a1b.oggstr"
+
+[deps]
+
+source_file="res://ui/251389__deadsillyrabbit__button-hover-ogg.ogg"
+dest_files=[ "res://.import/251389__deadsillyrabbit__button-hover-ogg.ogg-b8a49a9408867cd19573bbd32d307a1b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

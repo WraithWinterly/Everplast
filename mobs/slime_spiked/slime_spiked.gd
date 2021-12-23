@@ -8,6 +8,9 @@ func _ready() -> void:
 	var __: int
 	__ = mob_component.connect("hit_player", self, "_hit_player")
 
+	# Prevent lag on initial hit
+	particles.emitting = true
+
 
 func _hit_player() -> void:
 	particles.emitting = true

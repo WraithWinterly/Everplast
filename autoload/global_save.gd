@@ -15,7 +15,7 @@ const DEFAULT_DATA: Dictionary = {
 	"level": 1.0,
 	"adrenaline": 10.0,
 	"adrenaline_max": 10.0,
-	"adrenaline_speed": 2.0,
+	"adrenaline_speed": 3.0,
 	"world_last": 1.0,
 	"level_last": 1.0,
 	"world_max": 1.0,
@@ -72,6 +72,9 @@ func _physics_process(_delta):
 	else:
 		if adrenaline_timer.is_stopped():
 			adrenaline_timer.start(get_stat("adrenaline_speed"))
+
+	if int(GlobalSave.get_stat("health")) <= 0 and not Globals.death_in_progress:
+		GlobalEvents.emit_signal("player_death_started")
 
 
 func save_stats(_on_reset: bool = false) -> void:
@@ -225,19 +228,20 @@ func _player_died() -> void:
 	if Globals.game_state == Globals.GameStates.LEVEL:
 		var prev_last_world = GlobalLevel.current_world
 		var prev_last_level = GlobalLevel.current_level
-		var prev_powerups = get_stat("powerups")
-		var prev_collectables = get_stat("collectables")
-		var prev_equippables = get_stat("equippables")
-		var prev_equiped = get_stat("equipped_item")
+#		var prev_powerups = get_stat("powerups")
+#		var prev_collectables = get_stat("collectables")
+#		var prev_equippables = get_stat("equippables")
+#		var prev_equiped = get_stat("equipped_item")
 		yield(GlobalEvents, "ui_faded")
 		load_stats()
 		set_stat("world_last", prev_last_world)
 		set_stat("level_last", prev_last_level)
-		set_stat("equipped_item", prev_equiped)
-		set_stat("powerups", prev_powerups)
-		set_stat("collectables", prev_collectables)
-		set_stat("equippables", prev_equippables)
+#		set_stat("equipped_item", prev_equiped)
+#		set_stat("powerups", prev_powerups)
+#		set_stat("collectables", prev_collectables)
+#		set_stat("equippables", prev_equippables)
 		set_stat("health", get_stat("health_max"))
+		set_stat("adrenaline", get_stat("adrenaline_max"))
 		save_stats()
 		GlobalEvents.emit_signal("save_stat_updated")
 
@@ -253,9 +257,11 @@ func _player_level_increased(type: String) -> void:
 	match type:
 		"health":
 			set_stat("health_max", get_stat("health_max") + GlobalStats.stat_increase_from_level_up)
+			set_stat("health", get_stat("health_max"))
 		"adrenaline":
 			set_stat("adrenaline_max", get_stat("adrenaline_max") + GlobalStats.stat_increase_from_level_up)
-			set_stat("adrenaline_speed", get_stat("adrenaline_speed") / GlobalStats.adrenaline_time_decrease_from_level_up)
+			set_stat("adrenaline", get_stat("adrenaline_max"))
+			set_stat("adrenaline_speed", get_stat("adrenaline_speed") * GlobalStats.adrenaline_time_decrease_from_level_up)
 	set_stat("orbs", get_stat("orbs") - get_level_up_cost())
 	set_stat("level", get_stat("level") + 1)
 
@@ -305,7 +311,8 @@ func _player_collected_gem(index: int) -> void:
 					for level_key in gem_dict.get(key):
 						if level_key == str(GlobalLevel.current_level):
 							gem_dict[str(GlobalLevel.current_world)][str(GlobalLevel.current_level)][index] = true
-							return
+							# That return causing issues??
+							#return
 				else:
 					gem_dict[str(GlobalLevel.current_world)][str(GlobalLevel.current_level)] = [false, false, false]
 					gem_dict[str(GlobalLevel.current_world)][str(GlobalLevel.current_level)][index] = true

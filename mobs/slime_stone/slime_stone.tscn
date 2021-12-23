@@ -31,6 +31,7 @@ collision_mask = 3
 
 [node name="EnemyComponentManager" parent="." instance=ExtResource( 4 )]
 knockback = 200
+attack_damage = 2
 max_health = 2
 
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]

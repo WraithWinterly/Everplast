@@ -74,6 +74,24 @@ func release_action(action: String) -> void:
 	Input.parse_input_event(input_action)
 
 
+func start_low_vibration() -> void:
+	Input.stop_joy_vibration(0)
+	Input.start_joy_vibration(0, 0.1, 0, 0.05)
+
+
+func start_normal_vibration() -> void:
+	Input.stop_joy_vibration(0)
+	Input.start_joy_vibration(0, 0.15, 0.05, 0.1)
+
+
+func start_high_vibration() -> void:
+	Input.start_joy_vibration(0, 0.4, 0.2, 0.25)
+
+
+func start_ultra_high_vibration() -> void:
+	Input.start_joy_vibration(0, 1, 0.8, 1.5)
+
+
 func get_action_strength_keyboard() -> float:
 	return float(Input.get_axis("move_left", "move_right"))
 

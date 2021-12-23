@@ -30,6 +30,8 @@ func _ready() -> void:
 	output.get_child(5).set("custom_styles/hover", load("res://ui/ui_panel.tres"))
 	output.get_child(5).set("custom_fonts/font", load("res://ui/fonts/32x.tres"))
 
+	if not OS.is_debug_build():
+		queue_free()
 
 func show_menu() -> void:
 	was_paused = get_tree().paused
@@ -37,6 +39,7 @@ func show_menu() -> void:
 	prev_menu = GlobalUI.menu
 	GlobalUI.menu = GlobalUI.Menus.DEBUG
 	show()
+	GlobalUI.dis_focus_sound = true
 	input.grab_focus()
 	yield(get_tree(), "idle_frame")
 	input.clear()
@@ -51,7 +54,7 @@ func hide_menu() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_console"):
+	if event.is_action_pressed("debug_console") and not GlobalUI.menu_locked and not GlobalUI.fade_player_playing:
 		if console_visible:
 			hide_menu()
 		else:

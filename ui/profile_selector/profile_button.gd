@@ -17,6 +17,7 @@ var verify_failed := false
 onready var stats: VBoxContainer = $Stats
 onready var button_text: Label = $Text
 
+onready var level_label: Label = $Stats/HBoxContainer/Text/Level/Label
 onready var health_label: Label = $Stats/HBoxContainer/Text/Heart/Label
 onready var coin_label: Label = $Stats/HBoxContainer/Text/Coin/Label
 onready var orb_label: Label = $Stats/HBoxContainer/Text/Orb/Label
@@ -37,6 +38,9 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("ui_profile_selector_update_prompt_yes_pressed", self, "_ui_profile_selector_update_prompt_yes_pressed")
 	__ = connect("pressed", self, "button_pressed")
 	__ = connect("focus_entered", self, "_focus_entered")
+	__ = connect("focus_entered", self, "_button_hovered")
+	__ = connect("mouse_entered", self, "_button_hovered")
+
 
 	update_buttons()
 
@@ -44,6 +48,7 @@ func _ready() -> void:
 func update_buttons() -> void:
 	if not GlobalUI.menu_locked:
 		disabled = false
+
 	match GlobalUI.menu:
 		GlobalUI.Menus.PROFILE_SELECTOR_DELETE:
 			if my_index == 4:
@@ -60,7 +65,7 @@ func update_buttons() -> void:
 				button_text.text = tr("profile_selector.button.new")
 				button_text.show()
 				button_text.modulate = Color8(255, 255, 85)
-				stats.hide()
+				show_blank_stats()
 				world_icons.hide()
 				rank_icons.hide()
 			GlobalUI.Menus.PROFILE_SELECTOR_DELETE:
@@ -76,13 +81,13 @@ func update_buttons() -> void:
 			GlobalUI.Menus.PROFILE_SELECTOR:
 				button_text.modulate = Color8(255, 255, 85)
 				button_text.text = tr("profile_selector.button.update")
-				stats.hide()
+				show_blank_stats()
 				world_icons.hide()
 				rank_icons.hide()
 			GlobalUI.Menus.PROFILE_SELECTOR_DELETE:
 				button_text.text = "%s %s" % [tr("profile_selector.button.delete"), my_index + 1]
 				button_text.modulate = Color8(255, 0, 0)
-				stats.hide()
+				show_blank_stats()
 				world_icons.hide()
 				rank_icons.hide()
 		button_text.show()
@@ -91,9 +96,20 @@ func update_buttons() -> void:
 		match GlobalUI.menu:
 			GlobalUI.Menus.PROFILE_SELECTOR:
 				button_text.text = "%s %s" % [tr("profile_selector.button.normal"),my_index + 1]
+				level_label.text = str(GlobalSave.data[my_index].level)
 				health_label.text = "%s | %s" % [GlobalSave.data[my_index].health, GlobalSave.data[my_index].health_max]
 				coin_label.text = str(GlobalSave.data[my_index].coins)
 				orb_label.text = str(GlobalSave.data[my_index].orbs)
+
+				# Rank Icon
+				for texture in rank_icons.get_children():
+					if texture.name.to_lower() == GlobalStats.Ranks.keys()[GlobalSave.data[my_index].rank].to_lower():
+						rank_icons.show()
+						texture.show()
+					else:
+						texture.hide()
+
+				# Hide Adrenaline if not gold or above
 				if GlobalSave.data[my_index].rank >= GlobalStats.Ranks.GOLD:
 					adrenaline_label.text = "%s | %s" % [GlobalSave.data[my_index].adrenaline, GlobalSave.data[my_index].adrenaline_max]
 					adrenaline_label.show()
@@ -104,12 +120,7 @@ func update_buttons() -> void:
 
 				button_text.modulate = Color8(255, 255, 255)
 
-				for texture in rank_icons.get_children():
-					if texture.name.to_lower() == GlobalStats.Ranks.keys()[GlobalSave.data[my_index].rank]:
-						rank_icons.show()
-						texture.show()
-					else:
-						texture.hide()
+				# World Icon
 				for w_icon in world_icons.get_children():
 					if int(w_icon.name) == GlobalSave.data[my_index].world_max:
 						world_icons.show()
@@ -124,6 +135,14 @@ func update_buttons() -> void:
 		stats.show()
 		button_text.show()
 
+
+func show_blank_stats() -> void:
+	health_label.text = "-- | --"
+	coin_label.text = "--"
+	orb_label.text = "--"
+	adrenaline_icon.hide()
+	adrenaline_label.hide()
+	stats.show()
 
 func button_pressed() -> void:
 	if GlobalUI.menu_locked: return
@@ -163,6 +182,7 @@ func _ui_play_pressed() -> void:
 	yield(GlobalEvents, "ui_faded")
 	update_buttons()
 	if my_index == 0:
+		GlobalUI.dis_focus_sound = true
 		grab_focus()
 
 
@@ -175,6 +195,7 @@ func _ui_profile_selector_manage_pressed() -> void:
 	update_buttons()
 
 	if my_index == 0:
+		GlobalUI.dis_focus_sound = true
 		grab_focus()
 
 
@@ -191,9 +212,14 @@ func _ui_profile_selector_delete_prompt_yes_pressed() -> void:
 func _ui_profile_selector_update_prompt_yes_pressed() -> void:
 	update_buttons()
 	if my_index == GlobalUI.profile_index:
+		GlobalUI.dis_focus_sound = true
 		grab_focus()
 
 
 func _focus_entered() -> void:
 	GlobalUI.profile_index_focus = my_index
 	GlobalEvents.emit_signal("ui_profile_focus_index_changed")
+
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

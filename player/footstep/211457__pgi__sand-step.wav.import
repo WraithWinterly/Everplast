@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/211457__pgi__sand-step.wav-895509e5469b1c9ab454ecdfae51f0cd.sample"
+
+[deps]
+
+source_file="res://player/footstep/211457__pgi__sand-step.wav"
+dest_files=[ "res://.import/211457__pgi__sand-step.wav-895509e5469b1c9ab454ecdfae51f0cd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

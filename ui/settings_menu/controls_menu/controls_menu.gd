@@ -41,7 +41,24 @@ func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("ui_settings_controls_customize_pressed", self, "_ui_settings_controls_customize_pressed")
 	__ = GlobalEvents.connect("ui_settings_reset_settings_prompt_yes_pressed", self, "_ui_settings_reset_settings_prompt_yes_pressed")
-	__ = return_button.connect("pressed", self, "_return_ressed")
+	__ = return_button.connect("pressed", self, "_return_pressed")
+	__ = return_button.connect("focus_entered", self, "_button_hovered")
+	__ = return_button.connect("mouse_entered", self, "_button_hovered")
+
+	for button in assignments_1.get_children():
+		if button is Button:
+			__ = button.connect("focus_entered", self, "_button_hovered")
+			__ = button.connect("mouse_entered", self, "_button_hovered")
+
+	for button in assignments_2.get_children():
+		if button is Button:
+			__ = button.connect("focus_entered", self, "_button_hovered")
+			__ = button.connect("mouse_entered", self, "_button_hovered")
+
+	for button in $Panel/BG/ScrollContainer/Collumns/Reset.get_children():
+		if button is Button:
+			__ = button.connect("focus_entered", self, "_button_hovered")
+			__ = button.connect("mouse_entered", self, "_button_hovered")
 
 	scroll_container.get_child(0).set("custom_styles/scroll", load(GlobalPaths.CREDITS_SCROLL))
 	scroll_container.get_child(0).set("custom_styles/scroll_focus", load(GlobalPaths.CREDITS_SCROLL))
@@ -95,7 +112,7 @@ func _input(event: InputEvent) -> void:
 		get_tree().set_input_as_handled()
 
 	elif Input.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS_CUSTOMIZE and not GlobalUI.menu_locked:
-		_return_ressed()
+		_return_pressed()
 		get_tree().set_input_as_handled()
 
 
@@ -218,6 +235,7 @@ func get_settings_controls_2() -> Dictionary:
 
 
 func show_menu() -> void:
+	GlobalUI.dis_focus_sound = true
 	return_button.grab_focus()
 	show()
 	enable_buttons()
@@ -262,7 +280,7 @@ func _ui_settings_reset_settings_prompt_yes_pressed() -> void:
 			InputMap.action_erase_event(action, simulated_action)
 
 
-func _return_ressed() -> void:
+func _return_pressed() -> void:
 	if listening:
 		cancel_listening_event()
 	GlobalEvents.emit_signal("ui_button_pressed", true)
@@ -434,3 +452,7 @@ func _on_Equip_Reset_pressed() -> void:
 func _on_Powerup_Reset_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed")
 	reset_keybind("powerup")
+
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

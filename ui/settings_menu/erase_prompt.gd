@@ -25,6 +25,7 @@ func show_menu() -> void:
 	anim_player.play("show")
 	enable_buttons()
 	show()
+	GlobalUI.dis_focus_sound = true
 	no_button.grab_focus()
 	prompt_text.text = tr("erase_all.prompt.text")
 
@@ -86,6 +87,7 @@ func _yes_pressed() -> void:
 		yield(get_tree().create_timer(0.75), "timeout")
 		GlobalUI.menu_locked = false
 		enable_buttons()
+		GlobalUI.dis_focus_sound = true
 		no_button.grab_focus()
 		GlobalEvents.emit_signal("ui_button_pressed")
 		show_menu()

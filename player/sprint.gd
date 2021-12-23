@@ -7,8 +7,8 @@ onready var fsm: Node = get_parent()
 
 func _physics_process(_delta: float) -> void:
 	player.basic_movement()
-	if not player.sprinting_pressed:
 
+	if not player.sprinting_pressed:
 		fsm.change_state(fsm.idle)
 	elif not abs(GlobalInput.get_action_strength()) > 0:
 		fsm.change_state(fsm.walk)

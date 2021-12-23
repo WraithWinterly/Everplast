@@ -188,9 +188,9 @@ __meta__ = {
 }
 
 [node name="English" type="CheckBox" parent="Panel/VBoxContainer"]
-margin_top = 145.0
-margin_right = 851.0
-margin_bottom = 195.0
+margin_top = 190.0
+margin_right = 1056.0
+margin_bottom = 240.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../../BottomButtons/Return")
 focus_neighbour_right = NodePath(".")
@@ -216,9 +216,9 @@ __meta__ = {
 }
 
 [node name="Spanish" type="CheckBox" parent="Panel/VBoxContainer"]
-margin_top = 205.0
-margin_right = 851.0
-margin_bottom = 255.0
+margin_top = 250.0
+margin_right = 1056.0
+margin_bottom = 300.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../English")
 focus_neighbour_right = NodePath(".")
@@ -250,8 +250,8 @@ anchor_bottom = 0.95
 alignment = 1
 
 [node name="Return" type="Button" parent="Panel/BottomButtons"]
-margin_left = 418.0
-margin_right = 646.0
+margin_left = 546.0
+margin_right = 774.0
 margin_bottom = 50.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../../VBoxContainer/Spanish")

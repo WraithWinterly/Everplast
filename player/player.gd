@@ -1,10 +1,11 @@
 extends KinematicBody2D
 
-const water_jump_speed: int = 65
-const water_speed: int = 64
+const WATER_JUMP_SPEED: int = 65
+const WATER_SPEED: int = 64
 const WATER_GRAVITY: int = 150
 const WATER_SUCTION: int = 50
 const WATER_JUMP_BOOST: int = 350
+const INVINCIBILITY_TIME: float = 0.65
 
 var linear_velocity := Vector2.ZERO
 
@@ -26,13 +27,14 @@ var sprinting := false
 var falling := false
 var facing_right := true
 var dashing := false
+var was_falling := false
 
 onready var fsm: Node = $FSM
 onready var down_check_cast: RayCast2D = $Checks/Down
 onready var wall_checks = [$Checks/WallLeft, $Checks/WallRight]
 onready var collision_shape: CollisionShape2D = $CollisionShape2D
 onready var floor_checks := [$Checks/FloorLeft, $Checks/FloorRight]
-onready var area_2d : Area2D = $Area2D
+onready var area_2d: Area2D = $Area2D
 onready var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 onready var invincible_timer: Timer = $InvincibleTimer
@@ -52,6 +54,7 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("player_used_powerup", self, "_player_used_powerup")
 	__ = GlobalEvents.connect("player_powerup_ended", self, "_player_powerup_ended")
 	__ = GlobalEvents.connect("player_used_springboard", self, "_player_used_springboard")
+	__ = area_2d.connect("body_entered", self, "_body_entered")
 	__ = area_2d.connect("area_entered", self, "_area_entered")
 	__ = area_2d.connect("area_exited", self, "_area_exited")
 
@@ -82,11 +85,14 @@ func _physics_process(_delta):
 	if is_on_floor():
 		second_jump_used = false
 
+	if was_falling and is_on_floor():
+		yield(get_tree(), "physics_frame")
+		yield(get_tree(), "physics_frame")
+		was_falling = false
+
 
 func basic_movement():
 	var delta = get_physics_process_delta_time()
-
-	falling = linear_velocity.y > 0
 
 	if sprinting:
 		current_speed = sprint_speed
@@ -94,16 +100,46 @@ func basic_movement():
 		current_speed = walk_speed
 
 	current_speed *= GlobalInput.get_action_strength()
+
 	linear_velocity.x = lerp(linear_velocity.x, current_speed * speed_modifier, 0.08)
 	linear_velocity.y += delta * current_gravity
 
 	if not fsm.current_state == fsm.idle:
 		linear_velocity.x -= (get_floor_velocity().x * 0.07)
 
-	linear_velocity = move_and_slide(linear_velocity, Vector2.UP)
+#	linear_velocity = Vector2(stepify(linear_velocity.x, 1), stepify(linear_velocity.y, 1))
+#
+#	if fsm.current_state == fsm.idle:
+#		if facing_right:
+#			if linear_velocity.x < 8 and linear_velocity.x > 0:
+#				linear_velocity.x -= 1
+#		else:
+#			if linear_velocity.x > -8 and linear_velocity.x < 0:
+#				linear_velocity.x += 1
 
+#	linear_velocity.x = round_to_dec(linear_velocity.x, 1)
+#	linear_velocity.y = round_to_dec(linear_velocity.y, 1)
+	linear_velocity = move_and_slide(linear_velocity, Vector2.UP)
+	falling = linear_velocity.y > 0
+	if falling:
+		was_falling = true
+	#falling = linear_velocity.y > 0
 	down_check()
 
+
+func round_to_dec(num, decimal):
+	num = float(num)
+	decimal = int(decimal)
+	var sgn = 1
+	if num < 0:
+			sgn = -1
+			num = abs(num)
+			pass
+	var num_fraction = num - int(num)
+	var num_dec = round(num_fraction * pow(10.0, decimal)) / pow(10.0, decimal)
+	var round_num = sgn*(int(num) + num_dec)
+	return round_num
+	pass
 
 func start_invincibility(time: float) -> void:
 	yield(get_tree(), "physics_frame")
@@ -116,6 +152,14 @@ func start_invincibility(time: float) -> void:
 func stop_invincibility() -> void:
 	GlobalEvents.emit_signal("player_invincibility_stopped")
 	Globals.player_invincible = false
+
+func spawn_water_particles() -> void:
+	var w_part: PackedScene = load(GlobalPaths.WATER_PARTICLES)
+	var part_inst = w_part.instance()
+
+	get_node(GlobalPaths.LEVEL).add_child(part_inst)
+	part_inst.global_position = global_position
+	part_inst.global_position.y += 12
 
 
 func dash_failed() -> void:
@@ -172,7 +216,8 @@ func _player_death_started() -> void:
 	Globals.player_invincible = false
 	hurt_sound.pitch_scale = 0.65
 	hurt_sound.play()
-	die_sound.play()
+	if not die_sound.playing:
+		die_sound.play()
 
 
 func _player_died() -> void:
@@ -186,25 +231,32 @@ func _player_died() -> void:
 
 
 func _player_hurt_enemy(hurt_type: int) -> void:
+	GlobalInput.start_normal_vibration()
 	if not fsm.current_state == fsm.dash:
 		may_dash = true
 
+	if GlobalStats.timed_powerup_active and GlobalStats.active_timed_powerup == "glitch orb":
+		return
+
 	if hurt_type == Globals.HurtTypes.JUMP:
-		if not fsm.current_state == fsm.dash:
-			var new_jump_speed = jump_speed
+		var new_jump_speed = jump_speed
 
-			if in_water:
-				new_jump_speed /= 3
+		if in_water:
+			new_jump_speed /= 3
 
-			air_time = 0
-			linear_velocity.y = -new_jump_speed
+		air_time = 0
+		linear_velocity.y = -new_jump_speed
 
-			if not in_water:
-				fsm.change_state(fsm.jump)
+		if not in_water:
+			fsm.change_state(fsm.jump)
+
 
 func _player_hurt_from_enemy(hurt_type: int, knockback: int, _damage: int) -> void:
 	if fsm.current_state == fsm.dash: return
 	if Globals.player_invincible: return
+	if Globals.death_in_progress: return
+
+	GlobalInput.start_high_vibration()
 
 	if not GlobalSave.get_stat("health") <= 0:
 		if hurt_type == Globals.HurtTypes.TOUCH:
@@ -223,7 +275,7 @@ func _player_hurt_from_enemy(hurt_type: int, knockback: int, _damage: int) -> vo
 		elif hurt_type == Globals.HurtTypes.BULLET:
 			linear_velocity.x = knockback
 
-		start_invincibility(0.5)
+		start_invincibility(INVINCIBILITY_TIME)
 		hurt_sound.pitch_scale = 0.9
 		hurt_sound.play()
 
@@ -259,29 +311,42 @@ func _player_used_springboard(amount: int) -> void:
 # End of GlobalEvents
 
 
+func _body_entered(body: Node) -> void:
+	if body.is_in_group("Bullet"):
+		if body.player_bullet: return
+
+		var kb = 100
+
+		#var vel_x = body.get_parent().linear_velocity.x
+
+		# moving left
+		#if vel_x < 0:
+		if not facing_right:
+			kb = -kb
+		GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.BULLET, kb, body.damage)
+
+
 func _area_entered(area: Area2D) -> void:
 	if area.is_in_group("Water"):
+		if not $WaterSplashIn.playing:
+			$WaterSplashIn.play()
+
+		spawn_water_particles()
+
 		in_water = true
 
 		linear_velocity.y = WATER_SUCTION
 
 		fsm.change_state(fsm.water_idle)
-	elif area.is_in_group("Bullet"):
-		if area.get_parent().player_bullet: return
-
-		var kb = 100
-		var vel_x = area.get_parent().linear_velocity.x
-
-		# moving left
-		if vel_x < 0:
-			kb = -kb
-		GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.BULLET, kb, area.damage)
 
 
 func _area_exited(area: Area2D) -> void:
-	print("exited")
 	if area.is_in_group("Water"):
-		print("exited watre")
+		if not $WaterSplashOut.playing:
+			$WaterSplashOut.play()
+
+		spawn_water_particles()
+
 		may_dash = true
 		in_water = false
 

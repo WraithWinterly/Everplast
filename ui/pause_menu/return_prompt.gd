@@ -14,6 +14,10 @@ func _ready() -> void:
 	__ = no_button.connect("pressed", self, "_no_pressed")
 	__ = yes_button.connect("pressed", self, "_yes_pressed")
 
+	for button in $Panel/VBoxContainer/HBoxContainer.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
 	hide()
 
 
@@ -34,6 +38,7 @@ func show_menu() -> void:
 	title_text.show()
 	animation_player.play("show")
 	enable_buttons()
+	GlobalUI.dis_focus_sound = true
 	no_button.grab_focus()
 
 
@@ -76,6 +81,7 @@ func _yes_pressed() -> void:
 	hide_menu()
 	GlobalEvents.emit_signal("ui_pause_menu_return_prompt_yes_pressed")
 	if Globals.game_state == Globals.GameStates.LEVEL:
+		GlobalLevel.checkpoint_active = false
 		Globals.game_state = Globals.GameStates.WORLD_SELECTOR
 		GlobalUI.menu = GlobalUI.Menus.NONE
 		yield(GlobalEvents, "ui_faded")
@@ -87,4 +93,6 @@ func _yes_pressed() -> void:
 		get_tree().paused = false
 
 
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")
 

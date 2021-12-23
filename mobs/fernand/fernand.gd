@@ -35,10 +35,10 @@ onready var ray_left: RayCast2D = $RayCastLeft
 
 func _ready() -> void:
 	var __: int
-	__ = GlobalEvents.connect("story_w1_boss_activated", self, "_story_w1_boss_activated")
+	__ = GlobalEvents.connect("story_boss_activated", self, "_story_boss_activated")
 	__ = mob_component.connect("died", self, "_died")
 	__ = mob_component.connect("hit", self, "_hit")
-
+	$"Position2D/Water Gun/EquippableBase".mode = 2
 
 func _physics_process(_delta: float) -> void:
 	if not active: return
@@ -146,10 +146,13 @@ func update_gun_direction() -> void:
 		water_gun.scale.y = 1
 
 
-func _story_w1_boss_activated() -> void:
+func _story_boss_activated(idx: int) -> void:
+	if not idx == GlobalStats.Bosses.FERNAND: return
+
 	GlobalEvents.emit_signal("ui_dialogued","Oh... you found me.", NAME)
 	GlobalEvents.emit_signal("ui_dialogued","I was hired- wait, no. I am here to destroy you!", NAME)
 	GlobalEvents.emit_signal("ui_dialogued","You won't see the last of me!", NAME)
+
 	active = true
 	state_switching()
 
@@ -173,7 +176,7 @@ func _died() -> void:
 
 	yield(get_tree().create_timer(0.5), "timeout")
 
-	GlobalEvents.emit_signal("story_w1_boss_killed")
+	GlobalEvents.emit_signal("story_boss_killed", GlobalStats.Bosses.FERNAND)
 	GlobalEvents.emit_signal("ui_dialogued", "No... HOW???", NAME)
 	GlobalEvents.emit_signal("ui_dialogued", "You know what? It's okay.", NAME)
 	GlobalEvents.emit_signal("ui_dialogued", "YOU ARE NOT DONE YET!", NAME)

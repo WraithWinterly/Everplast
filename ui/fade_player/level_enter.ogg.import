@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/level_enter.ogg-b00891002ff44117d2b5e92978097d5b.oggstr"
+
+[deps]
+
+source_file="res://ui/fade_player/level_enter.ogg"
+dest_files=[ "res://.import/level_enter.ogg-b00891002ff44117d2b5e92978097d5b.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

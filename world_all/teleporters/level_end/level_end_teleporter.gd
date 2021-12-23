@@ -14,7 +14,7 @@ onready var sound: AudioStreamPlayer = $AudioStreamPlayer
 
 func _ready() -> void:
 	var __: int
-	__ = GlobalEvents.connect("story_w1_boss_camera_animated", self, "_story_w1_boss_camera_animated")
+	__ = GlobalEvents.connect("story_boss_camera_animated", self, "_story_boss_camera_animated")
 	__ = connect("body_entered", self, "_body_entered")
 	__ = connect("body_exited", self, "_body_exited")
 
@@ -25,6 +25,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and with_player \
 			and not GlobalUI.menu_locked and not used:
 
+		GlobalInput.start_ultra_high_vibration()
 		used = true
 		anim_player.play("hide")
 		sound.play()
@@ -51,7 +52,7 @@ func _body_exited(body: Node) -> void:
 		anim_player_glow.play_backwards("glow")
 
 
-func _story_w1_boss_camera_animated() -> void:
+func _story_boss_camera_animated(idx: int) -> void:
 	anim_player.play("appear")
 
 	yield(get_tree(), "physics_frame")
@@ -60,7 +61,5 @@ func _story_w1_boss_camera_animated() -> void:
 
 	yield(anim_player, "animation_finished")
 
-	GlobalEvents.emit_signal("story_w1_boss_level_end_completed")
-
-
+	GlobalEvents.emit_signal("story_boss_level_end_completed", idx)
 

@@ -12,6 +12,10 @@ func _ready() -> void:
 	__ = no_button.connect("pressed", self, "_no_pressed")
 	__ = yes_button.connect("pressed", self, "_yes_pressed")
 
+	for button in $Panel/VBoxContainer/HBoxContainer.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
 	hide()
 
 
@@ -35,6 +39,7 @@ func show_menu() -> void:
 	anim_player.play("show")
 	show()
 	enable_buttons()
+	GlobalUI.dis_focus_sound = true
 	no_button.grab_focus()
 	prompt_text.text = "%s %s?" % [tr("delete_prompt.text"),GlobalUI.profile_index + 1]
 
@@ -60,3 +65,7 @@ func _yes_pressed() -> void:
 	GlobalUI.menu = GlobalUI.Menus.PROFILE_SELECTOR_DELETE
 	GlobalEvents.emit_signal("ui_profile_selector_delete_prompt_yes_pressed")
 	hide_menu()
+
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

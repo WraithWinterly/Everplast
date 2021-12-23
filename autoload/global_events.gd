@@ -35,12 +35,14 @@ signal player_collected_coin(amount) # int
 signal player_collected_orb(amount) # int
 signal player_collected_gem(index) # int
 
-signal player_hurt_from_enemy(hurt_type, knockback, damage) # A_Globals.HurtTypes, int, int
-signal player_hurt_enemy(hurt_type) # A_Globals.HurtTypes
-signal player_killed_enemy(hurt_type) # A_Globals.HurtTypes
+signal player_hurt_from_enemy(hurt_type, knockback, damage) # Globals.HurtTypes, int, int
+signal player_hurt_enemy(hurt_type) # Globals.HurtTypes
+signal player_killed_enemy(hurt_type) # Globals.HurtTypes
 signal player_equipped(equippable) # string
 signal player_used_springboard(amount) # int
 signal player_level_increased(type)
+# Used by HUD in world selector and noti
+signal player_level_increase_animation_finished()
 
 #---------------------#
 #-----Save Events-----#
@@ -57,9 +59,6 @@ signal save_stat_updated()
 signal ui_dialogue_hidden()
 signal ui_dialogued(content, person, func_call) # string
 
-signal ui_social_disabled()
-signal ui_social_enabled()
-
 signal ui_settings_updated()
 
 
@@ -67,6 +66,7 @@ signal ui_faded()
 signal ui_notification_shown(noti) # string
 signal ui_notification_finished()
 signal ui_button_pressed(alt) # bool
+signal ui_button_hovered()
 signal ui_profile_focus_index_changed()
 
 signal ui_play_pressed()
@@ -114,7 +114,9 @@ signal ui_pause_menu_return_prompt_yes_pressed()
 signal ui_level_enter_menu_pressed()
 signal ui_inventory_opened()
 signal ui_inventory_closed()
-
+signal ui_shop_opened(shop_dict)
+signal ui_shop_bought(item, amount, cost)
+signal ui_shop_closed()
 #--------------------#
 #-----Mob Events-----#
 #--------------------#
@@ -125,7 +127,7 @@ signal mob_used_springboard(amount, mob) #int, mob reference
 #-----Story Events-----#
 #----------------------#
 
-signal story_w1_boss_activated()
-signal story_w1_boss_killed()
-signal story_w1_boss_camera_animated()
-signal story_w1_boss_level_end_completed()
+signal story_boss_activated(idx)
+signal story_boss_killed(idx)
+signal story_boss_camera_animated(idx)
+signal story_boss_level_end_completed(idx)

@@ -2,6 +2,8 @@ extends Sprite
 
 
 func _ready() -> void:
+	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR: return
+
 	frame = int(clamp(GlobalLevel.current_world - 1, 0, 999))
 
 	if flip_h:

@@ -1,6 +1,6 @@
 extends Label
 
-var last_item_name: String
+var last_timed_item_name: String
 var last_int: int = 0
 
 onready var timer: Timer = $Timer
@@ -26,9 +26,12 @@ func _physics_process(_delta) -> void:
 	if GlobalStats.timed_powerup_active:
 		progress_bar.value = timer.time_left
 		time_left_label.text = str(int(timer.time_left) + 1)
+
+		# Ticking Sound
 		if not last_int == int(timer.time_left):
 			last_int = int(timer.time_left)
 			tick_sound.play()
+
 			if last_int <= 2:
 				tick_sound.pitch_scale = 1.15
 			else:
@@ -36,24 +39,27 @@ func _physics_process(_delta) -> void:
 
 
 func _player_used_powerup(item_name: String) -> void:
-	last_item_name = item_name
 	text = GlobalStats.POWERUP_NAMES[item_name.capitalize()]
+	GlobalStats.active_timed_powerup = item_name
 	match item_name:
 		"bunny egg":
+			last_timed_item_name = item_name
 			show_bar(GlobalStats.bunny_egg_time)
 			last_int = GlobalStats.bunny_egg_time
 			tick_sound.pitch_scale = 1
 		"glitch orb":
+			last_timed_item_name = item_name
 			show_bar(GlobalStats.glitch_orb_time)
 			last_int = GlobalStats.glitch_orb_time
 			tick_sound.pitch_scale = 1
 
 
 func stop_active_item() -> void:
-		timer.stop()
-		GlobalStats.timed_powerup_active = false
-		anim_player.play_backwards("show")
-		GlobalEvents.emit_signal("player_powerup_ended", last_item_name)
+	timer.stop()
+	GlobalStats.timed_powerup_active = false
+	anim_player.play_backwards("show")
+	GlobalEvents.emit_signal("player_powerup_ended", last_timed_item_name)
+	GlobalStats.active_timed_powerup = null
 
 
 func _ui_pause_menu_return_prompt_yes_pressed() -> void:
@@ -66,7 +72,6 @@ func _level_completed() -> void:
 
 func _player_died() -> void:
 	stop_active_item()
-
 
 
 func show_bar(time: int) -> void:
@@ -82,4 +87,4 @@ func _timeout() -> void:
 	GlobalStats.timed_powerup_active = false
 	anim_player.play_backwards("show")
 	end_sound.play()
-	GlobalEvents.emit_signal("player_powerup_ended", last_item_name)
+	GlobalEvents.emit_signal("player_powerup_ended", last_timed_item_name)

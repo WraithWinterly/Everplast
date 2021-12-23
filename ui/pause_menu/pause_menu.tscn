@@ -151,10 +151,10 @@ __meta__ = {
 }
 
 [node name="PausedLabel" type="Label" parent="PauseLabelCenter"]
-margin_left = 346.0
-margin_top = 48.0
-margin_right = 934.0
-margin_bottom = 108.0
+margin_left = 506.0
+margin_top = 67.0
+margin_right = 1094.0
+margin_bottom = 127.0
 custom_fonts/font = ExtResource( 10 )
 text = "pause_menu.paused"
 
@@ -168,9 +168,9 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="LevelLabelCenter"]
-margin_left = 506.0
-margin_right = 506.0
-margin_bottom = 339.0
+margin_left = 666.0
+margin_right = 666.0
+margin_bottom = 423.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -226,10 +226,10 @@ margin_bottom = 76.0
 texture = SubResource( 8 )
 
 [node name="LevelLabel" type="Label" parent="LevelLabelCenter"]
-margin_left = 510.0
-margin_top = 154.0
-margin_right = 774.0
-margin_bottom = 184.0
+margin_left = 670.0
+margin_top = 196.0
+margin_right = 934.0
+margin_bottom = 226.0
 custom_fonts/font = ExtResource( 8 )
 text = "World Name - Level"
 align = 1
@@ -247,8 +247,9 @@ __meta__ = {
 }
 
 [node name="Continue" type="Button" parent="PauseButtons"]
-margin_right = 512.0
-margin_bottom = 60.0
+margin_top = 2.0
+margin_right = 640.0
+margin_bottom = 62.0
 focus_neighbour_left = NodePath("../Return")
 focus_neighbour_top = NodePath("../Return")
 focus_neighbour_right = NodePath("../Settings")
@@ -264,9 +265,9 @@ custom_styles/normal = ExtResource( 1 )
 text = "pause_menu.continue"
 
 [node name="Settings" type="Button" parent="PauseButtons"]
-margin_top = 75.0
-margin_right = 512.0
-margin_bottom = 135.0
+margin_top = 77.0
+margin_right = 640.0
+margin_bottom = 137.0
 focus_neighbour_left = NodePath("../Continue")
 focus_neighbour_top = NodePath("../Continue")
 focus_previous = NodePath("../Continue")
@@ -279,9 +280,9 @@ custom_styles/normal = ExtResource( 1 )
 text = "pause_menu.settings"
 
 [node name="Return" type="Button" parent="PauseButtons"]
-margin_top = 150.0
-margin_right = 512.0
-margin_bottom = 210.0
+margin_top = 152.0
+margin_right = 640.0
+margin_bottom = 212.0
 focus_neighbour_right = NodePath("../Continue")
 focus_neighbour_bottom = NodePath("../Continue")
 focus_next = NodePath("../Continue")

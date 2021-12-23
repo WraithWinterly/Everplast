@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world1/canvas_cloud.tscn" type="PackedScene" id=2]
@@ -21,14 +21,11 @@
 [ext_resource path="res://world_all/spikes/spikes.gd" type="Script" id=19]
 [ext_resource path="res://tilesets/tilemap_spikes.tres" type="TileSet" id=20]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=21]
-[ext_resource path="res://world_all/powerups/carrot.tscn" type="PackedScene" id=22]
-[ext_resource path="res://world_all/powerups/bunny_egg.tscn" type="PackedScene" id=23]
 [ext_resource path="res://mobs/slime/slime.tscn" type="PackedScene" id=24]
 [ext_resource path="res://mobs/chicken/chicken.tscn" type="PackedScene" id=25]
 [ext_resource path="res://mobs/bunny/bunny.tscn" type="PackedScene" id=26]
 [ext_resource path="res://world_all/coins/coin_10.tscn" type="PackedScene" id=27]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=28]
-[ext_resource path="res://world_all/collectables/water.tscn" type="PackedScene" id=29]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -63,7 +60,7 @@ __meta__ = {
 }
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 16, -120 )
+position = Vector2( 16, -24 )
 
 [node name="FallingPlatforms" type="Node2D" parent="."]
 
@@ -102,6 +99,10 @@ position = Vector2( 16, -24 )
 [node name="Checkpoint" parent="LevelComponents" instance=ExtResource( 7 )]
 position = Vector2( 1888, -136 )
 
+[node name="Checkpoint1" parent="LevelComponents" instance=ExtResource( 7 )]
+position = Vector2( 4680, -16 )
+index = 1
+
 [node name="LevelEndTeleporter" parent="LevelComponents" instance=ExtResource( 16 )]
 position = Vector2( 5224, -144 )
 
@@ -109,7 +110,7 @@ position = Vector2( 5224, -144 )
 z_index = 2
 tile_set = ExtResource( 6 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_mask = 0
 format = 1
@@ -118,7 +119,7 @@ tile_data = PoolIntArray( -3145657, 0, 0, -3145656, 0, 1, -3145655, 0, 1, -31456
 [node name="TileMapW1Platform" type="TileMap" parent="LevelComponents"]
 tile_set = ExtResource( 14 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 2
 collision_mask = 12
@@ -130,7 +131,7 @@ __meta__ = {
 [node name="BlockTilemap" type="TileMap" parent="LevelComponents"]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 1024
 collision_mask = 0
@@ -142,7 +143,7 @@ script = ExtResource( 5 )
 z_index = 4
 tile_set = ExtResource( 20 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
 tile_data = PoolIntArray( -2031526, 1073741826, 1, -1965993, 1073741826, 1, -1965992, 1073741826, 0, -1965991, 1073741826, 1, -1900458, 1073741826, 1, -1900457, 1073741826, 1, -1572505, 2, 0, -1572504, 2, 0, -1048415, 2, 1, -1048414, 2, 0, -1048413, 2, 1, -1048409, 2, 0, -917282, 2, 1, -917281, 2, 1, -917277, 2, 1, -917276, 2, 1, -851324, 0, 0, -851323, 0, 3, -851322, 0, 3, -589423, 2, 0, -589422, 2, 1, -589421, 2, 0, -589420, 2, 0, -196110, 0, 2, -196109, 0, 2 )
@@ -558,149 +559,105 @@ position = Vector2( 4392, -40 )
 
 [node name="Vase" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 184, 8 )
-item = ExtResource( 13 )
 
 [node name="Vase18" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 760, -136 )
-item = ExtResource( 13 )
 
 [node name="Vase19" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 1144, -152 )
-item = ExtResource( 13 )
 
 [node name="Vase20" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 1640, -160 )
-item = ExtResource( 13 )
 
 [node name="Vase21" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 3032, -168 )
-item = ExtResource( 23 )
 
 [node name="Vase22" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 3824, -8 )
-item = ExtResource( 23 )
 
 [node name="Vase2" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 456, -48 )
-item = ExtResource( 13 )
 
 [node name="Vase3" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 528, -72 )
-item = ExtResource( 13 )
 
 [node name="Vase4" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 528, -72 )
-item = ExtResource( 13 )
 
 [node name="Vase5" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 680, -72 )
-item = ExtResource( 13 )
 
 [node name="Vase6" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 936, -136 )
-item = ExtResource( 13 )
 
 [node name="Vase7" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 1240, -136 )
-type = 1
-item = ExtResource( 13 )
 
 [node name="Vase8" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 1264, -136 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Vase9" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 408, -48 )
-item = ExtResource( 29 )
 
 [node name="Vase23" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 768, -216 )
-item = ExtResource( 29 )
 
 [node name="Vase24" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 1696, -144 )
-item = ExtResource( 29 )
 
 [node name="Vase25" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 1872, -128 )
-item = ExtResource( 29 )
 
 [node name="Vase26" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 2632, -296 )
-item = ExtResource( 29 )
 
 [node name="Vase27" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 3112, -152 )
-item = ExtResource( 29 )
 
 [node name="Vase28" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 3208, -120 )
-item = ExtResource( 29 )
 
 [node name="Vase29" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 3488, -40 )
-item = ExtResource( 29 )
 
 [node name="Vase30" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 3944, 0 )
-item = ExtResource( 29 )
 
 [node name="Vase31" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 4112, -40 )
-item = ExtResource( 29 )
 
 [node name="Vase32" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 4480, 0 )
-item = ExtResource( 29 )
 
 [node name="Vase33" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 4864, 8 )
-item = ExtResource( 29 )
 
 [node name="Vase34" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 4864, 8 )
-item = ExtResource( 29 )
 
 [node name="Vase10" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 1928, -128 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Vase11" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 2152, -240 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Vase12" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 2368, -280 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Vase13" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 2592, -272 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Vase14" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 2744, -240 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Vase15" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 2952, -184 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Vase16" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 4656, -8 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Vase17" parent="Vases" instance=ExtResource( 21 )]
 position = Vector2( 4776, -8 )
-type = 1
-item = ExtResource( 22 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -841,9 +798,6 @@ position = Vector2( 2984, -192 )
 
 [node name="BlueBird7" parent="Birds" instance=ExtResource( 17 )]
 position = Vector2( 3064, -184 )
-
-[node name="BlueBird8" parent="Birds" instance=ExtResource( 17 )]
-position = Vector2( 4848, -24 )
 
 [node name="BlueBird9" parent="Birds" instance=ExtResource( 17 )]
 position = Vector2( 4128, -88 )

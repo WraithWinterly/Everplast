@@ -19,6 +19,7 @@ const valid_commands: Array = [
 	["get_stats_raw"],
 	["get_settings"],
 	["get_settings_raw"],
+	["finish_level"],
 	["clear"],
 	["kill"],
 	["save"],
@@ -29,10 +30,10 @@ const valid_commands: Array = [
 func tp(location_x: float, location_y: float) -> String:
 	debug_console.hide_menu()
 	var location = Vector2(location_x, location_y)
-	var player_body: KinematicBody2D = get_node_or_null(Globals.player_body_path)
-	if not player_body == null:
-		player_body.position = location
-		player_body.linear_velocity = Vector2(0, 0)
+	var player: KinematicBody2D = get_node_or_null(GlobalPaths.PLAYER)
+	if not player == null:
+		player.position = location
+		player.linear_velocity = Vector2(0, 0)
 		return str("Player position has been changed to (%s, %s)" % [location_x, location_y])
 	return str("FAILED: Player is not in the game.")
 
@@ -104,6 +105,16 @@ func get_settings() -> String:
 
 func get_settings_raw() -> String:
 	return str(get_node(GlobalPaths.SETTINGS).data)
+
+
+func finish_level() -> String:
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		debug_console.hide_menu()
+		GlobalEvents.emit_signal("level_completed")
+		return "Finishing Level %s - %s..." % [GlobalLevel.WORLD_NAMES[GlobalLevel.current_world], GlobalLevel.current_level]
+	else:
+		return "You must be in a level."
+
 
 
 func clear() -> String:

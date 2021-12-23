@@ -10,6 +10,7 @@ onready var camera: Camera2D = $Camera2D
 onready var previous_button_focus: Button = play_button
 
 onready var bg_color: Panel = $Background/CanvasLayerBack/Top
+onready var top_color: Panel = $Background/ParallaxLayer/ColorRect
 onready var parallax_layers := [$Background/ParallaxLayer, $Background/ParallaxLayer2,
 								$Background/ParallaxLayer3]
 
@@ -31,6 +32,10 @@ func _ready() -> void:
 	__ = settings_button.connect("pressed", self, "_on_settings_pressed")
 	__ = quit_button.connect("pressed", self, "_quit_pressed")
 
+	for button in menu_buttons.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
 	GlobalUI.menu_locked = true
 	show()
 
@@ -41,6 +46,7 @@ func _ready() -> void:
 	update_menu()
 
 	if not GlobalUI.menu == GlobalUI.Menus.INITIAL_SETUP:
+		GlobalUI.dis_focus_sound = true
 		play_button.grab_focus()
 
 	yield(get_tree(), "idle_frame")
@@ -53,6 +59,7 @@ func show_menu() -> void:
 	enable_buttons()
 	show()
 	bg_color.show()
+	top_color.show()
 	for bg in parallax_layers:
 		bg.show()
 	update_menu()
@@ -62,9 +69,10 @@ func hide_menu() -> void:
 	disable_buttons()
 	hide()
 	yield(get_tree(), "physics_frame")
-	if GlobalUI.fade_player_playing:
-		yield(GlobalEvents, "ui_faded")
+#	if GlobalUI.fade_player_playing:
+#		yield(GlobalEvents, "ui_faded")
 	bg_color.hide()
+	top_color.hide()
 	for bg in parallax_layers:
 		bg.hide()
 
@@ -73,14 +81,10 @@ func disable_buttons() -> void:
 	for button in menu_buttons.get_children():
 		button.disabled = true
 
-	GlobalEvents.emit_signal("ui_social_disabled")
-
 
 func enable_buttons() -> void:
 	for button in menu_buttons.get_children():
 		button.disabled = false
-
-	GlobalEvents.emit_signal("ui_social_enabled")
 
 
 func update_menu() -> void:
@@ -103,6 +107,7 @@ func _ui_profile_selector_return_pressed() -> void:
 		yield(GlobalEvents, "ui_faded")
 		update_menu()
 		show_menu()
+		GlobalUI.dis_focus_sound = true
 		play_button.grab_focus()
 
 
@@ -110,12 +115,14 @@ func _ui_quick_play_prompt_no_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	GlobalEvents.emit_signal("ui_button_pressed", true)
 	enable_buttons()
+	GlobalUI.dis_focus_sound = true
 	quick_play_button.grab_focus()
 
 
 func _ui_quit_prompt_no_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	enable_buttons()
+	GlobalUI.dis_focus_sound = true
 	quit_button.grab_focus()
 
 
@@ -129,6 +136,7 @@ func _ui_settings_back_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	if Globals.game_state == Globals.GameStates.MENU:
 		enable_buttons()
+		GlobalUI.dis_focus_sound = true
 		settings_button.grab_focus()
 
 
@@ -136,11 +144,13 @@ func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
 		yield(GlobalEvents, "ui_faded")
 		show_menu()
+		GlobalUI.dis_focus_sound = true
 		play_button.grab_focus()
 
 
 # Initial Languge Setup
 func _ui_settings_language_back_pressed_initial() -> void:
+	GlobalUI.dis_focus_sound = true
 	play_button.grab_focus()
 	enable_buttons()
 
@@ -186,3 +196,6 @@ func _quit_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed")
 	GlobalEvents.emit_signal("ui_quit_pressed")
 	GlobalUI.menu = GlobalUI.Menus.QUIT_PROMPT
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

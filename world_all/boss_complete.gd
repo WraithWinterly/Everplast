@@ -16,8 +16,9 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	var __: int
-	__ = GlobalEvents.connect("story_w1_boss_killed", self, "_story_w1_boss_killed")
-	__ = GlobalEvents.connect("story_w1_boss_camera_animated", self, "_story_w1_boss_camera_animated")
+	__ = GlobalEvents.connect("story_boss_killed", self, "_story_boss_killed")
+	__ = GlobalEvents.connect("story_boss_camera_animated", self, "_story_boss_camera_animated")
+
 	noise.seed = randi()
 	noise.period = 4
 	noise.octaves = 2
@@ -47,14 +48,16 @@ func shake() -> void:
 	offset.y = MAX_OFFSET.y * amount * noise.get_noise_2d(noise.seed*3, noise_y)
 
 
-func _story_w1_boss_killed() -> void:
+func _story_boss_killed(idx: int) -> void:
 	yield(GlobalEvents, "ui_dialogue_hidden")
 	yield(GlobalEvents, "ui_faded")
 	current = true
 	anim_player.play("cutscene")
 	yield(anim_player, "animation_finished")
-	GlobalEvents.emit_signal("story_w1_boss_camera_animated")
+	GlobalEvents.emit_signal("story_boss_camera_animated", idx)
 
 
-func _story_w1_boss_camera_animated() -> void:
+
+func _story_boss_camera_animated(_idx: int) -> void:
 	set_trauma(0.14)
+

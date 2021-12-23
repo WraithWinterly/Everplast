@@ -50,9 +50,10 @@ collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="MobComponentManager" parent="." instance=ExtResource( 4 )]
-orb_amount = 15
-knockback = 200
-max_health = 3
+orb_amount = 20
+knockback = 275
+attack_damage = 5
+max_health = 4
 
 [node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, -0.86 )
@@ -65,7 +66,6 @@ enemy_path = NodePath("../..")
 [node name="AttackTouch" parent="MobComponentManager" instance=ExtResource( 6 )]
 enemy_path = NodePath("../..")
 hit_area_path = NodePath("../HurtArea")
-attack_by_jump = false
 
 [node name="HurtByBullet" parent="MobComponentManager" instance=ExtResource( 8 )]
 enemy_path = NodePath("../..")

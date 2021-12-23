@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Everplast"
-run/main_scene="res://main.tscn"
+run/main_scene="res://loader/loader_loader.tscn"
 config/use_custom_user_dir=true
 boot_splash/image="res://ui/8x8.png"
 boot_splash/fullsize=false
@@ -72,8 +72,10 @@ gdscript/warnings/unused_signal=false
 
 [display]
 
-window/size/width=1280
-window/size/height=720
+window/size/width=1600
+window/size/height=900
+window/size/test_width=1280
+window/size/test_height=720
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="expand"
@@ -161,18 +163,15 @@ ui_down={
 }
 move_left={
 "deadzone": 0.49,
-"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
- ]
+"events": [  ]
 }
 move_right={
 "deadzone": 0.5,
-"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
- ]
+"events": [  ]
 }
 move_down={
 "deadzone": 0.5,
-"events": [ Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
-, Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
+"events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":1,"axis_value":1.0,"script":null)
  ]
 }
 move_jump={
@@ -237,7 +236,6 @@ ctr_move_right={
 ctr_move_left={
 "deadzone": 0.3,
 "events": [ Object(InputEventJoypadMotion,"resource_local_to_scene":false,"resource_name":"","device":0,"axis":0,"axis_value":-1.0,"script":null)
-, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
 ctr_look_up={
@@ -326,12 +324,10 @@ common/physics_jitter_fix=0.0
 
 2d/options/use_nvidia_rect_flicker_workaround=true
 2d/snapping/use_gpu_pixel_snap=true
-threads/thread_model=2
 vram_compression/import_etc=true
-quality/filters/msaa=1
-quality/filters/use_debanding=true
+quality/filters/use_nearest_mipmap_filter=true
 quality/dynamic_fonts/use_oversampling=false
-quality/2d/use_nvidia_rect_flicker_workaround=false
+quality/2d/use_nvidia_rect_flicker_workaround=true
 quality/2d/use_pixel_snap=true
 quality/2d/use_transform_snap=true
 

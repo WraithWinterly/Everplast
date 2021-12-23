@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://world1/rain.wav" type="AudioStream" id=1]
 [ext_resource path="res://tilesets/tilemap_w1_grass.tres" type="TileSet" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://world_all/coins/coin.tscn" type="PackedScene" id=11]
 [ext_resource path="res://mobs/slime/slime.tscn" type="PackedScene" id=12]
 [ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=13]
-[ext_resource path="res://world_all/powerups/carrot.tscn" type="PackedScene" id=14]
 [ext_resource path="res://mobs/worm/worm.tscn" type="PackedScene" id=15]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=16]
 [ext_resource path="res://world_all/platforms/small_moving_platform.tscn" type="PackedScene" id=17]
@@ -271,7 +270,7 @@ position = Vector2( 2392, -384 )
 z_index = 2
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_mask = 0
 format = 1
@@ -280,7 +279,7 @@ tile_data = PoolIntArray( -4652936, 0, 0, -4652935, 0, 3, -4652934, 0, 2, -46529
 [node name="TileMapW1Platform" type="TileMap" parent="LevelComponents"]
 tile_set = ExtResource( 28 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 2
 collision_mask = 12
@@ -293,7 +292,7 @@ __meta__ = {
 [node name="BlockTilemap" type="TileMap" parent="LevelComponents"]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 1024
 collision_mask = 0
@@ -647,63 +646,48 @@ position = Vector2( 2184, -376 )
 
 [node name="Vase" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 304, -64 )
-item = ExtResource( 14 )
 
 [node name="Vase2" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1736, -168 )
-item = ExtResource( 14 )
 
 [node name="Vase3" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1824, -208 )
-item = ExtResource( 11 )
 
 [node name="Vase4" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1736, -264 )
-item = ExtResource( 11 )
 
 [node name="Vase5" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1744, -336 )
-item = ExtResource( 11 )
 
 [node name="Vase6" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1872, -352 )
-item = ExtResource( 11 )
 
 [node name="Vase14" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 2216, -376 )
-item = ExtResource( 11 )
 
 [node name="Vase15" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 2384, -376 )
-item = ExtResource( 11 )
 
 [node name="Vase7" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1512, -128 )
-item = ExtResource( 11 )
 
 [node name="Vase8" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1280, -64 )
-item = ExtResource( 11 )
 
 [node name="Vase9" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1304, -64 )
-item = ExtResource( 11 )
 
 [node name="Vase10" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1360, -64 )
-item = ExtResource( 11 )
 
 [node name="Vase11" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1376, -64 )
-item = ExtResource( 11 )
 
 [node name="Vase12" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1464, -112 )
-item = ExtResource( 11 )
 
 [node name="Vase13" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 1584, -144 )
-item = ExtResource( 11 )
 
 [node name="MovingPlatforms" type="Node2D" parent="."]
 

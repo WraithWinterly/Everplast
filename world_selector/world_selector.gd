@@ -5,6 +5,8 @@ var teleporter: Area2D
 onready var tilemap_block: TileMap = $TileMapBlock
 onready var right_position: Position2D = $LevelComponents/CameraPositions/BottomRight
 
+onready var max_positions := [$World1Max, $World2Max, $World3Max, $World4Max]
+
 
 func _ready() -> void:
 	var teleporters: Node2D = $Teleporters
@@ -20,10 +22,7 @@ func _ready() -> void:
 		get_node("Player").get_node("KinematicBody2D").global_position = \
 				Vector2(teleporter.global_position.x, teleporter.global_position.y - 8)
 
-	match int(GlobalSave.get_stat("world_max")):
-		1:
-			tilemap_block.position = Vector2(0, 0)
-			right_position.position = Vector2(1896, 384)
-		2:
-			tilemap_block.position = Vector2(500, 0)
-			right_position.position = Vector2(2560, 384)
+	tilemap_block.position.x = max_positions[GlobalSave.get_stat("world_max") - 1].position.x
+	tilemap_block.position.y = max_positions[GlobalSave.get_stat("world_max") - 1].position.y + 48
+	right_position.position.x = max_positions[GlobalSave.get_stat("world_max") - 1].position.x
+	right_position.position.y = 384

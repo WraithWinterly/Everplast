@@ -10,6 +10,7 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
 	__ = GlobalEvents.connect("ui_pause_menu_return_pressed", self, "_ui_pause_menu_return_pressed")
 	__ = GlobalEvents.connect("ui_inventory_opened", self, "_ui_inventory_opened")
+	__ = GlobalEvents.connect("ui_shop_opened", self, "_ui_shop_opened")
 	__ = GlobalEvents.connect("ui_pause_menu_pressed", self, "_ui_pause_menu_pressed")
 	__ = GlobalEvents.connect("ui_level_enter_menu_pressed", self, "_ui_level_enter_menu_pressed")
 
@@ -50,6 +51,8 @@ func _ui_pause_menu_pressed() -> void:
 func _ui_inventory_opened() -> void:
 	hide_label()
 
+func _ui_shop_opened(_items: Dictionary) -> void:
+	hide_label()
 
 func _ui_pause_menu_return_pressed() -> void:
 	hide_label()

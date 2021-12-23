@@ -10,6 +10,7 @@ enum Ranks {
 
 enum Bosses {
 	FERNAND,
+	OSTRICH,
 }
 
 enum Guns {
@@ -27,7 +28,7 @@ enum Collectables {
 const equippable_items: Array = ["none", "water gun", "nail gun", "laser gun"]
 
 const bunny_egg_boost := 1.4
-const adrenaline_time_decrease_from_level_up := 1.3
+const adrenaline_time_decrease_from_level_up := 0.95
 
 const stat_increase_from_level_up: int = 5
 
@@ -77,6 +78,22 @@ const POWERUP_NAMES := {
 	"Laser Gun": "inventory.equippable.laser_gun"
 }
 
+const COLLECTABLE_NAMES := {
+	"Water": "Water",
+	"Energy": "Energy",
+	"Nail": "Nail",
+}
+
+const EQUIPPABLE_NAMES := {
+	"Water Gun": "Water Gun",
+	"Laser Gun": "Laser Gun",
+	"Nail Gun": "Nail Gun",
+}
+
+const SHOP_NAMES := {
+	"Orbs": "Orbs"
+}
+
 const valid_powerups: Array = ["carrot", "cherry", "coconut", "bunny egg", "glitch orb", "pear", "glitch soul"]
 const timed_powerups: Array = ["glitch orb", "bunny egg"]
 
@@ -94,6 +111,7 @@ const valid_collectables: Array = ["energy", "water", "nail"]
 #}
 
 var timed_powerup_active := false
+var active_timed_powerup = ""
 
 
 func get_powerup_explanation(powerup_name: String) -> String:
@@ -147,3 +165,18 @@ func get_spike_damage(tile_id: int) -> int:
 			return 2
 		_:
 			return 2
+
+
+func get_player_jump_damage() -> int:
+	var rank := int(GlobalSave.get_stat("rank"))
+
+	if rank == Ranks.SILVER:
+		return 1
+	elif rank == Ranks.GOLD:
+		return 3
+	elif rank == Ranks.DIAMOND:
+		return 5
+	elif rank == Ranks.GLITCH:
+		return 5
+
+	return 1

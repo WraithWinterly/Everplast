@@ -13,6 +13,10 @@ func _ready() -> void:
 	__ = no_button.connect("pressed", self, "_no_pressed")
 	__ = yes_button.connect("pressed", self, "_yes_pressed")
 
+	for button in $Panel/VBoxContainer/HBoxContainer.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
 	hide()
 
 
@@ -40,6 +44,7 @@ func show_menu() -> void:
 			GlobalLevel.WORLD_NAMES[GlobalSave.data[GlobalQuickPlay.data.last_profile].world_last],
 			GlobalSave.data[GlobalQuickPlay.data.last_profile].level_last]
 
+	GlobalUI.dis_focus_sound = true
 	no_button.grab_focus()
 	show()
 	enable_buttons()
@@ -77,3 +82,7 @@ func _yes_pressed() -> void:
 	GlobalSave.profile = GlobalQuickPlay.data.last_profile
 	GlobalEvents.emit_signal("level_changed", GlobalSave.data[GlobalQuickPlay.data.last_profile].world_last, GlobalSave.data[GlobalQuickPlay.data.last_profile].level_last)
 	hide_menu()
+
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

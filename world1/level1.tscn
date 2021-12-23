@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilesets/tilemap_platform.tres" type="TileSet" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=9]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=10]
-[ext_resource path="res://world_all/powerups/carrot.tscn" type="PackedScene" id=11]
 [ext_resource path="res://world_all/lanterns/lantern.tscn" type="PackedScene" id=12]
 [ext_resource path="res://tilesets/tilemap_block.tres" type="TileSet" id=13]
 [ext_resource path="res://world_all/signs/sign.tscn" type="PackedScene" id=14]
@@ -57,7 +56,7 @@ position = Vector2( 1824, 64 )
 z_index = 2
 tile_set = ExtResource( 15 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_mask = 12
 format = 1
@@ -69,7 +68,7 @@ __meta__ = {
 [node name="TileMapW1Platform" type="TileMap" parent="LevelComponents"]
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 2
 collision_mask = 12
@@ -82,7 +81,7 @@ __meta__ = {
 [node name="TileMapBlock" type="TileMap" parent="LevelComponents"]
 tile_set = ExtResource( 13 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 1024
 collision_mask = 0
@@ -94,7 +93,7 @@ script = ExtResource( 9 )
 z_index = 4
 tile_set = ExtResource( 20 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 32
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
 tile_data = PoolIntArray( 65715, 1073741826, 0, 65716, 1073741826, 0, 65717, 1073741826, 0 )
@@ -409,27 +408,21 @@ sign_text = [ [ "Look in your inventory to see your collected items!", "Sign", "
 
 [node name="Vase" parent="Vases" instance=ExtResource( 10 )]
 position = Vector2( 736, -32 )
-item = ExtResource( 11 )
 
 [node name="Vase2" parent="Vases" instance=ExtResource( 10 )]
 position = Vector2( 936, -32 )
-item = ExtResource( 7 )
 
 [node name="Vase3" parent="Vases" instance=ExtResource( 10 )]
 position = Vector2( 1256, -80 )
-item = ExtResource( 7 )
 
 [node name="Vase6" parent="Vases" instance=ExtResource( 10 )]
 position = Vector2( 1424, -40 )
-item = ExtResource( 7 )
 
 [node name="Vase4" parent="Vases" instance=ExtResource( 10 )]
 position = Vector2( 1728, 0 )
-item = ExtResource( 11 )
 
 [node name="Vase5" parent="Vases" instance=ExtResource( 10 )]
 position = Vector2( 1160, -168 )
-item = ExtResource( 11 )
 
 [node name="Slimes" type="Node2D" parent="."]
 

@@ -1,0 +1,748 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
+[ext_resource path="res://world_all/powerups/pear.png" type="Texture" id=3]
+[ext_resource path="res://world_all/powerups/coconut.png" type="Texture" id=4]
+[ext_resource path="res://world_all/powerups/carrot.png" type="Texture" id=5]
+[ext_resource path="res://world_all/powerups/glitch_orb.png" type="Texture" id=6]
+[ext_resource path="res://world_all/powerups/glitch_soul.png" type="Texture" id=7]
+[ext_resource path="res://world_all/powerups/bunny_egg.png" type="Texture" id=8]
+[ext_resource path="res://world_all/powerups/cherry.png" type="Texture" id=9]
+[ext_resource path="res://ui/inventory/equipable_button_normal.tres" type="StyleBox" id=10]
+[ext_resource path="res://ui/inventory/equipable_button_hover.tres" type="StyleBox" id=11]
+[ext_resource path="res://ui/inventory/equipable_button_pressed.tres" type="StyleBox" id=12]
+[ext_resource path="res://ui/inventory/equipable_button_focus.tres" type="StyleBox" id=13]
+[ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=14]
+[ext_resource path="res://ui/shop/shop_ui.gd" type="Script" id=15]
+[ext_resource path="res://world_all/orbs/orb.png" type="Texture" id=16]
+[ext_resource path="res://ui/shop/coin_display.tscn" type="PackedScene" id=17]
+[ext_resource path="res://world_all/gems/gem.png" type="Texture" id=18]
+[ext_resource path="res://ui/shop/buy.wav" type="AudioStream" id=19]
+[ext_resource path="res://world_all/light.png" type="Texture" id=20]
+[ext_resource path="res://world_all/collectables/energy.png" type="Texture" id=21]
+[ext_resource path="res://world_all/collectables/water.png" type="Texture" id=22]
+[ext_resource path="res://world_all/collectables/nail.png" type="Texture" id=23]
+[ext_resource path="res://world_all/equippables/water_gun.png" type="Texture" id=24]
+[ext_resource path="res://world_all/equippables/nail_gun.png" type="Texture" id=25]
+[ext_resource path="res://world_all/equippables/laser_gun.png" type="Texture" id=26]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.1, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 2.1, 0.9 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="CanvasItemMaterial" id=3]
+blend_mode = 1
+
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show"
+length = 0.5
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ), Vector2( 60, 60 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="ShopUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.2
+anchor_top = 1.1
+anchor_right = 0.8
+anchor_bottom = 2.1
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="Panel"]
+anchor_top = 0.985
+anchor_right = 0.938
+anchor_bottom = 0.985
+margin_left = 33.6
+margin_top = -61.5825
+margin_right = 33.6
+margin_bottom = -11.5825
+size_flags_horizontal = 3
+custom_constants/hseparation = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Back"
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Panel"]
+anchor_top = 0.01
+anchor_right = 1.0
+anchor_bottom = 0.011
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+text = "Shop"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GemHolder" type="Label" parent="Panel"]
+anchor_left = 0.165
+anchor_top = 0.815
+anchor_right = 0.165
+anchor_bottom = 0.815
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprite" type="Sprite" parent="Panel/GemHolder"]
+scale = Vector2( 6, 6 )
+texture = ExtResource( 18 )
+
+[node name="RequiredLabel" type="Label" parent="Panel"]
+anchor_left = 0.217
+anchor_top = 0.77
+anchor_right = 1.0
+anchor_bottom = 0.77
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+text = "Required:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YouHaveLabel" type="Label" parent="Panel"]
+anchor_left = 0.217
+anchor_top = 0.83
+anchor_right = 1.0
+anchor_bottom = 0.85
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+text = "You have:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Panel" parent="Panel"]
+anchor_left = 0.1
+anchor_top = 0.065
+anchor_right = 0.9
+anchor_bottom = 0.75
+margin_top = 1.52588e-05
+custom_styles/panel = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Items" type="VBoxContainer" parent="Panel/BG"]
+anchor_left = 0.05
+anchor_top = 0.05
+anchor_right = 0.8
+anchor_bottom = 0.05
+size_flags_horizontal = 3
+custom_constants/separation = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Coconut" type="Button" parent="Panel/BG/Items"]
+margin_right = 576.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
+custom_constants/hseparation = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Coconut [1]"
+icon = ExtResource( 4 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cherry" type="Button" parent="Panel/BG/Items"]
+margin_top = 60.0
+margin_right = 576.0
+margin_bottom = 110.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Cherry [1]"
+icon = ExtResource( 9 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Carrot" type="Button" parent="Panel/BG/Items"]
+margin_top = 120.0
+margin_right = 576.0
+margin_bottom = 170.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Carrot [1] "
+icon = ExtResource( 5 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bunny Egg" type="Button" parent="Panel/BG/Items"]
+margin_top = 180.0
+margin_right = 576.0
+margin_bottom = 230.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Huevo de Conejito x999"
+icon = ExtResource( 8 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Glitch Orb" type="Button" parent="Panel/BG/Items"]
+margin_top = 240.0
+margin_right = 576.0
+margin_bottom = 290.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Glitch Orb"
+icon = ExtResource( 6 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Pear" type="Button" parent="Panel/BG/Items"]
+margin_top = 300.0
+margin_right = 576.0
+margin_bottom = 350.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Pear"
+icon = ExtResource( 3 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Glitch Soul" type="Button" parent="Panel/BG/Items"]
+margin_top = 360.0
+margin_right = 576.0
+margin_bottom = 410.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Glitch Soul x999"
+icon = ExtResource( 7 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Orbs" type="Button" parent="Panel/BG/Items"]
+margin_top = 420.0
+margin_right = 576.0
+margin_bottom = 470.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Orbs"
+icon = ExtResource( 16 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water" type="Button" parent="Panel/BG/Items"]
+margin_top = 480.0
+margin_right = 576.0
+margin_bottom = 530.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Water"
+icon = ExtResource( 22 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Energy" type="Button" parent="Panel/BG/Items"]
+margin_top = 540.0
+margin_right = 576.0
+margin_bottom = 590.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Energy"
+icon = ExtResource( 21 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nail" type="Button" parent="Panel/BG/Items"]
+margin_top = 600.0
+margin_right = 576.0
+margin_bottom = 650.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Nail"
+icon = ExtResource( 23 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water Gun" type="Button" parent="Panel/BG/Items"]
+margin_top = 660.0
+margin_right = 576.0
+margin_bottom = 710.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Water Gun"
+icon = ExtResource( 24 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Laser Gun" type="Button" parent="Panel/BG/Items"]
+margin_top = 720.0
+margin_right = 576.0
+margin_bottom = 770.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Laser Gun"
+icon = ExtResource( 26 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Nail Gun" type="Button" parent="Panel/BG/Items"]
+margin_top = 780.0
+margin_right = 576.0
+margin_bottom = 830.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Nail Gun"
+icon = ExtResource( 25 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Price" type="VBoxContainer" parent="Panel/BG"]
+anchor_left = 0.83
+anchor_top = 0.073
+anchor_right = 0.83
+anchor_bottom = 0.083
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Coconut" type="Label" parent="Panel/BG/Price"]
+margin_right = 112.0
+margin_bottom = 30.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x99"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Coconut" instance=ExtResource( 17 )]
+
+[node name="Cherry" type="Label" parent="Panel/BG/Price"]
+margin_top = 60.0
+margin_right = 112.0
+margin_bottom = 90.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x99"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Cherry" instance=ExtResource( 17 )]
+
+[node name="Carrot" type="Label" parent="Panel/BG/Price"]
+margin_top = 120.0
+margin_right = 112.0
+margin_bottom = 150.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x99"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Carrot" instance=ExtResource( 17 )]
+
+[node name="Bunny Egg" type="Label" parent="Panel/BG/Price"]
+margin_top = 180.0
+margin_right = 112.0
+margin_bottom = 210.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x99"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Bunny Egg" instance=ExtResource( 17 )]
+
+[node name="Glitch Orb" type="Label" parent="Panel/BG/Price"]
+margin_top = 240.0
+margin_right = 112.0
+margin_bottom = 270.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x99"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Glitch Orb" instance=ExtResource( 17 )]
+
+[node name="Pear" type="Label" parent="Panel/BG/Price"]
+margin_top = 300.0
+margin_right = 112.0
+margin_bottom = 330.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x99"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Pear" instance=ExtResource( 17 )]
+
+[node name="Glitch Soul" type="Label" parent="Panel/BG/Price"]
+margin_top = 360.0
+margin_right = 112.0
+margin_bottom = 390.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x99"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Glitch Soul" instance=ExtResource( 17 )]
+
+[node name="Orbs" type="Label" parent="Panel/BG/Price"]
+margin_top = 420.0
+margin_right = 112.0
+margin_bottom = 450.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Orbs" instance=ExtResource( 17 )]
+
+[node name="Water" type="Label" parent="Panel/BG/Price"]
+margin_top = 480.0
+margin_right = 112.0
+margin_bottom = 510.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Water" instance=ExtResource( 17 )]
+
+[node name="Energy" type="Label" parent="Panel/BG/Price"]
+margin_top = 540.0
+margin_right = 112.0
+margin_bottom = 570.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Energy" instance=ExtResource( 17 )]
+
+[node name="Nail" type="Label" parent="Panel/BG/Price"]
+margin_top = 600.0
+margin_right = 112.0
+margin_bottom = 630.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Nail" instance=ExtResource( 17 )]
+
+[node name="Water Gun" type="Label" parent="Panel/BG/Price"]
+margin_top = 660.0
+margin_right = 112.0
+margin_bottom = 690.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Water Gun" instance=ExtResource( 17 )]
+
+[node name="Laser Gun" type="Label" parent="Panel/BG/Price"]
+margin_top = 720.0
+margin_right = 112.0
+margin_bottom = 750.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Laser Gun" instance=ExtResource( 17 )]
+
+[node name="Nail Gun" type="Label" parent="Panel/BG/Price"]
+margin_top = 780.0
+margin_right = 112.0
+margin_bottom = 810.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Nail Gun" instance=ExtResource( 17 )]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/show = SubResource( 1 )
+
+[node name="BuySound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 19 )
+volume_db = -6.0
+
+[node name="BoughtItem" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="BoughtItem"]
+margin_left = 800.0
+margin_top = 443.0
+margin_right = 800.0
+margin_bottom = 457.0
+
+[node name="Sprite" type="Sprite" parent="BoughtItem/Label"]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 16 )
+
+[node name="Sprite" type="Sprite" parent="BoughtItem/Label/Sprite"]
+modulate = Color( 0.805361, 0.394821, 0.808594, 0.607843 )
+material = SubResource( 3 )
+scale = Vector2( 0.05, 0.05 )
+texture = ExtResource( 20 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BoughtItem/Label/Sprite"]
+anims/RESET = SubResource( 5 )
+anims/show = SubResource( 4 )
+
+[connection signal="pressed" from="Panel/Back" to="." method="_on_Back_pressed"]
+[connection signal="animation_finished" from="BoughtItem/Label/Sprite/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -13,6 +13,10 @@ func _ready() -> void:
 	__ = no_button.connect("pressed", self, "_no_pressed")
 	__ = yes_button.connect("pressed", self, "_yes_pressed")
 
+	for button in $Panel/VBoxContainer/HBoxContainer.get_children():
+		__ = button.connect("focus_entered", self, "_button_hovered")
+		__ = button.connect("mouse_entered", self, "_button_hovered")
+
 	hide()
 
 
@@ -34,6 +38,7 @@ func disable_buttons() -> void:
 
 func show_menu() -> void:
 	anim_player.play("show")
+	GlobalUI.dis_focus_sound = true
 	no_button.grab_focus()
 	show()
 	enable_buttons()
@@ -63,3 +68,7 @@ func _no_pressed() -> void:
 func _yes_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	get_tree().quit()
+
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

@@ -12,8 +12,8 @@ export var attack_damage: int = 1
 export var max_health: int = 1
 
 var health: int = 1
+
 var dead := false
-# Cannot be hurt more while already being hurt
 var damaging_self := false
 
 onready var hurt_anim_player: AnimationPlayer = $SpriteHolder/AnimatedSprite/HurtAnimationPlayer
@@ -37,7 +37,7 @@ func damage(damage_type: int, body = null) -> void:
 	emit_signal("hit")
 	match damage_type:
 		Globals.HurtTypes.JUMP:
-			remove_health(1)
+			remove_health(GlobalStats.get_player_jump_damage())
 			GlobalEvents.emit_signal("player_hurt_enemy", Globals.HurtTypes.JUMP)
 		Globals.HurtTypes.BULLET:
 			remove_health(body.damage)
@@ -93,6 +93,6 @@ func die(hurt_type: int) -> void:
 		else:
 			orb_instance.global_position = Vector2(global_position.x + 2, global_position.y- 10)
 		level.call_deferred("add_child", orb_instance)
-		
+
 	yield(hurt_anim_player, "animation_finished")
 	call_deferred("free")

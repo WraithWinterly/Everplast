@@ -141,7 +141,7 @@ powerup_explanations.glitch_soul,Not complete,No esta completo
 ,,
 rank_explanations.none,You do not have a rank yet,No tienes un rango aun
 rank_explanations.silver,- See enemy health on hit\n- Double Jump\n- Wall Jump,- Puedes ver la salud de los enemigos en golpe\n- Doble Salto\n- Salto de Paredes
-rank_explanations.gold,- Adrenaline Rush\n,- Subidon de Adrenalina\n
+rank_explanations.gold,- Adrenaline Rush\n-Jump damage by 3,- Subidon de Adrenalina\n- Dano de salto por 3
 rank_explanations.diamond,Not complete,No esta completo
 rank_explanations.glitch,Not complete,No esta completo
 ,,

@@ -10,11 +10,13 @@ onready var title: Label = $Panel/VBoxContainer/PromptText
 func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("ui_settings_credits_pressed", self, "_ui_settings_credits_pressed")
+	__ = return_button.connect("focus_entered", self, "_button_hovered")
+	__ = return_button.connect("mouse_entered", self, "_button_hovered")
 
 	hide()
 
 	yield(get_tree(), "physics_frame")
-	var copyright: String = "%s\nCopyright (c) 2021 Ayden Springer." % Globals.version_string
+	var copyright: String = "%s\nCopyright (c) 2021-2022 WraithWinterly" % Globals.version_string
 
 	credits.scroll_vertical = 0
 	var engine_string: String = Engine.get_version_info().string
@@ -60,6 +62,7 @@ This game uses Godot Engine %s
 Music Tracks:
 	Antti Luode - Anttis Instrumentals <gamesounds.xyz>
 		Blue Arpeggio
+		Beachy Beach
 		Wonderful Lie
 		Some Kind of Music
 		Feel the Love
@@ -67,6 +70,8 @@ Music Tracks:
 		Rain
 		ET alone ET call home instrumental
 		Beach Walk
+		Guitars and Things
+		Little Guitar
 
 	Daydream Anatomy - 8-Bit-Heroes - 04 Struggle <gamesounds.xyz>
 
@@ -89,8 +94,13 @@ Sound Effects:
 	BFXR <https://www.bfxr.net>
 		Make sound effects for your games.
 
+	"Water, Pouring, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
+	"UI Confirmation Alert, D1.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
+	splash16.wav - https://freesound.org/people/Rocktopus/sounds/233415/
+
 Art:
 	Fox: https://opengameart.org/content/fox-animated
+	Spider: https://opengameart.org/content/2d-spider-animated
 """ % [copyright, engine_string]
 	title.text = copyright
 
@@ -130,6 +140,7 @@ func show_menu() -> void:
 	anim_player.play("show")
 	show()
 	enable_buttons()
+	GlobalUI.dis_focus_sound = true
 	return_button.grab_focus()
 
 
@@ -143,3 +154,6 @@ func _on_Return_pressed() -> void:
 	GlobalUI.menu = GlobalUI.Menus.SETTINGS_GENERAL
 	hide_menu()
 
+
+func _button_hovered() -> void:
+	GlobalEvents.emit_signal("ui_button_hovered")

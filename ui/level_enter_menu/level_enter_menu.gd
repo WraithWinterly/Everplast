@@ -36,6 +36,7 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.LEVEL_ENTER and not GlobalUI.menu_locked:
 		_back_pressed()
+		get_tree().set_input_as_handled()
 
 
 func disable_buttons() -> void:
@@ -121,8 +122,10 @@ func show_menu() -> void:
 	not_active.visible = not allowed
 
 	if allowed:
+		GlobalUI.dis_focus_sound = true
 		start_button.grab_focus()
 	else:
+		GlobalUI.dis_focus_sound = true
 		back_button.grab_focus()
 
 	var index: int = 0

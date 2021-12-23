@@ -47,6 +47,7 @@ func update_text() -> void:
 	var player: Node2D = get_node_or_null(GlobalPaths.PLAYER)
 	if not player == null:
 		text += "Player: %s\n" % str(player.fsm.current_state.name)
+		text += "Player Falling: %s\n" % str(player.falling)
 		text += "Player Position: %s\n" % str(player.global_position)
 		text += "Player Sprinting: %s\n" % str(player.sprinting)
 		text += "Player Second Jump Used: %s\n" % player.second_jump_used

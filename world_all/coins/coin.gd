@@ -16,6 +16,7 @@ func _ready() -> void:
 func _body_entered(body: Node) -> void:
 	if not body.is_in_group("Player"): return
 
+	GlobalInput.start_low_vibration()
 	GlobalEvents.emit_signal("player_collected_coin", coin_amount)
 	coin_sound.play()
 	animation_player.play("collect")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://ui/hud/hud.tscn" type="PackedScene" id=2]
@@ -29,6 +29,10 @@
 [ext_resource path="res://ui/profile_selector/delete_profile_prompt.tscn" type="PackedScene" id=27]
 [ext_resource path="res://ui/profile_selector/update_profile_prompt.tscn" type="PackedScene" id=28]
 [ext_resource path="res://ui/settings_menu/reset_settings_prompt.tscn" type="PackedScene" id=29]
+[ext_resource path="res://ui/ui_button_hover.gd" type="Script" id=30]
+[ext_resource path="res://ui/251389__deadsillyrabbit__button-hover-ogg.ogg" type="AudioStream" id=31]
+[ext_resource path="res://ui/shop/shop_ui.tscn" type="PackedScene" id=32]
+[ext_resource path="res://ui/gui.gd" type="Script" id=33]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 12 )
@@ -51,10 +55,11 @@ adjustment_saturation = 1.15
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 version_prefix = 1
-version_numbers = [ 0, 3, 0 ]
-runtime_pos = Vector2( 967, -30 )
-runtime_world = 1
-runtime_level = 9
+version_post = 1
+version_numbers = [ 0, 4, 0 ]
+runtime_pos = Vector2( 8880, -145 )
+runtime_world = 2
+runtime_level = 8
 
 [node name="LevelTest" type="Node" parent="."]
 script = ExtResource( 21 )
@@ -63,13 +68,13 @@ script = ExtResource( 21 )
 
 [node name="GUI" type="CanvasLayer" parent="."]
 pause_mode = 2
+script = ExtResource( 33 )
 
 [node name="Notification" parent="GUI" instance=ExtResource( 3 )]
 pause_mode = 2
 
 [node name="HUD" parent="GUI" instance=ExtResource( 2 )]
 pause_mode = 2
-visible = false
 
 [node name="Dialog" parent="GUI" instance=ExtResource( 16 )]
 visible = false
@@ -82,8 +87,6 @@ pause_mode = 2
 [node name="SocialPlug" parent="GUI" instance=ExtResource( 26 )]
 
 [node name="QuickPlayPrompt" parent="GUI" instance=ExtResource( 23 )]
-
-[node name="EnterLevel" parent="GUI" instance=ExtResource( 6 )]
 
 [node name="PauseMenu" parent="GUI" instance=ExtResource( 5 )]
 
@@ -111,13 +114,25 @@ pause_mode = 2
 
 [node name="DeleteProfilePopup" parent="GUI" instance=ExtResource( 27 )]
 
-[node name="UIButtonSound" type="AudioStreamPlayer" parent="GUI"]
+[node name="EnterLevel" parent="GUI" instance=ExtResource( 6 )]
+
+[node name="ShopUI" parent="GUI" instance=ExtResource( 32 )]
+
+[node name="UIButtonPress" type="AudioStreamPlayer" parent="GUI"]
 pause_mode = 2
 stream = ExtResource( 19 )
 volume_db = 15.0
 pitch_scale = 1.3
 bus = "Audio"
 script = ExtResource( 8 )
+
+[node name="UIButtonHover" type="AudioStreamPlayer" parent="GUI"]
+pause_mode = 2
+stream = ExtResource( 31 )
+volume_db = 5.0
+pitch_scale = 1.15
+bus = "Audio"
+script = ExtResource( 30 )
 
 [node name="FadePlayer" parent="GUI" instance=ExtResource( 7 )]
 pause_mode = 2

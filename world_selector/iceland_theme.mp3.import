@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/iceland_theme.mp3-33721a1cc82e450a0c01d2ac31b7ac90.mp3str"
+
+[deps]
+
+source_file="res://world_selector/iceland_theme.mp3"
+dest_files=[ "res://.import/iceland_theme.mp3-33721a1cc82e450a0c01d2ac31b7ac90.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

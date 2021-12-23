@@ -1,10 +1,16 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=1]
-[ext_resource path="res://ui/social_plug/twitter.png" type="Texture" id=2]
-[ext_resource path="res://ui/social_plug/youtube.png" type="Texture" id=3]
 [ext_resource path="res://ui/social_plug/social_plug.gd" type="Script" id=4]
-[ext_resource path="res://ui/social_plug/discord.png" type="Texture" id=5]
+[ext_resource path="res://ui/social_plug/web.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -106,85 +112,40 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 977.0
+margin_left = 899.0
 margin_right = 1267.0
-margin_bottom = 129.0
+margin_bottom = 180.0
 mouse_filter = 2
 alignment = 2
 
-[node name="Youtube" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 1.0
-margin_right = 290.0
-margin_bottom = 41.0
+[node name="Web" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+margin_top = 142.0
+margin_right = 368.0
+margin_bottom = 180.0
 alignment = 2
 
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Youtube"]
-modulate = Color( 1, 1, 1, 0.607843 )
-margin_left = 90.0
-margin_right = 246.0
-margin_bottom = 40.0
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Web"]
+modulate = Color( 0, 0.882353, 1, 0.607843 )
+margin_right = 320.0
+margin_bottom = 38.0
+focus_mode = 0
+custom_constants/hseparation = 0
 custom_fonts/font = ExtResource( 1 )
-text = "WraithWinterly"
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/disabled = SubResource( 5 )
+custom_styles/normal = SubResource( 6 )
+text = "sites.google.com/view/everplast"
 flat = true
-align = 2
 
-[node name="Icon" type="TextureRect" parent="HBoxContainer/VBoxContainer/Youtube"]
+[node name="Icon" type="Button" parent="HBoxContainer/VBoxContainer/Web"]
 modulate = Color( 1, 1, 1, 0.607843 )
-margin_left = 250.0
-margin_right = 290.0
-margin_bottom = 40.0
-mouse_filter = 2
-texture = ExtResource( 3 )
-stretch_mode = 4
-
-[node name="Twitter" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 45.0
-margin_right = 290.0
-margin_bottom = 85.0
-alignment = 2
-
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Twitter"]
-modulate = Color( 1, 1, 1, 0.607843 )
-margin_left = 74.0
-margin_right = 246.0
-margin_bottom = 40.0
-custom_fonts/font = ExtResource( 1 )
-text = "@WraithWinterly"
+margin_left = 324.0
+margin_right = 368.0
+margin_bottom = 38.0
+focus_mode = 0
+icon = ExtResource( 5 )
 flat = true
-align = 2
-
-[node name="Icon" type="TextureRect" parent="HBoxContainer/VBoxContainer/Twitter"]
-modulate = Color( 1, 1, 1, 0.607843 )
-margin_left = 250.0
-margin_right = 290.0
-margin_bottom = 40.0
-mouse_filter = 2
-texture = ExtResource( 2 )
-stretch_mode = 4
-
-[node name="Discord" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
-margin_top = 89.0
-margin_right = 290.0
-margin_bottom = 129.0
-alignment = 2
-
-[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/Discord"]
-modulate = Color( 1, 1, 1, 0.607843 )
-margin_right = 246.0
-margin_bottom = 40.0
-custom_fonts/font = ExtResource( 1 )
-text = "discord.gg/36ee6SpDAq"
-flat = true
-align = 2
-
-[node name="Icon" type="TextureRect" parent="HBoxContainer/VBoxContainer/Discord"]
-modulate = Color( 1, 1, 1, 0.607843 )
-margin_left = 250.0
-margin_right = 290.0
-margin_bottom = 40.0
-mouse_filter = 2
-texture = ExtResource( 5 )
-stretch_mode = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 1 )

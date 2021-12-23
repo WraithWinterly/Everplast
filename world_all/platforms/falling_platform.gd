@@ -18,6 +18,7 @@ func _body_entered(body: Node) -> void:
 		activated = true
 		anim_player.play("move")
 		sound.play()
+		GlobalInput.start_normal_vibration()
 
 		yield(anim_player, "animation_finished")
 		yield(get_tree().create_timer(3), "timeout")

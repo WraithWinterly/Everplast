@@ -156,15 +156,16 @@ __meta__ = {
 }
 
 [node name="ProfileButtons" type="HBoxContainer" parent="Panel/BG/VBoxContainer"]
-margin_top = 37.0
-margin_right = 1131.0
-margin_bottom = 467.0
+margin_top = 50.0
+margin_right = 1414.0
+margin_bottom = 580.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="ProfileButton1" parent="Panel/BG/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
-margin_left = 10.0
-margin_right = 220.0
+margin_left = 27.0
+margin_right = 287.0
+margin_bottom = 530.0
 focus_neighbour_left = NodePath("../ProfileButton5")
 focus_neighbour_right = NodePath("../ProfileButton2")
 focus_neighbour_bottom = NodePath("../../../../Buttons/ReturnToMenu")
@@ -173,8 +174,9 @@ focus_previous = NodePath("../ProfileButton5")
 profile_selector_path = NodePath("../../../../..")
 
 [node name="ProfileButton2" parent="Panel/BG/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
-margin_left = 235.0
-margin_right = 445.0
+margin_left = 302.0
+margin_right = 562.0
+margin_bottom = 530.0
 focus_neighbour_left = NodePath("../ProfileButton1")
 focus_neighbour_right = NodePath("../ProfileButton3")
 focus_neighbour_bottom = NodePath("../../../../Buttons/ReturnToMenu")
@@ -184,8 +186,9 @@ profile_selector_path = NodePath("../../../../..")
 my_index = 1
 
 [node name="ProfileButton3" parent="Panel/BG/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
-margin_left = 460.0
-margin_right = 670.0
+margin_left = 577.0
+margin_right = 837.0
+margin_bottom = 530.0
 focus_neighbour_left = NodePath("../ProfileButton2")
 focus_neighbour_right = NodePath("../ProfileButton4")
 focus_neighbour_bottom = NodePath("../../../../Buttons/ReturnToMenu")
@@ -195,8 +198,9 @@ profile_selector_path = NodePath("../../../../..")
 my_index = 2
 
 [node name="ProfileButton4" parent="Panel/BG/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
-margin_left = 685.0
-margin_right = 895.0
+margin_left = 852.0
+margin_right = 1112.0
+margin_bottom = 530.0
 focus_neighbour_left = NodePath("../ProfileButton3")
 focus_neighbour_right = NodePath("../ProfileButton5")
 focus_neighbour_bottom = NodePath("../../../../Buttons/ReturnToMenu")
@@ -206,8 +210,9 @@ profile_selector_path = NodePath("../../../../..")
 my_index = 3
 
 [node name="ProfileButton5" parent="Panel/BG/VBoxContainer/ProfileButtons" instance=ExtResource( 2 )]
-margin_left = 910.0
-margin_right = 1120.0
+margin_left = 1127.0
+margin_right = 1387.0
+margin_bottom = 530.0
 focus_neighbour_left = NodePath("../ProfileButton4")
 focus_neighbour_right = NodePath("../ProfileButton1")
 focus_neighbour_bottom = NodePath("../../../../Buttons/ReturnToMenu")
@@ -228,7 +233,7 @@ __meta__ = {
 }
 
 [node name="ReturnToMenu" type="Button" parent="Panel/Buttons"]
-margin_right = 593.0
+margin_right = 873.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../ManageProfiles")
 focus_neighbour_top = NodePath(".")
@@ -246,8 +251,8 @@ custom_styles/normal = ExtResource( 4 )
 text = "profile_selector.return"
 
 [node name="ManageProfiles" type="Button" parent="Panel/Buttons"]
-margin_left = 608.0
-margin_right = 1118.0
+margin_left = 888.0
+margin_right = 1398.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../ReturnToMenu")
 focus_neighbour_top = NodePath("../../BG/VBoxContainer/ProfileButtons/ProfileButton5")

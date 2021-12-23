@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=2]
 [ext_resource path="res://ui/fade_player/fade_player.gd" type="Script" id=3]
+[ext_resource path="res://ui/fade_player/level_enter.ogg" type="AudioStream" id=4]
 
 [sub_resource type="Animation" id=1]
 length = 0.4
@@ -121,8 +122,8 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="FadeRect/Control/HBoxContainer"]
-margin_left = 638.0
-margin_right = 638.0
+margin_left = 798.0
+margin_right = 798.0
 margin_bottom = 40.0
 mouse_filter = 2
 
@@ -167,11 +168,14 @@ mouse_filter = 2
 texture = SubResource( 6 )
 
 [node name="Label" type="Label" parent="FadeRect/Control/HBoxContainer"]
-margin_left = 642.0
-margin_right = 642.0
+margin_left = 802.0
+margin_right = 802.0
 margin_bottom = 40.0
 custom_fonts/font = ExtResource( 1 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LevelEnter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )

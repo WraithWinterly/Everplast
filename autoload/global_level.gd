@@ -4,8 +4,10 @@ const WORLD_NAMES := [
 	"World 0", "Foggy Overlands", "Drowsy Lands", "Snow Fall", "This is a world?"]
 
 const LEVEL_DATABASE := [
-	0, 9, 5, 4, 4, 4, 4
+	0, 9, 8, 4, 4, 4, 4
 ]
+
+const WORLD_COUNT := 4
 
 const CANVAS_DATABASE := [
 	#W0
@@ -13,7 +15,7 @@ const CANVAS_DATABASE := [
 	#W1
 	[false, false, false, true, false, true, true, false, true, false],
 	#W2
-	[false, false, false, false, false, false, false, false, false, false],
+	[false, false, false, true, false, false, true, false, false, false],
 	#W3
 	[false, false, false, false, false, false, false, false, false, false],
 	#W4
@@ -26,14 +28,13 @@ const CANVAS_SUBSECTION_DATABASE := [
 	#W1
 	[false, false, false, false, false, false, false, false, false, true],
 	#W2
-	[false, false, false, false, false, false, false, false, false, false],
+	[false, false, false, true, false, false, false, false, false, false],
 	#W3
 	[false, false, false, false, false, false, false, false, false, false],
 	#W4
 	[false, false, false, false, false, false, false, false, false, false],
 ]
 
-var level_sound := AudioStreamPlayer.new()
 
 var current_world: int = 0
 var current_level: int = 0
@@ -59,9 +60,6 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("ui_profile_selector_profile_pressed", self, "_ui_profile_selector_profile_pressed")
 	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
 
-	level_sound.bus = "Audio"
-	level_sound.stream = load(GlobalPaths.LEVEL_ENTER_SOUND)
-	add_child(level_sound)
 	pause_mode = PAUSE_MODE_PROCESS
 
 	var prev_level = get_node_or_null("/root/Main/Level")
@@ -70,9 +68,15 @@ func _ready() -> void:
 
 
 func _level_changed(world: int, level: int) -> void:
-	GlobalLevel.in_subsection = false
 
-	level_sound.play()
+	GlobalInput.start_high_vibration()
+
+	if world > WORLD_COUNT:
+		world = WORLD_COUNT
+	if level > LEVEL_DATABASE[world]:
+		level = LEVEL_DATABASE[world]
+
+	GlobalLevel.in_subsection = false
 
 	if checkpoint_active:
 		if not (checkpoint_world == world and checkpoint_level == level):
@@ -95,11 +99,20 @@ func replace_scenes(world: int, level: int) -> void:
 		prev_level.call_deferred("free")
 
 	yield(get_tree(), "physics_frame")
+
 	var new_level: PackedScene = load(GlobalPaths.get_level(world, level))
 
-	# If you crashed here you tried to load a level that doesn't exist
-	get_node(GlobalPaths.LEVEL_HOLDER).call_deferred("add_child", new_level.instance(), true)
-	error_detection()
+	if new_level:
+		get_node(GlobalPaths.LEVEL_HOLDER).call_deferred("add_child", new_level.instance(), true)
+		error_detection()
+	else:
+		level_failed()
+
+
+func level_failed() -> void:
+	GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
+	Globals.game_state = Globals.GameStates.MENU
+	var __: int = get_tree().change_scene("res://main.tscn")
 
 
 func error_detection() -> void:
@@ -153,11 +166,11 @@ func unlock_next_level() -> void:
 		GlobalSave.set_stat("level_max", 1)
 
 	yield(GlobalEvents, "ui_faded")
+
 	GlobalEvents.emit_signal("ui_notification_shown", "%s - %s %s" % [GlobalLevel.WORLD_NAMES[GlobalSave.get_stat("world_max")], GlobalSave.get_stat("level_max"), tr("notification.level_now_active")])
 
 
 func reset_checkpoint() -> void:
-	print("reset checkpoint")
 	checkpoint_world = 0
 	checkpoint_level = 0
 	checkpoint_active = false

@@ -39,15 +39,18 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if mode == USE:
+		if Globals.death_in_progress: return
 		if GlobalInput.ignore_fire: return
 		if not GlobalUI.menu == GlobalUI.Menus.NONE: return
 
 		if Input.is_action_just_pressed("fire") and not can_fire():
 			fail_fire()
+			GlobalInput.start_low_vibration()
 
 		if Input.is_action_pressed("fire"):
 			if can_fire():
 				fire()
+				GlobalInput.start_normal_vibration()
 
 
 func fire() -> void:
@@ -67,9 +70,9 @@ func fire() -> void:
 	inst.global_rotation = get_parent().get_parent().global_rotation
 
 	if get_parent().get_parent().scale.x > 0:
-		inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(inst.get_node("BulletBase/Area2D").speed, 0).rotated(get_parent().global_rotation))
+		inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(inst.get_node("BulletBase").speed, 0).rotated(get_parent().global_rotation))
 	else:
-		inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(-inst.get_node("BulletBase/Area2D").speed, 0).rotated(-get_parent().global_rotation))
+		inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(-inst.get_node("BulletBase").speed, 0).rotated(-get_parent().global_rotation))
 
 	get_node(GlobalPaths.PLAYER_CAMERA).set_trauma(0.25)
 
@@ -124,8 +127,8 @@ func can_fire() -> bool:
 
 
 func _body_entered(body: Node) -> void:
-	if body.is_in_group("Player"):
-		if mode == COLLECT:
+	if mode == COLLECT:
+		if body.is_in_group("Player"):
 			pickup_sound.play()
 			collision_shape.set_deferred("disabled", true)
 			animation_player.play("collected")

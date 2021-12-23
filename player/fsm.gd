@@ -37,6 +37,7 @@ func _ready() -> void:
 
 
 func change_state(new_state: Node, bypass: bool = false):
+	if Globals.death_in_progress: return
 	if not enabled: return
 
 	if Globals.death_in_progress and not bypass: return
