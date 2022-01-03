@@ -1,9 +1,11 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://mobs/slime/slime_hurt.ogg" type="AudioStream" id=1]
 [ext_resource path="res://mobs/components/component_manager.gd" type="Script" id=2]
 [ext_resource path="res://mobs/slime/slime.png" type="Texture" id=3]
 [ext_resource path="res://ui/fonts/16x.tres" type="DynamicFont" id=4]
+[ext_resource path="res://mobs/components/health_bar.gd" type="Script" id=5]
+[ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=6]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 3 )
@@ -142,6 +144,53 @@ tracks/2/keys = {
 "values": [ true, false ]
 }
 
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 1, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 2
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.392157 ) ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "hide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 0.392157 ), Color( 1, 1, 1, 0 ) ]
+}
+
 [node name="MobComponentManager" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -199,6 +248,39 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Index/HealthLabel"]
 anims/label = SubResource( 6 )
+
+[node name="HealthBar" type="ProgressBar" parent="Index"]
+modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.392157 )
+margin_left = -1.0
+margin_top = -6.0
+margin_right = 51.0
+margin_bottom = 15.0
+rect_scale = Vector2( 0.2, 0.2 )
+custom_fonts/font = ExtResource( 4 )
+custom_styles/fg = SubResource( 10 )
+custom_styles/bg = SubResource( 9 )
+value = 100.0
+percent_visible = false
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Index/HealthBar"]
+anchor_right = 1.0
+anchor_bottom = 1.283
+custom_fonts/font = ExtResource( 6 )
+text = "5"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Index/HealthBar"]
+anims/RESET = SubResource( 11 )
+anims/hide = SubResource( 12 )
 
 [node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
 visible = false

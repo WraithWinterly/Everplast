@@ -1,9 +1,57 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=2]
 [ext_resource path="res://ui/fade_player/fade_player.gd" type="Script" id=3]
 [ext_resource path="res://ui/fade_player/level_enter.ogg" type="AudioStream" id=4]
+[ext_resource path="res://ui/main_menu/main_logo.png" type="Texture" id=5]
+
+[sub_resource type="Shader" id=13]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float circle_size : hint_range(0.0, 1.05);
+uniform float screen_width;
+uniform float screen_height;
+
+void fragment() {
+	float ratio = screen_width / screen_height;
+	float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+	COLOR.a = step(circle_size, dist);
+} "
+
+[sub_resource type="ShaderMaterial" id=14]
+shader = SubResource( 13 )
+shader_param/circle_size = 0.0
+shader_param/screen_width = 1600.0
+shader_param/screen_height = 900.0
+
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/circle_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
 
 [sub_resource type="Animation" id=1]
 length = 0.4
@@ -15,10 +63,50 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.02, 0.38, 0.4 ),
+"times": PoolRealArray( 0, 0.02, 0.35, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/circle_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "fade_fancy"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:material:shader_param/circle_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.05, 0.0 ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -77,6 +165,38 @@ region = Rect2( 18, 0, 9, 16 )
 atlas = ExtResource( 2 )
 region = Rect2( 27, 0, 9, 16 )
 
+[sub_resource type="Animation" id=17]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "fade"
+length = 0.4
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.09, 0.35, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="FadePlayer" type="CanvasLayer"]
 layer = 2
 script = ExtResource( 3 )
@@ -86,7 +206,7 @@ color_world_3 = Color( 0.439216, 0.439216, 0.439216, 1 )
 color_world_4 = Color( 0.137255, 0, 0.0588235, 1 )
 
 [node name="FadeRect" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 14 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -98,7 +218,9 @@ __meta__ = {
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FadeRect"]
 pause_mode = 2
+anims/RESET = SubResource( 12 )
 anims/fade = SubResource( 1 )
+anims/fade_fancy = SubResource( 15 )
 
 [node name="Control" type="Control" parent="FadeRect"]
 modulate = Color( 1, 1, 1, 0 )
@@ -177,5 +299,37 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MainLogo" type="CenterContainer" parent="FadeRect"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="FadeRect/MainLogo"]
+margin_left = 800.0
+margin_top = 443.0
+margin_right = 800.0
+margin_bottom = 457.0
+
+[node name="Sprite" type="Sprite" parent="FadeRect/MainLogo/Label"]
+scale = Vector2( 20, 20 )
+texture = ExtResource( 5 )
+offset = Vector2( 0, -3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FadeRect/MainLogo"]
+anims/RESET = SubResource( 17 )
+anims/fade = SubResource( 16 )
+
 [node name="LevelEnter" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
+volume_db = -5.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

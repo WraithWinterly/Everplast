@@ -70,11 +70,14 @@ func _hit_area_body_entered(body: Node) -> void:
 
 
 func _player_invincibility_stopped() -> void:
-	yield(get_tree(), "physics_frame")
 	if mob_component.dead: return
 	if mob_component.damaging_self: return
 	if cooling_down: return
+
+	yield(get_tree(), "physics_frame")
+
 	var bodies = hit_area.get_overlapping_bodies()
+
 	for body in bodies:
 		if body.is_in_group("Player"):
 			_hit_area_body_entered(body)

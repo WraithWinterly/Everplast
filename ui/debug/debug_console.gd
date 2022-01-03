@@ -39,7 +39,7 @@ func show_menu() -> void:
 	prev_menu = GlobalUI.menu
 	GlobalUI.menu = GlobalUI.Menus.DEBUG
 	show()
-	GlobalUI.dis_focus_sound = true
+	
 	input.grab_focus()
 	yield(get_tree(), "idle_frame")
 	input.clear()
@@ -54,7 +54,7 @@ func hide_menu() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("debug_console") and not GlobalUI.menu_locked and not GlobalUI.fade_player_playing:
+	if event.is_action_pressed("debug_console"):
 		if console_visible:
 			hide_menu()
 		else:
@@ -63,13 +63,14 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and visible:
 		if event.scancode == KEY_UP:
 			set_command_history(-1)
-		if event.scancode == KEY_DOWN:
+		elif event.scancode == KEY_DOWN:
 			set_command_history(1)
 
 
 func set_command_history(offset: int) -> void:
 	command_history_line += offset
 	command_history_line = int(clamp(command_history_line, 0, command_history.size()))
+
 	if command_history_line < command_history.size() and command_history.size() > 0:
 		input.text = command_history[command_history_line]
 		input.caret_position = input.text.length()
@@ -113,17 +114,17 @@ func process_command(text) -> void:
 
 func check_type(string: String, type: int, index: int) -> bool:
 	match type:
-		command_handler.ARG_INT:
+		command_handler.Arguments.INT:
 			if string.is_valid_integer():
 				all_words[index] = int(string)
 				return true
-		command_handler.ARG_FLOAT:
+		command_handler.Arguments.FLOAT:
 			if string.is_valid_float():
 				all_words[index] = float(string)
 				return true
-		command_handler.ARG_STRING:
+		command_handler.Arguments.STRING:
 			return true
-		command_handler.ARG_BOOL:
+		command_handler.Arguments.BOOL:
 			if string == "true" or string == "1":
 				all_words[index] = bool(string)
 				return true
@@ -140,11 +141,11 @@ func output_text(text) -> void:
 
 
 func _text_entered(new_text: String) -> void:
+	if GlobalUI.menu_locked or GlobalUI.fade_player_playing:
+		output_text("Please wait for current transition to finish")
+		return
+
 	input.clear()
 	new_text = new_text.to_lower()
 	process_command(new_text)
 	command_history_line = command_history.size()
-
-
-func _error_level_changed() -> void:
-	output_text("Failed changing level! Potentionally to World %s, Level %s" % [last_world.x, last_world.y])

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/353069__ying16__highlight-harpepianoedit02.wav-120922ca6685ca307db6a7103c421787.sample"
+
+[deps]
+
+source_file="res://ui/353069__ying16__highlight-harpepianoedit02.wav"
+dest_files=[ "res://.import/353069__ying16__highlight-harpepianoedit02.wav-120922ca6685ca307db6a7103c421787.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -327,6 +327,7 @@ orb_amount = 2500
 knockback = 200
 attack_damage = 20
 max_health = 100
+free_on_death = false
 
 [node name="HitSound" parent="EnemyComponentManager" index="0"]
 stream = ExtResource( 8 )

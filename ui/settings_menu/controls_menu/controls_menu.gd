@@ -235,7 +235,7 @@ func get_settings_controls_2() -> Dictionary:
 
 
 func show_menu() -> void:
-	GlobalUI.dis_focus_sound = true
+	
 	return_button.grab_focus()
 	show()
 	enable_buttons()

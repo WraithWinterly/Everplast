@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=63 format=2]
 
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
@@ -33,10 +33,14 @@
 [ext_resource path="res://player/523650__matrixxx__powerup-06.wav" type="AudioStream" id=31]
 [ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=32]
 [ext_resource path="res://ui/level_icon.png" type="Texture" id=33]
+[ext_resource path="res://world_all/equippables/snow_gun.png" type="Texture" id=34]
+[ext_resource path="res://world_all/collectables/snow.png" type="Texture" id=35]
 [ext_resource path="res://ui/check_box.png" type="Texture" id=36]
 [ext_resource path="res://ui/check_box_checked.png" type="Texture" id=37]
 [ext_resource path="res://world_all/powerups/pear.png" type="Texture" id=38]
 [ext_resource path="res://world_all/powerups/glitch_soul.png" type="Texture" id=39]
+[ext_resource path="res://world_all/equippables/ice_gun.png" type="Texture" id=40]
+[ext_resource path="res://world_all/powerups/ice_spike.png" type="Texture" id=41]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -725,7 +729,7 @@ __meta__ = {
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Powerups/BG/HBoxContainer"]
 margin_right = 645.0
-margin_bottom = 502.0
+margin_bottom = 470.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
@@ -862,7 +866,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Glitch Soul2" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
+[node name="Ice Spike" type="Button" parent="Panel/Powerups/BG/HBoxContainer/Buttons"]
 margin_top = 420.0
 margin_right = 645.0
 margin_bottom = 470.0
@@ -873,8 +877,8 @@ custom_styles/pressed = ExtResource( 20 )
 custom_styles/focus = ExtResource( 18 )
 custom_styles/disabled = ExtResource( 19 )
 custom_styles/normal = ExtResource( 19 )
-text = "Extra Item"
-icon = ExtResource( 39 )
+text = "Ice Spike"
+icon = ExtResource( 41 )
 align = 2
 expand_icon = true
 __meta__ = {
@@ -1048,6 +1052,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Snow Gun" type="Button" parent="Panel/Collectables/Equippables/Buttons"]
+margin_top = 210.0
+margin_right = 577.0
+margin_bottom = 270.0
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Snow Gun"
+icon = ExtResource( 34 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ice Gun" type="Button" parent="Panel/Collectables/Equippables/Buttons"]
+margin_top = 280.0
+margin_right = 577.0
+margin_bottom = 340.0
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Ice Gun"
+icon = ExtResource( 40 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Collectables" type="Panel" parent="Panel/Collectables"]
 anchor_left = 0.55
 anchor_top = 0.02
@@ -1150,6 +1190,30 @@ custom_styles/disabled = ExtResource( 19 )
 custom_styles/normal = ExtResource( 19 )
 text = "Nail x999"
 icon = ExtResource( 25 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Snowball" type="Button" parent="Panel/Collectables/Collectables/Buttons"]
+margin_top = 210.0
+margin_right = 510.0
+margin_bottom = 270.0
+focus_neighbour_left = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_top = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_right = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_neighbour_bottom = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_next = NodePath("../../../../HBoxContainer/CollectablesButton")
+focus_previous = NodePath("../../../../HBoxContainer/CollectablesButton")
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 21 )
+custom_styles/pressed = ExtResource( 20 )
+custom_styles/focus = ExtResource( 18 )
+custom_styles/disabled = ExtResource( 19 )
+custom_styles/normal = ExtResource( 19 )
+text = "Snow"
+icon = ExtResource( 35 )
 align = 2
 expand_icon = true
 __meta__ = {
@@ -1725,12 +1789,14 @@ bus = "Audio"
 [connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul" to="." method="_on_Glitch_Soul_focus_entered"]
 [connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul" to="." method="_on_Glitch_Soul_mouse_entered"]
 [connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul" to="." method="_powerup_pressed"]
-[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul2" to="." method="_on_Glitch_Soul_focus_entered"]
-[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul2" to="." method="_on_Glitch_Soul_mouse_entered"]
-[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Glitch Soul2" to="." method="_powerup_pressed"]
+[connection signal="focus_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Ice Spike" to="." method="_on_Ice_Spike_focus_entered"]
+[connection signal="mouse_entered" from="Panel/Powerups/BG/HBoxContainer/Buttons/Ice Spike" to="." method="_on_Ice_Spike_mouse_entered"]
+[connection signal="pressed" from="Panel/Powerups/BG/HBoxContainer/Buttons/Ice Spike" to="." method="_powerup_pressed"]
 [connection signal="focus_entered" from="Panel/Powerups/Fill" to="." method="_on_Fill_focus_entered"]
 [connection signal="mouse_entered" from="Panel/Powerups/Fill" to="." method="_on_Fill_mouse_entered"]
 [connection signal="pressed" from="Panel/Powerups/Fill" to="." method="_on_Fill_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equippables/Buttons/Water Gun" to="." method="_equippable_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equippables/Buttons/Nail Gun" to="." method="_equippable_pressed"]
 [connection signal="pressed" from="Panel/Collectables/Equippables/Buttons/Laser Gun" to="." method="_equippable_pressed"]
+[connection signal="pressed" from="Panel/Collectables/Equippables/Buttons/Snow Gun" to="." method="_equippable_pressed"]
+[connection signal="pressed" from="Panel/Collectables/Equippables/Buttons/Ice Gun" to="." method="_equippable_pressed"]

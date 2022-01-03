@@ -10,6 +10,7 @@ export var orb_amount: int = 10
 export var knockback: int = 150
 export var attack_damage: int = 1
 export var max_health: int = 1
+export var free_on_death := true
 
 var health: int = 1
 
@@ -35,6 +36,7 @@ func _ready() -> void:
 
 func damage(damage_type: int, body = null) -> void:
 	emit_signal("hit")
+
 	match damage_type:
 		Globals.HurtTypes.JUMP:
 			remove_health(GlobalStats.get_player_jump_damage())
@@ -47,8 +49,9 @@ func damage(damage_type: int, body = null) -> void:
 	if health_label_animation_player.is_playing():
 		health_label_animation_player.stop()
 
-	if GlobalSave.get_stat("rank") >= GlobalStats.Ranks.SILVER:
-		health_label.text = "%s / %s" % [health, max_health]
+	if GlobalSave.get_stat("rank") >= GlobalStats.Ranks.SILVER \
+			and not GlobalSave.get_stat("rank") >= GlobalStats.Ranks.DIAMOND:
+		health_label.text = "%s  |  %s" % [health, max_health]
 		if not health_label_animation_player.is_playing():
 			health_label_animation_player.play("label")
 
@@ -73,6 +76,8 @@ func remove_health(number) -> void:
 
 func die(hurt_type: int) -> void:
 	if damaging_self: return
+
+	$Index/HealthBar/AnimationPlayer.play("hide")
 	emit_signal("died")
 	dead = true
 	death_sound.play()
@@ -94,5 +99,6 @@ func die(hurt_type: int) -> void:
 			orb_instance.global_position = Vector2(global_position.x + 2, global_position.y- 10)
 		level.call_deferred("add_child", orb_instance)
 
-	yield(hurt_anim_player, "animation_finished")
-	call_deferred("free")
+	if free_on_death:
+		yield(hurt_anim_player, "animation_finished")
+		call_deferred("free")

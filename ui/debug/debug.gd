@@ -31,8 +31,8 @@ func update_text() -> void:
 	text += "Checkpoint World: %s\n" % GlobalLevel.checkpoint_world
 	text += "Checkpoint Level: %s\n" % GlobalLevel.checkpoint_level
 	text += "Quick Play Profile: %s\n" % GlobalQuickPlay.data["last_profile"]
-
 	text += "\n"
+
 	if not Globals.game_state == Globals.GameStates.MENU:
 		text += "Max World: %s\n" % GlobalSave.get_stat("world_max")
 		text += "Max Level: %s\n" % GlobalSave.get_stat("level_max")
@@ -40,10 +40,12 @@ func update_text() -> void:
 		text += "Last Level: %s\n" % GlobalSave.get_stat("level_last")
 		text += "In Subsection: %s\n" % GlobalLevel.in_subsection
 		text += "Current Rank: %s\n" % GlobalSave.get_stat("rank")
-		text += "Last Powerup: %s\n" % get_node("/root/Main/GUI/Inventory").last_powerup
-		text += "Last Equippable: %s\n" % get_node("/root/Main/GUI/Inventory").last_equippable
+
+		text += "Last Powerup: %s\n" % GlobalStats.last_powerup
+		text += "Last Equippable: %s\n" % get_node("/root/Main/GUI/Control/Inventory").last_equippable
 
 	text += "\n"
+
 	var player: Node2D = get_node_or_null(GlobalPaths.PLAYER)
 	if not player == null:
 		text += "Player: %s\n" % str(player.fsm.current_state.name)

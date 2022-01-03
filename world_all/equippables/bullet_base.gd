@@ -1,13 +1,14 @@
 extends RigidBody2D
 
-var grace: bool = false
-var ignore: bool = false
-var player_bullet: bool = false
+var equippable_owner: String
 
 var grace_period: int = 0
-
 var damage: int
 var speed: int
+
+var grace := false
+var ignore := false
+var player_bullet := false
 
 onready var sound: AudioStreamPlayer = $Sound
 onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -15,22 +16,11 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 
 
 func _ready() -> void:
+	damage = GlobalStats.get_equippable_damage(equippable_owner)
+	speed = GlobalStats.get_equippable_speed(equippable_owner)
+	randomize()
+	sound.pitch_scale += rand_range(-0.1, 0.1)
 	sound.play()
-
-	match GlobalSave.get_stat("equipped_item"):
-		"nail gun":
-			damage = 10
-			speed = 300
-		"laser gun":
-			damage = 5
-			speed = 700
-		"water gun":
-			damage = 1
-			speed = 500
-
-
-func _process(_delta: float) -> void:
-	angular_velocity = 0
 
 
 func _physics_process(_delta: float) -> void:

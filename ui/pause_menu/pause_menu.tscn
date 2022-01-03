@@ -235,9 +235,9 @@ text = "World Name - Level"
 align = 1
 
 [node name="PauseButtons" type="VBoxContainer" parent="."]
-anchor_left = 0.3
+anchor_left = 0.35
 anchor_top = 0.35
-anchor_right = 0.7
+anchor_right = 0.65
 anchor_bottom = 0.5
 margin_bottom = 80.4
 custom_constants/separation = 15
@@ -248,7 +248,7 @@ __meta__ = {
 
 [node name="Continue" type="Button" parent="PauseButtons"]
 margin_top = 2.0
-margin_right = 640.0
+margin_right = 480.0
 margin_bottom = 62.0
 focus_neighbour_left = NodePath("../Return")
 focus_neighbour_top = NodePath("../Return")
@@ -266,7 +266,7 @@ text = "pause_menu.continue"
 
 [node name="Settings" type="Button" parent="PauseButtons"]
 margin_top = 77.0
-margin_right = 640.0
+margin_right = 480.0
 margin_bottom = 137.0
 focus_neighbour_left = NodePath("../Continue")
 focus_neighbour_top = NodePath("../Continue")
@@ -281,7 +281,7 @@ text = "pause_menu.settings"
 
 [node name="Return" type="Button" parent="PauseButtons"]
 margin_top = 152.0
-margin_right = 640.0
+margin_right = 480.0
 margin_bottom = 212.0
 focus_neighbour_right = NodePath("../Continue")
 focus_neighbour_bottom = NodePath("../Continue")

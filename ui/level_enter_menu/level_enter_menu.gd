@@ -53,6 +53,9 @@ func hide_menu() -> void:
 	disable_buttons()
 	anim_player.play_backwards("show")
 	get_tree().paused = false
+	yield(anim_player, "animation_finished")
+	if not anim_player.is_playing():
+		$BGBlur.hide()
 
 
 func show_menu() -> void:
@@ -122,10 +125,10 @@ func show_menu() -> void:
 	not_active.visible = not allowed
 
 	if allowed:
-		GlobalUI.dis_focus_sound = true
+
 		start_button.grab_focus()
 	else:
-		GlobalUI.dis_focus_sound = true
+
 		back_button.grab_focus()
 
 	var index: int = 0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://world1/rain.wav" type="AudioStream" id=1]
-[ext_resource path="res://tilesets/tilemap_w1_grass.tres" type="TileSet" id=2]
+[ext_resource path="res://tilesets/tileset_grass.tres" type="TileSet" id=2]
 [ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=3]
 [ext_resource path="res://world_all/level.gd" type="Script" id=4]
 [ext_resource path="res://world_all/trees/tree.tscn" type="PackedScene" id=5]
@@ -26,7 +26,7 @@
 [ext_resource path="res://mobs/slime_flying/slime_flying.tscn" type="PackedScene" id=25]
 [ext_resource path="res://mobs/bunny/bunny.tscn" type="PackedScene" id=26]
 [ext_resource path="res://world_all/tilemap_block/block.png" type="Texture" id=27]
-[ext_resource path="res://tilesets/tilemap_platform.tres" type="TileSet" id=28]
+[ext_resource path="res://world_all/platforms/tileset_platform.tres" type="TileSet" id=28]
 
 [sub_resource type="Gradient" id=6]
 offsets = PoolRealArray( 0.0808081, 0.936027 )
@@ -284,7 +284,7 @@ cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 2
 collision_mask = 12
 format = 1
-tile_data = PoolIntArray( -1965859, 0, 0, -786255, 2, 0, -393172, 0, 0, -196564, 0, 0, 7864334, 5, 0, 7864338, 5, 0, 7864341, 5, 0 )
+tile_data = PoolIntArray( -1965859, 0, 0, -786255, 11, 0, -393172, 0, 0, -196564, 0, 0, 7864334, 5, 0, 7864338, 5, 0, 7864341, 5, 0 )
 __meta__ = {
 "_edit_lock_": true
 }

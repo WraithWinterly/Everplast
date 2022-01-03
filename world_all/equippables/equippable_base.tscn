@@ -3,7 +3,7 @@
 [ext_resource path="res://world_all/equippables/equippable_base.gd" type="Script" id=1]
 [ext_resource path="res://world_all/equippables/pickup_equipable.wav" type="AudioStream" id=2]
 [ext_resource path="res://world_all/equippables/water_gun.png" type="Texture" id=3]
-[ext_resource path="res://world_all/equippables/no_amo.wav" type="AudioStream" id=4]
+[ext_resource path="res://world_all/equippables/560961__bricklover__snowball-smash-1.wav" type="AudioStream" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 10.1924
@@ -119,8 +119,8 @@ bus = "Audio"
 
 [node name="NoAmo" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-volume_db = -9.0
-pitch_scale = 1.12
+volume_db = 15.0
+pitch_scale = 1.23
 bus = "Audio"
 
 [node name="Position2D" type="Position2D" parent="."]

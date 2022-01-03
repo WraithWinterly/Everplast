@@ -6,6 +6,8 @@ const WATER_GRAVITY: int = 150
 const WATER_SUCTION: int = 50
 const WATER_JUMP_BOOST: int = 350
 const INVINCIBILITY_TIME: float = 0.65
+const LERP_SPEED: float = 0.08
+const LERP_SPEED_ICE: float = 0.025
 
 var linear_velocity := Vector2.ZERO
 
@@ -14,6 +16,8 @@ var walk_speed: float = 65
 var air_time: float = 0
 var current_speed: float = 0
 var speed_modifier: float = 1
+var speed_modifier_land: float = 1
+var lerp_speed: float = LERP_SPEED
 
 var jump_speed: int = 200
 var current_gravity: int = 0
@@ -85,6 +89,13 @@ func _physics_process(_delta):
 	if is_on_floor():
 		second_jump_used = false
 
+	if is_on_ice():
+		lerp_speed = LERP_SPEED_ICE
+		speed_modifier_land = 1.8
+	else:
+		lerp_speed = LERP_SPEED
+		speed_modifier_land = 1
+
 	if was_falling and is_on_floor():
 		yield(get_tree(), "physics_frame")
 		yield(get_tree(), "physics_frame")
@@ -101,7 +112,7 @@ func basic_movement():
 
 	current_speed *= GlobalInput.get_action_strength()
 
-	linear_velocity.x = lerp(linear_velocity.x, current_speed * speed_modifier, 0.08)
+	linear_velocity.x = lerp(linear_velocity.x, current_speed * speed_modifier * speed_modifier_land, lerp_speed)
 	linear_velocity.y += delta * current_gravity
 
 	if not fsm.current_state == fsm.idle:
@@ -125,6 +136,18 @@ func basic_movement():
 		was_falling = true
 	#falling = linear_velocity.y > 0
 	down_check()
+
+
+func is_on_ice() -> bool:
+	for i in get_slide_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.collider
+		if collider is TileMap:
+			match collider.name:
+				"TileMapW3Ice":
+					return true
+
+	return false
 
 
 func round_to_dec(num, decimal):
@@ -157,9 +180,10 @@ func spawn_water_particles() -> void:
 	var w_part: PackedScene = load(GlobalPaths.WATER_PARTICLES)
 	var part_inst = w_part.instance()
 
-	get_node(GlobalPaths.LEVEL).add_child(part_inst)
-	part_inst.global_position = global_position
-	part_inst.global_position.y += 12
+	get_node(GlobalPaths.LEVEL).call_deferred("add_child", part_inst)
+	var new_pos: Vector2 = global_position
+	new_pos.y += 12
+	part_inst.set_deferred("global_position", new_pos)
 
 
 func dash_failed() -> void:
@@ -251,12 +275,15 @@ func _player_hurt_enemy(hurt_type: int) -> void:
 			fsm.change_state(fsm.jump)
 
 
-func _player_hurt_from_enemy(hurt_type: int, knockback: int, _damage: int) -> void:
+func _player_hurt_from_enemy(hurt_type: int, knockback: int, damage: int) -> void:
 	if fsm.current_state == fsm.dash: return
 	if Globals.player_invincible: return
 	if Globals.death_in_progress: return
 
 	GlobalInput.start_high_vibration()
+
+	GlobalSave.set_health(GlobalSave.get_stat("health") - damage)
+
 
 	if not GlobalSave.get_stat("health") <= 0:
 		if hurt_type == Globals.HurtTypes.TOUCH:
@@ -291,9 +318,9 @@ func _player_killed_enemy(hurt_type: int):
 func _player_used_powerup(item_name: String) -> void:
 	match item_name:
 		"bunny egg":
-			speed_modifier = GlobalStats.bunny_egg_boost
+			speed_modifier = GlobalStats.BUNNY_EGG_BOOST
 		"glitch orb":
-			start_invincibility(GlobalStats.glitch_orb_time)
+			start_invincibility(GlobalStats.GLITCH_ORB_TIME)
 
 
 func _player_powerup_ended(item_name: String) -> void:

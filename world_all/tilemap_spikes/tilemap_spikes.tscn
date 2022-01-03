@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://tilesets/tilemap_spikes.tres" type="TileSet" id=1]
+[ext_resource path="res://tilesets/tileset_spikes.tres" type="TileSet" id=1]
 [ext_resource path="res://world_all/tilemap_spikes/tilemap_spikes.gd" type="Script" id=2]
 
 [node name="TileMapSpikes" type="TileMap" groups=["Spikes"]]

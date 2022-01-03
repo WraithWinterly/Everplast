@@ -36,12 +36,14 @@ func start() -> void:
 	player.second_jump_used = true
 	dash_time = 0
 	player.linear_velocity = Vector2(0, 0)
+
 	if player.facing_right:
 		player.linear_velocity.x += dash_speed
 		dashing_right = true
 	else:
 		player.linear_velocity.x -= dash_speed
 		dashing_right = false
+
 	player.may_dash = false
 	dash_sound.pitch_scale = rng.randf_range(0.8, 1.2)
 	dash_sound.play()

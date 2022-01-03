@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/zapTwoTone.mp3-62c873bcd3dc6f799c4cf55bc3df8177.mp3str"
+
+[deps]
+
+source_file="res://ui/zapTwoTone.mp3"
+dest_files=[ "res://.import/zapTwoTone.mp3-62c873bcd3dc6f799c4cf55bc3df8177.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

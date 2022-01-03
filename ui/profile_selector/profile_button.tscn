@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=12]
 [ext_resource path="res://ui/fonts/16x.tres" type="DynamicFont" id=13]
 [ext_resource path="res://ui/level_icon.png" type="Texture" id=14]
+[ext_resource path="res://world_all/gems/gem.png" type="Texture" id=15]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 50.0
@@ -109,11 +110,11 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Stats"]
 margin_right = 98.0
-margin_bottom = 66.0
+margin_bottom = 80.0
 
 [node name="Icons" type="VBoxContainer" parent="Stats/HBoxContainer"]
 margin_right = 8.0
-margin_bottom = 66.0
+margin_bottom = 80.0
 custom_constants/separation = 6
 
 [node name="Level" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
@@ -172,10 +173,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Adrenaline" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
+[node name="Gem" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
 margin_top = 56.0
 margin_right = 8.0
 margin_bottom = 64.0
+alignment = 1
+
+[node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Gem"]
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Adrenaline" type="HBoxContainer" parent="Stats/HBoxContainer/Icons"]
+margin_top = 70.0
+margin_right = 8.0
+margin_bottom = 78.0
 alignment = 1
 
 [node name="Texture" type="TextureRect" parent="Stats/HBoxContainer/Icons/Adrenaline"]
@@ -189,7 +204,7 @@ __meta__ = {
 [node name="Text" type="VBoxContainer" parent="Stats/HBoxContainer"]
 margin_left = 12.0
 margin_right = 36.0
-margin_bottom = 66.0
+margin_bottom = 80.0
 
 [node name="Level" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
 margin_right = 24.0
@@ -241,10 +256,23 @@ text = "--"
 align = 1
 valign = 1
 
-[node name="Adrenaline" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
+[node name="Gem" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
 margin_top = 56.0
 margin_right = 24.0
 margin_bottom = 66.0
+
+[node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Gem"]
+margin_right = 8.0
+margin_bottom = 10.0
+custom_fonts/font = ExtResource( 13 )
+text = "--"
+align = 1
+valign = 1
+
+[node name="Adrenaline" type="HBoxContainer" parent="Stats/HBoxContainer/Text"]
+margin_top = 70.0
+margin_right = 24.0
+margin_bottom = 80.0
 
 [node name="Label" type="Label" parent="Stats/HBoxContainer/Text/Adrenaline"]
 margin_right = 24.0

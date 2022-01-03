@@ -19,10 +19,10 @@
 [ext_resource path="res://mobs/bunny/bunny.tscn" type="PackedScene" id=17]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=18]
 [ext_resource path="res://mobs/scorpion/scorpion.tscn" type="PackedScene" id=20]
-[ext_resource path="res://tilesets/tilemap_w2_sandstone.tres" type="TileSet" id=21]
+[ext_resource path="res://tilesets/tileset_sandstone.tres" type="TileSet" id=21]
 [ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=22]
 [ext_resource path="res://mobs/fox/fox.tscn" type="PackedScene" id=23]
-[ext_resource path="res://world2/canvas_mountain.tscn" type="PackedScene" id=24]
+[ext_resource path="res://world2/canvas_mountain_w2.tscn" type="PackedScene" id=24]
 [ext_resource path="res://world_all/coins/coin_10.tscn" type="PackedScene" id=25]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=27]
 

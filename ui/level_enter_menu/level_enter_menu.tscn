@@ -452,8 +452,8 @@ __meta__ = {
 }
 
 [node name="GemSlot1" type="TextureRect" parent="Panel/GemBG/GenContainer"]
-margin_left = 75.0
-margin_right = 91.0
+margin_left = 101.0
+margin_right = 117.0
 margin_bottom = 16.0
 mouse_filter = 0
 texture = ExtResource( 4 )
@@ -477,8 +477,8 @@ anims/RESET = SubResource( 13 )
 anims/show = SubResource( 5 )
 
 [node name="GemSlot2" type="TextureRect" parent="Panel/GemBG/GenContainer"]
-margin_left = 95.0
-margin_right = 111.0
+margin_left = 121.0
+margin_right = 137.0
 margin_bottom = 16.0
 mouse_filter = 0
 texture = ExtResource( 4 )
@@ -499,8 +499,8 @@ anims/RESET = SubResource( 14 )
 anims/show = SubResource( 11 )
 
 [node name="GemSlot3" type="TextureRect" parent="Panel/GemBG/GenContainer"]
-margin_left = 115.0
-margin_right = 131.0
+margin_left = 141.0
+margin_right = 157.0
 margin_bottom = 16.0
 mouse_filter = 0
 texture = ExtResource( 4 )
@@ -564,8 +564,8 @@ __meta__ = {
 }
 
 [node name="1" type="TextureRect" parent="Panel/LogoBG/WorldIcons"]
-margin_left = 2.0
-margin_right = 11.0
+margin_left = 4.0
+margin_right = 13.0
 margin_bottom = 16.0
 mouse_filter = 2
 texture = SubResource( 3 )
@@ -624,7 +624,8 @@ __meta__ = {
 }
 
 [node name="Back" type="Button" parent="Panel/HBoxContainer"]
-margin_right = 242.0
+margin_left = 67.0
+margin_right = 309.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
@@ -644,8 +645,8 @@ __meta__ = {
 }
 
 [node name="Start" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 252.0
-margin_right = 762.0
+margin_left = 319.0
+margin_right = 829.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Back")
 focus_neighbour_top = NodePath(".")

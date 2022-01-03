@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/560961__bricklover__snowball-smash-1.wav-54865b44dd80f5ece13bd4a74824f0ed.sample"
+
+[deps]
+
+source_file="res://world_all/equippables/560961__bricklover__snowball-smash-1.wav"
+dest_files=[ "res://.import/560961__bricklover__snowball-smash-1.wav-54865b44dd80f5ece13bd4a74824f0ed.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

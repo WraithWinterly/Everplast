@@ -175,7 +175,6 @@ func _ready() -> void:
 	hide()
 
 
-
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("fullscreen"):
 		if OS.window_fullscreen:
@@ -236,7 +235,7 @@ func update_button_toggles() -> void:
 func show_menu() -> void:
 	disable_side_panel_right_focus()
 	subcategory_anim_player.play("slide")
-	GlobalUI.dis_focus_sound = true
+
 	back_button.grab_focus()
 	show()
 	animation_player.play("show")
@@ -474,7 +473,7 @@ func back() -> void:
 		GlobalUI.Menus.SETTINGS_GENERAL:
 			general_anim_player.play_backwards("slide")
 			subcategory_anim_player.play("slide")
-			GlobalUI.dis_focus_sound = true
+
 			general_menu_button.grab_focus()
 			GlobalUI.menu = GlobalUI.Menus.SETTINGS
 			in_category = false
@@ -482,7 +481,7 @@ func back() -> void:
 		GlobalUI.Menus.SETTINGS_GRAPHICS:
 			graphics_anim_player.play_backwards("slide")
 			subcategory_anim_player.play("slide")
-			GlobalUI.dis_focus_sound = true
+
 			graphics_menu_button.grab_focus()
 			GlobalUI.menu = GlobalUI.Menus.SETTINGS
 			in_category = false
@@ -490,7 +489,7 @@ func back() -> void:
 		GlobalUI.Menus.SETTINGS_CONTROLS:
 			controls_anim_player.play_backwards("slide")
 			subcategory_anim_player.play("slide")
-			GlobalUI.dis_focus_sound = true
+
 			controls_menu_button.grab_focus()
 			GlobalUI.menu = GlobalUI.Menus.SETTINGS
 			in_category = false
@@ -498,7 +497,7 @@ func back() -> void:
 		GlobalUI.Menus.SETTINGS_OTHER:
 			other_anim_player.play_backwards("slide")
 			subcategory_anim_player.play("slide")
-			GlobalUI.dis_focus_sound = true
+
 			other_menu_button.grab_focus()
 			GlobalUI.menu = GlobalUI.Menus.SETTINGS
 			in_category = false
@@ -567,25 +566,25 @@ func _ui_settings_pressed() -> void:
 
 func _ui_settings_credits_back_pressed() -> void:
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	credits_button.grab_focus()
 
 
 func _ui_settings_controls_customize_back_pressed() -> void:
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	controls_customize_button.grab_focus()
 
 
 func _ui_settings_erase_all_prompt_no_pressed() -> void:
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	erase_all_button.grab_focus()
 
 
 func _ui_settings_erase_all_prompt_extra_no_pressed() -> void:
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	erase_all_button.grab_focus()
 
 
@@ -604,7 +603,7 @@ func _ui_settings_erase_all_prompt_extra_yes_pressed() -> void:
 
 func _ui_settings_reset_settings_prompt_no_pressed() -> void:
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	reset_settings_button.grab_focus()
 
 
@@ -614,14 +613,14 @@ func _ui_settings_reset_settings_prompt_yes_pressed() -> void:
 	yield(get_tree(), "physics_frame")
 
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	reset_settings_button.grab_focus()
 	reset_file()
 
 
 func _ui_settings_language_back_pressed() -> void:
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	language_button.grab_focus()
 
 
@@ -650,7 +649,7 @@ func _general_pressed() -> void:
 		else:
 			previous_menu_back()
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_GENERAL
-		GlobalUI.dis_focus_sound = true
+
 		language_button.grab_focus()
 	update_left_button_focus()
 	update_right_button_focus()
@@ -670,7 +669,7 @@ func _graphics_pressed() -> void:
 		else:
 			previous_menu_back()
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_GRAPHICS
-		GlobalUI.dis_focus_sound = true
+
 		fullscreen_button.grab_focus()
 	update_left_button_focus()
 	update_right_button_focus()
@@ -690,7 +689,7 @@ func _controls_pressed() -> void:
 		else:
 			previous_menu_back()
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_CONTROLS
-		GlobalUI.dis_focus_sound = true
+
 		controls_customize_button.grab_focus()
 	update_left_button_focus()
 	update_right_button_focus()
@@ -710,7 +709,7 @@ func _other_pressed() -> void:
 		else:
 			previous_menu_back()
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_OTHER
-		GlobalUI.dis_focus_sound = true
+
 		reset_settings_button.grab_focus()
 	update_left_button_focus()
 	update_right_button_focus()
@@ -797,14 +796,14 @@ func _controls_customize_button_pressed() -> void:
 
 
 func _reset_settings_button_pressed() -> void:
-	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 	GlobalEvents.emit_signal("ui_settings_reset_settings_pressed")
 	GlobalUI.menu = GlobalUI.Menus.SETTINGS_RESET_SETTINGS_PROMPT
 	disable_buttons()
 
 
 func _erase_all_button_pressed() -> void:
-	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 	GlobalEvents.emit_signal("ui_settings_erase_all_pressed")
 	GlobalUI.menu = GlobalUI.Menus.SETTINGS_ERASE_ALL_PROMPT
 	disable_buttons()

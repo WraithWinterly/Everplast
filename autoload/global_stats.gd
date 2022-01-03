@@ -25,24 +25,6 @@ enum Collectables {
 	ENERGY
 }
 
-const equippable_items: Array = ["none", "water gun", "nail gun", "laser gun"]
-
-const bunny_egg_boost := 1.4
-const adrenaline_time_decrease_from_level_up := 0.95
-
-const stat_increase_from_level_up: int = 5
-
-const cherry_boost: int = 5
-const carrot_boost: int = 2
-const coconut_boost: int = 5
-const pear_health_boost: int = 10
-const pear_adrenaline_boost: int = 5
-
-const bunny_egg_time: int = 10
-const glitch_orb_time: int = 7
-
-const pear_time: int = 5
-const pear_consequence: int = 5
 
 const RANK_EXPLANATIONS := {
 	"none": "rank_explanations.none",
@@ -60,7 +42,7 @@ const RANK_NAMES := {
 	"Glitch": "rank_names.glitch",
 }
 
-const POWERUP_NAMES := {
+const COMMON_NAMES := {
 	"Carrot": "inventory.item.carrot",
 	"Cherry": "inventory.item.cherry",
 	"Coconut": "inventory.item.coconut",
@@ -68,68 +50,71 @@ const POWERUP_NAMES := {
 	"Glitch Orb": "inventory.item.glitch_orb",
 	"Pear": "inventory.item.pear",
 	"Glitch Soul": "inventory.item.glitch_soul",
+	"Ice Spike": "inventory.item.ice_spike",
 
 	"Energy": "inventory.collectable.energy",
 	"Water": "inventory.collectable.water",
 	"Nail": "inventory.collectable.nail",
+	"Snowball": "inventory.collectable.snowball",
 
 	"Water Gun": "inventory.equippable.water_gun",
 	"Nail Gun": "inventory.equippable.nail_gun",
-	"Laser Gun": "inventory.equippable.laser_gun"
-}
-
-const COLLECTABLE_NAMES := {
-	"Water": "Water",
-	"Energy": "Energy",
-	"Nail": "Nail",
-}
-
-const EQUIPPABLE_NAMES := {
-	"Water Gun": "Water Gun",
-	"Laser Gun": "Laser Gun",
-	"Nail Gun": "Nail Gun",
+	"Laser Gun": "inventory.equippable.laser_gun",
+	"Snow Gun": "inventory.equippable.snow_gun",
+	"Ice Gun": "inventory.equippable.ice_gun"
 }
 
 const SHOP_NAMES := {
 	"Orbs": "Orbs"
 }
 
-const valid_powerups: Array = ["carrot", "cherry", "coconut", "bunny egg", "glitch orb", "pear", "glitch soul"]
-const timed_powerups: Array = ["glitch orb", "bunny egg"]
+const VALID_POWERUPS: Array = ["carrot", "cherry", "coconut", "bunny egg", "glitch orb", "pear", "glitch soul", "ice spike"]
+const TIMED_POWERUPS: Array = ["glitch orb", "bunny egg", "ice spike"]
 
-const valid_equippables: Array = ["water gun", "nail gun", "laser gun"]
-const valid_collectables: Array = ["energy", "water", "nail"]
+const VALID_EQUIPPABLES: Array = ["water gun", "nail gun", "laser gun", "snow gun", "ice gun"]
+const VALID_COLLECTABLES: Array = ["energy", "water", "nail", "snowball"]
 
-#var powerup_explanations := {
-#	"carrot": "%s %s" % [tr("powerup_explanations.carrot"), carrot_boost],
-#	"cherry": "%s %s" % [tr("powerup_explanations.cherry"), cherry_boost],
-#	"coconut": "%s %s" % [tr("powerup_explanations.coconut"), coconut_boost],
-#	"bunny egg": "%s %s %s" % [tr("powerup_explanations.bunny_egg"), bunny_egg_time, tr("powerup_explanations.bunny_egg.2")],
-#	"glitch orb": "%s %s" % [tr("powerup_explanations.glitch_orb"), glitch_orb_time],
-#	"pear": "%s %s %s %s" % [tr("powerup_explanations.pear"), pear_health_boost, tr("powerup_explanations.pear.2"), pear_adrenaline_boost],
-#	"glitch soul": "%s" % tr("powerup_explanations.glitch_soul"),
-#}
+const BUNNY_EGG_BOOST := 1.4
+const ADRENALINE_TIME_DECREASE_FROM_LEVEL_UP := 0.8
 
+const STAT_INCREASE_FROM_LEVEL_UP: int = 5
+
+const CHERRY_BOOST: int = 10
+const CARROT_BOOST: int = 2
+const COCONUT_BOOST: int = 5
+const PEAR_HEALTH_BOOST: int = 10
+const PEAR_ADRENALINE_BOOST: int = 5
+
+const BUNNY_EGG_TIME: int = 10
+const GLITCH_ORB_TIME: int = 7
+const ICE_SPIKE_TIME: int = 7
+
+const PEAR_TIME: int = 5
+const PEAR_CONSEQUENCE: int = 5
+
+var active_timed_powerup := ""
+var last_powerup := ""
 var timed_powerup_active := false
-var active_timed_powerup = ""
 
 
 func get_powerup_explanation(powerup_name: String) -> String:
 	match powerup_name:
 		"carrot":
-			return "%s %s." % [tr("powerup_explanations.carrot"), carrot_boost]
+			return "%s %s." % [tr("powerup_explanations.carrot"), CARROT_BOOST]
 		"cherry":
-			return "%s %s." % [tr("powerup_explanations.cherry"), cherry_boost]
+			return "%s %s." % [tr("powerup_explanations.cherry"), CHERRY_BOOST]
 		"coconut":
-			return "%s %s." % [tr("powerup_explanations.coconut"), coconut_boost]
+			return "%s %s." % [tr("powerup_explanations.coconut"), COCONUT_BOOST]
 		"bunny egg":
-			return "%s %s %s." % [tr("powerup_explanations.bunny_egg"), bunny_egg_time, tr("powerup_explanations.bunny_egg.2")]
+			return "%s %s %s." % [tr("powerup_explanations.bunny_egg"), BUNNY_EGG_TIME, tr("powerup_explanations.bunny_egg.2")]
 		"glitch orb":
-			return "%s %s" % [tr("powerup_explanations.glitch_orb"), glitch_orb_time]
+			return "%s %s" % [tr("powerup_explanations.glitch_orb"), GLITCH_ORB_TIME]
 		"pear":
-			return "%s %s %s %s" % [tr("powerup_explanations.pear"), pear_health_boost, tr("powerup_explanations.pear.2"), pear_adrenaline_boost]
+			return "%s %s %s %s" % [tr("powerup_explanations.pear"), PEAR_HEALTH_BOOST, tr("powerup_explanations.pear.2"), PEAR_ADRENALINE_BOOST]
 		"glitch soul":
 			return "%s" % tr("powerup_explanations.glitch_soul")
+		"ice spike":
+			return "%s %s %s" % [tr("powerup_explanations.ice_spike"), ICE_SPIKE_TIME, tr("powerup_explanations.ice_spike_2")]
 		_:
 			return "Not complete"
 
@@ -142,20 +127,57 @@ func get_ammo() -> String:
 			return "energy"
 		"water gun":
 			return "water"
-	return ""
+		"snow gun":
+			return "snowball"
+	return "GET_AMO NOT SETUP"
 
 
-func get_firerate(gun: int) -> float:
-	match gun:
-		Guns.WATER_GUN:
-			return 0.2
-		Guns.NAIL_GUN:
+func get_firerate(equippable_name: String) -> float:
+	match equippable_name:
+		"nail gun":
 			return 0.05
-		Guns.LASER_GUN:
-			return 0.3
-		_:
+		"laser gun":
+			return 0.25
+		"water gun":
 			return 0.2
+		"snow gun":
+			return 0.3
+		"ice gun":
+			return 0.25
+	return 0.2
 
+
+func get_equippable_damage(equippable_name: String) -> int:
+	match equippable_name:
+		"nail gun":
+			return 20
+		"laser gun":
+			return 5
+		"water gun":
+			return 1
+		"snow gun":
+			return 10
+		"ice gun":
+			return 20
+		_:
+			printerr("Equippable damage not set for %s" % equippable_name)
+	return 0
+
+func get_equippable_speed(equippable_name: String) -> int:
+	match equippable_name:
+		"nail gun":
+			return 800
+		"laser gun":
+			return 700
+		"water gun":
+			return 500
+		"snow gun":
+			return 350
+		"ice gun":
+			return 900
+		_:
+			printerr("Equippable speed not set for %s" % equippable_name)
+	return 0
 
 func get_spike_damage(tile_id: int) -> int:
 	match tile_id:

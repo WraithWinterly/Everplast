@@ -1,0 +1,59 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://mobs/penguin/penguin.png" type="Texture" id=1]
+[ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=2]
+[ext_resource path="res://mobs/components/hurt_by_spikes.tscn" type="PackedScene" id=3]
+[ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=4]
+[ext_resource path="res://mobs/components/component_manager.tscn" type="PackedScene" id=5]
+[ext_resource path="res://mobs/components/basic_movement.tscn" type="PackedScene" id=6]
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 0, 8, 8 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ SubResource( 2 ), SubResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 4, 3.5 )
+
+[node name="Penguin" type="KinematicBody2D"]
+collision_layer = 64
+collision_mask = 3
+
+[node name="MobComponentManager" parent="." instance=ExtResource( 5 )]
+orb_amount = 5
+
+[node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
+position = Vector2( 0, 0.25 )
+frames = SubResource( 4 )
+
+[node name="BasicMovement" parent="MobComponentManager" instance=ExtResource( 6 )]
+flip_animation_player_path = NodePath("../SpriteHolder/AnimatedSprite/FlipAnimationPlayer")
+enemy_path = NodePath("../..")
+
+[node name="AttackTouch" parent="MobComponentManager" instance=ExtResource( 2 )]
+enemy_path = NodePath("../..")
+hit_area_path = NodePath("../HurtArea")
+
+[node name="HurtByBullet" parent="MobComponentManager" instance=ExtResource( 4 )]
+enemy_path = NodePath("../..")
+hurt_area_path = NodePath("../HurtArea")
+
+[node name="HurtBySpikes" parent="MobComponentManager" instance=ExtResource( 3 )]
+kinematic_body_path = NodePath("../..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 4, 3.5 )
+shape = SubResource( 1 )
+
+[editable path="MobComponentManager"]

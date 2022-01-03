@@ -71,7 +71,7 @@ func show_menu() -> void:
 		return_button.text = tr("pause_menu.return")
 
 	animation_player.play("pause")
-	GlobalUI.dis_focus_sound = true
+
 	continue_button.grab_focus()
 
 
@@ -116,7 +116,7 @@ func _level_changed(world: int, level: int) -> void:
 func _ui_settings_back_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	if not Globals.game_state == Globals.GameStates.MENU:
-		GlobalUI.dis_focus_sound = true
+
 		enable_buttons()
 		settings_button.grab_focus()
 
@@ -124,7 +124,7 @@ func _ui_settings_back_pressed() -> void:
 func _ui_pause_menu_return_prompt_no_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	return_button.grab_focus()
 
 
@@ -135,7 +135,7 @@ func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 
 func _continue_pressed() -> void:
 	if GlobalUI.menu_locked: return
-	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed", true)
 	GlobalEvents.emit_signal("ui_pause_menu_continue_pressed")
 	hide_menu()
 
@@ -151,7 +151,7 @@ func _settings_pressed() -> void:
 func _return_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	GlobalUI.menu = GlobalUI.Menus.RETURN_PROMPT
-	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 	GlobalEvents.emit_signal("ui_pause_menu_return_pressed")
 	disable_buttons()
 	return_button.release_focus()

@@ -39,7 +39,7 @@ func show_menu() -> void:
 	anim_player.play("show")
 	show()
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	no_button.grab_focus()
 	prompt_text.text = "%s %s?" % [tr("delete_prompt.text"),GlobalUI.profile_index + 1]
 
@@ -47,6 +47,9 @@ func show_menu() -> void:
 func hide_menu() -> void:
 	anim_player.play_backwards("show")
 	disable_buttons()
+	yield(anim_player, "animation_finished")
+	if not anim_player.is_playing():
+		$BGBlur.hide()
 
 
 func _ui_profile_selector_delete_pressed() -> void:

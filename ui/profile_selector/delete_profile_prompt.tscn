@@ -223,16 +223,16 @@ __meta__ = {
 }
 
 [node name="Title" type="Label" parent="Panel/VBoxContainer"]
-margin_right = 1152.0
+margin_right = 1440.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 8 )
 text = "delete_prompt.title"
 align = 1
 
 [node name="PromptText" type="Label" parent="Panel/VBoxContainer"]
-margin_top = 49.0
-margin_right = 1152.0
-margin_bottom = 79.0
+margin_top = 45.0
+margin_right = 1440.0
+margin_bottom = 75.0
 size_flags_vertical = 6
 custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
 custom_fonts/font = ExtResource( 8 )
@@ -240,9 +240,9 @@ text = "delete_prompt.text"
 align = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer"]
-margin_top = 99.0
-margin_right = 1152.0
-margin_bottom = 159.0
+margin_top = 90.0
+margin_right = 1440.0
+margin_bottom = 150.0
 custom_constants/separation = 15
 alignment = 1
 __meta__ = {
@@ -250,8 +250,8 @@ __meta__ = {
 }
 
 [node name="No" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_left = 358.0
-margin_right = 556.0
+margin_left = 502.0
+margin_right = 700.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
@@ -268,8 +268,8 @@ custom_styles/normal = ExtResource( 4 )
 text = "global.no"
 
 [node name="Yes" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_left = 571.0
-margin_right = 793.0
+margin_left = 715.0
+margin_right = 937.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../No")
 focus_neighbour_top = NodePath(".")

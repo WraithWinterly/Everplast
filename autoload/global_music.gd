@@ -4,7 +4,7 @@ var audio_stream_player := AudioStreamPlayer.new()
 
 var loaded_stream_name: String = ""
 
-var disabled: bool = false
+var disabled: bool = true
 
 # Look at line count for index
 const LEVEL_STREAM_PATHS := [
@@ -15,8 +15,8 @@ const LEVEL_STREAM_PATHS := [
 	"res://world2/anttis_instrumentals_simple_simplyfied.ogg",                  #4
 	"res://world2/anttis_instrumentals_beachy_beach.mp3",                       #5
 	"res://world2/anttis_instrumentals_little_guitar.mp3",                      #6
-	"res://world3/anttis_instrumentals_rain.ogg",
-	"res://world4/anttis_instrumentals_wonderful_lie.ogg",
+	"res://world3/anttis_instrumentals_rain.ogg",                               #7
+	"res://world4/anttis_instrumentals_wonderful_lie.ogg",                      #8
 	"res://world4/lines_of_code.mp3",
 ]
 
@@ -44,7 +44,7 @@ const MUSIC_DATABASE := [
 	[0, 0, 0, 0, 0, 0], # debug levels
 	[0, 0, 1, 0, 0, 2, 1, 3, 0, 0], # World 1
 	[4, 4, 6, 2, 5, 6, 2, 5, 4], # World 2
-	[1, 1, 1, 1, 1, 1], # World 3
+	[7, 7, 7, 7, 7, 7], # World 3
 	[6, 6, 6, 6, 6, 6], # World 4
 ]
 
@@ -61,15 +61,9 @@ const MUSIC_SUBSECTION_DATABASE := [
 func _ready() -> void:
 	set_physics_process(false)
 	pause_mode = PAUSE_MODE_PROCESS
-	# Give time for Settings to apply
-	yield(get_tree(), "physics_frame")
-	yield(get_tree(), "physics_frame")
-	yield(get_tree(), "physics_frame")
-	yield(get_tree(), "physics_frame")
 	add_child(audio_stream_player, true)
 	audio_stream_player.bus = "Music"
 	set_physics_process(true)
-	#update_music()
 
 
 func _physics_process(_delta: float) -> void:

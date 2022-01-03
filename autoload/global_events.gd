@@ -66,6 +66,7 @@ signal ui_faded()
 signal ui_notification_shown(noti) # string
 signal ui_notification_finished()
 signal ui_button_pressed(alt) # bool
+signal ui_button_pressed_to_prompt()
 signal ui_button_hovered()
 signal ui_profile_focus_index_changed()
 

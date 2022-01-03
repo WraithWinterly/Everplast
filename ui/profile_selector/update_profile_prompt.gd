@@ -39,7 +39,7 @@ func show_menu() -> void:
 	anim_player.play("show")
 	show()
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	no_button.grab_focus()
 	prompt_text.text = "%s %s %s" % [tr("update_prompt.text"), GlobalUI.profile_index + 1, tr("update_prompt.text.2")]
 

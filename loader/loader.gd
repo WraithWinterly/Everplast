@@ -1,33 +1,62 @@
 extends Control
 
+var packs := [
+	"res://Stream_1.pck",
+	"res://Stream_2.pck",
+	"res://Stream_3.pck",
+	"res://Graphics.pck"
+]
+
 
 func _enter_tree() -> void:
-	OS.min_window_size = Vector2(1280, 720)
-	GlobalMusic.disabled = true
+	VisualServer.set_default_clear_color(Color8(0, 0, 0, 0))
 
 
 func _ready() -> void:
-	$CenterContainer/Label/Sprite.texture = load("res://loader/logo_large_monochrome_dark.png")
-	$AnimationPlayer.play("splash")
-	$AudioStreamPlayer.play()
-	yield($AnimationPlayer, "animation_finished")
-	$CenterContainer/Label/Sprite.texture = load("res://loader/wraith_winterly_pfp.png")
-	#$AudioStreamPlayer.stream = load("res://ui/loader/220162__gameaudio__teleport-high.wav")
-	$AnimationPlayer.play("splash_wraith")
-	#$AudioStreamPlayer.play()
-	yield($AnimationPlayer,"animation_finished")
-	$AudioStreamPlayer.stream = load("res://loader/515827__newlocknew__ui-3-1-fhsandal-sinus-sytrus-arpegio-multiprocessing-rsmpl.wav")
-	$AudioStreamPlayer.play()
-	while $AudioStreamPlayer.playing:
-		yield(get_tree(), "physics_frame")
-	go_to_game()
+	if OS.has_feature("editor") or not OS.get_name() == "Windows":
+		go_to_splash()
+		return
+
+	var return_value: bool
+
+	var i: int = 0
+
+	for pck in packs:
+		return_value = ProjectSettings.load_resource_pack(pck)
+		if not return_value:
+			load_failed(packs[i])
+			return
+		i += 1
+
+	go_to_splash()
+
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and OS.has_feature("editor"):
-		go_to_game()
+	if event.is_action_pressed("ui_cancel"):
+		go_to_splash()
+		get_tree().set_input_as_handled()
 
-func go_to_game() -> void:
-	GlobalMusic.disabled = false
 
-	var __ = get_tree().change_scene("res://main.tscn")
+func go_to_splash() -> void:
+	var __: int = get_tree().change_scene("res://splash/splash.tscn")
 
+
+func load_failed(path: String) -> void:
+	path = path.replace("res://", "")
+
+	$ErrorLabel.text = \
+"""There was an error loading Everplast. If you have removed, changed, or renamed files,
+please restore them to their original state. Please do not change any .pck files, or
+rename any executables.
+Failed loading \"%s\"
+	\nLocal to \"%s"
+Press escape to try anyways.
+
+
+Hubo un error cargando Everplast. Si has quitado, cambiado o renombrado un archivo,
+por favor ponlos como el valor por defecto. Por favor no cambies ningunos archivos de .pck,
+o renombres ningunos ejecutables.
+Fallado cargar \"%s\"
+	\nLocal a \"%s"
+Pulsa escape para intentarlo de todos modos.
+""" % [path, OS.get_executable_path(), path, OS.get_executable_path()]

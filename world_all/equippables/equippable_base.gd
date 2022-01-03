@@ -12,6 +12,7 @@ export var equippable_name: String = "water gun"
 
 var mode: int = COLLECT
 var firerate: int = 1
+
 var may_fire := true
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -55,24 +56,36 @@ func _process(_delta: float) -> void:
 
 func fire() -> void:
 	if mode == USE:
-		reduce_ammo()
+		if equippable_name == "ice gun":
+			reduce_adrenaline()
+		else:
+			reduce_ammo()
 
 	may_fire = false
-	timer.start(get_firerate())
 
-	var inst = load(get_bullet()).instance()
+	timer.start(GlobalStats.get_firerate(equippable_name))
+
+	var inst = load(GlobalPaths.get_bullet(equippable_name)).instance()
+
+	var bullet = inst.get_node("BulletBase")
+
+	bullet.equippable_owner = equippable_name
 
 	if mode == USE:
-		inst.get_node("BulletBase").player_bullet = true
+		bullet.player_bullet = true
 
 	inst.global_position = position_2d.global_position
+
 	get_node(GlobalPaths.LEVEL).add_child(inst)
+
 	inst.global_rotation = get_parent().get_parent().global_rotation
 
+	yield(get_tree(), "physics_frame")
+
 	if get_parent().get_parent().scale.x > 0:
-		inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(inst.get_node("BulletBase").speed, 0).rotated(get_parent().global_rotation))
+		bullet.apply_impulse(Vector2(), Vector2(bullet.speed, 0).rotated(get_parent().global_rotation))
 	else:
-		inst.get_node("BulletBase").apply_impulse(Vector2(), Vector2(-inst.get_node("BulletBase").speed, 0).rotated(-get_parent().global_rotation))
+		bullet.apply_impulse(Vector2(), Vector2(-bullet.speed, 0).rotated(-get_parent().global_rotation))
 
 	get_node(GlobalPaths.PLAYER_CAMERA).set_trauma(0.25)
 
@@ -80,6 +93,7 @@ func fire() -> void:
 func fail_fire() -> void:
 	var worker: String = GlobalStats.get_ammo()
 	var inv: Array = GlobalSave.get_stat("collectables")
+
 	if not GlobalSave.has_item(inv, worker):
 		no_amo_sound.play()
 		return
@@ -92,21 +106,6 @@ func _direction_changed(facing_right: bool) -> void:
 	else:
 		scale.y = 1
 		scale.x = 1
-
-
-func get_bullet() -> String:
-	return GlobalPaths.get_bullet(equippable_name)
-
-
-func get_firerate() -> float:
-	match equippable_name:
-		"nail gun":
-			return 0.05
-		"laser gun":
-			return 0.25
-		"water gun":
-			return 0.2
-	return 0.2
 
 
 func reduce_ammo() -> void:
@@ -122,8 +121,15 @@ func reduce_ammo() -> void:
 	GlobalEvents.emit_signal("save_stat_updated")
 
 
+func reduce_adrenaline() -> void:
+	GlobalSave.set_stat("adrenaline", GlobalSave.get_stat("adrenaline") - 1)
+
+
 func can_fire() -> bool:
-	return may_fire and GlobalSave.has_item(GlobalSave.get_stat("collectables"), GlobalStats.get_ammo())
+	if equippable_name == "ice gun":
+		return may_fire and GlobalSave.get_stat("adrenaline") > 0
+	else:
+		return may_fire and GlobalSave.has_item(GlobalSave.get_stat("collectables"), GlobalStats.get_ammo())
 
 
 func _body_entered(body: Node) -> void:

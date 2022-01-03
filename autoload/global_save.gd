@@ -7,7 +7,6 @@ const FILE: String = \
 		"user://save.json"
 
 const DEFAULT_DATA: Dictionary = {
-	"jump_damage": 1.0,
 	"health_max": 5.0,
 	"health": 5.0,
 	"coins": 0.0,
@@ -47,7 +46,6 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("player_died", self, "_player_died")
 	__ = GlobalEvents.connect("player_dashed", self, "_player_dashed")
 	__ = GlobalEvents.connect("player_level_increased", self, "_player_level_increased")
-	__ = GlobalEvents.connect("player_hurt_from_enemy", self, "_player_hurt_from_enemy")
 	__ = GlobalEvents.connect("player_equipped", self, "_player_equipped")
 	__ = GlobalEvents.connect("player_used_powerup", self, "_player_used_powerup")
 	__ = GlobalEvents.connect("player_collected_coin", self, "_player_collected_coin")
@@ -64,16 +62,19 @@ func _ready() -> void:
 
 
 func _physics_process(_delta):
-	if not Globals.game_state == Globals.GameStates.LEVEL: return
-	if GlobalSave.get_stat("rank") <= GlobalStats.Ranks.SILVER:
+	if not Globals.game_state == Globals.GameStates.LEVEL:
 		return
+
+	if get_stat("rank") <= GlobalStats.Ranks.SILVER:
+		return
+
 	if get_stat("adrenaline") >= get_stat("adrenaline_max"):
 		adrenaline_timer.stop()
 	else:
 		if adrenaline_timer.is_stopped():
 			adrenaline_timer.start(get_stat("adrenaline_speed"))
 
-	if int(GlobalSave.get_stat("health")) <= 0 and not Globals.death_in_progress:
+	if int(get_stat("health")) <= 0 and not Globals.death_in_progress:
 		GlobalEvents.emit_signal("player_death_started")
 
 
@@ -137,6 +138,11 @@ func get_stat(value: String): #-> Variant not supported
 
 
 func set_stat(value, value2): #-> Variant
+	if GlobalStats.timed_powerup_active:
+		if GlobalStats.active_timed_powerup == "ice spike":
+			if value == "health" or value == "adrenaline":
+				return
+
 	if data[profile].has(value):
 		data[profile][value] = value2
 	else:
@@ -181,9 +187,15 @@ func get_level_up_cost() -> int:
 	return int(cost)
 
 
-func get_gem_count() -> int:
+func get_gem_count(idx: int = -1) -> int:
+	var gem_dict: Dictionary
 	var gem_count: int = 0
-	var gem_dict = get_stat("gems")
+
+	if idx == -1:
+		gem_dict = get_stat("gems")
+	else:
+		gem_dict = data[idx].gems
+
 	if gem_dict.size() > 0:
 		for world in gem_dict.keys():
 			if gem_dict[world].size() > 0:
@@ -200,6 +212,11 @@ func has_item(array: Array, value: String) -> bool:
 			return true
 	return false
 
+func get_item_count(array: Array, value: String) -> int:
+	for n in array:
+		if n[0] == value:
+			return n[1]
+	return 0
 
 func reset_all() -> void:
 	data = [{}, {}, {}, {}, {}]
@@ -221,7 +238,7 @@ func _save_file_saved(on_reset: bool = false) -> void:
 func _save_file_created(index: int) -> void:
 	data[index] = DEFAULT_DATA
 	save_stats(true)
-	load_stats()
+	#load_stats()
 
 
 func _player_died() -> void:
@@ -243,34 +260,28 @@ func _player_died() -> void:
 		set_stat("health", get_stat("health_max"))
 		set_stat("adrenaline", get_stat("adrenaline_max"))
 		save_stats()
-		GlobalEvents.emit_signal("save_stat_updated")
+
 
 
 func _player_dashed() -> void:
 	if not get_stat("adrenaline") <= 0:
 		if Globals.game_state == Globals.GameStates.LEVEL:
 			set_stat("adrenaline", get_stat("adrenaline") - 1)
-		GlobalEvents.emit_signal("save_stat_updated")
+
 
 
 func _player_level_increased(type: String) -> void:
 	match type:
 		"health":
-			set_stat("health_max", get_stat("health_max") + GlobalStats.stat_increase_from_level_up)
+			set_stat("health_max", get_stat("health_max") + GlobalStats.STAT_INCREASE_FROM_LEVEL_UP)
 			set_stat("health", get_stat("health_max"))
 		"adrenaline":
-			set_stat("adrenaline_max", get_stat("adrenaline_max") + GlobalStats.stat_increase_from_level_up)
+			set_stat("adrenaline_max", get_stat("adrenaline_max") + GlobalStats.STAT_INCREASE_FROM_LEVEL_UP)
 			set_stat("adrenaline", get_stat("adrenaline_max"))
-			set_stat("adrenaline_speed", get_stat("adrenaline_speed") * GlobalStats.adrenaline_time_decrease_from_level_up)
+			set_stat("adrenaline_speed", get_stat("adrenaline_speed") * GlobalStats.ADRENALINE_TIME_DECREASE_FROM_LEVEL_UP)
 	set_stat("orbs", get_stat("orbs") - get_level_up_cost())
 	set_stat("level", get_stat("level") + 1)
-
-
-func _player_hurt_from_enemy(_hurt_type: int, _knockback, damage) -> void:
-	if not Globals.player_invincible:
-		var health: int = get_stat("health")
-		set_health(health - damage)
-		GlobalEvents.emit_signal("save_stat_updated")
+	GlobalEvents.emit_signal("save_file_saved")
 
 
 func _player_equipped(equippable: String) -> void:
@@ -280,14 +291,14 @@ func _player_equipped(equippable: String) -> void:
 func _player_used_powerup(item_name: String) -> void:
 	match item_name:
 		"carrot":
-			set_health(get_stat("health") + GlobalStats.carrot_boost)
+			set_health(get_stat("health") + GlobalStats.CARROT_BOOST)
 		"coconut":
-			set_health(get_stat("health") + GlobalStats.coconut_boost)
+			set_health(get_stat("health") + GlobalStats.COCONUT_BOOST)
 		"pear":
-			set_health(get_stat("health") + GlobalStats.pear_health_boost)
-			set_adrenaline(get_stat("adrenaline") + GlobalStats.pear_adrenaline_boost)
+			set_health(get_stat("health") + GlobalStats.PEAR_HEALTH_BOOST)
+			set_adrenaline(get_stat("adrenaline") + GlobalStats.PEAR_ADRENALINE_BOOST)
 		"cherry":
-			set_adrenaline(get_stat("adrenaline") + GlobalStats.cherry_boost)
+			set_adrenaline(get_stat("health") + GlobalStats.CHERRY_BOOST)
 	GlobalEvents.emit_signal("save_stat_updated")
 
 
@@ -311,8 +322,6 @@ func _player_collected_gem(index: int) -> void:
 					for level_key in gem_dict.get(key):
 						if level_key == str(GlobalLevel.current_level):
 							gem_dict[str(GlobalLevel.current_world)][str(GlobalLevel.current_level)][index] = true
-							# That return causing issues??
-							#return
 				else:
 					gem_dict[str(GlobalLevel.current_world)][str(GlobalLevel.current_level)] = [false, false, false]
 					gem_dict[str(GlobalLevel.current_world)][str(GlobalLevel.current_level)][index] = true
@@ -333,14 +342,20 @@ func _ui_profile_selector_delete_prompt_yes_pressed() -> void:
 
 
 func _ui_profile_selector_update_prompt_yes_pressed() -> void:
+	# update profile, update_profile, profile_updated
 	var index: int = GlobalUI.profile_index
-	var old_profile: Dictionary = data[profile]
+	var old_profile: Dictionary = data[index]
+
 	data[index] = DEFAULT_DATA
+
 	for element in old_profile:
 		if DEFAULT_DATA.has(element) and typeof(old_profile.get(element)) == typeof(DEFAULT_DATA.get(element)):
 			data[index][element] = old_profile[element]
+
+	# Random fix
 	if old_profile.rank is String:
 		old_profile.rank = GlobalStats.Ranks.NONE
+
 	save_stats(true)
 
 

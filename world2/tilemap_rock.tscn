@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://tilesets/tilemap_w1_rock.tres" type="TileSet" id=1]
+[ext_resource path="res://tilesets/tileset_rock.tres" type="TileSet" id=1]
 
 [node name="TileMapRock" type="TileMap"]
 z_index = 1

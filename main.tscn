@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://main.gd" type="Script" id=1]
 [ext_resource path="res://ui/hud/hud.tscn" type="PackedScene" id=2]
@@ -33,6 +33,14 @@
 [ext_resource path="res://ui/251389__deadsillyrabbit__button-hover-ogg.ogg" type="AudioStream" id=31]
 [ext_resource path="res://ui/shop/shop_ui.tscn" type="PackedScene" id=32]
 [ext_resource path="res://ui/gui.gd" type="Script" id=33]
+[ext_resource path="res://ui/ui_button_press_2.gd" type="Script" id=34]
+[ext_resource path="res://ui/411460__inspectorj__power-up-bright-a.wav" type="AudioStream" id=35]
+[ext_resource path="res://ui/ui_button_press_play.gd" type="Script" id=36]
+[ext_resource path="res://ui/ui_button_press_to_prompt.gd" type="Script" id=37]
+[ext_resource path="res://ui/353069__ying16__highlight-harpepianoedit02.wav" type="AudioStream" id=38]
+[ext_resource path="res://splash/515827__newlocknew__ui-3-1-fhsandal-sinus-sytrus-arpegio-multiprocessing-rsmpl.wav" type="AudioStream" id=39]
+[ext_resource path="res://ui/ui_button_leave.gd" type="Script" id=40]
+[ext_resource path="res://ui/531511__eponn__menu-beep.wav" type="AudioStream" id=41]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 12 )
@@ -55,8 +63,7 @@ adjustment_saturation = 1.15
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 version_prefix = 1
-version_post = 1
-version_numbers = [ 0, 4, 0 ]
+version_numbers = [ 0, 5, 0 ]
 runtime_pos = Vector2( 8880, -145 )
 runtime_world = 2
 runtime_level = 8
@@ -70,53 +77,61 @@ script = ExtResource( 21 )
 pause_mode = 2
 script = ExtResource( 33 )
 
-[node name="Notification" parent="GUI" instance=ExtResource( 3 )]
+[node name="Control" type="Control" parent="GUI"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Notification" parent="GUI/Control" instance=ExtResource( 3 )]
 pause_mode = 2
 
-[node name="HUD" parent="GUI" instance=ExtResource( 2 )]
+[node name="HUD" parent="GUI/Control" instance=ExtResource( 2 )]
 pause_mode = 2
 
-[node name="Dialog" parent="GUI" instance=ExtResource( 16 )]
+[node name="Dialog" parent="GUI/Control" instance=ExtResource( 16 )]
 visible = false
 
-[node name="WorldSelectorLabel" parent="GUI" instance=ExtResource( 4 )]
+[node name="WorldSelectorLabel" parent="GUI/Control" instance=ExtResource( 4 )]
 
-[node name="MainMenu" parent="GUI" instance=ExtResource( 17 )]
+[node name="MainMenu" parent="GUI/Control" instance=ExtResource( 17 )]
 pause_mode = 2
 
-[node name="SocialPlug" parent="GUI" instance=ExtResource( 26 )]
+[node name="SocialPlug" parent="GUI/Control" instance=ExtResource( 26 )]
 
-[node name="QuickPlayPrompt" parent="GUI" instance=ExtResource( 23 )]
+[node name="QuickPlayPrompt" parent="GUI/Control" instance=ExtResource( 23 )]
 
-[node name="PauseMenu" parent="GUI" instance=ExtResource( 5 )]
+[node name="PauseMenu" parent="GUI/Control" instance=ExtResource( 5 )]
 
-[node name="ReturnPrompt" parent="GUI" instance=ExtResource( 25 )]
+[node name="ReturnPrompt" parent="GUI/Control" instance=ExtResource( 25 )]
 
-[node name="Settings" parent="GUI" instance=ExtResource( 11 )]
+[node name="Settings" parent="GUI/Control" instance=ExtResource( 11 )]
 
-[node name="ErasePrompt" parent="GUI" instance=ExtResource( 20 )]
+[node name="ErasePrompt" parent="GUI/Control" instance=ExtResource( 20 )]
 
-[node name="ResetSettingsPrompt" parent="GUI" instance=ExtResource( 29 )]
+[node name="ResetSettingsPrompt" parent="GUI/Control" instance=ExtResource( 29 )]
 
-[node name="Credits" parent="GUI" instance=ExtResource( 10 )]
+[node name="Credits" parent="GUI/Control" instance=ExtResource( 10 )]
 
-[node name="CustomizeControls" parent="GUI" instance=ExtResource( 22 )]
+[node name="CustomizeControls" parent="GUI/Control" instance=ExtResource( 22 )]
 
-[node name="QuitPrompt" parent="GUI" instance=ExtResource( 24 )]
+[node name="QuitPrompt" parent="GUI/Control" instance=ExtResource( 24 )]
 
-[node name="Language" parent="GUI" instance=ExtResource( 9 )]
+[node name="Language" parent="GUI/Control" instance=ExtResource( 9 )]
 
-[node name="Inventory" parent="GUI" instance=ExtResource( 18 )]
+[node name="Inventory" parent="GUI/Control" instance=ExtResource( 18 )]
 
-[node name="ProfileSelector" parent="GUI" instance=ExtResource( 15 )]
+[node name="ProfileSelector" parent="GUI/Control" instance=ExtResource( 15 )]
 
-[node name="UpgradeProfilePopup" parent="GUI" instance=ExtResource( 28 )]
+[node name="UpgradeProfilePopup" parent="GUI/Control" instance=ExtResource( 28 )]
 
-[node name="DeleteProfilePopup" parent="GUI" instance=ExtResource( 27 )]
+[node name="DeleteProfilePopup" parent="GUI/Control" instance=ExtResource( 27 )]
 
-[node name="EnterLevel" parent="GUI" instance=ExtResource( 6 )]
+[node name="EnterLevel" parent="GUI/Control" instance=ExtResource( 6 )]
 
-[node name="ShopUI" parent="GUI" instance=ExtResource( 32 )]
+[node name="ShopUI" parent="GUI/Control" instance=ExtResource( 32 )]
 
 [node name="UIButtonPress" type="AudioStreamPlayer" parent="GUI"]
 pause_mode = 2
@@ -125,6 +140,35 @@ volume_db = 15.0
 pitch_scale = 1.3
 bus = "Audio"
 script = ExtResource( 8 )
+
+[node name="UIButtonEnterGame" type="AudioStreamPlayer" parent="GUI"]
+pause_mode = 2
+stream = ExtResource( 35 )
+volume_db = 0.65
+bus = "Audio"
+script = ExtResource( 34 )
+
+[node name="UIButtonPressPlay" type="AudioStreamPlayer" parent="GUI"]
+pause_mode = 2
+stream = ExtResource( 38 )
+volume_db = 10.0
+bus = "Audio"
+script = ExtResource( 36 )
+
+[node name="UIButtonLeave" type="AudioStreamPlayer" parent="GUI"]
+pause_mode = 2
+stream = ExtResource( 41 )
+volume_db = 6.0
+bus = "Audio"
+script = ExtResource( 40 )
+
+[node name="UIButtonPressToPrompt" type="AudioStreamPlayer" parent="GUI"]
+pause_mode = 2
+stream = ExtResource( 39 )
+volume_db = 4.0
+pitch_scale = 0.85
+bus = "Audio"
+script = ExtResource( 37 )
 
 [node name="UIButtonHover" type="AudioStreamPlayer" parent="GUI"]
 pause_mode = 2

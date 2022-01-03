@@ -44,7 +44,7 @@ func show_menu() -> void:
 			GlobalLevel.WORLD_NAMES[GlobalSave.data[GlobalQuickPlay.data.last_profile].world_last],
 			GlobalSave.data[GlobalQuickPlay.data.last_profile].level_last]
 
-	GlobalUI.dis_focus_sound = true
+
 	no_button.grab_focus()
 	show()
 	enable_buttons()
@@ -52,6 +52,9 @@ func show_menu() -> void:
 
 func hide_menu() -> void:
 	anim_player.play_backwards("show")
+	yield(anim_player, "animation_finished")
+	if not anim_player.is_playing():
+		$BGBlur.hide()
 
 
 func _level_changed(_world: int, _level: int) -> void:

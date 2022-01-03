@@ -1,7 +1,7 @@
 [gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
-[ext_resource path="res://tilesets/tilemap_platform.tres" type="TileSet" id=2]
+[ext_resource path="res://world_all/platforms/tileset_platform.tres" type="TileSet" id=2]
 [ext_resource path="res://world_all/trees/tree.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world_all/death_area/death_area.tscn" type="PackedScene" id=4]
 [ext_resource path="res://world_all/spikes/spikes.gd" type="Script" id=5]
@@ -11,14 +11,14 @@
 [ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=9]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=10]
 [ext_resource path="res://world_all/lanterns/lantern.tscn" type="PackedScene" id=12]
-[ext_resource path="res://tilesets/tilemap_block.tres" type="TileSet" id=13]
+[ext_resource path="res://tilesets/tileset_block.tres" type="TileSet" id=13]
 [ext_resource path="res://world_all/signs/sign.tscn" type="PackedScene" id=14]
-[ext_resource path="res://tilesets/tilemap_w1_grass.tres" type="TileSet" id=15]
+[ext_resource path="res://tilesets/tileset_grass.tres" type="TileSet" id=15]
 [ext_resource path="res://world_all/level.gd" type="Script" id=16]
 [ext_resource path="res://mobs/slime/slime.tscn" type="PackedScene" id=17]
 [ext_resource path="res://mobs/chicken/chicken.tscn" type="PackedScene" id=18]
 [ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=19]
-[ext_resource path="res://tilesets/tilemap_spikes.tres" type="TileSet" id=20]
+[ext_resource path="res://tilesets/tileset_spikes.tres" type="TileSet" id=20]
 [ext_resource path="res://world_all/torches/torch.tscn" type="PackedScene" id=21]
 [ext_resource path="res://world1/cloud.tscn" type="PackedScene" id=30]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=40]
@@ -73,7 +73,7 @@ cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_layer = 2
 collision_mask = 12
 format = 1
-tile_data = PoolIntArray( -1376107, 5, 0, -1376103, 5, 0, -1310563, 0, 0, -1310562, 1, 0, -1310561, 2, 0, -1245027, 3, 0, -1245025, 4, 0, -1179491, 3, 0, -1179489, 4, 0, -1113956, 0, 0, -1113955, 1, 0, -1113954, 1, 0, -1113953, 2, 0, -1048420, 3, 0, -1048417, 4, 0, -982884, 3, 0, -982881, 4, 0, -917351, 0, 0, -917350, 1, 0, -917349, 1, 0, -917348, 1, 0, -917347, 1, 0, -917346, 1, 0, -917345, 2, 0, -851815, 3, 0, -851809, 4, 0, -786279, 3, 0, -786273, 4, 0, -720744, 2, 0, -720743, 3, 0, -720737, 4, 0, -655207, 3, 0, -655201, 4, 0, -524127, 0, 0, -458640, 1, 0, -458639, 1, 0, -458638, 2, 0, -458637, 0, 0, -458636, 1, 0, -458635, 1, 0, -458634, 2, 0, -393130, 536870914, 0, -393129, 536870913, 0, -393128, 536870913, 0, -393127, 536870913, 0, -393126, 536870912, 0, -393101, 3, 0, -393098, 4, 0, -327594, 3, 0, -327590, 4, 0, -327565, 3, 0, -327562, 4, 0, -327561, 0, 0, -327519, 0, 0, -327518, 1, 0, -327517, 1, 0, -327516, 1, 0, -327515, 2, 0, -262072, 5, 0, -262069, 5, 0, -262058, 3, 0, -262054, 4, 0, -262029, 3, 0, -262026, 4, 0, -131040, 5, 0, -131037, 5, 0, -130887, 5, 0, 16, 536870912, 0, 65730, 0, 0, 131260, 2, 0, 131280, 2, 0, 7864334, 5, 0, 7864338, 5, 0, 7864341, 5, 0 )
+tile_data = PoolIntArray( -1376107, 5, 0, -1376103, 5, 0, -1310563, 0, 0, -1310562, 1, 0, -1310561, 11, 0, -1245027, 3, 0, -1245025, 4, 0, -1179491, 3, 0, -1179489, 4, 0, -1113956, 0, 0, -1113955, 1, 0, -1113954, 1, 0, -1113953, 11, 0, -1048420, 3, 0, -1048417, 4, 0, -982884, 3, 0, -982881, 4, 0, -917351, 0, 0, -917350, 1, 0, -917349, 1, 0, -917348, 1, 0, -917347, 1, 0, -917346, 1, 0, -917345, 11, 0, -851815, 3, 0, -851809, 4, 0, -786279, 3, 0, -786273, 4, 0, -720744, 11, 0, -720743, 3, 0, -720737, 4, 0, -655207, 3, 0, -655201, 4, 0, -524127, 0, 0, -458640, 1, 0, -458639, 1, 0, -458638, 11, 0, -458637, 0, 0, -458636, 1, 0, -458635, 1, 0, -458634, 11, 0, -393130, 0, 0, -393129, 536870913, 0, -393128, 536870913, 0, -393127, 536870913, 0, -393126, 536870912, 0, -393101, 3, 0, -393098, 4, 0, -327594, 3, 0, -327590, 4, 0, -327565, 3, 0, -327562, 4, 0, -327561, 0, 0, -327519, 0, 0, -327518, 1, 0, -327517, 1, 0, -327516, 1, 0, -327515, 11, 0, -262072, 5, 0, -262069, 5, 0, -262058, 3, 0, -262054, 4, 0, -262029, 3, 0, -262026, 4, 0, -131040, 5, 0, -131037, 5, 0, -130887, 5, 0, 16, 536870912, 0, 65730, 0, 0, 131260, 11, 0, 131280, 11, 0, 7864334, 5, 0, 7864338, 5, 0, 7864341, 5, 0 )
 __meta__ = {
 "_edit_lock_": true
 }

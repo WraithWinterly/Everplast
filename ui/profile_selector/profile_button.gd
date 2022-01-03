@@ -21,6 +21,7 @@ onready var level_label: Label = $Stats/HBoxContainer/Text/Level/Label
 onready var health_label: Label = $Stats/HBoxContainer/Text/Heart/Label
 onready var coin_label: Label = $Stats/HBoxContainer/Text/Coin/Label
 onready var orb_label: Label = $Stats/HBoxContainer/Text/Orb/Label
+onready var gem_label: Label = $Stats/HBoxContainer/Text/Gem/Label
 onready var adrenaline_label: Label = $Stats/HBoxContainer/Text/Adrenaline/Label
 onready var adrenaline_icon: TextureRect = $Stats/HBoxContainer/Icons/Adrenaline/Texture
 onready var profile_selector: Control = get_node(profile_selector_path)
@@ -100,6 +101,8 @@ func update_buttons() -> void:
 				health_label.text = "%s | %s" % [GlobalSave.data[my_index].health, GlobalSave.data[my_index].health_max]
 				coin_label.text = str(GlobalSave.data[my_index].coins)
 				orb_label.text = str(GlobalSave.data[my_index].orbs)
+				gem_label.text = str(GlobalSave.get_gem_count(my_index))
+
 
 				# Rank Icon
 				for texture in rank_icons.get_children():
@@ -153,7 +156,7 @@ func button_pressed() -> void:
 				return
 			else:
 				GlobalUI.profile_index = my_index
-				GlobalEvents.emit_signal("ui_button_pressed")
+				GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 				GlobalEvents.emit_signal("ui_profile_selector_delete_pressed")
 				GlobalUI.menu = GlobalUI.Menus.PROFILE_SELECTOR_DELETE_PROMPT
 		else:
@@ -170,10 +173,9 @@ func button_pressed() -> void:
 			LOAD:
 				GlobalUI.menu = GlobalUI.Menus.NONE
 				release_focus()
-				GlobalEvents.emit_signal("ui_button_pressed")
 				GlobalEvents.emit_signal("ui_profile_selector_profile_pressed")
 			UPDATE:
-				GlobalEvents.emit_signal("ui_button_pressed")
+				GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 				GlobalEvents.emit_signal("ui_profile_selector_update_pressed")
 				GlobalUI.menu = GlobalUI.Menus.PROFILE_SELECTOR_UPDATE_PROMPT
 
@@ -182,7 +184,7 @@ func _ui_play_pressed() -> void:
 	yield(GlobalEvents, "ui_faded")
 	update_buttons()
 	if my_index == 0:
-		GlobalUI.dis_focus_sound = true
+
 		grab_focus()
 
 
@@ -195,7 +197,7 @@ func _ui_profile_selector_manage_pressed() -> void:
 	update_buttons()
 
 	if my_index == 0:
-		GlobalUI.dis_focus_sound = true
+
 		grab_focus()
 
 
@@ -212,7 +214,7 @@ func _ui_profile_selector_delete_prompt_yes_pressed() -> void:
 func _ui_profile_selector_update_prompt_yes_pressed() -> void:
 	update_buttons()
 	if my_index == GlobalUI.profile_index:
-		GlobalUI.dis_focus_sound = true
+
 		grab_focus()
 
 

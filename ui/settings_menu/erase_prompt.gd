@@ -25,7 +25,7 @@ func show_menu() -> void:
 	anim_player.play("show")
 	enable_buttons()
 	show()
-	GlobalUI.dis_focus_sound = true
+
 	no_button.grab_focus()
 	prompt_text.text = tr("erase_all.prompt.text")
 
@@ -67,8 +67,8 @@ func _no_pressed() -> void:
 func _yes_pressed() -> void:
 	if GlobalUI.menu_locked: return
 
-	GlobalEvents.emit_signal("ui_button_pressed")
 
+	GlobalEvents.emit_signal("ui_button_pressed")
 	if GlobalUI.menu == GlobalUI.Menus.SETTINGS_ERASE_ALL_EXTRA_PROMPT:
 		GlobalUI.menu_locked = true
 		GlobalEvents.emit_signal("ui_settings_erase_all_prompt_extra_yes_pressed")
@@ -85,10 +85,9 @@ func _yes_pressed() -> void:
 		hide_menu()
 		GlobalUI.menu_locked = true
 		yield(get_tree().create_timer(0.75), "timeout")
+		GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 		GlobalUI.menu_locked = false
 		enable_buttons()
-		GlobalUI.dis_focus_sound = true
 		no_button.grab_focus()
-		GlobalEvents.emit_signal("ui_button_pressed")
 		show_menu()
 		prompt_text.text = tr("erase_all.prompt.text_extra")

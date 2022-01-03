@@ -306,6 +306,7 @@ orb_amount = 1000
 knockback = 200
 attack_damage = 5
 max_health = 35
+free_on_death = false
 
 [node name="HitSound" parent="EnemyComponentManager" index="0"]
 stream = ExtResource( 8 )
@@ -327,13 +328,19 @@ rotation = 1.5708
 shape = SubResource( 4 )
 
 [node name="Index" parent="EnemyComponentManager" index="4"]
-position = Vector2( -25, -30 )
+position = Vector2( -5, -12 )
 
 [node name="HealthLabel" parent="EnemyComponentManager/Index" index="0"]
-margin_left = 16.0
-margin_top = 21.0
-margin_right = 56.0
-margin_bottom = 35.0
+margin_left = -5.0
+margin_top = 5.0
+margin_right = 35.0
+margin_bottom = 19.0
+
+[node name="HealthBar" parent="EnemyComponentManager/Index" index="1"]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 52.0
+margin_bottom = 21.0
 
 [node name="AttackTouch" parent="EnemyComponentManager" instance=ExtResource( 5 )]
 enemy_path = NodePath("../..")

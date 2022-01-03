@@ -97,7 +97,23 @@ Sound Effects:
 	"Water, Pouring, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
 	"UI Confirmation Alert, D1.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
 	splash16.wav - https://freesound.org/people/Rocktopus/sounds/233415/
+	https://freesound.org/people/Angel_Perez_Grandi/sounds/49190/
+	https://freesound.org/people/GreenFireSound/sounds/501888/
+	https://freesound.org/people/morganpurkis/sounds/369778/
+	https://freesound.org/people/Bricklover/sounds/560961/
+	Snowman Kill
+	https://freesound.org/people/Uberproduktion/sounds/556858/
+	Snowman Hurt
+	https://freesound.org/people/kodimynatt/sounds/276918/
 
+	Ice Cube
+	https://freesound.org/people/Craxic/sounds/204129/
+
+	UI
+	https://freesound.org/people/InspectorJ/sounds/411460/
+	https://freesound.org/people/ying16/sounds/353069/
+	https://freesound.org/people/ZoviPoland/sounds/517719/
+	https://freesound.org/people/Eponn/sounds/531511/
 Art:
 	Fox: https://opengameart.org/content/fox-animated
 	Spider: https://opengameart.org/content/2d-spider-animated
@@ -132,15 +148,16 @@ func hide_menu() -> void:
 	return_button.release_focus()
 	disable_buttons()
 	yield(anim_player, "animation_finished")
-	$BGBlur.hide()
-	hide()
+	if not anim_player.is_playing():
+		$BGBlur.hide()
+		hide()
 
 
 func show_menu() -> void:
 	anim_player.play("show")
 	show()
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	return_button.grab_focus()
 
 

@@ -87,6 +87,7 @@ func _body_entered(body: Node) -> void:
 
 	if not item == null:
 		var item_instance = item.instance()
+
 		item_instance.global_position = Vector2(global_position.x,
 				global_position.y - height)
 		get_node(GlobalPaths.LEVEL).call_deferred("add_child", item_instance)

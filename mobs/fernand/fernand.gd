@@ -6,18 +6,21 @@ enum States {
 	CHASE,
 	SHOOT_PLAYER,
 }
-const NAME: String = "Fernand"
 
-var facing_right: bool = true
-var active: bool = false
-var linear_velocity := Vector2()
+const NAME: String = "Fernand"
 
 const SHOOT_SPEED: int = 20
 const FLY_SPEED: int = 45
 const CHASE_SPEED: int = 120
 
-var current_speed: int = 0
+var linear_velocity := Vector2()
+
 var state: int = States.FLY
+
+var current_speed: int = 0
+
+var facing_right: bool = true
+var active: bool = false
 
 onready var mob_component: Node2D = $EnemyComponentManager
 onready var timer: Timer= $Timer
@@ -38,11 +41,12 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("story_boss_activated", self, "_story_boss_activated")
 	__ = mob_component.connect("died", self, "_died")
 	__ = mob_component.connect("hit", self, "_hit")
-	$"Position2D/Water Gun/EquippableBase".mode = 2
+
+	get_node("Position2D/Water Gun/EquippableBase").mode = 2
+
 
 func _physics_process(_delta: float) -> void:
 	if not active: return
-
 
 	#update_gun_direction()
 	if facing_right and ray_right.is_colliding():
@@ -72,20 +76,28 @@ func _physics_process(_delta: float) -> void:
 	linear_velocity.x = lerp(linear_velocity.x, current_speed, 0.1)
 	linear_velocity = move_and_slide(linear_velocity, Vector2.UP)
 
+	position_2d.global_rotation = lerp_angle(position_2d.global_rotation, fake_pos.global_rotation, 30 * get_physics_process_delta_time())
+
 
 func state_switching() -> void:
-	var prev_state = state
+	var prev_state: int = state
+
 	randomize()
 	timer.start(rand_range(0.5, 2))
+
 	var new_state = randi() % 3
+
 	state = new_state
 	while new_state == prev_state:
 		new_state = randi() % 3
 		state = new_state
 		yield(get_tree(), "physics_frame")
+
 	if state == States.FLY:
 		flip()
+
 	yield(timer, "timeout")
+
 	state_switching()
 
 
@@ -121,7 +133,7 @@ func shoot_player_ai() -> void:
 	look_pos.x += variation
 	variation = rand_range(-5, 5)
 	look_pos.y += variation
-	position_2d.look_at(look_pos)
+	fake_pos.look_at(look_pos)
 	current_speed *= SHOOT_SPEED
 
 	update_gun_direction()
@@ -130,18 +142,18 @@ func shoot_player_ai() -> void:
 
 
 func update_gun_direction() -> void:
-	if position_2d.rotation_degrees >= 180:
-		position_2d.rotation_degrees = -180
-	elif position_2d.rotation_degrees <= -180:
-		position_2d.rotation_degrees = 180
+	if fake_pos.rotation_degrees >= 180:
+		fake_pos.rotation_degrees = -180
+	elif fake_pos.rotation_degrees <= -180:
+		fake_pos.rotation_degrees = 180
 
-	if position_2d.rotation_degrees > 90 or position_2d.rotation_degrees < -90:
-		position_2d.position = Vector2(-8.5, 1)
+	if fake_pos.rotation_degrees > 90 or fake_pos.rotation_degrees < -90:
+		fake_pos.position = Vector2(-8.5, 1)
 		water_gun.scale.x = 1
 		water_gun.scale.y = -1
 
 	else:
-		position_2d.position = Vector2(7, 1)
+		fake_pos.position = Vector2(7, 1)
 		water_gun.scale.x = 1
 		water_gun.scale.y = 1
 

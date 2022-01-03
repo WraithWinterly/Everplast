@@ -55,7 +55,7 @@ func disable_buttons() -> void:
 func show_menu() -> void:
 	enable_buttons()
 	anim_player.play("show")
-	GlobalUI.dis_focus_sound = true
+	
 	english_button.grab_focus()
 
 

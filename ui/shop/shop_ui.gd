@@ -18,8 +18,10 @@ onready var bought_item_sprite: Sprite = $BoughtItem/Label/Sprite
 func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("ui_shop_opened", self, "_ui_shop_opened")
+
 	hide()
 	pause_mode = PAUSE_MODE_PROCESS
+
 	for button in items_vbox.get_children():
 		button.connect("pressed", self, "_button_pressed")
 
@@ -61,11 +63,12 @@ func disable_buttons(exclude_back: bool = false) -> void:
 
 func enable_buttons() -> void:
 	back_button.disabled = false
+
 	for button in items_vbox.get_children():
 		button.disabled = false
 
 		var btn_name: String = button.name.to_lower()
-		if btn_name in GlobalStats.valid_equippables:
+		if btn_name in GlobalStats.VALID_EQUIPPABLES:
 			if GlobalSave.has_item(GlobalSave.get_stat("equippables"), btn_name):
 				button.disabled = true
 				if not "ACQUIRED" in button.text:
@@ -82,6 +85,11 @@ func update_shop(items: Dictionary) -> void:
 	shop_label.text = "Shop"
 	shop_label.self_modulate = Color8(255, 255, 255, 255)
 
+	for button in items_vbox.get_children():
+		button.hide()
+	for label in prices_vbox.get_children():
+		label.hide()
+
 	for item in items:
 		if item == "gems": continue
 
@@ -97,16 +105,16 @@ func update_shop(items: Dictionary) -> void:
 
 		var string: String
 
-		if item in GlobalStats.valid_powerups:
-			string = tr(GlobalStats.POWERUP_NAMES[item.capitalize()])
-		elif item in GlobalStats.valid_collectables:
-			string = tr(GlobalStats.COLLECTABLE_NAMES[item.capitalize()])
-		elif item in GlobalStats.valid_equippables:
-			string = tr(GlobalStats.EQUIPPABLE_NAMES[item.capitalize()])
+		if item in GlobalStats.VALID_POWERUPS or item in GlobalStats.VALID_COLLECTABLES or item in GlobalStats.VALID_EQUIPPABLES:
+			string = tr(GlobalStats.COMMON_NAMES[item.capitalize()])
+#		elif item in GlobalStats.VALID_COLLECTABLES:
+#			string = tr(GlobalStats.COLLECTABLE_NAMES[item.capitalize()])
+#		elif item in GlobalStats.VALID_EQUIPPABLES:
+#			string = tr(GlobalStats.EQUIPPABLE_NAMES[item.capitalize()])
 		else:
 			string = tr(GlobalStats.SHOP_NAMES[item.capitalize()])
 
-		if item in GlobalStats.valid_equippables:
+		if item in GlobalStats.VALID_EQUIPPABLES:
 			items_vbox.get_node(item.capitalize()).text = "%s" % [string]
 			if GlobalSave.has_item(GlobalSave.get_stat("equippables"), item):
 				items_vbox.get_node(item.capitalize()).disabled = true
@@ -120,7 +128,36 @@ func update_shop(items: Dictionary) -> void:
 			items_vbox.get_node(item.capitalize()).disabled = true
 			prices_vbox.get_node(item.capitalize()).self_modulate = Color8(220, 25, 25, 255)
 
-
+#	# Button focuses
+#
+#	var button_count: int = items_vbox.get_children().size()
+#	var top_button: Button
+#	var bottom_button: Button
+#
+#	#loop through hidden buttons to get button count
+#	for item in items_vbox.get_children():
+#		if not item.visible:
+#			button_count -= 1
+#
+#	for item in items_vbox.get_children():
+#		if item.visible:
+#			top_button = item
+#			continue
+#
+#	# find bottom button
+#	var idx: int = 0
+#	for item in items_vbox.get_children():
+#		if item.visible:
+#			idx += 1
+#			if idx == button_count:
+#				bottom_button = item
+#				continue
+#
+#	print(button_count)
+#
+#	bottom_button.focus_neighbour_bottom = back_button.get_path()
+#	back_button.focus_neighbour_top = bottom_button.get_path()
+#	top_button.focus_neighbour_top = top_button.get_path()
 	loaded_shop = items
 
 	# Gems
@@ -157,36 +194,37 @@ func _button_pressed() -> void:
 	var item: String = target_button.name
 	item = item.to_lower()
 
-	if item in GlobalStats.valid_powerups:
+	if item in GlobalStats.VALID_POWERUPS:
 		var item_str = item.replace(" ", "_")
 		bought_item_sprite.texture = load("res://world_all/powerups/%s.png" % item_str)
-	elif item in GlobalStats.valid_collectables:
+	elif item in GlobalStats.VALID_COLLECTABLES:
 		var item_str = item.replace(" ", "_")
 		bought_item_sprite.texture = load("res://world_all/collectables/%s.png" % item_str)
-	elif item in GlobalStats.valid_equippables:
+	elif item in GlobalStats.VALID_EQUIPPABLES:
 		var item_str = item.replace(" ", "_")
 		bought_item_sprite.texture = load("res://world_all/equippables/%s.png" % item_str)
 	elif item == "orbs":
 		bought_item_sprite.texture = load("res://world_all/orbs/orb.png")
 	bought_item_anim_player.play("show")
 
-	GlobalSave.set_stat("coins", GlobalSave.get_stat("coins") - loaded_shop[item][2])
 
-	if item in GlobalStats.valid_powerups:
+	if item in GlobalStats.VALID_POWERUPS:
 		for i in loaded_shop[item][1]:
 			GlobalEvents.emit_signal("player_collected_powerup", item)
-	elif item in GlobalStats.valid_collectables:
+	elif item in GlobalStats.VALID_COLLECTABLES:
 		for i in loaded_shop[item][1]:
 			GlobalEvents.emit_signal("player_collected_collectable", item)
-	elif item in GlobalStats.valid_equippables:
+	elif item in GlobalStats.VALID_EQUIPPABLES:
 		GlobalEvents.emit_signal("player_collected_equippable", item)
 		GlobalSave.set_stat("equipped_item", item)
 	elif item == "orbs":
 		GlobalEvents.emit_signal("player_collected_orb", loaded_shop[item][1])
 
+
 	update_shop(loaded_shop)
 	disable_buttons(true)
-
+	yield(get_tree(), "physics_frame")
+	GlobalSave.set_stat("coins", GlobalSave.get_stat("coins") - loaded_shop[item][2])
 
 func _on_Back_pressed() -> void:
 	hide_menu()

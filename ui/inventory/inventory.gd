@@ -13,7 +13,7 @@ var powerups_buttons_bottom_focus: Button
 var equippables_buttons_top_focus: Button
 var equippables_buttons_bottom_focus: Button
 
-var last_powerup: String
+
 var last_equippable: String
 
 onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -136,7 +136,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			play_powerup_sound(true)
 
 	elif event.is_action_pressed("powerup"):
-		try_use_powerup(last_powerup)
+		try_use_powerup(GlobalStats.last_powerup)
 
 	elif not GlobalUI.menu_locked:
 		if event.is_action_pressed("inventory"):
@@ -180,7 +180,7 @@ func show_menu() -> void:
 	update_button_focus(powerups_buttons_top_focus)
 	get_tree().paused = true
 	animation_player.play("show")
-	GlobalUI.dis_focus_sound = true
+
 	top_powerup_button.grab_focus()
 
 
@@ -232,11 +232,12 @@ func update_inventory() -> void:
 					powerups_buttons_bottom_focus = powerups_buttons.get_node(stat[0].capitalize())
 		index -= 1
 
-	# equippables
+	# Equippables
 	stats = GlobalSave.get_stat("equippables")
 	index = stats.size()
 	equippables_buttons_top_focus = null
 	equippables_buttons_bottom_focus = null
+
 	for stat in stats:
 		if equippables_buttons.get_node(stat[0].capitalize()).visible:
 			if stats.size() > 0:
@@ -247,7 +248,7 @@ func update_inventory() -> void:
 		index -= 1
 
 
-	# Ranks and stats
+	# Ranks and Stats
 	rank_explanation_label.text = tr(GlobalStats.RANK_EXPLANATIONS[GlobalStats.Ranks.keys()[GlobalStats.Ranks.NONE].to_lower()])
 	rank_explanation_label.modulate = Color8(255, 255, 255, 255)
 	rank_title_label.text = ""
@@ -340,7 +341,8 @@ func order_buttons(buttons: VBoxContainer, player_stat: String) -> void:
 	var stats: Array = GlobalSave.get_stat(player_stat)
 	var index: int = stats.size()
 
-	var button_positions: Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	# got lazy
+	var button_positions: Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 	for button in button_names:
 		if not button in stats:
@@ -349,7 +351,7 @@ func order_buttons(buttons: VBoxContainer, player_stat: String) -> void:
 
 	for stat in stats:
 		if stat[0] in button_names:
-			var string: String = tr(GlobalStats.POWERUP_NAMES[stat[0].capitalize()])
+			var string: String = tr(GlobalStats.COMMON_NAMES[stat[0].capitalize()])
 			if not buttons.get_node_or_null(stat[0].capitalize()) == null:
 				if not player_stat == "equippables":
 					string += " x%s" % stat[1]
@@ -363,7 +365,7 @@ func order_buttons(buttons: VBoxContainer, player_stat: String) -> void:
 				button_positions[index] = index
 
 				if index == stats.size():
-					GlobalUI.dis_focus_sound = true
+
 					buttons.get_node(stat[0].capitalize()).grab_focus()
 				index -= 1
 
@@ -405,16 +407,16 @@ func fill_items(stat: String, amount: int) -> void:
 	var stat_boost: int
 	match stat:
 		"carrot":
-			stat_boost = GlobalStats.carrot_boost
+			stat_boost = GlobalStats.CARROT_BOOST
 			type = 0
 		"coconut":
-			stat_boost = GlobalStats.coconut_boost
+			stat_boost = GlobalStats.COCONUT_BOOST
 			type = 0
 		"cherry":
-			stat_boost = GlobalStats.cherry_boost
+			stat_boost = GlobalStats.CHERRY_BOOST
 			type = 1
 		"pear":
-			stat_boost = GlobalStats.pear_health_boost
+			stat_boost = GlobalStats.PEAR_HEALTH_BOOST
 			type = 0
 
 	var iterations: int = 0
@@ -449,6 +451,7 @@ func fill_items(stat: String, amount: int) -> void:
 			play_powerup_sound(true)
 			hide_menu()
 
+
 func try_use_powerup(item: String, from_inventory := true) -> void:
 	if not Globals.game_state == Globals.GameStates.LEVEL: return
 
@@ -470,15 +473,14 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 		get_tree().set_input_as_handled()
 		return
 
+	GlobalStats.last_powerup = item
 
-	last_powerup = item
-
-	if item in GlobalStats.timed_powerups and GlobalStats.timed_powerup_active:
+	if item in GlobalStats.TIMED_POWERUPS and GlobalStats.timed_powerup_active:
 		GlobalEvents.emit_signal("ui_notification_shown", tr("notification.item_active"))
 		return
 
 	else:
-		if not item in GlobalStats.timed_powerups and fill_button.pressed:
+		if not item in GlobalStats.TIMED_POWERUPS and fill_button.pressed:
 			var stats = GlobalSave.get_stat("powerups")
 
 			for stat in stats:
@@ -487,7 +489,7 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 				string = string.replace(" ", "_")
 
 				if string == stat[0]:
-					if not stat[0] in GlobalStats.timed_powerups:
+					if not stat[0] in GlobalStats.TIMED_POWERUPS:
 						fill_items(stat[0], stat[1])
 					continue
 		else:
@@ -501,14 +503,16 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 
 # Start of GlobalEvents
 func _level_changed(_world: int, _level: int) -> void:
-	last_powerup = "none"
+	#last_powerup = "none"
 	last_equippable = GlobalSave.get_stat("equipped_item")
 
-	# Determin last used gun
+	# Determine last used gun
 	var stats = GlobalSave.get_stat("equippables")
 	var index = stats.size()
+
 	equippables_buttons_top_focus = null
 	equippables_buttons_bottom_focus = null
+
 	for stat in stats:
 		if equippables_buttons.get_node(stat[0].capitalize()).visible:
 			if stats.size() > 0:
@@ -518,13 +522,13 @@ func _level_changed(_world: int, _level: int) -> void:
 
 
 func _level_completed() -> void:
-	last_powerup = "none"
+	#last_powerup = "none"
 	last_equippable = GlobalSave.get_stat("equipped_item")
 
 
 func _player_collected_powerup(item_name: String) -> void:
 	var inv: Array = GlobalSave.get_stat("powerups")
-	if item_name in GlobalStats.valid_powerups:
+	if item_name in GlobalStats.VALID_POWERUPS:
 		if not GlobalSave.has_item(inv, item_name):
 			inv.push_back([item_name, 1])
 			return
@@ -537,7 +541,8 @@ func _player_collected_powerup(item_name: String) -> void:
 
 func _player_collected_equippable(item_name: String) -> void:
 	var inv: Array = GlobalSave.get_stat("equippables")
-	if item_name in GlobalStats.valid_equippables:
+
+	if item_name in GlobalStats.VALID_EQUIPPABLES:
 		if not GlobalSave.has_item(inv, item_name):
 			inv.push_back([item_name, 1])
 			return
@@ -545,12 +550,14 @@ func _player_collected_equippable(item_name: String) -> void:
 			if array[0] == item_name:
 				if GlobalSave.has_item(inv, item_name):
 					array[1] += 1
+	else:
+		printerr("%s NOT FOUND IN VALID LIST" % item_name)
 	GlobalSave.set_stat("equippables", inv)
 
 
 func _player_collected_collectable(item_name: String) -> void:
 	var inv: Array = GlobalSave.get_stat("collectables")
-	if item_name in GlobalStats.valid_collectables:
+	if item_name in GlobalStats.VALID_COLLECTABLES:
 		if not GlobalSave.has_item(inv, item_name):
 			inv.push_back([item_name, 1])
 			return
@@ -562,7 +569,7 @@ func _player_collected_collectable(item_name: String) -> void:
 
 
 func _player_used_powerup(item_name: String) -> void:
-	if item_name in GlobalStats.valid_powerups:
+	if item_name in GlobalStats.VALID_POWERUPS:
 		var inv: Array = GlobalSave.get_stat("powerups")
 		if GlobalSave.has_item(inv, item_name):
 			for array in inv:
@@ -654,7 +661,7 @@ func _upgrade_stats_pressed() -> void:
 	$"Panel/Stats/UpgradeStatsPrompt".show()
 	var has_adrenaline: bool = GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD
 	upgrade_stats_adrenaline_button.visible = has_adrenaline
-	GlobalUI.dis_focus_sound = true
+
 	upgrade_stats_cancel_button.grab_focus()
 	GlobalEvents.emit_signal("ui_button_pressed")
 	GlobalUI.menu = GlobalUI.Menus.INVENTORY_UPGRADE_PROMPT
@@ -699,7 +706,7 @@ func _upgrade_stats_pressed() -> void:
 
 func _upgrade_stats_cancel_pressed() -> void:
 	GlobalUI.menu = GlobalUI.Menus.INVENTORY
-	GlobalUI.dis_focus_sound = true
+
 	stats_upgrade_button.grab_focus()
 	GlobalEvents.emit_signal("ui_button_pressed", true)
 	upgrade_stats_cancel_button.disabled = true
@@ -800,3 +807,11 @@ func _on_Glitch_Soul_focus_entered() -> void:
 
 func _on_Glitch_Soul_mouse_entered() -> void:
 	powerups_explanation_label.text = GlobalStats.get_powerup_explanation("glitch soul")
+
+
+func _on_Ice_Spike_focus_entered() -> void:
+	powerups_explanation_label.text = GlobalStats.get_powerup_explanation("ice spike")
+
+
+func _on_Ice_Spike_mouse_entered() -> void:
+	powerups_explanation_label.text = GlobalStats.get_powerup_explanation("ice spike")

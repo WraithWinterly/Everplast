@@ -83,13 +83,14 @@ inventory.item.bunny_egg,Bunny Egg,Huevo de Conejito
 inventory.item.glitch_orb,Glitch Orb,Orbe Glitch
 inventory.item.pear,Pear,Pera
 inventory.item.glitch_soul,Glitch Soul,Alma Glitch
+inventory.item.ice_spike,Ice Spike,Espiga de Hielo
 inventory.no_items,There is not much to see here.,Aun no hay cosas para ver aqui.
 ,,
 pause_menu.paused,Paused,Pausado
 pause_menu.continue,Continue,Seguir
 pause_menu.settings,Settings,Ajustes
 pause_menu.return,Return to Menu,Volver al Menu
-pause_menu.return_level,Exit Level,Salir al Selector Mundial
+pause_menu.return_level,Exit Level,Salir del Mundo
 return_prompt.title_level,Exit Level?,Salir?
 return_prompt.text_level,All unsaved progress will be lost!,Progreso no guardado sera perdido!
 return_prompt.title,Return to Main Menu?,Volver al Menu?
@@ -114,13 +115,15 @@ inventory.upgrade_stats.adrenaline,Adrenaline,Adrenalina
 inventory.upgrade_stats.cost,Cost,Costo
 inventory.upgrade_stats.upgrade_level,Upgrade Level!,Subir Nivel!
 inventory.upgrade_stats.orbs,Orbs,Orbes
+,,
 inventory.collectable.energy,Energy,Energia
 inventory.collectable.water,Water,Agua
 inventory.collectable.nail,Nail,Clavo
+inventory.collectable.snowball,Snowball,Bola de nieve
 inventory.equippable.water_gun,Water Gun,Pistola de Agua
 inventory.equippable.nail_gun,Nail Gun,Pistola de Clavo
 inventory.equippable.laser_gun,Laser Gun,Pistola de Laser
-,,
+inventory.equippable.snow_gun,Snow Gun,Pistola de nieve
 world_selector.teleporter_not_active,This teleporter is not active yet!,Este teletransportador aun no esta activo!
 world_selector.label,World Selector,Selector Mundial
 ,,
@@ -138,6 +141,8 @@ powerup_explanations.glitch_orb,CODE_GLITCH,PROGRAMA_GLITCH
 powerup_explanations.pear,Increases your health by,Aumenta tu salud por
 powerup_explanations.pear.2,and your adrenaline by,y su adrenalina por
 powerup_explanations.glitch_soul,Not complete,No esta completo
+powerup_explanations.ice_spike,Freezes your health and adrenaline for,Congela tu salud y adrenalina durante
+powerup_explanations.ice_spike_2,seconds. This includes powerups.,segundos. Esto incluye potenciadores.
 ,,
 rank_explanations.none,You do not have a rank yet,No tienes un rango aun
 rank_explanations.silver,- See enemy health on hit\n- Double Jump\n- Wall Jump,- Puedes ver la salud de los enemigos en golpe\n- Doble Salto\n- Salto de Paredes

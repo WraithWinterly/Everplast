@@ -17,7 +17,7 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("story_boss_camera_animated", self, "_story_boss_camera_animated")
 	__ = connect("body_entered", self, "_body_entered")
 	__ = connect("body_exited", self, "_body_exited")
-
+	$Godrays.show()
 
 func _input(event: InputEvent) -> void:
 	if not visible: return

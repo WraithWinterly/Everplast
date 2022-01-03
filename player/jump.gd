@@ -25,8 +25,9 @@ func _physics_process(_delta: float) -> void:
 	if not player.floor_checks[0].is_colliding() or not player.floor_checks[1].is_colliding():
 		checks_ignored = false
 
-	if player.is_on_floor() and not player.sprinting:
+	if player.is_on_floor() and player.floor_checks[0].is_colliding() and player.floor_checks[1].is_colliding():
 		fsm.change_state(fsm.walk)
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("move_jump"):

@@ -21,7 +21,10 @@ func _body_entered(body: Node) -> void:
 		GlobalInput.start_normal_vibration()
 
 		yield(anim_player, "animation_finished")
-		yield(get_tree().create_timer(3), "timeout")
+		$Timer.start(3)
+
+
+func _on_Timer_timeout() -> void:
 		anim_player.play("regen")
 		yield(anim_player, "animation_finished")
 		activated = false

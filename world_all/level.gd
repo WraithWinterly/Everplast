@@ -3,6 +3,8 @@ extends Node2D
 export var canvas_normal: PackedScene
 export var canvas_subsection: PackedScene
 
+export var windy_level: bool = false
+
 enum {
 	NORMAL
 	SUB
@@ -33,7 +35,7 @@ func _ready() -> void:
 	var start_pos: Position2D = get_node_or_null("LevelComponents/PlayerStart")
 
 	if GlobalLevel.checkpoint_active:
-		var checkpoint
+		var checkpoint: Node
 		if not GlobalLevel.checkpoint_index > 0:
 			checkpoint = get_node_or_null("LevelComponents/Checkpoint")
 		else:
@@ -70,7 +72,7 @@ func _level_subsection_changed(_pos: Vector2) -> void:
 
 
 func update_canvas() -> void:
-	var canvases = get_tree().get_nodes_in_group("CanvasModulate")
+	var canvases := get_tree().get_nodes_in_group("CanvasModulate")
 
 	if GlobalLevel.has_canvas():
 		for canvas in canvases:

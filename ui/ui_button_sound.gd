@@ -1,5 +1,5 @@
 extends AudioStreamPlayer
-
+#Normal button click sound
 
 func _ready() -> void:
 	var __: int

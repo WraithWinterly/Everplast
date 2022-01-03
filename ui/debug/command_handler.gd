@@ -2,24 +2,27 @@ extends Node
 
 onready var debug_console: Control = get_parent()
 
-enum {
-	ARG_INT,
-	ARG_FLOAT,
-	ARG_BOOL,
-	ARG_STRING,
+enum Arguments{
+	INT,
+	FLOAT,
+	BOOL,
+	STRING,
 }
 
 const valid_commands: Array = [
-	["tp", [ARG_FLOAT, ARG_FLOAT]],
-	["change_level", [ARG_INT, ARG_INT]],
-	["spawn", [ARG_STRING, ARG_INT]],
-	["set_stat", [ARG_STRING, ARG_STRING]],
-	["get_stat", [ARG_STRING]],
+	["tp", [Arguments.FLOAT, Arguments.FLOAT]],
+	["level", [Arguments.INT, Arguments.INT]],
+	["spawn", [Arguments.STRING, Arguments.INT]],
+	["set_stat", [Arguments.STRING, Arguments.STRING]],
+	["get_stat", [Arguments.STRING]],
+	["clear_stat_profile", [Arguments.STRING, Arguments.INT]],
+	["clear_stat", [Arguments.STRING]],
 	["get_stats"],
 	["get_stats_raw"],
 	["get_settings"],
 	["get_settings_raw"],
 	["finish_level"],
+	["get_gems"],
 	["clear"],
 	["kill"],
 	["save"],
@@ -38,7 +41,7 @@ func tp(location_x: float, location_y: float) -> String:
 	return str("FAILED: Player is not in the game.")
 
 
-func change_level(world: int, level: int) -> String:
+func level(world: int, level: int) -> String:
 	debug_console.hide_menu()
 	GlobalEvents.emit_signal("level_changed", world, level)
 	debug_console.last_world = Vector2(world, level)
@@ -47,6 +50,7 @@ func change_level(world: int, level: int) -> String:
 
 func spawn(loader: String, amount: int) -> String:
 	var spawn = load("res://" + loader + ".tscn")
+
 	if spawn is PackedScene:
 		for _n in amount:
 			var loaded = spawn.instance()
@@ -75,13 +79,30 @@ func get_stat(stat: String) -> String:
 	return str(GlobalSave.get_stat(stat))
 
 
+func clear_stat(stat: String) -> String:
+	if Globals.game_state == Globals.GameStates.MENU:
+		return "You must be in the game."
+	GlobalSave.set_stat(stat, GlobalSave.DEFAULT_DATA[stat])
+	return "Stat %s set to %s" % [stat, get_stat(stat)]
+
+
+func clear_stat_profile(stat: String, profile: int) -> String:
+	if GlobalSave.DEFAULT_DATA.has(stat):
+		GlobalSave.data[profile][stat] = GlobalSave.DEFAULT_DATA[stat]
+	else:
+		return "Stat %s not found." % stat
+	return "Stat %s set to %s on profile %s" % [stat, GlobalSave.data[profile][stat], profile]
+
+
+
 func get_stats() -> String:
 	var stats_string: String = "Save Data:\n"
-	var data = GlobalSave.data
-
+	var data := GlobalSave.data
 	var index: int = 0
+
 	for dict in data:
 		stats_string += "Profile %s:\n" % (index + 1)
+
 		for stats in data[index]:
 			stats_string += "     %s: %s\n" % [stats, data[index][stats]]
 		index += 1
@@ -94,12 +115,15 @@ func get_stats_raw() -> String:
 
 func get_settings() -> String:
 	var string: String = "Settings:\n"
+
 	for key in get_node(GlobalPaths.SETTINGS).data.keys():
 		var new_str: String = key
+
 		new_str = new_str.replace("_", " ")
 		new_str = new_str.capitalize()
 		string += "     %s: " % new_str
 		string += "%s\n" % get_node(GlobalPaths.SETTINGS).data[key]
+
 	return string
 
 
@@ -116,6 +140,14 @@ func finish_level() -> String:
 		return "You must be in a level."
 
 
+func get_gems() -> String:
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		GlobalEvents.emit_signal("player_collected_gem", 0)
+		GlobalEvents.emit_signal("player_collected_gem", 1)
+		GlobalEvents.emit_signal("player_collected_gem", 2)
+		return "Gems collected for World %s - %s" % [GlobalLevel.current_world, GlobalLevel.current_level]
+	else:
+		return "You must be in a level."
 
 func clear() -> String:
 	debug_console.output.text = "Type help for help"
@@ -140,11 +172,14 @@ func save() -> String:
 func help() -> String:
 	var help_string: String = "Debug Commands:\n"
 	var index: int = 0
+
 	for command in valid_commands:
 		help_string += "     %s" % command[0]
+
 		if command.size() > 1:
 			for parameter in command[1]:
-				help_string += " <%s>" % get_enum_name(parameter)
+				#help_string += " <%s>" % get_enum_name(parameter)
+				help_string += " <%s>" % Arguments.keys()[parameter].to_lower()
 		if not index == valid_commands.size() - 1:
 			help_string += "\n"
 			index += 1

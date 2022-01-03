@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
@@ -26,6 +26,10 @@
 [ext_resource path="res://world_all/equippables/water_gun.png" type="Texture" id=24]
 [ext_resource path="res://world_all/equippables/nail_gun.png" type="Texture" id=25]
 [ext_resource path="res://world_all/equippables/laser_gun.png" type="Texture" id=26]
+[ext_resource path="res://world_all/equippables/snow_gun.png" type="Texture" id=27]
+[ext_resource path="res://world_all/collectables/snow.png" type="Texture" id=28]
+[ext_resource path="res://world_all/equippables/ice_gun.png" type="Texture" id=29]
+[ext_resource path="res://world_all/powerups/ice_spike.png" type="Texture" id=30]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -218,6 +222,9 @@ margin_left = 33.6
 margin_top = -61.5825
 margin_right = 33.6
 margin_bottom = -11.5825
+focus_neighbour_left = NodePath(".")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
 size_flags_horizontal = 3
 custom_constants/hseparation = 0
 custom_fonts/font = ExtResource( 2 )
@@ -438,10 +445,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Orbs" type="Button" parent="Panel/BG/Items"]
+[node name="Ice Spike" type="Button" parent="Panel/BG/Items"]
 margin_top = 420.0
 margin_right = 576.0
 margin_bottom = 470.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Ice Spike"
+icon = ExtResource( 30 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Orbs" type="Button" parent="Panel/BG/Items"]
+margin_top = 480.0
+margin_right = 576.0
+margin_bottom = 530.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 11 )
@@ -458,9 +484,9 @@ __meta__ = {
 }
 
 [node name="Water" type="Button" parent="Panel/BG/Items"]
-margin_top = 480.0
+margin_top = 540.0
 margin_right = 576.0
-margin_bottom = 530.0
+margin_bottom = 590.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 11 )
@@ -477,9 +503,9 @@ __meta__ = {
 }
 
 [node name="Energy" type="Button" parent="Panel/BG/Items"]
-margin_top = 540.0
+margin_top = 600.0
 margin_right = 576.0
-margin_bottom = 590.0
+margin_bottom = 650.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 11 )
@@ -496,9 +522,9 @@ __meta__ = {
 }
 
 [node name="Nail" type="Button" parent="Panel/BG/Items"]
-margin_top = 600.0
+margin_top = 660.0
 margin_right = 576.0
-margin_bottom = 650.0
+margin_bottom = 710.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 11 )
@@ -514,10 +540,29 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Water Gun" type="Button" parent="Panel/BG/Items"]
-margin_top = 660.0
+[node name="Snowball" type="Button" parent="Panel/BG/Items"]
+margin_top = 720.0
 margin_right = 576.0
-margin_bottom = 710.0
+margin_bottom = 770.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Snow"
+icon = ExtResource( 28 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Water Gun" type="Button" parent="Panel/BG/Items"]
+margin_top = 780.0
+margin_right = 576.0
+margin_bottom = 830.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 11 )
@@ -534,9 +579,9 @@ __meta__ = {
 }
 
 [node name="Laser Gun" type="Button" parent="Panel/BG/Items"]
-margin_top = 720.0
+margin_top = 840.0
 margin_right = 576.0
-margin_bottom = 770.0
+margin_bottom = 890.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 11 )
@@ -553,9 +598,9 @@ __meta__ = {
 }
 
 [node name="Nail Gun" type="Button" parent="Panel/BG/Items"]
-margin_top = 780.0
+margin_top = 900.0
 margin_right = 576.0
-margin_bottom = 830.0
+margin_bottom = 950.0
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 2 )
 custom_styles/hover = ExtResource( 11 )
@@ -565,6 +610,44 @@ custom_styles/disabled = ExtResource( 10 )
 custom_styles/normal = ExtResource( 10 )
 text = "Nail Gun"
 icon = ExtResource( 25 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Snow Gun" type="Button" parent="Panel/BG/Items"]
+margin_top = 960.0
+margin_right = 576.0
+margin_bottom = 1010.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Snow Gun"
+icon = ExtResource( 27 )
+align = 2
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ice Gun" type="Button" parent="Panel/BG/Items"]
+margin_top = 1020.0
+margin_right = 576.0
+margin_bottom = 1070.0
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 11 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 13 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
+text = "Ice Gun"
+icon = ExtResource( 29 )
 align = 2
 expand_icon = true
 __meta__ = {
@@ -643,68 +726,104 @@ text = "     x99"
 
 [node name="CoinDisplay" parent="Panel/BG/Price/Glitch Soul" instance=ExtResource( 17 )]
 
-[node name="Orbs" type="Label" parent="Panel/BG/Price"]
+[node name="Ice Spike" type="Label" parent="Panel/BG/Price"]
 margin_top = 420.0
 margin_right = 112.0
 margin_bottom = 450.0
 custom_fonts/font = ExtResource( 2 )
-text = "     x999"
+text = "     x99"
 
-[node name="CoinDisplay" parent="Panel/BG/Price/Orbs" instance=ExtResource( 17 )]
+[node name="CoinDisplay" parent="Panel/BG/Price/Ice Spike" instance=ExtResource( 17 )]
 
-[node name="Water" type="Label" parent="Panel/BG/Price"]
+[node name="Orbs" type="Label" parent="Panel/BG/Price"]
 margin_top = 480.0
 margin_right = 112.0
 margin_bottom = 510.0
 custom_fonts/font = ExtResource( 2 )
 text = "     x999"
 
-[node name="CoinDisplay" parent="Panel/BG/Price/Water" instance=ExtResource( 17 )]
+[node name="CoinDisplay" parent="Panel/BG/Price/Orbs" instance=ExtResource( 17 )]
 
-[node name="Energy" type="Label" parent="Panel/BG/Price"]
+[node name="Water" type="Label" parent="Panel/BG/Price"]
 margin_top = 540.0
 margin_right = 112.0
 margin_bottom = 570.0
 custom_fonts/font = ExtResource( 2 )
 text = "     x999"
 
-[node name="CoinDisplay" parent="Panel/BG/Price/Energy" instance=ExtResource( 17 )]
+[node name="CoinDisplay" parent="Panel/BG/Price/Water" instance=ExtResource( 17 )]
 
-[node name="Nail" type="Label" parent="Panel/BG/Price"]
+[node name="Energy" type="Label" parent="Panel/BG/Price"]
 margin_top = 600.0
 margin_right = 112.0
 margin_bottom = 630.0
 custom_fonts/font = ExtResource( 2 )
 text = "     x999"
 
-[node name="CoinDisplay" parent="Panel/BG/Price/Nail" instance=ExtResource( 17 )]
+[node name="CoinDisplay" parent="Panel/BG/Price/Energy" instance=ExtResource( 17 )]
 
-[node name="Water Gun" type="Label" parent="Panel/BG/Price"]
+[node name="Nail" type="Label" parent="Panel/BG/Price"]
 margin_top = 660.0
 margin_right = 112.0
 margin_bottom = 690.0
 custom_fonts/font = ExtResource( 2 )
 text = "     x999"
 
-[node name="CoinDisplay" parent="Panel/BG/Price/Water Gun" instance=ExtResource( 17 )]
+[node name="CoinDisplay" parent="Panel/BG/Price/Nail" instance=ExtResource( 17 )]
 
-[node name="Laser Gun" type="Label" parent="Panel/BG/Price"]
+[node name="Snowball" type="Label" parent="Panel/BG/Price"]
 margin_top = 720.0
 margin_right = 112.0
 margin_bottom = 750.0
 custom_fonts/font = ExtResource( 2 )
 text = "     x999"
 
-[node name="CoinDisplay" parent="Panel/BG/Price/Laser Gun" instance=ExtResource( 17 )]
+[node name="CoinDisplay" parent="Panel/BG/Price/Snowball" instance=ExtResource( 17 )]
 
-[node name="Nail Gun" type="Label" parent="Panel/BG/Price"]
+[node name="Water Gun" type="Label" parent="Panel/BG/Price"]
 margin_top = 780.0
 margin_right = 112.0
 margin_bottom = 810.0
 custom_fonts/font = ExtResource( 2 )
 text = "     x999"
 
+[node name="CoinDisplay" parent="Panel/BG/Price/Water Gun" instance=ExtResource( 17 )]
+
+[node name="Laser Gun" type="Label" parent="Panel/BG/Price"]
+margin_top = 840.0
+margin_right = 112.0
+margin_bottom = 870.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Laser Gun" instance=ExtResource( 17 )]
+
+[node name="Nail Gun" type="Label" parent="Panel/BG/Price"]
+margin_top = 900.0
+margin_right = 112.0
+margin_bottom = 930.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
 [node name="CoinDisplay" parent="Panel/BG/Price/Nail Gun" instance=ExtResource( 17 )]
+
+[node name="Snow Gun" type="Label" parent="Panel/BG/Price"]
+margin_top = 960.0
+margin_right = 112.0
+margin_bottom = 990.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Snow Gun" instance=ExtResource( 17 )]
+
+[node name="Ice Gun" type="Label" parent="Panel/BG/Price"]
+margin_top = 1020.0
+margin_right = 112.0
+margin_bottom = 1050.0
+custom_fonts/font = ExtResource( 2 )
+text = "     x999"
+
+[node name="CoinDisplay" parent="Panel/BG/Price/Ice Gun" instance=ExtResource( 17 )]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )

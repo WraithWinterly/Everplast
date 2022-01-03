@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world_all/cannon/cannon_bullet_base.tscn" type="PackedScene" id=1]
+
+[node name="SnowballCannonBullet" type="Node2D"]
+
+[node name="CannonBulletBase" parent="." instance=ExtResource( 1 )]

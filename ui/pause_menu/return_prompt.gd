@@ -1,6 +1,6 @@
 extends Control
 
-onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var yes_button: Button = $Panel/VBoxContainer/HBoxContainer/Yes
 onready var no_button: Button = $Panel/VBoxContainer/HBoxContainer/No
 onready var title_text: Label = $Panel/VBoxContainer/Title
@@ -36,17 +36,19 @@ func show_menu() -> void:
 		prompt_text.text = ""
 	show()
 	title_text.show()
-	animation_player.play("show")
+	anim_player.play("show")
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	no_button.grab_focus()
 
 
 func hide_menu() -> void:
-	animation_player.play_backwards("show")
+	anim_player.play_backwards("show")
 	disable_buttons()
-	yield(animation_player, "animation_finished")
-	hide()
+	yield(anim_player, "animation_finished")
+	if not anim_player.is_playing():
+		hide()
+		$BGBlur.hide()
 
 
 func enable_buttons() -> void:
@@ -63,6 +65,7 @@ func _level_changed(_world: int, _level: int) -> void:
 	if GlobalUI.menu == GlobalUI.Menus.RETURN_PROMPT:
 		hide_menu()
 
+
 func _ui_pause_menu_return_pressed() -> void:
 	show_menu()
 
@@ -77,7 +80,7 @@ func _no_pressed() -> void:
 
 func _yes_pressed() -> void:
 	if GlobalUI.menu_locked: return
-	GlobalEvents.emit_signal("ui_button_pressed")
+
 	hide_menu()
 	GlobalEvents.emit_signal("ui_pause_menu_return_prompt_yes_pressed")
 	if Globals.game_state == Globals.GameStates.LEVEL:
@@ -87,6 +90,7 @@ func _yes_pressed() -> void:
 		yield(GlobalEvents, "ui_faded")
 		get_tree().paused = false
 	else:
+		GlobalStats.last_powerup = ""
 		Globals.game_state = Globals.GameStates.MENU
 		GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
 		yield(GlobalEvents, "ui_faded")

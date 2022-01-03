@@ -22,9 +22,10 @@ func footstep_sounds() -> void:
 	for i in get_parent().get_slide_count():
 		var collision = get_parent().get_slide_collision(i)
 		var collider = collision.collider
+
 		if collider is TileMap:
 			match collider.name:
-				"TileMapW1Platform", "PlatformTileMap", "TileMapPlatformW2":
+				"TileMapW1Platform", "PlatformTileMap", "TileMapPlatformW2", "TileMapPlatform":
 					try_play_sound($FootstepWood)
 				"TileMapW1Grass", "TileMapW1Beach":
 					try_play_sound($FootstepGrass)
@@ -36,6 +37,8 @@ func footstep_sounds() -> void:
 					try_play_sound($FootstepSand)
 				"TileMapSandstone":
 					try_play_sound($FootstepSandstone)
+				"TileMapW3Ice":
+					try_play_sound($FootstepIce)
 
 
 func try_play_sound(strm_player: AudioStreamPlayer) -> void:

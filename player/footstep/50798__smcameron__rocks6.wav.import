@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/50798__smcameron__rocks6.wav-cb0deba1d685e8c860bdbb1607e7ade8.sample"
+
+[deps]
+
+source_file="res://player/footstep/50798__smcameron__rocks6.wav"
+dest_files=[ "res://.import/50798__smcameron__rocks6.wav-cb0deba1d685e8c860bdbb1607e7ade8.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

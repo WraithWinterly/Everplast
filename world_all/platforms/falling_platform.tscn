@@ -165,3 +165,9 @@ anims/regen = SubResource( 4 )
 pause_mode = 2
 stream = ExtResource( 3 )
 bus = "Audio"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

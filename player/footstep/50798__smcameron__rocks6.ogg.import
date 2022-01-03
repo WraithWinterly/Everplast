@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/50798__smcameron__rocks6.ogg-b3a32030e7f003cc1f694dfc1fc5a553.oggstr"
+
+[deps]
+
+source_file="res://player/footstep/50798__smcameron__rocks6.ogg"
+dest_files=[ "res://.import/50798__smcameron__rocks6.ogg-b3a32030e7f003cc1f694dfc1fc5a553.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

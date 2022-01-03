@@ -10,10 +10,12 @@ texture = ExtResource( 1 )
 centered = false
 offset = Vector2( 0, -1 )
 hframes = 6
+vframes = 2
+frame = 1
 script = ExtResource( 2 )
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2( 8, 26 )
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2( 8, 8 )
 z_index = -1
 amount = 14
 lifetime = 5.0
@@ -29,7 +31,7 @@ damping = 100.0
 damping_random = 0.27
 scale_amount = 2.0
 scale_amount_random = 1.0
-color = Color( 0.0196078, 0.435294, 0, 1 )
+color = Color( 0.0392157, 0.560784, 0.0313726, 1 )
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
 position = Vector2( 32, 24 )
@@ -50,8 +52,8 @@ scale_amount = 2.0
 scale_amount_random = 1.0
 color = Color( 0.0509804, 0.32549, 0.00784314, 1 )
 
-[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
-position = Vector2( 8, 8 )
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2( 8, 26 )
 z_index = -1
 amount = 14
 lifetime = 5.0
@@ -67,4 +69,11 @@ damping = 100.0
 damping_random = 0.27
 scale_amount = 2.0
 scale_amount_random = 1.0
-color = Color( 0.0392157, 0.560784, 0.0313726, 1 )
+color = Color( 0.0196078, 0.435294, 0, 1 )
+
+[node name="VisibilityEnabler2D" type="VisibilityEnabler2D" parent="."]
+visible = false
+position = Vector2( 0, 48 )
+scale = Vector2( 4, 5.6 )
+process_parent = true
+physics_process_parent = true

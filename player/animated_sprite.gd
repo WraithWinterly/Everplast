@@ -51,11 +51,12 @@ func _ready() -> void:
 	rotation_degrees = 0
 
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
-		hide()
-		fsm.current_state = fsm.idle
 		fsm.enabled = false
-		$AnimationPlayer.play("spawn")
+		fsm.current_state = fsm.idle
+		hide()
+		yield(GlobalEvents, "ui_faded")
 		yield(get_tree(), "physics_frame")
+		$AnimationPlayer.play("spawn")
 		show()
 		$SpawnSound.play()
 		fsm.enabled = true
@@ -141,6 +142,7 @@ func _process(_delta: float) -> void:
 
 	level_up_light.global_position.x = global_position.x + 5.5
 	level_up_light.global_position.y = global_position.y + 13
+
 
 func _physics_process(_delta: float) -> void:
 	playing = not (animation == "idle" and not player.is_on_floor())

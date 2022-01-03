@@ -46,7 +46,7 @@ func _ready() -> void:
 	update_menu()
 
 	if not GlobalUI.menu == GlobalUI.Menus.INITIAL_SETUP:
-		GlobalUI.dis_focus_sound = true
+
 		play_button.grab_focus()
 
 	yield(get_tree(), "idle_frame")
@@ -107,7 +107,7 @@ func _ui_profile_selector_return_pressed() -> void:
 		yield(GlobalEvents, "ui_faded")
 		update_menu()
 		show_menu()
-		GlobalUI.dis_focus_sound = true
+
 		play_button.grab_focus()
 
 
@@ -115,14 +115,14 @@ func _ui_quick_play_prompt_no_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	GlobalEvents.emit_signal("ui_button_pressed", true)
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	quick_play_button.grab_focus()
 
 
 func _ui_quit_prompt_no_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	quit_button.grab_focus()
 
 
@@ -136,7 +136,7 @@ func _ui_settings_back_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	if Globals.game_state == Globals.GameStates.MENU:
 		enable_buttons()
-		GlobalUI.dis_focus_sound = true
+
 		settings_button.grab_focus()
 
 
@@ -144,13 +144,13 @@ func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
 		yield(GlobalEvents, "ui_faded")
 		show_menu()
-		GlobalUI.dis_focus_sound = true
+
 		play_button.grab_focus()
 
 
 # Initial Languge Setup
 func _ui_settings_language_back_pressed_initial() -> void:
-	GlobalUI.dis_focus_sound = true
+
 	play_button.grab_focus()
 	enable_buttons()
 
@@ -164,7 +164,6 @@ func _play_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	disable_buttons()
 	play_button.release_focus()
-	GlobalEvents.emit_signal("ui_button_pressed")
 	GlobalEvents.emit_signal("ui_play_pressed")
 	GlobalUI.menu = GlobalUI.Menus.PROFILE_SELECTOR
 	yield(GlobalEvents, "ui_faded")
@@ -175,7 +174,7 @@ func _quick_play_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	disable_buttons()
 	quick_play_button.release_focus()
-	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 	GlobalEvents.emit_signal("ui_quick_play_pressed")
 	GlobalUI.menu = GlobalUI.Menus.QUICK_PLAY_PROMPT
 
@@ -193,7 +192,7 @@ func _quit_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	disable_buttons()
 	quit_button.release_focus()
-	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 	GlobalEvents.emit_signal("ui_quit_pressed")
 	GlobalUI.menu = GlobalUI.Menus.QUIT_PROMPT
 

@@ -1,6 +1,7 @@
 extends Label
 
 var last_timed_item_name: String
+
 var last_int: int = 0
 
 onready var timer: Timer = $Timer
@@ -39,19 +40,22 @@ func _physics_process(_delta) -> void:
 
 
 func _player_used_powerup(item_name: String) -> void:
-	text = GlobalStats.POWERUP_NAMES[item_name.capitalize()]
-	GlobalStats.active_timed_powerup = item_name
+	if item_name in GlobalStats.TIMED_POWERUPS:
+		GlobalStats.active_timed_powerup = item_name
+	text = GlobalStats.COMMON_NAMES[item_name.capitalize()]
+	last_timed_item_name = item_name
+	tick_sound.pitch_scale = 1
+
 	match item_name:
 		"bunny egg":
-			last_timed_item_name = item_name
-			show_bar(GlobalStats.bunny_egg_time)
-			last_int = GlobalStats.bunny_egg_time
-			tick_sound.pitch_scale = 1
+			show_bar(GlobalStats.BUNNY_EGG_TIME)
+			last_int = GlobalStats.BUNNY_EGG_TIME
 		"glitch orb":
-			last_timed_item_name = item_name
-			show_bar(GlobalStats.glitch_orb_time)
-			last_int = GlobalStats.glitch_orb_time
-			tick_sound.pitch_scale = 1
+			show_bar(GlobalStats.GLITCH_ORB_TIME)
+			last_int = GlobalStats.GLITCH_ORB_TIME
+		"ice spike":
+			show_bar(GlobalStats.ICE_SPIKE_TIME)
+			last_int = GlobalStats.ICE_SPIKE_TIME
 
 
 func stop_active_item() -> void:
@@ -59,7 +63,7 @@ func stop_active_item() -> void:
 	GlobalStats.timed_powerup_active = false
 	anim_player.play_backwards("show")
 	GlobalEvents.emit_signal("player_powerup_ended", last_timed_item_name)
-	GlobalStats.active_timed_powerup = null
+	GlobalStats.active_timed_powerup = ""
 
 
 func _ui_pause_menu_return_prompt_yes_pressed() -> void:

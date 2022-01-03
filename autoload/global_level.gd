@@ -68,7 +68,6 @@ func _ready() -> void:
 
 
 func _level_changed(world: int, level: int) -> void:
-
 	GlobalInput.start_high_vibration()
 
 	if world > WORLD_COUNT:
@@ -207,6 +206,7 @@ func _level_checkpoint_activated() -> void:
 func _player_died() -> void:
 	GlobalLevel.in_boss = false
 	GlobalLevel.in_subsection = false
+	GlobalUI.menu_locked = true
 
 	get_tree().paused = true
 
@@ -220,9 +220,9 @@ func _player_died() -> void:
 	selected_world = GlobalSave.get_stat("world_last")
 	selected_level = GlobalSave.get_stat("level_last")
 
-	yield(get_tree(), "physics_frame")
+	for i in 20:
+		yield(get_tree(), "physics_frame")
 
-	GlobalUI.menu_locked = true
 	GlobalUI.menu_locked = false
 
 	GlobalEvents.emit_signal("ui_button_pressed")

@@ -1,7 +1,7 @@
 [gd_scene load_steps=24 format=2]
 
-[ext_resource path="res://tilesets/tilemap_spikes.tres" type="TileSet" id=1]
-[ext_resource path="res://tilesets/tilemap_w1_grass.tres" type="TileSet" id=2]
+[ext_resource path="res://tilesets/tileset_spikes.tres" type="TileSet" id=1]
+[ext_resource path="res://tilesets/tileset_grass.tres" type="TileSet" id=2]
 [ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=3]
 [ext_resource path="res://world_all/level.gd" type="Script" id=4]
 [ext_resource path="res://world_all/spikes/spikes.gd" type="Script" id=5]
@@ -20,7 +20,7 @@
 [ext_resource path="res://world_all/death_area/death_area.tscn" type="PackedScene" id=22]
 [ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=23]
 [ext_resource path="res://world_all/tilemap_block/block.png" type="Texture" id=27]
-[ext_resource path="res://tilesets/tilemap_platform.tres" type="TileSet" id=28]
+[ext_resource path="res://world_all/platforms/tileset_platform.tres" type="TileSet" id=28]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )

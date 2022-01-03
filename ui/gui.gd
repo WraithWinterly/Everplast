@@ -5,6 +5,6 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func _input(_event: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_K):
+		print($Control.get_focus_owner())

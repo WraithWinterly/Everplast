@@ -61,14 +61,14 @@ func show_menu() -> void:
 	setup()
 	anim_player.play("show")
 	enable_buttons()
-	GlobalUI.dis_focus_sound = true
+
 	profile_buttons[0].grab_focus()
 
 
 func setup(normal := true):
 	if normal:
 		var __: int = update_manage_button()
-		GlobalUI.dis_focus_sound = true
+
 		return_button.grab_focus()
 		anim_player.play("show")
 		return_button.text = tr("profile_selector.return")
@@ -200,21 +200,22 @@ func _return_pressed() -> void:
 		GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
 		hide_menu()
 	elif GlobalUI.menu == GlobalUI.Menus.PROFILE_SELECTOR_DELETE:
-		GlobalEvents.emit_signal("ui_button_pressed")
+		#GlobalEvents.emit_signal("ui_button_pressed")
 		GlobalEvents.emit_signal("ui_profile_selector_return_pressed")
 		GlobalUI.menu = GlobalUI.Menus.PROFILE_SELECTOR
 		anim_player.play_backwards("show")
 		GlobalUI.menu_locked = true
 		yield(anim_player, "animation_finished")
+
 		setup()
 		enable_buttons()
 		anim_player.play("show")
+
 		if update_manage_button():
-			GlobalUI.dis_focus_sound = true
 			manage_button.grab_focus()
 		else:
-			GlobalUI.dis_focus_sound = true
 			return_button.grab_focus()
+
 		GlobalUI.menu_locked = false
 
 
