@@ -25,6 +25,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and with_player \
 			and not GlobalUI.menu_locked and not used:
 
+		GlobalUI.menu_locked = true
 		GlobalInput.start_ultra_high_vibration()
 		used = true
 		anim_player.play("hide")

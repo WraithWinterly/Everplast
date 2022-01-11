@@ -49,13 +49,16 @@ func _ready() -> void:
 			item = load(GlobalPaths.CARROT)
 		elif GlobalLevel.current_world == 2:
 			item = load(GlobalPaths.COCONUT)
+		elif GlobalLevel.current_world == 3:
+			item = load(GlobalPaths.CHERRY)
 
 	elif num <= 75:
 		if GlobalLevel.current_world == 1:
 			item = load(GlobalPaths.WATER)
 		elif GlobalLevel.current_world == 2:
 			item = load(GlobalPaths.ENERGY)
-
+		elif GlobalLevel.current_world == 3:
+			item = load(GlobalPaths.SNOWBALL_ITEM)
 	elif num <= 100:
 		if GlobalLevel.current_world == 1:
 			# Bullet vases can't be used yet, awkward to show them
@@ -65,6 +68,8 @@ func _ready() -> void:
 			item = load(GlobalPaths.BUNNY_EGG)
 		elif GlobalLevel.current_world == 2:
 			item = load(GlobalPaths.PEAR)
+		elif GlobalLevel.current_world == 3:
+			item = load(GlobalPaths.ICE_SPIKE)
 		type = Types.BULLLET
 
 	if type == Types.BULLLET:

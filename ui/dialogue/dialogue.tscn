@@ -271,9 +271,11 @@ anims/show = SubResource( 3 )
 
 [node name="Show" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
-volume_db = -9.0
+pitch_scale = 0.8
 bus = "Audio"
 
 [node name="Text" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -6.0
+pitch_scale = 1.4
 bus = "Audio"

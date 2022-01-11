@@ -6,12 +6,22 @@ var ui_used_down := false
 var ui_used_left := false
 var ui_used_right := false
 
+# Control Prompts
+var interact_activators: int = 0
+
+var dash_activated: bool = false
+var fire_activated: bool = false
+var dialogue_activated: bool = false
+
 
 func _physics_process(_delta: float) -> void:
-	check_action("stick_ui_up")
-	check_action("stick_ui_down")
-	check_action("stick_ui_left")
-	check_action("stick_ui_right")
+	if GlobalUI.menu == GlobalUI.Menus.DIALOGUE:
+		dialogue_activated = true
+	# Was engine bug, is fixed now
+#	check_action("stick_ui_up")
+#	check_action("stick_ui_down")
+#	check_action("stick_ui_left")
+#	check_action("stick_ui_right")
 
 
 func _input(event: InputEvent) -> void:
@@ -76,20 +86,20 @@ func release_action(action: String) -> void:
 
 func start_low_vibration() -> void:
 	Input.stop_joy_vibration(0)
-	Input.start_joy_vibration(0, 0.1, 0, 0.05)
+	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 0.1, 0, 0.05)
 
 
 func start_normal_vibration() -> void:
 	Input.stop_joy_vibration(0)
-	Input.start_joy_vibration(0, 0.15, 0.05, 0.1)
+	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 0.15, 0.05, 0.1)
 
 
 func start_high_vibration() -> void:
-	Input.start_joy_vibration(0, 0.4, 0.2, 0.25)
+	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 0.4, 0.2, 0.25)
 
 
 func start_ultra_high_vibration() -> void:
-	Input.start_joy_vibration(0, 1, 0.8, 1.5)
+	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 1, 0.8, 1.5)
 
 
 func get_action_strength_keyboard() -> float:

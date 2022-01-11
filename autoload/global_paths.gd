@@ -9,13 +9,17 @@ const RANK_PICKUP := "res://world_all/rank_pickup/rank_pickup.tscn"
 const WORLD_SELECTOR := "res://world_selector/world_selector.tscn"
 
 const CARROT := "res://world_all/powerups/carrot.tscn"
+const CHERRY := "res://world_all/powerups/cherry.tscn"
 const COCONUT := "res://world_all/powerups/coconut.tscn"
 const BUNNY_EGG := "res://world_all/powerups/bunny_egg.tscn"
+const ICE_SPIKE := "res://world_all/powerups/ice_spike.tscn"
 const PEAR := "res://world_all/powerups/pear.tscn"
 const WATER := "res://world_all/collectables/water.tscn"
+const SNOW := "res://world_all/collectables/water.tscn"
 const ENERGY := "res://world_all/collectables/energy.tscn"
 
-const SNOWBALL := "res://mobs/snowman/snowball/snowball.tscn"
+const SNOWBALL_SNOWMAN := "res://mobs/snowman/snowball/snowball.tscn"
+const SNOWBALL_ITEM := "res://world_all/collectables/snowball.tscn"
 
 const ADRENALINE := "res://world_all/adrenaline.png"
 

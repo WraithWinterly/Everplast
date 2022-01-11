@@ -30,9 +30,12 @@ func _ready() -> void:
 	__ = connect("body_exited", self, "_body_exited")
 
 	show()
+
 	if type == Types.END:
 		hide()
 
+	if GlobalLevel.checkpoint_in_sub:
+		change_subsection(start_subsection.global_position)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and with_player \
@@ -60,32 +63,47 @@ func _input(event: InputEvent) -> void:
 		hide()
 
 
-func _level_subsection_changed(pos: Vector2) -> void:
+func change_subsection(pos: Vector2):
 	if type == Types.START_SUBSECTION and pos == start_subsection.global_position:
 		hide()
+
 	if pos == end.global_position and type == Types.START:
 		used = false
 		show()
+
+
 		anim_player.play_backwards("hide")
+
 		return
-#	if type == Types.START:
-#		show()
-#		yield(GlobalEvents, "ui_faded")
-#		anim_player.play("hide")
+
 	if type == Types.START_SUBSECTION and pos == start_subsection.global_position:
 		used = true
 		show()
 		anim_player.play("RESET")
+
+		if GlobalLevel.checkpoint_in_sub:
+			hide()
+
 		yield(GlobalEvents, "ui_faded")
-		anim_player.play("hide")
+
+		if not GlobalLevel.checkpoint_in_sub:
+			show()
+			anim_player.play("hide")
+
+
 	elif type == Types.END:
 		if pos == end.global_position:
 			show()
+
 			yield(GlobalEvents, "ui_faded")
 			yield(GlobalEvents, "ui_faded")
+
 			anim_player.play("hide")
+
 			yield(anim_player, "animation_finished")
+
 			hide()
+
 		if pos == start_subsection.global_position:
 			anim_player.play("RESET")
 			show()
@@ -93,6 +111,10 @@ func _level_subsection_changed(pos: Vector2) -> void:
 		used = false
 		anim_player.play("RESET")
 		show()
+
+
+func _level_subsection_changed(pos: Vector2) -> void:
+	change_subsection(pos)
 
 
 func _body_entered(body: Node) -> void:

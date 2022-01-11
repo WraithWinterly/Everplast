@@ -22,7 +22,7 @@
 [ext_resource path="res://tilesets/tileset_sandstone.tres" type="TileSet" id=21]
 [ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=22]
 [ext_resource path="res://mobs/fox/fox.tscn" type="PackedScene" id=23]
-[ext_resource path="res://world2/canvas_mountain_w2.tscn" type="PackedScene" id=24]
+[ext_resource path="res://world2/canvas_mountain_w2_old.tscn" type="PackedScene" id=24]
 [ext_resource path="res://world_all/coins/coin_10.tscn" type="PackedScene" id=25]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=27]
 

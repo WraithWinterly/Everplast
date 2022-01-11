@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=2]
@@ -7,13 +7,15 @@
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=5]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=6]
 [ext_resource path="res://world_all/light.png" type="Texture" id=7]
-[ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=8]
+[ext_resource path="res://ui/main_menu/531509__eponn__soft-dreamy-beep-alternative-version.wav" type="AudioStream" id=8]
 [ext_resource path="res://ui/main_menu/main_logo.png" type="Texture" id=9]
 [ext_resource path="res://ui/main_menu/version.gd" type="Script" id=10]
 [ext_resource path="res://ui/fonts/32x.tres" type="DynamicFont" id=13]
-[ext_resource path="res://ui/canvas_bg_override.gd" type="Script" id=15]
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="CanvasItemMaterial" id=8]
+blend_mode = 1
+
+[sub_resource type="Animation" id=6]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:scale")
@@ -57,8 +59,159 @@ tracks/0/keys = {
 "values": [ 10.0, -10.0 ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=3]
+[sub_resource type="CanvasItemMaterial" id=7]
 blend_mode = 1
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.125 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_left")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.125 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Light:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Light2:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Title/Label/Texture/Sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Title/Label/Texture:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "slide"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.125, 0.375 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_right")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.125, 0.635 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Light:rect_scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../Light2:rect_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 2, 2 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../Title/Label/Texture/Sprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 0.164, 0.05 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../Title/Label/Texture:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
+}
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -68,15 +221,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" parent="." instance=ExtResource( 8 )]
-script = ExtResource( 15 )
-
-[node name="CanvasModulate" parent="Background/CanvasLayerBack" index="0"]
-visible = false
+[node name="Backgrounds" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
-visible = false
-position = Vector2( -1, 0 )
+position = Vector2( 0, 75 )
 zoom = Vector2( 0.2, 0.2 )
 drag_margin_v_enabled = true
 smoothing_enabled = true
@@ -102,13 +255,40 @@ margin_bottom = 26.0
 
 [node name="Texture" type="Sprite" parent="Title/Label"]
 rotation = -0.174533
+scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 9 )
 offset = Vector2( 1, 0 )
 
+[node name="Sprite" type="Sprite" parent="Title/Label/Texture"]
+modulate = Color( 0.945098, 0, 1, 0.0980392 )
+material = SubResource( 8 )
+position = Vector2( 5, 1.071 )
+scale = Vector2( 1e-05, 1e-05 )
+z_index = -1
+texture = ExtResource( 7 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Title/Label/Texture"]
 autoplay = "scale"
-anims/RESET = SubResource( 4 )
+anims/RESET = SubResource( 6 )
 anims/scale = SubResource( 5 )
+
+[node name="Light2" type="HBoxContainer" parent="."]
+anchor_right = 0.995
+margin_left = -324.0
+margin_top = -325.0
+margin_bottom = 512.0
+rect_scale = Vector2( 1e-05, 1e-05 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Light2"]
+modulate = Color( 0, 0.196078, 0.192157, 0.607843 )
+material = SubResource( 7 )
+margin_right = 512.0
+margin_bottom = 837.0
+texture = ExtResource( 7 )
 
 [node name="Light" type="HBoxContainer" parent="."]
 anchor_left = 0.645
@@ -116,22 +296,23 @@ anchor_right = 0.995
 margin_left = -324.0
 margin_top = -325.0
 margin_bottom = 512.0
-rect_scale = Vector2( 2, 2 )
+rect_scale = Vector2( 1e-05, 1e-05 )
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TextureRect" type="TextureRect" parent="Light"]
 modulate = Color( 0, 0.196078, 0.192157, 0.607843 )
-material = SubResource( 3 )
+material = SubResource( 7 )
 margin_right = 512.0
 margin_bottom = 837.0
 texture = ExtResource( 7 )
 
 [node name="MenuButtons" type="VBoxContainer" parent="."]
-anchor_left = 0.35
+anchor_left = 1.125
 anchor_top = 0.4
-anchor_right = 0.65
+anchor_right = 1.125
 anchor_bottom = 0.4
 margin_bottom = 221.0
 custom_constants/separation = 15
@@ -141,7 +322,8 @@ __meta__ = {
 }
 
 [node name="Play" type="Button" parent="MenuButtons"]
-margin_right = 480.0
+modulate = Color( 0.737255, 1, 0.662745, 1 )
+margin_right = 442.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../Quit")
 focus_neighbour_top = NodePath("../Quit")
@@ -158,8 +340,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "main_menu.play"
 
 [node name="QuickPlay" type="Button" parent="MenuButtons"]
+modulate = Color( 0.529412, 0.792157, 1, 1 )
 margin_top = 75.0
-margin_right = 480.0
+margin_right = 442.0
 margin_bottom = 135.0
 focus_neighbour_left = NodePath("../Play")
 focus_neighbour_top = NodePath("../Play")
@@ -177,7 +360,7 @@ text = "main_menu.quick_play"
 
 [node name="Settings" type="Button" parent="MenuButtons"]
 margin_top = 150.0
-margin_right = 480.0
+margin_right = 442.0
 margin_bottom = 210.0
 focus_neighbour_left = NodePath("../QuickPlay")
 focus_neighbour_top = NodePath("../QuickPlay")
@@ -195,8 +378,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "main_menu.settings"
 
 [node name="Quit" type="Button" parent="MenuButtons"]
+modulate = Color( 1, 0.521569, 0.94902, 1 )
 margin_top = 225.0
-margin_right = 480.0
+margin_right = 442.0
 margin_bottom = 285.0
 focus_neighbour_left = NodePath("../Settings")
 focus_neighbour_top = NodePath("../Settings")
@@ -211,6 +395,11 @@ custom_styles/focus = ExtResource( 4 )
 custom_styles/disabled = ExtResource( 3 )
 custom_styles/normal = ExtResource( 3 )
 text = "main_menu.quit"
+
+[node name="MenuButtonAnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../MenuButtons")
+anims/RESET = SubResource( 10 )
+anims/slide = SubResource( 9 )
 
 [node name="Version" type="Label" parent="."]
 anchor_right = 0.99
@@ -235,4 +424,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[editable path="Background"]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PressButton" type="Label" parent="CenterContainer"]
+visible = false
+margin_left = 622.0
+margin_top = 430.0
+margin_right = 978.0
+margin_bottom = 470.0
+custom_fonts/font = ExtResource( 2 )
+text = "Press any button"
+
+[node name="PressButton" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = 9.0
+pitch_scale = 0.85
+bus = "Audio"

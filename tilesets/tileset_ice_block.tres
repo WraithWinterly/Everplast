@@ -69,7 +69,7 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 
 [resource]
-0/name = "Sand/Dirt"
+0/name = "IceBlock"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )

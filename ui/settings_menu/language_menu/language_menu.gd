@@ -26,9 +26,13 @@ func _ready() -> void:
 
 	if get_node(GlobalPaths.SETTINGS).data.language == "not_set":
 		GlobalUI.menu = GlobalUI.Menus.INITIAL_SETUP
+
 		yield(GlobalEvents, "ui_faded")
-		GlobalEvents.emit_signal("ui_button_pressed")
+
+		GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
+
 		_ui_settings_language_pressed()
+
 		return_button.hide()
 		return_button.text = tr("global.continue")
 		GlobalEvents.emit_signal("ui_settings_initial_started")
@@ -55,7 +59,7 @@ func disable_buttons() -> void:
 func show_menu() -> void:
 	enable_buttons()
 	anim_player.play("show")
-	
+
 	english_button.grab_focus()
 
 
@@ -118,7 +122,7 @@ func _return_pressed() -> void:
 		GlobalEvents.emit_signal("ui_button_pressed", true)
 	else:
 		GlobalEvents.emit_signal("ui_settings_language_back_pressed_initial")
-		GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
+		GlobalUI.menu = GlobalUI.Menus.PRE_MAIN_MENU
 		inital = false
 		GlobalEvents.emit_signal("ui_button_pressed")
 		yield(anim_player,"animation_finished")

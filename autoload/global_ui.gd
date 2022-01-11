@@ -1,6 +1,7 @@
 extends Node
 
 enum Menus {
+	PRE_MAIN_MENU
 	MAIN_MENU,
 	QUICK_PLAY_PROMPT,
 	QUIT_PROMPT,
@@ -37,6 +38,7 @@ enum Menus {
 	DEBUG,
 
 	INITIAL_SETUP,
+	CONTROLLER_WARNING,
 
 	CUTSCENE,
 
@@ -45,7 +47,7 @@ enum Menus {
 	NONE,
 }
 
-var menu: int = Menus.MAIN_MENU
+var menu: int = Menus.NONE
 var profile_index: int = 0
 var profile_index_focus: int = 0
 var menu_locked := false
@@ -57,8 +59,12 @@ func _ready() -> void:
 	pause_mode = PAUSE_MODE_PROCESS
 	var __: int
 	__  = GlobalEvents.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("player_died", self, "_player_died")
 
 
 func _level_changed(_world: int, _level: int) -> void:
 	yield(get_tree(), "physics_frame")
 	GlobalUI.menu = GlobalUI.Menus.NONE
+
+func _player_died() -> void:
+	pass

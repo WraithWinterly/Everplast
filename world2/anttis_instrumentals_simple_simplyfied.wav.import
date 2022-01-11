@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/anttis_instrumentals_simple_simplyfied.wav-4f0e2255adbba50934cb58f125efce28.sample"
+
+[deps]
+
+source_file="res://world2/anttis_instrumentals_simple_simplyfied.wav"
+dest_files=[ "res://.import/anttis_instrumentals_simple_simplyfied.wav-4f0e2255adbba50934cb58f125efce28.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

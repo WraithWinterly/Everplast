@@ -61,62 +61,156 @@ This game uses Godot Engine %s
 
 Music Tracks:
 	Antti Luode - Anttis Instrumentals <gamesounds.xyz>
-		Blue Arpeggio
-		Beachy Beach
-		Wonderful Lie
-		Some Kind of Music
-		Feel the Love
-		Simple Simplified
-		Rain
-		ET alone ET call home instrumental
-		Beach Walk
-		Guitars and Things
-		Little Guitar
+		Some Kind of Music (Main Menu Theme)
+		Blue Arpeggio (World Selector World 1 Theme)
+		Feel the Love (World 1 Theme)
+		Beach Walk (World 1 Alt Theme)
+		ET alone ET call home instrumental (World 1 & 2 Underground Theme)
+		Guitars and Things (World 2 World Selector Theme)
+		Simple Simplified (World 2 Theme)
+		Beachy Beach (World 2 Alt Theme)
+		Little Guitar (World 2 Alt Theme)
+		Rain (World 3 Theme)
+		Arpy Arp (World 3 Alt Theme)
+		Fun in the Sun (World 3 Dark Theme)
+		Wonderful Lie (World 4)
 
-	Daydream Anatomy - 8-Bit-Heroes - 04 Struggle <gamesounds.xyz>
+	Daydream Anatomy - 8-Bit-Heroes - 04 Struggle <gamesounds.xyz> (World 1 Cloud Theme)
 
-	Trevor Lentz - "Lines of Code" <opengameart.org>
+	Trevor Lentz - "Lines of Code" <opengameart.org> (World 4)
 
-	CodeManu - "Iceland Theme" <opengameart.org>
+	CodeManu - "Iceland Theme" <opengameart.org> (World 3 World Selector Theme)
 
 Sound Effects:
+	[button_press.ogg] (zapThreeToneUp)
 	Kenney "Kenny's Sound Pack" <kenney.nl>
-		zapThreeToneUp
+	(Button Press)
 
-	FXHome:
-		glass2
-		FXHome.com is a website for professional and amateur film makers,
-		and provides many resources for creating great movies.
+	[glass2]
+	FXHome.com is a website for professional and amateur film makers, and provides many resources for creating great movies.
+	(Vase Break)
 
+	[421184__inspectorj__water-pouring-a.wav]
+	"Water, Pouring, A.wav" by InspectorJ(www.jshaw.co.uk) of Freesound.org
+	(Water Out Sound)
+
+	[413749__inspectorj__ui-confirmation-alert-d1.wav]
+	"UI Confirmation Alert, D1.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
+	(Splash Sound)
+
+	[397946__inspectorj__footsteps-snow-a.wav]
+	"Footsteps, Snow, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
+	(Snow Footstep)
+
+	[splash16.wav]
+	https://freesound.org/people/Rocktopus/sounds/233415/
+	(Water Enter)
+
+	[49190__angel-perez-grandi__ice-breaking]
+	https://freesound.org/people/Angel_Perez_Grandi/sounds/49190/
+	(Falling Ice Break)
+
+	[501888__greenfiresound__snow-07.wav]
+	https://freesound.org/people/GreenFireSound/sounds/501888/
+	(Snowball Sound)
+
+	[369778__morganpurkis__snow-step-2.wav]
+	https://freesound.org/people/morganpurkis/sounds/369778/
+	(Snowball Sound)
+
+	[560961__bricklover__snowball-smash-1.wav]
+	https://freesound.org/people/Bricklover/sounds/560961/
+	(Gun No Amo)
+
+	[][556858__uberproduktion__impulse-response-elemente-snow.wav]
+	https://freesound.org/people/Uberproduktion/sounds/556858/
+	(Snowman Kill)
+
+	[276918__kodimynatt__snowstep5.wav]
+	https://freesound.org/people/kodimynatt/sounds/276918/
+	(Snowman Hurt)
+
+	[204129__craxic__glass16.wav]
+	https://freesound.org/people/Craxic/sounds/204129/
+	(Ice Cube)
+
+	[411460__inspectorj__power-up-bright-a.wav]
+	https://freesound.org/people/InspectorJ/sounds/411460/
+	(Everplast Logo Sound)
+
+	[https://freesound.org/people/MATRIXXX_/sounds/523650/]
+	https://freesound.org/people/MATRIXXX_/sounds/523650/
+	(Player Level Up)
+
+	[353069__ying16__highlight-harpepianoedit02.wav]
+	https://freesound.org/people/ying16/sounds/353069/
+	(Play Button Sound)
+
+	[531511__eponn__menu-beep.wav]
+	https://freesound.org/people/Eponn/sounds/531511/
+	(UI Leave)
+
+	[531509__eponn__soft-dreamy-beep-alternative-version.wav]
+	https://freesound.org/people/Eponn/sounds/531509/
+	(Main Menu Press Any Button)
+
+	[50794__smcameron__rocks2.wav]
+	https://freesound.org/people/smcameron/sounds/50794/
+	(Footstep Sound)
+
+	[50797__smcameron__rocks5.wav]
+	https://freesound.org/people/smcameron/sounds/50797/
+	(Footstep Sound)
+
+	[50798__smcameron__rocks6.wav]
+	https://freesound.org/people/smcameron/sounds/50798/
+	(Footstep Sound)
+
+	[110101__ronaldvanwonderen__heavy-wood-footstep-2.wav]
+	https://freesound.org/people/RonaldVanWonderen/sounds/110101/
+	(Footstep Sound)
+
+	[151229__owlstorm__grassy-footstep-2.wav]
+	(Footstep Sound)
+
+	[211457__pgi__sand-step.wav]
+	https://freesound.org/people/pgi/sounds/211457/
+	(Footstep Sound)
+
+	[347371__drfx__soft-grass-foot-step.wav]
+	https://freesound.org/people/DRFX/sounds/347371/
+	(Footstep Sound)
+
+	[397946__inspectorj__footsteps-snow-a.wav]
+	"Footsteps, Snow, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
+	(Footstep Sound)
+
+	[150839__toxicwafflezz__bullet-impact-3.wav]
+	https://freesound.org/people/toxicwafflezz/sounds/150839/
+
+	Other Utilities Used:
 	JFXR <jfxr.frozenfractal.com>
-		A browser-based tool to create sound effects for games.
+	"A browser-based tool to create sound effects for games."
 
 	BFXR <https://www.bfxr.net>
-		Make sound effects for your games.
+	"Make sound effects for your games."
 
-	"Water, Pouring, A.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
-	"UI Confirmation Alert, D1.wav" by InspectorJ (www.jshaw.co.uk) of Freesound.org
-	splash16.wav - https://freesound.org/people/Rocktopus/sounds/233415/
-	https://freesound.org/people/Angel_Perez_Grandi/sounds/49190/
-	https://freesound.org/people/GreenFireSound/sounds/501888/
-	https://freesound.org/people/morganpurkis/sounds/369778/
-	https://freesound.org/people/Bricklover/sounds/560961/
-	Snowman Kill
-	https://freesound.org/people/Uberproduktion/sounds/556858/
-	Snowman Hurt
-	https://freesound.org/people/kodimynatt/sounds/276918/
+	Audacity <https://www.audacityteam.org/>
+	"Audacity is an easy-to-use, multi-track audio editor and recorder for Windows, macOS, GNU/Linux and other operating systems.Audacity is free, open source software."
 
-	Ice Cube
-	https://freesound.org/people/Craxic/sounds/204129/
-
-	UI
-	https://freesound.org/people/InspectorJ/sounds/411460/
-	https://freesound.org/people/ying16/sounds/353069/
-	https://freesound.org/people/ZoviPoland/sounds/517719/
-	https://freesound.org/people/Eponn/sounds/531511/
 Art:
-	Fox: https://opengameart.org/content/fox-animated
-	Spider: https://opengameart.org/content/2d-spider-animated
+	https://opengameart.org/content/fox-animated
+	(Fox)
+
+	https://opengameart.org/content/2d-spider-animated
+	(Spider)
+
+	https://opengameart.org/content/country-side-platform-tiles
+	(World 1 Backgrounds)
+
+	https://itch.io/s/63033/winter-sale-2021-pt
+	(World 1/ 2 / 3 / 4 Backgrounds)
+
 """ % [copyright, engine_string]
 	title.text = copyright
 

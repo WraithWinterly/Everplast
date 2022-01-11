@@ -11,6 +11,8 @@ const LERP_SPEED_ICE: float = 0.025
 
 var linear_velocity := Vector2.ZERO
 
+var last_tile := ""
+
 var sprint_speed: float = 80
 var walk_speed: float = 65
 var air_time: float = 0
@@ -101,6 +103,7 @@ func _physics_process(_delta):
 		yield(get_tree(), "physics_frame")
 		was_falling = false
 
+	GlobalInput.dash_activated = may_dash
 
 func basic_movement():
 	var delta = get_physics_process_delta_time()
@@ -131,21 +134,34 @@ func basic_movement():
 #	linear_velocity.x = round_to_dec(linear_velocity.x, 1)
 #	linear_velocity.y = round_to_dec(linear_velocity.y, 1)
 	linear_velocity = move_and_slide(linear_velocity, Vector2.UP)
+
 	falling = linear_velocity.y > 0
+	#print(linear_velocity)
+	#print(falling)
+
 	if falling:
 		was_falling = true
+
 	#falling = linear_velocity.y > 0
 	down_check()
 
 
 func is_on_ice() -> bool:
+	if fsm.current_state == fsm.wall_slide or fsm.current_state == fsm.wall_jump:
+		return false
+
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.collider
+
 		if collider is TileMap:
-			match collider.name:
-				"TileMapW3Ice":
-					return true
+			last_tile = collider.name
+
+	match last_tile:
+			"TileMapIce":
+				return true
+			"TileMapIceBlock":
+				return true
 
 	return false
 

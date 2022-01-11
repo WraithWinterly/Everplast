@@ -599,8 +599,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/SidePanel"]
+margin_top = 247.0
 margin_right = 390.0
-margin_bottom = 360.0
+margin_bottom = 607.0
 custom_constants/separation = 15
 alignment = 1
 
@@ -711,9 +712,10 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/GeneralMenu"]
+margin_top = 163.0
 margin_right = 820.0
-margin_bottom = 371.0
-custom_constants/separation = 15
+margin_bottom = 609.0
+custom_constants/separation = 30
 alignment = 1
 
 [node name="Language" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
@@ -734,9 +736,9 @@ custom_styles/normal = ExtResource( 4 )
 text = "settings.general.languages"
 
 [node name="MusicVolume" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 75.0
+margin_top = 90.0
 margin_right = 820.0
-margin_bottom = 135.0
+margin_bottom = 150.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
 focus_neighbour_top = NodePath("../Language")
 focus_neighbour_right = NodePath("../MusicSlider/Slider")
@@ -754,9 +756,9 @@ pressed = true
 text = "settings.general.music_volume"
 
 [node name="MusicSlider" type="HBoxContainer" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 150.0
+margin_top = 180.0
 margin_right = 820.0
-margin_bottom = 178.0
+margin_bottom = 208.0
 
 [node name="Value" type="Label" parent="Panel/BG/GeneralMenu/HBoxContainer/MusicSlider"]
 margin_top = 4.0
@@ -787,9 +789,9 @@ value = 100.0
 rounded = true
 
 [node name="AudioVolume" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 193.0
+margin_top = 238.0
 margin_right = 820.0
-margin_bottom = 253.0
+margin_bottom = 298.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
 focus_neighbour_right = NodePath(".")
 custom_fonts/font = ExtResource( 11 )
@@ -803,9 +805,9 @@ pressed = true
 text = "settings.general.audio_volume"
 
 [node name="AudioSlider" type="HBoxContainer" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 268.0
+margin_top = 328.0
 margin_right = 820.0
-margin_bottom = 296.0
+margin_bottom = 356.0
 
 [node name="Value" type="Label" parent="Panel/BG/GeneralMenu/HBoxContainer/AudioSlider"]
 margin_top = 4.0
@@ -837,9 +839,9 @@ step = 2.0
 value = 100.0
 
 [node name="Credits" type="Button" parent="Panel/BG/GeneralMenu/HBoxContainer"]
-margin_top = 311.0
+margin_top = 386.0
 margin_right = 820.0
-margin_bottom = 371.0
+margin_bottom = 446.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/General")
 focus_neighbour_right = NodePath(".")
 focus_neighbour_bottom = NodePath("../Language")
@@ -868,9 +870,10 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/GraphicsMenu"]
+margin_top = 221.0
 margin_right = 820.0
-margin_bottom = 285.0
-custom_constants/separation = 15
+margin_bottom = 551.0
+custom_constants/separation = 30
 alignment = 1
 
 [node name="Fullscreen" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
@@ -893,9 +896,9 @@ pressed = true
 text = "Fullscreen Mode: On"
 
 [node name="VSync" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
-margin_top = 75.0
+margin_top = 90.0
 margin_right = 820.0
-margin_bottom = 135.0
+margin_bottom = 150.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
 focus_neighbour_top = NodePath("../Fullscreen")
 focus_neighbour_right = NodePath(".")
@@ -913,9 +916,9 @@ pressed = true
 text = "Use VSync: On"
 
 [node name="Tonemap" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
-margin_top = 150.0
+margin_top = 180.0
 margin_right = 820.0
-margin_bottom = 210.0
+margin_bottom = 240.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
 focus_neighbour_top = NodePath("../VSync")
 focus_neighbour_right = NodePath("../PostProcessing")
@@ -931,9 +934,9 @@ custom_styles/normal = ExtResource( 4 )
 text = "settings.graphics.tonemap"
 
 [node name="PostProcessing" type="Button" parent="Panel/BG/GraphicsMenu/HBoxContainer"]
-margin_top = 225.0
+margin_top = 270.0
 margin_right = 820.0
-margin_bottom = 285.0
+margin_bottom = 330.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Graphics")
 focus_neighbour_top = NodePath("../Tonemap")
 focus_neighbour_right = NodePath(".")
@@ -957,6 +960,7 @@ anims/slide = SubResource( 5 )
 [node name="ControlsMenu" type="VBoxContainer" parent="Panel/BG"]
 modulate = Color( 1, 1, 1, 0 )
 anchor_left = 1.0
+anchor_top = 0.015
 anchor_right = 1.8
 anchor_bottom = 0.139
 custom_constants/separation = 40
@@ -966,21 +970,92 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/ControlsMenu"]
-margin_right = 820.0
-margin_bottom = 60.0
-custom_constants/separation = 15
+margin_right = 923.0
+margin_bottom = 371.0
+custom_constants/separation = 30
 alignment = 1
 
-[node name="CustomizeControls" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
+[node name="ControllerIndex" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.862745 )
-margin_right = 820.0
+margin_right = 923.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Controls")
 focus_neighbour_top = NodePath(".")
 focus_neighbour_right = NodePath(".")
-focus_neighbour_bottom = NodePath(".")
-focus_next = NodePath(".")
+focus_neighbour_bottom = NodePath("../IndexSlider/Slider")
+focus_next = NodePath("../IndexSlider/Slider")
 focus_previous = NodePath(".")
+custom_colors/font_color_disabled = Color( 0.627451, 0.627451, 0.627451, 1 )
+custom_colors/font_color_hover = Color( 0.627451, 0.627451, 0.627451, 1 )
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+disabled = true
+toggle_mode = true
+text = "Selected Controller"
+
+[node name="Why" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer"]
+margin_top = 90.0
+margin_right = 923.0
+margin_bottom = 133.0
+custom_fonts/font = ExtResource( 12 )
+text = "If you have multiple controllers connected to your device, you might need to change this if it does not work."
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IndexSlider" type="HBoxContainer" parent="Panel/BG/ControlsMenu/HBoxContainer"]
+margin_top = 163.0
+margin_right = 923.0
+margin_bottom = 191.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/IndexSlider"]
+margin_top = 4.0
+margin_right = 134.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 12 )
+text = "Index 1: NONE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slider" type="HSlider" parent="Panel/BG/ControlsMenu/HBoxContainer/IndexSlider"]
+margin_left = 138.0
+margin_right = 923.0
+margin_bottom = 28.0
+focus_neighbour_top = NodePath("../../ControllerIndex")
+focus_neighbour_bottom = NodePath("../../CustomizeControls")
+focus_next = NodePath("../../CustomizeControls")
+focus_previous = NodePath("../../ControllerIndex")
+size_flags_horizontal = 3
+custom_icons/grabber_highlight = ExtResource( 15 )
+custom_icons/grabber = ExtResource( 14 )
+custom_styles/slider = ExtResource( 7 )
+custom_styles/grabber_area_highlight = ExtResource( 7 )
+custom_styles/grabber_area = ExtResource( 7 )
+min_value = 1.0
+max_value = 2.0
+value = 1.0
+
+[node name="CustomizeControls" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.862745 )
+margin_top = 221.0
+margin_right = 923.0
+margin_bottom = 281.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Controls")
+focus_neighbour_top = NodePath("../IndexSlider/Slider")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath("../ControllerControls")
+focus_next = NodePath("../ControllerControls")
+focus_previous = NodePath("../IndexSlider/Slider")
 custom_fonts/font = ExtResource( 11 )
 custom_styles/hover = ExtResource( 6 )
 custom_styles/pressed = ExtResource( 3 )
@@ -988,9 +1063,32 @@ custom_styles/focus = ExtResource( 5 )
 custom_styles/disabled = ExtResource( 4 )
 custom_styles/normal = ExtResource( 4 )
 toggle_mode = true
-text = "controls.customize_controls"
+text = "Keyboard Controls"
 
-[node name="TextureRect" type="TextureRect" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="ControllerControls" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0.862745 )
+margin_top = 311.0
+margin_right = 923.0
+margin_bottom = 371.0
+focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Controls")
+focus_neighbour_top = NodePath("../CustomizeControls")
+focus_neighbour_right = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+focus_next = NodePath(".")
+focus_previous = NodePath("../CustomizeControls")
+custom_colors/font_color_disabled = Color( 0.627451, 0.627451, 0.627451, 1 )
+custom_colors/font_color_hover = Color( 0.627451, 0.627451, 0.627451, 1 )
+custom_fonts/font = ExtResource( 11 )
+custom_styles/hover = ExtResource( 6 )
+custom_styles/pressed = ExtResource( 3 )
+custom_styles/focus = ExtResource( 5 )
+custom_styles/disabled = ExtResource( 4 )
+custom_styles/normal = ExtResource( 4 )
+disabled = true
+toggle_mode = true
+text = "Controller Controls"
+
+[node name="TextureRect" type="TextureRect" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_top = 72.3
 margin_right = 738.0
 margin_bottom = 138.3
@@ -1000,7 +1098,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Interact" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Interact" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 15.0
 margin_top = 145.0
 margin_right = 140.0
@@ -1013,7 +1111,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Equip" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Equip" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 15.0
 margin_top = 180.0
 margin_right = 140.0
@@ -1026,7 +1124,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Powerup" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Powerup" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 15.0
 margin_top = 109.0
 margin_right = 140.0
@@ -1039,7 +1137,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Sprint" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Sprint" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 420.0
 margin_top = 145.0
 margin_right = 561.0
@@ -1051,7 +1149,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Fire" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Fire" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 550.0
 margin_top = 144.0
 margin_right = 1288.0
@@ -1063,7 +1161,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Inventory" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Inventory" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 420.0
 margin_top = 182.0
 margin_right = 1158.0
@@ -1075,7 +1173,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Back" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Back" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 420.0
 margin_top = 216.0
 margin_right = 1158.0
@@ -1087,7 +1185,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Jump" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Jump" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 420.0
 margin_top = 250.0
 margin_right = 1158.0
@@ -1099,7 +1197,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Aim" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Aim" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 420.0
 margin_top = 309.0
 margin_right = 1158.0
@@ -1111,7 +1209,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Move" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Move" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_top = 333.0
 margin_right = 235.0
 margin_bottom = 353.0
@@ -1123,7 +1221,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Seperator" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Seperator" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 262.0
 margin_top = 333.0
 margin_right = 1000.0
@@ -1135,7 +1233,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Ability" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls"]
+[node name="Ability" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls"]
 margin_left = 285.0
 margin_top = 333.0
 margin_right = 1023.0
@@ -1163,9 +1261,10 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/OtherMenu"]
+margin_top = 311.0
 margin_right = 820.0
-margin_bottom = 135.0
-custom_constants/separation = 15
+margin_bottom = 461.0
+custom_constants/separation = 30
 alignment = 1
 
 [node name="ResetSettings" type="Button" parent="Panel/BG/OtherMenu/HBoxContainer"]
@@ -1187,9 +1286,9 @@ toggle_mode = true
 text = "settings.reset_settings"
 
 [node name="EraseGame" type="Button" parent="Panel/BG/OtherMenu/HBoxContainer"]
-margin_top = 75.0
+margin_top = 90.0
 margin_right = 820.0
-margin_bottom = 135.0
+margin_bottom = 150.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Other")
 focus_neighbour_top = NodePath("../ResetSettings")
 focus_neighbour_right = NodePath(".")
@@ -1242,6 +1341,8 @@ anims/show = SubResource( 2 )
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/VSync" to="." method="_on_VSync_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/Tonemap" to="." method="_on_Tonemap_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/PostProcessing" to="." method="_on_PostProcessing_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/ControllerIndex" to="." method="_on_Test_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls" to="." method="_on_Test_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls" to="." method="_on_Test_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/ResetSettings" to="." method="_on_DebugConsole_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/EraseGame" to="." method="_on_EraseGame_focus_entered"]

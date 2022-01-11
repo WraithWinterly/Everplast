@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/anttis_instrumentals_arpy_arp.wav-a589c207f848747e3a8c2e7da9714d1f.sample"
+
+[deps]
+
+source_file="res://world3/anttis_instrumentals_arpy_arp.wav"
+dest_files=[ "res://.import/anttis_instrumentals_arpy_arp.wav-a589c207f848747e3a8c2e7da9714d1f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

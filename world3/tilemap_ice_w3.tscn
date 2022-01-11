@@ -2,7 +2,7 @@
 
 [ext_resource path="res://tilesets/tileset_ice.tres" type="TileSet" id=1]
 
-[node name="TileMapW3Ice" type="TileMap"]
+[node name="TileMapIce" type="TileMap"]
 z_index = 1
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )

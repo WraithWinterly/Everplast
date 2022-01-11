@@ -2,13 +2,14 @@ extends Node2D
 
 const DELAY := 1
 const THROW_SPEED: int = 350
+
 var throw_allowed := true
 var facing_right := true
 
 onready var enemy_base: MobComponentManager = $MobComponentManager
-onready var area_2d: Area2D = $MobComponentManager/HurtArea
+onready var area_2d: Area2D = $Area2D
 onready var timer: Timer = $Timer
-onready var pos_2d: Position2D = $Position2D
+onready var pos_2d: Position2D = $MobComponentManager/SpriteHolder/AnimatedSprite/Position2D
 onready var flip_anim_player: AnimationPlayer = $MobComponentManager/SpriteHolder/AnimatedSprite/FlipAnimationPlayer
 
 
@@ -43,7 +44,7 @@ func throw_snowball() -> void:
 	randomize()
 	pos_2d.rotation_degrees += rand_range(-10, 10)
 
-	var snowball: RigidBody2D = load(GlobalPaths.SNOWBALL).instance()
+	var snowball: RigidBody2D = load(GlobalPaths.SNOWBALL_SNOWMAN).instance()
 
 	get_node(GlobalPaths.LEVEL).add_child(snowball)
 	snowball.global_position = pos_2d.global_position

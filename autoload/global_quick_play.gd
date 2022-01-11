@@ -4,6 +4,7 @@ const FILE: String = "user://quick_play.json"
 
 var data: Dictionary = {
 	"last_profile": -1,
+	"last_world": 1
 }
 
 var available := false
@@ -14,7 +15,7 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
 	__ = GlobalEvents.connect("save_file_saved", self, "_save_file_saved")
 	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
-
+	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_extra_yes_pressed", self, "_ui_settings_erase_all_prompt_extra_yes_pressed")
 	load_stats()
 	update_stats()
 
@@ -45,7 +46,11 @@ func load_stats() -> void:
 		var __: int = file.open(FILE, File.READ)
 		var test = parse_json(file.get_as_text())
 		if test is Dictionary:
-			data = parse_json(file.get_as_text())
+			var test_data = parse_json(file.get_as_text())
+			if test_data.size() == data.size():
+				data = test_data
+			else:
+				save_stats()
 		else:
 			save_stats()
 			return
@@ -57,18 +62,21 @@ func load_stats() -> void:
 
 func reset() -> void:
 	data.last_profile = -1
+	data.last_world = 1
 	update_stats()
 	save_stats()
 
 
 func _level_changed(_world: int, _level: int) -> void:
 	data.last_profile = GlobalSave.profile
+	data.last_world = GlobalLevel.current_world
 	save_stats()
 	update_stats()
 
 
 func _save_file_saved(_noti: bool = false) -> void:
 	data.last_profile = GlobalSave.profile
+	data.last_world = GlobalLevel.current_world
 	save_stats()
 	update_stats()
 
@@ -76,3 +84,7 @@ func _save_file_saved(_noti: bool = false) -> void:
 func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
 		update_stats()
+
+
+func _ui_settings_erase_all_prompt_extra_yes_pressed() -> void:
+	reset()

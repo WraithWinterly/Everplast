@@ -58,10 +58,11 @@ func _ready() -> void:
 #		NOTIFICATION_WM_FOCUS_IN:
 #			AudioServer.set_bus_mute(0, false)
 #			AudioServer.set_bus_mute(1, false)
-func _input(event: InputEvent) -> void:
+
+func _input(_event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_0):
 		OS.window_borderless = true
-		OS.window_size = Vector2(1920, 1080)
+		OS.window_size = Vector2(1920, 1079)
 		OS.window_position = Vector2(0, 0)
 	if Input.is_key_pressed(KEY_9):
 		OS.window_borderless = false

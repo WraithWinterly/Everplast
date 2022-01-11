@@ -26,9 +26,9 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("player_died", self, "_player_died")
 	__ = GlobalEvents.connect("story_boss_killed", self, "_story_boss_killed")
 	__ = GlobalEvents.connect("story_boss_level_end_completed", self, "_story_boss_level_end_completed")
-	__ = GlobalEvents.connect("ui_play_pressed", self, "_ui_play_pressed")
+	#__ = GlobalEvents.connect("ui_play_pressed", self, "_ui_play_pressed")
 	__ = GlobalEvents.connect("ui_profile_selector_profile_pressed", self, "_ui_profile_selector_profile_pressed")
-	__ = GlobalEvents.connect("ui_profile_selector_return_pressed", self, "_ui_profile_selector_return_pressed")
+	#__ = GlobalEvents.connect("ui_profile_selector_return_pressed", self, "_ui_profile_selector_return_pressed")
 	__ = GlobalEvents.connect("ui_profile_selector_delete_prompt_yes_pressed", self, "_ui_profile_selector_delete_prompt_yes_pressed")
 	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
 	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_yes_pressed", self, "_ui_settings_erase_all_prompt_yes_pressed")
@@ -55,6 +55,10 @@ func _ready() -> void:
 func play(fade_out: bool, fancy := false) -> void:
 	fade_rect.material.set_shader_param("in_color", color)
 	fade_rect.color = color
+
+	if GlobalLevel.in_subsection or Globals.death_in_progress:
+		fade_rect.material.set_shader_param("in_color", Color(0, 0, 0, 255))
+		fade_rect.color = Color(0, 0, 0, 255)
 
 	if not fade_out:
 		if fancy:
@@ -134,14 +138,26 @@ func set_color_per_world(world: int, level: int) -> void:
 
 
 func _level_changed(world: int = 0, level: int = 0) -> void:
+	GlobalUI.menu_locked = true
 	set_color_per_world(world, level)
 	main_logo.hide()
+
+	if Globals.death_in_progress:
+		anim_player.get_animation("fade").length = 0.4
+		anim_player.get_animation("fade_fancy").length = 0.4
+		play(false, true)
+		yield(anim_player, "animation_finished")
+		level_enter.play()
+		play(true, true)
+		yield(anim_player, "animation_finished")
+		GlobalUI.menu_locked = false
+		get_tree().paused = false
+		return
+
 	level_enter.play()
 	#anim_player.stop()
 	anim_player.get_animation("fade").length = 1.4
 	anim_player.get_animation("fade_fancy").length = 1.4
-	GlobalUI.menu_locked = true
-	label.text = "%s - %s" % [GlobalLevel.WORLD_NAMES[world], level]
 
 	for w_icon in world_icons.get_children():
 		if int(w_icon.name) == world:
@@ -152,6 +168,9 @@ func _level_changed(world: int = 0, level: int = 0) -> void:
 
 
 	level_anim_player.play("level")
+	yield(get_tree(), "physics_frame")
+
+	label.text = "%s %s\n%s - %s" % [tr("profile_selector.button.normal"), GlobalSave.profile + 1, GlobalLevel.WORLD_NAMES[world], level]
 	play(false)
 	yield(GlobalEvents, "ui_faded")
 	play(true)
@@ -168,7 +187,7 @@ func _level_subsection_changed(_pos: Vector2) -> void:
 	get_tree().paused = true
 	anim_player.get_animation("fade").length = 0.4
 	anim_player.get_animation("fade_fancy").length = 0.4
-	transition()
+	transition(false, true)
 
 	match GlobalLevel.current_world:
 		1:
@@ -189,7 +208,8 @@ func _level_subsection_changed(_pos: Vector2) -> void:
 
 
 func _player_died() -> void:
-	transition(false, true)
+	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+		transition()
 
 
 func _story_boss_killed(_idx: int) -> void:
@@ -201,17 +221,8 @@ func _story_boss_level_end_completed(_idx: int) -> void:
 	transition()
 
 
-func _ui_play_pressed() -> void:
-	transition()
-
-
 func _ui_profile_selector_profile_pressed() -> void:
 	transition(true, true)
-
-
-func _ui_profile_selector_return_pressed() -> void:
-	if GlobalUI.menu == GlobalUI.Menus.PROFILE_SELECTOR:
-		transition()
 
 
 func _ui_profile_selector_delete_prompt_yes_pressed() -> void:

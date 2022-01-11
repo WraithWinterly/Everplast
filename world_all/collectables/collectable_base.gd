@@ -10,7 +10,7 @@ enum {
 }
 
 var mode: int = COLLECT
-
+var give_one := false
 
 func _ready() -> void:
 	var __: int
@@ -28,6 +28,9 @@ func _body_entered(body: Node) -> void:
 			$Sound.play()
 			$CollisionShape2D.set_deferred("disabled", true)
 			animation_player.play("collected")
-			for _n in range(10):
+			if give_one:
 				GlobalEvents.emit_signal("player_collected_collectable", collectable_name)
+			else:
+				for _n in range(10):
+					GlobalEvents.emit_signal("player_collected_collectable", collectable_name)
 

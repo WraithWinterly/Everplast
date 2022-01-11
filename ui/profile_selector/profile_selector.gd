@@ -10,9 +10,9 @@ onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var label: Label = $Panel/Label
 onready var profile_buttons = get_node("Panel/BG/VBoxContainer/ProfileButtons").get_children()
 
-onready var bg_color: Panel = $Background/CanvasLayerBack/Top
-onready var parallax_layers := [$Background/ParallaxLayer, $Background/ParallaxLayer2,
-								$Background/ParallaxLayer3]
+#onready var bg_color: Panel = $Background/CanvasLayerBack/Top
+#onready var parallax_layers := [$Background/ParallaxLayer, $Background/ParallaxLayer2,
+#								$Background/ParallaxLayer3]
 
 
 func _ready() -> void:
@@ -38,7 +38,6 @@ func _ready() -> void:
 	__ = update_manage_button()
 
 	hide()
-	hide_canvas_bg()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -49,14 +48,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func show_menu() -> void:
-	bg_color.show()
-	for bg in parallax_layers:
-		bg.show()
+#	bg_color.show()
+#	for bg in parallax_layers:
+#		bg.show()
 
 	GlobalUI.profile_index = 0
 	GlobalUI.profile_index_focus = 0
 	return_button.focus_neighbour_top = profile_buttons[0].get_path()
-	yield(GlobalEvents, "ui_faded")
 	show()
 	setup()
 	anim_player.play("show")
@@ -92,15 +90,10 @@ func setup(normal := true):
 func hide_menu() -> void:
 	disable_buttons()
 	anim_player.play_backwards("show")
-	yield(GlobalEvents, "ui_faded")
-	hide_canvas_bg()
-	hide()
+	yield(anim_player, "animation_finished")
+	if not anim_player.is_playing() and (not GlobalUI.menu == GlobalUI.Menus.PROFILE_SELECTOR and not GlobalUI.menu == GlobalUI.Menus.PROFILE_SELECTOR_DELETE):
+		hide()
 
-
-func hide_canvas_bg() -> void:
-	bg_color.hide()
-	for bg in parallax_layers:
-		bg.hide()
 
 
 func disable_buttons() -> void:
@@ -136,11 +129,12 @@ func _level_changed(_world: int, _level: int) -> void:
 
 
 func _ui_play_pressed() -> void:
-	yield(GlobalEvents, "ui_faded")
 	show_menu()
 
 
 func _ui_profile_selector_profile_pressed() -> void:
+	disable_buttons()
+	yield(GlobalEvents, "ui_faded")
 	hide_menu()
 
 

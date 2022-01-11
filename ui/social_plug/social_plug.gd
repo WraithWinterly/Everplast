@@ -48,8 +48,8 @@ func _ui_play_pressed() -> void:
 
 func _ui_profile_selector_return_pressed() -> void:
 	if GlobalUI.menu == GlobalUI.Menus.PROFILE_SELECTOR:
-		yield(GlobalEvents, "ui_faded")
-		yield(GlobalEvents, "ui_faded")
+		#yield(GlobalEvents, "ui_faded")
+		#yield(GlobalEvents, "ui_faded")
 		anim_player.play("show")
 		is_visible = true
 

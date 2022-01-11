@@ -189,6 +189,7 @@ __meta__ = {
 }
 
 [node name="WaterParticles" type="Particles2D" parent="."]
+visible = false
 position = Vector2( 4, 4 )
 rotation = -2.23577
 emitting = false

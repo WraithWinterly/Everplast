@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://mobs/components/hurt_by_bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://mobs/snowman/snowman.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://mobs/snowman/556858__uberproduktion__impulse-response-elemente-snow.wav" type="AudioStream" id=5]
 [ext_resource path="res://mobs/components/attack_touch.tscn" type="PackedScene" id=6]
 [ext_resource path="res://mobs/snowman/276918__kodimynatt__snowstep5.wav" type="AudioStream" id=7]
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 63.0
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -106,8 +109,13 @@ script = ExtResource( 3 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 
-[node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 14, -3 )
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 4, 13 )
+collision_layer = 64
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 8 )
 
 [node name="MobComponentManager" parent="." instance=ExtResource( 4 )]
 orb_amount = 25
@@ -118,16 +126,21 @@ free_on_death = false
 
 [node name="HitSound" parent="MobComponentManager" index="0"]
 stream = ExtResource( 7 )
-volume_db = 20.0
+volume_db = 24.0
 
 [node name="DeathSound" parent="MobComponentManager" index="1"]
 stream = ExtResource( 5 )
+volume_db = -8.0
 
 [node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 10 )
 frames = SubResource( 3 )
+frame = 1
 
-[node name="HurtAnimationPlayer" parent="MobComponentManager/SpriteHolder/AnimatedSprite" index="0"]
+[node name="Position2D" type="Position2D" parent="MobComponentManager/SpriteHolder/AnimatedSprite" index="0"]
+position = Vector2( 14, -9 )
+
+[node name="HurtAnimationPlayer" parent="MobComponentManager/SpriteHolder/AnimatedSprite" index="1"]
 anims/death = SubResource( 6 )
 anims/hurt = SubResource( 7 )
 

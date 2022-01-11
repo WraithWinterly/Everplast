@@ -176,8 +176,8 @@ __meta__ = {
 }
 
 [node name="WorldIcons" type="VBoxContainer" parent="LevelLabelCenter/Control"]
-anchor_top = 0.323
-anchor_bottom = 0.323
+anchor_top = 0.37
+anchor_bottom = 0.37
 margin_left = -54.0
 rect_scale = Vector2( 6, 6 )
 alignment = 1

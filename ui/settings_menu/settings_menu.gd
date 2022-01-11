@@ -1,5 +1,10 @@
 extends Control
 
+enum InputMapTypes {
+	JOY,
+	BUTTON,
+}
+
 const FILE: String = \
 	"user://settings.json"
 
@@ -13,6 +18,7 @@ const DEFAULT_DATA: Dictionary = {
 	"music_enabled": true,
 	"music_value": 100.0,
 	"language": "not_set",
+	"controller_index": 0.0,
 	"controls": {
 		"ability": KEY_CONTROL,
 		"move_left": KEY_A,
@@ -45,6 +51,9 @@ var data: Dictionary = {}
 
 var side_panel_focus: Button = null
 var button_focus: Button = null
+
+var connected_controllers: int = 0
+
 var in_category: bool = false
 
 onready var subcategory: Label = $Panel/BG/Subcategory
@@ -79,6 +88,9 @@ onready var post_processing_button: Button = $Panel/BG/GraphicsMenu/HBoxContaine
 #
 onready var controls_buttons: VBoxContainer = $Panel/BG/ControlsMenu/HBoxContainer
 onready var controls_customize_button: Button = $Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls
+onready var controls_controller_index_button: Button = $Panel/BG/ControlsMenu/HBoxContainer/ControllerIndex
+onready var controls_controller_index_slider: HSlider = $Panel/BG/ControlsMenu/HBoxContainer/IndexSlider/Slider
+onready var controls_controller_index_label: Label = $Panel/BG/ControlsMenu/HBoxContainer/IndexSlider/Value
 
 #
 # OTHER MENU
@@ -118,21 +130,27 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("ui_settings_language_back_pressed", self, "_ui_settings_language_back_pressed")
 	__ = GlobalEvents.connect("ui_settings_language_english_pressed", self, "_ui_settings_language_english_pressed")
 	__ = GlobalEvents.connect("ui_settings_language_spanish_pressed", self, "_ui_settings_language_spanish_pressed")
+	__ = GlobalEvents.connect("ui_controller_warning_yes_pressed", self, "_ui_controller_warning_yes_pressed")
 	__ = general_menu_button.connect("pressed", self, "_general_pressed")
 	__ = graphics_menu_button.connect("pressed", self, "_graphics_pressed")
 	__ = controls_menu_button.connect("pressed", self, "_controls_pressed")
 	__ = other_menu_button.connect("pressed", self, "_other_pressed")
+
 	__ = language_button.connect("pressed", self, "_language_button_pressed")
 	__ = audio_volume_button.connect("pressed", self, "_audio_volume_button_pressed")
 	__ = audio_volume_slider.connect("value_changed", self, "_audio_volume_changed")
 	__ = music_volume_button.connect("pressed", self, "_music_volume_button_pressed")
 	__ = music_volume_slider.connect("value_changed", self, "_music_volume_changed")
 	__ = credits_button.connect("pressed", self, "_credits_button_pressed")
+
 	__ = fullscreen_button.connect("pressed", self, "_fullscreen_button_pressed")
 	__ = vsync_button.connect("pressed", self, "_vsync_button_pressed")
 	__ = tonemap_button.connect("pressed", self, "_tonemap_button_pressed")
 	__ = post_processing_button.connect("pressed", self, "_post_processing_button_pressed")
+
 	__ = controls_customize_button.connect("pressed", self, "_controls_customize_button_pressed")
+	__ = controls_controller_index_slider.connect("value_changed", self, "_controls_controller_index_slider_changed")
+
 	__ = reset_settings_button.connect("pressed", self, "_reset_settings_button_pressed")
 	__ = erase_all_button.connect("pressed", self, "_erase_all_button_pressed")
 	__ = back_button.connect("pressed", self, "_back_button_pressed")
@@ -171,6 +189,8 @@ func _ready() -> void:
 	update_toggle_buttons()
 	update_tonemap_button_text()
 	update_audio_labels()
+	update_controllers()
+	update_connected_controllers()
 	apply_settings()
 	hide()
 
@@ -209,6 +229,8 @@ func _notification(what: int) -> void:
 		update_toggle_buttons()
 		update_tonemap_button_text()
 		update_audio_labels()
+		update_controllers()
+		update_connected_controllers()
 
 
 func update_audio_labels() -> void:
@@ -247,6 +269,8 @@ func show_menu() -> void:
 	update_toggle_buttons()
 	update_audio_labels()
 	update_tonemap_button_text()
+	update_controllers()
+	update_connected_controllers()
 
 
 func hide_menu() -> void:
@@ -275,9 +299,10 @@ func enable_buttons() -> void:
 	tonemap_button.disabled = false
 
 	controls_customize_button.disabled = false
+	controls_controller_index_button.disabled = false
+	controls_controller_index_slider.editable = true
 
 	erase_all_button.disabled = false
-
 	reset_settings_button.disabled = false
 
 	if Globals.game_state == Globals.GameStates.MENU:
@@ -306,6 +331,8 @@ func disable_buttons() -> void:
 	tonemap_button.disabled = true
 
 	controls_customize_button.disabled = true
+	controls_controller_index_button.disabled = true
+	controls_controller_index_slider.editable = false
 
 	reset_settings_button.disabled = true
 	erase_all_button.disabled = true
@@ -598,6 +625,8 @@ func _ui_settings_erase_all_prompt_extra_yes_pressed() -> void:
 	update_toggle_buttons()
 	update_tonemap_button_text()
 	update_audio_labels()
+	update_controllers()
+	update_connected_controllers()
 	apply_settings()
 
 
@@ -634,23 +663,34 @@ func _ui_settings_language_spanish_pressed() -> void:
 	apply_settings()
 
 
+func _ui_controller_warning_yes_pressed() -> void:
+	show_menu()
+	_controls_pressed()
+	controls_controller_index_slider.grab_focus()
+
 # End of Global Events
 func _general_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed")
 	side_panel_focus = general_menu_button
+
 	for button in side_panel.get_children():
 		button.focus_neighbour_right = language_button.get_path()
+
 	button_focus = language_button
+
 	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_GENERAL:
 		general_anim_player.play("slide")
+
 		if not in_category:
 			subcategory_anim_player.play_backwards("slide")
 			in_category = true
 		else:
 			previous_menu_back()
+
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_GENERAL
 
 		language_button.grab_focus()
+
 	update_left_button_focus()
 	update_right_button_focus()
 
@@ -658,19 +698,25 @@ func _general_pressed() -> void:
 func _graphics_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed")
 	side_panel_focus = graphics_menu_button
+
 	for button in side_panel.get_children():
 		button.focus_neighbour_right = fullscreen_button.get_path()
+
 	button_focus = fullscreen_button
+
 	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_GRAPHICS:
 		graphics_anim_player.play("slide")
+
 		if not in_category:
 			subcategory_anim_player.play_backwards("slide")
 			in_category = true
 		else:
 			previous_menu_back()
+
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_GRAPHICS
 
 		fullscreen_button.grab_focus()
+
 	update_left_button_focus()
 	update_right_button_focus()
 
@@ -678,19 +724,25 @@ func _graphics_pressed() -> void:
 func _controls_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed")
 	side_panel_focus = controls_menu_button
+
 	for button in side_panel.get_children():
 		button.focus_neighbour_right = controls_customize_button.get_path()
+
 	button_focus = controls_customize_button
+
 	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS:
 		controls_anim_player.play("slide")
+
 		if not in_category:
 			subcategory_anim_player.play_backwards("slide")
 			in_category = true
 		else:
 			previous_menu_back()
+
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_CONTROLS
 
-		controls_customize_button.grab_focus()
+		controls_controller_index_button.grab_focus()
+
 	update_left_button_focus()
 	update_right_button_focus()
 
@@ -698,19 +750,25 @@ func _controls_pressed() -> void:
 func _other_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed")
 	side_panel_focus = other_menu_button
+
 	for button in side_panel.get_children():
 		button.focus_neighbour_right = reset_settings_button.get_path()
+
 	button_focus = reset_settings_button
+
 	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_OTHER:
 		other_anim_player.play("slide")
+
 		if not in_category:
 			subcategory_anim_player.play_backwards("slide")
 			in_category = true
 		else:
 			previous_menu_back()
+
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_OTHER
 
 		reset_settings_button.grab_focus()
+
 	update_left_button_focus()
 	update_right_button_focus()
 
@@ -794,6 +852,87 @@ func _controls_customize_button_pressed() -> void:
 	GlobalUI.menu = GlobalUI.Menus.SETTINGS_CONTROLS_CUSTOMIZE
 	disable_buttons()
 
+
+func _controls_controller_index_slider_changed(value: int) -> void:
+	data.controller_index = (value - 1)
+	apply_settings()
+	update_controllers()
+
+
+func update_controllers() -> void:
+	controls_controller_index_label.text = "Controller %s" % (data.controller_index + 1)
+	controls_controller_index_slider.value = data.controller_index + 1
+
+	if not Input.get_joy_name(data.controller_index) == "":
+		controls_controller_index_label.text += ": %s" % Input.get_joy_name(data.controller_index)
+		controls_controller_index_slider.show()
+	else:
+		controls_controller_index_label.text = "No Controllers Connected"
+		controls_controller_index_slider.hide()
+
+	#print(data.controller_index)
+	# SET CONTROLS TO NEW INDEX
+
+	replace_device_map("ctr_move_left", InputMapTypes.JOY)
+	replace_device_map("ctr_move_right", InputMapTypes.JOY)
+	replace_device_map("move_down", InputMapTypes.JOY)
+	replace_device_map("ctr_look_up", InputMapTypes.JOY)
+	replace_device_map("ctr_look_left", InputMapTypes.JOY)
+	replace_device_map("ctr_look_down", InputMapTypes.JOY)
+	replace_device_map("ctr_look_right", InputMapTypes.JOY)
+	replace_device_map("ui_up", InputMapTypes.JOY)
+	replace_device_map("ui_left", InputMapTypes.JOY)
+	replace_device_map("ui_right", InputMapTypes.JOY)
+	replace_device_map("ui_down", InputMapTypes.JOY)
+	replace_device_map("interact", InputMapTypes.BUTTON)
+	replace_device_map("move_jump", InputMapTypes.BUTTON)
+	replace_device_map("move_sprint", InputMapTypes.BUTTON)
+	replace_device_map("inventory", InputMapTypes.BUTTON)
+	replace_device_map("fire", InputMapTypes.BUTTON)
+	replace_device_map("equip", InputMapTypes.BUTTON)
+	replace_device_map("powerup", InputMapTypes.BUTTON)
+	replace_device_map("ability", InputMapTypes.BUTTON)
+
+	update_connected_controllers()
+
+	GlobalEvents.emit_signal("ui_settings_updated")
+
+
+func update_connected_controllers() -> void:
+	connected_controllers = 0
+
+	for n in range(5):
+		if not Input.get_joy_name(n) == "":
+			connected_controllers += 1
+
+	if data.controller_index > connected_controllers:
+		data.controller_index = 0
+		save_settings()
+
+	controls_controller_index_slider.max_value = connected_controllers
+
+
+func replace_device_map(action: String, type: int) -> void:
+	var mapped_action := InputMap.get_action_list(action)
+	for event in mapped_action:
+		if type == InputMapTypes.JOY:
+			if event is InputEventJoypadMotion:
+				var input_event := InputEventJoypadMotion.new()
+				input_event = event
+				InputMap.action_erase_event(action, input_event)
+
+				input_event.device = data.controller_index
+				InputMap.action_add_event(action, input_event)
+
+		elif type == InputMapTypes.BUTTON:
+			if event is InputEventJoypadButton:
+				var input_event := InputEventJoypadButton.new()
+
+				input_event = event
+				InputMap.action_erase_event(action, input_event)
+
+				input_event.device = data.controller_index
+				InputMap.action_add_event(action, input_event)
 
 func _reset_settings_button_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")

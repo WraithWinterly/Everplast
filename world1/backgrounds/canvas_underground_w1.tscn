@@ -1,0 +1,96 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://world1/backgrounds/SET3_background.png" type="Texture" id=2]
+[ext_resource path="res://world1/backgrounds/SET3_background2.png" type="Texture" id=3]
+[ext_resource path="res://world1/backgrounds/SET3_background3.png" type="Texture" id=4]
+[ext_resource path="res://world1/backgrounds/SET3_background4.png" type="Texture" id=5]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.411765, 0.501961, 0.52549, 1 )
+border_width_top = 40
+border_color = Color( 0.411765, 0.501961, 0.52549, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.0980392, 0.0862745, 0.0784314, 1 )
+border_width_top = 155
+border_color = Color( 0.0980392, 0.0862745, 0.0784314, 1 )
+border_blend = true
+
+[node name="UndergoundBackgroundW1" type="ParallaxBackground" groups=["CanvasBackground"]]
+layer = -1
+follow_viewport_scale = 0.001
+
+[node name="Bottom" type="Panel" parent="."]
+visible = false
+anchor_bottom = 1.0
+margin_top = 236.0
+margin_right = 1933.0
+margin_bottom = 1041.6
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.35, 0 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+position = Vector2( 8, -330 )
+texture = ExtResource( 2 )
+centered = false
+offset = Vector2( 0, -125 )
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.5, 0.5 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer2"]
+position = Vector2( 0, -330 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.75, 0.375 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer3"]
+position = Vector2( 0, -330 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.75, 0.375 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer4"]
+position = Vector2( 0, -330 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="CanvasLayerBack" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Top" type="Panel" parent="CanvasLayerBack"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}

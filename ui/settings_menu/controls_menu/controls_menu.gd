@@ -72,6 +72,76 @@ func _ready() -> void:
 	scroll_container.get_child(1).set("custom_styles/grabber_highlight", load(GlobalPaths.CREDITS_SCROLL_GRABBER))
 	scroll_container.get_child(1).set("custom_styles/grabber_pressed", load(GlobalPaths.CREDITS_SCROLL_GRABBER))
 
+	ability.focus_neighbour_right = ability_2.get_path()
+	walk_left.focus_neighbour_right = walk_left_2.get_path()
+	walk_right.focus_neighbour_right = walk_right_2.get_path()
+	move_down.focus_neighbour_right = move_down_2.get_path()
+	jump.focus_neighbour_right = jump_2.get_path()
+	sprint.focus_neighbour_right = sprint_2.get_path()
+	interact.focus_neighbour_right = interact_2.get_path()
+	inventory.focus_neighbour_right = inventory_2.get_path()
+	fire.focus_neighbour_right = fire_2.get_path()
+	equip.focus_neighbour_right = equip_2.get_path()
+	powerup.focus_neighbour_right = powerup_2.get_path()
+
+	ability_2.focus_neighbour_left = ability.get_path()
+	walk_left_2.focus_neighbour_left = walk_left.get_path()
+	walk_right_2.focus_neighbour_left = walk_right.get_path()
+	move_down_2.focus_neighbour_left = move_down.get_path()
+	jump_2.focus_neighbour_left = jump.get_path()
+	sprint_2.focus_neighbour_left = sprint.get_path()
+	interact_2.focus_neighbour_left = interact.get_path()
+	inventory_2.focus_neighbour_left = inventory.get_path()
+	fire_2.focus_neighbour_left = fire.get_path()
+	equip_2.focus_neighbour_left = equip.get_path()
+	powerup_2.focus_neighbour_left = powerup.get_path()
+
+	powerup.focus_neighbour_bottom = powerup.get_path()
+	powerup_2.focus_neighbour_bottom = powerup_2.get_path()
+	var res_button_top = $Panel/BG/ScrollContainer/Collumns/Reset/Ability
+	var res_button_bottom = $Panel/BG/ScrollContainer/Collumns/Reset/Powerup
+	res_button_top.focus_neighbour_top = return_button.get_path()
+	res_button_bottom.focus_neighbour_bottom = res_button_bottom.get_path()
+
+	var last_button = powerup
+	var last_button_2 = powerup_2
+	var first_button = ability
+	var first_button_2 = ability_2
+
+
+	var idx: int = 0
+	for button in assignments_1.get_children():
+		if button is Button:
+			if not button == last_button and not button == last_button_2:
+				button.focus_neighbour_bottom = assignments_1.get_child(idx + 1).get_path()
+			if not button == first_button and not button == first_button_2:
+				button.focus_neighbour_top = assignments_1.get_child(idx - 1).get_path()
+		idx += 1
+
+	var idx_2: int = 0
+	for button in assignments_2.get_children():
+		if button is Button:
+			if not button == last_button and not button == last_button_2:
+				button.focus_neighbour_bottom = assignments_2.get_child(idx_2 + 1).get_path()
+			if not button == first_button and not button == first_button_2:
+				button.focus_neighbour_top = assignments_2.get_child(idx_2 - 1).get_path()
+		idx_2 += 1
+
+	var res_buttons = $Panel/BG/ScrollContainer/Collumns/Reset
+	var idx_3: int = 0
+
+	for button in res_buttons.get_children():
+		if button is Button:
+			if not button == res_button_bottom:
+				button.focus_neighbour_bottom = res_buttons.get_child(idx_3 + 1).get_path()
+			if not button == res_button_top:
+				button.focus_neighbour_top = res_buttons.get_child(idx_3 - 1).get_path()
+		idx_3 += 1
+
+	for button in res_buttons.get_children():
+		if button is Button:
+			button.focus_neighbour_right = button.get_path()
+
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")
 	update_button_map_and_texts()
@@ -235,7 +305,7 @@ func get_settings_controls_2() -> Dictionary:
 
 
 func show_menu() -> void:
-	
+	return_button.set_focus_mode(true)
 	return_button.grab_focus()
 	show()
 	enable_buttons()
@@ -246,11 +316,13 @@ func show_menu() -> void:
 
 
 func hide_menu() -> void:
+	return_button.set_focus_mode(false)
 	disable_buttons()
 	anim_player.play_backwards("show")
 	yield(anim_player, "animation_finished")
 	if not anim_player.is_playing():
 		$BGBlur.hide()
+		hide()
 
 
 func disable_buttons() -> void:

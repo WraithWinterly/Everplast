@@ -129,7 +129,8 @@ tracks/1/keys = {
 extents = Vector2( 2.5, 51 )
 
 [node name="FallingIce" type="KinematicBody2D" groups=["FallingIce"]]
-collision_layer = 64
+collision_layer = 32
+collision_mask = 3
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -156,7 +157,6 @@ anims/regen = SubResource( 10 )
 anims/rumble = SubResource( 3 )
 
 [node name="Detection" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 4
 
@@ -169,7 +169,6 @@ process_mode = 0
 one_shot = true
 
 [node name="HitArea" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 36
 

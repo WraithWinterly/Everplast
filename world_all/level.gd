@@ -30,7 +30,6 @@ func _ready() -> void:
 			canvas.call_deferred("free")
 		level_components.add_child(canvas_normal.instance())
 
-	update_canvas()
 
 	var start_pos: Position2D = get_node_or_null("LevelComponents/PlayerStart")
 
@@ -42,33 +41,39 @@ func _ready() -> void:
 			checkpoint = get_node_or_null("LevelComponents/Checkpoint%s" % GlobalLevel.checkpoint_index)
 		if not checkpoint == null:
 			if GlobalLevel.checkpoint_in_sub:
-				yield(GlobalEvents, "ui_faded")
+				#yield(GlobalEvents, "ui_faded")
 				GlobalLevel.in_subsection = true
-				GlobalEvents.emit_signal("level_subsection_changed", $SubsectionTeleporters/StartSubsection.global_position)
-				yield(GlobalEvents, "ui_faded")
-				yield(get_tree(), "physics_frame")
-				yield(get_tree(), "physics_frame")
 				$Player/KinematicBody2D.global_position = Vector2(checkpoint.global_position.x, checkpoint.global_position.y - 7)
+
+				#GlobalEvents.emit_signal("level_subsection_changed", $SubsectionTeleporters/StartSubsection.global_position)
+				#yield(GlobalEvents, "ui_faded")
+				#yield(get_tree(), "physics_frame")
+				#yield(get_tree(), "physics_frame")
 			else:
 				$Player/KinematicBody2D.global_position = Vector2(checkpoint.global_position.x, checkpoint.global_position.y - 7)
 	elif not start_pos == null:
 		$Player.global_position = start_pos.global_position
 
+	if GlobalLevel.checkpoint_in_sub:
+		swap_canvases()
+
+	update_canvas()
 
 func _level_subsection_changed(_pos: Vector2) -> void:
 	if swap_canvas:
 		yield(GlobalEvents, "ui_faded")
-
-		var canvases = get_tree().get_nodes_in_group("CanvasBackground")
-
-		for canvas in canvases:
-			canvas.call_deferred("free")
-		if GlobalLevel.in_subsection:
-			level_components.add_child(canvas_subsection.instance())
-		else:
-			level_components.add_child(canvas_normal.instance())
-
+		swap_canvases()
 		update_canvas()
+
+func swap_canvases() -> void:
+	var canvases = get_tree().get_nodes_in_group("CanvasBackground")
+
+	for canvas in canvases:
+		canvas.call_deferred("free")
+	if GlobalLevel.in_subsection:
+		level_components.add_child(canvas_subsection.instance())
+	else:
+		level_components.add_child(canvas_normal.instance())
 
 
 func update_canvas() -> void:

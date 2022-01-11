@@ -1,0 +1,134 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://world1/level_3_canvas_modulate.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world_selector/background/SET4_background4_night.png" type="Texture" id=2]
+[ext_resource path="res://world_selector/background/SET4_background2A_night.png" type="Texture" id=3]
+[ext_resource path="res://world_selector/background/SET4_background1_night.png" type="Texture" id=4]
+[ext_resource path="res://world_selector/background/SET4_background3_night.png" type="Texture" id=5]
+[ext_resource path="res://world_selector/background/SET4_background2B_night.png" type="Texture" id=6]
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.411765, 0.501961, 0.52549, 1 )
+border_width_top = 40
+border_color = Color( 0.411765, 0.501961, 0.52549, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.431373, 0.52549, 0.54902, 1 )
+border_width_top = 155
+border_color = Color( 0.431373, 0.52549, 0.54902, 1 )
+border_blend = true
+
+[node name="MountainBackgroundWorldSelector" type="ParallaxBackground" groups=["CanvasBackground"]]
+layer = -1
+follow_viewport_scale = 0.001
+
+[node name="Bottom" type="Panel" parent="."]
+visible = false
+anchor_bottom = 1.0
+margin_top = 236.0
+margin_right = 1933.0
+margin_bottom = 1041.6
+custom_styles/panel = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="CanvasModulate" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.35, 0 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+modulate = Color( 0.901961, 0.901961, 0.901961, 1 )
+texture = ExtResource( 4 )
+centered = false
+offset = Vector2( 0, -145 )
+
+[node name="CanvasModulate" parent="ParallaxLayer" instance=ExtResource( 1 )]
+visible = false
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.5, 0.25 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer2"]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+position = Vector2( 0, -400 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="CanvasModulate" parent="ParallaxLayer2" instance=ExtResource( 1 )]
+visible = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.75, 0.375 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer3"]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+position = Vector2( 0, -400 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="CanvasModulate" parent="ParallaxLayer3" instance=ExtResource( 1 )]
+visible = false
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.75, 0.375 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer4"]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+position = Vector2( 0, -400 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="CanvasModulate" parent="ParallaxLayer4" instance=ExtResource( 1 )]
+visible = false
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+motion_scale = Vector2( 0.75, 0.375 )
+motion_mirroring = Vector2( 639.5, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer5"]
+modulate = Color( 0.784314, 0.784314, 0.784314, 1 )
+position = Vector2( 0, -400 )
+texture = ExtResource( 2 )
+centered = false
+
+[node name="CanvasModulate" parent="ParallaxLayer5" instance=ExtResource( 1 )]
+visible = false
+
+[node name="CanvasLayerBack" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Top" type="Panel" parent="CanvasLayerBack"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="CanvasModulate" parent="CanvasLayerBack" instance=ExtResource( 1 )]

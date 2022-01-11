@@ -17,7 +17,7 @@ const CANVAS_DATABASE := [
 	#W2
 	[false, false, false, true, false, false, true, false, false, false],
 	#W3
-	[false, false, false, false, false, false, false, false, false, false],
+	[false, false, false, true, false, false, false, false, false, false],
 	#W4
 	[false, false, false, false, false, false, false, false, false, false],
 ]
@@ -75,7 +75,10 @@ func _level_changed(world: int, level: int) -> void:
 	if level > LEVEL_DATABASE[world]:
 		level = LEVEL_DATABASE[world]
 
-	GlobalLevel.in_subsection = false
+	if GlobalLevel.checkpoint_in_sub:
+		GlobalLevel.in_subsection = true
+	else:
+		GlobalLevel.in_subsection = false
 
 	if checkpoint_active:
 		if not (checkpoint_world == world and checkpoint_level == level):
@@ -173,6 +176,7 @@ func reset_checkpoint() -> void:
 	checkpoint_world = 0
 	checkpoint_level = 0
 	checkpoint_active = false
+	checkpoint_in_sub = false
 
 
 func has_canvas() -> bool:
@@ -210,27 +214,13 @@ func _player_died() -> void:
 
 	get_tree().paused = true
 
-	yield(GlobalEvents, "ui_faded")
-
-	load_world_selector()
-	error_detection()
-
-	yield(GlobalEvents, "ui_faded")
-
-	selected_world = GlobalSave.get_stat("world_last")
-	selected_level = GlobalSave.get_stat("level_last")
-
-	for i in 20:
-		yield(get_tree(), "physics_frame")
-
-	GlobalUI.menu_locked = false
-
-	GlobalEvents.emit_signal("ui_button_pressed")
-	GlobalEvents.emit_signal("ui_level_enter_menu_pressed")
-
-	GlobalUI.menu = GlobalUI.Menus.LEVEL_ENTER
-
-	get_tree().paused = true
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		GlobalEvents.emit_signal("level_changed", GlobalSave.get_stat("world_last"), GlobalSave.get_stat("level_last"))
+		error_detection()
+	else:
+		yield(GlobalEvents, "ui_faded")
+		load_world_selector()
+		error_detection()
 
 
 func _ui_faded() -> void:

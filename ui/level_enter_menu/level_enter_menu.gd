@@ -161,9 +161,10 @@ func _level_enter_menu_pressed() -> void:
 func _start_pressed() -> void:
 	GlobalUI.menu = GlobalUI.Menus.NONE
 	GlobalEvents.emit_signal("level_changed", GlobalLevel.selected_world, GlobalLevel.selected_level)
-	hide_menu()
 	get_tree().paused = true
+	disable_buttons()
 	yield(GlobalEvents, "ui_faded")
+	hide_menu()
 	get_tree().paused = false
 
 

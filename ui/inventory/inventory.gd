@@ -138,7 +138,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif event.is_action_pressed("powerup"):
 		try_use_powerup(GlobalStats.last_powerup)
 
-	elif not GlobalUI.menu_locked:
+	elif not GlobalUI.menu_locked and not GlobalUI.fade_player_playing:
 		if event.is_action_pressed("inventory"):
 			if GlobalUI.menu == GlobalUI.Menus.INVENTORY:
 				hide_menu()

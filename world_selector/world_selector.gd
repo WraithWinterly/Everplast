@@ -26,3 +26,9 @@ func _ready() -> void:
 	tilemap_block.position.y = max_positions[GlobalSave.get_stat("world_max") - 1].position.y + 48
 	right_position.position.x = max_positions[GlobalSave.get_stat("world_max") - 1].position.x
 	right_position.position.y = 384
+
+
+	var canvases := get_tree().get_nodes_in_group("CanvasModulate")
+
+	for canvas in canvases:
+		canvas.set_deferred("visible", true)

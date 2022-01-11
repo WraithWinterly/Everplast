@@ -35,7 +35,7 @@ func _input(event: InputEvent) -> void:
 		GlobalLevel.selected_world = world
 		GlobalLevel.selected_level = level
 		GlobalUI.menu = GlobalUI.Menus.LEVEL_ENTER
-		GlobalEvents.emit_signal("ui_button_pressed")
+		GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 		GlobalEvents.emit_signal("ui_level_enter_menu_pressed")
 
 

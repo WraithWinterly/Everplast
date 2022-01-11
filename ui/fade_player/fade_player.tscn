@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/world_icons.png" type="Texture" id=2]
@@ -109,6 +109,45 @@ tracks/1/keys = {
 "values": [ 1.05, 0.0 ]
 }
 
+[sub_resource type="Animation" id=18]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
 [sub_resource type="Animation" id=2]
 resource_name = "level"
 length = 2.5
@@ -182,8 +221,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=16]
 resource_name = "fade"
-length = 0.4
-step = 0.01
+length = 0.8
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:modulate")
 tracks/0/interp = 1
@@ -191,7 +229,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.09, 0.35, 0.4 ),
+"times": PoolRealArray( 0, 0.4, 0.7, 0.79 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ) ]
@@ -231,6 +269,7 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="FadeRect/Control"]
+anims/RESET = SubResource( 18 )
 anims/level = SubResource( 2 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="FadeRect/Control"]
@@ -244,13 +283,13 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="FadeRect/Control/HBoxContainer"]
-margin_left = 798.0
-margin_right = 798.0
-margin_bottom = 40.0
+margin_left = 704.0
+margin_right = 704.0
+margin_bottom = 83.0
 mouse_filter = 2
 
 [node name="WorldIcons" type="VBoxContainer" parent="FadeRect/Control/HBoxContainer/Control"]
-anchor_top = -1.0
+anchor_top = -0.442
 margin_left = -101.0
 margin_right = -4.0
 rect_scale = Vector2( 8, 8 )
@@ -290,10 +329,12 @@ mouse_filter = 2
 texture = SubResource( 6 )
 
 [node name="Label" type="Label" parent="FadeRect/Control/HBoxContainer"]
-margin_left = 802.0
-margin_right = 802.0
-margin_bottom = 40.0
+margin_left = 708.0
+margin_right = 896.0
+margin_bottom = 83.0
 custom_fonts/font = ExtResource( 1 )
+text = "Profile 1
+World 1 -1"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

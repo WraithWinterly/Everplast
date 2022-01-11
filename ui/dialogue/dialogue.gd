@@ -11,6 +11,7 @@ var dialogue_locked := false
 var fast_speed := false
 var was_in_cutscene := false
 var clicked := false
+var play_text_sound := false
 
 onready var anim_player: AnimationPlayer = $AnimationPlayer
 onready var header: Panel = $Panels/Header
@@ -31,6 +32,14 @@ func _ready() -> void:
 	hide()
 	header.hide()
 	pointer.hide()
+
+
+func _physics_process(_delta: float) -> void:
+	if play_text_sound:
+		if not $Text.is_playing():
+			$Text.play()
+			randomize()
+			$Text.pitch_scale = rand_range(1.78, 1.82)
 
 
 func _input(event: InputEvent) -> void:
@@ -70,6 +79,8 @@ func next_dialogue() -> void:
 #	if GlobalUI.menu == GlobalUI.Menus.NONE:
 #		GlobalUI.menu = GlobalUI.Menus.DIALOGUE
 
+
+
 	fast_speed = false
 	content_text.text = ""
 	header_text.text = ""
@@ -105,11 +116,20 @@ func next_dialogue() -> void:
 	update_dialogue_speed()
 
 	content_text_anim_player.play("show")
+
+	play_text_sound = true
+
 	if not content_text.text == "":
 		yield(content_text_anim_player, "animation_finished")
+
+	play_text_sound = false
+
 	update_dialogue(true)
 	dialogue_index += 1
 
+	while not next_dialogue_allowed:
+		$Text.play()
+		yield(get_tree(), "physics_frame")
 
 func close_dialogue() -> void:
 	dialogue_locked = true
@@ -138,6 +158,8 @@ func close_dialogue() -> void:
 		GlobalUI.menu = GlobalUI.Menus.CUTSCENE
 
 
+
+
 	dialogue_index = 0
 	content_text.text = ""
 	content_text_anim_player.stop()
@@ -151,6 +173,8 @@ func close_dialogue() -> void:
 
 	content_text.text = ""
 	dialogue_locked = false
+
+
 
 
 func update_dialogue(allowed := false) -> void:

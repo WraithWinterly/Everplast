@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=1]
 [ext_resource path="res://ui/profile_selector/profile_button.tscn" type="PackedScene" id=2]
@@ -10,38 +10,36 @@
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=11]
 [ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=12]
-[ext_resource path="res://world1/canvas_beach.tscn" type="PackedScene" id=13]
-[ext_resource path="res://ui/canvas_bg_override.gd" type="Script" id=14]
 [ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=15]
 
 [sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:modulate")
+tracks/0/path = NodePath("BGBlur:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("BGBlur:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ false ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("BGBlur:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("BGBlur:modulate")
+tracks/2/path = NodePath("Panel:anchor_top")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -50,47 +48,70 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [ 0.05 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_bottom")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.95 ]
 }
 
 [sub_resource type="Animation" id=1]
-length = 0.3
-step = 0.01
+length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Panel:modulate")
+tracks/0/path = NodePath("BGBlur:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("BGBlur:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.01 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("BGBlur:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 tracks/2/type = "value"
-tracks/2/path = NodePath("BGBlur:modulate")
-tracks/2/interp = 1
+tracks/2/path = NodePath("Panel:anchor_top")
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3 ),
+"times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ -1.05, 0.05 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Panel:anchor_bottom")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ -0.05, 0.95 ]
 }
 
 [node name="ProfileSelector" type="Control"]
@@ -107,11 +128,7 @@ __meta__ = {
 visible = false
 modulate = Color( 1, 1, 1, 0 )
 
-[node name="Background" parent="." instance=ExtResource( 13 )]
-script = ExtResource( 14 )
-
 [node name="Panel" type="Panel" parent="."]
-modulate = Color( 1, 1, 1, 0 )
 anchor_left = 0.03
 anchor_top = 0.05
 anchor_right = 0.97

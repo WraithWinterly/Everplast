@@ -39,7 +39,7 @@ func show_menu() -> void:
 	prev_menu = GlobalUI.menu
 	GlobalUI.menu = GlobalUI.Menus.DEBUG
 	show()
-	
+
 	input.grab_focus()
 	yield(get_tree(), "idle_frame")
 	input.clear()

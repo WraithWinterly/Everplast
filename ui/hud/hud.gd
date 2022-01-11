@@ -39,6 +39,7 @@ onready var powerup_use_anim_player: AnimationPlayer = $VBoxContainer/QuickPower
 onready var gem_textures := [$GenContainer/GemSlot1/Gem, $GenContainer/GemSlot2/Gem, $GenContainer/GemSlot3/Gem]
 onready var gem_container: HBoxContainer = $GenContainer
 onready var low_health_rect :TextureRect = $LowHealth
+onready var noti_delay: Timer = $NotiDelay
 
 
 func _ready() -> void:
@@ -91,7 +92,12 @@ func _physics_process(_delta: float) -> void:
 
 				if Globals.game_state == Globals.GameStates.MENU:
 					return
-			GlobalEvents.emit_signal("ui_notification_shown", tr("notification.upgrade_available"))
+
+				if not GlobalSave.get_stat("orbs") >= GlobalSave.get_level_up_cost():
+					return
+			if noti_delay.is_stopped():
+				noti_delay.start(noti_delay.wait_time)
+			#GlobalEvents.emit_signal("ui_notification_shown", tr("notification.upgrade_available"))
 			upgrade_notification_showed = true
 
 		if not shown_powerup == null and not shown_powerup == "":
@@ -169,14 +175,13 @@ func update_visibility() -> void:
 		if powerup_slot_visible:
 			powerup_slot_anim_player.play_backwards("slide")
 			powerup_slot_visible = false
-		#powerup_slot.hide()
 
 
 func update_counters() -> void:
 	if Globals.game_state == Globals.GameStates.MENU:
 		return
 
-	update_gems()
+	#update_gems()
 	update_coin_counter()
 	update_orb_counter()
 	update_health_counter()
@@ -353,7 +358,7 @@ func _level_world_selector_loaded() -> void:
 func _player_died() -> void:
 	hide_hud()
 	yield(GlobalEvents, "ui_faded")
-	update_counters()
+	update_gems()
 
 
 func _player_level_increased(_upgrade: String) -> void:
@@ -377,7 +382,7 @@ func _player_collected_orb(_amount: int) -> void:
 
 
 func _player_collected_gem(_index: int) -> void:
-	update_counters()
+	update_gems()
 
 
 func _player_hurt_from_enemy(_hurt_type: int, _knockback: int, _damage: int) -> void:
@@ -396,7 +401,7 @@ func _player_used_powerup(item_name: String) -> void:
 
 
 func _save_stat_updated() -> void:
-	update_counters()
+	update_gems()
 
 
 func _ui_pause_menu_return_prompt_yes_pressed() -> void:
@@ -410,3 +415,7 @@ func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 			powerup_slot_visible = false
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
 		upgrade_notification_showed = false
+
+
+func _on_NotiDelay_timeout() -> void:
+	GlobalEvents.emit_signal("ui_notification_shown", tr("notification.upgrade_available"))

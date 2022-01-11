@@ -38,8 +38,9 @@ func disable_buttons() -> void:
 
 func show_menu() -> void:
 	anim_player.play("show")
-	prompt_text.text = "%s %s: %s - %s?" % [
+	prompt_text.text = "%s %s %s: %s - %s?" % [
 			tr("quick_play.prompt_text"),
+			tr("profile_selector.button.normal"),
 			GlobalQuickPlay.data.last_profile + 1,
 			GlobalLevel.WORLD_NAMES[GlobalSave.data[GlobalQuickPlay.data.last_profile].world_last],
 			GlobalSave.data[GlobalQuickPlay.data.last_profile].level_last]
@@ -76,7 +77,7 @@ func _no_pressed() -> void:
 
 func _yes_pressed() -> void:
 	if GlobalUI.menu_locked: return
-
+	yes_button.release_focus()
 	GlobalEvents.emit_signal("ui_quick_play_prompt_yes_pressed")
 	GlobalUI.menu = GlobalUI.Menus.NONE
 	release_focus()

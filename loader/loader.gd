@@ -23,6 +23,7 @@ func _ready() -> void:
 
 	for pck in packs:
 		return_value = ProjectSettings.load_resource_pack(pck)
+
 		if not return_value:
 			load_failed(packs[i])
 			return

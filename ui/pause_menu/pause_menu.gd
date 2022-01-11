@@ -28,8 +28,8 @@ func _ready() -> void:
 	hide()
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel") and not GlobalUI.menu_locked:
+func _input(event: InputEvent) -> void:
+	if (event.is_action_pressed("pause") or (event.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.PAUSE_MENU)) and not GlobalUI.menu_locked:
 		if GlobalUI.menu == GlobalUI.Menus.NONE and not GlobalUI.fade_player_playing:
 			show_menu()
 			GlobalEvents.emit_signal("ui_button_pressed")
@@ -43,6 +43,19 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func show_menu() -> void:
+	return_button.set_focus_mode(true)
+	continue_button.set_focus_mode(true)
+	settings_button.set_focus_mode(true)
+	continue_button.focus_neighbour_bottom = settings_button.get_path()
+	settings_button.focus_neighbour_bottom = return_button.get_path()
+	return_button.focus_neighbour_bottom = continue_button.get_path()
+
+	continue_button.focus_neighbour_top = return_button.get_path()
+	settings_button.focus_neighbour_top = continue_button.get_path()
+	return_button.focus_neighbour_top = settings_button.get_path()
+
+	yield(get_tree(), "physics_frame")
+	continue_button.grab_focus()
 	GlobalUI.menu = GlobalUI.Menus.PAUSE_MENU
 	get_tree().paused = true
 
@@ -76,6 +89,10 @@ func show_menu() -> void:
 
 
 func hide_menu(wait_for_fade: bool = false) -> void:
+	return_button.enabled_focus_mode = false
+	continue_button.enabled_focus_mode = false
+	settings_button.enabled_focus_mode = false
+
 	GlobalUI.menu = GlobalUI.Menus.NONE
 	disable_buttons()
 	animation_player.play_backwards("pause")
@@ -135,6 +152,7 @@ func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 
 func _continue_pressed() -> void:
 	if GlobalUI.menu_locked: return
+	continue_button.release_focus()
 	GlobalEvents.emit_signal("ui_button_pressed", true)
 	GlobalEvents.emit_signal("ui_pause_menu_continue_pressed")
 	hide_menu()
@@ -142,6 +160,7 @@ func _continue_pressed() -> void:
 
 func _settings_pressed() -> void:
 	if GlobalUI.menu_locked: return
+	settings_button.release_focus()
 	GlobalUI.menu = GlobalUI.Menus.SETTINGS
 	GlobalEvents.emit_signal("ui_button_pressed")
 	GlobalEvents.emit_signal("ui_settings_pressed")
@@ -150,6 +169,7 @@ func _settings_pressed() -> void:
 
 func _return_pressed() -> void:
 	if GlobalUI.menu_locked: return
+	return_button.release_focus()
 	GlobalUI.menu = GlobalUI.Menus.RETURN_PROMPT
 	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
 	GlobalEvents.emit_signal("ui_pause_menu_return_pressed")

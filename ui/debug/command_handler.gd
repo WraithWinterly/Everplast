@@ -11,6 +11,7 @@ enum Arguments{
 
 const valid_commands: Array = [
 	["tp", [Arguments.FLOAT, Arguments.FLOAT]],
+	["tpmod", [Arguments.FLOAT, Arguments.FLOAT]],
 	["level", [Arguments.INT, Arguments.INT]],
 	["spawn", [Arguments.STRING, Arguments.INT]],
 	["set_stat", [Arguments.STRING, Arguments.STRING]],
@@ -32,9 +33,20 @@ const valid_commands: Array = [
 
 func tp(location_x: float, location_y: float) -> String:
 	debug_console.hide_menu()
-	var location = Vector2(location_x, location_y)
 	var player: KinematicBody2D = get_node_or_null(GlobalPaths.PLAYER)
 	if not player == null:
+		var location = Vector2(location_x, location_y)
+		player.position = location
+		player.linear_velocity = Vector2(0, 0)
+		return str("Player position has been changed to (%s, %s)" % [location_x, location_y])
+	return str("FAILED: Player is not in the game.")
+
+
+func tpmod(location_x: float, location_y: float) -> String:
+	debug_console.hide_menu()
+	var player: KinematicBody2D = get_node_or_null(GlobalPaths.PLAYER)
+	if not player == null:
+		var location = Vector2(player.global_position.x + location_x, player.global_position.y + location_y)
 		player.position = location
 		player.linear_velocity = Vector2(0, 0)
 		return str("Player position has been changed to (%s, %s)" % [location_x, location_y])

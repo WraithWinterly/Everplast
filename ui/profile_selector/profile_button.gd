@@ -181,10 +181,9 @@ func button_pressed() -> void:
 
 
 func _ui_play_pressed() -> void:
-	yield(GlobalEvents, "ui_faded")
+	yield(get_tree(), "physics_frame")
 	update_buttons()
 	if my_index == 0:
-
 		grab_focus()
 
 

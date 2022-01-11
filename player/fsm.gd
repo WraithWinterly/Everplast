@@ -42,6 +42,7 @@ func change_state(new_state: Node, bypass: bool = false):
 
 	if Globals.death_in_progress and not bypass: return
 
+	#print(new_state.name)
 	last_state = current_state
 	current_state.set_process(false)
 	current_state.set_process_input(false)

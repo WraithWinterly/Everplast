@@ -46,6 +46,9 @@ func _ready() -> void:
 
 	update_camera_positions(NORMAL)
 
+	if GlobalLevel.checkpoint_in_sub:
+		update_camera_positions(SUB)
+
 
 func _process(delta) -> void:
 	if trauma:

@@ -6,7 +6,7 @@
 [node name="SnowBall" type="Node2D"]
 
 [node name="CollectableBase" parent="." instance=ExtResource( 1 )]
-collectable_name = "snow"
+collectable_name = "snowball"
 
 [node name="Sprite" parent="CollectableBase" index="0"]
 texture = ExtResource( 2 )

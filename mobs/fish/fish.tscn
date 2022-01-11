@@ -40,7 +40,6 @@ script = ExtResource( 2 )
 orb_amount = 5
 
 [node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
-modulate = Color( 0.788235, 0.266667, 0.266667, 1 )
 position = Vector2( 0, 0 )
 frames = SubResource( 4 )
 

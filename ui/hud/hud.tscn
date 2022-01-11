@@ -911,3 +911,9 @@ stretch_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="NotiDelay" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[connection signal="timeout" from="NotiDelay" to="." method="_on_NotiDelay_timeout"]
