@@ -15,16 +15,19 @@ func _ready() -> void:
 
 func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player") and not activated:
-		activated = true
-		anim_player.play("move")
-		sound.play()
-		GlobalInput.start_normal_vibration()
+		if body.is_on_floor() or body.falling:
+			activated = true
+			anim_player.play("move")
+			sound.play()
+			GlobalInput.start_normal_vibration()
 
-		yield(anim_player, "animation_finished")
-		$Timer.start(3)
+			yield(anim_player, "animation_finished")
+			coll_shape.set_deferred("disabled", true)
+			$Timer.start(3)
 
 
 func _on_Timer_timeout() -> void:
 		anim_player.play("regen")
+		coll_shape.set_deferred("disabled", false)
 		yield(anim_player, "animation_finished")
 		activated = false

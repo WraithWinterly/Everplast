@@ -4,6 +4,7 @@
 [ext_resource path="res://tilesets/tileset_block.tres" type="TileSet" id=2]
 
 [node name="TileMapBlock" type="TileMap"]
+z_index = 99
 tile_set = ExtResource( 2 )
 cell_size = Vector2( 8, 8 )
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )

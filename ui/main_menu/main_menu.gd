@@ -69,7 +69,10 @@ func _ready() -> void:
 #		enable_buttons()
 
 func _input(event: InputEvent) -> void:
-	if (event is InputEventKey or event is InputEventJoypadButton) and can_pass_pre_menu and GlobalUI.menu == GlobalUI.Menus.PRE_MAIN_MENU:
+	if (event is InputEventKey or event is InputEventJoypadButton) \
+			and can_pass_pre_menu and GlobalUI.menu == GlobalUI.Menus.PRE_MAIN_MENU \
+			and Globals.game_state == Globals.GameStates.MENU:
+			# fix for occuring in game???
 		go_to_main_menu()
 
 
@@ -85,6 +88,7 @@ func go_to_pre_menu() -> void:
 
 
 func go_to_main_menu() -> void:
+	can_pass_pre_menu = false
 	GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
 	get_tree().set_input_as_handled()
 	play_button.grab_focus()

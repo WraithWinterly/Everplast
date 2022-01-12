@@ -137,6 +137,7 @@ __meta__ = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 16, 4 )
 shape = SubResource( 1 )
+one_way_collision = true
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 texture = ExtResource( 1 )

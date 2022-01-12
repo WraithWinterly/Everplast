@@ -8,7 +8,7 @@ const WATER_JUMP_BOOST: int = 350
 const INVINCIBILITY_TIME: float = 0.65
 const LERP_SPEED: float = 0.08
 const LERP_SPEED_ICE: float = 0.025
-
+const TERMINAL_VELOCITY: int = 475
 var linear_velocity := Vector2.ZERO
 
 var last_tile := ""
@@ -63,7 +63,6 @@ func _ready() -> void:
 	__ = area_2d.connect("body_entered", self, "_body_entered")
 	__ = area_2d.connect("area_entered", self, "_area_entered")
 	__ = area_2d.connect("area_exited", self, "_area_exited")
-
 	current_gravity = gravity
 
 	Globals.death_in_progress = false
@@ -73,6 +72,7 @@ func _ready() -> void:
 
 # Spikes
 func _physics_process(_delta):
+	#print(linear_velocity.y)
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.collider
@@ -117,6 +117,9 @@ func basic_movement():
 
 	linear_velocity.x = lerp(linear_velocity.x, current_speed * speed_modifier * speed_modifier_land, lerp_speed)
 	linear_velocity.y += delta * current_gravity
+
+	if linear_velocity.y > TERMINAL_VELOCITY:
+		linear_velocity.y = TERMINAL_VELOCITY
 
 	if not fsm.current_state == fsm.idle:
 		linear_velocity.x -= (get_floor_velocity().x * 0.07)
@@ -247,6 +250,7 @@ func _level_subsection_changed(pos: Vector2) -> void:
 
 
 func _player_death_started() -> void:
+	GlobalUI.menu_locked = true
 	linear_velocity = Vector2(0, 0)
 	fsm.change_state(fsm.idle, true)
 

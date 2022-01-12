@@ -38,6 +38,7 @@ func _ready() -> void:
 
 	prev_pos = global_position
 
+
 func _physics_process(_delta: float) -> void:
 	if falling:
 		linear_velocity.y += gravity
@@ -78,6 +79,7 @@ func regen():
 func rumble() -> void:
 	if instant_fall:
 		anim_player.playback_speed = 999
+	GlobalInput.start_low_vibration()
 	anim_player.play("rumble")
 	randomize()
 	ice_rumble_sound.pitch_scale = rand_range(0.95, 1.05)

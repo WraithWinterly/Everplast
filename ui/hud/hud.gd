@@ -141,7 +141,7 @@ func hide_hud() -> void:
 
 
 func show_ui_slot() -> void:
-	if not ui_slot_visible and Globals.game_state == Globals.GameStates.LEVEL:
+	if not ui_slot_visible and Globals.game_state == Globals.GameStates.LEVEL and not GlobalSave.get_stat("equipped_item") == "none":
 		ui_slot_anim_player.play("slide")
 		ui_slot_visible = true
 
@@ -164,6 +164,7 @@ func hide_powerup_slot() -> void:
 	if powerup_slot_visible:
 		powerup_slot_anim_player.play_backwards("slide")
 		powerup_slot_visible = false
+
 
 func update_visibility() -> void:
 	yield(get_tree(), "physics_frame")
@@ -356,9 +357,12 @@ func _level_world_selector_loaded() -> void:
 
 
 func _player_died() -> void:
+	powerup_slot_visible = false
+	ui_slot_visible = false
 	hide_hud()
-	yield(GlobalEvents, "ui_faded")
-	update_gems()
+	pass
+	#yield(GlobalEvents, "ui_faded")
+	#update_gems()
 
 
 func _player_level_increased(_upgrade: String) -> void:

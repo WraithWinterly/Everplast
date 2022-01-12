@@ -77,26 +77,6 @@ region = Rect2( 66, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 77, 0, 11, 24 )
 
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 33, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 22, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 88, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 1 )
-region = Rect2( 99, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=16]
-atlas = ExtResource( 1 )
-region = Rect2( 110, 0, 11, 24 )
-
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
 region = Rect2( 55, 0, 11, 24 )
@@ -113,6 +93,26 @@ region = Rect2( 77, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 66, 0, 11, 24 )
 
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 1 )
+region = Rect2( 110, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 88, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 1 )
+region = Rect2( 99, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 22, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 1 )
+region = Rect2( 33, 0, 11, 24 )
+
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
 "frames": [ SubResource( 3 ), SubResource( 4 ) ],
@@ -125,14 +125,14 @@ animations = [ {
 "name": "sprint",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 17 ) ],
+"frames": [ SubResource( 6 ), SubResource( 5 ), SubResource( 8 ), SubResource( 7 ) ],
 "loop": true,
-"name": "air_walk",
-"speed": 5.0
+"name": "walk",
+"speed": 7.0
 }, {
-"frames": [ SubResource( 11 ) ],
+"frames": [ SubResource( 16 ) ],
 "loop": true,
-"name": "air_idle",
+"name": "dash",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
@@ -140,15 +140,15 @@ animations = [ {
 "name": "ladder",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 16 ) ],
+"frames": [ SubResource( 11 ) ],
 "loop": true,
-"name": "dash",
+"name": "air_idle",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 5 ), SubResource( 8 ), SubResource( 7 ) ],
+"frames": [ SubResource( 17 ) ],
 "loop": true,
-"name": "walk",
-"speed": 7.0
+"name": "air_walk",
+"speed": 5.0
 } ]
 
 [sub_resource type="CanvasItemMaterial" id=30]
@@ -648,6 +648,7 @@ material = ExtResource( 2 )
 z_index = 3
 frames = SubResource( 18 )
 animation = "idle"
+frame = 1
 playing = true
 centered = false
 script = ExtResource( 4 )
