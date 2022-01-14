@@ -44,7 +44,7 @@ func _process(_delta: float) -> void:
 		if GlobalInput.ignore_fire: return
 		if not GlobalUI.menu == GlobalUI.Menus.NONE: return
 
-		if Input.is_action_just_pressed("fire") and not can_fire():
+		if Input.is_action_just_pressed("fire") and not can_fire() and not timer.time_left > 0:
 			fail_fire()
 			GlobalInput.start_low_vibration()
 

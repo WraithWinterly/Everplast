@@ -76,7 +76,7 @@ region = Rect2( 33, 0, 11, 13 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 11 )
-region = Rect2( 44, 0, 11, 13 )
+region = Rect2( 33, 0, 11, 13 )
 
 [sub_resource type="AtlasTexture" id=13]
 atlas = ExtResource( 11 )
@@ -307,8 +307,8 @@ __meta__ = {
 }
 
 [node name="WorldIcons" type="VBoxContainer" parent="HBoxContainer"]
-margin_left = 17.0
-margin_right = 26.0
+margin_left = 9.0
+margin_right = 18.0
 margin_bottom = 42.0
 alignment = 1
 __meta__ = {
@@ -357,19 +357,19 @@ margin_bottom = 76.0
 texture = SubResource( 7 )
 
 [node name="RankIcons" type="VBoxContainer" parent="HBoxContainer"]
-visible = false
-margin_left = 18.0
-margin_right = 29.0
-margin_bottom = 34.0
+margin_left = 22.0
+margin_right = 33.0
+margin_bottom = 42.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Silver" type="TextureRect" parent="HBoxContainer/RankIcons"]
-margin_top = 10.0
+visible = false
+margin_top = 6.0
 margin_right = 11.0
-margin_bottom = 23.0
+margin_bottom = 19.0
 texture = SubResource( 8 )
 
 [node name="Gold" type="TextureRect" parent="HBoxContainer/RankIcons"]
@@ -394,10 +394,9 @@ margin_bottom = 13.0
 texture = SubResource( 11 )
 
 [node name="Glitch" type="TextureRect" parent="HBoxContainer/RankIcons"]
-visible = false
-margin_left = 15.0
-margin_right = 26.0
-margin_bottom = 13.0
+margin_top = 14.0
+margin_right = 11.0
+margin_bottom = 27.0
 texture = SubResource( 12 )
 
 [node name="Volcano" type="TextureRect" parent="HBoxContainer/RankIcons"]

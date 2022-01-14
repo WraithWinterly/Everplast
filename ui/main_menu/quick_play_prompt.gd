@@ -51,16 +51,21 @@ func show_menu() -> void:
 	enable_buttons()
 
 
-func hide_menu() -> void:
-	anim_player.play_backwards("show")
+func hide_menu(alt_anim := false) -> void:
+	if alt_anim:
+		anim_player.play("hide_alt")
+	else:
+		anim_player.play_backwards("show")
+
 	yield(anim_player, "animation_finished")
-	if not anim_player.is_playing():
+
+	if not anim_player.is_playing() and not GlobalUI.menu == GlobalUI.Menus.QUICK_PLAY_PROMPT:
 		$BGBlur.hide()
 
 
 func _level_changed(_world: int, _level: int) -> void:
 	if GlobalUI.menu == GlobalUI.Menus.QUICK_PLAY_PROMPT:
-		hide_menu()
+		hide_menu(true)
 
 
 func _ui_quick_play_pressed() -> void:
@@ -82,10 +87,12 @@ func _yes_pressed() -> void:
 	GlobalUI.menu = GlobalUI.Menus.NONE
 	release_focus()
 	disable_buttons()
-
+	hide_menu(true)
 	GlobalSave.profile = GlobalQuickPlay.data.last_profile
 	GlobalEvents.emit_signal("level_changed", GlobalSave.data[GlobalQuickPlay.data.last_profile].world_last, GlobalSave.data[GlobalQuickPlay.data.last_profile].level_last)
-	hide_menu()
+	yield(GlobalEvents, "ui_faded")
+	hide()
+	#hide_menu()
 
 
 func _button_hovered() -> void:

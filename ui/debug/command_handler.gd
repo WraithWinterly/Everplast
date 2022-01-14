@@ -18,6 +18,7 @@ const valid_commands: Array = [
 	["get_stat", [Arguments.STRING]],
 	["clear_stat_profile", [Arguments.STRING, Arguments.INT]],
 	["clear_stat", [Arguments.STRING]],
+	["unlockall"],
 	["get_stats"],
 	["get_stats_raw"],
 	["get_settings"],
@@ -91,13 +92,6 @@ func get_stat(stat: String) -> String:
 	return str(GlobalSave.get_stat(stat))
 
 
-func clear_stat(stat: String) -> String:
-	if Globals.game_state == Globals.GameStates.MENU:
-		return "You must be in the game."
-	GlobalSave.set_stat(stat, GlobalSave.DEFAULT_DATA[stat])
-	return "Stat %s set to %s" % [stat, get_stat(stat)]
-
-
 func clear_stat_profile(stat: String, profile: int) -> String:
 	if GlobalSave.DEFAULT_DATA.has(stat):
 		GlobalSave.data[profile][stat] = GlobalSave.DEFAULT_DATA[stat]
@@ -105,6 +99,60 @@ func clear_stat_profile(stat: String, profile: int) -> String:
 		return "Stat %s not found." % stat
 	return "Stat %s set to %s on profile %s" % [stat, GlobalSave.data[profile][stat], profile]
 
+
+func clear_stat(stat: String) -> String:
+	if Globals.game_state == Globals.GameStates.MENU:
+		return "You must be in the game."
+	GlobalSave.set_stat(stat, GlobalSave.DEFAULT_DATA[stat])
+	return "Stat %s set to %s" % [stat, get_stat(stat)]
+
+func unlockall() -> String:
+	if Globals.game_state == Globals.GameStates.MENU:
+		return "You must be in a profile."
+
+	GlobalSave.data[GlobalSave.profile].adrenaline_max = 100
+	GlobalSave.data[GlobalSave.profile].adrenaline = 100
+	GlobalSave.data[GlobalSave.profile].level = 100
+	GlobalSave.data[GlobalSave.profile].adrenaline_speed *= GlobalStats.ADRENALINE_TIME_DECREASE_FROM_LEVEL_UP * 100
+	GlobalSave.data[GlobalSave.profile].health_max = 100
+	GlobalSave.data[GlobalSave.profile].health = 100
+	GlobalSave.data[GlobalSave.profile].orbs = 10000
+	GlobalSave.data[GlobalSave.profile].coins = 10000
+	GlobalSave.data[GlobalSave.profile].rank = GlobalStats.Ranks.GLITCH
+	GlobalSave.data[GlobalSave.profile].world_max = 4
+	GlobalSave.data[GlobalSave.profile].level_max = 10
+
+	for powerup in GlobalStats.VALID_POWERUPS:
+		for i in 99:
+			GlobalEvents.emit_signal("player_collected_powerup", powerup)
+
+	for powerup in GlobalStats.VALID_COLLECTABLES:
+		for i in 99:
+			GlobalEvents.emit_signal("player_collected_collectable", powerup)
+
+	for powerup in GlobalStats.VALID_EQUIPPABLES:
+		GlobalEvents.emit_signal("player_collected_equippable", powerup)
+
+	GlobalSave.data[GlobalSave.profile].gems[str(1)] = {}
+	GlobalSave.data[GlobalSave.profile].gems[str(2)] = {}
+	GlobalSave.data[GlobalSave.profile].gems[str(3)] = {}
+	GlobalSave.data[GlobalSave.profile].gems[str(4)] = {}
+
+	for level in GlobalLevel.LEVEL_DATABASE[1]:
+		GlobalSave.data[GlobalSave.profile].gems["1"][str(level)] = [true, true, true]
+
+	for world in GlobalLevel.LEVEL_DATABASE[2]:
+		GlobalSave.data[GlobalSave.profile].gems["2"][str(world)] = [true, true, true]
+
+	for world in GlobalLevel.LEVEL_DATABASE[3]:
+		GlobalSave.data[GlobalSave.profile].gems["3"][str(world)] = [true, true, true]
+
+	for world in GlobalLevel.LEVEL_DATABASE[4]:
+		GlobalSave.data[GlobalSave.profile].gems["4"][str(world)] = [true, true, true]
+
+	GlobalEvents.emit_signal("save_file_saved")
+
+	return "Modified Profile %s" % GlobalSave.profile
 
 
 func get_stats() -> String:

@@ -188,19 +188,16 @@ position = Vector2( 1072, 200 )
 position = Vector2( 1456, 208 )
 
 [node name="Coin14" parent="Coins" instance=ExtResource( 16 )]
-position = Vector2( 1472, 216 )
+position = Vector2( 1480, 216 )
 
 [node name="Coin15" parent="Coins" instance=ExtResource( 16 )]
-position = Vector2( 1488, 232 )
-
-[node name="Coin16" parent="Coins" instance=ExtResource( 16 )]
-position = Vector2( 1496, 256 )
+position = Vector2( 1496, 232 )
 
 [node name="Coin17" parent="Coins" instance=ExtResource( 16 )]
-position = Vector2( 1512, 240 )
+position = Vector2( 1512, 248 )
 
 [node name="Coin18" parent="Coins" instance=ExtResource( 16 )]
-position = Vector2( 1536, 240 )
+position = Vector2( 1536, 256 )
 
 [node name="Coin19" parent="Coins" instance=ExtResource( 16 )]
 position = Vector2( 1616, 248 )

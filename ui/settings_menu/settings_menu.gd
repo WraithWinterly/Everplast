@@ -201,10 +201,12 @@ func _input(_event: InputEvent) -> void:
 			data.fullscreen = false
 			OS.window_fullscreen = false
 			fullscreen_changed()
+			get_tree().set_input_as_handled()
 		elif not OS.window_fullscreen:
 			data.fullscreen = true
 			OS.window_fullscreen = true
 			fullscreen_changed()
+			get_tree().set_input_as_handled()
 		save_settings()
 
 		var file: File = File.new()

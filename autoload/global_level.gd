@@ -4,7 +4,7 @@ const WORLD_NAMES := [
 	"World 0", "Foggy Overlands", "Drowsy Lands", "Snow Fall", "This is a world?"]
 
 const LEVEL_DATABASE := [
-	0, 9, 8, 4, 4, 4, 4
+	0, 9, 8, 10, 9
 ]
 
 const WORLD_COUNT := 4
@@ -30,7 +30,7 @@ const CANVAS_SUBSECTION_DATABASE := [
 	#W2
 	[false, false, false, true, false, false, false, false, false, false],
 	#W3
-	[false, false, false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, true, false, false, false, false],
 	#W4
 	[false, false, false, false, false, false, false, false, false, false],
 ]
@@ -112,7 +112,7 @@ func replace_scenes(world: int, level: int) -> void:
 
 
 func level_failed() -> void:
-	GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
+	GlobalUI.menu = GlobalUI.Menus.NONE
 	Globals.game_state = Globals.GameStates.MENU
 	var __: int = get_tree().change_scene("res://main.tscn")
 

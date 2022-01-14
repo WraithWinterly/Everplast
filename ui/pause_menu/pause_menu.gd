@@ -2,6 +2,7 @@ extends Control
 
 
 onready var continue_button: Button = $PauseButtons/Continue
+onready var restart_button: Button = $PauseButtons/RestartLevel
 onready var return_button: Button = $PauseButtons/Return
 onready var settings_button: Button = $PauseButtons/Settings
 onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -12,10 +13,13 @@ onready var world_icons: VBoxContainer = $LevelLabelCenter/Control/WorldIcons
 func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
+	__ = GlobalEvents.connect("ui_pause_menu_restart_prompt_no_pressed", self, "_ui_pause_menu_restart_prompt_no_pressed")
+	__ = GlobalEvents.connect("ui_pause_menu_restart_prompt_yes_pressed", self, "_ui_pause_menu_restart_prompt_yes_pressed")
 	__ = GlobalEvents.connect("ui_settings_back_pressed", self, "_ui_settings_back_pressed")
 	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_no_pressed", self, "_ui_pause_menu_return_prompt_no_pressed")
 	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
 	__ = continue_button.connect("pressed", self, "_continue_pressed")
+	__ = restart_button.connect("pressed", self, "_restart_pressed")
 	__ = settings_button.connect("pressed", self, "_settings_pressed")
 	__ = return_button.connect("pressed", self, "_return_pressed")
 
@@ -46,13 +50,28 @@ func show_menu() -> void:
 	return_button.set_focus_mode(true)
 	continue_button.set_focus_mode(true)
 	settings_button.set_focus_mode(true)
-	continue_button.focus_neighbour_bottom = settings_button.get_path()
-	settings_button.focus_neighbour_bottom = return_button.get_path()
-	return_button.focus_neighbour_bottom = continue_button.get_path()
+	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+		continue_button.focus_neighbour_bottom = settings_button.get_path()
+		settings_button.focus_neighbour_bottom = return_button.get_path()
+		return_button.focus_neighbour_bottom = continue_button.get_path()
 
-	continue_button.focus_neighbour_top = return_button.get_path()
-	settings_button.focus_neighbour_top = continue_button.get_path()
-	return_button.focus_neighbour_top = settings_button.get_path()
+		continue_button.focus_neighbour_top = return_button.get_path()
+		settings_button.focus_neighbour_top = continue_button.get_path()
+		return_button.focus_neighbour_top = settings_button.get_path()
+		restart_button.hide()
+
+	else:
+		continue_button.focus_neighbour_bottom = restart_button.get_path()
+		restart_button.focus_neighbour_bottom = settings_button.get_path()
+		settings_button.focus_neighbour_bottom = return_button.get_path()
+		return_button.focus_neighbour_bottom = continue_button.get_path()
+
+		continue_button.focus_neighbour_top = return_button.get_path()
+		restart_button.focus_neighbour_top = continue_button.get_path()
+		settings_button.focus_neighbour_top = restart_button.get_path()
+		return_button.focus_neighbour_top = settings_button.get_path()
+		restart_button.show()
+
 
 	yield(get_tree(), "physics_frame")
 	continue_button.grab_focus()
@@ -111,12 +130,14 @@ func hide_menu(wait_for_fade: bool = false) -> void:
 
 func enable_buttons() -> void:
 	continue_button.disabled = false
+	restart_button.disabled = false
 	settings_button.disabled = false
 	return_button.disabled = false
 
 
 func disable_buttons() -> void:
 	continue_button.disabled = true
+	restart_button.disabled = true
 	settings_button.disabled = true
 	return_button.disabled = true
 
@@ -128,6 +149,19 @@ func _level_changed(world: int, level: int) -> void:
 	yield(get_tree(), "idle_frame")
 	level_label.show()
 	level_label.text = "%s %s\n %s - %s" % [tr("pause_menu.profile"), GlobalSave.profile + 1, GlobalLevel.WORLD_NAMES[world], level]
+
+
+func _ui_pause_menu_restart_prompt_no_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	enable_buttons()
+
+	restart_button.grab_focus()
+
+
+func _ui_pause_menu_restart_prompt_yes_pressed() -> void:
+	yield(GlobalEvents, "ui_faded")
+	hide()
+	$ColorRect/BGBlur.hide()
 
 
 func _ui_settings_back_pressed() -> void:
@@ -146,6 +180,7 @@ func _ui_pause_menu_return_prompt_no_pressed() -> void:
 
 
 func _ui_pause_menu_return_prompt_yes_pressed() -> void:
+	yield(GlobalEvents, "ui_faded")
 	hide()
 	$ColorRect/BGBlur.hide()
 
@@ -156,6 +191,16 @@ func _continue_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed", true)
 	GlobalEvents.emit_signal("ui_pause_menu_continue_pressed")
 	hide_menu()
+
+
+func _restart_pressed() -> void:
+	if GlobalUI.menu_locked: return
+	restart_button.release_focus()
+	GlobalUI.menu = GlobalUI.Menus.RESTART_PROMPT
+	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
+	GlobalEvents.emit_signal("ui_pause_menu_restart_pressed")
+	disable_buttons()
+	restart_button.release_focus()
 
 
 func _settings_pressed() -> void:

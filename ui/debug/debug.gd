@@ -55,6 +55,7 @@ func update_text() -> void:
 		text += "Player Second Jump Used: %s\n" % player.second_jump_used
 		text += "Player Facing Right: %s\n" % player.facing_right
 		text += "Player Velocity: %s\n" % player.linear_velocity
+		text += "Player Death In Prog: %s\n" % Globals.death_in_progress
 		text += "\n"
 
 	yield(get_tree(), "idle_frame")

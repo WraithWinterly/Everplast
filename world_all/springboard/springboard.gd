@@ -14,6 +14,8 @@ func _ready() -> void:
 	__ = area_2d.connect("body_entered", self, "_body_entered")
 	# Fit stutter on first use
 	particles.emitting = true
+	if GlobalLevel.current_world == 3:
+		amount *= 2
 
 
 func _body_entered(body: Node) -> void:

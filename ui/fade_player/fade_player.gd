@@ -52,11 +52,11 @@ func _ready() -> void:
 #		anim_player.play("fade_fancy")
 
 
-func play(fade_out: bool, fancy := false) -> void:
+func play(fade_out: bool, fancy := false, black := false) -> void:
 	fade_rect.material.set_shader_param("in_color", color)
 	fade_rect.color = color
 
-	if GlobalLevel.in_subsection or Globals.death_in_progress:
+	if black or Globals.death_in_progress:
 		fade_rect.material.set_shader_param("in_color", Color(0, 0, 0, 255))
 		fade_rect.color = Color(0, 0, 0, 255)
 
@@ -81,7 +81,7 @@ func play(fade_out: bool, fancy := false) -> void:
 		GlobalUI.fade_player_playing = true
 
 
-func transition(with_color := false, fancy := false) -> void:
+func transition(with_color := false, fancy := false, black := false) -> void:
 	for icon in world_icons.get_children():
 		icon.hide()
 
@@ -99,9 +99,15 @@ func transition(with_color := false, fancy := false) -> void:
 		main_logo.hide()
 
 	if fancy:
-		play(false, true)
+		if black:
+			play(false, true, true)
+		else:
+			play(false, true)
 	else:
-		play(false)
+		if black:
+			play(false, false, true)
+		else:
+			play(false)
 
 	yield(GlobalEvents, "ui_faded")
 
@@ -109,9 +115,15 @@ func transition(with_color := false, fancy := false) -> void:
 #		return
 
 	if fancy:
-		play(true, true)
+		if black:
+			play(true, true, true)
+		else:
+			play(true, true)
 	else:
-		play(true)
+		if black:
+			play(true, false, true)
+		else:
+			play(true)
 
 	yield(GlobalEvents, "ui_faded")
 
@@ -179,7 +191,7 @@ func _level_changed(world: int = 0, level: int = 0) -> void:
 
 
 func _level_completed() -> void:
-	transition(true, true)
+	transition(true, true, false)
 
 
 func _level_subsection_changed(_pos: Vector2) -> void:
@@ -187,7 +199,7 @@ func _level_subsection_changed(_pos: Vector2) -> void:
 	get_tree().paused = true
 	anim_player.get_animation("fade").length = 0.4
 	anim_player.get_animation("fade_fancy").length = 0.4
-	transition(false, true)
+	transition(false, true, true)
 
 	match GlobalLevel.current_world:
 		1:
@@ -209,7 +221,7 @@ func _level_subsection_changed(_pos: Vector2) -> void:
 
 func _player_died() -> void:
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
-		transition()
+		transition(false, true, true)
 
 
 func _story_boss_killed(_idx: int) -> void:

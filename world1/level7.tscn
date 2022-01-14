@@ -176,7 +176,7 @@ position = Vector2( 496, -120 )
 always_palm = true
 
 [node name="Tree6" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 808, -184 )
+position = Vector2( 816, -184 )
 always_palm = true
 
 [node name="Tree7" parent="Trees" instance=ExtResource( 18 )]
@@ -248,10 +248,6 @@ position = Vector2( 2352, -328 )
 always_palm = true
 
 [node name="Tree24" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 2424, -328 )
-always_palm = true
-
-[node name="Tree25" parent="Trees" instance=ExtResource( 18 )]
 position = Vector2( 2424, -328 )
 always_palm = true
 

@@ -121,7 +121,7 @@ shape = SubResource( 8 )
 orb_amount = 25
 knockback = 200
 attack_damage = 10
-max_health = 10
+max_health = 5
 free_on_death = false
 
 [node name="HitSound" parent="MobComponentManager" index="0"]
@@ -135,7 +135,6 @@ volume_db = -8.0
 [node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 10 )
 frames = SubResource( 3 )
-frame = 1
 
 [node name="Position2D" type="Position2D" parent="MobComponentManager/SpriteHolder/AnimatedSprite" index="0"]
 position = Vector2( 14, -9 )

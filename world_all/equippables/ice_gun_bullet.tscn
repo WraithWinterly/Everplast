@@ -20,7 +20,6 @@ texture = ExtResource( 2 )
 
 [node name="Sound" parent="BulletBase" index="4"]
 stream = ExtResource( 3 )
-volume_db = 15.0
 pitch_scale = 1.1
 
 [editable path="BulletBase"]

@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player") and not activated:
-		if body.is_on_floor() or body.falling:
+		if body.is_on_floor() and body.linear_velocity.y >= 0:
 			activated = true
 			anim_player.play("move")
 			sound.play()

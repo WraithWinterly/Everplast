@@ -81,7 +81,6 @@ func _no_pressed() -> void:
 func _yes_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	yes_button.release_focus()
-	hide_menu()
 	GlobalEvents.emit_signal("ui_pause_menu_return_prompt_yes_pressed")
 	if Globals.game_state == Globals.GameStates.LEVEL:
 		GlobalLevel.checkpoint_active = false
@@ -89,12 +88,16 @@ func _yes_pressed() -> void:
 		Globals.game_state = Globals.GameStates.WORLD_SELECTOR
 		GlobalUI.menu = GlobalUI.Menus.NONE
 		yield(GlobalEvents, "ui_faded")
+		hide_menu()
+		hide()
 		get_tree().paused = false
 	else:
 		GlobalStats.last_powerup = ""
 		Globals.game_state = Globals.GameStates.MENU
 		GlobalUI.menu = GlobalUI.Menus.MAIN_MENU
 		yield(GlobalEvents, "ui_faded")
+		hide_menu()
+		hide()
 		get_tree().paused = false
 
 

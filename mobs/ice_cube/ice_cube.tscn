@@ -128,7 +128,7 @@ script = ExtResource( 11 )
 orb_amount = 50
 knockback = 200
 attack_damage = 20
-max_health = 30
+max_health = 20
 
 [node name="HitSound" parent="MobComponentManager" index="0"]
 stream = ExtResource( 7 )

@@ -87,7 +87,7 @@ const PEAR_ADRENALINE_BOOST: int = 5
 
 const BUNNY_EGG_TIME: int = 10
 const GLITCH_ORB_TIME: int = 7
-const ICE_SPIKE_TIME: int = 7
+const ICE_SPIKE_TIME: int = 3
 
 const PEAR_TIME: int = 5
 const PEAR_CONSEQUENCE: int = 5

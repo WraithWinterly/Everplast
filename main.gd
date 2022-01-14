@@ -42,10 +42,6 @@ func _ready() -> void:
 				version_numbers[0], version_numbers[1],version_numbers[2],
 				VersionPrefixes.keys()[version_prefix].to_lower()]
 
-	OS.window_borderless = false
-	OS.window_position.x -= 10
-	OS.window_position.y -= 28
-
 	# Give time for Settings to apply
 	yield(get_tree(), "physics_frame")
 	GlobalMusic.disabled = false
@@ -59,12 +55,3 @@ func _ready() -> void:
 #			AudioServer.set_bus_mute(0, false)
 #			AudioServer.set_bus_mute(1, false)
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_key_pressed(KEY_0):
-		OS.window_borderless = true
-		OS.window_size = Vector2(1920, 1079)
-		OS.window_position = Vector2(0, 0)
-	if Input.is_key_pressed(KEY_9):
-		OS.window_borderless = false
-		OS.window_size = Vector2(1600, 900)
-		OS.window_position = Vector2(160, 300)

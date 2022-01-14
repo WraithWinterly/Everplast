@@ -329,6 +329,7 @@ func _player_collected_gem(index: int) -> void:
 		gem_dict[str(GlobalLevel.current_world)] = {}
 		gem_dict[str(GlobalLevel.current_world)][str(GlobalLevel.current_level)] = [false, false, false]
 		gem_dict[str(GlobalLevel.current_world)][str(GlobalLevel.current_level)][index] = true
+
 	set_stat("gems", gem_dict)
 
 

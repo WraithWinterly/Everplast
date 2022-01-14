@@ -51,8 +51,8 @@ func _ready() -> void:
 #	camera.current = false
 	update_menu()
 
-	if not GlobalUI.menu == GlobalUI.Menus.INITIAL_SETUP:
-		play_button.grab_focus()
+#	if not GlobalUI.menu == GlobalUI.Menus.INITIAL_SETUP:
+#		play_button.grab_focus()
 
 
 	yield(get_tree(), "idle_frame")
@@ -68,11 +68,15 @@ func _ready() -> void:
 #	if GlobalUI.menu == GlobalUI.Menus.MAIN_MENU:
 #		enable_buttons()
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventKey or event is InputEventJoypadButton) \
 			and can_pass_pre_menu and GlobalUI.menu == GlobalUI.Menus.PRE_MAIN_MENU \
 			and Globals.game_state == Globals.GameStates.MENU:
 			# fix for occuring in game???
+		if event is InputEventKey:
+			if not event.pressed: return
+		if event.is_action_pressed("fullscreen"):
+			return
 		go_to_main_menu()
 
 

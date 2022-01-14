@@ -22,6 +22,7 @@ export var items := {
 	"laser gun": [false, 1, 350],
 	"nail gun": [false, 1, 450],
 	"snow gun": [false, 1, 500],
+	"ice gun": [false, 1, 500],
 }
 
 var with_player := false

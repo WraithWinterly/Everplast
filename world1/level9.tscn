@@ -5,7 +5,7 @@
 [ext_resource path="res://world1/level_5_canvas_modulate.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world_all/level.gd" type="Script" id=4]
 [ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=5]
-[ext_resource path="res://world1/canvas_rock.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world1/backgrounds/canvas_underground_w1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=7]
 [ext_resource path="res://world_all/tilemap_block/block.png" type="Texture" id=8]
 [ext_resource path="res://tilesets/tileset_grass.tres" type="TileSet" id=9]
@@ -20,8 +20,8 @@
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=18]
 [ext_resource path="res://tilesets/tileset_spikes.tres" type="TileSet" id=19]
 [ext_resource path="res://world_all/spikes/spikes.gd" type="Script" id=20]
+[ext_resource path="res://world1/backgrounds/canvas_mountain_w1.tscn" type="PackedScene" id=21]
 [ext_resource path="res://world_all/teleporters/subsection/subsection_teleporter.tscn" type="PackedScene" id=23]
-[ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=24]
 [ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=25]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=26]
 [ext_resource path="res://world_all/trees/tree.tscn" type="PackedScene" id=27]
@@ -92,7 +92,7 @@ __meta__ = {
 "_edit_horizontal_guides_": [  ],
 "_edit_lock_": true
 }
-canvas_normal = ExtResource( 24 )
+canvas_normal = ExtResource( 21 )
 canvas_subsection = ExtResource( 6 )
 
 [node name="Lanterns" type="Node2D" parent="."]
