@@ -9,6 +9,7 @@ const FILE: String = \
 	"user://settings.json"
 
 const DEFAULT_DATA: Dictionary = {
+	"button_hint": true,
 	"vsync": true,
 	"tonemap": 3.0,
 	"fullscreen": true,
@@ -63,6 +64,7 @@ onready var subcategory_anim_player: AnimationPlayer = $Panel/BG/Subcategory/Ani
 # GENERAL MENU
 #
 onready var general_buttons: VBoxContainer = $Panel/BG/GeneralMenu/HBoxContainer
+onready var hint_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/ButtonHint
 onready var language_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/Language
 onready var credits_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/Credits
 onready var audio_volume_button: Button = $Panel/BG/GeneralMenu/HBoxContainer/AudioVolume
@@ -136,6 +138,7 @@ func _ready() -> void:
 	__ = controls_menu_button.connect("pressed", self, "_controls_pressed")
 	__ = other_menu_button.connect("pressed", self, "_other_pressed")
 
+	__ = hint_button.connect("pressed", self, "_hint_button_pressed")
 	__ = language_button.connect("pressed", self, "_language_button_pressed")
 	__ = audio_volume_button.connect("pressed", self, "_audio_volume_button_pressed")
 	__ = audio_volume_slider.connect("value_changed", self, "_audio_volume_changed")
@@ -195,6 +198,11 @@ func _ready() -> void:
 	hide()
 
 
+func _physics_process(_delta: float) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS:
+		update_controllers()
+
+
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("fullscreen"):
 		if OS.window_fullscreen:
@@ -246,6 +254,7 @@ func disable_side_panel_right_focus() -> void:
 
 
 func update_button_toggles() -> void:
+	hint_button.pressed = data.button_hint
 	fullscreen_button.pressed = data.fullscreen
 	vsync_button.pressed = data.vsync
 	post_processing_button.pressed = data.post_processing
@@ -289,6 +298,7 @@ func enable_buttons() -> void:
 	controls_menu_button.disabled = false
 	other_menu_button.disabled = false
 
+	hint_button.disabled = false
 	language_button.disabled = false
 	credits_button.disabled = false
 	audio_volume_button.disabled = false
@@ -321,6 +331,7 @@ func disable_buttons() -> void:
 	controls_menu_button.disabled = true
 	other_menu_button.disabled = true
 
+	hint_button.disabled = true
 	language_button.disabled = true
 	credits_button.disabled = true
 	audio_volume_button.disabled = true
@@ -377,6 +388,7 @@ func reset_file() -> void:
 
 
 func save_settings() -> void:
+	data.button_hint = hint_button.pressed
 	data.fullscreen = fullscreen_button.pressed
 	data.vsync = vsync_button.pressed
 	data.audio_enabled = audio_volume_button.pressed
@@ -458,6 +470,11 @@ func update_music_toggle() -> void:
 
 
 func update_toggle_buttons() -> void:
+	if hint_button.pressed:
+		hint_button.text = "%s: %s" % [tr("settings.general.button_hint"), tr("global.on")]
+	else:
+		hint_button.text = "%s: %s" % [tr("settings.general.button_hint"), tr("global.off")]
+
 	if fullscreen_button.pressed:
 		fullscreen_button.text = "%s: %s" % [tr("settings.graphics.fullscreen"), tr("global.on")]
 	else:
@@ -691,7 +708,8 @@ func _general_pressed() -> void:
 
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_GENERAL
 
-		language_button.grab_focus()
+		hint_button.grab_focus()
+		#language_button.grab_focus()
 
 	update_left_button_focus()
 	update_right_button_focus()
@@ -773,6 +791,11 @@ func _other_pressed() -> void:
 
 	update_left_button_focus()
 	update_right_button_focus()
+
+
+func _hint_button_pressed() -> void:
+	GlobalEvents.emit_signal("ui_button_pressed")
+	apply_settings()
 
 
 func _language_button_pressed() -> void:
@@ -862,15 +885,16 @@ func _controls_controller_index_slider_changed(value: int) -> void:
 
 
 func update_controllers() -> void:
-	controls_controller_index_label.text = "Controller %s" % (data.controller_index + 1)
+	controls_controller_index_label.text = "%s %s" % [tr("settings.controls.index"), (data.controller_index + 1)]
 	controls_controller_index_slider.value = data.controller_index + 1
 
 	if not Input.get_joy_name(data.controller_index) == "":
 		controls_controller_index_label.text += ": %s" % Input.get_joy_name(data.controller_index)
 		controls_controller_index_slider.show()
 	else:
-		controls_controller_index_label.text = "No Controllers Connected"
+		controls_controller_index_label.text = tr("settings.controls.no_controllers")
 		controls_controller_index_slider.hide()
+		controls_controller_index_button.grab_focus()
 
 	#print(data.controller_index)
 	# SET CONTROLS TO NEW INDEX

@@ -28,7 +28,7 @@ func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
 	__ = GlobalEvents.connect("ui_dialogued", self, "_ui_dialogued")
-
+	__ = GlobalEvents.connect("player_died", self, "_player_died")
 	hide()
 	header.hide()
 	pointer.hide()
@@ -217,3 +217,7 @@ func _ui_dialogued(content: String, person: String = "", func_call: String = "")
 		dialogue_content.clear()
 		dialogue_content.push_back([content, person, func_call])
 		show_dialogue()
+
+func _player_died() -> void:
+	close_dialogue()
+	play_text_sound = false

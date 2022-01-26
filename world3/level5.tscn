@@ -1059,9 +1059,6 @@ position = Vector2( 3544, 712 )
 [node name="IceCube11" parent="." instance=ExtResource( 27 )]
 position = Vector2( 3776, 688 )
 
-[node name="IceSlime" parent="." instance=ExtResource( 26 )]
-position = Vector2( 448, 568 )
-
 [node name="IceSlime2" parent="." instance=ExtResource( 26 )]
 position = Vector2( 784, 712 )
 

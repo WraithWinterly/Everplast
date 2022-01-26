@@ -3,7 +3,7 @@
 [ext_resource path="res://world_all/equippables/equippable_base.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world_all/equippables/ice_gun.png" type="Texture" id=2]
 
-[node name="Snow Gun" type="Node2D"]
+[node name="Ice Gun" type="Node2D"]
 
 [node name="EquippableBase" parent="." instance=ExtResource( 1 )]
 equippable_name = "ice gun"

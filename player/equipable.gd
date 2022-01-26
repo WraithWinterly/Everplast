@@ -16,6 +16,7 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.CUTSCENE: return
 	if not GlobalUI.menu == GlobalUI.Menus.NONE: return
 	if Input.is_action_pressed("ctr_look_up") or Input.is_action_pressed("ctr_look_down") or Input.is_action_pressed("ctr_look_left") or Input.is_action_pressed("ctr_look_right"):
 		rotation_degrees = rad2deg(atan2(-GlobalInput.get_controller_right_axis().y, GlobalInput.get_controller_right_axis().x))
@@ -26,6 +27,7 @@ func _process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.CUTSCENE: return
 	if event is InputEventMouseMotion:
 		look_at(get_global_mouse_position())
 		update_direction()

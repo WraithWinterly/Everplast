@@ -61,9 +61,21 @@ region = Rect2( 0, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 11, 0, 11, 24 )
 
-[sub_resource type="AtlasTexture" id=16]
+[sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 1 )
-region = Rect2( 110, 0, 11, 24 )
+region = Rect2( 55, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 44, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 77, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 66, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 1 )
@@ -81,29 +93,9 @@ region = Rect2( 66, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 77, 0, 11, 24 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=16]
 atlas = ExtResource( 1 )
-region = Rect2( 55, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 1 )
-region = Rect2( 44, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 77, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 66, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 1 )
-region = Rect2( 22, 0, 11, 24 )
-
-[sub_resource type="AtlasTexture" id=17]
-atlas = ExtResource( 1 )
-region = Rect2( 33, 0, 11, 24 )
+region = Rect2( 110, 0, 11, 24 )
 
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 1 )
@@ -113,6 +105,14 @@ region = Rect2( 88, 0, 11, 24 )
 atlas = ExtResource( 1 )
 region = Rect2( 99, 0, 11, 24 )
 
+[sub_resource type="AtlasTexture" id=31]
+atlas = ExtResource( 1 )
+region = Rect2( 77, 0, 11, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 1 )
+region = Rect2( 22, 0, 11, 24 )
+
 [sub_resource type="SpriteFrames" id=18]
 animations = [ {
 "frames": [ SubResource( 3 ), SubResource( 4 ) ],
@@ -120,34 +120,34 @@ animations = [ {
 "name": "idle",
 "speed": 2.0
 }, {
-"frames": [ SubResource( 16 ) ],
+"frames": [ SubResource( 6 ), SubResource( 5 ), SubResource( 8 ), SubResource( 7 ) ],
 "loop": true,
-"name": "dash",
-"speed": 5.0
+"name": "walk",
+"speed": 7.0
 }, {
 "frames": [ SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
 "loop": true,
 "name": "sprint",
 "speed": 10.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 5 ), SubResource( 8 ), SubResource( 7 ) ],
+"frames": [ SubResource( 16 ) ],
 "loop": true,
-"name": "walk",
-"speed": 7.0
-}, {
-"frames": [ SubResource( 11 ) ],
-"loop": true,
-"name": "air_idle",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 17 ) ],
-"loop": true,
-"name": "air_walk",
+"name": "dash",
 "speed": 5.0
 }, {
 "frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "ladder",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 31 ) ],
+"loop": true,
+"name": "air_walk",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 11 ) ],
+"loop": true,
+"name": "air_idle",
 "speed": 5.0
 } ]
 
@@ -647,8 +647,7 @@ pause_mode = 2
 material = ExtResource( 2 )
 z_index = 3
 frames = SubResource( 18 )
-animation = "idle"
-frame = 1
+animation = "air_idle"
 playing = true
 centered = false
 script = ExtResource( 4 )
@@ -661,6 +660,9 @@ gold_color_3 = Color( 0.960784, 0.498039, 0.0901961, 1 )
 diamond_color_1 = Color( 0.0117647, 0.607843, 0.898039, 1 )
 diamond_color_2 = Color( 0.00784314, 0.533333, 0.819608, 1 )
 diamond_color_3 = Color( 0.00784314, 0.466667, 0.741176, 1 )
+glitch_color_1 = Color( 0.556863, 0.141176, 0.666667, 1 )
+glitch_color_2 = Color( 0.482353, 0.121569, 0.635294, 1 )
+glitch_color_3 = Color( 0.415686, 0.105882, 0.603922, 1 )
 
 [node name="LevelUpLight" type="Sprite" parent="Smoothing2D/AnimatedSprite"]
 modulate = Color( 0.792157, 0.705882, 0.403922, 0 )

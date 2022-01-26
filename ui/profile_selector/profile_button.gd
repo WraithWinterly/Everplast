@@ -27,6 +27,8 @@ onready var adrenaline_icon: TextureRect = $Stats/HBoxContainer/Icons/Adrenaline
 onready var profile_selector: Control = get_node(profile_selector_path)
 onready var world_icons: VBoxContainer = $HBoxContainer/WorldIcons
 onready var rank_icons: VBoxContainer = $HBoxContainer/RankIcons
+onready var star_1: TextureRect = $StarHBoxContainer/TextureRect
+onready var star_2: TextureRect = $StarHBoxContainer/TextureRect2
 
 
 func _ready() -> void:
@@ -49,6 +51,9 @@ func _ready() -> void:
 func update_buttons() -> void:
 	if not GlobalUI.menu_locked:
 		disabled = false
+
+	star_1.hide()
+	star_2.hide()
 
 	match GlobalUI.menu:
 		GlobalUI.Menus.PROFILE_SELECTOR_DELETE:
@@ -85,12 +90,16 @@ func update_buttons() -> void:
 				show_blank_stats()
 				world_icons.hide()
 				rank_icons.hide()
+				star_1.hide()
+				star_2.hide()
 			GlobalUI.Menus.PROFILE_SELECTOR_DELETE:
 				button_text.text = "%s %s" % [tr("profile_selector.button.delete"), my_index + 1]
 				button_text.modulate = Color8(255, 0, 0)
 				show_blank_stats()
 				world_icons.hide()
 				rank_icons.hide()
+				star_1.hide()
+				star_2.hide()
 		button_text.show()
 	else:
 		button_type = LOAD
@@ -102,7 +111,14 @@ func update_buttons() -> void:
 				coin_label.text = str(GlobalSave.data[my_index].coins)
 				orb_label.text = str(GlobalSave.data[my_index].orbs)
 				gem_label.text = str(GlobalSave.get_gem_count(my_index))
-
+				if GlobalSave.data[my_index].game_beat:
+					star_1.show()
+				if GlobalSave.data[my_index].all_gems_collected:
+					star_2.show()
+				if GlobalSave.get_gem_count(my_index) == GlobalStats.total_gems:
+					gem_label.modulate = Color(0.078125, 1, 0)
+				else:
+					gem_label.modulate = Color(1, 1, 1, 1)
 
 				# Rank Icon
 				for texture in rank_icons.get_children():
@@ -126,6 +142,9 @@ func update_buttons() -> void:
 				# World Icon
 				for w_icon in world_icons.get_children():
 					if int(w_icon.name) == GlobalSave.data[my_index].world_max:
+						if GlobalSave.data[my_index].world_max == 4:
+							world_icons.hide()
+							continue
 						world_icons.show()
 						w_icon.show()
 					else:
@@ -170,6 +189,7 @@ func button_pressed() -> void:
 				GlobalEvents.emit_signal("save_file_created", my_index)
 				button_type = LOAD
 				button_pressed()
+				release_focus()
 			LOAD:
 				GlobalUI.menu = GlobalUI.Menus.NONE
 				release_focus()

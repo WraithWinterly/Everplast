@@ -12,16 +12,35 @@ var interact_activators: int = 0
 var dash_activated: bool = false
 var fire_activated: bool = false
 var dialogue_activated: bool = false
+var powerup_activated: bool = false
+var equip_activated: bool = false
 
 
 func _physics_process(_delta: float) -> void:
 	if GlobalUI.menu == GlobalUI.Menus.DIALOGUE:
 		dialogue_activated = true
+
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		match GlobalSave.get_stat("equipped_item"):
+			"none":
+				fire_activated = false
+			_:
+				fire_activated = true
+	else:
+		fire_activated = false
+
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		equip_activated = GlobalSave.get_stat("equippables").size() > 0
+		powerup_activated = GlobalSave.get_stat("powerups").size() > 0
+	else:
+		equip_activated = false
+		powerup_activated = false
+
 	# Was engine bug, is fixed now
-#	check_action("stick_ui_up")
-#	check_action("stick_ui_down")
-#	check_action("stick_ui_left")
-#	check_action("stick_ui_right")
+	check_action("stick_ui_up")
+	check_action("stick_ui_down")
+	check_action("stick_ui_left")
+	check_action("stick_ui_right")
 
 
 func _input(event: InputEvent) -> void:

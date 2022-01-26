@@ -179,10 +179,17 @@ shape = SubResource( 1 )
 [node name="IceBreak" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 pitch_scale = 1.3
+bus = "Audio"
 
 [node name="IceRumble" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
 volume_db = 9.0
+bus = "Audio"
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+visible = false
+position = Vector2( -1.90735e-06, 48 )
+scale = Vector2( 3.2, 7.2 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -11,6 +11,7 @@ enum Ranks {
 enum Bosses {
 	FERNAND,
 	OSTRICH,
+	CORA,
 }
 
 enum Guns {
@@ -79,7 +80,8 @@ const ADRENALINE_TIME_DECREASE_FROM_LEVEL_UP := 0.8
 
 const STAT_INCREASE_FROM_LEVEL_UP: int = 5
 
-const CHERRY_BOOST: int = 10
+const CHERRY_BOOST: int = 5
+const CHERRY_BOOST_HEALTH: int = 15
 const CARROT_BOOST: int = 2
 const COCONUT_BOOST: int = 5
 const PEAR_HEALTH_BOOST: int = 10
@@ -96,11 +98,30 @@ var active_timed_powerup := ""
 var last_powerup := ""
 var timed_powerup_active := false
 
+var total_gems: int = 0
+
+
+func _enter_tree() -> void:
+	pause_mode = PAUSE_MODE_PROCESS
+
+func _ready() -> void:
+
+	for world in range(GlobalLevel.WORLD_COUNT + 1):
+		#print(str(world) + "- World")
+		for level in GlobalLevel.LEVEL_DATABASE[world] + 1:
+			if int(level) == 0: continue
+			#print(str(level) + "-level")
+			total_gems += 3
+
+	#print(total_gems)
+
+func _process(_delta: float) -> void:
+	pass#print(total_gems)
 
 func get_powerup_explanation(powerup_name: String) -> String:
 	match powerup_name:
 		"carrot":
-			return "%s %s." % [tr("powerup_explanations.carrot"), CARROT_BOOST]
+			return "%s %s." % [tr("powerup_explanations.carrot" + "TO BE UPDATED"), CARROT_BOOST]
 		"cherry":
 			return "%s %s." % [tr("powerup_explanations.cherry"), CHERRY_BOOST]
 		"coconut":
@@ -158,7 +179,7 @@ func get_equippable_damage(equippable_name: String) -> int:
 		"snow gun":
 			return 10
 		"ice gun":
-			return 20
+			return 15
 		_:
 			printerr("Equippable damage not set for %s" % equippable_name)
 	return 0

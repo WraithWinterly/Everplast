@@ -42,9 +42,11 @@ func _on_Shop_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		with_player = true
 		$AnimationPlayer.play("glow")
+		GlobalInput.interact_activators += 1
 
 
 func _on_Shop_body_exited(body: Node) -> void:
 	if body.is_in_group("Player"):
 		with_player = false
 		$AnimationPlayer.play("idle_glow")
+		GlobalInput.interact_activators -= 1

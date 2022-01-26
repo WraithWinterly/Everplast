@@ -21,6 +21,7 @@ onready var level_components: Node2D = $LevelComponents
 func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("level_subsection_changed", self, "_level_subsection_changed")
+	__ = GlobalEvents.connect("story_w3_attempt_beat", self, "_story_w3_attempt_beat")
 
 	if canvas_normal == null or canvas_subsection == null:
 		swap_canvas = false
@@ -85,3 +86,29 @@ func update_canvas() -> void:
 	else:
 		for canvas in canvases:
 			canvas.set_deferred("visible", false)
+
+
+func _story_w3_attempt_beat() -> void:
+	GlobalUI.menu = GlobalUI.Menus.CUTSCENE
+	yield(GlobalEvents, "ui_faded")
+	var fernand = load("res://mobs/fernand/fernand.tscn").instance()
+	fernand.is_end_version = true
+	get_tree().call_group("Cannon", "enable")
+	GlobalUI.menu = GlobalUI.Menus.CUTSCENE
+	add_child(fernand, true)
+	yield(GlobalEvents, "ui_faded")
+	$BossComplete.current = true
+	$BossComplete/AnimationPlayer.play("fernand")
+	while $BossComplete/AnimationPlayer.is_playing():
+		$Fernand.global_position.x = lerp($Fernand.global_position.x, $LevelComponents/Fernand.global_position.x, 0.3)
+		$Fernand.global_position.y = lerp($Fernand.global_position.y, $LevelComponents/Fernand.global_position.y, 0.3)
+		yield(get_tree(), "physics_frame")
+	#yield($BossComplete/AnimationPlayer, "animation_finished")
+	GlobalEvents.emit_signal("story_w3_fernand_anim_finished")
+	GlobalUI.menu = GlobalUI.Menus.NONE
+	GlobalLevel.in_boss = true
+	$BossComplete.current = false
+
+
+func upgrade_fernand() -> void:
+	$Fernand.upgrade()

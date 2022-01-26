@@ -8,7 +8,7 @@ export var bullet_type: int = BulletTypes.SNOWBALL
 
 var speed: int = 150
 var rng := RandomNumberGenerator.new()
-
+var enabled := true
 
 onready var pos_2d: Position2D = $Base/Top/Sprite/Position2D
 onready var anim_player: AnimationPlayer = $Base/Top/AnimationPlayer
@@ -17,13 +17,15 @@ onready var explosion_sound: AudioStreamPlayer2D = $Explosion
 
 
 func _ready() -> void:
-	rng.seed = 123
-	rng.seed += int(name)
-	timer.start(rand_range(0, 1))
+	if Globals.game_state == Globals.GameStates.LEVEL:
+		rng.seed = 123
+		rng.seed += int(name)
+		timer.start(rand_range(0, 1))
 
 
 # Called by animation player
 func shoot() -> void:
+	if not enabled: return
 	match bullet_type:
 		BulletTypes.SNOWBALL:
 			var pitch_change: float = rand_range(-0.15, 0.15)
@@ -44,3 +46,10 @@ func _on_Timer_timeout() -> void:
 	rng.seed -= int(name)
 	var type: int = rng.randi_range(1, 3)
 	anim_player.play("type_%s" % type)
+
+
+func disable() -> void:
+	enabled = false
+
+func enable() -> void:
+	enabled = true

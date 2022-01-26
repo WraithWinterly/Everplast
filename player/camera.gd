@@ -34,6 +34,7 @@ onready var fsm: Node = $"../../KinematicBody2D/FSM"
 func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("level_subsection_changed", self, "_level_subsection_changed")
+	__ = GlobalEvents.connect("story_w3_fernand_anim_finished", self, "_story_w3_fernand_anim_finished")
 	__ = fsm.connect("state_changed", self, "_state_changed")
 
 	randomize()
@@ -48,6 +49,7 @@ func _ready() -> void:
 
 	if GlobalLevel.checkpoint_in_sub:
 		update_camera_positions(SUB)
+		state = SUB
 
 
 func _process(delta) -> void:
@@ -57,6 +59,7 @@ func _process(delta) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	#return
 	zoom = lerp(zoom, current_zoom, 0.1484375)
 
 	if player.sprinting:
@@ -131,4 +134,6 @@ func _state_changed() -> void:
 	if fsm.current_state == fsm.dash:
 		set_trauma(0.4)
 
-
+func _story_w3_fernand_anim_finished() -> void:
+	yield(GlobalEvents, "ui_faded")
+	current = true

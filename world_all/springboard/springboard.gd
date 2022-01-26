@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+export var mimick_level := 0
+
 var used := false
 var amount: int = 100
 
@@ -14,7 +16,7 @@ func _ready() -> void:
 	__ = area_2d.connect("body_entered", self, "_body_entered")
 	# Fit stutter on first use
 	particles.emitting = true
-	if GlobalLevel.current_world == 3:
+	if GlobalLevel.current_world == 3 or mimick_level == 3:
 		amount *= 2
 
 

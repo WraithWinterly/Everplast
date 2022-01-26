@@ -15,10 +15,10 @@ const LEVEL_STREAM_PATHS := [
 	"res://world2/anttis_instrumentals_beachy_beach.mp3",                       #5
 	"res://world2/anttis_instrumentals_little_guitar.mp3",                      #6
 	"res://world3/anttis_instrumentals_rain.ogg",                               #7
-	"res://world3/anttis_instrumentals_arpy_arp.wav",
-	"res://world3/anttis_instrumentals_fun_in the_sun.wav",
-	"res://world4/anttis_instrumentals_wonderful_lie.ogg",                      #8
-	"res://world4/lines_of_code.mp3",
+	"res://world3/anttis_instrumentals_arpy_arp.wav",                           #8
+	"res://world3/anttis_instrumentals_fun_in the_sun.wav",                     #9
+	"res://world4/anttis_instrumentals_wonderful_lie.ogg",                      #10
+	"res://world4/lines_of_code.mp3",                                           #11
 ]
 
 const MAIN_MENU_PATHS := [
@@ -41,12 +41,12 @@ const BOSS_PATHS := [
 ]
 
 const MUSIC_DATABASE := [
-#    0  1  2  3  4  5  6  7  8  9
+#    0  1  2  3  4  5  6  7  8  9  10
 	[0, 0, 0, 0, 0, 0], # debug levels
 	[0, 0, 1, 0, 0, 2, 1, 3, 0, 0], # World 1
 	[4, 4, 6, 2, 5, 6, 2, 5, 4], # World 2
-	[7, 7, 8, 9, 8, 8, 7, 7, 9, 8], # World 3
-	[6, 6, 6, 6, 6, 6], # World 4
+	[7, 7, 8, 9, 8, 8, 7, 8, 9, 8], # World 3
+	[0, 0, 10, 10, 10, 10, 10, 10, 10, 10, 10], # World 4
 ]
 
 const MUSIC_SUBSECTION_DATABASE := [
@@ -54,7 +54,7 @@ const MUSIC_SUBSECTION_DATABASE := [
 	[0, 0, 0, 0, 0, 0], # debug levels
 	[0, 0, 0, 0, 0, 0, 0, 0, 0, 2], # World 1
 	[0, 0, 0, 6, 0, 0, 2, 5, 0], # World 2
-	[0, 0, 0, 0, 0, 9], # World 3
+	[0, 0, 0, 0, 0, 9, 0, 0, 0, 8], # World 3
 	[0, 0, 0, 0, 0, 0], # World 4
 ]
 

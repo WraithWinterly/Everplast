@@ -6,6 +6,7 @@ const THROW_SPEED: int = 350
 var throw_allowed := true
 var facing_right := true
 
+
 onready var enemy_base: MobComponentManager = $MobComponentManager
 onready var area_2d: Area2D = $Area2D
 onready var timer: Timer = $Timer
@@ -15,6 +16,7 @@ onready var flip_anim_player: AnimationPlayer = $MobComponentManager/SpriteHolde
 
 func _ready() -> void:
 	timer.start(DELAY)
+	flip(true)
 
 
 func _physics_process(_delta: float) -> void:

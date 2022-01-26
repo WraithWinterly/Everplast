@@ -35,7 +35,10 @@ func _ready() -> void:
 		hide()
 
 	if GlobalLevel.checkpoint_in_sub:
-		change_subsection(start_subsection.global_position)
+		change_subsection(start.global_position)
+		if type == Types.START:
+			used = true
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and with_player \
@@ -49,8 +52,8 @@ func _input(event: InputEvent) -> void:
 		if type == Types.END_SUBSECTION:
 			used = true
 			anim_player.play("hide")
-			GlobalEvents.emit_signal("level_subsection_changed", end.global_position)
 			GlobalLevel.in_subsection = false
+			GlobalEvents.emit_signal("level_subsection_changed", end.global_position)
 			with_player = false
 		if type == Types.START_SUBSECTION:
 			return

@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Everplast"
-run/main_scene="res://loader/loader.tscn"
+run/main_scene="res://splash/splash.tscn"
 config/use_custom_user_dir=true
 boot_splash/image="res://ui/8x8.png"
 boot_splash/fullsize=false
@@ -329,7 +329,6 @@ common/physics_jitter_fix=0.0
 2d/options/use_nvidia_rect_flicker_workaround=true
 2d/snapping/use_gpu_pixel_snap=true
 vram_compression/import_etc=true
-quality/filters/use_nearest_mipmap_filter=true
 quality/dynamic_fonts/use_oversampling=false
 quality/2d/use_nvidia_rect_flicker_workaround=true
 quality/2d/use_pixel_snap=true

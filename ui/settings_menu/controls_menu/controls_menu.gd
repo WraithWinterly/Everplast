@@ -146,6 +146,8 @@ func _ready() -> void:
 	yield(get_tree(), "physics_frame")
 	update_button_map_and_texts()
 
+	rect_position = Vector2(999, 999)
+
 
 func _physics_process(_delta: float) -> void:
 	if Input.is_action_pressed("ui_up") and scroll_container.scroll_vertical <= 70:
@@ -153,7 +155,12 @@ func _physics_process(_delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if listening and event is InputEventKey:
+	if listening and not event is InputEventKey:
+		if event.is_action_pressed("ui_cancel"):
+			GlobalEvents.emit_signal("ui_button_pressed", true)
+			cancel_listening_event()
+			get_tree().set_input_as_handled()
+	elif listening and event is InputEventKey:
 		if event.scancode == KEY_ESCAPE:
 			GlobalEvents.emit_signal("ui_button_pressed", true)
 			cancel_listening_event()
@@ -181,7 +188,7 @@ func _input(event: InputEvent) -> void:
 		save_settings()
 		get_tree().set_input_as_handled()
 
-	elif Input.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS_CUSTOMIZE and not GlobalUI.menu_locked:
+	elif Input.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS_CUSTOMIZE and not GlobalUI.menu_locked and not listening:
 		_return_pressed()
 		get_tree().set_input_as_handled()
 
@@ -305,6 +312,7 @@ func get_settings_controls_2() -> Dictionary:
 
 
 func show_menu() -> void:
+	rect_position = Vector2(0, 0)
 	return_button.set_focus_mode(true)
 	return_button.grab_focus()
 	show()
@@ -320,9 +328,10 @@ func hide_menu() -> void:
 	disable_buttons()
 	anim_player.play_backwards("show")
 	yield(anim_player, "animation_finished")
-	if not anim_player.is_playing():
+	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS_CUSTOMIZE:
 		$BGBlur.hide()
 		hide()
+		rect_position = Vector2(999, 999)
 
 
 func disable_buttons() -> void:

@@ -35,3 +35,9 @@ func _level_changed(_world: int, _level: int) -> void:
 	yield(get_tree(), "physics_frame")
 	game_state = GameStates.LEVEL
 
+#
+#func _process(delta: float) -> void:
+#	if Input.is_action_pressed("ability"):
+#		Engine.time_scale = 2
+#	else:
+#		Engine.time_scale = 1

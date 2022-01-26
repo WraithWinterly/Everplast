@@ -118,7 +118,7 @@ func unlockall() -> String:
 	GlobalSave.data[GlobalSave.profile].health = 100
 	GlobalSave.data[GlobalSave.profile].orbs = 10000
 	GlobalSave.data[GlobalSave.profile].coins = 10000
-	GlobalSave.data[GlobalSave.profile].rank = GlobalStats.Ranks.GLITCH
+	GlobalSave.data[GlobalSave.profile].rank = GlobalStats.Ranks.DIAMOND
 	GlobalSave.data[GlobalSave.profile].world_max = 4
 	GlobalSave.data[GlobalSave.profile].level_max = 10
 
@@ -149,6 +149,7 @@ func unlockall() -> String:
 
 	for world in GlobalLevel.LEVEL_DATABASE[4]:
 		GlobalSave.data[GlobalSave.profile].gems["4"][str(world)] = [true, true, true]
+
 
 	GlobalEvents.emit_signal("save_file_saved")
 

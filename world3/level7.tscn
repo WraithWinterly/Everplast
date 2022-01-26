@@ -43,9 +43,6 @@ position = Vector2( 4656, -120 )
 [node name="Lantern4" parent="Lanterns" instance=ExtResource( 4 )]
 position = Vector2( 4832, -144 )
 
-[node name="Lantern5" parent="Lanterns" instance=ExtResource( 4 )]
-position = Vector2( 4832, -144 )
-
 [node name="Lantern6" parent="Lanterns" instance=ExtResource( 4 )]
 position = Vector2( 4976, -104 )
 
@@ -74,9 +71,6 @@ position = Vector2( 6624, 192 )
 position = Vector2( 6928, 144 )
 
 [node name="Lantern13" parent="Lanterns" instance=ExtResource( 4 )]
-position = Vector2( 6160, 144 )
-
-[node name="Lantern14" parent="Lanterns" instance=ExtResource( 4 )]
 position = Vector2( 6160, 144 )
 
 [node name="CanvasModulate" parent="." instance=ExtResource( 11 )]
@@ -111,7 +105,7 @@ scale = Vector2( 500, 0.76 )
 [node name="CameraPositions" type="Node2D" parent="LevelComponents"]
 
 [node name="TopLeft" type="Position2D" parent="LevelComponents/CameraPositions"]
-position = Vector2( 120, -384 )
+position = Vector2( 128, -384 )
 
 [node name="BottomRight" type="Position2D" parent="LevelComponents/CameraPositions"]
 position = Vector2( 6952, 312 )

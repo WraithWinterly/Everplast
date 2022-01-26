@@ -46,6 +46,9 @@ enum Menus {
 	SHOP,
 
 	NONE,
+
+	BEAT_GAME,
+	ALL_ORBS,
 }
 
 var menu: int = Menus.NONE

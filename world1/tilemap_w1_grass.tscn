@@ -6,7 +6,7 @@
 z_index = 1
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 8, 8 )
-cell_quadrant_size = 8
+cell_quadrant_size = 128
 cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 collision_mask = 0
 format = 1

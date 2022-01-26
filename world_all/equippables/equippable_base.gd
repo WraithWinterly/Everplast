@@ -39,6 +39,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.CUTSCENE: return
+
 	if mode == USE:
 		if Globals.death_in_progress: return
 		if GlobalInput.ignore_fire: return

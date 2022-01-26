@@ -123,6 +123,8 @@ signal ui_inventory_closed()
 signal ui_shop_opened(shop_dict)
 signal ui_shop_bought(item, amount, cost)
 signal ui_shop_closed()
+signal ui_game_beat_shown()
+signal ui_all_gems_shown()
 #--------------------#
 #-----Mob Events-----#
 #--------------------#
@@ -137,3 +139,7 @@ signal story_boss_activated(idx)
 signal story_boss_killed(idx)
 signal story_boss_camera_animated(idx)
 signal story_boss_level_end_completed(idx)
+
+signal story_w3_attempt_beat()
+signal story_w3_fernand_anim_finished()
+signal story_fernand_beat()

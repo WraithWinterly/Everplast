@@ -221,10 +221,12 @@ func _button_pressed() -> void:
 		GlobalEvents.emit_signal("player_collected_orb", loaded_shop[item][1])
 
 
-	update_shop(loaded_shop)
 	disable_buttons(true)
 	yield(get_tree(), "physics_frame")
 	GlobalSave.set_stat("coins", GlobalSave.get_stat("coins") - loaded_shop[item][2])
+	yield(get_tree(), "physics_frame")
+	update_shop(loaded_shop)
+
 
 func _on_Back_pressed() -> void:
 	hide_menu()
@@ -234,3 +236,4 @@ func _on_Back_pressed() -> void:
 func _on_AnimationPlayer_animation_finished(_anim_name: String) -> void:
 	if GlobalUI.menu == GlobalUI.Menus.SHOP:
 		enable_buttons()
+		update_shop(loaded_shop)

@@ -136,4 +136,3 @@ func _died() -> void:
 	GlobalEvents.emit_signal("ui_dialogued", "Just take it, I do not even care anymore...", NAME)
 	set_physics_process(false)
 	set_process(false)
-

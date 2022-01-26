@@ -72,8 +72,10 @@ func _unhandled_input(event: InputEvent) -> void:
 	if (event is InputEventKey or event is InputEventJoypadButton) \
 			and can_pass_pre_menu and GlobalUI.menu == GlobalUI.Menus.PRE_MAIN_MENU \
 			and Globals.game_state == Globals.GameStates.MENU:
-			# fix for occuring in game???
+		# fix for occuring in game???
 		if event is InputEventKey:
+			if not event.pressed: return
+		if event is InputEventJoypadButton:
 			if not event.pressed: return
 		if event.is_action_pressed("fullscreen"):
 			return
@@ -224,7 +226,7 @@ func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
 		yield(GlobalEvents, "ui_faded")
 		show_menu()
-
+		menu_buttons_anim_player.play("slide")
 		play_button.grab_focus()
 
 

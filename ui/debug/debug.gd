@@ -1,21 +1,40 @@
 extends Label
 
+enum Modes {
+	HIDDEN,
+	FPS,
+	FULL
+}
+
+var mode = Modes.HIDDEN
 
 func _ready() -> void:
 	hide()
 
 
+func _physics_process(_delta: float) -> void:
+	update_text()
+
+
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("debug"):
-		if visible:
-			hide()
-		else:
-			show()
-			update_text()
+		if mode == Modes.HIDDEN:
+			mode = Modes.FPS
+		elif mode == Modes.FPS:
+			mode = Modes.FULL
+		elif mode == Modes.FULL:
+			mode = Modes.HIDDEN
 
 
 func update_text() -> void:
+	if mode == Modes.HIDDEN:
+		hide()
+		return
+	else:
+		show()
+
 	text = "FPS: %s\n" % Engine.get_frames_per_second()
+	if mode == Modes.FPS: return
 	text += "%s\n" % Globals.version_string
 
 	text += "\n"
@@ -57,7 +76,3 @@ func update_text() -> void:
 		text += "Player Velocity: %s\n" % player.linear_velocity
 		text += "Player Death In Prog: %s\n" % Globals.death_in_progress
 		text += "\n"
-
-	yield(get_tree(), "idle_frame")
-	if visible:
-		update_text()

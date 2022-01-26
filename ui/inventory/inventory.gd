@@ -50,6 +50,7 @@ onready var stats_label: Label = $Panel/Stats/PlayerStats/Info
 onready var stats_label_level: Label = $Panel/Stats/PlayerStats/Level
 onready var stats_label_orbs: Label = $Panel/Stats/PlayerStats/TotalOrbs
 onready var stats_label_gems: Label = $Panel/Stats/PlayerStats/TotalGems
+onready var stats_label_time: Label = $Panel/Stats/PlayerStats/TotalTime
 onready var world_icons: VBoxContainer = $Panel/Stats/PlayerStats/WorldIcons
 onready var upgrade_stats_health_button: Button = $Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer/Health
 onready var upgrade_stats_adrenaline_button: Button = $Panel/Stats/UpgradeStatsPrompt/Panel/VBoxContainer/HBoxContainer/Adrenaline
@@ -59,8 +60,8 @@ onready var upgrade_stats_prompt_text: Label = $Panel/Stats/UpgradeStatsPrompt/P
 onready var upgrade_stats_info_label: Label = $Panel/Stats/StatsUpgrade/Info
 onready var upgrade_sound: AudioStreamPlayer = $Panel/Stats/UpgradeStatsPrompt/UpgradeSound
 
-onready var current_panel: Panel = powerups_panel
 
+onready var current_panel: Panel = powerups_panel
 
 func _ready() -> void:
 	var __: int
@@ -115,7 +116,12 @@ func _ready() -> void:
 		button.hide()
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _physics_process(_delta: float) -> void:
+	if GlobalUI.menu == GlobalUI.Menus.INVENTORY:
+		stats_label_time.text = GlobalSave.get_timeplay_string()
+
+
+func _input(event: InputEvent) -> void:
 	if Globals.game_state == Globals.GameStates.MENU: return
 	if Globals.death_in_progress: return
 
@@ -267,9 +273,9 @@ func update_inventory() -> void:
 	var world_string: String = "\"%s\" - %s" % [GlobalLevel.WORLD_NAMES[GlobalSave.get_stat("world_max")], GlobalSave.get_stat("level_max")]
 	stats_label.text = "%s: %s\n\n%s:\n       %s" % \
 			[tr("inventory.stats_profile_label"), (GlobalSave.profile + 1), tr("inventory.lastest_world"),world_string]
-	stats_label_level.text = "Player Level: %s" % GlobalSave.get_stat("level")
-	stats_label_orbs.text = "Total Orbs: x%s" % GlobalSave.get_stat("orbs")
-	stats_label_gems.text = "Total Gems: x%s" % GlobalSave.get_gem_count()
+	stats_label_level.text = "%s: %s" % [tr("inventory.stats.player_level"), GlobalSave.get_stat("level")]
+	stats_label_orbs.text = "%s: x%s" % [tr("inventory.stats.total_orbs"), GlobalSave.get_stat("orbs")]
+	stats_label_gems.text = "%s: x%s" % [tr("inventory.stats.total_gems"), GlobalSave.get_gem_count()]
 
 	for w_icon in world_icons.get_children():
 		if int(w_icon.name) == GlobalSave.get_stat("world_max"):
@@ -467,7 +473,8 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 			return
 		# Item Failed
 		GlobalEvents.emit_signal("ui_inventory_opened")
-		GlobalEvents.emit_signal("ui_button_pressed")
+
+		#GlobalEvents.emit_signal("ui_button_pressed")
 		GlobalUI.menu = GlobalUI.Menus.INVENTORY
 		show_menu()
 		get_tree().set_input_as_handled()
@@ -497,7 +504,7 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 			play_powerup_sound()
 
 		if from_inventory:
-			GlobalEvents.emit_signal("ui_button_pressed")
+			#GlobalEvents.emit_signal("ui_button_pressed")
 			hide_menu()
 
 
@@ -590,7 +597,7 @@ func _ui_settings_updated() -> void:
 
 func _close_pressed() -> void:
 	hide_menu()
-	GlobalEvents.emit_signal("ui_button_pressed")
+	GlobalEvents.emit_signal("ui_button_pressed", true)
 	GlobalEvents.emit_signal("ui_inventory_closed")
 	button_close.release_focus()
 

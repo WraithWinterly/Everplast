@@ -2,6 +2,7 @@ extends Sprite
 
 export var always_palm := false
 export var always_green := false
+export var always_snow := false
 
 onready var rng := RandomNumberGenerator.new()
 
@@ -28,10 +29,10 @@ func update_trees() -> void:
 			is_palm = true
 		else:
 			frame = rng.randi_range(0, 2)
-	elif GlobalLevel.current_world == 2 or always_palm:
+	if GlobalLevel.current_world == 2 or always_palm:
 		frame = rng.randi_range(3, 5)
 		is_palm = true
-	elif GlobalLevel.current_world == 3:
+	if GlobalLevel.current_world == 3 or always_snow:
 		frame = rng.randi_range(6, 9)
 		$CPUParticles2D.queue_free()
 		$CPUParticles2D2.queue_free()
@@ -39,5 +40,8 @@ func update_trees() -> void:
 	else:
 		frame = rng.randi_range(0, 2)
 
-	if get_node(GlobalPaths.LEVEL).windy_level and is_palm:
+	if get_node(GlobalPaths.LEVEL).windy_level and (is_palm or is_snow_palm()):
 		material = load("res://world_all/trees/wind.tres")
+
+func is_snow_palm() -> bool:
+	return frame == 7 or frame == 8

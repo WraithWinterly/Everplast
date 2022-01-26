@@ -1,0 +1,402 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://ui/game_beat/game_beat.gd" type="Script" id=1]
+[ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=5]
+[ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=7]
+[ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=8]
+[ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=10]
+[ext_resource path="res://world_all/orbs/orb.png" type="Texture" id=11]
+[ext_resource path="res://ui/8x8.png" type="Texture" id=12]
+[ext_resource path="res://ui/clock.png" type="Texture" id=13]
+[ext_resource path="res://ui/level_icon.png" type="Texture" id=14]
+[ext_resource path="res://world_all/gems/gem.png" type="Texture" id=15]
+[ext_resource path="res://ui/hud/hud_font_panel.tres" type="StyleBox" id=16]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BGBlur:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BGBlur:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.9 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BGBlur:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BGBlur:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float amount: hint_range(0.0, 5.0);
+
+void fragment() {
+	COLOR.rgb = textureLod(SCREEN_TEXTURE, SCREEN_UV, amount).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/amount = 1.2
+
+[node name="GameBeat" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/show = SubResource( 4 )
+
+[node name="BGBlur" type="TextureRect" parent="." instance=ExtResource( 4 )]
+visible = false
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 12 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.15
+anchor_top = 1.0
+anchor_right = 0.85
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 3 )
+text = "Congrats!!!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Panel" parent="Panel"]
+anchor_left = 0.03
+anchor_top = 0.095
+anchor_right = 0.975
+anchor_bottom = 0.885
+margin_left = -7.62939e-06
+margin_top = 1.52588e-05
+custom_styles/panel = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Panel"]
+anchor_top = 0.132
+anchor_right = 1.0
+anchor_bottom = 0.178
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 2 )
+text = "Everplast is now complete!
+There are still %s gems that have not been
+collected."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Panel"]
+anchor_left = 0.02
+anchor_top = 0.744
+anchor_right = 0.98
+anchor_bottom = 0.764
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 2 )
+text = "You can try speedrunning to get the total time low and share your score."
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+anchor_left = 0.105
+anchor_top = 0.309
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Level" type="Label" parent="Panel/VBoxContainer"]
+margin_right = 1002.0
+margin_bottom = 30.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Player Level: %s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelTexture" type="TextureRect" parent="Panel/VBoxContainer/Level"]
+anchor_left = -0.065
+anchor_top = -0.06
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalOrbs" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 60.0
+margin_right = 1002.0
+margin_bottom = 90.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Total Orbs: x%s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OrbTexture" type="TextureRect" parent="Panel/VBoxContainer/TotalOrbs"]
+anchor_left = -0.065
+anchor_top = -0.06
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalGems" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 120.0
+margin_right = 1002.0
+margin_bottom = 150.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Total Level Gems: x%s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GemTexture" type="TextureRect" parent="Panel/VBoxContainer/TotalGems"]
+anchor_left = -0.065
+anchor_top = -0.145
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RemainingGems" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 180.0
+margin_right = 1002.0
+margin_bottom = 210.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Remaining Gems: x%s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GemTexture" type="TextureRect" parent="Panel/VBoxContainer/RemainingGems"]
+anchor_left = -0.065
+anchor_top = -0.145
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalTime" type="Label" parent="Panel/VBoxContainer"]
+margin_top = 240.0
+margin_right = 1002.0
+margin_bottom = 270.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Total Time:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeTexture" type="TextureRect" parent="Panel/VBoxContainer/TotalTime"]
+anchor_left = -0.065
+anchor_top = -0.145
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_left = 0.1
+anchor_top = 0.897
+anchor_right = 0.9
+anchor_bottom = 0.903
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 327.0
+margin_right = 569.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+custom_fonts/font = ExtResource( 3 )
+custom_styles/hover = ExtResource( 5 )
+custom_styles/pressed = ExtResource( 10 )
+custom_styles/focus = ExtResource( 9 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+text = "global.back"
+__meta__ = {
+"_edit_use_anchors_": false
+}

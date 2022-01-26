@@ -123,14 +123,14 @@ inventory.collectable.snowball,Snowball,Bola de nieve
 inventory.equippable.water_gun,Water Gun,Pistola de Agua
 inventory.equippable.nail_gun,Nail Gun,Pistola de Clavo
 inventory.equippable.laser_gun,Laser Gun,Pistola de Laser
-inventory.equippable.snow_gun,Snow Gun,Pistola de nieve
+inventory.equippable.snow_gun,Snow Gun,Pistola de Nieve
+inventory.equippable.ice_gun,Ice Gun,Pistola de Hielo
 world_selector.teleporter_not_active,This teleporter is not active yet!,Este teletransportador aun no esta activo!
 world_selector.label,World Selector,Selector Mundial
-,,
 settings.reset_settings.title,Reset Settings?,Reajustar Ajustes?
 settings.reset_settings.text,All settings will be reset to their default values.,Todos ajustes sera reajustados a sus valores predeterminados.
 ,,
-inventory.quick_items.fill,"Will use all required or available items. For example, if you have 2 carrots and 4 health to fill, two will be used instead of one. Only available for items that refill stats.","Usara todos los potenciadores que sea posible. Por ejemplo, si tienes dos zanahorias y cuatros corazones para llenar, dos se uasaran. Solo funciona por los potenciadores que llena a los estadisticas. "
+inventory.quick_items.fill,Will use all required or available items to fill your health to the maximum,Utilizará todos los elementos requeridos o disponibles para llenar su salud al máximo
 ,,
 powerup_explanations.carrot,Increases your health by,Aumenta tu salud por
 powerup_explanations.cherry,Increases your adrenaline by,Aumenta tu adrenalina por
@@ -147,8 +147,8 @@ powerup_explanations.ice_spike_2,seconds. This includes powerups.,segundos. Esto
 rank_explanations.none,You do not have a rank yet,No tienes un rango aun
 rank_explanations.silver,- See enemy health on hit\n- Double Jump\n- Wall Jump,- Puedes ver la salud de los enemigos en golpe\n- Doble Salto\n- Salto de Paredes
 rank_explanations.gold,- Adrenaline Rush\n-Jump damage by 3,- Subidon de Adrenalina\n- Dano de salto por 3
-rank_explanations.diamond,Not complete,No esta completo
-rank_explanations.glitch,Not complete,No esta completo
+rank_explanations.diamond,- Always see Enemy Health\n-Jump damage by 5,- Siempre ver salud de enemigo\n-Dano de salto por 5
+rank_explanations.glitch,Certifies that you have completed the game,Certifica de que has completado el juego
 ,,
 rank_names.none,None,Nada
 rank_names.silver,Silver,Plata
@@ -176,3 +176,28 @@ controls.powerup,Powerup,Potenciarse
 controls.move,Move,Moverse
 controls.unassigned,Unassigned,Sin Asignar
 controls.left_click,Left Click,Clic Izquierdo
+,,
+controls.inventory,Inventory,Inventario
+controls.sprint,Sprint,Esprintar
+controls.interact,Interact,Interactuar
+controls.powerup,Powerup,Potenciarse
+controls.equip,Equip,Equipar
+controls.fire,Fire,Disparar
+controls.dash,Dash,Habilidad
+,,
+settings.general.button_hint,Show Button Hints,Mostrar Sugerencias de Botones
+settings.controls.selected_controller,Selected Controller,Controlador Seleccionado
+settings.controls.control_hint,"If you have multiple controllers connected to your device, you might need to change this if it does not work","Si tienes varios controladores conectados a su dispositivo, es posible que debas cambiar esto si no funciona"
+settings.controls.kb_controls,Keyboard Controls,Controles de Teclado
+settings.controls.ctr_controls,Controller Controls,Controles del Controlador
+settings.controls.index,Controller,Controlador
+settings.controls.no_controllers,No Controllers Connected,No hay controladores conectados
+,,
+inventory.stats.player_level,Player Level,Nivel de Jugador
+inventory.stats.total_orbs,Total Orbs,Orbes totales
+inventory.stats.total_gems,Total Gems,Gemas totales
+global.day,Days,Dias
+global.hour,Hours,Horas
+global.minute,Minutes,Minutos
+global.second,Seconds,Segundos
+remaning_gems,Remaining Gems,Gemas restantes

@@ -91,6 +91,7 @@ anims/destroy = SubResource( 3 )
 [node name="BreakSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 4 )
 volume_db = 12.0
+bus = "Audio"
 
 [connection signal="body_entered" from="." to="." method="_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -303,7 +303,6 @@ position = Vector2( 0, 5.96046e-08 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 pause_mode = 1
 frames = SubResource( 15 )
-frame = 1
 playing = true
 flip_h = true
 

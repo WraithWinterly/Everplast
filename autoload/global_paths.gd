@@ -17,7 +17,9 @@ const PEAR := "res://world_all/powerups/pear.tscn"
 const WATER := "res://world_all/collectables/water.tscn"
 const SNOW := "res://world_all/collectables/water.tscn"
 const ENERGY := "res://world_all/collectables/energy.tscn"
-
+const GLITCH_ORB := "res://world_all/powerups/glitch_orb.tscn"
+const GLITCH_SOUL := "res://world_all/powerups/glitch_soul.tscn"
+const NAIL_BULLET := "res://world_all/collectables/nail.tscn"
 const SNOWBALL_SNOWMAN := "res://mobs/snowman/snowball/snowball.tscn"
 const SNOWBALL_ITEM := "res://world_all/collectables/snowball.tscn"
 

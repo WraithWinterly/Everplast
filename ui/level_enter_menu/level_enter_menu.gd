@@ -101,18 +101,18 @@ func show_menu() -> void:
 			logo_color_rect.color = fade_player.color_world_3
 			logo_color_rect.color.a8 = modulate_val
 			gem_color_rect.color = fade_player.color_world_3
-		4:
-			logo_color_rect.color = fade_player.color_world_4
-			logo_color_rect.color.a8 = modulate_val
-			gem_color_rect.color = fade_player.color_world_4
-		5:
-			logo_color_rect.color = fade_player.color_world_5
-			logo_color_rect.color.a8 = modulate_val
-			gem_color_rect.color = fade_player.color_world_5
-		6:
-			logo_color_rect.color = fade_player.color_world_6
-			logo_color_rect.color.a8 = modulate_val
-			gem_color_rect.color = fade_player.color_world_6
+#		4:
+#			logo_color_rect.color = fade_player.color_world_4
+#			logo_color_rect.color.a8 = modulate_val
+#			gem_color_rect.color = fade_player.color_world_4
+#		5:
+#			logo_color_rect.color = fade_player.color_world_5
+#			logo_color_rect.color.a8 = modulate_val
+#			gem_color_rect.color = fade_player.color_world_5
+#		6:
+#			logo_color_rect.color = fade_player.color_world_6
+#			logo_color_rect.color.a8 = modulate_val
+#			gem_color_rect.color = fade_player.color_world_6
 		_:
 			logo_color_rect.color = fade_player.color_world_error
 			logo_color_rect.color.a8 = modulate_val

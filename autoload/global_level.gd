@@ -1,10 +1,10 @@
 extends Node
 
 const WORLD_NAMES := [
-	"World 0", "Foggy Overlands", "Drowsy Lands", "Snow Fall", "This is a world?"]
+	"World 0", "Foggy Overlands", "Drowsy Lands", "Snow Fall", "The End"]
 
 const LEVEL_DATABASE := [
-	0, 9, 8, 10, 9
+	0, 9, 8, 9, 1
 ]
 
 const WORLD_COUNT := 4
@@ -17,9 +17,8 @@ const CANVAS_DATABASE := [
 	#W2
 	[false, false, false, true, false, false, true, false, false, false],
 	#W3
-	[false, false, false, true, false, false, false, false, false, false],
-	#W4
-	[false, false, false, false, false, false, false, false, false, false],
+	[false, false, false, true, false, false, false, false, true, true],
+	[false, false],
 ]
 
 const CANVAS_SUBSECTION_DATABASE := [
@@ -30,9 +29,8 @@ const CANVAS_SUBSECTION_DATABASE := [
 	#W2
 	[false, false, false, true, false, false, false, false, false, false],
 	#W3
-	[false, false, false, false, false, true, false, false, false, false],
-	#W4
-	[false, false, false, false, false, false, false, false, false, false],
+	[false, false, false, false, false, true, false, false, false, true],
+	[false, false],
 ]
 
 
@@ -56,6 +54,7 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("level_completed", self, "_level_completed")
 	__ = GlobalEvents.connect("level_checkpoint_activated", self, "_level_checkpoint_activated")
 	__ = GlobalEvents.connect("player_died", self, "_player_died")
+	__ = GlobalEvents.connect("story_fernand_beat", self, "_story_fernand_beat")
 	__ = GlobalEvents.connect("ui_faded", self, "_ui_faded")
 	__ = GlobalEvents.connect("ui_profile_selector_profile_pressed", self, "_ui_profile_selector_profile_pressed")
 	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
@@ -142,6 +141,10 @@ func load_world_selector() -> void:
 	GlobalEvents.emit_signal("level_world_selector_loaded")
 	GlobalLevel.in_subsection = false
 
+	var prev_time = GlobalSave.get_stat("seconds_played")
+	GlobalSave.load_stats()
+	GlobalSave.set_stat("seconds_played", prev_time)
+
 #	current_world = -1
 #	current_level = -1
 
@@ -164,7 +167,11 @@ func unlock_next_level() -> void:
 		GlobalSave.set_stat("world_max", GlobalLevel.current_world)
 		GlobalSave.set_stat("level_max", GlobalLevel.current_level + 1)
 	else:
-		GlobalSave.set_stat("world_max", GlobalLevel.current_world + 1)
+		if not int(GlobalSave.get_stat("world_max")) == GlobalLevel.WORLD_COUNT:
+			GlobalSave.set_stat("world_max", GlobalLevel.current_world + 1)
+			GlobalSave.set_stat("level_max", 1)
+
+	if GlobalLevel.current_world == 4:
 		GlobalSave.set_stat("level_max", 1)
 
 	yield(GlobalEvents, "ui_faded")
@@ -200,6 +207,20 @@ func _level_completed() -> void:
 	load_world_selector()
 	GlobalEvents.emit_signal("save_file_saved")
 
+	yield(GlobalEvents, "ui_faded")
+
+	if GlobalSave.get_stat("world_max") == 4 and not GlobalSave.get_stat("game_beat"):
+		GlobalEvents.emit_signal("ui_game_beat_shown")
+
+	yield(get_tree(), "physics_frame")
+
+	if GlobalUI.menu == GlobalUI.Menus.BEAT_GAME:
+		while GlobalUI.menu == GlobalUI.Menus.BEAT_GAME:
+			yield(get_tree(), "physics_frame")
+
+	if not GlobalSave.get_stat("all_gems_collected") and GlobalSave.get_gem_count() == GlobalStats.total_gems:
+		GlobalEvents.emit_signal("ui_all_gems_shown")
+
 
 func _level_checkpoint_activated() -> void:
 	checkpoint_active = true
@@ -221,6 +242,22 @@ func _player_died() -> void:
 		yield(GlobalEvents, "ui_faded")
 		load_world_selector()
 		error_detection()
+
+
+func _story_fernand_beat() -> void:
+	get_tree().paused = true
+	yield(GlobalEvents, "ui_faded")
+	for node in get_node(GlobalPaths.LEVEL_HOLDER).get_children():
+		node.queue_free()
+	yield(get_tree(), "physics_frame")
+	#get_tree().paused = false
+	GlobalEvents.emit_signal("level_changed", 4, 1)
+	GlobalSave.set_stat("world_max", 4)
+	GlobalSave.set_stat("level_max", 1)
+	GlobalSave.set_stat("world_last", 1)
+	GlobalSave.set_stat("level_last", 1)
+
+	GlobalEvents.emit_signal("save_file_saved")
 
 
 func _ui_faded() -> void:

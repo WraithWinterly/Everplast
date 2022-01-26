@@ -174,8 +174,12 @@ position = Vector2( 16, -24 )
 position = Vector2( 2264, -544 )
 
 [node name="Checkpoint1" parent="LevelComponents" instance=ExtResource( 7 )]
-position = Vector2( 4224, -1600 )
+position = Vector2( 3280, -544 )
 index = 1
+
+[node name="Checkpoint2" parent="LevelComponents" instance=ExtResource( 7 )]
+position = Vector2( 4224, -1600 )
+index = 2
 
 [node name="LevelEndTeleporter" parent="LevelComponents" instance=ExtResource( 16 )]
 position = Vector2( 5344, -72 )
@@ -395,10 +399,6 @@ always_palm = true
 
 [node name="Tree39" parent="Trees" instance=ExtResource( 18 )]
 position = Vector2( 3160, -632 )
-always_palm = true
-
-[node name="Tree40" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 3272, -584 )
 always_palm = true
 
 [node name="Tree41" parent="Trees" instance=ExtResource( 18 )]

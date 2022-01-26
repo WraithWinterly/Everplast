@@ -135,6 +135,7 @@ volume_db = -8.0
 [node name="AnimatedSprite" parent="MobComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 10 )
 frames = SubResource( 3 )
+frame = 1
 
 [node name="Position2D" type="Position2D" parent="MobComponentManager/SpriteHolder/AnimatedSprite" index="0"]
 position = Vector2( 14, -9 )

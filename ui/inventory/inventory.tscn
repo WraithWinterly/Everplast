@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
@@ -41,6 +41,7 @@
 [ext_resource path="res://world_all/powerups/glitch_soul.png" type="Texture" id=39]
 [ext_resource path="res://world_all/equippables/ice_gun.png" type="Texture" id=40]
 [ext_resource path="res://world_all/powerups/ice_spike.png" type="Texture" id=41]
+[ext_resource path="res://ui/clock.png" type="Texture" id=42]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -729,7 +730,7 @@ __meta__ = {
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Powerups/BG/HBoxContainer"]
 margin_right = 645.0
-margin_bottom = 470.0
+margin_bottom = 502.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
@@ -1384,7 +1385,7 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="Panel/Stats"]
 anchor_right = 1.0
-anchor_bottom = 0.153
+anchor_bottom = 0.074
 mouse_filter = 0
 custom_fonts/font = ExtResource( 2 )
 text = "inventory.your_stats"
@@ -1397,9 +1398,9 @@ __meta__ = {
 
 [node name="PlayerStats" type="Panel" parent="Panel/Stats"]
 anchor_left = 0.1
-anchor_top = 0.12
+anchor_top = 0.065
 anchor_right = 0.9
-anchor_bottom = 0.8
+anchor_bottom = 0.85
 margin_top = -1.0
 margin_bottom = 39.0
 custom_styles/panel = ExtResource( 4 )
@@ -1409,7 +1410,7 @@ __meta__ = {
 
 [node name="Info" type="Label" parent="Panel/Stats/PlayerStats"]
 anchor_left = 0.03
-anchor_top = 0.12
+anchor_top = 0.034
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 0
@@ -1424,7 +1425,7 @@ __meta__ = {
 
 [node name="Level" type="Label" parent="Panel/Stats/PlayerStats"]
 anchor_left = 0.07
-anchor_top = 0.63
+anchor_top = 0.55
 anchor_right = 0.7
 anchor_bottom = 1.0
 mouse_filter = 0
@@ -1448,7 +1449,7 @@ __meta__ = {
 
 [node name="TotalOrbs" type="Label" parent="Panel/Stats/PlayerStats"]
 anchor_left = 0.07
-anchor_top = 0.75
+anchor_top = 0.645
 anchor_right = 0.7
 anchor_bottom = 1.0
 mouse_filter = 0
@@ -1472,7 +1473,7 @@ __meta__ = {
 
 [node name="TotalGems" type="Label" parent="Panel/Stats/PlayerStats"]
 anchor_left = 0.07
-anchor_top = 0.87
+anchor_top = 0.75
 anchor_right = 0.7
 anchor_bottom = 1.0
 mouse_filter = 0
@@ -1490,6 +1491,30 @@ margin_bottom = 8.0
 rect_scale = Vector2( 5, 5 )
 mouse_filter = 0
 texture = ExtResource( 29 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TotalTime" type="Label" parent="Panel/Stats/PlayerStats"]
+anchor_left = 0.07
+anchor_top = 0.83
+anchor_right = 0.7
+anchor_bottom = 1.0
+mouse_filter = 0
+custom_fonts/font = ExtResource( 2 )
+custom_styles/normal = ExtResource( 16 )
+text = "Total Time: %s"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GemTexture" type="TextureRect" parent="Panel/Stats/PlayerStats/TotalTime"]
+anchor_left = -0.065
+anchor_top = -0.145
+margin_bottom = 8.0
+rect_scale = Vector2( 5, 5 )
+mouse_filter = 0
+texture = ExtResource( 42 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1536,7 +1561,7 @@ mouse_filter = 2
 texture = SubResource( 27 )
 
 [node name="StatsUpgrade" type="Panel" parent="Panel/Stats"]
-anchor_left = 0.52
+anchor_left = 0.562
 anchor_top = 0.117
 anchor_right = 0.9
 anchor_bottom = 0.797

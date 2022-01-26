@@ -1,12 +1,587 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://ui/button_hint/button_hint.gd" type="Script" id=1]
+[ext_resource path="res://ui/button_hint/control_buttons.png" type="Texture" id=2]
+[ext_resource path="res://ui/button_hint/new_atlastexture.tres" type="Texture" id=3]
+[ext_resource path="res://ui/button_hint/atlas_kb.tres" type="Texture" id=4]
+[ext_resource path="res://ui/fonts/16x.tres" type="DynamicFont" id=5]
+
+[sub_resource type="StyleBoxFlat" id=8]
+content_margin_right = 6.0
+content_margin_top = 3.0
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 7, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 14, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 35, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 42, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 28, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 21, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 7, 0, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 7, 7, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 7, 14, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 7, 35, 7, 7 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 7, 42, 7, 7 )
 
 [node name="ButtonHint" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainerPS4" type="VBoxContainer" parent="."]
+modulate = Color( 1, 1, 1, 0.392157 )
+anchor_left = 0.01
+anchor_top = 0.25
+anchor_right = 0.05
+anchor_bottom = 0.401
+rect_scale = Vector2( 4, 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="TextureRect" parent="VBoxContainerPS4"]
+margin_right = 64.0
+margin_bottom = 7.0
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="VBoxContainerPS4/Inventory"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "Inventory"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprint" type="TextureRect" parent="VBoxContainerPS4"]
+margin_top = 11.0
+margin_right = 64.0
+margin_bottom = 18.0
+texture = SubResource( 1 )
+
+[node name="Label" type="Label" parent="VBoxContainerPS4/Sprint"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "Sprint"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interact" type="TextureRect" parent="VBoxContainerPS4"]
+margin_top = 22.0
+margin_right = 64.0
+margin_bottom = 29.0
+texture = SubResource( 2 )
+
+[node name="Label" type="Label" parent="VBoxContainerPS4/Interact"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "Interact"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerup" type="TextureRect" parent="VBoxContainerPS4"]
+margin_top = 33.0
+margin_right = 64.0
+margin_bottom = 40.0
+texture = SubResource( 9 )
+
+[node name="Label" type="Label" parent="VBoxContainerPS4/Powerup"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "Powerup"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equip" type="TextureRect" parent="VBoxContainerPS4"]
+margin_top = 44.0
+margin_right = 64.0
+margin_bottom = 51.0
+texture = SubResource( 10 )
+
+[node name="Label" type="Label" parent="VBoxContainerPS4/Equip"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "Equip"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire" type="TextureRect" parent="VBoxContainerPS4"]
+margin_top = 55.0
+margin_right = 64.0
+margin_bottom = 62.0
+texture = SubResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainerPS4/Fire"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "Fire"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dash" type="TextureRect" parent="VBoxContainerPS4"]
+margin_top = 66.0
+margin_right = 64.0
+margin_bottom = 73.0
+texture = SubResource( 3 )
+
+[node name="Label" type="Label" parent="VBoxContainerPS4/Dash"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "Dash"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainerOther" type="VBoxContainer" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.392157 )
+anchor_left = 0.01
+anchor_top = 0.25
+anchor_right = 0.05
+anchor_bottom = 0.401
+rect_scale = Vector2( 4, 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="TextureRect" parent="VBoxContainerOther"]
+margin_right = 64.0
+margin_bottom = 7.0
+texture = SubResource( 5 )
+
+[node name="Label" type="Label" parent="VBoxContainerOther/Inventory"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "controls.inventory"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprint" type="TextureRect" parent="VBoxContainerOther"]
+margin_top = 11.0
+margin_right = 64.0
+margin_bottom = 18.0
+texture = SubResource( 6 )
+
+[node name="Label" type="Label" parent="VBoxContainerOther/Sprint"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "controls.sprint"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interact" type="TextureRect" parent="VBoxContainerOther"]
+margin_top = 44.0
+margin_right = 64.0
+margin_bottom = 51.0
+texture = SubResource( 7 )
+
+[node name="Label" type="Label" parent="VBoxContainerOther/Interact"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "controls.interact"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerup" type="TextureRect" parent="VBoxContainerOther"]
+margin_top = 22.0
+margin_right = 64.0
+margin_bottom = 29.0
+texture = SubResource( 11 )
+
+[node name="Label" type="Label" parent="VBoxContainerOther/Powerup"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "controls.powerup"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equip" type="TextureRect" parent="VBoxContainerOther"]
+margin_top = 33.0
+margin_right = 64.0
+margin_bottom = 40.0
+texture = SubResource( 12 )
+
+[node name="Label" type="Label" parent="VBoxContainerOther/Equip"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "controls.equip"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire" type="TextureRect" parent="VBoxContainerOther"]
+margin_top = 66.0
+margin_right = 64.0
+margin_bottom = 73.0
+texture = SubResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainerOther/Fire"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "controls.fire"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dash" type="TextureRect" parent="VBoxContainerOther"]
+margin_top = 55.0
+margin_right = 64.0
+margin_bottom = 62.0
+texture = SubResource( 3 )
+
+[node name="Label" type="Label" parent="VBoxContainerOther/Dash"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+margin_left = 0.384
+margin_right = 67.0
+margin_bottom = 7.672
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "controls.dash"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainerKB" type="VBoxContainer" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0.392157 )
+anchor_left = 0.01
+anchor_top = 0.25
+anchor_right = 0.05
+anchor_bottom = 0.401
+rect_scale = Vector2( 4, 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Inventory" type="TextureRect" parent="VBoxContainerKB"]
+margin_right = 64.0
+margin_bottom = 7.0
+texture = ExtResource( 4 )
+stretch_mode = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainerKB/Inventory"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "E | Inventory"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Sprint" type="TextureRect" parent="VBoxContainerKB"]
+margin_top = 11.0
+margin_right = 64.0
+margin_bottom = 18.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainerKB/Sprint"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "Shift | Sprint"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Powerup" type="TextureRect" parent="VBoxContainerKB"]
+margin_top = 22.0
+margin_right = 64.0
+margin_bottom = 29.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainerKB/Powerup"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "X | Powerup"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Equip" type="TextureRect" parent="VBoxContainerKB"]
+margin_top = 33.0
+margin_right = 64.0
+margin_bottom = 40.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainerKB/Equip"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "R | Equip"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Interact" type="TextureRect" parent="VBoxContainerKB"]
+margin_top = 44.0
+margin_right = 64.0
+margin_bottom = 51.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainerKB/Interact"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "F | Interact"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fire" type="TextureRect" parent="VBoxContainerKB"]
+margin_top = 55.0
+margin_right = 64.0
+margin_bottom = 62.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainerKB/Fire"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "LClick | Fire"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dash" type="TextureRect" parent="VBoxContainerKB"]
+margin_top = 66.0
+margin_right = 64.0
+margin_bottom = 73.0
+texture = ExtResource( 4 )
+
+[node name="Label" type="Label" parent="VBoxContainerKB/Dash"]
+anchor_left = 0.119
+anchor_right = 0.25
+anchor_bottom = 0.904
+rect_scale = Vector2( 0.5, 0.5 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 5 )
+custom_styles/normal = SubResource( 8 )
+text = "C | Dash"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

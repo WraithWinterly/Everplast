@@ -227,6 +227,7 @@ rotation = -1.5708
 stream = ExtResource( 4 )
 volume_db = -8.0
 pitch_scale = 0.95
+bus = "Audio"
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

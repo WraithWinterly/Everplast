@@ -7,6 +7,9 @@ const FILE: String = \
 		"user://save.json"
 
 const DEFAULT_DATA: Dictionary = {
+	"game_beat": false,
+	"all_gems_collected": false,
+	"seconds_played": 0.0,
 	"health_max": 5.0,
 	"health": 5.0,
 	"coins": 0.0,
@@ -33,6 +36,7 @@ const PLAYER_LEVEL_MULTIPLIER := 2.6
 var data := [{}, {}, {}, {}, {}]
 
 var adrenaline_timer := Timer.new()
+var seconds_timer := Timer.new()
 
 var no_data_hash: int = data.hash()
 var profile: int = 0
@@ -54,11 +58,26 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("ui_profile_selector_profile_pressed", self, "_ui_profile_selector_profile_pressed")
 	__ = GlobalEvents.connect("ui_profile_selector_delete_prompt_yes_pressed", self, "_ui_profile_selector_delete_prompt_yes_pressed")
 	__ = GlobalEvents.connect("ui_profile_selector_update_prompt_yes_pressed", self, "_ui_profile_selector_update_prompt_yes_pressed")
+	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
+
 	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_extra_yes_pressed", self, "_ui_settings_erase_all_prompt_extra_yes_pressed")
 	__ = adrenaline_timer.connect("timeout", self, "_timer_timeout")
+	__ = seconds_timer.connect("timeout", self, "_seconds_timeout")
+
 
 	add_child(adrenaline_timer)
+	add_child(seconds_timer)
+	seconds_timer.autostart = true
+	seconds_timer.wait_time = 1
+	seconds_timer.process_mode = Timer.TIMER_PROCESS_PHYSICS
+	seconds_timer.start(1)
 	load_stats()
+
+	pause_mode = PAUSE_MODE_PROCESS
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_CRASH or what == NOTIFICATION_WM_QUIT_REQUEST:
+		GlobalSave.save_stats()
 
 
 func _physics_process(_delta):
@@ -224,7 +243,10 @@ func reset_all() -> void:
 
 
 func _level_changed(world: int, level: int) -> void:
+	var prev_time = get_stat("seconds_played")
 	load_stats()
+	set_stat("seconds_played", prev_time)
+
 	yield(GlobalEvents, "ui_faded")
 	set_stat("world_last", world)
 	set_stat("level_last", level)
@@ -249,11 +271,13 @@ func _player_died() -> void:
 #		var prev_collectables = get_stat("collectables")
 #		var prev_equippables = get_stat("equippables")
 		var prev_equiped = get_stat("equipped_item")
+		var prev_time = get_stat("seconds_played")
 		yield(GlobalEvents, "ui_faded")
 		load_stats()
 		set_stat("world_last", prev_last_world)
 		set_stat("level_last", prev_last_level)
 		set_stat("equipped_item", prev_equiped)
+		set_stat("seconds_played", prev_time)
 #		set_stat("powerups", prev_powerups)
 #		set_stat("collectables", prev_collectables)
 #		set_stat("equippables", prev_equippables)
@@ -298,7 +322,8 @@ func _player_used_powerup(item_name: String) -> void:
 			set_health(get_stat("health") + GlobalStats.PEAR_HEALTH_BOOST)
 			set_adrenaline(get_stat("adrenaline") + GlobalStats.PEAR_ADRENALINE_BOOST)
 		"cherry":
-			set_adrenaline(get_stat("health") + GlobalStats.CHERRY_BOOST)
+			set_adrenaline(get_stat("adrenaline") + GlobalStats.CHERRY_BOOST)
+			set_health(get_stat("health") + GlobalStats.CHERRY_BOOST_HEALTH)
 	GlobalEvents.emit_signal("save_stat_updated")
 
 
@@ -332,8 +357,25 @@ func _player_collected_gem(index: int) -> void:
 
 	set_stat("gems", gem_dict)
 
+func get_timeplay_string() -> String:
+	var total_secs: int = get_stat("seconds_played")
+	if total_secs == 0: return ""
+
+	var days: int = int(total_secs) / 86400
+	total_secs %= 86400
+	var hours: int = total_secs / 3600
+
+	total_secs %= 3600
+	var mins: int = total_secs / 60
+
+	total_secs %= 60
+	var secs: int = total_secs
+
+	return "%s %s, %s %s, %s %s, %s %s" % [days, tr("global.day"), hours, tr("global.hour"), mins, tr("global.minute"), secs, tr("global.second")]
+
 
 func _ui_profile_selector_profile_pressed() -> void:
+	seconds_timer.start(1)
 	profile = GlobalUI.profile_index
 	load_stats()
 
@@ -359,6 +401,8 @@ func _ui_profile_selector_update_prompt_yes_pressed() -> void:
 
 	save_stats(true)
 
+func _ui_pause_menu_return_prompt_yes_pressed() -> void:
+	save_stats()
 
 func _ui_settings_erase_all_prompt_extra_yes_pressed() -> void:
 	data = [{}, {}, {}, {}, {}]
@@ -369,3 +413,11 @@ func _timer_timeout() -> void:
 	if Globals.game_state == Globals.GameStates.LEVEL:
 		set_adrenaline(get_stat("adrenaline") + 1)
 		GlobalEvents.emit_signal("save_stat_updated")
+
+
+func _seconds_timeout() -> void:
+	if Globals.game_state == Globals.GameStates.MENU:
+		return
+
+	set_stat("seconds_played", get_stat("seconds_played") + 1)
+	#print(get_stat("seconds_played"))

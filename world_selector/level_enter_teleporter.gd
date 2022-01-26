@@ -43,11 +43,13 @@ func _body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
 		with_player = true
 		anim_player.play("glow")
+		GlobalInput.interact_activators += 1
 
 
 func _body_exited(body: Node) -> void:
 	if body.is_in_group("Player"):
 		with_player = false
 		anim_player.play_backwards("glow")
+		GlobalInput.interact_activators -= 1
 
 

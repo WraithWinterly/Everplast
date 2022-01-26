@@ -87,6 +87,7 @@ func _yes_pressed() -> void:
 		GlobalLevel.checkpoint_in_sub = false
 		Globals.game_state = Globals.GameStates.WORLD_SELECTOR
 		GlobalUI.menu = GlobalUI.Menus.NONE
+		GlobalLevel.in_boss = false
 		yield(GlobalEvents, "ui_faded")
 		hide_menu()
 		hide()

@@ -106,6 +106,8 @@ func _physics_process(_delta):
 	GlobalInput.dash_activated = may_dash
 
 func basic_movement():
+	if GlobalUI.menu == GlobalUI.Menus.CUTSCENE: return
+
 	var delta = get_physics_process_delta_time()
 
 	if sprinting:

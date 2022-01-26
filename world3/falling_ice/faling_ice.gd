@@ -23,6 +23,7 @@ onready var anim_player: AnimationPlayer = $Sprite/AnimationPlayer
 onready var ice_break_sound: AudioStreamPlayer2D = $IceBreak
 onready var ice_rumble_sound: AudioStreamPlayer2D = $IceRumble
 onready var timer: Timer = $Timer
+onready var visi_noti: VisibilityNotifier2D = $VisibilityNotifier2D
 
 
 func _ready() -> void:
@@ -40,12 +41,14 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not Globals.game_state == Globals.GameStates.LEVEL: return
+
 	if falling:
 		linear_velocity.y += gravity
 	else:
 		linear_velocity.y = 0
 
-	if is_on_floor():
+	if is_on_floor() or not visi_noti.is_on_screen():
 		if not no_damage and falling:
 			break_ice()
 
@@ -87,6 +90,7 @@ func rumble() -> void:
 
 
 func _on_Detection_body_entered(body: Node) -> void:
+	if not Globals.game_state == Globals.GameStates.LEVEL: return
 	if body.is_in_group("Player") and not no_damage:
 		rumble()
 
@@ -103,6 +107,8 @@ func _on_Timer_timeout() -> void:
 
 
 func _on_HitArea_body_entered(body: Node) -> void:
+	if not Globals.game_state == Globals.GameStates.LEVEL: return
+
 	if not no_damage:
 		if body.is_in_group("Player"):
 			GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.TOUCH, kb, damage)

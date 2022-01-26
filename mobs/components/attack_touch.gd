@@ -86,15 +86,16 @@ func _player_invincibility_stopped() -> void:
 
 	yield(get_tree(), "physics_frame")
 
-	var bodies = hit_area.get_overlapping_bodies()
+	if hit_area.monitoring:
+		var bodies = hit_area.get_overlapping_bodies()
 
-	for body in bodies:
-		if body.is_in_group("Player"):
-			_hit_area_body_entered(body)
-			if flying_enemy:
-				GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.TOUCH_AIR, mob_component.knockback, mob_component.attack_damage)
-			else:
-				GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.TOUCH, mob_component.knockback, mob_component.attack_damage)
+		for body in bodies:
+			if body.is_in_group("Player"):
+				_hit_area_body_entered(body)
+				if flying_enemy:
+					GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.TOUCH_AIR, mob_component.knockback, mob_component.attack_damage)
+				else:
+					GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.TOUCH, mob_component.knockback, mob_component.attack_damage)
 
 
 func _on_Cooldown_timeout() -> void:

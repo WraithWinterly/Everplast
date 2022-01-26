@@ -5,7 +5,6 @@ export(Color, RGB) var color_world_error
 export(Color, RGB) var color_world_1
 export(Color, RGB) var color_world_2
 export(Color, RGB) var color_world_3
-export(Color, RGB) var color_world_4
 
 onready var fade_rect: ColorRect = $FadeRect
 onready var world_icons = $FadeRect/Control/HBoxContainer/Control/WorldIcons
@@ -26,6 +25,9 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("player_died", self, "_player_died")
 	__ = GlobalEvents.connect("story_boss_killed", self, "_story_boss_killed")
 	__ = GlobalEvents.connect("story_boss_level_end_completed", self, "_story_boss_level_end_completed")
+	__ = GlobalEvents.connect("story_w3_attempt_beat", self, "_story_w3_attempt_beat")
+	__ = GlobalEvents.connect("story_w3_fernand_anim_finished", self, "_story_w3_fernand_anim_finished")
+	__ = GlobalEvents.connect("story_fernand_beat", self, "_story_fernand_beat")
 	#__ = GlobalEvents.connect("ui_play_pressed", self, "_ui_play_pressed")
 	__ = GlobalEvents.connect("ui_profile_selector_profile_pressed", self, "_ui_profile_selector_profile_pressed")
 	#__ = GlobalEvents.connect("ui_profile_selector_return_pressed", self, "_ui_profile_selector_return_pressed")
@@ -142,8 +144,6 @@ func set_color_per_world(world: int, level: int) -> void:
 			color = color_world_2
 		3:
 			color = color_world_3
-		4:
-			color = color_world_4
 		_:
 			color = color_world_error
 			label.text = "Unofficial World - %s" % level
@@ -183,6 +183,8 @@ func _level_changed(world: int = 0, level: int = 0) -> void:
 	yield(get_tree(), "physics_frame")
 
 	label.text = "%s %s\n%s - %s" % [tr("profile_selector.button.normal"), GlobalSave.profile + 1, GlobalLevel.WORLD_NAMES[world], level]
+	if level == 4:
+		label.text = "The End"
 	play(false)
 	yield(GlobalEvents, "ui_faded")
 	play(true)
@@ -208,8 +210,6 @@ func _level_subsection_changed(_pos: Vector2) -> void:
 			color = color_world_2
 		3:
 			color = color_world_3
-		4:
-			color = color_world_4
 		_:
 			color = color_world_error
 
@@ -229,8 +229,22 @@ func _story_boss_killed(_idx: int) -> void:
 	transition()
 
 
+func _story_w3_attempt_beat() -> void:
+	yield(GlobalEvents, "ui_dialogue_hidden")
+	transition()
+
+
 func _story_boss_level_end_completed(_idx: int) -> void:
 	transition()
+
+
+func _story_w3_fernand_anim_finished() -> void:
+	transition()
+
+
+func _story_fernand_beat() -> void:
+	transition(true, true)
+
 
 
 func _ui_profile_selector_profile_pressed() -> void:
