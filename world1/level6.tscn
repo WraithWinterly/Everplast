@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilesets/tileset_beach.tres" type="TileSet" id=2]
@@ -16,7 +16,6 @@
 [ext_resource path="res://world_all/platforms/tileset_platform.tres" type="TileSet" id=14]
 [ext_resource path="res://world_all/torches/torch.tscn" type="PackedScene" id=15]
 [ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=16]
-[ext_resource path="res://world1/canvas_beach.tscn" type="PackedScene" id=17]
 [ext_resource path="res://world_all/trees/tree.tscn" type="PackedScene" id=18]
 [ext_resource path="res://world_all/coins/coin.tscn" type="PackedScene" id=19]
 [ext_resource path="res://world_all/platforms/falling_platform.tscn" type="PackedScene" id=20]
@@ -128,10 +127,6 @@ position = Vector2( 24, -24 )
 
 [node name="LevelComponents" type="Node2D" parent="."]
 
-[node name="BeachBackground" parent="LevelComponents" instance=ExtResource( 17 )]
-offset = Vector2( 0, -40 )
-transform = Transform2D( 1, 0, 0, 1, 0, -40 )
-
 [node name="DeathArea" parent="LevelComponents" instance=ExtResource( 10 )]
 position = Vector2( 160, 72 )
 scale = Vector2( 1000, 0.8 )
@@ -240,6 +235,8 @@ cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
 format = 1
 tile_data = PoolIntArray( -14024084, 0, 0, -13565373, 0, 3, -13368776, 0, 3, -13303311, 0, 0, -13303310, 0, 1, -13172181, 0, 1, -13106732, 0, 2, -13106731, 0, 2, -4062832, 0, 2, -4062827, 0, 0, -4062819, 0, 1, -4062799, 0, 1, -3997443, 2, 1, -3473146, 2, 1 )
 script = ExtResource( 29 )
+
+[node name="BeachBackgroundW1" parent="LevelComponents" instance=ExtResource( 24 )]
 
 [node name="Ladders" type="Node2D" parent="."]
 
@@ -437,54 +434,6 @@ always_palm = true
 position = Vector2( 5424, -136 )
 always_palm = true
 
-[node name="Tree50" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 5496, -160 )
-always_palm = true
-
-[node name="Tree51" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 5640, -192 )
-always_palm = true
-
-[node name="Tree52" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 5736, -152 )
-always_palm = true
-
-[node name="Tree53" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 5872, -224 )
-always_palm = true
-
-[node name="Tree54" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 6008, -224 )
-always_palm = true
-
-[node name="Tree55" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 6128, -184 )
-always_palm = true
-
-[node name="Tree56" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 6264, -168 )
-always_palm = true
-
-[node name="Tree57" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 6376, -144 )
-always_palm = true
-
-[node name="Tree58" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 6504, -112 )
-always_palm = true
-
-[node name="Tree59" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 6584, -112 )
-always_palm = true
-
-[node name="Tree60" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 6664, -112 )
-always_palm = true
-
-[node name="Tree61" parent="Trees" instance=ExtResource( 18 )]
-position = Vector2( 6824, -80 )
-always_palm = true
-
 [node name="Tree62" parent="Trees" instance=ExtResource( 18 )]
 position = Vector2( 3216, -1616 )
 
@@ -670,45 +619,6 @@ position = Vector2( 5224, -72 )
 [node name="Lantern53" parent="Lanterns" instance=ExtResource( 12 )]
 position = Vector2( 5328, -80 )
 
-[node name="Lantern54" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 5464, -104 )
-
-[node name="Lantern55" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 5528, -128 )
-
-[node name="Lantern56" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 5600, -160 )
-
-[node name="Lantern57" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 5712, -120 )
-
-[node name="Lantern58" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 5920, -192 )
-
-[node name="Lantern59" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 5984, -192 )
-
-[node name="Lantern60" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 6168, -152 )
-
-[node name="Lantern61" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 6296, -136 )
-
-[node name="Lantern62" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 6408, -112 )
-
-[node name="Lantern63" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 6488, -80 )
-
-[node name="Lantern64" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 6560, -80 )
-
-[node name="Lantern65" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 6720, -64 )
-
-[node name="Lantern66" parent="Lanterns" instance=ExtResource( 12 )]
-position = Vector2( 6808, -48 )
-
 [node name="Lantern38" parent="Lanterns" instance=ExtResource( 12 )]
 position = Vector2( 3296, -1576 )
 
@@ -755,13 +665,6 @@ position = Vector2( 4592, -24 )
 
 [node name="Torch5" parent="Torches" instance=ExtResource( 15 )]
 position = Vector2( 4592, -72 )
-
-[node name="Torch3" parent="Torches" instance=ExtResource( 15 )]
-position = Vector2( 6752, -136 )
-
-[node name="Torch4" parent="Torches" instance=ExtResource( 15 )]
-position = Vector2( 6480, -136 )
-flip_h = true
 
 [node name="Coins" type="Node2D" parent="."]
 
@@ -995,36 +898,6 @@ position = Vector2( 5280, -56 )
 [node name="Slime27" parent="Slimes" instance=ExtResource( 22 )]
 position = Vector2( 5424, -88 )
 
-[node name="Slime28" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 5584, -144 )
-
-[node name="Slime29" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 5648, -144 )
-
-[node name="Slime30" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 5744, -104 )
-
-[node name="Slime31" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 5896, -176 )
-
-[node name="Slime32" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 6024, -176 )
-
-[node name="Slime33" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 6192, -136 )
-
-[node name="Slime34" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 6368, -96 )
-
-[node name="Slime35" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 6544, -64 )
-
-[node name="Slime36" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 6776, -32 )
-
-[node name="Slime37" parent="Slimes" instance=ExtResource( 22 )]
-position = Vector2( 6824, -32 )
-
 [node name="Slime38" parent="Slimes" instance=ExtResource( 22 )]
 position = Vector2( 3336, -1560 )
 
@@ -1148,18 +1021,6 @@ position = Vector2( 5200, -64 )
 
 [node name="Worm15" parent="Worms" instance=ExtResource( 23 )]
 position = Vector2( 5456, -88 )
-
-[node name="Worm16" parent="Worms" instance=ExtResource( 23 )]
-position = Vector2( 5968, -176 )
-
-[node name="Worm17" parent="Worms" instance=ExtResource( 23 )]
-position = Vector2( 6152, -136 )
-
-[node name="Worm18" parent="Worms" instance=ExtResource( 23 )]
-position = Vector2( 6504, -64 )
-
-[node name="Worm19" parent="Worms" instance=ExtResource( 23 )]
-position = Vector2( 6688, -64 )
 
 [node name="Worm20" parent="Worms" instance=ExtResource( 23 )]
 position = Vector2( 3544, -1552 )
@@ -1332,9 +1193,6 @@ position = Vector2( 3016, -632 )
 
 [node name="Vase11" parent="Vases" instance=ExtResource( 26 )]
 position = Vector2( 3400, -496 )
-
-[node name="Vase12" parent="Vases" instance=ExtResource( 26 )]
-position = Vector2( 5680, -144 )
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -1562,30 +1420,6 @@ process_material = SubResource( 8 )
 
 [node name="Particles2D27" type="Particles2D" parent="Rain"]
 position = Vector2( 5952, -312 )
-amount = 300
-lifetime = 2.4
-preprocess = 40.0
-visibility_rect = Rect2( 0, 0, 300, 300 )
-process_material = SubResource( 8 )
-
-[node name="Particles2D28" type="Particles2D" parent="Rain"]
-position = Vector2( 6184, -248 )
-amount = 300
-lifetime = 2.4
-preprocess = 40.0
-visibility_rect = Rect2( 0, 0, 300, 300 )
-process_material = SubResource( 8 )
-
-[node name="Particles2D29" type="Particles2D" parent="Rain"]
-position = Vector2( 6416, -216 )
-amount = 300
-lifetime = 2.4
-preprocess = 40.0
-visibility_rect = Rect2( 0, 0, 300, 300 )
-process_material = SubResource( 8 )
-
-[node name="Particles2D30" type="Particles2D" parent="Rain"]
-position = Vector2( 6664, -240 )
 amount = 300
 lifetime = 2.4
 preprocess = 40.0

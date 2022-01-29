@@ -1,7 +1,6 @@
-[gd_resource type="TileSet" load_steps=41 format=2]
+[gd_resource type="TileSet" load_steps=40 format=2]
 
 [ext_resource path="res://world4/w4_sheet.png" type="Texture" id=1]
-[ext_resource path="res://world3/tree.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
@@ -442,17 +441,3 @@ points = PoolVector2Array( 0, 6, 8, 6, 8, 8, 0, 8 )
 4/shape_one_way_margin = 0.0
 4/shapes = [  ]
 4/z_index = 2
-5/name = "Tree"
-5/texture = ExtResource( 2 )
-5/tex_offset = Vector2( 0, 4 )
-5/modulate = Color( 1, 1, 1, 1 )
-5/region = Rect2( 0, 0, 33, 52 )
-5/tile_mode = 0
-5/occluder_offset = Vector2( 0, 0 )
-5/navigation_offset = Vector2( 0, 0 )
-5/shape_offset = Vector2( 0, 0 )
-5/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-5/shape_one_way = false
-5/shape_one_way_margin = 0.0
-5/shapes = [  ]
-5/z_index = 0

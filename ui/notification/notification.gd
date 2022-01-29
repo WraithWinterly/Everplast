@@ -39,11 +39,11 @@ func show_notification(noti: String, wait: bool = false) -> void:
 		GlobalEvents.emit_signal("ui_notification_finished")
 
 
-func _save_file_saved(noti: bool = true) -> void:
+func _save_file_saved(save_silent: bool = false) -> void:
 	if GlobalUI.menu_locked:
 		yield(GlobalEvents, "ui_faded")
 
-	if not noti: return
+	if save_silent: return
 
 	yield(get_tree(), "physics_frame")
 	yield(get_tree(), "physics_frame")

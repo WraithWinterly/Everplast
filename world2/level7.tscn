@@ -1,6 +1,6 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
-[ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world2/backgrounds/canvas_mountain_w2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://mobs/slime_red/slime_red.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world_all/death_area/death_area.tscn" type="PackedScene" id=3]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=4]
@@ -18,18 +18,19 @@
 [ext_resource path="res://world_all/coins/coin.tscn" type="PackedScene" id=16]
 [ext_resource path="res://mobs/bunny/bunny.tscn" type="PackedScene" id=17]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=18]
+[ext_resource path="res://world1/backgrounds/canvas_beach_w1.tscn" type="PackedScene" id=19]
 [ext_resource path="res://mobs/scorpion/scorpion.tscn" type="PackedScene" id=20]
 [ext_resource path="res://tilesets/tileset_sandstone.tres" type="TileSet" id=21]
 [ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=22]
 [ext_resource path="res://mobs/fox/fox.tscn" type="PackedScene" id=23]
-[ext_resource path="res://world2/canvas_mountain_w2_old.tscn" type="PackedScene" id=24]
+[ext_resource path="res://world1/backgrounds/canvas_mountain_w1.tscn" type="PackedScene" id=24]
 [ext_resource path="res://world_all/coins/coin_10.tscn" type="PackedScene" id=25]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=27]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 10 )
-canvas_normal = ExtResource( 1 )
-canvas_subsection = ExtResource( 24 )
+canvas_normal = ExtResource( 24 )
+canvas_subsection = ExtResource( 1 )
 
 [node name="SubsectionTeleporters" type="Node2D" parent="."]
 
@@ -65,7 +66,7 @@ position = Vector2( 8, 8 )
 
 [node name="LevelComponents" type="Node2D" parent="."]
 
-[node name="MountainBackground" parent="LevelComponents" instance=ExtResource( 1 )]
+[node name="BeachBackgroundW1" parent="LevelComponents" instance=ExtResource( 19 )]
 
 [node name="TileMapBlock" parent="LevelComponents" instance=ExtResource( 5 )]
 tile_data = PoolIntArray( -12844591, 0, 0, -12779055, 0, 0, -12713519, 0, 0, -12647983, 0, 0, -12582447, 0, 0, -12516911, 0, 0, -12451375, 0, 0, -12385839, 0, 0, -12320303, 0, 0, -12254767, 0, 0, -12189231, 0, 0, -12123695, 0, 0, -12058159, 0, 0, -11992623, 0, 0, -11927087, 0, 0, -11861551, 0, 0, -11796015, 0, 0, -11730479, 0, 0, -11664943, 0, 0, -11599407, 0, 0, -11533871, 0, 0, -11468335, 0, 0, -11402799, 0, 0, -11337263, 0, 0, -11271727, 0, 0, -11206191, 0, 0, -11140655, 0, 0, -11075119, 0, 0, -11009583, 0, 0, -10944047, 0, 0, -10878511, 0, 0, -10812975, 0, 0, -10747439, 0, 0, -10681903, 0, 0, -10616367, 0, 0, -10550831, 0, 0, -10485295, 0, 0, -10419759, 0, 0, -10354223, 0, 0, -10288687, 0, 0, -10223151, 0, 0, -10157615, 0, 0, -10092079, 0, 0, -10026543, 0, 0, -9961007, 0, 0, -9895471, 0, 0, -9829935, 0, 0, -9764399, 0, 0, -9698863, 0, 0, -9633327, 0, 0, -9567791, 0, 0, -9502255, 0, 0, -9436719, 0, 0, -9371183, 0, 0, -9305647, 0, 0, -9175041, 0, 0, -9240111, 0, 0, -9109505, 0, 0, -9174575, 0, 0, -9043969, 0, 0, -9109039, 0, 0, -8978433, 0, 0, -9043503, 0, 0, -8912897, 0, 0, -8977967, 0, 0, -8847361, 0, 0, -8912431, 0, 0, -8781825, 0, 0, -8846895, 0, 0, -8716289, 0, 0, -8781359, 0, 0, -8650753, 0, 0, -8715823, 0, 0, -8585217, 0, 0, -8650287, 0, 0, -8519681, 0, 0, -8584751, 0, 0, -8454145, 0, 0, -8519215, 0, 0, -8388609, 0, 0, -8453679, 0, 0, -8323073, 0, 0, -8388143, 0, 0, -8257537, 0, 0, -8322607, 0, 0, -8192001, 0, 0, -8257071, 0, 0, -8126465, 0, 0, -8191535, 0, 0, -8060929, 0, 0, -8125999, 0, 0, -8060463, 0, 0, -7994927, 0, 0, -7929391, 0, 0, -7863855, 0, 0, -7798319, 0, 0, -7732783, 0, 0, -7667247, 0, 0, -7601711, 0, 0, -7536175, 0, 0, -7470639, 0, 0, -7405103, 0, 0, -7339567, 0, 0, -7274031, 0, 0, -7208495, 0, 0, -7142959, 0, 0, -917505, 0, 0, -982645, 0, 0, -851969, 0, 0, -917109, 0, 0, -786433, 0, 0, -851573, 0, 0, -720897, 0, 0, -786037, 0, 0, -655361, 0, 0, -720501, 0, 0, -589825, 0, 0, -654965, 0, 0, -524289, 0, 0, -589429, 0, 0, -458753, 0, 0, -523893, 0, 0, -393217, 0, 0, -458357, 0, 0, -327681, 0, 0, -392821, 0, 0, -262145, 0, 0, -327285, 0, 0, -196609, 0, 0, -261749, 0, 0, -131073, 0, 0, -196213, 0, 0, -65537, 0, 0, -130677, 0, 0, -1, 0, 0, -65141, 0, 0, 65535, 0, 0, 395, 0, 0, 131071, 0, 0, 65931, 0, 0, 196607, 0, 0, 131467, 0, 0, 262143, 0, 0 )

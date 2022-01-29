@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world3/backgrounds/canvas_mountain_w3.tscn" type="PackedScene" id=2]
@@ -43,6 +43,8 @@
 [ext_resource path="res://mobs/slime_flying/slime_flying.tscn" type="PackedScene" id=41]
 [ext_resource path="res://mobs/spider/spider.tscn" type="PackedScene" id=42]
 [ext_resource path="res://mobs/worm/worm.tscn" type="PackedScene" id=43]
+[ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=44]
+[ext_resource path="res://world_all/gems/gem.gd" type="Script" id=45]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 6 )
@@ -129,6 +131,22 @@ position = Vector2( 2176, 56 )
 
 [node name="LevelEndTeleporter" parent="LevelComponents" instance=ExtResource( 11 )]
 position = Vector2( 5512, 8 )
+
+[node name="Gems" type="Node2D" parent="LevelComponents"]
+
+[node name="Gem1" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 44 )]
+position = Vector2( 1448, 272 )
+script = ExtResource( 45 )
+
+[node name="Gem2" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 44 )]
+position = Vector2( 4136, 80 )
+script = ExtResource( 45 )
+index = 1
+
+[node name="Gem3" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 44 )]
+position = Vector2( 5408, -8 )
+script = ExtResource( 45 )
+index = 2
 
 [node name="Lanterns" type="Node2D" parent="."]
 
@@ -426,6 +444,15 @@ position = Vector2( 5312, 8 )
 [node name="Coin81" parent="Coins" instance=ExtResource( 14 )]
 position = Vector2( 5336, 0 )
 
+[node name="Coin82" parent="Coins" instance=ExtResource( 14 )]
+position = Vector2( 5384, -8 )
+
+[node name="Coin83" parent="Coins" instance=ExtResource( 14 )]
+position = Vector2( 5408, -32 )
+
+[node name="Coin84" parent="Coins" instance=ExtResource( 14 )]
+position = Vector2( 5432, -8 )
+
 [node name="Trees" type="Node2D" parent="."]
 
 [node name="Tree" parent="Trees" instance=ExtResource( 8 )]
@@ -689,6 +716,9 @@ position = Vector2( 5384, 16 )
 
 [node name="Vase40" parent="Vases" instance=ExtResource( 16 )]
 position = Vector2( 5472, 16 )
+
+[node name="Vase41" parent="Vases" instance=ExtResource( 16 )]
+position = Vector2( 5488, 16 )
 
 [node name="FallingPlatform" parent="." instance=ExtResource( 23 )]
 position = Vector2( 840, 208 )

@@ -56,15 +56,21 @@ func _player_used_powerup(item_name: String) -> void:
 		"ice spike":
 			show_bar(GlobalStats.ICE_SPIKE_TIME)
 			last_int = GlobalStats.ICE_SPIKE_TIME
+		"glitch soul":
+			show_bar(GlobalStats.GLITCH_SOUL_TIME)
+			last_int = GlobalStats.GLITCH_SOUL_TIME
+			Engine.time_scale = 0.75
+
 
 
 func stop_active_item() -> void:
+	if GlobalStats.active_timed_powerup == "glitch soul":
+		Engine.time_scale = 1
 	timer.stop()
 	GlobalStats.timed_powerup_active = false
 	anim_player.play_backwards("show")
 	GlobalEvents.emit_signal("player_powerup_ended", last_timed_item_name)
 	GlobalStats.active_timed_powerup = ""
-
 
 func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 	stop_active_item()
@@ -92,3 +98,5 @@ func _timeout() -> void:
 	anim_player.play_backwards("show")
 	end_sound.play()
 	GlobalEvents.emit_signal("player_powerup_ended", last_timed_item_name)
+	if GlobalStats.active_timed_powerup == "glitch soul":
+		Engine.time_scale = 1

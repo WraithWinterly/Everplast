@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://world_all/fog_shader.gd" type="Script" id=1]
+[ext_resource path="res://world1/backgrounds/SET4_background2A_day.png" type="Texture" id=2]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -59,11 +60,7 @@ shader = SubResource( 1 )
 shader_param/color = Vector3( 1, 1, 1 )
 shader_param/OCTAVES = 6
 
-[node name="FogShader" type="ColorRect"]
+[node name="FogShader" type="Sprite"]
 material = SubResource( 2 )
-margin_right = 1600.0
-margin_bottom = 1600.0
+texture = ExtResource( 2 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}

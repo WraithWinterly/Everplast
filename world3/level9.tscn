@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=37 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world3/backgrounds/canvas_snow_w3.tscn" type="PackedScene" id=2]
@@ -28,6 +28,8 @@
 [ext_resource path="res://world3/backgrounds/canvas_mountain_w3.tscn" type="PackedScene" id=26]
 [ext_resource path="res://world_all/torches/torch.tscn" type="PackedScene" id=27]
 [ext_resource path="res://mobs/cora/cora.tscn" type="PackedScene" id=28]
+[ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=29]
+[ext_resource path="res://world_all/gems/gem.gd" type="Script" id=30]
 
 [sub_resource type="Animation" id=11]
 length = 0.001
@@ -189,6 +191,22 @@ position = Vector2( 4304, 344 )
 [node name="LevelEndTeleporter" parent="LevelComponents" instance=ExtResource( 14 )]
 visible = false
 position = Vector2( 5024, 488 )
+
+[node name="Gems" type="Node2D" parent="LevelComponents"]
+
+[node name="Gem1" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 29 )]
+position = Vector2( 792, 104 )
+script = ExtResource( 30 )
+
+[node name="Gem2" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 29 )]
+position = Vector2( 2256, 232 )
+script = ExtResource( 30 )
+index = 1
+
+[node name="Gem3" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 29 )]
+position = Vector2( 4376, -8 )
+script = ExtResource( 30 )
+index = 2
 
 [node name="Lanterns" type="Node2D" parent="."]
 

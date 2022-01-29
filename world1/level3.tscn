@@ -1,11 +1,11 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://world1/rain.wav" type="AudioStream" id=1]
 [ext_resource path="res://tilesets/tileset_grass.tres" type="TileSet" id=2]
 [ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=3]
 [ext_resource path="res://world_all/level.gd" type="Script" id=4]
 [ext_resource path="res://world_all/trees/tree.tscn" type="PackedScene" id=5]
-[ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=6]
+[ext_resource path="res://world1/backgrounds/canvas_beach_w1.tscn" type="PackedScene" id=6]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=7]
 [ext_resource path="res://world_all/lanterns/lantern.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world_all/rank_pickup/rank_pickup.tscn" type="PackedScene" id=9]
@@ -22,7 +22,6 @@
 [ext_resource path="res://mobs/bird/bird.tscn" type="PackedScene" id=21]
 [ext_resource path="res://world_all/death_area/death_area.tscn" type="PackedScene" id=22]
 [ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=23]
-[ext_resource path="res://world1/fog_shader.tscn" type="PackedScene" id=24]
 [ext_resource path="res://mobs/slime_flying/slime_flying.tscn" type="PackedScene" id=25]
 [ext_resource path="res://mobs/bunny/bunny.tscn" type="PackedScene" id=26]
 [ext_resource path="res://world_all/tilemap_block/block.png" type="Texture" id=27]
@@ -227,6 +226,8 @@ bus = "Audio"
 
 [node name="LevelComponents" type="Node2D" parent="."]
 
+[node name="BeachBackgroundW1" parent="LevelComponents" instance=ExtResource( 6 )]
+
 [node name="CameraPositions" type="Node2D" parent="LevelComponents"]
 
 [node name="TopLeft" type="Position2D" parent="LevelComponents/CameraPositions"]
@@ -247,11 +248,6 @@ index = 1
 [node name="Gem3" parent="LevelComponents/Gems" instance=ExtResource( 19 )]
 position = Vector2( 1448, -144 )
 index = 2
-
-[node name="MountainBackground" parent="LevelComponents" instance=ExtResource( 6 )]
-
-[node name="FogShader" parent="LevelComponents/MountainBackground" instance=ExtResource( 24 )]
-modulate = Color( 0.411765, 0.411765, 0.411765, 1 )
 
 [node name="PlayerStart" type="Position2D" parent="LevelComponents"]
 position = Vector2( 16, -24 )

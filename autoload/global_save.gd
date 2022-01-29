@@ -219,8 +219,10 @@ func get_gem_count(idx: int = -1) -> int:
 		for world in gem_dict.keys():
 			if gem_dict[world].size() > 0:
 				for level in gem_dict[world]:
+					if int(level) == 0: continue
 					for i in gem_dict[world][level]:
 						if i:
+
 							gem_count += 1
 	return gem_count
 

@@ -572,7 +572,7 @@ world = 3
 level = 9
 
 [node name="3-10" parent="Teleporters" instance=ExtResource( 3 )]
-position = Vector2( 5744, 16 )
+position = Vector2( 5696, 16 )
 world = 4
 level = 1
 
@@ -618,131 +618,6 @@ z_index = 5
 [node name="Coin8" parent="." instance=ExtResource( 19 )]
 position = Vector2( 3072, -128 )
 z_index = 5
-
-[node name="Shop" parent="." instance=ExtResource( 20 )]
-position = Vector2( 424, -16 )
-items = {
-"bunny egg": [ true, 1, 150 ],
-"carrot": [ true, 10, 50 ],
-"cherry": [ false, 5, 300 ],
-"coconut": [ false, 10, 250 ],
-"energy": [ false, 10, 200 ],
-"gems": 3,
-"glitch orb": [ false, 1, 500 ],
-"glitch soul": [ false, 1, 300 ],
-"laser gun": [ false, 1, 350 ],
-"nail": [ false, 10, 300 ],
-"nail gun": [ false, 1, 450 ],
-"orbs": [ false, 100, 250 ],
-"pear": [ false, 2, 250 ],
-"water": [ false, 10, 100 ],
-"water gun": [ false, 1, 250 ]
-}
-
-[node name="Shop2" parent="." instance=ExtResource( 20 )]
-position = Vector2( 968, -32 )
-items = {
-"bunny egg": [ true, 2, 300 ],
-"carrot": [ true, 20, 75 ],
-"cherry": [ false, 5, 300 ],
-"coconut": [ false, 10, 250 ],
-"energy": [ false, 10, 200 ],
-"gems": 6,
-"glitch orb": [ false, 1, 500 ],
-"glitch soul": [ false, 1, 300 ],
-"laser gun": [ false, 1, 350 ],
-"nail": [ false, 10, 300 ],
-"nail gun": [ false, 1, 450 ],
-"orbs": [ true, 100, 250 ],
-"pear": [ false, 2, 250 ],
-"water": [ true, 100, 100 ],
-"water gun": [ true, 1, 250 ]
-}
-
-[node name="Shop3" parent="." instance=ExtResource( 20 )]
-position = Vector2( 1688, -64 )
-items = {
-"bunny egg": [ true, 5, 350 ],
-"carrot": [ true, 30, 150 ],
-"cherry": [ false, 5, 300 ],
-"coconut": [ false, 10, 250 ],
-"energy": [ false, 10, 200 ],
-"gems": 15,
-"glitch orb": [ false, 1, 500 ],
-"glitch soul": [ false, 1, 300 ],
-"laser gun": [ false, 1, 350 ],
-"nail": [ false, 10, 300 ],
-"nail gun": [ false, 1, 450 ],
-"orbs": [ false, 500, 500 ],
-"pear": [ false, 2, 250 ],
-"water": [ true, 500, 350 ],
-"water gun": [ false, 1, 250 ]
-}
-
-[node name="Shop4" parent="." instance=ExtResource( 20 )]
-position = Vector2( 2472, -96 )
-items = {
-"bunny egg": [ true, 3, 200 ],
-"carrot": [ false, 10, 50 ],
-"cherry": [ false, 5, 300 ],
-"coconut": [ true, 10, 250 ],
-"energy": [ true, 50, 150 ],
-"gems": 21,
-"glitch orb": [ false, 1, 500 ],
-"glitch soul": [ false, 1, 300 ],
-"laser gun": [ true, 1, 350 ],
-"nail": [ false, 10, 300 ],
-"nail gun": [ false, 1, 450 ],
-"orbs": [ false, 100, 250 ],
-"pear": [ false, 2, 250 ],
-"water": [ false, 10, 100 ],
-"water gun": [ false, 1, 250 ]
-}
-
-[node name="Shop5" parent="." instance=ExtResource( 20 )]
-position = Vector2( 3208, -152 )
-items = {
-"bunny egg": [ false, 1, 150 ],
-"carrot": [ false, 10, 50 ],
-"cherry": [ false, 5, 300 ],
-"coconut": [ false, 10, 250 ],
-"energy": [ true, 100, 200 ],
-"gems": 24,
-"glitch orb": [ false, 1, 500 ],
-"glitch soul": [ false, 1, 300 ],
-"laser gun": [ false, 1, 350 ],
-"nail": [ false, 10, 300 ],
-"nail gun": [ false, 1, 450 ],
-"orbs": [ true, 500, 450 ],
-"pear": [ true, 5, 275 ],
-"water": [ false, 10, 100 ],
-"water gun": [ false, 1, 250 ]
-}
-
-[node name="Shop6" parent="." instance=ExtResource( 20 )]
-position = Vector2( 4296, -56 )
-items = {
-"bunny egg": [ false, 1, 150 ],
-"carrot": [ false, 10, 50 ],
-"cherry": [ false, 5, 300 ],
-"coconut": [ false, 10, 250 ],
-"energy": [ false, 10, 200 ],
-"gems": 3,
-"glitch orb": [ false, 1, 500 ],
-"glitch soul": [ false, 1, 300 ],
-"laser gun": [ false, 1, 350 ],
-"nail": [ false, 10, 300 ],
-"nail gun": [ false, 1, 450 ],
-"orbs": [ false, 100, 250 ],
-"pear": [ false, 2, 250 ],
-"snow gun": [ true, 1, 500 ],
-"snowball": [ true, 10, 400 ],
-"water": [ false, 10, 100 ],
-"water gun": [ false, 1, 250 ]
-}
-
-[node name="Shop7" parent="." instance=ExtResource( 20 )]
-position = Vector2( 5064, -248 )
 
 [node name="Cannon" parent="." instance=ExtResource( 25 )]
 position = Vector2( 4216, -216 )
@@ -813,3 +688,197 @@ position = Vector2( 5144, -104 )
 
 [node name="FallingPlatform4" parent="." instance=ExtResource( 28 )]
 position = Vector2( 5144, -56 )
+
+[node name="Shop" type="Node2D" parent="."]
+
+[node name="Shop" parent="Shop" instance=ExtResource( 20 )]
+position = Vector2( 256, -16 )
+items = {
+"bunny egg": [ true, 1, 20 ],
+"carrot": [ true, 10, 10 ],
+"cherry": [ false, 5, 25 ],
+"coconut": [ false, 10, 25 ],
+"energy": [ false, 5, 20 ],
+"gems": 3,
+"glitch orb": [ false, 1, 30 ],
+"glitch soul": [ false, 1, 35 ],
+"ice gun": [ false, 1, 250 ],
+"ice spike": [ false, 1, 25 ],
+"laser gun": [ false, 1, 100 ],
+"nail": [ false, 5, 30 ],
+"nail gun": [ false, 1, 300 ],
+"orbs": [ false, 100, 40 ],
+"pear": [ false, 2, 250 ],
+"snow gun": [ false, 1, 150 ],
+"snowball": [ false, 5, 40 ],
+"water": [ false, 5, 10 ],
+"water gun": [ false, 1, 50 ]
+}
+
+[node name="Shop2" parent="Shop" instance=ExtResource( 20 )]
+position = Vector2( 560, 8 )
+items = {
+"bunny egg": [ true, 1, 20 ],
+"carrot": [ true, 10, 10 ],
+"cherry": [ false, 5, 25 ],
+"coconut": [ false, 10, 25 ],
+"energy": [ false, 5, 20 ],
+"gems": 6,
+"glitch orb": [ false, 1, 30 ],
+"glitch soul": [ false, 1, 35 ],
+"ice gun": [ false, 1, 250 ],
+"ice spike": [ false, 1, 25 ],
+"laser gun": [ false, 1, 100 ],
+"nail": [ false, 5, 30 ],
+"nail gun": [ false, 1, 300 ],
+"orbs": [ false, 100, 40 ],
+"pear": [ false, 2, 250 ],
+"snow gun": [ false, 1, 150 ],
+"snowball": [ false, 5, 40 ],
+"water": [ true, 5, 10 ],
+"water gun": [ true, 1, 50 ]
+}
+
+[node name="Shop3" parent="Shop" instance=ExtResource( 20 )]
+position = Vector2( 1688, -64 )
+items = {
+"bunny egg": [ true, 5, 35 ],
+"carrot": [ true, 20, 15 ],
+"cherry": [ false, 5, 25 ],
+"coconut": [ false, 10, 25 ],
+"energy": [ false, 5, 20 ],
+"gems": 18,
+"glitch orb": [ false, 1, 30 ],
+"glitch soul": [ false, 1, 35 ],
+"ice gun": [ false, 1, 250 ],
+"ice spike": [ false, 1, 25 ],
+"laser gun": [ false, 1, 100 ],
+"nail": [ false, 5, 30 ],
+"nail gun": [ false, 1, 300 ],
+"orbs": [ true, 400, 80 ],
+"pear": [ false, 2, 250 ],
+"snow gun": [ false, 1, 150 ],
+"snowball": [ false, 5, 40 ],
+"water": [ true, 25, 30 ],
+"water gun": [ false, 1, 50 ]
+}
+
+[node name="Shop4" parent="Shop" instance=ExtResource( 20 )]
+position = Vector2( 2472, -96 )
+items = {
+"bunny egg": [ false, 1, 20 ],
+"carrot": [ false, 10, 10 ],
+"cherry": [ false, 5, 25 ],
+"coconut": [ true, 10, 10 ],
+"energy": [ false, 5, 20 ],
+"gems": 21,
+"glitch orb": [ false, 1, 30 ],
+"glitch soul": [ false, 1, 35 ],
+"ice gun": [ false, 1, 250 ],
+"ice spike": [ false, 1, 25 ],
+"laser gun": [ true, 1, 115 ],
+"nail": [ false, 5, 30 ],
+"nail gun": [ false, 1, 300 ],
+"orbs": [ false, 100, 40 ],
+"pear": [ true, 5, 25 ],
+"snow gun": [ false, 1, 150 ],
+"snowball": [ false, 5, 40 ],
+"water": [ false, 5, 10 ],
+"water gun": [ false, 1, 50 ]
+}
+
+[node name="Shop5" parent="Shop" instance=ExtResource( 20 )]
+position = Vector2( 3208, -152 )
+items = {
+"bunny egg": [ false, 1, 20 ],
+"carrot": [ false, 10, 10 ],
+"cherry": [ false, 5, 25 ],
+"coconut": [ true, 20, 35 ],
+"energy": [ true, 10, 35 ],
+"gems": 30,
+"glitch orb": [ false, 1, 30 ],
+"glitch soul": [ false, 1, 35 ],
+"ice gun": [ false, 1, 250 ],
+"ice spike": [ false, 1, 25 ],
+"laser gun": [ false, 1, 100 ],
+"nail": [ false, 5, 30 ],
+"nail gun": [ false, 1, 300 ],
+"orbs": [ true, 500, 70 ],
+"pear": [ true, 10, 35 ],
+"snow gun": [ false, 1, 150 ],
+"snowball": [ false, 5, 40 ],
+"water": [ false, 5, 10 ],
+"water gun": [ false, 1, 50 ]
+}
+
+[node name="Shop6" parent="Shop" instance=ExtResource( 20 )]
+position = Vector2( 4280, -232 )
+items = {
+"bunny egg": [ false, 1, 20 ],
+"carrot": [ false, 10, 10 ],
+"cherry": [ true, 8, 25 ],
+"coconut": [ false, 10, 25 ],
+"energy": [ false, 5, 20 ],
+"gems": 45,
+"glitch orb": [ false, 1, 30 ],
+"glitch soul": [ false, 1, 35 ],
+"ice gun": [ false, 1, 250 ],
+"ice spike": [ false, 1, 25 ],
+"laser gun": [ false, 1, 100 ],
+"nail": [ false, 5, 30 ],
+"nail gun": [ false, 1, 300 ],
+"orbs": [ false, 100, 40 ],
+"pear": [ false, 2, 250 ],
+"snow gun": [ true, 1, 150 ],
+"snowball": [ true, 5, 40 ],
+"water": [ false, 5, 10 ],
+"water gun": [ false, 1, 50 ]
+}
+
+[node name="Shop7" parent="Shop" instance=ExtResource( 20 )]
+position = Vector2( 5064, -248 )
+items = {
+"bunny egg": [ false, 1, 20 ],
+"carrot": [ false, 10, 10 ],
+"cherry": [ true, 5, 25 ],
+"coconut": [ false, 10, 25 ],
+"energy": [ false, 5, 20 ],
+"gems": 60,
+"glitch orb": [ false, 1, 30 ],
+"glitch soul": [ false, 1, 35 ],
+"ice gun": [ true, 1, 250 ],
+"ice spike": [ true, 2, 30 ],
+"laser gun": [ false, 1, 100 ],
+"nail": [ false, 5, 30 ],
+"nail gun": [ false, 1, 300 ],
+"orbs": [ false, 100, 40 ],
+"pear": [ true, 10, 60 ],
+"snow gun": [ false, 1, 150 ],
+"snowball": [ false, 5, 40 ],
+"water": [ false, 5, 10 ],
+"water gun": [ false, 1, 50 ]
+}
+
+[node name="Shop8" parent="Shop" instance=ExtResource( 20 )]
+position = Vector2( 5752, 16 )
+items = {
+"bunny egg": [ false, 1, 20 ],
+"carrot": [ false, 10, 10 ],
+"cherry": [ true, 20, 20 ],
+"coconut": [ false, 10, 25 ],
+"energy": [ false, 5, 20 ],
+"gems": 81,
+"glitch orb": [ true, 5, 15 ],
+"glitch soul": [ true, 5, 15 ],
+"ice gun": [ false, 1, 250 ],
+"ice spike": [ true, 5, 10 ],
+"laser gun": [ false, 1, 100 ],
+"nail": [ true, 10, 20 ],
+"nail gun": [ true, 1, 250 ],
+"orbs": [ true, 2000, 100 ],
+"pear": [ false, 2, 250 ],
+"snow gun": [ false, 1, 150 ],
+"snowball": [ false, 5, 40 ],
+"water": [ false, 5, 10 ],
+"water gun": [ false, 1, 50 ]
+}

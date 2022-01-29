@@ -166,6 +166,8 @@ func unlock_next_level() -> void:
 	if GlobalLevel.current_level + 1 <= LEVEL_DATABASE[GlobalLevel.current_world]:
 		GlobalSave.set_stat("world_max", GlobalLevel.current_world)
 		GlobalSave.set_stat("level_max", GlobalLevel.current_level + 1)
+		#print("upping level")
+		GlobalEvents.emit_signal("save_file_saved", true)
 	else:
 		if not int(GlobalSave.get_stat("world_max")) == GlobalLevel.WORLD_COUNT:
 			GlobalSave.set_stat("world_max", GlobalLevel.current_world + 1)

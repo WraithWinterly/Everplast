@@ -473,8 +473,8 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 			return
 		# Item Failed
 		GlobalEvents.emit_signal("ui_inventory_opened")
+		GlobalEvents.emit_signal("ui_button_pressed")
 
-		#GlobalEvents.emit_signal("ui_button_pressed")
 		GlobalUI.menu = GlobalUI.Menus.INVENTORY
 		show_menu()
 		get_tree().set_input_as_handled()

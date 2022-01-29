@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/game_beat/game_beat.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=10]
 [ext_resource path="res://world_all/orbs/orb.png" type="Texture" id=11]
-[ext_resource path="res://ui/8x8.png" type="Texture" id=12]
 [ext_resource path="res://ui/clock.png" type="Texture" id=13]
 [ext_resource path="res://ui/level_icon.png" type="Texture" id=14]
 [ext_resource path="res://world_all/gems/gem.png" type="Texture" id=15]
@@ -172,16 +171,9 @@ __meta__ = {
 anims/RESET = SubResource( 3 )
 anims/show = SubResource( 4 )
 
-[node name="BGBlur" type="TextureRect" parent="." instance=ExtResource( 4 )]
+[node name="BGBlur" parent="." instance=ExtResource( 4 )]
 visible = false
 material = SubResource( 2 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 12 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Panel" type="Panel" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -199,7 +191,7 @@ anchor_right = 1.0
 anchor_bottom = 0.1
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 3 )
-text = "Congrats!!!"
+text = "game_beat.title"
 align = 1
 valign = 1
 __meta__ = {
@@ -240,7 +232,7 @@ anchor_right = 0.98
 anchor_bottom = 0.764
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 2 )
-text = "You can try speedrunning to get the total time low and share your score."
+text = "game_beat.content4"
 align = 1
 valign = 1
 autowrap = true

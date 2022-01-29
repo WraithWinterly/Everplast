@@ -183,7 +183,7 @@ func _level_changed(world: int = 0, level: int = 0) -> void:
 	yield(get_tree(), "physics_frame")
 
 	label.text = "%s %s\n%s - %s" % [tr("profile_selector.button.normal"), GlobalSave.profile + 1, GlobalLevel.WORLD_NAMES[world], level]
-	if level == 4:
+	if world == 4:
 		label.text = "The End"
 	play(false)
 	yield(GlobalEvents, "ui_faded")

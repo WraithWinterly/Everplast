@@ -40,7 +40,7 @@ func _body_entered(body: Node) -> void:
 		GlobalLevel.checkpoint_index = index
 		GlobalEvents.emit_signal("level_checkpoint_activated")
 		GlobalEvents.emit_signal("ui_notification_shown", tr("notification.checkpoint"))
-		GlobalEvents.emit_signal("save_file_saved", false)
+		GlobalEvents.emit_signal("save_file_saved", true)
 		sound.play()
 		disable()
 

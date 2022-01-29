@@ -599,9 +599,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/SidePanel"]
-margin_top = 247.0
 margin_right = 390.0
-margin_bottom = 607.0
+margin_bottom = 360.0
 custom_constants/separation = 15
 alignment = 1
 
@@ -712,9 +711,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/GeneralMenu"]
-margin_top = 118.0
 margin_right = 820.0
-margin_bottom = 654.0
+margin_bottom = 536.0
 custom_constants/separation = 30
 alignment = 1
 
@@ -889,9 +887,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/GraphicsMenu"]
-margin_top = 221.0
 margin_right = 820.0
-margin_bottom = 551.0
+margin_bottom = 330.0
 custom_constants/separation = 30
 alignment = 1
 
@@ -989,14 +986,14 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/ControlsMenu"]
-margin_right = 923.0
+margin_right = 820.0
 margin_bottom = 348.0
 custom_constants/separation = 30
 alignment = 1
 
 [node name="ControllerIndex" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.862745 )
-margin_right = 923.0
+margin_right = 820.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Controls")
 focus_neighbour_top = NodePath(".")
@@ -1018,7 +1015,7 @@ text = "settings.controls.selected_controller"
 
 [node name="Why" type="Label" parent="Panel/BG/ControlsMenu/HBoxContainer"]
 margin_top = 90.0
-margin_right = 923.0
+margin_right = 820.0
 margin_bottom = 110.0
 custom_fonts/font = ExtResource( 12 )
 text = "settings.controls.control_hint"
@@ -1030,7 +1027,7 @@ __meta__ = {
 
 [node name="IndexSlider" type="HBoxContainer" parent="Panel/BG/ControlsMenu/HBoxContainer"]
 margin_top = 140.0
-margin_right = 923.0
+margin_right = 820.0
 margin_bottom = 168.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1048,7 +1045,7 @@ __meta__ = {
 
 [node name="Slider" type="HSlider" parent="Panel/BG/ControlsMenu/HBoxContainer/IndexSlider"]
 margin_left = 138.0
-margin_right = 923.0
+margin_right = 820.0
 margin_bottom = 28.0
 focus_neighbour_top = NodePath("../../ControllerIndex")
 focus_neighbour_bottom = NodePath("../../CustomizeControls")
@@ -1067,7 +1064,7 @@ value = 1.0
 [node name="CustomizeControls" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.862745 )
 margin_top = 198.0
-margin_right = 923.0
+margin_right = 820.0
 margin_bottom = 258.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Controls")
 focus_neighbour_top = NodePath("../IndexSlider/Slider")
@@ -1087,7 +1084,7 @@ text = "settings.controls.kb_controls"
 [node name="ControllerControls" type="Button" parent="Panel/BG/ControlsMenu/HBoxContainer"]
 modulate = Color( 1, 1, 1, 0.862745 )
 margin_top = 288.0
-margin_right = 923.0
+margin_right = 820.0
 margin_bottom = 348.0
 focus_neighbour_left = NodePath("../../../../SidePanel/HBoxContainer/Controls")
 focus_neighbour_top = NodePath("../CustomizeControls")
@@ -1280,9 +1277,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Panel/BG/OtherMenu"]
-margin_top = 311.0
 margin_right = 820.0
-margin_bottom = 461.0
+margin_bottom = 150.0
 custom_constants/separation = 30
 alignment = 1
 
@@ -1352,7 +1348,7 @@ anims/show = SubResource( 2 )
 [connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Graphics" to="." method="_on_Graphics_focus_entered"]
 [connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Controls" to="." method="_on_Controls_focus_entered"]
 [connection signal="focus_entered" from="Panel/SidePanel/HBoxContainer/Other" to="." method="_on_Other_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/ButtonHint" to="." method="_on_Credits_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/ButtonHint" to="." method="_on_ButtonHint_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/Language" to="." method="_on_Language_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/MusicVolume" to="." method="_on_MusicVolume_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GeneralMenu/HBoxContainer/AudioVolume" to="." method="_on_AudioVolume_focus_entered"]
@@ -1361,8 +1357,8 @@ anims/show = SubResource( 2 )
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/VSync" to="." method="_on_VSync_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/Tonemap" to="." method="_on_Tonemap_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/GraphicsMenu/HBoxContainer/PostProcessing" to="." method="_on_PostProcessing_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/ControllerIndex" to="." method="_on_Test_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls" to="." method="_on_Test_focus_entered"]
-[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls" to="." method="_on_Test_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/ControllerIndex" to="." method="_on_ControllerIndex_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/CustomizeControls" to="." method="_on_CustomizeControls_focus_entered"]
+[connection signal="focus_entered" from="Panel/BG/ControlsMenu/HBoxContainer/ControllerControls" to="." method="_on_ControllerControls_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/ResetSettings" to="." method="_on_DebugConsole_focus_entered"]
 [connection signal="focus_entered" from="Panel/BG/OtherMenu/HBoxContainer/EraseGame" to="." method="_on_EraseGame_focus_entered"]

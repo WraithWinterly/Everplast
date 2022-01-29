@@ -31,21 +31,21 @@ func _unhandled_input(event: InputEvent) -> void:
 func show_menu() -> void:
 	GlobalSave.set_stat("game_beat", true)
 	GlobalEvents.emit_signal("save_file_saved")
-	$Panel/Label2.text = "Everplast is now complete!"
+	$Panel/Label2.text = tr("game_beat.content")
 
 	if GlobalStats.total_gems - GlobalSave.get_gem_count() > 0:
-		$Panel/Label2.text += "There are still %s gems that have not been collected." % (GlobalStats.total_gems - GlobalSave.get_gem_count())
+		$Panel/Label2.text += "\n%s %s %s" % [tr("game_beat.content2"), (GlobalStats.total_gems - GlobalSave.get_gem_count()), tr("game_beat.content3")]
 	else:
 		remaining_gems.hide()
 
 	return_button.grab_focus()
 	return_button.disabled = false
 	anim_player.play("show")
-	level_label.text = "Level: " + str(GlobalSave.get_stat("level"))
-	total_orbs.text = "Total Orbs: "+ str(GlobalSave.get_gem_count())
-	total_gems.text = "Total Gems: " + str(GlobalSave.get_gem_count())
-	remaining_gems.text = "Remaining Gems: " + str(GlobalStats.total_gems - GlobalSave.get_gem_count())
-	total_time.text = "Time Played: "+ GlobalSave.get_timeplay_string()
+	level_label.text = "%s: " % tr("inventory.stats.player_level") + str(GlobalSave.get_stat("level"))
+	total_orbs.text = "%s: " % tr("inventory.stats.total_orbs") + str(GlobalSave.get_gem_count())
+	total_gems.text = "%s: " % tr("inventory.stats.total_gems") + str(GlobalSave.get_gem_count())
+	remaining_gems.text = "%s: %s" % [tr("game_beat.remaning_gems"), str(GlobalStats.total_gems - GlobalSave.get_gem_count())]
+	total_time.text = "%s: " % tr("game_beat.time_played") + GlobalSave.get_timeplay_string()
 	get_tree().paused = true
 
 

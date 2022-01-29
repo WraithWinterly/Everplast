@@ -13,10 +13,11 @@ func _ready() -> void:
 	__ = yes_button.connect("pressed", self, "_yes_pressed")
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel") and (
-			GlobalUI.menu == GlobalUI.Menus.SETTINGS_ERASE_ALL_PROMPT or GlobalUI.menu == GlobalUI.Menus.SETTINGS_ERASE_ALL_EXTRA_PROMPT
-			) and not GlobalUI.menu_locked:
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel") and \
+			(GlobalUI.menu == GlobalUI.Menus.SETTINGS_ERASE_ALL_PROMPT or GlobalUI.menu == GlobalUI.Menus.SETTINGS_ERASE_ALL_EXTRA_PROMPT) \
+			and not GlobalUI.menu_locked:
+		print("goin back")
 		_no_pressed()
 		get_tree().set_input_as_handled()
 
@@ -80,12 +81,13 @@ func _yes_pressed() -> void:
 
 	else:
 		disable_buttons()
+		GlobalUI.menu_locked = true
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_ERASE_ALL_EXTRA_PROMPT
 		GlobalEvents.emit_signal("ui_settings_erase_all_prompt_yes_pressed")
 		hide_menu()
-		GlobalUI.menu_locked = true
 		yield(get_tree().create_timer(0.75), "timeout")
 		GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
+		#yield(anim_player, "animation_finished")
 		GlobalUI.menu_locked = false
 		enable_buttons()
 		no_button.grab_focus()

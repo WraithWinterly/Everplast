@@ -70,7 +70,7 @@ const SHOP_NAMES := {
 }
 
 const VALID_POWERUPS: Array = ["carrot", "cherry", "coconut", "bunny egg", "glitch orb", "pear", "glitch soul", "ice spike"]
-const TIMED_POWERUPS: Array = ["glitch orb", "bunny egg", "ice spike"]
+const TIMED_POWERUPS: Array = ["glitch orb", "bunny egg", "ice spike", "glitch soul"]
 
 const VALID_EQUIPPABLES: Array = ["water gun", "nail gun", "laser gun", "snow gun", "ice gun"]
 const VALID_COLLECTABLES: Array = ["energy", "water", "nail", "snowball"]
@@ -90,6 +90,7 @@ const PEAR_ADRENALINE_BOOST: int = 5
 const BUNNY_EGG_TIME: int = 10
 const GLITCH_ORB_TIME: int = 7
 const ICE_SPIKE_TIME: int = 3
+const GLITCH_SOUL_TIME: int = 6
 
 const PEAR_TIME: int = 5
 const PEAR_CONSEQUENCE: int = 5

@@ -138,17 +138,21 @@ func unlockall() -> String:
 	GlobalSave.data[GlobalSave.profile].gems[str(3)] = {}
 	GlobalSave.data[GlobalSave.profile].gems[str(4)] = {}
 
-	for level in GlobalLevel.LEVEL_DATABASE[1]:
+	for level in GlobalLevel.LEVEL_DATABASE[1] + 1:
+		if level == 0: continue
 		GlobalSave.data[GlobalSave.profile].gems["1"][str(level)] = [true, true, true]
 
-	for world in GlobalLevel.LEVEL_DATABASE[2]:
-		GlobalSave.data[GlobalSave.profile].gems["2"][str(world)] = [true, true, true]
+	for level in GlobalLevel.LEVEL_DATABASE[2] + 1:
+		if level == 0: continue
+		GlobalSave.data[GlobalSave.profile].gems["2"][str(level)] = [true, true, true]
 
-	for world in GlobalLevel.LEVEL_DATABASE[3]:
-		GlobalSave.data[GlobalSave.profile].gems["3"][str(world)] = [true, true, true]
+	for level in GlobalLevel.LEVEL_DATABASE[3] + 1:
+		if level == 0: continue
+		GlobalSave.data[GlobalSave.profile].gems["3"][str(level)] = [true, true, true]
 
-	for world in GlobalLevel.LEVEL_DATABASE[4]:
-		GlobalSave.data[GlobalSave.profile].gems["4"][str(world)] = [true, true, true]
+	for level in GlobalLevel.LEVEL_DATABASE[4] + 1:
+		if level == 0: continue
+		GlobalSave.data[GlobalSave.profile].gems["4"][str(level)] = [true, true, true]
 
 
 	GlobalEvents.emit_signal("save_file_saved")

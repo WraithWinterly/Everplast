@@ -38,7 +38,7 @@ const DEFAULT_DATA: Dictionary = {
 		"move_left": KEY_LEFT,
 		"move_right": KEY_RIGHT,
 		"move_down": KEY_DOWN,
-		"move_jump": KEY_W,
+		"move_jump": KEY_UP,
 		"move_sprint": null,
 		"interact": null,
 		"inventory": null,
@@ -228,6 +228,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_GENERAL or GlobalUI.menu == GlobalUI.Menus.SETTINGS_GRAPHICS\
 			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS or GlobalUI.menu == GlobalUI.Menus.SETTINGS_OTHER) and not GlobalUI.menu_locked:
 		back()
+		print("setting back")
 		get_tree().set_input_as_handled()
 
 
@@ -268,7 +269,7 @@ func update_button_toggles() -> void:
 func show_menu() -> void:
 	disable_side_panel_right_focus()
 	subcategory_anim_player.play("slide")
-
+	yield(get_tree(), "physics_frame")
 	back_button.grab_focus()
 	show()
 	animation_player.play("show")
@@ -556,6 +557,8 @@ func back() -> void:
 			else:
 				GlobalUI.menu = GlobalUI.Menus.PAUSE_MENU
 
+	update_left_button_focus()
+
 
 func update_tonemap_button_text() -> void:
 	var string: String = "%s: " % tr("settings.graphics.tonemap")
@@ -593,6 +596,15 @@ func update_right_button_focus() -> void:
 func update_left_button_focus() -> void:
 	for button in side_panel.get_children():
 		button.focus_neighbour_right = button_focus.get_path()
+
+	# No subcategory
+	if GlobalUI.menu == GlobalUI.Menus.SETTINGS:
+		back_button.focus_neighbour_right = back_button.get_path()
+		general_menu_button.focus_neighbour_right = general_menu_button.get_path()
+		graphics_menu_button.focus_neighbour_right = graphics_menu_button.get_path()
+		controls_menu_button.focus_neighbour_right = controls_menu_button.get_path()
+		other_menu_button.focus_neighbour_right = other_menu_button.get_path()
+
 
 
 # Start of Global Events
@@ -894,7 +906,8 @@ func update_controllers() -> void:
 	else:
 		controls_controller_index_label.text = tr("settings.controls.no_controllers")
 		controls_controller_index_slider.hide()
-		controls_controller_index_button.grab_focus()
+		if GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS:
+			controls_controller_index_button.grab_focus()
 
 	#print(data.controller_index)
 	# SET CONTROLS TO NEW INDEX
@@ -1017,6 +1030,10 @@ func _on_Other_focus_entered() -> void:
 # GENERAL MENU FOCUSES
 #
 
+func _on_ButtonHint_focus_entered() -> void:
+	button_focus = hint_button
+	update_left_button_focus()
+
 func _on_Language_focus_entered() -> void:
 	button_focus = language_button
 	update_left_button_focus()
@@ -1064,6 +1081,22 @@ func _on_PostProcessing_focus_entered() -> void:
 func _on_Test_focus_entered() -> void:
 	button_focus = controls_customize_button
 	update_left_button_focus()
+
+
+func _on_ControllerIndex_focus_entered() -> void:
+	button_focus = controls_controller_index_button
+	update_left_button_focus()
+
+
+func _on_CustomizeControls_focus_entered() -> void:
+	button_focus = controls_customize_button
+	update_left_button_focus()
+
+
+func _on_ControllerControls_focus_entered() -> void:
+	button_focus = $Panel/BG/ControlsMenu/HBoxContainer/ControllerControls
+	update_left_button_focus()
+
 
 #
 # OTHER MENU FOCUSES

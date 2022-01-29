@@ -126,7 +126,7 @@ inventory.equippable.laser_gun,Laser Gun,Pistola de Laser
 inventory.equippable.snow_gun,Snow Gun,Pistola de Nieve
 inventory.equippable.ice_gun,Ice Gun,Pistola de Hielo
 world_selector.teleporter_not_active,This teleporter is not active yet!,Este teletransportador aun no esta activo!
-world_selector.label,World Selector,Selector Mundial
+world_selector.label,Level Selector,Selector de Nivel
 settings.reset_settings.title,Reset Settings?,Reajustar Ajustes?
 settings.reset_settings.text,All settings will be reset to their default values.,Todos ajustes sera reajustados a sus valores predeterminados.
 ,,
@@ -200,4 +200,12 @@ global.day,Days,Dias
 global.hour,Hours,Horas
 global.minute,Minutes,Minutos
 global.second,Seconds,Segundos
-remaning_gems,Remaining Gems,Gemas restantes
+game_beat.time_played,Time Played,Tiempo Jugado
+game_beat.remaning_gems,Remaining Gems,Gemas restantes
+game_beat.title,Congrats!!!,Felicidades!!!
+game_beat.content,Everplast is now complete!,Everplast ahora esta completo!
+game_beat.content2,There are still,Todavia hay
+game_beat.content3,gems that have not been collected.,gemas que no han sido recolectadas.
+game_beat.content4,You can try speedrunning to get the total time low and share your score,Puedes probar el speedrunning para reducir el tiempo total y compartir tu puntuacion
+all_gem.content,You have obtained every gem in Everplast!,Has obtenido todas las gemas de Everplast!
+all_gem.content2,Your profile button will now reflect this!,Tu boton de perfil ya reflejara esto!

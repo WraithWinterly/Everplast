@@ -225,7 +225,7 @@ func _button_pressed() -> void:
 	yield(get_tree(), "physics_frame")
 	GlobalSave.set_stat("coins", GlobalSave.get_stat("coins") - loaded_shop[item][2])
 	yield(get_tree(), "physics_frame")
-	update_shop(loaded_shop)
+	#update_shop(loaded_shop)
 
 
 func _on_Back_pressed() -> void:

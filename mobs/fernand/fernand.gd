@@ -238,7 +238,7 @@ func _died() -> void:
 		yield(get_tree(), "physics_frame")
 		get_tree().paused = true
 		yield(GlobalEvents, "ui_dialogue_hidden")
-		GlobalEvents.emit_signal("save_file_saved")
+		GlobalEvents.emit_signal("save_file_saved", true)
 		GlobalEvents.emit_signal("story_fernand_beat")
 		pause_mode = PAUSE_MODE_PROCESS
 		get_tree().paused = true

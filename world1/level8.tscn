@@ -7,7 +7,7 @@
 [ext_resource path="res://world_all/spikes/spikes.gd" type="Script" id=5]
 [ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=6]
 [ext_resource path="res://world_all/coins/coin.tscn" type="PackedScene" id=7]
-[ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world1/backgrounds/canvas_mountain_w1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=9]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=10]
 [ext_resource path="res://world_all/lanterns/lantern.tscn" type="PackedScene" id=12]
@@ -76,8 +76,6 @@ position = Vector2( 4432, 56 )
 
 [node name="PlayerStart" type="Position2D" parent="LevelComponents"]
 
-[node name="MountainBackground" parent="LevelComponents" instance=ExtResource( 8 )]
-
 [node name="TileMapW1Grass" type="TileMap" parent="LevelComponents"]
 z_index = 2
 tile_set = ExtResource( 15 )
@@ -144,6 +142,8 @@ index = 2
 
 [node name="LevelEndTeleporter" parent="LevelComponents" instance=ExtResource( 6 )]
 position = Vector2( 4392, -184 )
+
+[node name="MountainBackgroundW1" parent="LevelComponents" instance=ExtResource( 8 )]
 
 [node name="Lantern" type="Node2D" parent="."]
 

@@ -27,13 +27,13 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func show_menu() -> void:
 	GlobalSave.set_stat("all_gems_collected", true)
-	GlobalEvents.emit_signal("save_file_saved")
+	GlobalEvents.emit_signal("save_file_saved", true)
 
 	return_button.grab_focus()
 	return_button.disabled = false
 	anim_player.play("show")
-	total_gems.text = "Total Gems: " + str(GlobalSave.get_gem_count())
-	remaining_gems.text = "Remaining Gems: " + str(GlobalStats.total_gems - GlobalSave.get_gem_count())
+	total_gems.text = "%s: " % tr("inventory.stats.total_gems") + str(GlobalSave.get_gem_count())
+	remaining_gems.text = "%s: " % tr("game_beat.remaning_gems") + str(GlobalStats.total_gems - GlobalSave.get_gem_count())
 	get_tree().paused = true
 
 
@@ -52,6 +52,6 @@ func _back_pressed() -> void:
 func _ui_all_gems_shown() -> void:
 	show_menu()
 	#GlobalSave.set_stat("all_gems_collected", true)
-	GlobalEvents.emit_signal("save_file_saved")
+	GlobalEvents.emit_signal("save_file_saved", true)
 	GlobalUI.menu = GlobalUI.Menus.ALL_ORBS
 	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")

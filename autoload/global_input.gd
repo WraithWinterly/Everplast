@@ -17,6 +17,7 @@ var equip_activated: bool = false
 
 
 func _physics_process(_delta: float) -> void:
+
 	if GlobalUI.menu == GlobalUI.Menus.DIALOGUE:
 		dialogue_activated = true
 
