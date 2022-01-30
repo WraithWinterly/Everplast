@@ -326,6 +326,7 @@ func _player_used_powerup(item_name: String) -> void:
 		"cherry":
 			set_adrenaline(get_stat("adrenaline") + GlobalStats.CHERRY_BOOST)
 			set_health(get_stat("health") + GlobalStats.CHERRY_BOOST_HEALTH)
+
 	GlobalEvents.emit_signal("save_stat_updated")
 
 
@@ -359,15 +360,17 @@ func _player_collected_gem(index: int) -> void:
 
 	set_stat("gems", gem_dict)
 
+
 func get_timeplay_string() -> String:
 	var total_secs: int = get_stat("seconds_played")
 	if total_secs == 0: return ""
 
 	var days: int = int(total_secs) / 86400
 	total_secs %= 86400
-	var hours: int = total_secs / 3600
 
+	var hours: int = total_secs / 3600
 	total_secs %= 3600
+
 	var mins: int = total_secs / 60
 
 	total_secs %= 60

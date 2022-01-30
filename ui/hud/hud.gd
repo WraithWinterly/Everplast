@@ -178,6 +178,7 @@ func show_powerup_slot() -> void:
 		#update_counters()
 
 
+
 func hide_powerup_slot() -> void:
 	if powerup_slot_visible:
 		powerup_slot_anim_player.play_backwards("slide")
@@ -226,7 +227,7 @@ func update_counters() -> void:
 	else:
 		show_ui_slot()
 
-	if GlobalStats.last_powerup == "none":
+	if GlobalStats.last_powerup == "":
 		hide_powerup_slot()
 	else:
 		show_powerup_slot()
@@ -427,14 +428,16 @@ func _player_hurt_from_enemy(_hurt_type: int, _knockback: int, _damage: int) -> 
 
 
 func _player_used_powerup(item_name: String) -> void:
+	GlobalStats.last_powerup = item_name
+	GlobalStats.last_powerup_before_death = item_name
 	yield(get_tree(), "physics_frame")
 								# wtf godot?
 #	if shown_powerup == null or shown_powerup == "":
 #		powerup_slot_anim_player.play("slide")
-	show_powerup_slot()
 	powerup_slot_texture.texture = load(GlobalPaths.get_powerup_texture(item_name))
 	shown_powerup = item_name
 	powerup_use_anim_player.play("use")
+	show_powerup_slot()
 	update_counters()
 
 

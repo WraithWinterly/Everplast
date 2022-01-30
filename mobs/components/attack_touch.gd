@@ -29,7 +29,7 @@ func damage_by_jump() -> void:
 
 func damage_by_touch() -> void:
 	if attack_by_jump:
-		yield(get_tree(), "physics_frame")
+		#yield(get_tree(), "physics_frame")
 		#yield(get_tree(), "physics_frame")
 		if mob_component.dead: return
 		if mob_component.damaging_self: return
@@ -66,16 +66,18 @@ func _hit_area_body_entered(body: Node) -> void:
 
 			if get_node(GlobalPaths.PLAYER).dashing:
 				damage_by_jump()
+				print(get_parent().get_parent().name + " Damage Enemy bc dash")
 				return
 			elif in_jump_boots and (body.was_falling or not body.is_on_floor()):
 				damage_by_jump()
+				print(get_parent().get_parent().name + " Damage Enemy bc fall")
 				return
 			else:
-				if attack_by_jump:
-					#yield(get_tree(), "physics_frame")
-					if not cooling_down:
-						damage_by_touch()
-						return
+				yield(get_tree(), "physics_frame")
+				if not cooling_down:
+					damage_by_touch()
+					print(get_parent().get_parent().name + " Damage Player")
+					return
 		else:
 			damage_by_touch()
 			return

@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=2]
 
-[ext_resource path="res://world2/canvas_mountain_w2_old.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world2/backgrounds/canvas_mountain_w2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world_all/torches/torch.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world_all/death_area/death_area.tscn" type="PackedScene" id=3]
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=4]
@@ -22,7 +22,7 @@
 [ext_resource path="res://world_all/teleporters/subsection/subsection_teleporter.tscn" type="PackedScene" id=20]
 [ext_resource path="res://tilesets/tileset_sandstone.tres" type="TileSet" id=21]
 [ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=22]
-[ext_resource path="res://world1/canvas_mountain.tscn" type="PackedScene" id=24]
+[ext_resource path="res://world1/backgrounds/canvas_mountain_w1.tscn" type="PackedScene" id=23]
 [ext_resource path="res://mobs/ostrich/ostrich.tscn" type="PackedScene" id=25]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=26]
 [ext_resource path="res://world_all/boss_activator/boss_activater.tscn" type="PackedScene" id=27]
@@ -62,7 +62,7 @@ tracks/0/keys = {
 [node name="Level" type="Node2D"]
 script = ExtResource( 10 )
 canvas_normal = ExtResource( 1 )
-canvas_subsection = ExtResource( 24 )
+canvas_subsection = ExtResource( 23 )
 
 [node name="BossComplete" type="Camera2D" parent="."]
 pause_mode = 2

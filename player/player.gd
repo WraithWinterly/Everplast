@@ -77,6 +77,7 @@ func _physics_process(_delta):
 		linear_velocity = Vector2(0, 0)
 
 	#print(linear_velocity.y)
+	if get_tree().paused: return
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.collider
@@ -104,7 +105,7 @@ func _physics_process(_delta):
 
 	if was_falling and is_on_floor():
 		yield(get_tree(), "physics_frame")
-		yield(get_tree(), "physics_frame")
+		#yield(get_tree(), "physics_frame")
 		was_falling = false
 
 	GlobalInput.dash_activated = may_dash and GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD
