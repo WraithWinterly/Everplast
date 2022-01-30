@@ -40,6 +40,7 @@ func _physics_process(_delta) -> void:
 
 
 func _player_used_powerup(item_name: String) -> void:
+	if GlobalStats.timed_powerup_active: stop_active_item()
 	if item_name in GlobalStats.TIMED_POWERUPS:
 		GlobalStats.active_timed_powerup = item_name
 	text = GlobalStats.COMMON_NAMES[item_name.capitalize()]

@@ -63,6 +63,7 @@ func _ready() -> void:
 		gem.hide()
 
 
+
 func _physics_process(_delta: float) -> void:
 	if not Globals.game_state == Globals.GameStates.MENU:
 		if Globals.game_state == Globals.GameStates.LEVEL:
@@ -110,6 +111,7 @@ func _physics_process(_delta: float) -> void:
 		low_health_rect_active = false
 
 
+
 	update_counters()
 
 	if GlobalStats.timed_powerup_active:
@@ -154,10 +156,26 @@ func hide_ui_slot() -> void:
 
 
 func show_powerup_slot() -> void:
+	var has_item: bool = false
+
+	for stat in GlobalSave.get_stat("powerups"):
+		if stat[0] == GlobalStats.last_powerup:
+			if stat[1] > 0:
+				has_item = true
+				#print("has item")
+
+	if not has_item:
+		GlobalStats.last_powerup = ""
+		#powerup_slot_visible = false
+		#print("removing item")
+
+	#print(powerup_slot_visible)
 	if not powerup_slot_visible and Globals.game_state == Globals.GameStates.LEVEL and not GlobalStats.last_powerup == "":
 		powerup_slot.show()
+		#print("SLIDING IN!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		powerup_slot_anim_player.play("slide")
 		powerup_slot_visible = true
+		#update_counters()
 
 
 func hide_powerup_slot() -> void:
@@ -238,6 +256,20 @@ func update_counters() -> void:
 		else:
 			ui_slot_label.text = "x0"
 			ui_slot_label.modulate = Color8(220, 25, 25)
+
+		var inv_2: Array = GlobalSave.get_stat("powerups")
+		var worker_2: String = GlobalStats.last_powerup
+
+		if GlobalSave.has_item(inv_2, worker_2):
+			for array in inv_2:
+				if array[0] == worker_2:
+					powerup_slot_label.text = "x%s" % array[1]
+					powerup_slot_label.modulate = Color8(255, 255, 255)
+					if array[1] == 0:
+						hide_powerup_slot()
+					else:
+						show_powerup_slot()
+					continue
 
 
 func update_gems() -> void:
@@ -343,6 +375,7 @@ func _level_changed(_world: int, _level: int) -> void:
 	show_hud()
 	toggled = true
 	show_ui_slot()
+
 	show_powerup_slot()
 
 
@@ -360,9 +393,9 @@ func _player_died() -> void:
 	powerup_slot_visible = false
 	ui_slot_visible = false
 	hide_hud()
-	pass
-	#yield(GlobalEvents, "ui_faded")
-	#update_gems()
+	if not GlobalStats.last_powerup_before_death == "":
+		GlobalStats.last_powerup = GlobalStats.last_powerup_before_death
+
 
 
 func _player_level_increased(_upgrade: String) -> void:
@@ -396,8 +429,9 @@ func _player_hurt_from_enemy(_hurt_type: int, _knockback: int, _damage: int) -> 
 func _player_used_powerup(item_name: String) -> void:
 	yield(get_tree(), "physics_frame")
 								# wtf godot?
-	if shown_powerup == null or shown_powerup == "":
-		powerup_slot_anim_player.play("slide")
+#	if shown_powerup == null or shown_powerup == "":
+#		powerup_slot_anim_player.play("slide")
+	show_powerup_slot()
 	powerup_slot_texture.texture = load(GlobalPaths.get_powerup_texture(item_name))
 	shown_powerup = item_name
 	powerup_use_anim_player.play("use")

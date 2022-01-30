@@ -60,8 +60,8 @@ onready var upgrade_stats_prompt_text: Label = $Panel/Stats/UpgradeStatsPrompt/P
 onready var upgrade_stats_info_label: Label = $Panel/Stats/StatsUpgrade/Info
 onready var upgrade_sound: AudioStreamPlayer = $Panel/Stats/UpgradeStatsPrompt/UpgradeSound
 
-
 onready var current_panel: Panel = powerups_panel
+
 
 func _ready() -> void:
 	var __: int
@@ -481,31 +481,33 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 		return
 
 	GlobalStats.last_powerup = item
+	GlobalStats.last_powerup_before_death = item
 
-	if item in GlobalStats.TIMED_POWERUPS and GlobalStats.timed_powerup_active:
-		GlobalEvents.emit_signal("ui_notification_shown", tr("notification.item_active"))
-		return
 
+#	if item in GlobalStats.TIMED_POWERUPS and GlobalStats.timed_powerup_active:
+#		GlobalEvents.emit_signal("ui_notification_shown", tr("notification.item_active"))
+#		return
+#
+#	else:
+	if not item in GlobalStats.TIMED_POWERUPS and fill_button.pressed:
+		var stats = GlobalSave.get_stat("powerups")
+
+		for stat in stats:
+			var string = item
+
+			string = string.replace(" ", "_")
+
+			if string == stat[0]:
+				if not stat[0] in GlobalStats.TIMED_POWERUPS:
+					fill_items(stat[0], stat[1])
+				continue
 	else:
-		if not item in GlobalStats.TIMED_POWERUPS and fill_button.pressed:
-			var stats = GlobalSave.get_stat("powerups")
+		GlobalEvents.emit_signal("player_used_powerup", item)
+		play_powerup_sound()
 
-			for stat in stats:
-				var string = item
-
-				string = string.replace(" ", "_")
-
-				if string == stat[0]:
-					if not stat[0] in GlobalStats.TIMED_POWERUPS:
-						fill_items(stat[0], stat[1])
-					continue
-		else:
-			GlobalEvents.emit_signal("player_used_powerup", item)
-			play_powerup_sound()
-
-		if from_inventory:
-			#GlobalEvents.emit_signal("ui_button_pressed")
-			hide_menu()
+	if from_inventory:
+		#GlobalEvents.emit_signal("ui_button_pressed")
+		hide_menu()
 
 
 # Start of GlobalEvents

@@ -595,6 +595,9 @@ func update_right_button_focus() -> void:
 
 func update_left_button_focus() -> void:
 	for button in side_panel.get_children():
+		if button == null: return
+		if button_focus == null: return
+
 		button.focus_neighbour_right = button_focus.get_path()
 
 	# No subcategory
@@ -905,9 +908,9 @@ func update_controllers() -> void:
 		controls_controller_index_slider.show()
 	else:
 		controls_controller_index_label.text = tr("settings.controls.no_controllers")
-		controls_controller_index_slider.hide()
-		if GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS:
+		if GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS and controls_controller_index_slider.has_focus():
 			controls_controller_index_button.grab_focus()
+		controls_controller_index_slider.hide()
 
 	#print(data.controller_index)
 	# SET CONTROLS TO NEW INDEX

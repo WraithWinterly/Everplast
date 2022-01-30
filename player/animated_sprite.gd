@@ -79,9 +79,11 @@ func _process(_delta: float) -> void:
 
 	if bypass: return
 
-	if get_tree().paused: return
-
 	playing = not get_tree().paused
+
+	if get_tree().paused:
+		return
+
 
 	match fsm.current_state:
 		fsm.idle:

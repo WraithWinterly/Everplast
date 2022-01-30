@@ -89,13 +89,14 @@ const PEAR_ADRENALINE_BOOST: int = 5
 
 const BUNNY_EGG_TIME: int = 10
 const GLITCH_ORB_TIME: int = 7
-const ICE_SPIKE_TIME: int = 3
+const ICE_SPIKE_TIME: int = 6
 const GLITCH_SOUL_TIME: int = 6
 
 const PEAR_TIME: int = 5
 const PEAR_CONSEQUENCE: int = 5
 
 var active_timed_powerup := ""
+var last_powerup_before_death := ""
 var last_powerup := ""
 var timed_powerup_active := false
 
