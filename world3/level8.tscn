@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world3/backgrounds/canvas_underground_w3.tscn" type="PackedScene" id=2]
@@ -24,7 +24,6 @@
 [ext_resource path="res://mobs/ice_cube/ice_cube.tscn" type="PackedScene" id=22]
 [ext_resource path="res://world_all/cannon/cannon.tscn" type="PackedScene" id=23]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=24]
-[ext_resource path="res://world_all/gems/gem.gd" type="Script" id=25]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 6 )
@@ -72,27 +71,16 @@ position = Vector2( 5608, -32 )
 
 [node name="Gems" type="Node2D" parent="LevelComponents"]
 
-[node name="Gem1" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 24 )]
+[node name="Gem1" parent="LevelComponents/Gems" instance=ExtResource( 24 )]
 position = Vector2( 480, 48 )
-script = ExtResource( 25 )
 
-[node name="Gem2" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 24 )]
+[node name="Gem2" parent="LevelComponents/Gems" instance=ExtResource( 24 )]
 position = Vector2( 1600, 88 )
-script = ExtResource( 25 )
 index = 1
 
-[node name="Gem3" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 24 )]
+[node name="Gem3" parent="LevelComponents/Gems" instance=ExtResource( 24 )]
 position = Vector2( 4744, 128 )
-script = ExtResource( 25 )
 index = 2
-
-[node name="PlayerPositions" type="Node2D" parent="."]
-
-[node name="Start" type="Position2D" parent="PlayerPositions"]
-position = Vector2( 144, 232 )
-
-[node name="End" type="Position2D" parent="PlayerPositions"]
-position = Vector2( 312, -240 )
 
 [node name="Lanterns" type="Node2D" parent="."]
 
@@ -231,9 +219,6 @@ position = Vector2( 5504, -8 )
 [node name="Trees" type="Node2D" parent="."]
 
 [node name="FallingPlatform" type="Node2D" parent="."]
-
-[node name="FallingPlatform" parent="FallingPlatform" instance=ExtResource( 13 )]
-position = Vector2( 240, -144 )
 
 [node name="Torches" type="Node2D" parent="."]
 
@@ -825,9 +810,6 @@ position = Vector2( 5216, 56 )
 
 [node name="Penguin17" parent="Penguins" instance=ExtResource( 21 )]
 position = Vector2( 5360, 32 )
-
-[node name="Penguin18" parent="Penguins" instance=ExtResource( 21 )]
-position = Vector2( 5424, 32 )
 
 [node name="Penguin19" parent="Penguins" instance=ExtResource( 21 )]
 position = Vector2( 5504, 8 )
@@ -1570,10 +1552,6 @@ rotation = -3.14159
 
 [node name="Cannon3" parent="Cannon" instance=ExtResource( 23 )]
 position = Vector2( 592, 152 )
-rotation = -3.14159
-
-[node name="Cannon4" parent="Cannon" instance=ExtResource( 23 )]
-position = Vector2( 640, 40 )
 rotation = -3.14159
 
 [node name="Cannon5" parent="Cannon" instance=ExtResource( 23 )]

@@ -42,7 +42,7 @@ func show_menu() -> void:
 	return_button.disabled = false
 	anim_player.play("show")
 	level_label.text = "%s: " % tr("inventory.stats.player_level") + str(GlobalSave.get_stat("level"))
-	total_orbs.text = "%s: " % tr("inventory.stats.total_orbs") + str(GlobalSave.get_gem_count())
+	total_orbs.text = "%s: " % tr("inventory.stats.total_orbs") + str(GlobalSave.get_stat("orbs"))
 	total_gems.text = "%s: " % tr("inventory.stats.total_gems") + str(GlobalSave.get_gem_count())
 	remaining_gems.text = "%s: %s" % [tr("game_beat.remaning_gems"), str(GlobalStats.total_gems - GlobalSave.get_gem_count())]
 	total_time.text = "%s: " % tr("game_beat.time_played") + GlobalSave.get_timeplay_string()

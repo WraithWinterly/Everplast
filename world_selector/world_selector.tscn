@@ -770,7 +770,7 @@ items = {
 "carrot": [ false, 10, 10 ],
 "cherry": [ false, 5, 25 ],
 "coconut": [ true, 10, 10 ],
-"energy": [ false, 5, 20 ],
+"energy": [ true, 5, 20 ],
 "gems": 21,
 "glitch orb": [ false, 1, 30 ],
 "glitch soul": [ false, 1, 35 ],

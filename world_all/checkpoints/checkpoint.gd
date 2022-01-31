@@ -22,6 +22,7 @@ func _ready() -> void:
 			GlobalLevel.checkpoint_level == GlobalLevel.current_level:
 		disable(false)
 
+	GlobalUI.menu = GlobalUI.Menus.NONE
 
 func disable(animation: bool = true) -> void:
 	enabled = false
