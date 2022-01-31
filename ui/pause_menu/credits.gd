@@ -73,11 +73,8 @@ Music Tracks:
 		Rain (World 3 Theme)
 		Arpy Arp (World 3 Alt Theme)
 		Fun in the Sun (World 3 Dark Theme)
-		Wonderful Lie (World 4)
 
 	Daydream Anatomy - 8-Bit-Heroes - 04 Struggle <gamesounds.xyz> (World 1 Cloud Theme)
-
-	Trevor Lentz - "Lines of Code" <opengameart.org> (World 4)
 
 	CodeManu - "Iceland Theme" <opengameart.org> (World 3 World Selector Theme)
 
@@ -209,7 +206,7 @@ Art:
 	(World 1 Backgrounds)
 
 	https://itch.io/s/63033/winter-sale-2021-pt
-	(World 1/ 2 / 3 / 4 Backgrounds)
+	(World 1 / 2 / 3 Backgrounds)
 
 """ % [copyright, engine_string]
 	title.text = copyright
