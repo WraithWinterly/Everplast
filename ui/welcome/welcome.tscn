@@ -1,0 +1,277 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=2]
+[ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=3]
+[ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.png" type="Texture" id=4]
+[ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=5]
+[ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=7]
+[ext_resource path="res://world_selector/level_enter_teleporter.png" type="Texture" id=8]
+[ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=9]
+[ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=10]
+[ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=11]
+[ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=12]
+[ext_resource path="res://world_selector/shop/shop_enter.png" type="Texture" id=13]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BGBlur:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BGBlur:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Panel:anchor_top")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.2 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Panel:anchor_bottom")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.8 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Panel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BGBlur:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.01 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("BGBlur:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform float amount: hint_range(0.0, 5.0);
+
+void fragment() {
+	COLOR.rgb = textureLod(SCREEN_TEXTURE, SCREEN_UV, amount).rgb;
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/amount = 1.2
+
+[node name="Welcome" type="Control"]
+pause_mode = 2
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/show = SubResource( 4 )
+
+[node name="BGBlur" parent="." instance=ExtResource( 5 )]
+visible = false
+material = SubResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.15
+anchor_top = 1.0
+anchor_right = 0.85
+anchor_bottom = 1.0
+custom_styles/panel = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WelcomeLabel" type="Label" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 0.1
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 2 )
+text = "Welcome to Everplast!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BG" type="Panel" parent="Panel"]
+anchor_left = 0.03
+anchor_top = 0.108
+anchor_right = 0.975
+anchor_bottom = 0.75
+margin_left = -7.62939e-06
+margin_top = 1.52588e-05
+custom_styles/panel = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContentLabel" type="Label" parent="Panel/BG"]
+anchor_top = 0.165
+anchor_right = 1.0
+anchor_bottom = 0.178
+margin_left = -33.6
+margin_top = -26.4222
+margin_right = -33.6
+margin_bottom = -0.929043
+custom_fonts/font = ExtResource( 3 )
+text = "Right now you are in the level selector."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel"]
+anchor_left = 0.1
+anchor_top = 0.802
+anchor_right = 0.9
+anchor_bottom = 0.903
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Back" type="Button" parent="Panel/HBoxContainer"]
+margin_left = 327.0
+margin_right = 569.0
+margin_bottom = 60.0
+focus_neighbour_left = NodePath(".")
+focus_neighbour_top = NodePath(".")
+focus_neighbour_bottom = NodePath(".")
+custom_fonts/font = ExtResource( 2 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 12 )
+custom_styles/focus = ExtResource( 11 )
+custom_styles/disabled = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+text = "global.back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelEnter" type="TextureRect" parent="Panel"]
+margin_left = 112.0
+margin_top = 144.0
+margin_right = 208.0
+margin_bottom = 336.0
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Shop" type="TextureRect" parent="Panel"]
+margin_left = 510.0
+margin_top = 144.0
+margin_right = 606.0
+margin_bottom = 336.0
+texture = ExtResource( 13 )
+expand = true
+
+[node name="LevelExit" type="TextureRect" parent="Panel"]
+margin_left = 948.0
+margin_top = 144.0
+margin_right = 1044.0
+margin_bottom = 336.0
+texture = ExtResource( 4 )
+expand = true

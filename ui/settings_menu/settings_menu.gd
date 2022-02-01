@@ -723,8 +723,8 @@ func _general_pressed() -> void:
 
 		GlobalUI.menu = GlobalUI.Menus.SETTINGS_GENERAL
 
-		hint_button.grab_focus()
-		#language_button.grab_focus()
+		#hint_button.grab_focus()
+		language_button.grab_focus()
 
 	update_left_button_focus()
 	update_right_button_focus()

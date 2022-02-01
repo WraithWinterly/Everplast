@@ -14,8 +14,8 @@ main_menu.settings,Settings,Ajustes
 main_menu.quit,Quit,Salir
 ,,
 quick_play.prompt_title,Play Last Profile...,Jugar Perfil Ultimo...
-quick_play.prompt_text,Play,¿Jugar
-quit_prompt.title,Quit?,¿Salir?
+quick_play.prompt_text,Play,Jugar
+quit_prompt.title,Quit?,Salir?
 quit_prompt.text,Are you sure you want to quit?,Estas seguro que quieres salir?
 ,,
 settings.title,Settings,Ajustes
@@ -130,20 +130,20 @@ world_selector.label,Level Selector,Selector de Nivel
 settings.reset_settings.title,Reset Settings?,Reajustar Ajustes?
 settings.reset_settings.text,All settings will be reset to their default values.,Todos ajustes sera reajustados a sus valores predeterminados.
 ,,
-inventory.quick_items.fill,Will use all required or available items to fill your health to the maximum,Utilizará todos los elementos requeridos o disponibles para llenar su salud al máximo
+inventory.quick_items.fill,Will use all required or available items to fill your health to the maximum,Utilizara todos los elementos requeridos o disponibles para llenar su salud al maximo
 ,,
 powerup_explanations.carrot,Increases your health by,Aumenta tu salud por
-powerup_explanations.cherry,Increases your adrenaline by,Aumenta tu adrenalina por
+powerup_explanations.cherry,Increases your health by,Aumenta tu salud por
+powerup_explanations.cherry_2,and your adrenaline by,Aumenta tu adrenalina por
 powerup_explanations.coconut,Increases your health by ,Aumenta tu salud por
 powerup_explanations.bunny_egg,Gives you a speed boost for,Aumenta tu velocidad por
-powerup_explanations.bunny_egg.2,seconds,segundos
+powerup_explanations.bunny_egg_2,seconds,segundos
 powerup_explanations.glitch_orb,CODE_GLITCH,PROGRAMA_GLITCH
 powerup_explanations.pear,Increases your health by,Aumenta tu salud por
 powerup_explanations.pear.2,and your adrenaline by,y su adrenalina por
 powerup_explanations.glitch_soul,Not complete,No esta completo
 powerup_explanations.ice_spike,Freezes your health and adrenaline for,Congela tu salud y adrenalina durante
 powerup_explanations.ice_spike_2,seconds. This includes powerups.,segundos. Esto incluye potenciadores.
-,,
 rank_explanations.none,You do not have a rank yet,No tienes un rango aun
 rank_explanations.silver,- See enemy health on hit\n- Double Jump\n- Wall Jump,- Puedes ver la salud de los enemigos en golpe\n- Doble Salto\n- Salto de Paredes
 rank_explanations.gold,- Adrenaline Rush\n-Jump damage by 3,- Subidon de Adrenalina\n- Dano de salto por 3

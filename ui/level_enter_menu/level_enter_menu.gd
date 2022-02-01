@@ -155,6 +155,8 @@ func _level_changed(_world: int, _level: int) -> void:
 
 
 func _level_enter_menu_pressed() -> void:
+	yield(get_tree(), "physics_frame")
+	if not GlobalUI.menu == GlobalUI.Menus.LEVEL_ENTER: return
 	show_menu()
 
 

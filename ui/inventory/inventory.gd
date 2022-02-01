@@ -123,6 +123,8 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if Globals.game_state == Globals.GameStates.MENU: return
+	if GlobalUI.menu == GlobalUI.Menus.DIALOGUE: return
+	if GlobalUI.menu == GlobalUI.Menus.CUTSCENE: return
 	if Globals.death_in_progress: return
 
 	if event.is_action_pressed("equip"):

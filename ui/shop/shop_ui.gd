@@ -4,6 +4,8 @@ var loaded_shop: Dictionary
 # Used for saving
 var bought_something: bool = false
 
+var prev_focus: Button
+
 onready var items_vbox: VBoxContainer = $Panel/BG/Items
 onready var prices_vbox: VBoxContainer = $Panel/BG/Price
 onready var anim_player: AnimationPlayer = $AnimationPlayer
@@ -85,10 +87,15 @@ func update_shop(items: Dictionary) -> void:
 	shop_label.text = "Shop"
 	shop_label.self_modulate = Color8(255, 255, 255, 255)
 
+	for button in $Panel/BG/Items.get_children():
+		if button.has_focus():
+			prev_focus = button
+
 	for button in items_vbox.get_children():
 		button.hide()
 	for label in prices_vbox.get_children():
 		label.hide()
+
 
 	for item in items:
 		if item == "gems": continue
@@ -127,6 +134,9 @@ func update_shop(items: Dictionary) -> void:
 		if int(GlobalSave.get_stat("coins")) < items[item][2]:
 			items_vbox.get_node(item.capitalize()).disabled = true
 			prices_vbox.get_node(item.capitalize()).self_modulate = Color8(220, 25, 25, 255)
+
+		if not prev_focus == null:
+			prev_focus.grab_focus()
 
 #	# Button focuses
 #
@@ -237,3 +247,6 @@ func _on_AnimationPlayer_animation_finished(_anim_name: String) -> void:
 	if GlobalUI.menu == GlobalUI.Menus.SHOP:
 		enable_buttons()
 		update_shop(loaded_shop)
+		print(prev_focus)
+		if not prev_focus == null:
+			prev_focus.grab_focus()

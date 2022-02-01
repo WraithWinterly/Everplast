@@ -876,9 +876,6 @@ position = Vector2( 2592, 24 )
 [node name="Penguin13" parent="Penguins" instance=ExtResource( 10 )]
 position = Vector2( 2824, -88 )
 
-[node name="Penguin14" parent="Penguins" instance=ExtResource( 10 )]
-position = Vector2( 2968, -96 )
-
 [node name="Penguin15" parent="Penguins" instance=ExtResource( 10 )]
 position = Vector2( 3136, -128 )
 

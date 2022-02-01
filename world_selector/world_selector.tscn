@@ -492,7 +492,7 @@ world = 2
 level = 1
 
 [node name="2-2" parent="Teleporters" instance=ExtResource( 3 )]
-position = Vector2( 2368, -160 )
+position = Vector2( 2400, -160 )
 world = 2
 level = 2
 
@@ -764,7 +764,7 @@ items = {
 }
 
 [node name="Shop4" parent="Shop" instance=ExtResource( 20 )]
-position = Vector2( 2472, -96 )
+position = Vector2( 2352, -160 )
 items = {
 "bunny egg": [ false, 1, 20 ],
 "carrot": [ false, 10, 10 ],
@@ -794,7 +794,7 @@ items = {
 "carrot": [ false, 10, 10 ],
 "cherry": [ false, 5, 25 ],
 "coconut": [ true, 20, 35 ],
-"energy": [ true, 10, 35 ],
+"energy": [ true, 20, 35 ],
 "gems": 30,
 "glitch orb": [ false, 1, 30 ],
 "glitch soul": [ false, 1, 35 ],

@@ -10,7 +10,7 @@ extents = Vector2( 4, 3.34 )
 modulate = Color( 0.141176, 0.321569, 0.490196, 0.470588 )
 material = ExtResource( 2 )
 scale = Vector2( 700, 15 )
-z_index = 1
+z_index = 2
 texture = ExtResource( 1 )
 centered = false
 

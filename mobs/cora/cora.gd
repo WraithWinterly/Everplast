@@ -175,7 +175,7 @@ func _died() -> void:
 	GlobalEvents.emit_signal("story_boss_killed", GlobalStats.Bosses.CORA)
 	GlobalEvents.emit_signal("ui_dialogued", "Hehe", NAME)
 	GlobalEvents.emit_signal("ui_dialogued", "Just wait...", NAME)
-	GlobalEvents.emit_signal("ui_dialogued", "If you thought that was any hard... you are in for a suprise.", NAME)
+	GlobalEvents.emit_signal("ui_dialogued", "If you thought that was any hard... you are in for a surprise.", NAME)
 	GlobalEvents.emit_signal("ui_dialogued", "Take this, you are not going to make it much farther. HAHAHA!", NAME)
 	set_physics_process(false)
 	set_process(false)

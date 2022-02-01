@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func _story_boss_killed(idx: int) -> void:
 	GlobalUI.menu = GlobalUI.Menus.CUTSCENE
+	print("putting in cutscene - story boss killed")
 	yield(GlobalEvents, "ui_dialogue_hidden")
 
 	GlobalUI.menu_locked = true

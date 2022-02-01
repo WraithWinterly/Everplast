@@ -123,13 +123,13 @@ func _process(_delta: float) -> void:
 func get_powerup_explanation(powerup_name: String) -> String:
 	match powerup_name:
 		"carrot":
-			return "%s %s." % [tr("powerup_explanations.carrot" + "TO BE UPDATED"), CARROT_BOOST]
+			return "%s %s" % [tr("powerup_explanations.carrot"), CARROT_BOOST]
 		"cherry":
-			return "%s %s." % [tr("powerup_explanations.cherry"), CHERRY_BOOST]
+			return "%s %s %s %s" % [tr("powerup_explanations.cherry"), CHERRY_BOOST_HEALTH, tr("powerup_explanations.cherry_2"), CHERRY_BOOST]
 		"coconut":
-			return "%s %s." % [tr("powerup_explanations.coconut"), COCONUT_BOOST]
+			return "%s %s" % [tr("powerup_explanations.coconut"), COCONUT_BOOST]
 		"bunny egg":
-			return "%s %s %s." % [tr("powerup_explanations.bunny_egg"), BUNNY_EGG_TIME, tr("powerup_explanations.bunny_egg.2")]
+			return "%s %s %s" % [tr("powerup_explanations.bunny_egg"), BUNNY_EGG_TIME, tr("powerup_explanations.bunny_egg_2")]
 		"glitch orb":
 			return "%s %s" % [tr("powerup_explanations.glitch_orb"), GLITCH_ORB_TIME]
 		"pear":

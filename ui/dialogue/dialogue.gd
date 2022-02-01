@@ -156,6 +156,7 @@ func close_dialogue() -> void:
 		get_tree().paused = false
 	else:
 		GlobalUI.menu = GlobalUI.Menus.CUTSCENE
+		print("close dialogue - cutscene")
 
 
 

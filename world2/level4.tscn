@@ -58,11 +58,11 @@ position = Vector2( 8, 8 )
 position = Vector2( 0, -200 )
 
 [node name="BottomRight" type="Position2D" parent="LevelComponents/CameraPositions"]
-position = Vector2( 7824, 184 )
+position = Vector2( 7824, 168 )
 
 [node name="DeathArea" parent="LevelComponents" instance=ExtResource( 3 )]
 position = Vector2( 4864, 200 )
-scale = Vector2( 500, 1 )
+scale = Vector2( 500, 0.8 )
 
 [node name="LevelEndTeleporter" parent="LevelComponents" instance=ExtResource( 11 )]
 position = Vector2( 7768, 48 )
@@ -76,7 +76,7 @@ position = Vector2( 4072, -64 )
 position = Vector2( 1704, -32 )
 
 [node name="Gem2" parent="LevelComponents/Gems" instance=ExtResource( 24 )]
-position = Vector2( 1104, -216 )
+position = Vector2( 2527, 113 )
 index = 1
 
 [node name="Gem3" parent="LevelComponents/Gems" instance=ExtResource( 24 )]

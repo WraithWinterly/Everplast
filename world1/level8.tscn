@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world_all/platforms/tileset_platform.tres" type="TileSet" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://world1/backgrounds/canvas_mountain_w1.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world_all/tilemap_block/tilemap_block.gd" type="Script" id=9]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=11]
 [ext_resource path="res://world_all/lanterns/lantern.tscn" type="PackedScene" id=12]
 [ext_resource path="res://mobs/slime_flying/slime_flying.tscn" type="PackedScene" id=13]
 [ext_resource path="res://mobs/bird/bird.tscn" type="PackedScene" id=14]
@@ -144,6 +145,9 @@ index = 2
 position = Vector2( 4392, -184 )
 
 [node name="MountainBackgroundW1" parent="LevelComponents" instance=ExtResource( 8 )]
+
+[node name="Checkpoint" parent="LevelComponents" instance=ExtResource( 11 )]
+position = Vector2( 2688, -72 )
 
 [node name="Lantern" type="Node2D" parent="."]
 
@@ -280,7 +284,7 @@ position = Vector2( 2488, -80 )
 position = Vector2( 2544, -80 )
 
 [node name="Tree24" parent="Trees" instance=ExtResource( 3 )]
-position = Vector2( 2656, -112 )
+position = Vector2( 2648, -112 )
 
 [node name="Tree25" parent="Trees" instance=ExtResource( 3 )]
 position = Vector2( 2776, -112 )
@@ -399,7 +403,7 @@ position = Vector2( 2408, -24 )
 position = Vector2( 2560, -32 )
 
 [node name="Vase18" parent="Vases" instance=ExtResource( 10 )]
-position = Vector2( 2664, -64 )
+position = Vector2( 2656, -64 )
 
 [node name="Vase19" parent="Vases" instance=ExtResource( 10 )]
 position = Vector2( 2872, -48 )
@@ -408,7 +412,7 @@ position = Vector2( 2872, -48 )
 position = Vector2( 3160, -96 )
 
 [node name="Vase37" parent="Vases" instance=ExtResource( 10 )]
-position = Vector2( 2688, -64 )
+position = Vector2( 2672, -64 )
 
 [node name="Vase38" parent="Vases" instance=ExtResource( 10 )]
 position = Vector2( 1992, -32 )
@@ -769,12 +773,6 @@ position = Vector2( 2384, -88 )
 
 [node name="FlyingSlime13" parent="FlyingSlime" instance=ExtResource( 13 )]
 position = Vector2( 2528, -80 )
-
-[node name="FlyingSlime14" parent="FlyingSlime" instance=ExtResource( 13 )]
-position = Vector2( 2624, -88 )
-
-[node name="FlyingSlime15" parent="FlyingSlime" instance=ExtResource( 13 )]
-position = Vector2( 2736, -96 )
 
 [node name="FlyingSlime16" parent="FlyingSlime" instance=ExtResource( 13 )]
 position = Vector2( 2880, -118 )

@@ -24,7 +24,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=8]
-extents = Vector2( 6.5, 4 )
+extents = Vector2( 6.5, 3.5 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 3.5 )
@@ -42,10 +42,9 @@ max_health = 6
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 1.12 )
 frames = SubResource( 7 )
-frame = 1
 
 [node name="CollisionShape2D" parent="EnemyComponentManager/HurtArea" index="0"]
-position = Vector2( 3.5, 3 )
+position = Vector2( 3.5, 3.5 )
 shape = SubResource( 8 )
 
 [node name="BasicMovement" parent="EnemyComponentManager" instance=ExtResource( 5 )]

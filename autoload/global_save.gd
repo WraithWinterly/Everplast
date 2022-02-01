@@ -7,6 +7,8 @@ const FILE: String = \
 		"user://save.json"
 
 const DEFAULT_DATA: Dictionary = {
+	"welcome_shown": false,
+	"adrenaline_shown": false,
 	"game_beat": false,
 	"all_gems_collected": false,
 	"seconds_played": 0.0,

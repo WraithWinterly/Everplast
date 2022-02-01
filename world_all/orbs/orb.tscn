@@ -80,8 +80,8 @@ tracks/0/keys = {
 blend_mode = 1
 
 [sub_resource type="CapsuleShape2D" id=3]
-radius = 12.0
-height = 4.0
+radius = 9.0
+height = 0.0
 
 [sub_resource type="CircleShape2D" id=7]
 radius = 7.0
@@ -89,6 +89,7 @@ radius = 7.0
 [node name="Orb" type="KinematicBody2D"]
 collision_layer = 8
 collision_mask = 3
+collision/safe_margin = 0.345
 script = ExtResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -112,7 +113,6 @@ texture = ExtResource( 4 )
 offset = Vector2( 0, -1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 4, 4 )
 shape = SubResource( 3 )
 

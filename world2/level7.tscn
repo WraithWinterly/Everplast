@@ -105,7 +105,7 @@ position = Vector2( 3720, -896 )
 
 [node name="DeathArea" parent="LevelComponents" instance=ExtResource( 3 )]
 position = Vector2( 4864, 200 )
-scale = Vector2( 500, 1 )
+scale = Vector2( -1141.03, 0.786517 )
 
 [node name="DeathArea2" parent="LevelComponents" instance=ExtResource( 3 )]
 position = Vector2( 4728, -888 )
@@ -117,22 +117,26 @@ position = Vector2( 3224, -1448 )
 [node name="Checkpoint" parent="LevelComponents" instance=ExtResource( 22 )]
 position = Vector2( 3096, 48 )
 
+[node name="Checkpoint1" parent="LevelComponents" instance=ExtResource( 22 )]
+position = Vector2( 2272, -1096 )
+index = 1
+
 [node name="Gems" type="Node2D" parent="LevelComponents"]
 
 [node name="Gem1" parent="LevelComponents/Gems" instance=ExtResource( 27 )]
-position = Vector2( 1424, 176 )
+position = Vector2( 1424, 152 )
 
 [node name="Gem2" parent="LevelComponents/Gems" instance=ExtResource( 27 )]
-position = Vector2( 3056, 168 )
+position = Vector2( 3056, 152 )
 index = 1
 
 [node name="Gem3" parent="LevelComponents/Gems" instance=ExtResource( 27 )]
-position = Vector2( 3528, -1400 )
+position = Vector2( 3504, -1400 )
 index = 2
 
 [node name="Water" parent="." instance=ExtResource( 7 )]
 position = Vector2( -8, 128 )
-scale = Vector2( 399, 8 )
+scale = Vector2( 399, 10 )
 
 [node name="Trees" type="Node2D" parent="."]
 
@@ -374,9 +378,6 @@ position = Vector2( 2664, -1056 )
 
 [node name="Vase33" parent="Vases" instance=ExtResource( 18 )]
 position = Vector2( 2408, -1088 )
-
-[node name="Vase34" parent="Vases" instance=ExtResource( 18 )]
-position = Vector2( 2304, -1088 )
 
 [node name="Vase35" parent="Vases" instance=ExtResource( 18 )]
 position = Vector2( 2144, -968 )
@@ -849,14 +850,8 @@ position = Vector2( 936, 104 )
 [node name="Bunny2" parent="." instance=ExtResource( 17 )]
 position = Vector2( 2384, 120 )
 
-[node name="Bunny3" parent="." instance=ExtResource( 17 )]
-position = Vector2( 2280, -1088 )
-
 [node name="Fox" parent="." instance=ExtResource( 23 )]
 position = Vector2( 264, -1032 )
-
-[node name="Fox2" parent="." instance=ExtResource( 23 )]
-position = Vector2( 2232, -1088 )
 
 [node name="Fox3" parent="." instance=ExtResource( 23 )]
 position = Vector2( 3288, -1408 )
