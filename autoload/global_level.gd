@@ -161,6 +161,14 @@ func load_world_selector() -> void:
 	GlobalEvents.emit_signal("level_world_selector_loaded")
 	GlobalEvents.emit_signal("save_stat_updated")
 
+	if not GlobalSave.get_stat("welcome_shown"):
+		yield(GlobalEvents, "ui_faded")
+		GlobalEvents.emit_signal("ui_welcome_shown")
+
+	if not GlobalSave.get_stat("adrenaline_shown") and GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD:
+		yield(GlobalEvents, "ui_faded")
+		GlobalEvents.emit_signal("ui_adrenaline_shown")
+
 
 func unlock_next_level() -> void:
 	if GlobalLevel.current_level + 1 <= LEVEL_DATABASE[GlobalLevel.current_world]:

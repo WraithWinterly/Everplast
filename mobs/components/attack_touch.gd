@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func damage_by_jump() -> void:
 	cooling_down = true
-	cooldown_timer.start(0.1)
+	cooldown_timer.start(0.3)
 	mob_component.damage(Globals.HurtTypes.JUMP)
 	GlobalEvents.emit_signal("player_hurt_enemy", Globals.HurtTypes.JUMP)
 
@@ -36,7 +36,7 @@ func damage_by_touch() -> void:
 		if cooling_down: return
 
 	cooling_down = true
-	cooldown_timer.start(0.1)
+	cooldown_timer.start(0.3)
 
 	if flying_enemy:
 		GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.TOUCH_AIR,
@@ -73,7 +73,7 @@ func _hit_area_body_entered(body: Node) -> void:
 				print(get_parent().get_parent().name + " Damage Enemy bc fall")
 				return
 			else:
-				yield(get_tree(), "physics_frame")
+				#yield(get_tree(), "physics_frame")
 				if not cooling_down:
 					damage_by_touch()
 					print(get_parent().get_parent().name + " Damage Player")

@@ -2,6 +2,7 @@ extends Area2D
 
 export var world: int = 0
 export var level: int = 0
+export var hide_shader: bool = false
 
 var with_player := false
 var used := false
@@ -18,6 +19,8 @@ func _ready() -> void:
 	__ = connect("body_entered", self, "_body_entered")
 	__ = connect("body_exited", self, "_body_exited")
 	$Godrays.show()
+	if hide_shader:
+		$Godrays.hide()
 
 
 func _input(event: InputEvent) -> void:

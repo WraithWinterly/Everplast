@@ -100,6 +100,8 @@ func _physics_process(_delta: float) -> void:
 				noti_delay.start(noti_delay.wait_time)
 			#GlobalEvents.emit_signal("ui_notification_shown", tr("notification.upgrade_available"))
 			upgrade_notification_showed = true
+			if not GlobalSave.get_stat("level_upgrade_shown"):
+				GlobalEvents.emit_signal("ui_level_upgrade_shown")
 
 		if not shown_powerup == null and not shown_powerup == "":
 			powerup_slot_label.text = "x" + str(GlobalSave.get_item_count(GlobalSave.get_stat("powerups"), shown_powerup))

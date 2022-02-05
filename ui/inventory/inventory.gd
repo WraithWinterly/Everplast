@@ -125,8 +125,11 @@ func _input(event: InputEvent) -> void:
 	if Globals.game_state == Globals.GameStates.MENU: return
 	if GlobalUI.menu == GlobalUI.Menus.DIALOGUE: return
 	if GlobalUI.menu == GlobalUI.Menus.CUTSCENE: return
+	if get_tree().paused and not GlobalUI.menu == GlobalUI.Menus.INVENTORY: return
 	if Globals.death_in_progress: return
 
+	#yield(get_tree(), "idle_frame")
+	print("TRY FYUCKING INVENRT")
 	if event.is_action_pressed("equip"):
 		if not Globals.game_state == Globals.GameStates.LEVEL:
 			return
@@ -155,11 +158,15 @@ func _input(event: InputEvent) -> void:
 				GlobalUI.menu = GlobalUI.Menus.NONE
 				get_tree().set_input_as_handled()
 			elif GlobalUI.menu == GlobalUI.Menus.NONE:
-				GlobalEvents.emit_signal("ui_inventory_opened")
-				GlobalEvents.emit_signal("ui_button_pressed")
-				GlobalUI.menu = GlobalUI.Menus.INVENTORY
-				show_menu()
-				get_tree().set_input_as_handled()
+
+				if not GlobalUI.menu == GlobalUI.Menus.PAUSE_MENU:
+					GlobalUI.menu = GlobalUI.Menus.INVENTORY
+					GlobalUI.menu_locked = true
+					GlobalEvents.emit_signal("ui_inventory_opened")
+					GlobalEvents.emit_signal("ui_button_pressed")
+					if not GlobalUI.menu == GlobalUI.Menus.INVENTORY: return
+					show_menu()
+					get_tree().set_input_as_handled()
 		elif event.is_action_pressed("ui_cancel"):
 			if GlobalUI.menu == GlobalUI.Menus.INVENTORY:
 				hide_menu()
@@ -174,6 +181,7 @@ func _input(event: InputEvent) -> void:
 
 
 func show_menu() -> void:
+	if not GlobalUI.menu == GlobalUI.Menus.INVENTORY: return
 	enable_buttons()
 	current_panel = powerups_panel
 	current_panel.get_node("AnimationPlayer").play("slide")
@@ -190,6 +198,7 @@ func show_menu() -> void:
 	animation_player.play("show")
 
 	top_powerup_button.grab_focus()
+	GlobalUI.menu_locked = false
 
 
 func hide_menu() -> void:
@@ -198,7 +207,7 @@ func hide_menu() -> void:
 	animation_player.play_backwards("show")
 	disable_buttons()
 	yield(animation_player, "animation_finished")
-	if not animation_player.is_playing() and not get_tree().paused:
+	if not animation_player.is_playing() and not get_tree().paused and not GlobalUI.menu == GlobalUI.Menus.INVENTORY:
 		hide()
 
 

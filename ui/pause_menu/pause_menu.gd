@@ -33,8 +33,9 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+
 	if (event.is_action_pressed("pause") or (event.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.PAUSE_MENU)) and not GlobalUI.menu_locked:
-		if GlobalUI.menu == GlobalUI.Menus.NONE and not GlobalUI.fade_player_playing:
+		if GlobalUI.menu == GlobalUI.Menus.NONE and not GlobalUI.fade_player_playing and not GlobalUI.menu_locked:
 			show_menu()
 			GlobalEvents.emit_signal("ui_button_pressed")
 			GlobalEvents.emit_signal("ui_pause_menu_pressed")
@@ -73,7 +74,7 @@ func show_menu() -> void:
 		restart_button.show()
 
 
-	yield(get_tree(), "physics_frame")
+	#yield(get_tree(), "physics_frame")
 	continue_button.grab_focus()
 	GlobalUI.menu = GlobalUI.Menus.PAUSE_MENU
 	get_tree().paused = true

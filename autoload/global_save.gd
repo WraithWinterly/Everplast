@@ -8,6 +8,7 @@ const FILE: String = \
 
 const DEFAULT_DATA: Dictionary = {
 	"welcome_shown": false,
+	"level_upgrade_shown": false,
 	"adrenaline_shown": false,
 	"game_beat": false,
 	"all_gems_collected": false,

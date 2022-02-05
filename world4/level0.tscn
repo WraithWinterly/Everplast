@@ -1,0 +1,351 @@
+[gd_scene load_steps=59 format=2]
+
+[ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world3/backgrounds/canvas_mountain_w3.tscn" type="PackedScene" id=2]
+[ext_resource path="res://world3/tilemap_ice_w3.tscn" type="PackedScene" id=3]
+[ext_resource path="res://world1/tilemap_w1_grass.tscn" type="PackedScene" id=4]
+[ext_resource path="res://world_all/death_area/death_area.tscn" type="PackedScene" id=5]
+[ext_resource path="res://world_all/level.gd" type="Script" id=6]
+[ext_resource path="res://world_all/platforms/tilemap_platform.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world_all/trees/tree.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world3/falling_ice/faling_ice.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world_all/checkpoints/checkpoint.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world_all/tilemap_block/tilemap_block.tscn" type="PackedScene" id=12]
+[ext_resource path="res://mobs/ice_cube/ice_cube.tscn" type="PackedScene" id=13]
+[ext_resource path="res://world_all/coins/coin.tscn" type="PackedScene" id=14]
+[ext_resource path="res://world_all/tilemap_spikes/tilemap_spikes.tscn" type="PackedScene" id=15]
+[ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=16]
+[ext_resource path="res://tilesets/tileset_beach.tres" type="TileSet" id=17]
+[ext_resource path="res://world2/tilemap_sandstone_w2.tscn" type="PackedScene" id=18]
+[ext_resource path="res://world2/tilemap_sand_w2.tscn" type="PackedScene" id=19]
+[ext_resource path="res://world3/tilemap_ice_block_w3.tscn" type="PackedScene" id=20]
+[ext_resource path="res://world2/tilemap_rock.tscn" type="PackedScene" id=21]
+[ext_resource path="res://tilesets/tileset_cloud.tres" type="TileSet" id=22]
+[ext_resource path="res://world_all/platforms/falling_platform.tscn" type="PackedScene" id=23]
+[ext_resource path="res://world_all/equippables/water_gun.tscn" type="PackedScene" id=24]
+[ext_resource path="res://tilesets/tilemap_w4.tres" type="TileSet" id=25]
+[ext_resource path="res://world_all/lanterns/lantern.tscn" type="PackedScene" id=26]
+[ext_resource path="res://world_all/equippables/nail_gun.tscn" type="PackedScene" id=27]
+[ext_resource path="res://world_all/rank_pickup/rank_pickup.tscn" type="PackedScene" id=28]
+[ext_resource path="res://world_all/orbs/orb.tscn" type="PackedScene" id=29]
+[ext_resource path="res://world_all/equippables/laser_gun.tscn" type="PackedScene" id=30]
+[ext_resource path="res://mobs/scorpion/scorpion.tscn" type="PackedScene" id=31]
+[ext_resource path="res://world_all/equippables/snow_gun.tscn" type="PackedScene" id=32]
+[ext_resource path="res://mobs/bird/bird.tscn" type="PackedScene" id=33]
+[ext_resource path="res://mobs/slime/slime.tscn" type="PackedScene" id=34]
+[ext_resource path="res://mobs/chicken/chicken.tscn" type="PackedScene" id=35]
+[ext_resource path="res://world_all/equippables/ice_gun.tscn" type="PackedScene" id=36]
+[ext_resource path="res://mobs/ice_slime/ice_slime.tscn" type="PackedScene" id=37]
+[ext_resource path="res://mobs/snowman/snowman.tscn" type="PackedScene" id=38]
+[ext_resource path="res://world_all/collectables/energy.tscn" type="PackedScene" id=39]
+[ext_resource path="res://mobs/bunny/bunny.tscn" type="PackedScene" id=40]
+[ext_resource path="res://mobs/slime_flying/slime_flying.tscn" type="PackedScene" id=41]
+[ext_resource path="res://world_all/collectables/nail.tscn" type="PackedScene" id=42]
+[ext_resource path="res://mobs/worm/worm.tscn" type="PackedScene" id=43]
+[ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=44]
+[ext_resource path="res://world_all/coins/coin_100.tscn" type="PackedScene" id=45]
+[ext_resource path="res://world_all/coins/coin_10.tscn" type="PackedScene" id=46]
+[ext_resource path="res://world_all/teleporters/subsection/subsection_teleporter.tscn" type="PackedScene" id=47]
+[ext_resource path="res://world_all/collectables/snowball.tscn" type="PackedScene" id=48]
+[ext_resource path="res://world_all/collectables/water.tscn" type="PackedScene" id=49]
+[ext_resource path="res://world_all/powerups/cherry.tscn" type="PackedScene" id=50]
+[ext_resource path="res://world_all/powerups/glitch_soul.tscn" type="PackedScene" id=51]
+[ext_resource path="res://world_all/powerups/pear.tscn" type="PackedScene" id=52]
+[ext_resource path="res://world_all/powerups/coconut.tscn" type="PackedScene" id=53]
+[ext_resource path="res://world_all/powerups/bunny_egg.tscn" type="PackedScene" id=54]
+[ext_resource path="res://world_all/powerups/glitch_orb.tscn" type="PackedScene" id=55]
+[ext_resource path="res://world_all/powerups/carrot.tscn" type="PackedScene" id=56]
+[ext_resource path="res://world_all/powerups/ice_spike.tscn" type="PackedScene" id=57]
+[ext_resource path="res://world_all/torches/torch.tscn" type="PackedScene" id=58]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 6 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 216, 144 )
+
+[node name="LevelComponents" type="Node2D" parent="."]
+
+[node name="MountainBackgroundW2" parent="LevelComponents" instance=ExtResource( 2 )]
+
+[node name="CameraPositions" type="Node2D" parent="LevelComponents"]
+
+[node name="TopLeft" type="Position2D" parent="LevelComponents/CameraPositions"]
+position = Vector2( 128, -384 )
+
+[node name="BottomRight" type="Position2D" parent="LevelComponents/CameraPositions"]
+position = Vector2( 5552, 312 )
+
+[node name="TileMapW1Grass" parent="LevelComponents" instance=ExtResource( 4 )]
+tile_data = PoolIntArray( 1310747, 1, 5, 1310750, 1, 2, 1310752, 1, 1, 1376273, 0, 0, 1376274, 0, 2, 1376275, 0, 1, 1376276, 0, 2, 1376277, 0, 4, 1376282, 0, 0, 1376283, 0, 3, 1376284, 0, 1, 1376285, 0, 3, 1376286, 0, 3, 1376287, 0, 2, 1376288, 0, 3, 1376289, 0, 4, 1441809, 0, 65536, 1441810, 0, 131075, 1441811, 0, 131075, 1441812, 0, 131075, 1441813, 0, 65540, 1441818, 0, 131072, 1441819, 0, 65538, 1441820, 0, 131075, 1441821, 0, 65537, 1441822, 0, 65539, 1441823, 0, 65539, 1441824, 0, 131075, 1441825, 0, 131076, 1507345, 0, 196608, 1507346, 0, 196610, 1507347, 0, 196610, 1507348, 0, 196611, 1507349, 0, 196612, 1507354, 0, 196608, 1507355, 0, 196610, 1507356, 0, 196611, 1507357, 0, 196611, 1507358, 0, 196610, 1507359, 0, 196609, 1507360, 0, 196609, 1507361, 0, 196612, 2031632, 1, 4, 2031633, 1, 1, 2031636, 1, 2, 2031643, 1, 0, 2097167, 0, 0, 2097168, 0, 1, 2097169, 0, 3, 2097170, 0, 2, 2097171, 0, 1, 2097172, 0, 4, 2162703, 0, 131072, 2162704, 0, 131075, 2162705, 0, 131073, 2162706, 0, 65538, 2162707, 0, 131074, 2162708, 0, 131076, 2228239, 0, 65536, 2228240, 0, 131073, 2228241, 0, 131074, 2228242, 0, 131074, 2228243, 0, 131075, 2228244, 0, 65540, 2293775, 0, 131072, 2293776, 0, 131075, 2293777, 0, 65538, 2293778, 0, 131074, 2293779, 0, 65539, 2293780, 0, 131076, 2359311, 0, 131072, 2359312, 0, 131073, 2359313, 0, 131074, 2359314, 0, 65539, 2359315, 0, 65538, 2359316, 0, 131076, 2424847, 0, 131072, 2424848, 0, 65537, 2424849, 0, 131073, 2424850, 0, 131075, 2424851, 0, 65539, 2424852, 0, 65540, 2490383, 0, 131072, 2490384, 0, 131073, 2490385, 0, 131075, 2490386, 0, 131075, 2490387, 0, 131073, 2490388, 0, 65540, 2555919, 0, 65536, 2555920, 0, 131073, 2555921, 0, 131075, 2555922, 0, 65538, 2555923, 0, 65537, 2555924, 0, 131076, 2621455, 0, 131072, 2621456, 0, 131074, 2621457, 0, 65537, 2621458, 0, 131075, 2621459, 0, 131073, 2621460, 0, 131076, 2686991, 0, 196608, 2686992, 0, 196611, 2686993, 0, 196609, 2686994, 0, 196611, 2686995, 0, 196610, 2686996, 0, 196612 )
+
+[node name="TileMapW1Beach" type="TileMap" parent="LevelComponents"]
+z_index = 1
+tile_set = ExtResource( 17 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 32
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+format = 1
+tile_data = PoolIntArray( 2031639, 1, 1, 2031641, 1, 3, 2097174, 0, 0, 2097175, 0, 1, 2097176, 0, 1, 2097177, 0, 1, 2097178, 0, 2, 2162710, 0, 65536, 2162711, 0, 65537, 2162712, 0, 65537, 2162713, 0, 65537, 2162714, 0, 65538, 2228246, 0, 65536, 2228247, 0, 65537, 2228248, 0, 65537, 2228249, 0, 65537, 2228250, 0, 65538, 2293782, 0, 65536, 2293783, 0, 65537, 2293784, 0, 65537, 2293785, 0, 65537, 2293786, 0, 65538, 2359318, 0, 65536, 2359319, 0, 65537, 2359320, 0, 65537, 2359321, 0, 65537, 2359322, 0, 65538, 2424854, 0, 65536, 2424855, 0, 65537, 2424856, 0, 65537, 2424857, 0, 65537, 2424858, 0, 65538, 2490390, 0, 65536, 2490391, 0, 65537, 2490392, 0, 65537, 2490393, 0, 65537, 2490394, 0, 65538, 2555926, 0, 65536, 2555927, 0, 65537, 2555928, 0, 65537, 2555929, 0, 65537, 2555930, 0, 65538, 2621462, 0, 65536, 2621463, 0, 65537, 2621464, 0, 65537, 2621465, 0, 65537, 2621466, 0, 65538, 2686998, 0, 131072, 2686999, 0, 131073, 2687000, 0, 131073, 2687001, 0, 131073, 2687002, 0, 131074 )
+
+[node name="TileMapW1Cloud" type="TileMap" parent="LevelComponents"]
+z_index = 2
+tile_set = ExtResource( 22 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 32
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+collision_mask = 0
+format = 1
+tile_data = PoolIntArray( 2031644, 1, 0, 2031646, 1, 2, 2097180, 0, 0, 2097181, 0, 1, 2097182, 0, 1, 2097183, 0, 1, 2097184, 0, 2, 2162716, 0, 65536, 2162717, 0, 65537, 2162718, 0, 65537, 2162719, 0, 65537, 2162720, 0, 65538, 2228252, 0, 65536, 2228253, 0, 65537, 2228254, 0, 65537, 2228255, 0, 65537, 2228256, 0, 65538, 2293788, 0, 65536, 2293789, 0, 65537, 2293790, 0, 65537, 2293791, 0, 65537, 2293792, 0, 65538, 2359324, 0, 65536, 2359325, 0, 65537, 2359326, 0, 65537, 2359327, 0, 65537, 2359328, 0, 65538, 2424860, 0, 65536, 2424861, 0, 65537, 2424862, 0, 65537, 2424863, 0, 65537, 2424864, 0, 65538, 2490396, 0, 65536, 2490397, 0, 65537, 2490398, 0, 65537, 2490399, 0, 65537, 2490400, 0, 65538, 2555932, 0, 65536, 2555933, 0, 65537, 2555934, 0, 65537, 2555935, 0, 65537, 2555936, 0, 65538, 2621468, 0, 65536, 2621469, 0, 65537, 2621470, 0, 65537, 2621471, 0, 65537, 2621472, 0, 65538, 2687004, 0, 131072, 2687005, 0, 131073, 2687006, 0, 131073, 2687007, 0, 131073, 2687008, 0, 131074 )
+
+[node name="TileMapRock" parent="LevelComponents" instance=ExtResource( 21 )]
+tile_data = PoolIntArray( 2031651, 1, 0, 2031653, 1, 4, 2097186, 0, 0, 2097187, 0, 2, 2097188, 0, 3, 2097189, 0, 2, 2097190, 0, 4, 2162722, 0, 65536, 2162723, 0, 65539, 2162724, 0, 131073, 2162725, 0, 65539, 2162726, 0, 131076, 2228258, 0, 131072, 2228259, 0, 131074, 2228260, 0, 65537, 2228261, 0, 131074, 2228262, 0, 131076, 2293794, 0, 65536, 2293795, 0, 131074, 2293796, 0, 131074, 2293797, 0, 131073, 2293798, 0, 65540, 2359330, 0, 131072, 2359331, 0, 65539, 2359332, 0, 131073, 2359333, 0, 131075, 2359334, 0, 131076, 2424866, 0, 65536, 2424867, 0, 65538, 2424868, 0, 65539, 2424869, 0, 65537, 2424870, 0, 131076, 2490402, 0, 131072, 2490403, 0, 65537, 2490404, 0, 131073, 2490405, 0, 65539, 2490406, 0, 131076, 2555938, 0, 131072, 2555939, 0, 65538, 2555940, 0, 131073, 2555941, 0, 65539, 2555942, 0, 65540, 2621474, 0, 131072, 2621475, 0, 65537, 2621476, 0, 65538, 2621477, 0, 131074, 2621478, 0, 65540, 2687010, 0, 196608, 2687011, 0, 196611, 2687012, 0, 196609, 2687013, 0, 196609, 2687014, 0, 196612 )
+
+[node name="TileMapSand" parent="LevelComponents" instance=ExtResource( 19 )]
+tile_data = PoolIntArray( 2031657, 1, 3, 2031660, 1, 0, 2097192, 0, 0, 2097193, 0, 1, 2097194, 0, 1, 2097195, 0, 1, 2097196, 0, 2, 2162728, 0, 65536, 2162729, 0, 65537, 2162730, 0, 65537, 2162731, 0, 65537, 2162732, 0, 65538, 2228264, 0, 65536, 2228265, 0, 65537, 2228266, 0, 65537, 2228267, 0, 65537, 2228268, 0, 65538, 2293800, 0, 65536, 2293801, 0, 65537, 2293802, 0, 65537, 2293803, 0, 65537, 2293804, 0, 65538, 2359336, 0, 65536, 2359337, 0, 65537, 2359338, 0, 65537, 2359339, 0, 65537, 2359340, 0, 65538, 2424872, 0, 65536, 2424873, 0, 65537, 2424874, 0, 65537, 2424875, 0, 65537, 2424876, 0, 65538, 2490408, 0, 65536, 2490409, 0, 65537, 2490410, 0, 65537, 2490411, 0, 65537, 2490412, 0, 65538, 2555944, 0, 65536, 2555945, 0, 65537, 2555946, 0, 65537, 2555947, 0, 65537, 2555948, 0, 65538, 2621480, 0, 65536, 2621481, 0, 65537, 2621482, 0, 65537, 2621483, 0, 65537, 2621484, 0, 65538, 2687016, 0, 131072, 2687017, 0, 131073, 2687018, 0, 131073, 2687019, 0, 131073, 2687020, 0, 131074 )
+
+[node name="TileMapSandstone" parent="LevelComponents" instance=ExtResource( 18 )]
+tile_data = PoolIntArray( 2097198, 0, 0, 2097199, 0, 1, 2097200, 0, 2, 2162734, 0, 65536, 2162735, 0, 65537, 2162736, 0, 65538, 2228270, 0, 65536, 2228271, 0, 65537, 2228272, 0, 65538, 2293806, 0, 65536, 2293807, 0, 65537, 2293808, 0, 65538, 2359342, 0, 65536, 2359343, 0, 65537, 2359344, 0, 65538, 2424878, 0, 65536, 2424879, 0, 65537, 2424880, 0, 65538, 2490414, 0, 65536, 2490415, 0, 65537, 2490416, 0, 65538, 2555950, 0, 65536, 2555951, 0, 65537, 2555952, 0, 65538, 2621486, 0, 65536, 2621487, 0, 65537, 2621488, 0, 65538, 2687022, 0, 131072, 2687023, 0, 131073, 2687024, 0, 131074 )
+
+[node name="TileMapIce" parent="LevelComponents" instance=ExtResource( 3 )]
+tile_data = PoolIntArray( 1245233, 0, 0, 1245234, 0, 3, 1245235, 0, 1, 1245236, 0, 3, 1245237, 0, 3, 1245238, 0, 1, 1245239, 0, 4, 1310769, 0, 65536, 1310770, 0, 65538, 1310771, 0, 131075, 1310772, 0, 65538, 1310773, 0, 65537, 1310774, 0, 65537, 1310775, 0, 131076, 1376305, 0, 131072, 1376306, 0, 65538, 1376307, 0, 65538, 1376308, 0, 131073, 1376309, 0, 131073, 1376310, 0, 65538, 1376311, 0, 65540, 1441841, 0, 196608, 1441842, 0, 196610, 1441843, 0, 196609, 1441844, 0, 196611, 1441845, 0, 196610, 1441846, 0, 196611, 1441847, 0, 196612, 1835068, 0, 0, 1835069, 0, 1, 1835070, 0, 1, 1835071, 0, 4, 1900604, 0, 65536, 1900605, 0, 131074, 1900606, 0, 131074, 1900607, 0, 131076, 1966135, 0, 0, 1966136, 0, 3, 1966137, 0, 2, 1966138, 0, 2, 1966139, 0, 1, 1966140, 0, 262150, 1966141, 0, 65538, 1966142, 0, 65539, 1966143, 0, 65540, 2031667, 1, 5, 2031669, 1, 3, 2031671, 0, 65536, 2031672, 0, 65539, 2031673, 0, 131075, 2031674, 0, 65537, 2031675, 0, 131074, 2031676, 0, 131075, 2031677, 0, 65537, 2031678, 0, 65538, 2031679, 0, 131076, 2097202, 0, 0, 2097203, 0, 1, 2097204, 0, 3, 2097205, 0, 3, 2097206, 0, 3, 2097207, 0, 262150, 2097208, 0, 131073, 2097209, 0, 65538, 2097210, 0, 131074, 2097211, 0, 65539, 2097212, 0, 65537, 2097213, 0, 131074, 2097214, 0, 131075, 2097215, 0, 131076, 2162738, 0, 65536, 2162739, 0, 131073, 2162740, 0, 131074, 2162741, 0, 65538, 2162742, 0, 131075, 2162743, 0, 131073, 2162744, 0, 131074, 2162745, 0, 65537, 2162746, 0, 131073, 2162747, 0, 65537, 2162748, 0, 131073, 2162749, 0, 65537, 2162750, 0, 65537, 2162751, 0, 131076, 2228274, 0, 131072, 2228275, 0, 65539, 2228276, 0, 65537, 2228277, 0, 131075, 2228278, 0, 131074, 2228279, 0, 131074, 2228280, 0, 65538, 2228281, 0, 131074, 2228282, 0, 65538, 2228283, 0, 65539, 2228284, 0, 131075, 2228285, 0, 65538, 2228286, 0, 131075, 2228287, 0, 65540, 2293810, 0, 65536, 2293811, 0, 131073, 2293812, 0, 65538, 2293813, 0, 65537, 2293814, 0, 131073, 2293815, 0, 65539, 2293816, 0, 65537, 2293817, 0, 131073, 2293818, 0, 131074, 2293819, 0, 131075, 2293820, 0, 131073, 2293821, 0, 131075, 2293822, 0, 131073, 2293823, 0, 131076, 2359346, 0, 65536, 2359347, 0, 65537, 2359348, 0, 65537, 2359349, 0, 131073, 2359350, 0, 65537, 2359351, 0, 131074, 2359352, 0, 131074, 2359353, 0, 131073, 2359354, 0, 65537, 2359355, 0, 131075, 2359356, 0, 131073, 2359357, 0, 65539, 2359358, 0, 65537, 2359359, 0, 131076, 2424882, 0, 65536, 2424883, 0, 131075, 2424884, 0, 65539, 2424885, 0, 65537, 2424886, 0, 131073, 2424887, 0, 131073, 2424888, 0, 131074, 2424889, 0, 65538, 2424890, 0, 131073, 2424891, 0, 65537, 2424892, 0, 131075, 2424893, 0, 65537, 2424894, 0, 131074, 2424895, 0, 65540, 2490418, 0, 65536, 2490419, 0, 65537, 2490420, 0, 65537, 2490421, 0, 131073, 2490422, 0, 131073, 2490423, 0, 131075, 2490424, 0, 131074, 2490425, 0, 131075, 2490426, 0, 65537, 2490427, 0, 65537, 2490428, 0, 131075, 2490429, 0, 131073, 2490430, 0, 65537, 2490431, 0, 65540, 2555954, 0, 131072, 2555955, 0, 131073, 2555956, 0, 65537, 2555957, 0, 131075, 2555958, 0, 65538, 2555959, 0, 131075, 2555960, 0, 65537, 2555961, 0, 131075, 2555962, 0, 65538, 2555963, 0, 131074, 2555964, 0, 131074, 2555965, 0, 65538, 2555966, 0, 65539, 2555967, 0, 131076, 2621490, 0, 131072, 2621491, 0, 131074, 2621492, 0, 131073, 2621493, 0, 131073, 2621494, 0, 131073, 2621495, 0, 65537, 2621496, 0, 131075, 2621497, 0, 65538, 2621498, 0, 65537, 2621499, 0, 65539, 2621500, 0, 131073, 2621501, 0, 131073, 2621502, 0, 131074, 2621503, 0, 131076, 2687026, 0, 196608, 2687027, 0, 196611, 2687028, 0, 196609, 2687029, 0, 196609, 2687030, 0, 196611, 2687031, 0, 196610, 2687032, 0, 196610, 2687033, 0, 196610, 2687034, 0, 196609, 2687035, 0, 196609, 2687036, 0, 196609, 2687037, 0, 196609, 2687038, 0, 196611, 2687039, 0, 196612 )
+
+[node name="TileMapIceBlock" parent="LevelComponents" instance=ExtResource( 20 )]
+tile_data = PoolIntArray( 655419, 0, 0, 655420, 0, 1, 655421, 0, 1, 655422, 0, 1, 655423, 0, 1, 655424, 0, 1, 655425, 0, 1, 655426, 0, 1, 655427, 0, 1, 655428, 0, 1, 655429, 0, 1, 655430, 0, 1, 655431, 0, 1, 655432, 0, 1, 655433, 0, 1, 655434, 0, 1, 655435, 0, 1, 655436, 0, 1, 655437, 0, 1, 655438, 0, 1, 655439, 0, 1, 655440, 0, 1, 655441, 0, 2, 720955, 0, 65536, 720956, 0, 65537, 720957, 0, 65537, 720958, 0, 65537, 720959, 0, 65537, 720960, 0, 65537, 720961, 0, 65537, 720962, 0, 65537, 720963, 0, 65537, 720964, 0, 65537, 720965, 0, 65537, 720966, 0, 65537, 720967, 0, 65537, 720968, 0, 65537, 720969, 0, 65537, 720970, 0, 65537, 720971, 0, 65537, 720972, 0, 65537, 720973, 0, 65537, 720974, 0, 65537, 720975, 0, 65537, 720976, 0, 65537, 720977, 0, 65538, 786491, 0, 131072, 786492, 0, 131073, 786493, 0, 131073, 786494, 0, 131073, 786495, 0, 131073, 786496, 0, 131073, 786497, 0, 131073, 786498, 0, 131073, 786499, 0, 131073, 786500, 0, 131073, 786501, 0, 131073, 786502, 0, 131073, 786503, 0, 131073, 786504, 0, 131073, 786505, 0, 131073, 786506, 0, 131073, 786507, 0, 131073, 786508, 0, 131073, 786509, 0, 131073, 786510, 0, 131073, 786511, 0, 131073, 786512, 0, 131073, 786513, 0, 131074, 1048635, 0, 0, 1048636, 0, 1, 1048637, 0, 1, 1048638, 0, 1, 1048639, 0, 1, 1048640, 0, 1, 1048641, 0, 1, 1048642, 0, 1, 1048643, 0, 1, 1048644, 0, 1, 1048645, 0, 1, 1048646, 0, 1, 1048647, 0, 1, 1048648, 0, 1, 1048649, 0, 1, 1048650, 0, 2, 1114171, 0, 65536, 1114172, 0, 65537, 1114173, 0, 65537, 1114174, 0, 65537, 1114175, 0, 65537, 1114176, 0, 65537, 1114177, 0, 65537, 1114178, 0, 65537, 1114179, 0, 65537, 1114180, 0, 65537, 1114181, 0, 65537, 1114182, 0, 65537, 1114183, 0, 65537, 1114184, 0, 65537, 1114185, 0, 65537, 1114186, 0, 65538, 1179707, 0, 131072, 1179708, 0, 131073, 1179709, 0, 131073, 1179710, 0, 131073, 1179711, 0, 131073, 1179712, 0, 131073, 1179713, 0, 131073, 1179714, 0, 131073, 1179715, 0, 131073, 1179716, 0, 131073, 1179717, 0, 131073, 1179718, 0, 131073, 1179719, 0, 131073, 1179720, 0, 131073, 1179721, 0, 131073, 1179722, 0, 131074, 1835073, 0, 0, 1835074, 0, 1, 1835075, 0, 2, 1900609, 0, 65536, 1900610, 0, 65537, 1900611, 0, 65538, 1966145, 0, 65536, 1966146, 0, 65537, 1966147, 0, 65538, 2031681, 0, 65536, 2031682, 0, 65537, 2031683, 0, 65538, 2097217, 0, 65536, 2097218, 0, 65537, 2097219, 0, 65538, 2162753, 0, 65536, 2162754, 0, 65537, 2162755, 0, 65538, 2228289, 0, 65536, 2228290, 0, 65537, 2228291, 0, 65538, 2293825, 0, 65536, 2293826, 0, 65537, 2293827, 0, 65538, 2359361, 0, 65536, 2359362, 0, 65537, 2359363, 0, 65538, 2424897, 0, 65536, 2424898, 0, 65537, 2424899, 0, 65538, 2490433, 0, 65536, 2490434, 0, 65537, 2490435, 0, 65538, 2555969, 0, 65536, 2555970, 0, 65537, 2555971, 0, 65538, 2621505, 0, 65536, 2621506, 0, 65537, 2621507, 0, 65538, 2687041, 0, 131072, 2687042, 0, 131073, 2687043, 0, 131074 )
+
+[node name="TileMapPlatform" parent="LevelComponents" instance=ExtResource( 7 )]
+tile_data = PoolIntArray( 1310742, 5, 0 )
+
+[node name="TileMapBlock" parent="LevelComponents" instance=ExtResource( 12 )]
+tile_data = PoolIntArray( 786447, 0, 0, 851983, 0, 0, 917519, 0, 0, 983055, 0, 0, 1048591, 0, 0, 1114127, 0, 0, 1179663, 0, 0, 1245199, 0, 0, 1310735, 0, 0, 1376271, 0, 0, 1441807, 0, 0, 1507343, 0, 0, 1572879, 0, 0, 1638415, 0, 0, 1703951, 0, 0, 1769487, 0, 0, 1835023, 0, 0, 1900559, 0, 0, 1966095, 0, 0, 2031631, 0, 0, 2097167, 0, 0, 2162703, 0, 0, 2228239, 0, 0, 2293775, 0, 0, 2359311, 0, 0, 2424847, 0, 0, 2490383, 0, 0, 2555919, 0, 0, 2621455, 0, 0, 2686991, 0, 0 )
+
+[node name="TileMapSpikes" parent="LevelComponents" instance=ExtResource( 15 )]
+tile_data = PoolIntArray( 1179698, 1, 0, 1179699, 1, 0, 1179700, 1, 0, 1179701, 1, 0, 1179702, 1, 0, 1310738, 0, 0, 1310739, 0, 0, 1310740, 0, 0, 1572890, 1073741826, 0, 1572891, 1073741826, 0, 1572892, 1073741826, 0, 1572893, 1073741826, 0, 1572894, 1073741826, 0, 1572895, 1073741826, 0, 1572896, 1073741826, 0, 1572897, 1073741826, 0, 2031648, 0, 0 )
+
+[node name="TileMap" type="TileMap" parent="LevelComponents"]
+z_index = 1
+tile_set = ExtResource( 25 )
+cell_size = Vector2( 8, 8 )
+cell_quadrant_size = 128
+cell_custom_transform = Transform2D( 8, 0, 0, 8, 0, 0 )
+collision_mask = 4
+format = 1
+tile_data = PoolIntArray( 1835077, 0, 0, 1835078, 0, 2, 1835079, 0, 2, 1835080, 0, 2, 1835081, 0, 2, 1835082, 0, 1, 1835083, 0, 4, 1900613, 0, 131072, 1900614, 0, 131074, 1900615, 0, 131075, 1900616, 0, 65539, 1900617, 0, 131075, 1900618, 0, 65539, 1900619, 0, 131076, 1966149, 0, 131072, 1966150, 0, 65539, 1966151, 0, 131073, 1966152, 0, 131075, 1966153, 0, 65537, 1966154, 0, 65538, 1966155, 0, 131076, 2031685, 0, 65536, 2031686, 0, 65539, 2031687, 0, 131074, 2031688, 0, 65539, 2031689, 0, 65538, 2031690, 0, 131074, 2031691, 0, 65540, 2097221, 0, 131072, 2097222, 0, 65538, 2097223, 0, 65539, 2097224, 0, 131075, 2097225, 0, 131073, 2097226, 0, 131073, 2097227, 0, 131076, 2162757, 0, 65536, 2162758, 0, 131074, 2162759, 0, 65539, 2162760, 0, 65539, 2162761, 0, 65539, 2162762, 0, 131075, 2162763, 0, 131076, 2228293, 0, 65536, 2228294, 0, 65539, 2228295, 0, 131074, 2228296, 0, 131074, 2228297, 0, 131075, 2228298, 0, 65537, 2228299, 0, 65540, 2293829, 0, 65536, 2293830, 0, 65539, 2293831, 0, 131073, 2293832, 0, 131075, 2293833, 0, 65537, 2293834, 0, 65537, 2293835, 0, 131076, 2359365, 0, 65536, 2359366, 0, 131073, 2359367, 0, 65537, 2359368, 0, 131075, 2359369, 0, 131074, 2359370, 0, 65539, 2359371, 0, 65540, 2424901, 0, 65536, 2424902, 0, 131074, 2424903, 0, 65537, 2424904, 0, 131075, 2424905, 0, 65539, 2424906, 0, 65537, 2424907, 0, 65540, 2490437, 0, 65536, 2490438, 0, 131074, 2490439, 0, 131074, 2490440, 0, 131074, 2490441, 0, 131073, 2490442, 0, 65538, 2490443, 0, 65540, 2555973, 0, 65536, 2555974, 0, 65539, 2555975, 0, 65539, 2555976, 0, 131075, 2555977, 0, 65538, 2555978, 0, 131074, 2555979, 0, 65540, 2621509, 0, 131072, 2621510, 0, 131074, 2621511, 0, 65537, 2621512, 0, 131073, 2621513, 0, 131075, 2621514, 0, 65538, 2621515, 0, 65540, 2687045, 0, 196608, 2687046, 0, 196609, 2687047, 0, 196610, 2687048, 0, 196611, 2687049, 0, 196610, 2687050, 0, 196609, 2687051, 0, 196612 )
+
+[node name="DeathArea" parent="LevelComponents" instance=ExtResource( 5 )]
+position = Vector2( 648, 344 )
+scale = Vector2( 500, 0.786046 )
+
+[node name="PlayerStart" type="Position2D" parent="LevelComponents"]
+position = Vector2( 216, 144 )
+
+[node name="Checkpoint" parent="LevelComponents" instance=ExtResource( 10 )]
+position = Vector2( 560, 208 )
+
+[node name="LevelEndTeleporter" parent="LevelComponents" instance=ExtResource( 11 )]
+position = Vector2( 592, 208 )
+
+[node name="Snowman" parent="LevelComponents/LevelEndTeleporter" instance=ExtResource( 38 )]
+position = Vector2( -104, -8 )
+
+[node name="Gems" type="Node2D" parent="LevelComponents"]
+
+[node name="Gem1" parent="LevelComponents/Gems" instance=ExtResource( 44 )]
+position = Vector2( 144, 136 )
+
+[node name="Gem2" parent="LevelComponents/Gems" instance=ExtResource( 44 )]
+position = Vector2( 168, 136 )
+index = 1
+
+[node name="Gem3" parent="LevelComponents/Gems" instance=ExtResource( 44 )]
+position = Vector2( 192, 136 )
+index = 2
+
+[node name="Lanterns" type="Node2D" parent="."]
+
+[node name="Lantern" parent="Lanterns" instance=ExtResource( 26 )]
+position = Vector2( 288, 232 )
+
+[node name="Signs" type="Node2D" parent="."]
+
+[node name="Cherries" type="Node2D" parent="."]
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Trees" type="Node2D" parent="."]
+
+[node name="Tree" parent="Trees" instance=ExtResource( 8 )]
+position = Vector2( 128, 200 )
+always_green = true
+
+[node name="Tree2" parent="Trees" instance=ExtResource( 8 )]
+position = Vector2( 184, 200 )
+always_palm = true
+
+[node name="Tree4" parent="Trees" instance=ExtResource( 8 )]
+position = Vector2( 320, 200 )
+always_palm = true
+always_green = true
+
+[node name="Tree27" parent="Trees" instance=ExtResource( 8 )]
+position = Vector2( 400, 200 )
+always_palm = true
+always_green = true
+always_snow = true
+
+[node name="FallingIce" type="Node2D" parent="."]
+
+[node name="FallingIce" parent="FallingIce" instance=ExtResource( 9 )]
+position = Vector2( 392, 184 )
+
+[node name="FallingIce2" parent="FallingIce" instance=ExtResource( 9 )]
+position = Vector2( 400, 184 )
+
+[node name="FallingIce3" parent="FallingIce" instance=ExtResource( 9 )]
+position = Vector2( 408, 184 )
+
+[node name="FallingIce4" parent="FallingIce" instance=ExtResource( 9 )]
+position = Vector2( 416, 184 )
+instant_fall = true
+
+[node name="FallingIce5" parent="FallingIce" instance=ExtResource( 9 )]
+position = Vector2( 424, 184 )
+instant_fall = true
+
+[node name="FallingIce6" parent="FallingIce" instance=ExtResource( 9 )]
+position = Vector2( 432, 184 )
+instant_fall = true
+
+[node name="FallingIce7" parent="FallingIce" instance=ExtResource( 9 )]
+position = Vector2( 440, 184 )
+instant_fall = true
+
+[node name="Vases" type="Node2D" parent="."]
+
+[node name="Vase" parent="Vases" instance=ExtResource( 16 )]
+position = Vector2( 272, 248 )
+
+[node name="Vase2" parent="Vases" instance=ExtResource( 16 )]
+position = Vector2( 304, 248 )
+
+[node name="FallingPlatform" parent="." instance=ExtResource( 23 )]
+position = Vector2( 352, 184 )
+
+[node name="Nail Gun" parent="." instance=ExtResource( 27 )]
+position = Vector2( 576, 120 )
+
+[node name="RankPickup" parent="." instance=ExtResource( 28 )]
+position = Vector2( 288, 184 )
+
+[node name="RankPickup2" parent="." instance=ExtResource( 28 )]
+position = Vector2( 304, 184 )
+rank = 2
+
+[node name="RankPickup3" parent="." instance=ExtResource( 28 )]
+position = Vector2( 320, 184 )
+rank = 3
+
+[node name="RankPickup4" parent="." instance=ExtResource( 28 )]
+position = Vector2( 336, 184 )
+rank = 4
+
+[node name="Slime2" parent="." instance=ExtResource( 34 )]
+position = Vector2( 152, 248 )
+
+[node name="Chicken" parent="." instance=ExtResource( 35 )]
+position = Vector2( 232, 248 )
+
+[node name="Scorpion" parent="." instance=ExtResource( 31 )]
+position = Vector2( 344, 248 )
+
+[node name="Bunny" parent="." instance=ExtResource( 40 )]
+position = Vector2( 288, 248 )
+
+[node name="FlyingSlime" parent="." instance=ExtResource( 41 )]
+position = Vector2( 256, 216 )
+
+[node name="Worm" parent="." instance=ExtResource( 43 )]
+position = Vector2( 184, 248 )
+
+[node name="Orb" parent="." instance=ExtResource( 29 )]
+position = Vector2( 248, 160 )
+
+[node name="Coin" parent="." instance=ExtResource( 14 )]
+position = Vector2( 248, 136 )
+
+[node name="Coin3" parent="." instance=ExtResource( 46 )]
+position = Vector2( 272, 136 )
+
+[node name="Coin4" parent="." instance=ExtResource( 45 )]
+position = Vector2( 304, 136 )
+
+[node name="SubsectionTeleporter" parent="." instance=ExtResource( 47 )]
+position = Vector2( 528, 208 )
+
+[node name="BlueBird" parent="." instance=ExtResource( 33 )]
+position = Vector2( 176, 216 )
+
+[node name="IceCube" parent="." instance=ExtResource( 13 )]
+position = Vector2( 416, 248 )
+
+[node name="IceSlime" parent="." instance=ExtResource( 37 )]
+position = Vector2( 456, 232 )
+
+[node name="Water Gun" parent="." instance=ExtResource( 24 )]
+position = Vector2( 480, 120 )
+
+[node name="Laser Gun" parent="." instance=ExtResource( 30 )]
+position = Vector2( 504, 120 )
+
+[node name="Snow Gun" parent="." instance=ExtResource( 32 )]
+position = Vector2( 528, 120 )
+
+[node name="Ice Gun" parent="." instance=ExtResource( 36 )]
+position = Vector2( 552, 120 )
+
+[node name="Water" parent="." instance=ExtResource( 49 )]
+position = Vector2( 472, 72 )
+
+[node name="Energy" parent="." instance=ExtResource( 39 )]
+position = Vector2( 488, 72 )
+
+[node name="SnowBall" parent="." instance=ExtResource( 48 )]
+position = Vector2( 504, 72 )
+
+[node name="Nail" parent="." instance=ExtResource( 42 )]
+position = Vector2( 520, 72 )
+
+[node name="Powerups" type="Node2D" parent="."]
+position = Vector2( 0, 1 )
+
+[node name="Carrot" parent="Powerups" instance=ExtResource( 56 )]
+position = Vector2( 536, 71 )
+
+[node name="Cherry" parent="Powerups" instance=ExtResource( 50 )]
+position = Vector2( 568, 71 )
+
+[node name="Bunny Egg" parent="Powerups" instance=ExtResource( 54 )]
+position = Vector2( 552, 71 )
+
+[node name="Coconut" parent="Powerups" instance=ExtResource( 53 )]
+position = Vector2( 584, 71 )
+
+[node name="Glitch Orb" parent="Powerups" instance=ExtResource( 55 )]
+position = Vector2( 632, 71 )
+
+[node name="Glitch Soul" parent="Powerups" instance=ExtResource( 51 )]
+position = Vector2( 648, 71 )
+
+[node name="Ice Spike" parent="Powerups" instance=ExtResource( 57 )]
+position = Vector2( 616, 71 )
+
+[node name="Pear" parent="Powerups" instance=ExtResource( 52 )]
+position = Vector2( 600, 71 )
+
+[node name="Torch" parent="." instance=ExtResource( 58 )]
+position = Vector2( 384, 152 )
+flip_h = true
+
+[node name="Torch2" parent="." instance=ExtResource( 58 )]
+position = Vector2( 448, 152 )

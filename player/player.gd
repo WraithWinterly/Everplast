@@ -34,6 +34,7 @@ var falling := false
 var facing_right := true
 var dashing := false
 var was_falling := false
+var waiting_frame := false
 
 onready var fsm: Node = $FSM
 onready var down_check_cast: RayCast2D = $Checks/Down
@@ -63,6 +64,7 @@ func _ready() -> void:
 	__ = area_2d.connect("body_entered", self, "_body_entered")
 	__ = area_2d.connect("area_entered", self, "_area_entered")
 	__ = area_2d.connect("area_exited", self, "_area_exited")
+	get_tree().connect("physics_frame", self, "_physics_frame")
 	current_gravity = gravity
 
 	Globals.death_in_progress = false
@@ -104,11 +106,20 @@ func _physics_process(_delta):
 		speed_modifier_land = 1
 
 	if was_falling and is_on_floor():
-		yield(get_tree(), "physics_frame")
+		waiting_frame = true
+
 		#yield(get_tree(), "physics_frame")
-		was_falling = false
+
 
 	GlobalInput.dash_activated = may_dash and GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD
+
+
+func _physics_frame() -> void:
+	if waiting_frame:
+		yield(get_tree(), "physics_frame")
+		was_falling = false
+		waiting_frame = false
+
 
 func basic_movement():
 	if GlobalUI.menu == GlobalUI.Menus.CUTSCENE: return

@@ -78,9 +78,13 @@ func enable_buttons() -> void:
 
 
 func _ui_shop_opened(items: Dictionary) -> void:
+	yield(get_tree(), "idle_frame")
+	if get_tree().paused: return
+	GlobalUI.menu_locked = true
 	GlobalEvents.emit_signal("ui_button_pressed")
 	show_menu()
 	update_shop(items)
+	GlobalUI.menu_locked = false
 
 
 func update_shop(items: Dictionary) -> void:

@@ -462,6 +462,7 @@ pitch_scale = 0.92
 bus = "Audio"
 
 [node name="Godrays" type="ColorRect" parent="."]
+visible = false
 material = SubResource( 9 )
 margin_left = -96.0
 margin_top = -424.0

@@ -6,13 +6,13 @@ onready var return_button: Button = $Panel/HBoxContainer/Back
 
 func _ready() -> void:
 	var __: int
-	__ = GlobalEvents.connect("ui_welcome_shown", self, "_ui_welcome_shown")
+	__ = GlobalEvents.connect("ui_level_upgrade_shown", self, "_ui_level_upgrade_shown")
 	__ = return_button.connect("pressed", self, "_back_pressed")
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
-		if GlobalUI.menu == GlobalUI.Menus.WELCOME:
+		if GlobalUI.menu == GlobalUI.Menus.LEVEL_UPGRADE_TUT:
 			_back_pressed()
 
 #
@@ -23,7 +23,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func show_menu() -> void:
-	GlobalSave.set_stat("welcome_shown", true)
+	GlobalSave.set_stat("level_upgrade_shown", true)
 	GlobalEvents.emit_signal("save_file_saved", true)
 
 	return_button.grab_focus()
@@ -46,9 +46,9 @@ func _back_pressed() -> void:
 	GlobalUI.menu = GlobalUI.Menus.NONE
 
 
-func _ui_welcome_shown() -> void:
+func _ui_level_upgrade_shown() -> void:
 	show_menu()
 	#GlobalSave.set_stat("all_gems_collected", true)
 	GlobalEvents.emit_signal("save_file_saved", true)
-	GlobalUI.menu = GlobalUI.Menus.WELCOME
+	GlobalUI.menu = GlobalUI.Menus.LEVEL_UPGRADE_TUT
 	GlobalEvents.emit_signal("ui_button_pressed_to_prompt")

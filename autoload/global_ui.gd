@@ -49,6 +49,9 @@ enum Menus {
 
 	BEAT_GAME,
 	ALL_ORBS,
+	WELCOME,
+	LEVEL_UPGRADE_TUT,
+	ADRENALINE_TUT,
 }
 
 var menu: int = Menus.NONE

@@ -54,8 +54,9 @@ func hide_menu() -> void:
 	anim_player.play_backwards("show")
 	get_tree().paused = false
 	yield(anim_player, "animation_finished")
-	if not anim_player.is_playing():
+	if not anim_player.is_playing() and not GlobalUI.menu == GlobalUI.Menus.LEVEL_ENTER:
 		$BGBlur.hide()
+		hide()
 
 
 func show_menu() -> void:

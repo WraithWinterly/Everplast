@@ -290,7 +290,8 @@ func hide_menu() -> void:
 	disable_buttons()
 	in_category = false
 	yield(animation_player, "animation_finished")
-	hide()
+	if not GlobalUI.menu == GlobalUI.Menus.SETTINGS and not GlobalUI.menu == GlobalUI.Menus.SETTINGS_GENERAL:
+		hide()
 
 
 func enable_buttons() -> void:

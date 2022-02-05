@@ -48,7 +48,7 @@ func hide_menu() -> void:
 	anim_player.play_backwards("show")
 	disable_buttons()
 	yield(anim_player, "animation_finished")
-	if not anim_player.is_playing():
+	if not anim_player.is_playing() and not GlobalUI.menu == GlobalUI.Menus.PROFILE_SELECTOR_UPDATE_PROMPT:
 		$BGBlur.hide()
 
 

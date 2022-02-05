@@ -239,7 +239,7 @@ func hide_menu() -> void:
 	return_button.release_focus()
 	disable_buttons()
 	yield(anim_player, "animation_finished")
-	if not anim_player.is_playing():
+	if not anim_player.is_playing() and not GlobalUI.menu == GlobalUI.Menus.SETTINGS_CREDITS:
 		$BGBlur.hide()
 		hide()
 

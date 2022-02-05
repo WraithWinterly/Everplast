@@ -1,18 +1,16 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://ui/welcome/welcome.gd" type="Script" id=1]
+[ext_resource path="res://ui/level_upgrade/level_upgrade.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/fonts/48x.tres" type="DynamicFont" id=3]
-[ext_resource path="res://world_all/teleporters/level_end/level_end_teleporter.png" type="Texture" id=4]
+[ext_resource path="res://world_all/orbs/orb.png" type="Texture" id=4]
 [ext_resource path="res://ui/bg_blur.tscn" type="PackedScene" id=5]
 [ext_resource path="res://ui/buttons/button_normal.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/ui_panel.tres" type="StyleBox" id=7]
-[ext_resource path="res://world_selector/level_enter_teleporter.png" type="Texture" id=8]
 [ext_resource path="res://ui/ui_panel_bg.tres" type="StyleBox" id=9]
 [ext_resource path="res://ui/buttons/button_hover.tres" type="StyleBox" id=10]
 [ext_resource path="res://ui/buttons/button_focus.tres" type="StyleBox" id=11]
 [ext_resource path="res://ui/buttons/button_pressed.tres" type="StyleBox" id=12]
-[ext_resource path="res://world_selector/shop/shop_enter.png" type="Texture" id=13]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -155,7 +153,7 @@ void fragment() {
 shader = SubResource( 1 )
 shader_param/amount = 1.2
 
-[node name="Welcome" type="Control"]
+[node name="LevelUpTut" type="Control"]
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -189,7 +187,7 @@ anchor_right = 1.0
 anchor_bottom = 0.1
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 2 )
-text = "Welcome to Everplast!"
+text = "Look! You can level up!"
 align = 1
 valign = 1
 __meta__ = {
@@ -217,8 +215,11 @@ margin_top = -26.4222
 margin_right = -33.6
 margin_bottom = -0.929043
 custom_fonts/font = ExtResource( 3 )
-text = "Right now you are in the level selector. Use the \"interact\" key
-with one of these to do things!"
+text = "In Everplast, you collect orbs which can be used for
+leveling up, and gaining more potential!
+
+You have enough orbs to level up. This can be done
+in the inventory under \"Stats\"."
 align = 1
 valign = 1
 __meta__ = {
@@ -257,86 +258,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelEnter" type="TextureRect" parent="Panel"]
+[node name="Orb" type="TextureRect" parent="Panel"]
 anchor_left = 0.059
-anchor_top = 0.3
+anchor_top = 0.487
 anchor_right = 0.059
-anchor_bottom = 0.3
-margin_right = 96.0
-margin_bottom = 192.0
-texture = ExtResource( 8 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ContentLabel" type="Label" parent="Panel/LevelEnter"]
-anchor_left = 1.0
-anchor_top = 0.298
-anchor_right = 1.158
-anchor_bottom = 1.0
-margin_top = -31.68
-margin_right = 656.0
-margin_bottom = -4.17599
-custom_fonts/font = ExtResource( 3 )
-text = "Enter Level"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LevelEnd" type="TextureRect" parent="Panel"]
-anchor_left = 0.34
-anchor_top = 0.3
-anchor_right = 0.34
-anchor_bottom = 0.3
-margin_right = 96.0
-margin_bottom = 192.0
+anchor_bottom = 0.487
+margin_right = 110.0
+margin_bottom = 110.0
 texture = ExtResource( 4 )
 expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ContentLabel" type="Label" parent="Panel/LevelEnd"]
-anchor_left = 1.0
-anchor_top = 0.298
-anchor_right = 1.158
-anchor_bottom = 1.0
-margin_top = -31.68
-margin_right = 656.0
-margin_bottom = -4.17599
-custom_fonts/font = ExtResource( 3 )
-text = "Complete Level"
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Shops" type="TextureRect" parent="Panel"]
-anchor_left = 0.65
-anchor_top = 0.3
-anchor_right = 0.65
-anchor_bottom = 0.3
-margin_right = 96.0
-margin_bottom = 192.0
-texture = ExtResource( 13 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ContentLabel" type="Label" parent="Panel/Shops"]
-anchor_left = 1.0
-anchor_top = 0.298
-anchor_right = 1.158
-anchor_bottom = 1.0
-margin_top = -31.68
-margin_right = 656.0
-margin_bottom = -4.17599
-custom_fonts/font = ExtResource( 3 )
-text = "Shops"
-valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

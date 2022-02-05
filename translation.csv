@@ -85,7 +85,7 @@ inventory.item.pear,Pear,Pera
 inventory.item.glitch_soul,Glitch Soul,Alma Glitch
 inventory.item.ice_spike,Ice Spike,Espiga de Hielo
 inventory.no_items,There is not much to see here.,Aun no hay cosas para ver aqui.
-,,
+pause_menu.restart,Restart Level,Reiniciar Nivel
 pause_menu.paused,Paused,Pausado
 pause_menu.continue,Continue,Seguir
 pause_menu.settings,Settings,Ajustes
