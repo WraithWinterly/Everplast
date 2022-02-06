@@ -74,7 +74,7 @@ adjustment_saturation = 1.15
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 version_prefix = 3
-version_numbers = [ 1, 0, 1 ]
+version_numbers = [ 1, 0, 2 ]
 
 [node name="LevelTest" type="Node" parent="."]
 script = ExtResource( 21 )

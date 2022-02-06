@@ -258,7 +258,7 @@ func _level_changed(world: int, level: int) -> void:
 	set_stat("adrenaline", get_stat("adrenaline_max"))
 
 
-func _save_file_saved() -> void:
+func _save_file_saved(_noti: bool = true) -> void:
 	save_stats()
 
 

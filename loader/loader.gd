@@ -9,7 +9,7 @@ var packs := [
 
 
 func _enter_tree() -> void:
-	VisualServer.set_default_clear_color(Color8(0, 0, 0, 0))
+	VisualServer.set_default_clear_color(Color.black)
 
 
 func _ready() -> void:
