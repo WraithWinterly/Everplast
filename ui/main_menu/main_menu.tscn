@@ -257,7 +257,7 @@ margin_bottom = 26.0
 rotation = -0.174533
 scale = Vector2( 1e-05, 1e-05 )
 texture = ExtResource( 9 )
-offset = Vector2( 1, 0 )
+offset = Vector2( 2, -2.218 )
 
 [node name="Sprite" type="Sprite" parent="Title/Label/Texture"]
 modulate = Color( 0.945098, 0, 1, 0.0980392 )

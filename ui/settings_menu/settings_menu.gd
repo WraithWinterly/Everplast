@@ -228,7 +228,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_GENERAL or GlobalUI.menu == GlobalUI.Menus.SETTINGS_GRAPHICS\
 			or GlobalUI.menu == GlobalUI.Menus.SETTINGS_CONTROLS or GlobalUI.menu == GlobalUI.Menus.SETTINGS_OTHER) and not GlobalUI.menu_locked:
 		back()
-		print("setting back")
+		#print("setting back")
 		get_tree().set_input_as_handled()
 
 

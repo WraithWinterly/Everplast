@@ -66,6 +66,7 @@ func _level_subsection_changed(_pos: Vector2) -> void:
 		swap_canvases()
 		update_canvas()
 
+
 func swap_canvases() -> void:
 	var canvases = get_tree().get_nodes_in_group("CanvasBackground")
 
@@ -89,7 +90,7 @@ func update_canvas() -> void:
 
 
 func _story_w3_attempt_beat() -> void:
-	print("putting in cutscene - story w3 beat")
+	#print("putting in cutscene - story w3 beat")
 	GlobalUI.menu = GlobalUI.Menus.CUTSCENE
 	yield(GlobalEvents, "ui_faded")
 	#print("putting in cutscene - story w3 beat 2")

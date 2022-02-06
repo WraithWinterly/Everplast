@@ -360,9 +360,6 @@ position = Vector2( 1840, -200 )
 [node name="FlyingSlime6" parent="FlyingSlimes" instance=ExtResource( 9 )]
 position = Vector2( 1592, -304 )
 
-[node name="FlyingSlime7" parent="FlyingSlimes" instance=ExtResource( 9 )]
-position = Vector2( 1640, -344 )
-
 [node name="FlyingSlime8" parent="FlyingSlimes" instance=ExtResource( 9 )]
 position = Vector2( 2072, -208 )
 

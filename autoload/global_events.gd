@@ -128,6 +128,7 @@ signal ui_all_gems_shown()
 signal ui_welcome_shown()
 signal ui_level_upgrade_shown()
 signal ui_adrenaline_shown()
+
 #--------------------#
 #-----Mob Events-----#
 #--------------------#

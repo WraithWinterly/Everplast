@@ -251,6 +251,6 @@ func _on_AnimationPlayer_animation_finished(_anim_name: String) -> void:
 	if GlobalUI.menu == GlobalUI.Menus.SHOP:
 		enable_buttons()
 		update_shop(loaded_shop)
-		print(prev_focus)
+		#print(prev_focus)
 		if not prev_focus == null:
 			prev_focus.grab_focus()

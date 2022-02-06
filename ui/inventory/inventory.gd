@@ -272,7 +272,7 @@ func update_inventory() -> void:
 
 	# Ranks and Stats
 	rank_explanation_label.text = tr(GlobalStats.RANK_EXPLANATIONS[GlobalStats.Ranks.keys()[GlobalStats.Ranks.NONE].to_lower()])
-	rank_explanation_label.modulate = Color8(255, 255, 255, 255)
+	rank_explanation_label.modulate = Color.white
 	rank_title_label.text = ""
 	for texture in ranks_container.get_children():
 		if texture.name.to_lower() == GlobalStats.Ranks.keys()[GlobalSave.get_stat("rank")].to_lower():

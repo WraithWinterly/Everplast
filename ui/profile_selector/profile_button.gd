@@ -105,7 +105,7 @@ func update_buttons() -> void:
 		button_type = LOAD
 		match GlobalUI.menu:
 			GlobalUI.Menus.PROFILE_SELECTOR:
-				button_text.text = "%s %s" % [tr("profile_selector.button.normal"),my_index + 1]
+				button_text.text = "%s %s" % [tr("profile_selector.button.normal"), my_index + 1]
 				level_label.text = str(GlobalSave.data[my_index].level)
 				health_label.text = "%s | %s" % [GlobalSave.data[my_index].health, GlobalSave.data[my_index].health_max]
 				coin_label.text = str(GlobalSave.data[my_index].coins)
@@ -235,7 +235,6 @@ func _ui_profile_selector_delete_prompt_yes_pressed() -> void:
 func _ui_profile_selector_update_prompt_yes_pressed() -> void:
 	update_buttons()
 	if my_index == GlobalUI.profile_index:
-
 		grab_focus()
 
 

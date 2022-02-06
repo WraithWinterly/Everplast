@@ -100,7 +100,8 @@ func _physics_process(_delta):
 		GlobalEvents.emit_signal("player_death_started")
 
 
-func save_stats(_on_reset: bool = false) -> void:
+func save_stats() -> void:
+	#print("SAVING...")
 	if Globals.game_state == Globals.GameStates.LEVEL:
 		set_stat("world_last", GlobalLevel.current_world)
 		set_stat("level_last", GlobalLevel.current_level)
@@ -197,7 +198,7 @@ func delete_profile(index: int):
 	if GlobalQuickPlay.data.last_profile == index:
 		GlobalQuickPlay.reset()
 	data[index] = {}
-	save_stats(true)
+	save_stats()
 	load_stats()
 
 
@@ -225,7 +226,6 @@ func get_gem_count(idx: int = -1) -> int:
 					if int(level) == 0: continue
 					for i in gem_dict[world][level]:
 						if i:
-
 							gem_count += 1
 	return gem_count
 
@@ -244,7 +244,7 @@ func get_item_count(array: Array, value: String) -> int:
 
 func reset_all() -> void:
 	data = [{}, {}, {}, {}, {}]
-	save_stats(true)
+	save_stats()
 
 
 func _level_changed(world: int, level: int) -> void:
@@ -258,13 +258,18 @@ func _level_changed(world: int, level: int) -> void:
 	set_stat("adrenaline", get_stat("adrenaline_max"))
 
 
-func _save_file_saved(on_reset: bool = false) -> void:
-	save_stats(on_reset)
+func _save_file_saved() -> void:
+	save_stats()
 
 
 func _save_file_created(index: int) -> void:
-	data[index] = DEFAULT_DATA
-	save_stats(true)
+	#yield(get_tree(), "physics_frame")
+	#print("Save File created")
+	data[index] = DEFAULT_DATA.duplicate()
+	#print(str(data[index]))
+	save_stats()
+	#print("Saved")
+	#print(str(data[index]))
 	#load_stats()
 
 
@@ -383,9 +388,9 @@ func get_timeplay_string() -> String:
 
 
 func _ui_profile_selector_profile_pressed() -> void:
+	load_stats()
 	seconds_timer.start(1)
 	profile = GlobalUI.profile_index
-	load_stats()
 
 
 func _ui_profile_selector_delete_prompt_yes_pressed() -> void:
@@ -395,22 +400,25 @@ func _ui_profile_selector_delete_prompt_yes_pressed() -> void:
 func _ui_profile_selector_update_prompt_yes_pressed() -> void:
 	# update profile, update_profile, profile_updated
 	var index: int = GlobalUI.profile_index
-	var old_profile: Dictionary = data[index]
 
-	data[index] = DEFAULT_DATA
+	var old_profile: Dictionary = data[index]
+	var def := DEFAULT_DATA.duplicate()
+	data[index] = def
 
 	for element in old_profile:
-		if DEFAULT_DATA.has(element) and typeof(old_profile.get(element)) == typeof(DEFAULT_DATA.get(element)):
+		if def.has(element) and typeof(old_profile[element]) == typeof(def[element]):
 			data[index][element] = old_profile[element]
 
-	# Random fix
+	# Random fix from old versions
 	if old_profile.rank is String:
 		old_profile.rank = GlobalStats.Ranks.NONE
 
-	save_stats(true)
+	save_stats()
+
 
 func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 	save_stats()
+
 
 func _ui_settings_erase_all_prompt_extra_yes_pressed() -> void:
 	data = [{}, {}, {}, {}, {}]

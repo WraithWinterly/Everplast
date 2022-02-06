@@ -7,4 +7,5 @@ func _ready() -> void:
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_K):
-		print($Control.get_focus_owner())
+		pass
+		#print($Control.get_focus_owner())

@@ -288,7 +288,6 @@ func _ui_profile_selector_profile_pressed() -> void:
 	load_world_selector()
 
 
-
 func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 	if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
 		reset_checkpoint()
