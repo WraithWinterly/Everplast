@@ -58,9 +58,9 @@ func _process(_delta: float) -> void:
 
 func fire() -> void:
 	if mode == USE:
-		if equippable_name == "ice gun":
+		if equippable_name == "ice gun" and Globals.game_state == Globals.GameStates.LEVEL:
 			reduce_adrenaline()
-		else:
+		elif Globals.game_state == Globals.GameStates.LEVEL:
 			reduce_ammo()
 
 	may_fire = false
@@ -104,9 +104,13 @@ func fail_fire() -> void:
 func _direction_changed(facing_right: bool) -> void:
 	if not facing_right:
 		scale.y = -1
+#		if name == "Fernand":
+#			position.x = -7
 		scale.x = 1
 	else:
 		scale.y = 1
+#		if name == "Fernand":
+#			position.x = 7
 		scale.x = 1
 
 

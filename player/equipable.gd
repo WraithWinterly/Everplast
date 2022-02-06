@@ -11,7 +11,7 @@ func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("player_equipped", self, "_player_equipped")
 	#get_parent().connect("direction_changed", self, "_direction_changed")
-	if not GlobalSave.get_stat("equipped_item") == "none" and Globals.game_state == Globals.GameStates.LEVEL:
+	if not GlobalSave.get_stat("equipped_item") == "none" and not Globals.game_state == Globals.GameStates.MENU:
 		_player_equipped(GlobalSave.get_stat("equipped_item"))
 
 

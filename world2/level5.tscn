@@ -464,7 +464,7 @@ position = Vector2( 4592, -40 )
 
 [node name="Sign" parent="." instance=ExtResource( 19 )]
 position = Vector2( 80, 24 )
-sign_text = [ [ "We welcome to the dry lands...", "", "" ] ]
+sign_text = [ [ "I am glad you made it through... it is really hot and lonely here...", "", "" ] ]
 
 [node name="FallingPlatform" parent="." instance=ExtResource( 24 )]
 position = Vector2( 4488, -32 )
@@ -474,9 +474,6 @@ position = Vector2( 1888, -40 )
 
 [node name="Fox3" parent="." instance=ExtResource( 12 )]
 position = Vector2( 2088, -64 )
-
-[node name="Fox4" parent="." instance=ExtResource( 12 )]
-position = Vector2( 2152, -64 )
 
 [node name="Fox5" parent="." instance=ExtResource( 12 )]
 position = Vector2( 3592, -360 )

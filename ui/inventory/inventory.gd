@@ -127,11 +127,12 @@ func _input(event: InputEvent) -> void:
 	if GlobalUI.menu == GlobalUI.Menus.CUTSCENE: return
 	if get_tree().paused and not GlobalUI.menu == GlobalUI.Menus.INVENTORY: return
 	if Globals.death_in_progress: return
+	if not GlobalUI.menu == GlobalUI.Menus.NONE and not GlobalUI.menu == GlobalUI.Menus.INVENTORY: return
 
 	#yield(get_tree(), "idle_frame")
-	print("TRY FYUCKING INVENRT")
+	#print("TRY  INVENRT")
 	if event.is_action_pressed("equip"):
-		if not Globals.game_state == Globals.GameStates.LEVEL:
+		if Globals.game_state == Globals.GameStates.MENU:
 			return
 
 		if GlobalUI.menu_locked or GlobalUI.fade_player_playing: return
@@ -140,10 +141,14 @@ func _input(event: InputEvent) -> void:
 			if last_equippable == "none": return
 
 			GlobalEvents.emit_signal("player_equipped", last_equippable)
+			if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+				GlobalEvents.emit_signal("save_file_saved", true)
 			play_powerup_sound()
 		else:
 			last_equippable = GlobalSave.get_stat("equipped_item")
 			GlobalEvents.emit_signal("player_equipped", "none")
+			if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+				GlobalEvents.emit_signal("save_file_saved", true)
 			play_powerup_sound(true)
 
 	elif event.is_action_pressed("powerup"):
@@ -225,8 +230,8 @@ func enable_buttons() -> void:
 
 func update_inventory() -> void:
 	# Quick Items
-	not_in_level_warning.visible = \
-			Globals.game_state == Globals.GameStates.WORLD_SELECTOR
+	not_in_level_warning.visible = false#\
+			#Globals.game_state == Globals.GameStates.WORLD_SELECTOR
 
 	powerups_explanation_label.text = tr("inventory.no_items")
 
@@ -470,7 +475,7 @@ func fill_items(stat: String, amount: int) -> void:
 
 
 func try_use_powerup(item: String, from_inventory := true) -> void:
-	if not Globals.game_state == Globals.GameStates.LEVEL: return
+	if Globals.game_state == Globals.GameStates.MENU: return
 
 	var has_item := false
 
@@ -616,16 +621,20 @@ func _close_pressed() -> void:
 
 
 func _equippable_pressed() -> void:
-	if Globals.game_state == Globals.GameStates.LEVEL:
+	if not Globals.game_state == Globals.GameStates.MENU:
 		GlobalEvents.emit_signal("ui_button_pressed")
 		for n in equippables_buttons.get_children():
 			if n.has_focus():
 				if not GlobalSave.get_stat("equipped_item") == n.name.to_lower():
 					powerup_sound.play()
 					GlobalEvents.emit_signal("player_equipped", n.name.to_lower())
+					if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+						GlobalEvents.emit_signal("save_file_saved", true)
 					hide_menu()
 				else:
 					GlobalEvents.emit_signal("player_equipped", "none")
+					if Globals.game_state == Globals.GameStates.WORLD_SELECTOR:
+						GlobalEvents.emit_signal("save_file_saved", true)
 					hide_menu()
 
 

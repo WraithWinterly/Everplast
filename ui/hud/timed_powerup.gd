@@ -40,9 +40,13 @@ func _physics_process(_delta) -> void:
 
 
 func _player_used_powerup(item_name: String) -> void:
-	if GlobalStats.timed_powerup_active: stop_active_item()
+	if GlobalStats.timed_powerup_active and item_name in GlobalStats.TIMED_POWERUPS:
+		stop_active_item()
 	if item_name in GlobalStats.TIMED_POWERUPS:
 		GlobalStats.active_timed_powerup = item_name
+
+	if not item_name in GlobalStats.TIMED_POWERUPS: return
+
 	text = GlobalStats.COMMON_NAMES[item_name.capitalize()]
 	last_timed_item_name = item_name
 	tick_sound.pitch_scale = 1

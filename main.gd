@@ -5,6 +5,7 @@ enum VersionPrefixes {
 	DEV,
 	ALPHA,
 	BETA,
+	PRE_RELEASE,
 	RELEASE,
 }
 

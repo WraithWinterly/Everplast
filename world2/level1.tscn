@@ -556,4 +556,4 @@ position = Vector2( 3504, -40 )
 
 [node name="Sign" parent="." instance=ExtResource( 23 )]
 position = Vector2( 80, 24 )
-sign_text = [ [ "We welcome to the dry lands...", "", "" ] ]
+sign_text = [ [ "We welcome you to the Drowsy Lands...", "", "" ] ]

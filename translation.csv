@@ -141,9 +141,9 @@ powerup_explanations.bunny_egg_2,seconds,segundos
 powerup_explanations.glitch_orb,CODE_GLITCH,PROGRAMA_GLITCH
 powerup_explanations.pear,Increases your health by,Aumenta tu salud por
 powerup_explanations.pear.2,and your adrenaline by,y su adrenalina por
-powerup_explanations.glitch_soul,Not complete,No esta completo
+powerup_explanations.glitch_soul,Slows down the time...,Retrasa el tiempo...
 powerup_explanations.ice_spike,Freezes your health and adrenaline for,Congela tu salud y adrenalina durante
-powerup_explanations.ice_spike_2,seconds. This includes powerups.,segundos. Esto incluye potenciadores.
+powerup_explanations.ice_spike_2,seconds,segundos
 rank_explanations.none,You do not have a rank yet,No tienes un rango aun
 rank_explanations.silver,- See enemy health on hit\n- Double Jump\n- Wall Jump,- Puedes ver la salud de los enemigos en golpe\n- Doble Salto\n- Salto de Paredes
 rank_explanations.gold,- Adrenaline Rush\n-Jump damage by 3,- Subidon de Adrenalina\n- Dano de salto por 3
@@ -209,3 +209,15 @@ game_beat.content3,gems that have not been collected.,gemas que no han sido reco
 game_beat.content4,You can try speedrunning to get the total time low and share your score,Puedes probar el speedrunning para reducir el tiempo total y compartir tu puntuacion
 all_gem.content,You have obtained every gem in Everplast!,Has obtenido todas las gemas de Everplast!
 all_gem.content2,Your profile button will now reflect this!,Tu boton de perfil ya reflejara esto!
+,,
+welcome.welcome,Welcome to Everplast!,Bienvenido a Everplast!
+welcome.content,"Right now you are in the level selector. Use the ""interact"" key\nwith one of these to do things!",Ahora mismo estas en el selector de niveles. Usa la tecla\n<<interactuar>> con uno de estos para hacer cosas!
+welocme.explain_1,Enter Level,Entrar en nivel
+welocme.explain_2,Complete Level,Completar nivel
+welocme.explain_3,Shops,Tiendas
+,,
+level_upgrade.title,Look! You can level up!,Mira! Puedes subir de nivel!
+level_upgrade.content,"In Everplast, you collect orbs which can be used for\nleveling up, and gaining more potential!\n\nYou have enough orbs to level up. This can be done\nin the inventory under ""Stats""","En Everplast, recolectas orbes que se pueden usar para\nsubir de nivel y ganar mas potencial!\n\nTienes suficientes orbes para subir de nivel.\nEsto se puede hacer en el inventario en <<Estadísticas>>"
+,,
+adrenaline.title,Don't miss this!,No te pierdas esto!
+adrenaline.content,"You have achieved the gold rank,\nunlocking adrenaline - your ability.\nYou can now use this to dash while in the air.\nIt is as simple as a click of a button!","Has alcanzado el rango de oro, liberando adrenalina, tu habilidad.\nAhora puede usar esto para correr mientras esta en el aire.\nEs tan simple como hacer clic en un boton!"

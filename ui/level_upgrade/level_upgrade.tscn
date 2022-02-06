@@ -187,7 +187,7 @@ anchor_right = 1.0
 anchor_bottom = 0.1
 margin_bottom = 14.0
 custom_fonts/font = ExtResource( 2 )
-text = "Look! You can level up!"
+text = "level_upgrade.title"
 align = 1
 valign = 1
 __meta__ = {
@@ -215,11 +215,7 @@ margin_top = -26.4222
 margin_right = -33.6
 margin_bottom = -0.929043
 custom_fonts/font = ExtResource( 3 )
-text = "In Everplast, you collect orbs which can be used for
-leveling up, and gaining more potential!
-
-You have enough orbs to level up. This can be done
-in the inventory under \"Stats\"."
+text = "level_upgrade.content"
 align = 1
 valign = 1
 __meta__ = {

@@ -161,12 +161,19 @@ func load_world_selector() -> void:
 	GlobalEvents.emit_signal("level_world_selector_loaded")
 	GlobalEvents.emit_signal("save_stat_updated")
 
+	var already_waited: bool = false
 	if not GlobalSave.get_stat("welcome_shown"):
 		yield(GlobalEvents, "ui_faded")
+		already_waited = true
 		GlobalEvents.emit_signal("ui_welcome_shown")
 
+	if GlobalUI.menu == GlobalUI.Menus.WELCOME:
+		while GlobalUI.menu == GlobalUI.Menus.WELCOME:
+			yield(get_tree(), "physics_frame")
+
 	if not GlobalSave.get_stat("adrenaline_shown") and GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD:
-		yield(GlobalEvents, "ui_faded")
+		if not already_waited:
+			yield(GlobalEvents, "ui_faded")
 		GlobalEvents.emit_signal("ui_adrenaline_shown")
 
 

@@ -64,7 +64,7 @@ func _ready() -> void:
 	__ = area_2d.connect("body_entered", self, "_body_entered")
 	__ = area_2d.connect("area_entered", self, "_area_entered")
 	__ = area_2d.connect("area_exited", self, "_area_exited")
-	get_tree().connect("physics_frame", self, "_physics_frame")
+	__ = get_tree().connect("physics_frame", self, "_physics_frame")
 	current_gravity = gravity
 
 	Globals.death_in_progress = false

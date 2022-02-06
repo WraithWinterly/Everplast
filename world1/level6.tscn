@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://tilesets/tileset_beach.tres" type="TileSet" id=2]
@@ -25,7 +25,6 @@
 [ext_resource path="res://world1/backgrounds/canvas_beach_w1.tscn" type="PackedScene" id=24]
 [ext_resource path="res://world1/backgrounds/canvas_mountain_w1.tscn" type="PackedScene" id=25]
 [ext_resource path="res://world_all/vases/vase.tscn" type="PackedScene" id=26]
-[ext_resource path="res://world_all/signs/sign.tscn" type="PackedScene" id=27]
 [ext_resource path="res://world_all/gems/gem.tscn" type="PackedScene" id=28]
 [ext_resource path="res://world_all/spikes/spikes.gd" type="Script" id=29]
 [ext_resource path="res://tilesets/tileset_spikes.tres" type="TileSet" id=30]
@@ -352,6 +351,10 @@ always_palm = true
 
 [node name="Tree28" parent="Trees" instance=ExtResource( 18 )]
 position = Vector2( 2320, -376 )
+always_palm = true
+
+[node name="Tree40" parent="Trees" instance=ExtResource( 18 )]
+position = Vector2( 2384, -360 )
 always_palm = true
 
 [node name="Tree29" parent="Trees" instance=ExtResource( 18 )]
@@ -1441,7 +1444,3 @@ lifetime = 2.4
 preprocess = 40.0
 visibility_rect = Rect2( 0, 0, 300, 300 )
 process_material = SubResource( 8 )
-
-[node name="Sign" parent="." instance=ExtResource( 27 )]
-position = Vector2( 2384, -312 )
-sign_text = [ [ "Open your inventory and use collectables!", "Sign", "" ] ]

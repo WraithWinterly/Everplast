@@ -145,7 +145,7 @@ func hide_hud() -> void:
 
 
 func show_ui_slot() -> void:
-	if not ui_slot_visible and Globals.game_state == Globals.GameStates.LEVEL and not GlobalSave.get_stat("equipped_item") == "none":
+	if not ui_slot_visible and not Globals.game_state == Globals.GameStates.MENU and not GlobalSave.get_stat("equipped_item") == "none":
 		ui_slot_anim_player.play("slide")
 		ui_slot_visible = true
 
@@ -172,7 +172,7 @@ func show_powerup_slot() -> void:
 		#print("removing item")
 
 	#print(powerup_slot_visible)
-	if not powerup_slot_visible and Globals.game_state == Globals.GameStates.LEVEL and not GlobalStats.last_powerup == "":
+	if not powerup_slot_visible and not Globals.game_state == Globals.GameStates.MENU and not GlobalStats.last_powerup == "":
 		powerup_slot.show()
 		#print("SLIDING IN!!!!!!!!!!!!!!!!!!!!!!!!!!")
 		powerup_slot_anim_player.play("slide")
@@ -189,7 +189,7 @@ func hide_powerup_slot() -> void:
 
 func update_visibility() -> void:
 	yield(get_tree(), "physics_frame")
-	if not Globals.game_state == Globals.GameStates.LEVEL:
+	if Globals.game_state == Globals.GameStates.MENU:
 		#ui_slot.hide()
 		if ui_slot_visible:
 			ui_slot_anim_player.play_backwards("slide")
@@ -369,7 +369,8 @@ func _level_changed(_world: int, _level: int) -> void:
 	hide()
 	yield(GlobalEvents, "ui_faded")
 	reset_hud_displays()
-
+	powerup_slot_visible = false
+	ui_slot_visible = false
 	upgrade_notification_showed = false
 	update_counters()
 	yield(GlobalEvents, "ui_faded")
@@ -378,7 +379,6 @@ func _level_changed(_world: int, _level: int) -> void:
 	show_hud()
 	toggled = true
 	show_ui_slot()
-
 	show_powerup_slot()
 
 
@@ -452,7 +452,7 @@ func _ui_pause_menu_return_prompt_yes_pressed() -> void:
 	hide_hud()
 	yield(GlobalEvents, "ui_faded")
 	yield(get_tree(), "physics_frame")
-	if not Globals.game_state == Globals.GameStates.LEVEL:
+	if Globals.game_state == Globals.GameStates.MENU:
 		if powerup_slot_visible:
 			powerup_use_anim_player.play_backwards("use")
 			powerup_slot_visible = false

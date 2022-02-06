@@ -14,7 +14,8 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("level_changed", self, "_level_changed")
 	with_player = false
 	sprite.frame = int(clamp(GlobalLevel.current_world - 1, 0, INF))
-	label.hide()
+
+	#label.hide()
 
 
 func _input(event: InputEvent) -> void:
@@ -38,11 +39,13 @@ func _level_changed(_world: int, _level: int) -> void:
 
 func _on_CollisionShape2D_body_entered(body: Node) -> void:
 	if body.is_in_group("Player"):
+		GlobalInput.interact_activators += 1
 		with_player = true
 		anim_player.play("show")
 
 
 func _on_CollisionShape2D_body_exited(body: Node) -> void:
 	if body.is_in_group("Player"):
+		GlobalInput.interact_activators -= 1
 		with_player = false
 		anim_player.play_backwards("show")

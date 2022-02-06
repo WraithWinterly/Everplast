@@ -418,7 +418,7 @@ func _ui_settings_erase_all_prompt_extra_yes_pressed() -> void:
 
 
 func _timer_timeout() -> void:
-	if Globals.game_state == Globals.GameStates.LEVEL:
+	if not Globals.game_state == Globals.GameStates.MENU:
 		set_adrenaline(get_stat("adrenaline") + 1)
 		GlobalEvents.emit_signal("save_stat_updated")
 

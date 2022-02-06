@@ -719,7 +719,7 @@ position = Vector2( 1648, -296 )
 [node name="Signs" type="Node2D" parent="."]
 
 [node name="Sign" parent="Signs" instance=ExtResource( 10 )]
-position = Vector2( 1336, -64 )
+position = Vector2( 1488, -128 )
 sign_text = [ [ "You found a rank! Check your inventory to see what it is.", "Sign", "" ] ]
 
 [node name="Bird" type="Node2D" parent="."]

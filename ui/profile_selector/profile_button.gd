@@ -159,9 +159,11 @@ func update_buttons() -> void:
 
 
 func show_blank_stats() -> void:
+	level_label.text = "--"
 	health_label.text = "-- | --"
 	coin_label.text = "--"
 	orb_label.text = "--"
+	gem_label.text = "--"
 	adrenaline_icon.hide()
 	adrenaline_label.hide()
 	stats.show()

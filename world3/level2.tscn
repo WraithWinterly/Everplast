@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world3/backgrounds/canvas_snow_w3.tscn" type="PackedScene" id=2]
@@ -22,7 +22,6 @@
 [ext_resource path="res://mobs/snowman/snowman.tscn" type="PackedScene" id=20]
 [ext_resource path="res://world_all/cannon/cannon.tscn" type="PackedScene" id=21]
 [ext_resource path="res://world3/piled_snow/piled_snow.tscn" type="PackedScene" id=22]
-[ext_resource path="res://world_all/gems/gem.gd" type="Script" id=23]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 6 )
@@ -70,18 +69,15 @@ position = Vector2( 4872, -600 )
 
 [node name="Gems" type="Node2D" parent="LevelComponents"]
 
-[node name="Gem1" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 19 )]
+[node name="Gem1" parent="LevelComponents/Gems" instance=ExtResource( 19 )]
 position = Vector2( 704, 184 )
-script = ExtResource( 23 )
 
-[node name="Gem2" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 19 )]
+[node name="Gem2" parent="LevelComponents/Gems" instance=ExtResource( 19 )]
 position = Vector2( 2784, 208 )
-script = ExtResource( 23 )
 index = 1
 
-[node name="Gem3" type="Area2D" parent="LevelComponents/Gems" instance=ExtResource( 19 )]
+[node name="Gem3" parent="LevelComponents/Gems" instance=ExtResource( 19 )]
 position = Vector2( 3608, -384 )
-script = ExtResource( 23 )
 index = 2
 
 [node name="Lanterns" type="Node2D" parent="."]

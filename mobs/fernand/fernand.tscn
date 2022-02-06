@@ -308,14 +308,16 @@ shape = SubResource( 1 )
 position = Vector2( 0, 5.96046e-08 )
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 7, 0 )
-scale = Vector2( 0.7, 0.7 )
+position = Vector2( 0, 1 )
 script = ExtResource( 7 )
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Water Gun" parent="Position2D" instance=ExtResource( 3 )]
+
+[node name="EquippableBase" parent="Position2D/Water Gun" index="0"]
+modulate = Color( 1, 1, 1, 0.627451 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

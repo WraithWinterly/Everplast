@@ -17,7 +17,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( -15, 0 ), Vector2( -15, -10 ) ]
+"values": [ Vector2( 0.765, 0 ), Vector2( 0.765, -10 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Label:modulate")
@@ -29,7 +29,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [ Color( 1, 1, 1, 0 ), Color( 0.12549, 0.705882, 0.47451, 1 ) ]
 }
 
 [sub_resource type="CircleShape2D" id=2]
@@ -39,6 +39,8 @@ radius = 12.0416
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -1.5 )
+scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 1 )
 centered = false
 hframes = 3
@@ -46,8 +48,8 @@ region_rect = Rect2( 45, 63, 8, 8 )
 
 [node name="Label" type="Label" parent="Sprite"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = -15.0
-margin_right = 66.0
+margin_left = 0.805
+margin_right = 16.805
 margin_bottom = 23.0
 rect_scale = Vector2( 0.5, 0.5 )
 custom_fonts/font = ExtResource( 3 )

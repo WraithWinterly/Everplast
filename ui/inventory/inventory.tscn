@@ -730,7 +730,7 @@ __meta__ = {
 
 [node name="Buttons" type="VBoxContainer" parent="Panel/Powerups/BG/HBoxContainer"]
 margin_right = 645.0
-margin_bottom = 502.0
+margin_bottom = 470.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 

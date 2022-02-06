@@ -21,7 +21,7 @@ func _physics_process(_delta: float) -> void:
 	if GlobalUI.menu == GlobalUI.Menus.DIALOGUE:
 		dialogue_activated = true
 
-	if Globals.game_state == Globals.GameStates.LEVEL:
+	if not Globals.game_state == Globals.GameStates.MENU:
 		match GlobalSave.get_stat("equipped_item"):
 			"none":
 				fire_activated = false
@@ -30,7 +30,7 @@ func _physics_process(_delta: float) -> void:
 	else:
 		fire_activated = false
 
-	if Globals.game_state == Globals.GameStates.LEVEL:
+	if not Globals.game_state == Globals.GameStates.MENU:
 		equip_activated = GlobalSave.get_stat("equippables").size() > 0
 		powerup_activated = GlobalSave.get_stat("powerups").size() > 0
 	else:
