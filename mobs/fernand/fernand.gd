@@ -190,9 +190,9 @@ func update_gun_direction() -> void:
 func _story_boss_activated(idx: int) -> void:
 	if not idx == GlobalStats.Bosses.FERNAND: return
 
-	GlobalEvents.emit_signal("ui_dialogued","Oh... you found me.", NAME)
-	GlobalEvents.emit_signal("ui_dialogued","I was hired- wait, no. I am here to destroy you!", NAME)
-	GlobalEvents.emit_signal("ui_dialogued","You won't see the last of me!", NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("fernand.intro_1"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("fernand.intro_2"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("fernand.intro_3"), NAME)
 	$EnemyComponentManager/HurtArea.monitoring = true
 	active = true
 	state_switching()
@@ -222,19 +222,19 @@ func _died() -> void:
 		get_tree().call_group("Cannon", "disable")
 		get_tree().call_group("Snowball", "destroy")
 		get_tree().paused = true
-		GlobalEvents.emit_signal("ui_dialogued", "Well... it is over.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "There is nothing more I can do.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "You see, as a child, I was always the one left out.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "It enraged me, all I wanted was revenge.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "You think this world is real? The Everplast.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "Ever wondered how we talk to you while we are dead?", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "None of this is real. It was all created for you.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "The Everplast is a world of peace and giving.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "And even that, I ruined.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "I ruined everything.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "I just always wanted to stand out. To be important.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "This is the end. There is no more. I can't do more. You are too powerful.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "Whether or not I return is a secret.", NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_1"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_2"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_3"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_4"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_5"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_6"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_7"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_8"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_9"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_10"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_11"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_12"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.final_defeat_13"), NAME)
 		yield(get_tree(), "physics_frame")
 		get_tree().paused = true
 		yield(GlobalEvents, "ui_dialogue_hidden")
@@ -245,11 +245,11 @@ func _died() -> void:
 		queue_free()
 	else:
 		GlobalEvents.emit_signal("story_boss_killed", GlobalStats.Bosses.FERNAND)
-		GlobalEvents.emit_signal("ui_dialogued", "No... HOW???", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "You know what? It's okay.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "YOU ARE NOT DONE YET!", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "Oh, just wait, you'll see more of me.", NAME)
-		GlobalEvents.emit_signal("ui_dialogued", "Here, I\'ll give this to you. YOU WILL NEED IT. But you will fail anyways, so here you go.", NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.defeat_1"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.defeat_2"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.defeat_3"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.defeat_4"), NAME)
+		GlobalEvents.emit_signal("ui_dialogued", tr("fernand.defeat_5"), NAME)
 	set_physics_process(false)
 	set_process(false)
 

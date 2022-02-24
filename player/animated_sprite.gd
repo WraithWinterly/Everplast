@@ -27,7 +27,6 @@ onready var particles_reverse: Particles2D = $Particles2DReverse
 onready var wall_checks := [get_parent().get_parent().get_node("KinematicBody2D/Checks/LowerWallLeft"), get_parent().get_parent().get_node("KinematicBody2D/Checks/LowerWallRight")]
 onready var dust: PackedScene = load(GlobalPaths.DUST)
 onready var level_up_light: Sprite = $LevelUpLight
-#onready var anim_player_fx: AnimationPlayer = $AnimationPlayerFX
 onready var equippable: Position2D = $Equippable
 onready var equippable_holder: Position2D = $EquippableHolder
 
@@ -66,17 +65,9 @@ func _ready() -> void:
 
 	set_color_shader()
 	level_up_light.set_as_toplevel(true)
-#	equippable.set_as_toplevel(true)
-#	equippable_holder.set_as_toplevel(true)
 
 
 func _process(_delta: float) -> void:
-
-#	equippable.global_position.x = lerp(equippable.global_position.x, global_position.x, 20 * delta)
-#	equippable.global_position.y = lerp(equippable.global_position.y, global_position.y, 20 * delta)
-#	equippable_holder.global_position.x = lerp(equippable.global_position.x, global_position.x, 20 * delta)
-#	equippable_holder.global_position.y = lerp(equippable.global_position.y, global_position.y, 20 * delta)
-
 	if bypass: return
 
 	playing = not get_tree().paused
@@ -114,20 +105,12 @@ func _process(_delta: float) -> void:
 				animation = "air_idle"
 
 			if not jump_dust_played:
-#				if player.is_on_floor():
-#					anim_player_fx.play("jump")
 				jump_dust_played = true
 				var dust_effect: Node2D = dust.instance()
 
 				get_node(GlobalPaths.LEVEL).add_child(dust_effect)
 				dust_effect.global_position = \
 						get_node(GlobalPaths.PLAYER).global_position
-
-#		fsm.fall:
-#			if abs(GlobalInput.get_action_strength()) > 0:
-#				animation = "fall"
-#			else:
-#				animation = "air_idle"
 
 		fsm.water_idle:
 			animation = "idle"

@@ -104,9 +104,9 @@ func _story_boss_activated(idx: int) -> void:
 	if not idx == GlobalStats.Bosses.OSTRICH: return
 
 	flip()
-	GlobalEvents.emit_signal("ui_dialogued","Huh? A visitor...", NAME)
-	GlobalEvents.emit_signal("ui_dialogued","You know... I don't even have a name. I am literally called \"Ostrich\"", NAME)
-	GlobalEvents.emit_signal("ui_dialogued","Sigh... I'M HUUNGRRRYYYY.", NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("ostrich.intro_1"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("ostrich.intro_2"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("ostrich.intro_3"), NAME)
 	active = true
 
 
@@ -130,9 +130,9 @@ func _died() -> void:
 	yield(get_tree().create_timer(0.5), "timeout")
 
 	GlobalEvents.emit_signal("story_boss_killed", GlobalStats.Bosses.OSTRICH)
-	GlobalEvents.emit_signal("ui_dialogued", "Wow...", NAME)
-	GlobalEvents.emit_signal("ui_dialogued", "This is embarrassing.", NAME)
-	GlobalEvents.emit_signal("ui_dialogued", "I am going to let our master down...", NAME)
-	GlobalEvents.emit_signal("ui_dialogued", "Just take it, I do not even care anymore...", NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("ostrich.defeat_1"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("ostrich.defeat_2"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("ostrich.defeat_3"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("ostrich.defeat_4"), NAME)
 	set_physics_process(false)
 	set_process(false)

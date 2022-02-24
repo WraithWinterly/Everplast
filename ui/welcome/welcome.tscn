@@ -212,9 +212,7 @@ __meta__ = {
 anchor_top = 0.165
 anchor_right = 1.0
 anchor_bottom = 0.178
-margin_left = -33.6
 margin_top = -26.4222
-margin_right = -33.6
 margin_bottom = -0.929043
 custom_fonts/font = ExtResource( 3 )
 text = "welcome.content"
@@ -258,9 +256,9 @@ __meta__ = {
 
 [node name="LevelEnter" type="TextureRect" parent="Panel"]
 anchor_left = 0.059
-anchor_top = 0.3
+anchor_top = 0.35
 anchor_right = 0.059
-anchor_bottom = 0.3
+anchor_bottom = 0.35
 margin_right = 96.0
 margin_bottom = 192.0
 texture = ExtResource( 8 )
@@ -278,17 +276,17 @@ margin_top = -31.68
 margin_right = 656.0
 margin_bottom = -4.17599
 custom_fonts/font = ExtResource( 3 )
-text = "welocme.explain_1"
+text = "welcome.explain_1"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LevelEnd" type="TextureRect" parent="Panel"]
-anchor_left = 0.36
-anchor_top = 0.3
-anchor_right = 0.36
-anchor_bottom = 0.3
+anchor_left = 0.38
+anchor_top = 0.35
+anchor_right = 0.38
+anchor_bottom = 0.35
 margin_right = 96.0
 margin_bottom = 192.0
 texture = ExtResource( 4 )
@@ -306,17 +304,17 @@ margin_top = -31.68
 margin_right = 656.0
 margin_bottom = -4.17599
 custom_fonts/font = ExtResource( 3 )
-text = "welocme.explain_2"
+text = "welcome.explain_2"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Shops" type="TextureRect" parent="Panel"]
-anchor_left = 0.67
-anchor_top = 0.3
-anchor_right = 0.67
-anchor_bottom = 0.3
+anchor_left = 0.69
+anchor_top = 0.35
+anchor_right = 0.69
+anchor_bottom = 0.35
 margin_right = 96.0
 margin_bottom = 192.0
 texture = ExtResource( 13 )
@@ -334,7 +332,7 @@ margin_top = -31.68
 margin_right = 656.0
 margin_bottom = -4.17599
 custom_fonts/font = ExtResource( 3 )
-text = "welocme.explain_3"
+text = "welcome.explain_3"
 valign = 1
 __meta__ = {
 "_edit_use_anchors_": false

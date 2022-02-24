@@ -4,6 +4,7 @@ onready var fsm = get_parent().get_node("FSM")
 onready var timer: Timer = $Timer
 
 var sound_allowed: bool = true
+var timer_count: float = 0
 
 
 func _ready() -> void:
@@ -19,6 +20,8 @@ func _physics_process(_delta: float) -> void:
 
 
 func footstep_sounds() -> void:
+	calc_footstep_speed()
+
 	for i in get_parent().get_slide_count():
 		var collision = get_parent().get_slide_collision(i)
 		var collider = collision.collider
@@ -45,6 +48,34 @@ func footstep_sounds() -> void:
 					try_play_sound($FootstepSnow)
 
 
+func calc_footstep_speed() -> void:
+#	if get_parent().speed_modifier > 1:
+#		timer_count: float = 0.2
+#		timer_count /= GlobalInput.get_action_strength()
+#
+#	if get_parent().sprinting:
+#		var timer_count: float = 0.3
+#		timer_count *= abs(GlobalInput.get_action_strength())
+#		timer.start(timer_count)
+#		timer.start(timer_count)
+#	else:
+		var og_timer_count: float
+		if get_parent().speed_modifier > 1:
+			og_timer_count = 0.18
+		elif get_parent().sprinting:
+			og_timer_count = 0.27
+		else:
+			og_timer_count = 0.3
+
+		timer_count = og_timer_count
+		if not GlobalInput.get_action_strength() == 0:
+			timer_count *= 1 / abs(GlobalInput.get_action_strength())
+			if abs(GlobalInput.get_action_strength()) < 0.4:
+				 timer_count *= 1.3
+		timer_count = clamp(timer_count, og_timer_count, 0.7)
+		#print(timer_count)
+
+
 func try_play_sound(strm_player: AudioStreamPlayer) -> void:
 	if sound_allowed:
 		strm_player.pitch_scale = rand_range(0.75 + strm_player.pitch_modifier, 1.1 + strm_player.pitch_modifier)
@@ -54,20 +85,12 @@ func try_play_sound(strm_player: AudioStreamPlayer) -> void:
 
 
 func start_timer() -> void:
-	if get_parent().speed_modifier > 1:
-		timer.start(0.2)
-		return
+	timer.start(timer_count)
 
-	if get_parent().sprinting:
-		timer.start(0.3)
-	else:
-		timer.start(0.4)
 
 
 func _state_changed() -> void:
 	if fsm.last_state == fsm.fall or fsm.current_state == fsm.jump:
-		#sound_allowed = true
-		#start_timer()
 		if sound_allowed:
 			footstep_sounds()
 

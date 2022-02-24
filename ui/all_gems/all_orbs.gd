@@ -18,12 +18,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if GlobalUI.menu == GlobalUI.Menus.ALL_ORBS:
 			_back_pressed()
 
-#
-#	if Input.is_action_just_pressed("ability"):
-#		show_menu()
-#		GlobalUI.menu = GlobalUI.Menus.BEAT_GAME
-#		GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
-
 
 func show_menu() -> void:
 	GlobalSave.set_stat("all_gems_collected", true)

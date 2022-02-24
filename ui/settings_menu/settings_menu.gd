@@ -13,7 +13,7 @@ const DEFAULT_DATA: Dictionary = {
 	"vsync": true,
 	"tonemap": 3.0,
 	"fullscreen": true,
-	"post_processing": true,
+	"post_processing": false,
 	"audio_enabled": true,
 	"audio_value": 100.0,
 	"music_enabled": true,
@@ -193,6 +193,7 @@ func _ready() -> void:
 	update_tonemap_button_text()
 	update_audio_labels()
 	update_controllers()
+	replace_device_maps()
 	update_connected_controllers()
 	apply_settings()
 	hide()
@@ -390,6 +391,7 @@ func reset_file() -> void:
 
 
 func save_settings() -> void:
+	replace_device_maps()
 	data.button_hint = hint_button.pressed
 	data.fullscreen = fullscreen_button.pressed
 	data.vsync = vsync_button.pressed
@@ -404,13 +406,18 @@ func save_settings() -> void:
 
 
 func apply_settings() -> void:
+	replace_device_maps()
 	update_toggle_buttons()
 	yield(get_tree(), "physics_frame")
 	save_settings()
 	OS.window_fullscreen = data.fullscreen
 	OS.vsync_enabled = data.vsync
-
-	get_node(GlobalPaths.WORLD_ENVIRONMENT).environment.tonemap_mode = data.tonemap
+	var env: WorldEnvironment = get_node(GlobalPaths.WORLD_ENVIRONMENT)
+	env.environment.tonemap_mode = data.tonemap
+	if env.environment.tonemap_mode == env.environment.TONE_MAPPER_ACES:
+		env.environment.tonemap_white = 2
+	else:
+		env.environment.tonemap_white = 1
 	get_node(GlobalPaths.WORLD_ENVIRONMENT).environment.glow_enabled = data.post_processing
 	get_node(GlobalPaths.WORLD_ENVIRONMENT).environment.adjustment_enabled = data.post_processing
 
@@ -701,7 +708,9 @@ func _ui_settings_language_spanish_pressed() -> void:
 func _ui_controller_warning_yes_pressed() -> void:
 	show_menu()
 	_controls_pressed()
+	yield(get_tree(), "physics_frame")
 	controls_controller_index_slider.grab_focus()
+	GlobalInput.start_controller_test_vibration()
 
 # End of Global Events
 func _general_pressed() -> void:
@@ -895,9 +904,12 @@ func _controls_customize_button_pressed() -> void:
 
 
 func _controls_controller_index_slider_changed(value: int) -> void:
+	Input.stop_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index)
 	data.controller_index = (value - 1)
 	apply_settings()
 	update_controllers()
+	yield(get_tree(), "physics_frame")
+	GlobalInput.start_controller_test_vibration()
 
 
 func update_controllers() -> void:
@@ -916,6 +928,12 @@ func update_controllers() -> void:
 	#print(data.controller_index)
 	# SET CONTROLS TO NEW INDEX
 
+	update_connected_controllers()
+
+	GlobalEvents.emit_signal("ui_settings_updated")
+
+
+func replace_device_maps():
 	replace_device_map("ctr_move_left", InputMapTypes.JOY)
 	replace_device_map("ctr_move_right", InputMapTypes.JOY)
 	replace_device_map("move_down", InputMapTypes.JOY)
@@ -935,11 +953,6 @@ func update_controllers() -> void:
 	replace_device_map("equip", InputMapTypes.BUTTON)
 	replace_device_map("powerup", InputMapTypes.BUTTON)
 	replace_device_map("ability", InputMapTypes.BUTTON)
-
-	update_connected_controllers()
-
-	GlobalEvents.emit_signal("ui_settings_updated")
-
 
 func update_connected_controllers() -> void:
 	connected_controllers = 0

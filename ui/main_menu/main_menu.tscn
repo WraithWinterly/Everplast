@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://ui/main_menu/main_menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/64x.tres" type="DynamicFont" id=2]
@@ -150,7 +150,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.125, 0.375 ]
+"values": [ 1.125, 0.06 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath(".:anchor_right")
@@ -162,7 +162,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ 1.125, 0.635 ]
+"values": [ 1.125, 0.37 ]
 }
 tracks/2/type = "value"
 tracks/2/path = NodePath("../Light:rect_scale")
@@ -213,6 +213,38 @@ tracks/5/keys = {
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=12]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "fade"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -238,19 +270,20 @@ drag_margin_top = 0.5
 drag_margin_bottom = 0.1
 
 [node name="Title" type="HBoxContainer" parent="."]
-anchor_right = 0.083
+anchor_left = 0.689
+anchor_top = 0.241
+anchor_right = 0.69
+anchor_bottom = 0.241
 margin_top = 0.200001
 margin_bottom = 40.0
-rect_scale = Vector2( 12, 12 )
+rect_scale = Vector2( 16, 16 )
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label" type="Label" parent="Title"]
-margin_left = 66.0
 margin_top = 12.0
-margin_right = 66.0
 margin_bottom = 26.0
 
 [node name="Texture" type="Sprite" parent="Title/Label"]
@@ -260,7 +293,7 @@ texture = ExtResource( 9 )
 offset = Vector2( 2, -2.218 )
 
 [node name="Sprite" type="Sprite" parent="Title/Label/Texture"]
-modulate = Color( 0.945098, 0, 1, 0.0980392 )
+modulate = Color( 0.945098, 0, 1, 0.196078 )
 material = SubResource( 8 )
 position = Vector2( 5, 1.071 )
 scale = Vector2( 1e-05, 1e-05 )
@@ -311,10 +344,8 @@ texture = ExtResource( 7 )
 
 [node name="MenuButtons" type="VBoxContainer" parent="."]
 anchor_left = 1.125
-anchor_top = 0.4
 anchor_right = 1.125
-anchor_bottom = 0.4
-margin_bottom = 221.0
+anchor_bottom = 1.0
 custom_constants/separation = 15
 alignment = 1
 __meta__ = {
@@ -323,8 +354,9 @@ __meta__ = {
 
 [node name="Play" type="Button" parent="MenuButtons"]
 modulate = Color( 0.737255, 1, 0.662745, 1 )
+margin_top = 307.0
 margin_right = 442.0
-margin_bottom = 60.0
+margin_bottom = 367.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Quit")
 focus_neighbour_right = NodePath(".")
@@ -341,9 +373,9 @@ text = "main_menu.play"
 
 [node name="QuickPlay" type="Button" parent="MenuButtons"]
 modulate = Color( 0.529412, 0.792157, 1, 1 )
-margin_top = 75.0
+margin_top = 382.0
 margin_right = 442.0
-margin_bottom = 135.0
+margin_bottom = 442.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Play")
 focus_neighbour_right = NodePath(".")
@@ -359,9 +391,9 @@ custom_styles/normal = ExtResource( 3 )
 text = "main_menu.quick_play"
 
 [node name="Settings" type="Button" parent="MenuButtons"]
-margin_top = 150.0
+margin_top = 457.0
 margin_right = 442.0
-margin_bottom = 210.0
+margin_bottom = 517.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../QuickPlay")
 focus_neighbour_right = NodePath(".")
@@ -379,9 +411,9 @@ text = "main_menu.settings"
 
 [node name="Quit" type="Button" parent="MenuButtons"]
 modulate = Color( 1, 0.521569, 0.94902, 1 )
-margin_top = 225.0
+margin_top = 532.0
 margin_right = 442.0
-margin_bottom = 285.0
+margin_bottom = 592.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath("../Settings")
 focus_neighbour_right = NodePath(".")
@@ -433,13 +465,17 @@ __meta__ = {
 }
 
 [node name="PressButton" type="Label" parent="CenterContainer"]
-visible = false
-margin_left = 622.0
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 504.0
 margin_top = 430.0
-margin_right = 978.0
+margin_right = 1096.0
 margin_bottom = 470.0
 custom_fonts/font = ExtResource( 2 )
-text = "Press any button"
+text = "main_menu.press_any_button"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CenterContainer/PressButton"]
+anims/RESET = SubResource( 12 )
+anims/fade = SubResource( 11 )
 
 [node name="PressButton" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )

@@ -41,12 +41,12 @@ func _ready() -> void:
 
 	var num: int = rng.randi_range(0, 100)
 
-	if num <= 35:
+	if num <= 25:
 		item = load(GlobalPaths.COIN)
 		if GlobalLevel.current_world == 4:
 			item = load(GlobalPaths.NAIL_BULLET)
 
-	elif num <= 50:
+	elif num <= 52:
 		if GlobalLevel.current_world == 1:
 			item = load(GlobalPaths.CARROT)
 		elif GlobalLevel.current_world == 2:
@@ -54,7 +54,7 @@ func _ready() -> void:
 		elif GlobalLevel.current_world == 3 or GlobalLevel.current_world == 4:
 			item = load(GlobalPaths.CHERRY)
 
-	elif num <= 75:
+	elif num <= 85:
 		if GlobalLevel.current_world == 1:
 			item = load(GlobalPaths.WATER)
 		elif GlobalLevel.current_world == 2:

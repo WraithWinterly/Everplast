@@ -81,23 +81,8 @@ func _physics_process(delta: float) -> void:
 			animated_sprite.animation = "default"
 			animated_sprite.speed_scale = anim_speed_scale_default
 
-		#print(linear_velocity.x)
-		# Don't play running anim while shoved against a wall
-		# Dunno why 7.5 but works
-
-
-		#linear_velocity.x = lerp(linear_velocity.x, current_speed, 0.05)
 		linear_velocity.y += gravity * delta
 		linear_velocity = enemy.move_and_slide(linear_velocity, Vector2.UP)
-
-#	print(linear_velocity.x)
-#	if is_equal_approx(linear_velocity.x, 0):
-#		if not animated_sprite.animation == "default":
-#			print("ya")
-#			animated_sprite.animation = "default"
-#			animated_sprite.speed_scale = anim_speed_scale_default
-#			animated_sprite.playing = true
-
 
 func attempt_flip(flip_left: bool = true) -> void:
 	if enemy.get_slide_count() > 0:

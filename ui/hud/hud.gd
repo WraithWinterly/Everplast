@@ -98,7 +98,7 @@ func _physics_process(_delta: float) -> void:
 					return
 			if noti_delay.is_stopped():
 				noti_delay.start(noti_delay.wait_time)
-			#GlobalEvents.emit_signal("ui_notification_shown", tr("notification.upgrade_available"))
+
 			upgrade_notification_showed = true
 			if not GlobalSave.get_stat("level_upgrade_shown"):
 				GlobalEvents.emit_signal("ui_level_upgrade_shown")
@@ -164,21 +164,15 @@ func show_powerup_slot() -> void:
 		if stat[0] == GlobalStats.last_powerup:
 			if stat[1] > 0:
 				has_item = true
-				#print("has item")
 
 	if not has_item:
 		GlobalStats.last_powerup = ""
-		#powerup_slot_visible = false
-		#print("removing item")
 
-	#print(powerup_slot_visible)
 	if not powerup_slot_visible and not Globals.game_state == Globals.GameStates.MENU and not GlobalStats.last_powerup == "":
 		powerup_slot.show()
-		#print("SLIDING IN!!!!!!!!!!!!!!!!!!!!!!!!!!")
+
 		powerup_slot_anim_player.play("slide")
 		powerup_slot_visible = true
-		#update_counters()
-
 
 
 func hide_powerup_slot() -> void:
@@ -190,7 +184,7 @@ func hide_powerup_slot() -> void:
 func update_visibility() -> void:
 	yield(get_tree(), "physics_frame")
 	if Globals.game_state == Globals.GameStates.MENU:
-		#ui_slot.hide()
+
 		if ui_slot_visible:
 			ui_slot_anim_player.play_backwards("slide")
 			ui_slot_visible = false
@@ -203,7 +197,6 @@ func update_counters() -> void:
 	if Globals.game_state == Globals.GameStates.MENU:
 		return
 
-	#update_gems()
 	update_coin_counter()
 	update_orb_counter()
 	update_health_counter()
@@ -223,6 +216,9 @@ func update_counters() -> void:
 		health_label.modulate = Color8(220, 25, 25)
 	else:
 		health_label.modulate = Color8(255, 255, 255)
+
+	if GlobalSave.get_stat("equipped_item") == "":
+		return
 
 	if GlobalSave.get_stat("equipped_item") == "none":
 		hide_ui_slot()
@@ -433,9 +429,7 @@ func _player_used_powerup(item_name: String) -> void:
 	GlobalStats.last_powerup = item_name
 	GlobalStats.last_powerup_before_death = item_name
 	yield(get_tree(), "physics_frame")
-								# wtf godot?
-#	if shown_powerup == null or shown_powerup == "":
-#		powerup_slot_anim_player.play("slide")
+
 	powerup_slot_texture.texture = load(GlobalPaths.get_powerup_texture(item_name))
 	shown_powerup = item_name
 	powerup_use_anim_player.play("use")

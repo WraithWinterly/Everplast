@@ -20,10 +20,6 @@ func _ready() -> void:
 	sprite.texture = load("res://splash/wraith_winterly_pfp.png")
 	anim_player.play("splash_wraith")
 
-
-	#audio.stream = load("res://loader/515827__newlocknew__ui-3-1-fhsandal-sinus-sytrus-arpegio-multiprocessing-rsmpl.wav")
-	#audio.play()
-
 	yield(anim_player,"animation_finished")
 
 	sprite.texture = load("res://ui/main_menu/main_logo.png")

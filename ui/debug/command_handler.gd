@@ -18,6 +18,7 @@ const valid_commands: Array = [
 	["get_stat", [Arguments.STRING]],
 	["clear_stat_profile", [Arguments.STRING, Arguments.INT]],
 	["clear_stat", [Arguments.STRING]],
+	["fake_gems"],
 	["unlockall"],
 	["get_stats"],
 	["get_stats_raw"],
@@ -105,6 +106,10 @@ func clear_stat(stat: String) -> String:
 		return "You must be in the game."
 	GlobalSave.set_stat(stat, GlobalSave.DEFAULT_DATA[stat])
 	return "Stat %s set to %s" % [stat, get_stat(stat)]
+
+func fake_gems() -> String:
+	Globals.use_test_fake_gems = true
+	return "Gems faked until next restart"
 
 func unlockall() -> String:
 	if Globals.game_state == Globals.GameStates.MENU:

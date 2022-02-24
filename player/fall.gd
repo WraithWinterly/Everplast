@@ -68,7 +68,6 @@ func _input(event: InputEvent) -> void:
 				player.cayote_used = true
 				may_jump = false
 
-			#elif not player.second_jump_used and Globals.game_state == Globals.GameStates.LEVEL:
 			elif player.can_second_jump():
 				player.second_jump_used = true
 				fsm.change_state(fsm.jump)

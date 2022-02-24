@@ -106,7 +106,6 @@ func save_stats() -> void:
 		set_stat("world_last", GlobalLevel.current_world)
 		set_stat("level_last", GlobalLevel.current_level)
 	var file: File = File.new()
-	#file.open_encrypted_with_pass(FILE, File.WRITE, KEY)
 	var __ = file.open(FILE, File.WRITE)
 	file.store_string(to_json(data))
 	file.close()
@@ -116,7 +115,6 @@ func save_stats() -> void:
 func load_stats() -> void:
 	var file: File = File.new()
 	if file.file_exists(FILE):
-		#file.open_encrypted_with_pass(FILE, File.READ, KEY)
 		var __ = file.open(FILE, File.READ)
 		var loaded_data
 		var test = parse_json(file.get_as_text())
@@ -211,6 +209,9 @@ func get_level_up_cost() -> int:
 
 
 func get_gem_count(idx: int = -1) -> int:
+	if Globals.use_test_fake_gems:
+		return 81
+
 	var gem_dict: Dictionary
 	var gem_count: int = 0
 
@@ -242,6 +243,7 @@ func get_item_count(array: Array, value: String) -> int:
 			return n[1]
 	return 0
 
+
 func reset_all() -> void:
 	data = [{}, {}, {}, {}, {}]
 	save_stats()
@@ -263,34 +265,24 @@ func _save_file_saved(_noti: bool = true) -> void:
 
 
 func _save_file_created(index: int) -> void:
-	#yield(get_tree(), "physics_frame")
-	#print("Save File created")
 	data[index] = DEFAULT_DATA.duplicate()
-	#print(str(data[index]))
 	save_stats()
-	#print("Saved")
-	#print(str(data[index]))
-	#load_stats()
 
 
 func _player_died() -> void:
 	if Globals.game_state == Globals.GameStates.LEVEL:
 		var prev_last_world = GlobalLevel.current_world
 		var prev_last_level = GlobalLevel.current_level
-#		var prev_powerups = get_stat("powerups")
-#		var prev_collectables = get_stat("collectables")
-#		var prev_equippables = get_stat("equippables")
 		var prev_equiped = get_stat("equipped_item")
 		var prev_time = get_stat("seconds_played")
+
 		yield(GlobalEvents, "ui_faded")
+
 		load_stats()
 		set_stat("world_last", prev_last_world)
 		set_stat("level_last", prev_last_level)
 		set_stat("equipped_item", prev_equiped)
 		set_stat("seconds_played", prev_time)
-#		set_stat("powerups", prev_powerups)
-#		set_stat("collectables", prev_collectables)
-#		set_stat("equippables", prev_equippables)
 		set_stat("health", get_stat("health_max"))
 		set_stat("adrenaline", get_stat("adrenaline_max"))
 		save_stats()
@@ -436,4 +428,3 @@ func _seconds_timeout() -> void:
 		return
 
 	set_stat("seconds_played", get_stat("seconds_played") + 1)
-	#print(get_stat("seconds_played"))

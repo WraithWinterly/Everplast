@@ -238,7 +238,7 @@ custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 9 )
 custom_styles/hover_pressed = ExtResource( 5 )
 custom_styles/normal = ExtResource( 9 )
-text = "Espanol"
+text = "Español"
 __meta__ = {
 "_edit_use_anchors_": false
 }

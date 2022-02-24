@@ -43,13 +43,6 @@ onready var dash_other: TextureRect = $VBoxContainerOther/Dash
 onready var fire_other: TextureRect = $VBoxContainerOther/Fire
 
 
-func _ready() -> void:
-	var __: int
-	__ = GlobalEvents.connect("ui_settings_updated", self, "_ui_settings_updated")
-	yield(get_tree(), "physics_frame")
-	update_visibility()
-
-
 func _input(event: InputEvent) -> void:
 	if event is InputEventJoypadMotion:
 		if abs(GlobalInput.get_action_strength_controller()) > 0.5:
@@ -60,8 +53,6 @@ func _input(event: InputEvent) -> void:
 		last_input = InputTypes.KB
 	elif event is InputEventKey:
 		last_input = InputTypes.KB
-
-	#print(last_input)
 
 
 func _physics_process(_delta: float) -> void:
@@ -136,18 +127,6 @@ func _physics_process(_delta: float) -> void:
 				fire_kb.show()
 			else:
 				fire_kb.hide()
-
-
-func update_visibility() -> void:
-	if get_node(GlobalPaths.SETTINGS).data.button_hint:
-		show()
-	else:
-		hide()
-
-
-func _ui_settings_updated() -> void:
-	update_visibility()
-
 
 
 

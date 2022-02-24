@@ -45,11 +45,15 @@ func show_menu() -> void:
 
 
 func hide_menu() -> void:
+	prev_focus = null
 	get_tree().paused = false
 	GlobalUI.menu = GlobalUI.Menus.NONE
 	GlobalEvents.emit_signal("ui_shop_closed")
 	anim_player.play_backwards("show")
 	back_button.release_focus()
+	for button in items_vbox.get_children():
+		if button.has_focus():
+			button.release_focus()
 	disable_buttons()
 	if bought_something:
 		GlobalEvents.emit_signal("save_file_saved")

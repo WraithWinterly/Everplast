@@ -34,6 +34,12 @@ knockback = 200
 attack_damage = 2
 max_health = 2
 
+[node name="HitSound" parent="EnemyComponentManager" index="0"]
+pitch_scale = 0.8
+
+[node name="DeathSound" parent="EnemyComponentManager" index="1"]
+pitch_scale = 1.2
+
 [node name="AnimatedSprite" parent="EnemyComponentManager/SpriteHolder" index="0"]
 position = Vector2( 0, 0 )
 frames = SubResource( 3 )

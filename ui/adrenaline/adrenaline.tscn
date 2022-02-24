@@ -173,9 +173,9 @@ material = SubResource( 2 )
 
 [node name="Panel" type="Panel" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-anchor_left = 0.15
+anchor_left = 0.1
 anchor_top = 1.0
-anchor_right = 0.85
+anchor_right = 0.9
 anchor_bottom = 1.0
 custom_styles/panel = ExtResource( 7 )
 __meta__ = {
@@ -210,9 +210,7 @@ __meta__ = {
 anchor_top = 0.165
 anchor_right = 1.0
 anchor_bottom = 0.574
-margin_left = -33.6
 margin_top = -26.4222
-margin_right = -33.6
 margin_bottom = -0.929043
 custom_fonts/font = ExtResource( 3 )
 text = "adrenaline.content"
@@ -234,8 +232,8 @@ __meta__ = {
 }
 
 [node name="Back" type="Button" parent="Panel/HBoxContainer"]
-margin_left = 327.0
-margin_right = 569.0
+margin_left = 391.0
+margin_right = 633.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")

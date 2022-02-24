@@ -76,11 +76,6 @@ func show_dialogue() -> void:
 func next_dialogue() -> void:
 	if dialogue_locked: return
 
-#	if GlobalUI.menu == GlobalUI.Menus.NONE:
-#		GlobalUI.menu = GlobalUI.Menus.DIALOGUE
-
-
-
 	fast_speed = false
 	content_text.text = ""
 	header_text.text = ""
@@ -142,8 +137,6 @@ func close_dialogue() -> void:
 	GlobalEvents.emit_signal("ui_dialogue_hidden")
 	dialogue_index = 0
 
-#	if not GlobalUI.menu == GlobalUI.Menus.DIALOGUE:
-#		return
 	dialogue_content.clear()
 
 	anim_player.play_backwards("show")
@@ -156,7 +149,6 @@ func close_dialogue() -> void:
 		get_tree().paused = false
 	else:
 		GlobalUI.menu = GlobalUI.Menus.CUTSCENE
-		print("close dialogue - cutscene")
 
 
 

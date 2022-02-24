@@ -18,20 +18,20 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if GlobalUI.menu == GlobalUI.Menus.CONTROLLER_WARNING and event is InputEventAction:
-		event = event as InputEventAction
-		if event.action == "ui_cancel":
-			get_tree().set_input_as_handled()
-			hide_menu()
-			GlobalEvents.emit_signal("ui_button_pressed")
+	if event.is_action_pressed("ui_cancel") and GlobalUI.menu == GlobalUI.Menus.CONTROLLER_WARNING:
+		get_tree().set_input_as_handled()
+		hide_menu()
+		GlobalEvents.emit_signal("ui_button_pressed")
+
 
 func show_menu() -> void:
 	if GlobalUI.menu == GlobalUI.Menus.INITIAL_SETUP:
 		while GlobalUI.menu == GlobalUI.Menus.INITIAL_SETUP:
 			yield(get_tree(), "physics_frame")
 
-	$Panel/VBoxContainer/PromptText.text = "You have multiple controllers connected. You should select which controller you are using.\nCurrent Controller: %s"\
-			 % Input.get_joy_name(get_node(GlobalPaths.SETTINGS).data.controller_index)
+	$Panel/VBoxContainer/PromptText.text = tr("controller_warning.text")
+	$Panel/VBoxContainer/PromptText.text += "\n%s: %s" % [tr("controller_warning.current_controller"),
+			 Input.get_joy_name(get_node(GlobalPaths.SETTINGS).data.controller_index)]
 	GlobalUI.menu = GlobalUI.Menus.CONTROLLER_WARNING
 	show()
 	anim_player.play("show")
@@ -53,9 +53,11 @@ func hide_menu() -> void:
 func _level_changed(_world: int, _level: int) -> void:
 	hide_menu()
 
+
 func no_pressed() -> void:
 	hide_menu()
 	GlobalEvents.emit_signal("ui_button_pressed", true)
+
 
 func yes_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed")

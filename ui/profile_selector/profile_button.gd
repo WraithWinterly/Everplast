@@ -44,7 +44,6 @@ func _ready() -> void:
 	__ = connect("focus_entered", self, "_button_hovered")
 	__ = connect("mouse_entered", self, "_button_hovered")
 
-
 	update_buttons()
 
 
@@ -168,6 +167,7 @@ func show_blank_stats() -> void:
 	adrenaline_label.hide()
 	stats.show()
 
+
 func button_pressed() -> void:
 	if GlobalUI.menu_locked: return
 
@@ -187,7 +187,6 @@ func button_pressed() -> void:
 
 		match button_type:
 			CREATE:
-				GlobalEvents.emit_signal("ui_button_pressed")
 				GlobalEvents.emit_signal("save_file_created", my_index)
 				button_type = LOAD
 				button_pressed()

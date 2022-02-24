@@ -10,7 +10,6 @@ onready var equip_holder: Position2D = get_parent().get_node("EquippableHolder")
 func _ready() -> void:
 	var __: int
 	__ = GlobalEvents.connect("player_equipped", self, "_player_equipped")
-	#get_parent().connect("direction_changed", self, "_direction_changed")
 	if not GlobalSave.get_stat("equipped_item") == "none" and not Globals.game_state == Globals.GameStates.MENU:
 		_player_equipped(GlobalSave.get_stat("equipped_item"))
 
@@ -51,6 +50,8 @@ func _player_equipped(equippable: String) -> void:
 	for n in existing:
 		n.call_deferred("free")
 	if not equippable == "none":
+		if GlobalSave.get_stat("equipped_item") == "":
+			return
 		var scn: PackedScene = load(GlobalPaths.get_equippable(equippable))
 		var inst: Node2D = scn.instance()
 		inst.get_node("EquippableBase").mode = inst.get_node("EquippableBase").USE

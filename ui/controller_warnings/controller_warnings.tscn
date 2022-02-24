@@ -226,7 +226,7 @@ __meta__ = {
 margin_right = 1440.0
 margin_bottom = 30.0
 custom_fonts/font = ExtResource( 9 )
-text = "Select Controller?"
+text = "controller_warnings.select"
 align = 1
 
 [node name="PromptText" type="Label" parent="Panel/VBoxContainer"]
@@ -236,7 +236,7 @@ margin_bottom = 75.0
 size_flags_vertical = 6
 custom_colors/font_color = Color( 1, 0.572549, 0.65098, 1 )
 custom_fonts/font = ExtResource( 9 )
-text = "You have multiple controllers connected. You should select which controller you are using."
+text = "controller_warning.text"
 align = 1
 autowrap = true
 
@@ -251,8 +251,8 @@ __meta__ = {
 }
 
 [node name="No" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_left = 276.0
-margin_right = 474.0
+margin_left = 366.0
+margin_right = 564.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath(".")
 focus_neighbour_top = NodePath(".")
@@ -269,8 +269,8 @@ custom_styles/normal = ExtResource( 6 )
 text = "global.no"
 
 [node name="Yes" type="Button" parent="Panel/VBoxContainer/HBoxContainer"]
-margin_left = 489.0
-margin_right = 1163.0
+margin_left = 579.0
+margin_right = 1073.0
 margin_bottom = 60.0
 focus_neighbour_left = NodePath("../No")
 focus_neighbour_top = NodePath(".")
@@ -287,7 +287,7 @@ custom_styles/pressed = ExtResource( 3 )
 custom_styles/focus = ExtResource( 7 )
 custom_styles/disabled = ExtResource( 6 )
 custom_styles/normal = ExtResource( 6 )
-text = "Select Controller (Recommended)"
+text = "controller_warning.yes"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )

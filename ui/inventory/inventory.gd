@@ -1,13 +1,5 @@
 extends Control
 
-#                                                              #
-# !!! UPDATE _powerup_pressed WHEN ADDING NEW FILLER ITEMS !!! #
-#                                                              #
-
-#                                                                     #
-# !!! WHEN ADDING BUTTONS CONNECT mouse_entered AND focus_entered !!! #
-#                                                                     #
-
 var powerups_buttons_top_focus: Button
 var powerups_buttons_bottom_focus: Button
 var equippables_buttons_top_focus: Button
@@ -129,13 +121,14 @@ func _input(event: InputEvent) -> void:
 	if Globals.death_in_progress: return
 	if not GlobalUI.menu == GlobalUI.Menus.NONE and not GlobalUI.menu == GlobalUI.Menus.INVENTORY: return
 
-	#yield(get_tree(), "idle_frame")
-	#print("TRY  INVENRT")
-	if event.is_action_pressed("equip"):
+	if event.is_action_pressed("equip") and GlobalUI.menu == GlobalUI.Menus.NONE:
 		if Globals.game_state == Globals.GameStates.MENU:
 			return
 
 		if GlobalUI.menu_locked or GlobalUI.fade_player_playing: return
+
+		if GlobalSave.get_stat("equipped_item") == "":
+			return
 
 		if GlobalSave.get_stat("equipped_item") == "none":
 			if last_equippable == "none": return
@@ -151,7 +144,7 @@ func _input(event: InputEvent) -> void:
 				GlobalEvents.emit_signal("save_file_saved", true)
 			play_powerup_sound(true)
 
-	elif event.is_action_pressed("powerup"):
+	elif event.is_action_pressed("powerup") and GlobalUI.menu == GlobalUI.Menus.NONE:
 		try_use_powerup(GlobalStats.last_powerup)
 
 	elif not GlobalUI.menu_locked and not GlobalUI.fade_player_playing:
@@ -231,7 +224,6 @@ func enable_buttons() -> void:
 func update_inventory() -> void:
 	# Quick Items
 	not_in_level_warning.visible = false#\
-			#Globals.game_state == Globals.GameStates.WORLD_SELECTOR
 
 	powerups_explanation_label.text = tr("inventory.no_items")
 
@@ -249,9 +241,11 @@ func update_inventory() -> void:
 		if powerups_buttons.get_node(stat[0].capitalize()).visible:
 			if stats.size() > 0:
 				if index == 1:
-					powerups_buttons_top_focus = powerups_buttons.get_node(stat[0].capitalize())
-				elif index == stats.size():
 					powerups_buttons_bottom_focus = powerups_buttons.get_node(stat[0].capitalize())
+					#print("b: " + powerups_buttons_bottom_focus.name)
+				elif index == stats.size():
+					powerups_buttons_top_focus = powerups_buttons.get_node(stat[0].capitalize())
+					#print("f: " + powerups_buttons_top_focus.name)
 		index -= 1
 
 	# Equippables
@@ -264,9 +258,9 @@ func update_inventory() -> void:
 		if equippables_buttons.get_node(stat[0].capitalize()).visible:
 			if stats.size() > 0:
 				if index == 1:
-					equippables_buttons_top_focus = equippables_buttons.get_node(stat[0].capitalize())
-				elif index == stats.size():
 					equippables_buttons_bottom_focus = equippables_buttons.get_node(stat[0].capitalize())
+				elif index == stats.size():
+					equippables_buttons_top_focus = equippables_buttons.get_node(stat[0].capitalize())
 		index -= 1
 
 
@@ -301,7 +295,7 @@ func update_inventory() -> void:
 			w_icon.hide()
 
 
-func update_button_focus(top_button: Button) -> void:
+func update_button_focus(top_button: Button, bottom_button: Button = null) -> void:
 	if top_button == null:
 		for button in upper_buttons.get_children():
 				button.focus_neighbour_bottom = button.get_path()
@@ -314,6 +308,8 @@ func update_button_focus(top_button: Button) -> void:
 			else:
 				button.focus_neighbour_bottom = button.get_path()
 		return
+#	elif top_button == powerups_buttons_top_focus:
+#
 
 	var button_container: VBoxContainer
 
@@ -323,7 +319,6 @@ func update_button_focus(top_button: Button) -> void:
 		button_container = equippables_buttons
 
 	var index: int = button_container.get_children().size()
-
 
 	for button in button_container.get_children():
 		button.focus_neighbour_left = button.get_path()
@@ -340,17 +335,30 @@ func update_button_focus(top_button: Button) -> void:
 		index -= 1
 
 	button_close.focus_neighbour_bottom = top_button.get_path()
+
 	top_powerup_button.focus_neighbour_bottom = \
 			top_button.get_path()
+
 	top_collectables_button.focus_neighbour_bottom = \
 			top_button.get_path()
+
+
+	if not bottom_button == null:
+		bottom_button.focus_neighbour_bottom = \
+				bottom_button.get_path()
+		bottom_button.focus_next = \
+				bottom_button.get_path()
+
 	top_rank_button.focus_neighbour_bottom = \
 			top_button.get_path()
 	top_stats_button.focus_neighbour_bottom = top_button.get_path()
 
 	if top_button == powerups_buttons_top_focus:
+		#print(top_button)
 		top_button.focus_neighbour_top = top_powerup_button.get_path()
-	else:
+
+
+	elif top_button == equippables_buttons_top_focus:
 		top_button.focus_neighbour_top = top_collectables_button.get_path()
 
 
@@ -363,12 +371,12 @@ func order_buttons(buttons: VBoxContainer, player_stat: String) -> void:
 	var stats: Array = GlobalSave.get_stat(player_stat)
 	var index: int = stats.size()
 
-	# got lazy
-	var button_positions: Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+	var button_positions: Array = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 	for button in button_names:
 		if not button in stats:
 			if not buttons.get_node_or_null(button.capitalize()) == null:
+
 				buttons.get_node(button.capitalize()).hide()
 
 	for stat in stats:
@@ -386,26 +394,46 @@ func order_buttons(buttons: VBoxContainer, player_stat: String) -> void:
 				buttons.get_node(stat[0].capitalize()).text = string
 				button_positions[index] = index
 
-				if index == stats.size():
 
+				if index == stats.size():
 					buttons.get_node(stat[0].capitalize()).grab_focus()
 				index -= 1
 
-	button_positions.invert()
+	button_positions
+	var array_without_zeros := []
+	array_without_zeros.push_back(0)
+	for pos in button_positions:
+		if not pos == 0:
+			array_without_zeros.push_back(pos)
+	array_without_zeros.invert()
+	#print(array_without_zeros)
 	index = stats.size()
+
+	var actual_index: int = stats.size()
+	for stat in stats:
+		if not buttons.get_node(stat[0].capitalize()) == null:
+			if not buttons.get_node(stat[0].capitalize()).visible:
+				actual_index -= 1
+
+	actual_index = stats.size()
 
 	for stat in stats:
 		if not buttons.get_node(stat[0].capitalize()) == null:
-
 			if buttons.get_node(stat[0].capitalize()).visible:
+				#print(buttons.get_node(stat[0].capitalize()))
 				buttons.move_child(
 						buttons.get_node(stat[0].capitalize()),
-						button_positions[stats.size()])
+						array_without_zeros[actual_index])
+				#print(button_positions)
 
-				if index == stats.size():
-					if not player_stat == "powerups":
-						buttons.get_node(stat[0].capitalize()).focus_neighbour_bottom = buttons.get_node(stat[0].capitalize()).get_path()
-				index -= 1
+#				if actual_index == stats.size():
+#					if not player_stat == "powerups":
+#						buttons.get_node(stat[0].capitalize()).focus_neighbour_bottom = buttons.get_node(stat[0].capitalize()).get_path()
+
+				actual_index -= 1
+
+
+
 
 	index = stats.size()
 
@@ -419,9 +447,6 @@ func play_powerup_sound(alt_sound: bool = false) -> void:
 	powerup_sound.play()
 
 
-#                                                  #
-# !!! UPDATE THIS WHEN ADDING NEW FILLER ITEMS !!! #
-#                                                  #
 func fill_items(stat: String, amount: int) -> void:
 	# 0 : Health
 	# 1 : Adrenaine
@@ -500,11 +525,6 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 	GlobalStats.last_powerup_before_death = item
 
 
-#	if item in GlobalStats.TIMED_POWERUPS and GlobalStats.timed_powerup_active:
-#		GlobalEvents.emit_signal("ui_notification_shown", tr("notification.item_active"))
-#		return
-#
-#	else:
 	if not item in GlobalStats.TIMED_POWERUPS and fill_button.pressed:
 		var stats = GlobalSave.get_stat("powerups")
 
@@ -528,7 +548,7 @@ func try_use_powerup(item: String, from_inventory := true) -> void:
 
 # Start of GlobalEvents
 func _level_changed(_world: int, _level: int) -> void:
-	#last_powerup = "none"
+
 	last_equippable = GlobalSave.get_stat("equipped_item")
 
 	# Determine last used gun
@@ -659,7 +679,7 @@ func _powerups_pressed() -> void:
 func _collectables_pressed() -> void:
 	GlobalEvents.emit_signal("ui_button_pressed")
 	if not current_panel == collectables_panel:
-		update_button_focus(equippables_buttons_top_focus)
+		update_button_focus(equippables_buttons_top_focus, equippables_buttons_bottom_focus)
 		collectables_panel.show()
 		collectables_panel_anim_player.play_backwards("slide")
 		current_panel.get_node("AnimationPlayer").play("slide")

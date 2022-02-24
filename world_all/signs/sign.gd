@@ -20,17 +20,17 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("interact") and with_player:
-		GlobalEvents.emit_signal("ui_dialogued", sign_text[0][0], sign_text[0][1], sign_text[0][2])
+		GlobalEvents.emit_signal("ui_dialogued", tr(sign_text[0][0]), tr(sign_text[0][1]), sign_text[0][2])
 		yield(get_tree(), "physics_frame")
 		for n in sign_text:
 			if n.hash() == sign_text[0].hash():
 				continue
 			if n.size() >= 3:
-				GlobalEvents.emit_signal("ui_dialogued", n[0], n[1], n[2])
+				GlobalEvents.emit_signal("ui_dialogued", tr(n[0]), tr(n[1]), n[2])
 			elif n.size() >= 2:
-				GlobalEvents.emit_signal("ui_dialogued", n[0], n[1])
+				GlobalEvents.emit_signal("ui_dialogued", tr(n[0]), tr(n[1]))
 			else:
-				GlobalEvents.emit_signal("ui_dialogued", n[0])
+				GlobalEvents.emit_signal("ui_dialogued", tr(n[0]))
 
 
 func _level_changed(_world: int, _level: int) -> void:

@@ -3,13 +3,7 @@ extends Node2D
 
 export var kinematic_body_path: NodePath
 
-onready var kinematic_body = get_node(kinematic_body_path
-
-)
-func _ready() -> void:
-	pass # Replace with function body.
-
-
+onready var kinematic_body = get_node(kinematic_body_path)
 
 # Spikes
 func _physics_process(_delta):

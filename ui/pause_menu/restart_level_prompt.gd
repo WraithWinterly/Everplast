@@ -75,6 +75,7 @@ func _no_pressed() -> void:
 func _yes_pressed() -> void:
 	if GlobalUI.menu_locked: return
 	yes_button.release_focus()
+	GlobalLevel.reset_checkpoint()
 	GlobalEvents.emit_signal("ui_pause_menu_restart_prompt_yes_pressed")
 	GlobalEvents.emit_signal("level_changed", GlobalLevel.current_world, GlobalLevel.current_level)
 	yield(GlobalEvents, "ui_faded")

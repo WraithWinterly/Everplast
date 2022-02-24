@@ -24,9 +24,6 @@ func _input(event: InputEvent) -> void:
 
 func start() -> void:
 	player.may_dash = true
-#	if Input.is_action_just_pressed("move_jump") and player.kinematic_body.is_on_floor():
-#		player_body.air_time = 0
-#		player_body.linear_velocity.y -= player_body.jump_speed
 	player.sprinting = false
 
 

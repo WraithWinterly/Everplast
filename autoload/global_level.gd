@@ -136,17 +136,12 @@ func error_detection() -> void:
 
 
 func load_world_selector() -> void:
-	#reset_checkpoint()
-
 	GlobalEvents.emit_signal("level_world_selector_loaded")
 	GlobalLevel.in_subsection = false
 
 	var prev_time = GlobalSave.get_stat("seconds_played")
 	GlobalSave.load_stats()
 	GlobalSave.set_stat("seconds_played", prev_time)
-
-#	current_world = -1
-#	current_level = -1
 
 	Globals.game_state = Globals.GameStates.WORLD_SELECTOR
 
@@ -176,19 +171,29 @@ func load_world_selector() -> void:
 			yield(GlobalEvents, "ui_faded")
 		GlobalEvents.emit_signal("ui_adrenaline_shown")
 
+	if not GlobalSave.get_stat("all_gems_collected") and GlobalSave.get_gem_count() == GlobalStats.total_gems:
+		if not already_waited:
+			yield(GlobalEvents, "ui_faded")
+
+		yield(get_tree(), "physics_frame")
+
+		if GlobalUI.menu == GlobalUI.Menus.BEAT_GAME:
+			while GlobalUI.menu == GlobalUI.Menus.BEAT_GAME:
+				yield(get_tree(), "physics_frame")
+
+		GlobalEvents.emit_signal("ui_all_gems_shown")
+
 
 func unlock_next_level() -> void:
 	if GlobalLevel.current_level + 1 <= LEVEL_DATABASE[GlobalLevel.current_world]:
 		GlobalSave.set_stat("world_max", GlobalLevel.current_world)
 		GlobalSave.set_stat("level_max", GlobalLevel.current_level + 1)
-		#print("upping level")
 		GlobalEvents.emit_signal("save_file_saved", true)
 	else:
 		if not int(GlobalSave.get_stat("world_max")) == GlobalLevel.WORLD_COUNT:
 			GlobalSave.set_stat("world_max", GlobalLevel.current_world + 1)
 			GlobalSave.set_stat("level_max", 1)
 			GlobalEvents.emit_signal("save_file_saved", true)
-			#print("upping world")
 
 	if GlobalLevel.current_world == 4:
 		GlobalSave.set_stat("level_max", 1)
@@ -213,6 +218,7 @@ func has_canvas() -> bool:
 
 
 func _level_completed() -> void:
+	GlobalEvents.emit_signal("save_file_saved", true)
 	GlobalLevel.in_boss = false
 	get_tree().paused = true
 
@@ -231,14 +237,6 @@ func _level_completed() -> void:
 	if GlobalSave.get_stat("world_max") == 4 and not GlobalSave.get_stat("game_beat"):
 		GlobalEvents.emit_signal("ui_game_beat_shown")
 
-	yield(get_tree(), "physics_frame")
-
-	if GlobalUI.menu == GlobalUI.Menus.BEAT_GAME:
-		while GlobalUI.menu == GlobalUI.Menus.BEAT_GAME:
-			yield(get_tree(), "physics_frame")
-
-	if not GlobalSave.get_stat("all_gems_collected") and GlobalSave.get_gem_count() == GlobalStats.total_gems:
-		GlobalEvents.emit_signal("ui_all_gems_shown")
 
 
 func _level_checkpoint_activated() -> void:
@@ -269,7 +267,6 @@ func _story_fernand_beat() -> void:
 	for node in get_node(GlobalPaths.LEVEL_HOLDER).get_children():
 		node.queue_free()
 	yield(get_tree(), "physics_frame")
-	#get_tree().paused = false
 	GlobalEvents.emit_signal("level_changed", 4, 1)
 	GlobalSave.set_stat("world_max", 4)
 	GlobalSave.set_stat("level_max", 1)

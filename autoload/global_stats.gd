@@ -118,7 +118,8 @@ func _ready() -> void:
 	#print(total_gems)
 
 func _process(_delta: float) -> void:
-	pass#print(total_gems)
+	pass#(total_gems)
+
 
 func get_powerup_explanation(powerup_name: String) -> String:
 	match powerup_name:

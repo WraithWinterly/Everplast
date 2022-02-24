@@ -10,6 +10,7 @@ onready var camera: Camera2D = $Camera2D
 onready var previous_button_focus: Button = play_button
 onready var menu_buttons_anim_player: AnimationPlayer = $MenuButtonAnimationPlayer
 onready var backgrounds: Control = $Backgrounds
+onready var labl_anim_player: AnimationPlayer = $CenterContainer/PressButton/AnimationPlayer
 
 var run_camera := true
 var can_pass_pre_menu := false
@@ -41,7 +42,7 @@ func _ready() -> void:
 		__ = button.connect("mouse_entered", self, "_button_hovered")
 
 	disable_buttons()
-	$CenterContainer/PressButton.hide()
+	$CenterContainer/PressButton.show()
 	GlobalUI.menu_locked = true
 	show()
 	add_background()
@@ -90,7 +91,8 @@ func _physics_process(_delta: float) -> void:
 func go_to_pre_menu() -> void:
 	GlobalUI.menu = GlobalUI.Menus.PRE_MAIN_MENU
 	can_pass_pre_menu = true
-	$CenterContainer/PressButton.show()
+	#$CenterContainer/PressButton.show()
+	labl_anim_player.play("fade")
 
 
 func go_to_main_menu() -> void:
@@ -99,7 +101,8 @@ func go_to_main_menu() -> void:
 	get_tree().set_input_as_handled()
 	play_button.grab_focus()
 	menu_buttons_anim_player.play("slide")
-	$CenterContainer/PressButton.hide()
+	#$CenterContainer/PressButton.hide()
+	labl_anim_player.play_backwards("fade")
 	$PressButton.play()
 	enable_buttons()
 	#GlobalEvents.emit_signal("ui_button_pressed")

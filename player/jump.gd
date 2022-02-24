@@ -6,6 +6,7 @@ onready var jump_sound: AudioStreamPlayer = get_parent().get_parent().get_node("
 
 var checks_ignored := true
 
+
 func _physics_process(_delta: float) -> void:
 	player.basic_movement()
 
@@ -17,16 +18,8 @@ func _physics_process(_delta: float) -> void:
 	elif player.is_on_floor() and player.floor_checks[0].is_colliding() and player.floor_checks[1].is_colliding():
 		fsm.change_state(fsm.walk)
 
-#	elif player.floor_checks[0].is_colliding() or player.floor_checks[1].is_colliding():
-#		#if not player.can_wall_slide(): return
-#
-#		player.may_dash = true
-#		player.second_jump_used = false
-#		fsm.change_state(fsm.walk)
-
 	if not player.floor_checks[0].is_colliding() or not player.floor_checks[1].is_colliding():
 		checks_ignored = false
-
 
 
 func _input(event: InputEvent) -> void:

@@ -47,16 +47,10 @@ func _physics_process(delta: float) -> void:
 
 		current_swim_amount += abs(linear_velocity.x) * delta
 		linear_velocity.x = lerp(linear_velocity.x, current_speed, 0.05)
-		#linear_velocity.y += gravity * delta
 		linear_velocity = enemy.move_and_slide(linear_velocity, Vector2.UP)
 
 
 func attempt_flip(flip_left: bool = true) -> void:
-#	if ignore:
-#		if (facing_right and not raycast_wall_left.is_colliding()):
-#			ignore = false
-#		if raycast_floor_left.is_colliding() and raycast_floor_right.is_colliding() and ignore:
-#			return
 	if flip_left:
 		if not raycast_wall_left.is_colliding():
 			facing_right = false

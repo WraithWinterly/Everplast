@@ -37,7 +37,7 @@ func _physics_process(_delta: float) -> void:
 		equip_activated = false
 		powerup_activated = false
 
-	# Was engine bug, is fixed now
+	# Was engine bug, is fixed now, but I keep it here, stil improves
 	check_action("stick_ui_up")
 	check_action("stick_ui_down")
 	check_action("stick_ui_left")
@@ -105,21 +105,29 @@ func release_action(action: String) -> void:
 
 
 func start_low_vibration() -> void:
-	Input.stop_joy_vibration(0)
+	if get_tree().root.get_node("Main/GUI/Control/ButtonHint").last_input == 0: return
+	Input.stop_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index)
 	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 0.1, 0, 0.05)
 
 
 func start_normal_vibration() -> void:
-	Input.stop_joy_vibration(0)
+	if get_tree().root.get_node("Main/GUI/Control/ButtonHint").last_input == 0: return
+	Input.stop_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index)
 	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 0.15, 0.05, 0.1)
 
 
 func start_high_vibration() -> void:
+	if get_tree().root.get_node("Main/GUI/Control/ButtonHint").last_input == 0: return
 	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 0.4, 0.2, 0.25)
 
 
 func start_ultra_high_vibration() -> void:
+	if get_tree().root.get_node("Main/GUI/Control/ButtonHint").last_input == 0: return
 	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 1, 0.8, 1.5)
+
+func start_controller_test_vibration() -> void:
+	Input.stop_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index)
+	Input.start_joy_vibration(get_node(GlobalPaths.SETTINGS).data.controller_index, 1, 0.8, 0.6)
 
 
 func get_action_strength_keyboard() -> float:

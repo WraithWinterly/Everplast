@@ -21,12 +21,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if GlobalUI.menu == GlobalUI.Menus.BEAT_GAME:
 			_back_pressed()
 
-#
-#	if Input.is_action_just_pressed("ability"):
-#		show_menu()
-#		GlobalUI.menu = GlobalUI.Menus.BEAT_GAME
-#		GlobalEvents.emit_signal("ui_button_pressed_to_prompt")
-
 
 func show_menu() -> void:
 	GlobalSave.set_stat("game_beat", true)

@@ -38,5 +38,5 @@ func _story_boss_level_end_completed(_idx: int) -> void:
 
 
 func _story_w3_attempt_beat() -> void:
-	GlobalEvents.emit_signal("ui_dialogued", "I told you that you would not see the last of me.", "Fernand")
-	GlobalEvents.emit_signal("ui_dialogued", "And you did not believe me...", "Fernand")
+	GlobalEvents.emit_signal("ui_dialogued", tr("fernand.reentry_1"), "Fernand")
+	GlobalEvents.emit_signal("ui_dialogued", tr("fernand_reentry_2"), "Fernand")

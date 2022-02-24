@@ -65,25 +65,6 @@ func _physics_process(_delta: float) -> void:
 
 	if state == States.AFTER:
 		run_cora()
-#	match state:
-#		States.CHASE:
-#			chase_ai()
-#		States.JUMP:
-#			jump_ai()
-#
-#	if not state == States.JUMP:
-#		if facing_right and ray_right.is_colliding():
-#			if ray_right_top.is_colliding():
-#				flip()
-#			else:
-#				linear_velocity.y -= JUMP_SPEED
-#				state = States.JUMP
-#		elif not facing_right and ray_left.is_colliding():
-#			if ray_left_top.is_colliding():
-#				flip()
-#			else:
-#				linear_velocity.y -= JUMP_SPEED
-#				state = States.JUMP
 
 	linear_velocity.y += gravity
 	linear_velocity.x = lerp(linear_velocity.x, current_speed, 0.1)
@@ -120,7 +101,7 @@ func run_cora() -> void:
 func start_boss() -> void:
 	for i in 10:
 		yield(get_tree(), "physics_frame")
-	GlobalEvents.emit_signal("ui_dialogued","Worthless!!! As I thought!", NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.destroy"), NAME)
 	#yield(GlobalEvents, "ui_dialogued")
 	#$Shield.hide()
 	$Shield/AnimationPlayer.play_backwards("use")
@@ -143,11 +124,11 @@ func _story_boss_activated(idx: int) -> void:
 	if not idx == GlobalStats.Bosses.CORA: return
 
 	flip()
-	GlobalEvents.emit_signal("ui_dialogued","YOU!!!", NAME)
-	GlobalEvents.emit_signal("ui_dialogued","I can NOT believe you made it past ALL OF THAT!!!", NAME)
-	GlobalEvents.emit_signal("ui_dialogued","YOU ARE GOING TO PASS ME???", NAME)
-	GlobalEvents.emit_signal("ui_dialogued","You are not prepared.", NAME)
-	GlobalEvents.emit_signal("ui_dialogued","LET'S GO!!!", NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.intro_1"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.intro_2"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.intro_3"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.intro_4"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.intro_5"), NAME)
 	active = true
 	yield(GlobalEvents, "ui_dialogue_hidden")
 	$Shield/AnimationPlayer.play("use")
@@ -173,10 +154,10 @@ func _died() -> void:
 	yield(get_tree().create_timer(0.5), "timeout")
 
 	GlobalEvents.emit_signal("story_boss_killed", GlobalStats.Bosses.CORA)
-	GlobalEvents.emit_signal("ui_dialogued", "Hehe", NAME)
-	GlobalEvents.emit_signal("ui_dialogued", "Just wait...", NAME)
-	GlobalEvents.emit_signal("ui_dialogued", "If you thought that was any hard... you are in for a surprise.", NAME)
-	GlobalEvents.emit_signal("ui_dialogued", "Take this, you are not going to make it much farther. HAHAHA!", NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.defeat_1"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.defeat_2"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.defeat_3"), NAME)
+	GlobalEvents.emit_signal("ui_dialogued", tr("cora.defeat_4"), NAME)
 	set_physics_process(false)
 	set_process(false)
 

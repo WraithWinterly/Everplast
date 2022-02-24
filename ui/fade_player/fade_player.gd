@@ -28,9 +28,7 @@ func _ready() -> void:
 	__ = GlobalEvents.connect("story_w3_attempt_beat", self, "_story_w3_attempt_beat")
 	__ = GlobalEvents.connect("story_w3_fernand_anim_finished", self, "_story_w3_fernand_anim_finished")
 	__ = GlobalEvents.connect("story_fernand_beat", self, "_story_fernand_beat")
-	#__ = GlobalEvents.connect("ui_play_pressed", self, "_ui_play_pressed")
 	__ = GlobalEvents.connect("ui_profile_selector_profile_pressed", self, "_ui_profile_selector_profile_pressed")
-	#__ = GlobalEvents.connect("ui_profile_selector_return_pressed", self, "_ui_profile_selector_return_pressed")
 	__ = GlobalEvents.connect("ui_profile_selector_delete_prompt_yes_pressed", self, "_ui_profile_selector_delete_prompt_yes_pressed")
 	__ = GlobalEvents.connect("ui_pause_menu_return_prompt_yes_pressed", self, "_ui_pause_menu_return_prompt_yes_pressed")
 	__ = GlobalEvents.connect("ui_settings_erase_all_prompt_yes_pressed", self, "_ui_settings_erase_all_prompt_yes_pressed")
@@ -43,15 +41,6 @@ func _ready() -> void:
 	anim_player.pause_mode = PAUSE_MODE_PROCESS
 	main_logo.hide()
 	main_logo.set_as_toplevel(true)
-
-#func _physics_process(_delta: float) -> void:
-#	print(fade_rect.material.get_shader_param("position"))
-#
-#func _input(event: InputEvent) -> void:
-#	if event.is_action_pressed("ui_up"):
-#		anim_player.play("fade")
-#	if event.is_action_pressed("ui_down"):
-#		anim_player.play("fade_fancy")
 
 
 func play(fade_out: bool, fancy := false, black := false) -> void:

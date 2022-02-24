@@ -59,7 +59,6 @@ func _process(delta) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	#return
 	zoom = lerp(zoom, current_zoom, 0.1484375)
 
 	if player.sprinting:

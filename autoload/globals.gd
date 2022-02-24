@@ -22,6 +22,7 @@ var death_in_progress := false
 var player_invincible := false
 var demo_version := false
 
+var use_test_fake_gems := false
 
 func _ready() -> void:
 	var __: int
@@ -34,10 +35,3 @@ func _ready() -> void:
 func _level_changed(_world: int, _level: int) -> void:
 	yield(get_tree(), "physics_frame")
 	game_state = GameStates.LEVEL
-
-#
-#func _process(delta: float) -> void:
-#	if Input.is_action_pressed("ability"):
-#		Engine.time_scale = 2
-#	else:
-#		Engine.time_scale = 1

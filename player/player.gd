@@ -9,6 +9,7 @@ const INVINCIBILITY_TIME: float = 0.65
 const LERP_SPEED: float = 0.08
 const LERP_SPEED_ICE: float = 0.025
 const TERMINAL_VELOCITY: int = 475
+
 var linear_velocity := Vector2.ZERO
 
 var last_tile := ""
@@ -71,6 +72,9 @@ func _ready() -> void:
 	Globals.player_invincible = false
 	GlobalLevel.error_detection()
 
+	if GlobalStats.timed_powerup_active:
+		_player_used_powerup(GlobalStats.active_timed_powerup)
+
 
 # Spikes
 func _physics_process(_delta):
@@ -78,7 +82,6 @@ func _physics_process(_delta):
 	if Globals.death_in_progress:
 		linear_velocity = Vector2(0, 0)
 
-	#print(linear_velocity.y)
 	if get_tree().paused: return
 	for i in get_slide_count():
 		var collision = get_slide_collision(i)
@@ -107,9 +110,6 @@ func _physics_process(_delta):
 
 	if was_falling and is_on_floor():
 		waiting_frame = true
-
-		#yield(get_tree(), "physics_frame")
-
 
 	GlobalInput.dash_activated = may_dash and GlobalSave.get_stat("rank") >= GlobalStats.Ranks.GOLD
 
@@ -142,28 +142,13 @@ func basic_movement():
 	if not fsm.current_state == fsm.idle:
 		linear_velocity.x -= (get_floor_velocity().x * 0.07)
 
-#	linear_velocity = Vector2(stepify(linear_velocity.x, 1), stepify(linear_velocity.y, 1))
-#
-#	if fsm.current_state == fsm.idle:
-#		if facing_right:
-#			if linear_velocity.x < 8 and linear_velocity.x > 0:
-#				linear_velocity.x -= 1
-#		else:
-#			if linear_velocity.x > -8 and linear_velocity.x < 0:
-#				linear_velocity.x += 1
-
-#	linear_velocity.x = round_to_dec(linear_velocity.x, 1)
-#	linear_velocity.y = round_to_dec(linear_velocity.y, 1)
 	linear_velocity = move_and_slide(linear_velocity, Vector2.UP)
 
 	falling = linear_velocity.y > 0
-	#print(linear_velocity)
-	#print(falling)
 
 	if falling:
 		was_falling = true
 
-	#falling = linear_velocity.y > 0
 	down_check()
 
 
@@ -382,10 +367,6 @@ func _body_entered(body: Node) -> void:
 
 		var kb = 100
 
-		#var vel_x = body.get_parent().linear_velocity.x
-
-		# moving left
-		#if vel_x < 0:
 		if not facing_right:
 			kb = -kb
 		GlobalEvents.emit_signal("player_hurt_from_enemy", Globals.HurtTypes.BULLET, kb, body.damage)

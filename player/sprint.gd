@@ -23,10 +23,3 @@ func _input(event: InputEvent) -> void:
 
 func start() -> void:
 	player.sprinting = true
-
-
-#func stop() -> void:
-#	yield(get_tree(), "physics_frame")
-#	yield(get_tree(), "physics_frame")
-#	if player_body.is_on_floor():
-#		player.sprinting = false
