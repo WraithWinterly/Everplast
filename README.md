@@ -33,4 +33,5 @@ I have spent a total of 8 months making this game. For everyone here, for everyo
 --WraithWinterly
 
 https://twitter.com/WraithWinterly
+
 https://discord.gg/36ee6SpDAq 
