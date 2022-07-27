@@ -173,20 +173,14 @@ func set_stat(value, value2): #-> Variant
 
 
 func set_health(new_value):
-	if new_value > get_stat("health_max"):
-		new_value = get_stat("health_max")
-	elif new_value < 0:
-		new_value = 0
+	new_value = clamp(new_value, 0, get_stat("health_max"))
 
 	set_stat("health", new_value)
 	GlobalEvents.emit_signal("save_stat_updated")
 
 
 func set_adrenaline(new_value):
-	if new_value > get_stat("adrenaline_max"):
-		new_value = get_stat("adrenaline_max")
-	elif new_value < 0:
-		new_value = 0
+	new_value = clamp(new_value, 0, get_stat("adrenaline_max"))
 
 	set_stat("adrenaline", new_value)
 	GlobalEvents.emit_signal("save_stat_updated")
