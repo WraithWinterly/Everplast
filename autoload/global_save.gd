@@ -116,14 +116,7 @@ func load_stats() -> void:
 	var file: File = File.new()
 	if file.file_exists(FILE):
 		var __ = file.open(FILE, File.READ)
-		var loaded_data
-		var test = parse_json(file.get_as_text())
-
-		if test is Array:
-			loaded_data = parse_json(file.get_as_text())
-		else:
-			reset_all()
-			return
+		var loaded_data = parse_json(file.get_as_text())
 
 		if not typeof(loaded_data) == TYPE_ARRAY:
 			reset_all()
