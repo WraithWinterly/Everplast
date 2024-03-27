@@ -1,12 +1,6 @@
 # Everplast
 https://store.steampowered.com/app/1896630/Everplast/
 
-
-## Learn Why I Quit Game Development
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/LtBNl2DZPZU/0.jpg)](https://www.youtube.com/watch?v=LtBNl2DZPZU)
-
-![Screenshot4](https://user-images.githubusercontent.com/37941646/156928264-08a2acdf-35cb-45c8-8337-4c29be5127b9.png)
-
 Feel the adrenaline rush as you plow through enemies, make precise and timed jumps while running through levels.
 
 Everplast is a unique platforming experience mixed with player freedom to allow you to develop refreshing hand-eye-coordination and platforming skills. Choose how you develop your profile be it by obtaining many items and sprinting through levels at double the speed while spraying down enemies with weapons, or by increasing your stats to extremely high levels to be incredibly powerful. Take off with all of your decisions - and get used to failure and falling.
